@@ -39,6 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataBase\DataBase.cs" />
+    <Compile Include="DataBase\IProvider.cs" />
+    <Compile Include="DataBase\ProviderSQL.cs" />
     <Compile Include="dictionary\Activity.cs" />
     <Compile Include="dictionary\Regions.cs" />
     <Compile Include="OfficeDoc.cs" />
