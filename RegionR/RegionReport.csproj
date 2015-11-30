@@ -1,0 +1,728 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{AE164CB1-D531-4FDE-977A-138864D6A46A}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RegionR</RootNamespace>
+    <AssemblyName>RegionReport</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>3F533B256772F5C0FF817DA902079F4EBB3D4822</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>RegionReport_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Debug\RegionReport.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Release\RegionReport.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Acc2015.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Acc2015.Designer.cs">
+      <DependentUpon>Acc2015.cs</DependentUpon>
+    </Compile>
+    <Compile Include="addedit\AddEditCust.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="addedit\AddEditCust.Designer.cs">
+      <DependentUpon>AddEditCust.cs</DependentUpon>
+    </Compile>
+    <Compile Include="addedit\AddEditKosCust.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="addedit\AddEditKosCust.Designer.cs">
+      <DependentUpon>AddEditKosCust.cs</DependentUpon>
+    </Compile>
+    <Compile Include="addedit\AddEditLPU.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="addedit\AddEditLPU.Designer.cs">
+      <DependentUpon>AddEditLPU.cs</DependentUpon>
+    </Compile>
+    <Compile Include="addedit\AddEditMarkAct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="addedit\AddEditMarkAct.Designer.cs">
+      <DependentUpon>AddEditMarkAct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="addedit\AddEditMat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="addedit\AddEditMat.Designer.cs">
+      <DependentUpon>AddEditMat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="addedit\AddEditNomForAcc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="addedit\AddEditNomForAcc.Designer.cs">
+      <DependentUpon>AddEditNomForAcc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="addedit\AddEditUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="addedit\AddEditUser.Designer.cs">
+      <DependentUpon>AddEditUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="addedit\AddEditVisitPlanDay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="addedit\AddEditVisitPlanDay.designer.cs">
+      <DependentUpon>AddEditVisitPlanDay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="addedit\AddEditVisitPlanList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="addedit\AddEditVisitPlanList.designer.cs">
+      <DependentUpon>AddEditVisitPlanList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="addedit\AddRowReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="addedit\AddRowReport.Designer.cs">
+      <DependentUpon>AddRowReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="addedit\AECodeName.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="addedit\AECodeName.Designer.cs">
+      <DependentUpon>AECodeName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="addedit\AEName.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="addedit\AEName.Designer.cs">
+      <DependentUpon>AEName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="addedit\AEReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="addedit\AEReport.Designer.cs">
+      <DependentUpon>AEReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="addedit\aeTracker.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="addedit\aeTracker.Designer.cs">
+      <DependentUpon>aeTracker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="addedit\AllocCosts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="addedit\AllocCosts.Designer.cs">
+      <DependentUpon>AllocCosts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="addedit\EditUserLPU.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="addedit\EditUserLPU.Designer.cs">
+      <DependentUpon>EditUserLPU.cs</DependentUpon>
+    </Compile>
+    <Compile Include="addedit\Merge.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="addedit\Merge.Designer.cs">
+      <DependentUpon>Merge.cs</DependentUpon>
+    </Compile>
+    <Compile Include="addedit\RegionAddEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="addedit\RegionAddEdit.Designer.cs">
+      <DependentUpon>RegionAddEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="aeFR\aeOutlay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="aeFR\aeOutlay.Designer.cs">
+      <DependentUpon>aeOutlay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DialogList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogList.Designer.cs">
+      <DependentUpon>DialogList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Directories\Buttons.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Directories\Buttons.Designer.cs">
+      <DependentUpon>Buttons.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Directories\CodeName.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Directories\CodeName.Designer.cs">
+      <DependentUpon>CodeName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Directories\Customers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Directories\Customers.Designer.cs">
+      <DependentUpon>Customers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Directories\KosCust.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Directories\KosCust.Designer.cs">
+      <DependentUpon>KosCust.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Directories\LPU.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Directories\LPU.Designer.cs">
+      <DependentUpon>LPU.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Directories\Material2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Directories\Material2.Designer.cs">
+      <DependentUpon>Material2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Directories\Materials.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Directories\Materials.Designer.cs">
+      <DependentUpon>Materials.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Directories\Name.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Directories\Name.Designer.cs">
+      <DependentUpon>Name.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Directories\NomForAcc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Directories\NomForAcc.Designer.cs">
+      <DependentUpon>NomForAcc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Directories\privateSales.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Directories\privateSales.Designer.cs">
+      <DependentUpon>privateSales.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Directories\RefDoc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Directories\RefDoc.Designer.cs">
+      <DependentUpon>RefDoc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Directories\RegionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Directories\RegionForm.Designer.cs">
+      <DependentUpon>RegionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Directories\Trackers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Directories\Trackers.Designer.cs">
+      <DependentUpon>Trackers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Directories\ULPUforUsers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Directories\ULPUforUsers.Designer.cs">
+      <DependentUpon>ULPUforUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Directories\userBC.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Directories\userBC.Designer.cs">
+      <DependentUpon>userBC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Directories\userManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Directories\userManager.Designer.cs">
+      <DependentUpon>userManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Directories\UserRent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Directories\UserRent.Designer.cs">
+      <DependentUpon>UserRent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Directories\Users.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Directories\Users.Designer.cs">
+      <DependentUpon>Users.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FirstPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FirstPage.Designer.cs">
+      <DependentUpon>FirstPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="globalData.cs" />
+    <Compile Include="Komment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Komment.Designer.cs">
+      <DependentUpon>Komment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="other\CreateUserMessage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="other\CreateUserMessage.Designer.cs">
+      <DependentUpon>CreateUserMessage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="other\ListMessage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="other\ListMessage.Designer.cs">
+      <DependentUpon>ListMessage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="other\MoveReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="other\MoveReport.Designer.cs">
+      <DependentUpon>MoveReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="other\MoveSales.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="other\MoveSales.Designer.cs">
+      <DependentUpon>MoveSales.cs</DependentUpon>
+    </Compile>
+    <Compile Include="other\RepDistRight.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="other\RepDistRight.Designer.cs">
+      <DependentUpon>RepDistRight.cs</DependentUpon>
+    </Compile>
+    <Compile Include="other\UpdRepDist.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="other\UpdRepDist.Designer.cs">
+      <DependentUpon>UpdRepDist.cs</DependentUpon>
+    </Compile>
+    <Compile Include="other\UserMessage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="other\UserMessage.Designer.cs">
+      <DependentUpon>UserMessage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="other\ViewText.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="other\ViewText.Designer.cs">
+      <DependentUpon>ViewText.cs</DependentUpon>
+    </Compile>
+    <Compile Include="other\VisitPlanDay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="other\VisitPlanDay.designer.cs">
+      <DependentUpon>VisitPlanDay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RR.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RR.Designer.cs">
+      <DependentUpon>RR.cs</DependentUpon>
+    </Compile>
+    <Compile Include="help\about.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="help\about.Designer.cs">
+      <DependentUpon>about.cs</DependentUpon>
+    </Compile>
+    <Compile Include="login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="login.Designer.cs">
+      <DependentUpon>login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="other\fUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="other\fUser.Designer.cs">
+      <DependentUpon>fUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="other\InputDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="other\InputDialog.Designer.cs">
+      <DependentUpon>InputDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="other\Settings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="other\Settings.Designer.cs">
+      <DependentUpon>Settings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RRRent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <EmbeddedResource Include="Acc2015.resx">
+      <DependentUpon>Acc2015.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="addedit\AddEditCust.resx">
+      <DependentUpon>AddEditCust.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="addedit\AddEditKosCust.resx">
+      <DependentUpon>AddEditKosCust.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="addedit\AddEditLPU.resx">
+      <DependentUpon>AddEditLPU.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="addedit\AddEditMarkAct.resx">
+      <DependentUpon>AddEditMarkAct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="addedit\AddEditMat.resx">
+      <DependentUpon>AddEditMat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="addedit\AddEditNomForAcc.resx">
+      <DependentUpon>AddEditNomForAcc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="addedit\AddEditUser.resx">
+      <DependentUpon>AddEditUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="addedit\AddEditVisitPlanDay.resx">
+      <DependentUpon>AddEditVisitPlanDay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="addedit\AddEditVisitPlanList.resx">
+      <DependentUpon>AddEditVisitPlanList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="addedit\AddRowReport.resx">
+      <DependentUpon>AddRowReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="addedit\AECodeName.resx">
+      <DependentUpon>AECodeName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="addedit\AEName.resx">
+      <DependentUpon>AEName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="addedit\AEReport.resx">
+      <DependentUpon>AEReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="addedit\aeTracker.resx">
+      <DependentUpon>aeTracker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="addedit\AllocCosts.resx" />
+    <EmbeddedResource Include="addedit\EditUserLPU.resx">
+      <DependentUpon>EditUserLPU.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="addedit\Merge.resx">
+      <DependentUpon>Merge.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="addedit\RegionAddEdit.resx">
+      <DependentUpon>RegionAddEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="aeFR\aeOutlay.resx">
+      <DependentUpon>aeOutlay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DialogList.resx">
+      <DependentUpon>DialogList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Directories\Buttons.resx">
+      <DependentUpon>Buttons.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Directories\CodeName.resx">
+      <DependentUpon>CodeName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Directories\Customers.resx">
+      <DependentUpon>Customers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Directories\KosCust.resx">
+      <DependentUpon>KosCust.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Directories\LPU.resx">
+      <DependentUpon>LPU.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Directories\Material2.resx">
+      <DependentUpon>Material2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Directories\Materials.resx">
+      <DependentUpon>Materials.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Directories\Name.resx">
+      <DependentUpon>Name.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Directories\NomForAcc.resx">
+      <DependentUpon>NomForAcc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Directories\privateSales.resx">
+      <DependentUpon>privateSales.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Directories\RefDoc.resx">
+      <DependentUpon>RefDoc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Directories\RegionForm.resx">
+      <DependentUpon>RegionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Directories\Trackers.resx">
+      <DependentUpon>Trackers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Directories\ULPUforUsers.resx">
+      <DependentUpon>ULPUforUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Directories\userBC.resx">
+      <DependentUpon>userBC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Directories\userManager.resx">
+      <DependentUpon>userManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Directories\UserRent.resx">
+      <DependentUpon>UserRent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Directories\Users.resx">
+      <DependentUpon>Users.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FirstPage.resx">
+      <DependentUpon>FirstPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Komment.resx">
+      <DependentUpon>Komment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="other\CreateUserMessage.resx">
+      <DependentUpon>CreateUserMessage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="other\ListMessage.resx">
+      <DependentUpon>ListMessage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="other\MoveReport.resx">
+      <DependentUpon>MoveReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="other\MoveSales.resx">
+      <DependentUpon>MoveSales.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="other\RepDistRight.resx">
+      <DependentUpon>RepDistRight.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="other\UpdRepDist.resx">
+      <DependentUpon>UpdRepDist.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="other\UserMessage.resx">
+      <DependentUpon>UserMessage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="other\ViewText.resx">
+      <DependentUpon>ViewText.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="other\VisitPlanDay.resx">
+      <DependentUpon>VisitPlanDay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RR.resx">
+      <DependentUpon>RR.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="help\about.resx">
+      <DependentUpon>about.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="login.resx">
+      <DependentUpon>login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="other\fUser.resx">
+      <DependentUpon>fUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="other\InputDialog.resx">
+      <DependentUpon>InputDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="other\Settings.resx">
+      <DependentUpon>Settings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>4</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <Private>False</Private>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>6</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\большие стрелки.JPG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\маленькие стрелки.JPG" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ClassLibrary\ClassLibrary.csproj">
+      <Project>{3493496e-8c49-40a1-ac1e-a4b8aef6dfd0}</Project>
+      <Name>ClassLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataLayer\DataLayer.csproj">
+      <Project>{8a2af9d6-3842-4120-a787-e10733338ddc}</Project>
+      <Name>DataLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\System.Windows.Forms.Calendar\System.Windows.Forms.Calendar.csproj">
+      <Project>{25649f08-3046-4891-adb8-7ea787b57063}</Project>
+      <Name>System.Windows.Forms.Calendar</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
