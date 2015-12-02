@@ -15,7 +15,6 @@ namespace ClassLibrary.SF
         string Street { get; }
         string AdministrativeLevel { get; }
 
-        IQuantity GetQuantity();
         string GetINN();
         void AddChildOrganization();
     }
