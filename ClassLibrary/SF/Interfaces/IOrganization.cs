@@ -10,7 +10,6 @@ namespace ClassLibrary.SF
     {
         string NumberSF { get; }
         string Type { get; }
-        string Name { get; }
         string ShortName { get; }
         string Profile { get; }
         string Email { get; }
