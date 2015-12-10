@@ -15,6 +15,11 @@ namespace ClassLibrary
             _database = new SQL();
         }
 
+        public static void ChangeDataBase(DBNames name)
+        {
+            _database.ChangeDataBase(name);
+        }
+
         public static void InitMockDataBase()
         {
             throw new NotImplementedException();
@@ -40,7 +45,8 @@ namespace ClassLibrary
 
         public static void InitSQLProvider()
         {
-            _provider = new ProviderSQL();
+            if (_provider == null)
+                _provider = new ProviderSQL();
         }
 
         public static void InitMockProvider()

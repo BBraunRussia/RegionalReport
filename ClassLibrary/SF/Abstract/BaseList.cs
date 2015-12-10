@@ -19,6 +19,8 @@ namespace ClassLibrary.SF
             LoadFromDataBase(tableName);
         }
 
+        protected List<BaseDictionary> List { get { return _list; } }
+
         private void LoadFromDataBase(string tableName)
         {
             DataTable dt = _provider.Select(tableName);
@@ -32,7 +34,12 @@ namespace ClassLibrary.SF
 
         public DataTable ToDataTable()
         {
-            return _list.Select(item => item.GetRow()).CopyToDataTable();
+            return (_list.Count == 0) ? null : _list.Select(item => item.GetRow()).CopyToDataTable();
+        }
+
+        public BaseDictionary GetItem(int id)
+        {
+            return _list.Where(item => item.ID == id).First();
         }
     }
 }

@@ -15,5 +15,14 @@ namespace ClassLibrary.SF
         {
             int.TryParse(row[2].ToString(), out _idDistrict);
         }
+
+        public District District
+        {
+            get
+            {
+                DistrictList districtList = DistrictList.GetUniqueInstance();
+                return districtList.GetItem(_idDistrict) as District;
+            }
+        }
     }
 }

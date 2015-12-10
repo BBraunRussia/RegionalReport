@@ -652,6 +652,7 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.organizationRRToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._dgv1)).BeginInit();
             this._cms1.SuspendLayout();
@@ -1001,7 +1002,8 @@
             this.RepDistRightToolStripMenuItem,
             this.trackersToolStripMenuItem,
             this.userManagerToolStripMenuItem,
-            this.userBCToolStripMenuItem});
+            this.userBCToolStripMenuItem,
+            this.organizationRRToolStripMenuItem});
             this.directoriesToolStripMenuItem.Name = "directoriesToolStripMenuItem";
             this.directoriesToolStripMenuItem.Size = new System.Drawing.Size(94, 20);
             this.directoriesToolStripMenuItem.Text = "Справочники";
@@ -7241,6 +7243,13 @@
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
+            // organizationRRToolStripMenuItem
+            // 
+            this.organizationRRToolStripMenuItem.Name = "organizationRRToolStripMenuItem";
+            this.organizationRRToolStripMenuItem.Size = new System.Drawing.Size(313, 22);
+            this.organizationRRToolStripMenuItem.Text = "Организации SF";
+            this.organizationRRToolStripMenuItem.Click += new System.EventHandler(this.organizationRRToolStripMenuItem_Click);
+            // 
             // RR
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -7926,6 +7935,7 @@
         private System.Windows.Forms.ToolStripMenuItem энимедToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem нДАToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem любойToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem organizationRRToolStripMenuItem;
     }
 }
 

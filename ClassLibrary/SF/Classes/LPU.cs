@@ -14,7 +14,7 @@ namespace ClassLibrary.SF
         private int _idOwnership;
         private int _idAdmLevel;
         private int _idMainSpec;
-        private int _idLPU;
+        private int _idLpuRR;
         private string _inn;
         private string _kpp;
         private string _postAddress;
@@ -44,7 +44,7 @@ namespace ClassLibrary.SF
             int.TryParse(row[5].ToString(), out _idOwnership);
             int.TryParse(row[6].ToString(), out _idAdmLevel);
             int.TryParse(row[7].ToString(), out _idMainSpec);
-            int.TryParse(row[8].ToString(), out _idLPU);
+            int.TryParse(row[8].ToString(), out _idLpuRR);
             _inn = row[9].ToString();
             _kpp = row[10].ToString();
             _postAddress = row[11].ToString();
@@ -66,6 +66,11 @@ namespace ClassLibrary.SF
             int.TryParse(row[27].ToString(), out _patientCRRT);
         }
 
+        public string INN
+        {
+            get { return _inn; }
+        }
+
         public string KPP
         {
             get { throw new NotImplementedException(); }
@@ -76,20 +81,17 @@ namespace ClassLibrary.SF
             get { throw new NotImplementedException(); }
         }
 
-        public string Region
+        public City City
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                CityList cityList = CityList.GetUniqueInstance();
+                return cityList.GetItem(_idCity) as City;
+            }
         }
 
-        public string District
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        public string City
-        {
-            get { throw new NotImplementedException(); }
-        }
+        public District District { get { return City.District; } }
+        public RealRegion RealRegion { get { return District.RealRegion; } }
 
         public string Street
         {
@@ -100,12 +102,7 @@ namespace ClassLibrary.SF
         {
             get { throw new NotImplementedException(); }
         }
-
-        public string GetINN()
-        {
-            throw new NotImplementedException();
-        }
-
+        
         public void AddChildOrganization()
         {
             throw new NotImplementedException();
@@ -113,12 +110,16 @@ namespace ClassLibrary.SF
 
         public string NumberSF
         {
-            get { throw new NotImplementedException(); }
+            get { return _numberSF; }
         }
 
-        public string Type
+        public TypeLPU TypeLPU
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                TypeLPUList typeLPUList = TypeLPUList.GetUniqueInstance();
+                return typeLPUList.GetItem(_idTypeLPU) as TypeLPU;
+            }
         }
 
         public string ShortName
@@ -146,6 +147,17 @@ namespace ClassLibrary.SF
             get { throw new NotImplementedException(); }
         }
 
+        public LpuRR LpuRR
+        {
+            get
+            {
+                LpuRRList lpuRRList = LpuRRList.GetUniqueInstance();
+                return lpuRRList.GetItem(_idLpuRR) as LpuRR;
+            }
+        }
+
+        public RegionRR RegionRR { get { return LpuRR.RegionRR; } }
+
         public DataTable GetEmployees()
         {
             throw new NotImplementedException();
@@ -154,6 +166,33 @@ namespace ClassLibrary.SF
         public void Save()
         {
             throw new NotImplementedException();
+        }
+
+        public override DataRow GetRow()
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("id");
+            dt.Columns.Add("Номер SF");
+            dt.Columns.Add("Название организации");
+            dt.Columns.Add("Тип");
+            dt.Columns.Add("ИНН");
+            dt.Columns.Add("Регион федерации");
+            dt.Columns.Add("Город");
+            dt.Columns.Add("Сопоставление ЛПУ-RR");
+            dt.Columns.Add("Регион RR");
+
+            DataRow row = dt.NewRow();
+            row[0] = ID;
+            row[1] = NumberSF;
+            row[2] = Name;
+            row[3] = TypeLPU.Name;
+            row[4] = INN;
+            row[5] = RealRegion.Name;
+            row[6] = City.Name;
+            row[7] = LpuRR.Name;
+            row[8] = RegionRR.Name;
+
+            return row;
         }
     }
 }

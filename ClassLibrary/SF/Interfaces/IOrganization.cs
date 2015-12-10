@@ -9,7 +9,7 @@ namespace ClassLibrary.SF
     public interface IOrganization
     {
         string NumberSF { get; }
-        string Type { get; }
+        TypeLPU TypeLPU { get; }
         string ShortName { get; }
         string Profile { get; }
         string Email { get; }

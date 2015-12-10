@@ -6,6 +6,8 @@ using System.Text;
 
 namespace DataLayer
 {
+    public enum DBNames { RegionalR_TestSF, Competitors };
+
     public class SQL : IDataBase
     {
         private const int TIMEOUT = 600;
@@ -20,6 +22,8 @@ namespace DataLayer
 
         public SQL()
         {
+            _database = DBNames.RegionalR_TestSF.ToString();
+
             if (_server == @"bbmru09")
             {
                 _userID = "sa";
@@ -34,9 +38,9 @@ namespace DataLayer
             Init();
         }
 
-        public void SetDataBase(string dataBaseName)
+        public void ChangeDataBase(DBNames name)
         {
-            _database = dataBaseName;
+            _database = name.ToString();
             Init();
         }
 

@@ -2,22 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Data;
 
 namespace ClassLibrary.SF
 {
-    public class LPUList : BaseList
+    public class UserList : BaseList
     {
-        private static LPUList _uniqueInstance;
+        private static UserList _uniqueInstance;
 
-        private LPUList(string tableName)
+        private UserList(string tableName)
             : base(tableName)
         { }
 
-        public static LPUList GetUniqueInstance()
+        public static UserList GetUniqueInstance()
         {
             if (_uniqueInstance == null)
-                _uniqueInstance = new LPUList("SF_LPU");
+                _uniqueInstance = new UserList("SF_User");
 
             return _uniqueInstance;
         }

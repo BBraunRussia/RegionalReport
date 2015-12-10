@@ -453,6 +453,24 @@
     <Compile Include="RRRent.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="SF\FormFirstStepAddOrganization.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SF\FormFirstStepAddOrganization.Designer.cs">
+      <DependentUpon>FormFirstStepAddOrganization.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SF\FormOrganizationList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SF\FormOrganizationList.Designer.cs">
+      <DependentUpon>FormOrganizationList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SF\FormSecondStepAddOrganization.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SF\FormSecondStepAddOrganization.Designer.cs">
+      <DependentUpon>FormSecondStepAddOrganization.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Acc2015.resx">
       <DependentUpon>Acc2015.cs</DependentUpon>
     </EmbeddedResource>
@@ -631,6 +649,15 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="SF\FormFirstStepAddOrganization.resx">
+      <DependentUpon>FormFirstStepAddOrganization.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SF\FormOrganizationList.resx">
+      <DependentUpon>FormOrganizationList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SF\FormSecondStepAddOrganization.resx">
+      <DependentUpon>FormSecondStepAddOrganization.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

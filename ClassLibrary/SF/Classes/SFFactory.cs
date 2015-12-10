@@ -30,6 +30,16 @@ namespace ClassLibrary.SF
                     return new TypeLPU(row);
                 case "SF_RealRegion":
                     return new RealRegion(row);
+                case "SF_LpuRR":
+                    return new LpuRR(row);
+                case "SF_Role":
+                    return new Role(row);
+                case "SF_RegionRR":
+                    return new RegionRR(row);
+                case "SF_User":
+                    return new User(row);
+                case "SF_UserLpuRR":
+                    return new UserLpuRR(row);
                 default:
                     throw new NotImplementedException("Фабрика не может создать экземпляр данного класса");
             }

@@ -58,7 +58,10 @@ namespace RegionR
         public RR()
         {
             InitializeComponent();
-                        
+
+            DataBase.InitDataBase();
+            Provider.InitSQLProvider();
+
             /* Закрыть доступ ОPM на косвенные продажи * /
             btnAdd.Enabled =  false;
             btnEdit.Enabled = false;
@@ -16079,6 +16082,11 @@ namespace RegionR
 
             loadMaterialRegion2(globalData.input);
         }
-      
+
+        private void organizationRRToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormOrganizationList formOrganizationList = new FormOrganizationList();
+            formOrganizationList.ShowDialog();
+        }
     }
 }

@@ -9,13 +9,13 @@ namespace ClassLibrary.SF
     {
         string KPP { get; }
         string MailAddress { get; }
-        string Region { get; }
-        string District { get; }
-        string City { get; }
+        RealRegion RealRegion { get; }
+        District District { get; }
+        City City { get; }
         string Street { get; }
         string AdministrativeLevel { get; }
+        string INN { get; }
 
-        string GetINN();
         void AddChildOrganization();
     }
 }

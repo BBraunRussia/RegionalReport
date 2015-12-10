@@ -18,8 +18,9 @@ namespace ClassLibrary.SF
         }
 
         public string Name { get { return _name; } }
+        public int ID { get { return _id; } }
 
-        public DataRow GetRow()
+        public virtual DataRow GetRow()
         {
             DataTable dt = new DataTable();
             dt.Columns.Add("id");

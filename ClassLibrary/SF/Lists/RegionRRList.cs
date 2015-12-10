@@ -2,22 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Data;
 
 namespace ClassLibrary.SF
 {
-    public class LPUList : BaseList
+    public class RegionRRList : BaseList
     {
-        private static LPUList _uniqueInstance;
+        private static RegionRRList _uniqueInstance;
 
-        private LPUList(string tableName)
+        private RegionRRList(string tableName)
             : base(tableName)
         { }
 
-        public static LPUList GetUniqueInstance()
+        public static RegionRRList GetUniqueInstance()
         {
             if (_uniqueInstance == null)
-                _uniqueInstance = new LPUList("SF_LPU");
+                _uniqueInstance = new RegionRRList("SF_RegionRR");
 
             return _uniqueInstance;
         }
