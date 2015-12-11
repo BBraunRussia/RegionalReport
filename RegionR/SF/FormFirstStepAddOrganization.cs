@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using ClassLibrary.SF;
 
 namespace RegionR.SF
 {
@@ -30,7 +31,9 @@ namespace RegionR.SF
         {
             if (radioButton1.Checked)
             {
-                FormSecondStepAddOrganization formSecondStepAddOrganization = new FormSecondStepAddOrganization();
+                LPU lpu = Organization.CreateItem(TypeOrg.ЛПУ) as LPU;
+
+                FormSecondStepAddOrganization formSecondStepAddOrganization = new FormSecondStepAddOrganization(lpu);
                 formSecondStepAddOrganization.ShowDialog();
                 Close();
             }

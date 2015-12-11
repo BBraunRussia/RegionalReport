@@ -46,6 +46,7 @@
     <Compile Include="dictionary\Regions.cs" />
     <Compile Include="OfficeDoc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SF\Abstract\Organization.cs" />
     <Compile Include="SF\Classes\AdmLevel.cs" />
     <Compile Include="SF\Classes\LpuCompetitors.cs" />
     <Compile Include="SF\Classes\LpuRR.cs" />
@@ -54,6 +55,7 @@
     <Compile Include="SF\Classes\Role.cs" />
     <Compile Include="SF\Classes\User.cs" />
     <Compile Include="SF\Classes\UserLpuRR.cs" />
+    <Compile Include="SF\enums.cs" />
     <Compile Include="SF\Interfaces\IDataTable.cs" />
     <Compile Include="SF\Lists\AdmLevelList.cs" />
     <Compile Include="SF\Classes\City.cs" />
@@ -63,7 +65,8 @@
     <Compile Include="SF\Classes\LPUChild.cs" />
     <Compile Include="SF\Lists\LPUChildList.cs" />
     <Compile Include="SF\Lists\LpuCompetitorsList.cs" />
-    <Compile Include="SF\Lists\LPUList.cs" />
+    <Compile Include="SF\Lists\LpuList.cs" />
+    <Compile Include="SF\Lists\OrganizationList.cs" />
     <Compile Include="SF\Classes\MainSpec.cs" />
     <Compile Include="SF\Lists\LpuRRList.cs" />
     <Compile Include="SF\Lists\MainSpecList.cs" />
@@ -72,8 +75,7 @@
     <Compile Include="SF\Classes\RealRegion.cs" />
     <Compile Include="SF\Abstract\BaseDictionary.cs" />
     <Compile Include="SF\Abstract\BaseList.cs" />
-    <Compile Include="SF\Interfaces\IMainOrganization.cs" />
-    <Compile Include="SF\Interfaces\IOrganization.cs" />
+    <Compile Include="SF\Abstract\MainOrganization.cs" />
     <Compile Include="SF\Classes\LPU.cs" />
     <Compile Include="SF\Lists\RealRegionList.cs" />
     <Compile Include="SF\Classes\SFFactory.cs" />

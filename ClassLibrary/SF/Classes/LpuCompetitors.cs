@@ -20,6 +20,9 @@ namespace ClassLibrary.SF
             _kpp = row[4].ToString();
         }
 
+        public string INN { get { return _inn; } }
+        public string KPP { get { return _kpp; } }
+
         private RegionCompetitors RegionCompetitors
         {
             get
@@ -32,14 +35,16 @@ namespace ClassLibrary.SF
         public override DataRow GetRow()
         {
             DataTable dt = new DataTable();
+            dt.Columns.Add("id");
             dt.Columns.Add("Официальное название");
             dt.Columns.Add("Регион");
             dt.Columns.Add("ИНН");
 
             DataRow row = dt.NewRow();
-            row[0] = Name;
-            row[1] = RegionCompetitors.Name;
-            row[2] = _inn;
+            row[0] = ID;
+            row[1] = Name;
+            row[2] = RegionCompetitors.Name;
+            row[3] = _inn;
 
             return row;
         }

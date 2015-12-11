@@ -453,6 +453,12 @@
     <Compile Include="RRRent.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="SF\FormAddLPU.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SF\FormAddLPU.Designer.cs">
+      <DependentUpon>FormAddLPU.cs</DependentUpon>
+    </Compile>
     <Compile Include="SF\FormFirstStepAddOrganization.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -649,6 +655,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="SF\FormAddLPU.resx">
+      <DependentUpon>FormAddLPU.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SF\FormFirstStepAddOrganization.resx">
       <DependentUpon>FormFirstStepAddOrganization.cs</DependentUpon>
     </EmbeddedResource>

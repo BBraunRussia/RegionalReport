@@ -6,20 +6,19 @@ using System.Data;
 
 namespace ClassLibrary.SF
 {
-    public class LPUList : BaseList
+    public class LpuList : IDataTable
     {
-        private static LPUList _uniqueInstance;
+        private List<LPU> _list;
 
-        private LPUList(string tableName)
-            : base(tableName)
-        { }
-
-        public static LPUList GetUniqueInstance()
+        public LpuList()
         {
-            if (_uniqueInstance == null)
-                _uniqueInstance = new LPUList("SF_LPU");
+            OrganizationList organizationList = OrganizationList.GetUniqueInstance();
+            _list = organizationList.List;
+        }
 
-            return _uniqueInstance;
+        public DataTable ToDataTable()
+        {
+            return (_list.Count == 0) ? null : _list.Select(item => item.GetRow()).CopyToDataTable();
         }
     }
 }

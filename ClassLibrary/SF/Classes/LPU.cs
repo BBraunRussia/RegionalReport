@@ -6,23 +6,11 @@ using System.Data;
 
 namespace ClassLibrary.SF
 {
-    public class LPU : BaseDictionary, IMainOrganization
+    public class LPU : MainOrganization
     {
-        private string _numberSF;
-        private string _shortName;
-        private int _idTypeLPU;
-        private int _idOwnership;
-        private int _idAdmLevel;
-        private int _idMainSpec;
-        private int _idLpuRR;
+        private LpuRR _lpuRR;
         private string _inn;
-        private string _kpp;
-        private string _postAddress;
-        private int _idCity;
-        private string _street;
-        private string _email;
-        private string _website;
-        private string _phone;
+
         private int _bedsTotal;
         private int _bedsIC;
         private int _bedsSurgical;
@@ -38,137 +26,99 @@ namespace ClassLibrary.SF
         public LPU(DataRow row)
             : base(row)
         {
-            _numberSF = row[1].ToString();
-            _shortName = row[3].ToString();
-            int.TryParse(row[4].ToString(), out _idTypeLPU);
-            int.TryParse(row[5].ToString(), out _idOwnership);
-            int.TryParse(row[6].ToString(), out _idAdmLevel);
-            int.TryParse(row[7].ToString(), out _idMainSpec);
-            int.TryParse(row[8].ToString(), out _idLpuRR);
-            _inn = row[9].ToString();
-            _kpp = row[10].ToString();
-            _postAddress = row[11].ToString();
-            int.TryParse(row[12].ToString(), out _idCity);
-            _street = row[13].ToString();
-            _email = row[14].ToString();
-            _website = row[15].ToString();
-            _phone = row[16].ToString();
-            int.TryParse(row[17].ToString(), out _bedsTotal);
-            int.TryParse(row[18].ToString(), out _bedsIC);
-            int.TryParse(row[19].ToString(), out _bedsSurgical);
-            int.TryParse(row[20].ToString(), out _bedsOperating);
-            int.TryParse(row[21].ToString(), out _machineGD);
-            int.TryParse(row[22].ToString(), out _machineGDF);
-            int.TryParse(row[23].ToString(), out _machineCRRT);
-            int.TryParse(row[24].ToString(), out _shift);
-            int.TryParse(row[25].ToString(), out _patientGD);
-            int.TryParse(row[26].ToString(), out _patientPD);
-            int.TryParse(row[27].ToString(), out _patientCRRT);
+            _inn = row[16].ToString();
+
+            int idLpuRR;
+            int.TryParse(row[17].ToString(), out idLpuRR);
+            LpuRRList lpuRRList = LpuRRList.GetUniqueInstance();
+            _lpuRR = lpuRRList.GetItem(idLpuRR) as LpuRR;
+
+            int.TryParse(row[18].ToString(), out _bedsTotal);
+            int.TryParse(row[19].ToString(), out _bedsIC);
+            int.TryParse(row[20].ToString(), out _bedsSurgical);
+            int.TryParse(row[21].ToString(), out _bedsOperating);
+            int.TryParse(row[22].ToString(), out _machineGD);
+            int.TryParse(row[23].ToString(), out _machineGDF);
+            int.TryParse(row[24].ToString(), out _machineCRRT);
+            int.TryParse(row[25].ToString(), out _shift);
+            int.TryParse(row[26].ToString(), out _patientGD);
+            int.TryParse(row[27].ToString(), out _patientPD);
+            int.TryParse(row[28].ToString(), out _patientCRRT);
         }
+
+        public LPU(TypeOrg typeOrg)
+            : base(typeOrg)
+        { }
 
         public string INN
         {
             get { return _inn; }
-        }
-
-        public string KPP
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        public string MailAddress
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        public City City
-        {
-            get
-            {
-                CityList cityList = CityList.GetUniqueInstance();
-                return cityList.GetItem(_idCity) as City;
-            }
-        }
-
-        public District District { get { return City.District; } }
-        public RealRegion RealRegion { get { return District.RealRegion; } }
-
-        public string Street
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        public string AdministrativeLevel
-        {
-            get { throw new NotImplementedException(); }
-        }
-        
-        public void AddChildOrganization()
-        {
-            throw new NotImplementedException();
-        }
-
-        public string NumberSF
-        {
-            get { return _numberSF; }
-        }
-
-        public TypeLPU TypeLPU
-        {
-            get
-            {
-                TypeLPUList typeLPUList = TypeLPUList.GetUniqueInstance();
-                return typeLPUList.GetItem(_idTypeLPU) as TypeLPU;
-            }
-        }
-
-        public string ShortName
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        public string Profile
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        public string Email
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        public string Website
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        public string Phone
-        {
-            get { throw new NotImplementedException(); }
+            set { _inn = value; }
         }
 
         public LpuRR LpuRR
         {
-            get
-            {
-                LpuRRList lpuRRList = LpuRRList.GetUniqueInstance();
-                return lpuRRList.GetItem(_idLpuRR) as LpuRR;
-            }
+            get { return _lpuRR; }
+            set { _lpuRR = value; }
         }
 
-        public RegionRR RegionRR { get { return LpuRR.RegionRR; } }
-
-        public DataTable GetEmployees()
+        public string BedsTotal
         {
-            throw new NotImplementedException();
+            get { return (_bedsTotal == 0) ? string.Empty : _bedsTotal.ToString(); }
+            set { int.TryParse(value, out _bedsTotal); }
         }
-
-        public void Save()
+        public string BedsIC
         {
-            throw new NotImplementedException();
+            get { return (_bedsIC == 0) ? string.Empty : _bedsIC.ToString(); }
+            set { int.TryParse(value, out _bedsIC); }
+        }
+        public string BedsSurgical
+        {
+            get { return (_bedsSurgical == 0) ? string.Empty : _bedsSurgical.ToString(); }
+            set { int.TryParse(value, out _bedsSurgical); }
+        }
+        public string BedsOperating
+        {
+            get { return (_bedsOperating == 0) ? string.Empty : _bedsOperating.ToString(); }
+            set { int.TryParse(value, out _bedsOperating); }
+        }
+        public string MachineGD
+        {
+            get { return (_machineGD == 0) ? string.Empty : _machineGD.ToString(); }
+            set { int.TryParse(value, out _machineGD); }
+        }
+        public string MachineGDF
+        {
+            get { return (_machineGDF == 0) ? string.Empty : _machineGDF.ToString(); }
+            set { int.TryParse(value, out _machineGDF); }
+        }
+        public string MachineCRRT
+        {
+            get { return (_machineCRRT == 0) ? string.Empty : _machineCRRT.ToString(); }
+            set { int.TryParse(value, out _machineCRRT); }
+        }
+        public string Shift
+        {
+            get { return (_shift == 0) ? string.Empty : _shift.ToString(); }
+            set { int.TryParse(value, out _shift); }
+        }
+        public string PatientGD
+        {
+            get { return (_patientGD == 0) ? string.Empty : _patientGD.ToString(); }
+            set { int.TryParse(value, out _patientGD); }
+        }
+        public string PatientPD
+        {
+            get { return (_patientPD == 0) ? string.Empty : _patientPD.ToString(); }
+            set { int.TryParse(value, out _patientPD); }
+        }
+        public string PatientCRRT
+        {
+            get { return (_patientCRRT == 0) ? string.Empty : _patientCRRT.ToString(); }
+            set { int.TryParse(value, out _patientCRRT); }
         }
 
-        public override DataRow GetRow()
+        public DataRow GetRow()
         {
             DataTable dt = new DataTable();
             dt.Columns.Add("id");
@@ -190,9 +140,18 @@ namespace ClassLibrary.SF
             row[5] = RealRegion.Name;
             row[6] = City.Name;
             row[7] = LpuRR.Name;
-            row[8] = RegionRR.Name;
+            row[8] = LpuRR.RegionRR.Name;
 
             return row;
+        }
+
+        public override void Save()
+        {
+            IProvider _provider = Provider.GetProvider();
+
+            _provider.Insert("SF_LPU", ID, NumberSF, TypeOrg, Name, ShortName, MainSpec.ID, Email, WebSite, Phone, TypeLPU.ID, Ownership.ID, AdmLevel.ID,
+                INN, KPP, PostIndex, City.ID, Street, LpuRR.ID,
+                _bedsTotal, _bedsIC, _bedsSurgical, _bedsOperating, _machineGD, _machineGDF, _machineCRRT, _shift, _patientGD, _patientPD, _patientCRRT);
         }
     }
 }

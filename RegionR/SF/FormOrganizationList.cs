@@ -20,7 +20,7 @@ namespace RegionR
 
         private void formOrganizationList_Load(object sender, EventArgs e)
         {
-            LPUList lpuList = LPUList.GetUniqueInstance();
+            LpuList lpuList = new LpuList();
 
             dgv.DataSource = lpuList.ToDataTable();
         }

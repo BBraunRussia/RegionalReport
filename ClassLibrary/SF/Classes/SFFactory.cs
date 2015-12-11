@@ -12,8 +12,6 @@ namespace ClassLibrary.SF
         {
             switch (tableName)
             {
-                case "SF_LPU":
-                    return new LPU(row);
                 case "SF_LPU_Child":
                     return new LPUChild(row);
                 case "SF_AdmLevel":
