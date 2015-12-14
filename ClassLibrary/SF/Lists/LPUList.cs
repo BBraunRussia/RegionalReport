@@ -16,9 +16,24 @@ namespace ClassLibrary.SF
             _list = organizationList.List;
         }
 
+        public DataTable ToDataTable(User user)
+        {
+            UserRightList userRightList = UserRightList.GetUniqueInstance();
+            var userRightList2 = userRightList.ToList(user);
+
+            var list = _list.Where(item => userRightList2.Contains(item.LpuRR.RegionRR));
+            return (list.Count() == 0) ? null : list.Select(item => item.GetRow()).CopyToDataTable();
+        }
+
         public DataTable ToDataTable()
         {
             return (_list.Count == 0) ? null : _list.Select(item => item.GetRow()).CopyToDataTable();
+        }
+
+        public LPU GetItem(int idLPU)
+        {
+            var list = _list.Where(item => item.ID == idLPU);
+            return (list.Count() == 0) ? null : list.First();
         }
     }
 }

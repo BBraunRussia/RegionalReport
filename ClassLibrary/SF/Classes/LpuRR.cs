@@ -24,5 +24,14 @@ namespace ClassLibrary.SF
                 return regionRRList.GetItem(_idRegionRR) as RegionRR;
             }
         }
+
+        public bool IsInList
+        {
+            get
+            {
+                LpuList lpuList = new LpuList();
+                return lpuList.GetItem(ID) != null;
+            }
+        }
     }
 }

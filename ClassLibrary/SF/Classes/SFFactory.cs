@@ -12,12 +12,12 @@ namespace ClassLibrary.SF
         {
             switch (tableName)
             {
+                case "SF_City":
+                    return new City(row);
                 case "SF_LPU_Child":
                     return new LPUChild(row);
                 case "SF_AdmLevel":
                     return new AdmLevel(row);
-                case "SF_City":
-                    return new City(row);
                 case "SF_District":
                     return new District(row);
                 case "SF_MainSpec":
@@ -38,6 +38,8 @@ namespace ClassLibrary.SF
                     return new User(row);
                 case "SF_UserLpuRR":
                     return new UserLpuRR(row);
+                case "SF_UserRight":
+                    return new UserRight(row);
                 default:
                     throw new NotImplementedException("Фабрика не может создать экземпляр данного класса");
             }

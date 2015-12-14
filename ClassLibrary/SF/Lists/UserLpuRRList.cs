@@ -24,7 +24,7 @@ namespace ClassLibrary.SF
 
         public DataTable ToDataTable(User user)
         {
-            var list = List.Where(item => (item as UserLpuRR).User == user);
+            var list = List.Where(item => (item as UserLpuRR).User == user && !(item as UserLpuRR).LpuRR.IsInList);
 
             DataTable dt = new DataTable();
             dt.Columns.Add("id");

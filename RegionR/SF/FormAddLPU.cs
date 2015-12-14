@@ -78,7 +78,7 @@ namespace RegionR.SF
             tbEmail.Text = _lpu.Email;
             tbWebSite.Text = _lpu.WebSite;
             tbPhone.Text = _lpu.Phone;
-
+            
             if (_lpu.RealRegion != null)
                 cbRealRegion.SelectedValue = _lpu.RealRegion.ID;
 
@@ -87,7 +87,7 @@ namespace RegionR.SF
 
             if (_lpu.City != null)
                 cbCity.SelectedValue = _lpu.City.ID;
-
+            
             tbStreet.Text = _lpu.Street;
 
             tbBedsTotal.Text = _lpu.BedsTotal.ToString();

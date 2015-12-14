@@ -55,6 +55,7 @@
     <Compile Include="SF\Classes\Role.cs" />
     <Compile Include="SF\Classes\User.cs" />
     <Compile Include="SF\Classes\UserLpuRR.cs" />
+    <Compile Include="SF\Classes\UserRight.cs" />
     <Compile Include="SF\enums.cs" />
     <Compile Include="SF\Interfaces\IDataTable.cs" />
     <Compile Include="SF\Lists\AdmLevelList.cs" />
@@ -86,6 +87,7 @@
     <Compile Include="SF\Lists\TypeLPUList.cs" />
     <Compile Include="SF\Lists\UserList.cs" />
     <Compile Include="SF\Lists\UserLpuRRList.cs" />
+    <Compile Include="SF\Lists\UserRightList.cs" />
     <Compile Include="Test\clAnswer.cs" />
     <Compile Include="Test\clAnswerList.cs" />
     <Compile Include="Test\clQuestion.cs" />

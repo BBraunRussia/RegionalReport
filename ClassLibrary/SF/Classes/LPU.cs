@@ -13,8 +13,8 @@ namespace ClassLibrary.SF
 
         private int _bedsTotal;
         private int _bedsIC;
-        private int _bedsSurgical;
-        private int _bedsOperating;
+        private int _surgical;
+        private int _operating;
         private int _machineGD;
         private int _machineGDF;
         private int _machineCRRT;
@@ -35,8 +35,8 @@ namespace ClassLibrary.SF
 
             int.TryParse(row[18].ToString(), out _bedsTotal);
             int.TryParse(row[19].ToString(), out _bedsIC);
-            int.TryParse(row[20].ToString(), out _bedsSurgical);
-            int.TryParse(row[21].ToString(), out _bedsOperating);
+            int.TryParse(row[20].ToString(), out _surgical);
+            int.TryParse(row[21].ToString(), out _operating);
             int.TryParse(row[22].ToString(), out _machineGD);
             int.TryParse(row[23].ToString(), out _machineGDF);
             int.TryParse(row[24].ToString(), out _machineCRRT);
@@ -72,15 +72,15 @@ namespace ClassLibrary.SF
             get { return (_bedsIC == 0) ? string.Empty : _bedsIC.ToString(); }
             set { int.TryParse(value, out _bedsIC); }
         }
-        public string BedsSurgical
+        public string Surgical
         {
-            get { return (_bedsSurgical == 0) ? string.Empty : _bedsSurgical.ToString(); }
-            set { int.TryParse(value, out _bedsSurgical); }
+            get { return (_surgical == 0) ? string.Empty : _surgical.ToString(); }
+            set { int.TryParse(value, out _surgical); }
         }
-        public string BedsOperating
+        public string Operating
         {
-            get { return (_bedsOperating == 0) ? string.Empty : _bedsOperating.ToString(); }
-            set { int.TryParse(value, out _bedsOperating); }
+            get { return (_operating == 0) ? string.Empty : _operating.ToString(); }
+            set { int.TryParse(value, out _operating); }
         }
         public string MachineGD
         {
@@ -151,7 +151,10 @@ namespace ClassLibrary.SF
 
             _provider.Insert("SF_LPU", ID, NumberSF, TypeOrg, Name, ShortName, MainSpec.ID, Email, WebSite, Phone, TypeLPU.ID, Ownership.ID, AdmLevel.ID,
                 INN, KPP, PostIndex, City.ID, Street, LpuRR.ID,
-                _bedsTotal, _bedsIC, _bedsSurgical, _bedsOperating, _machineGD, _machineGDF, _machineCRRT, _shift, _patientGD, _patientPD, _patientCRRT);
+                _bedsTotal, _bedsIC, _surgical, _operating, _machineGD, _machineGDF, _machineCRRT, _shift, _patientGD, _patientPD, _patientCRRT);
+
+            OrganizationList organizationList = OrganizationList.GetUniqueInstance();
+            organizationList.Add(this);
         }
     }
 }

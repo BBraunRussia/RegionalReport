@@ -282,9 +282,9 @@
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(27, 77);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(110, 13);
+            this.label9.Size = new System.Drawing.Size(102, 13);
             this.label9.TabIndex = 21;
-            this.label9.Text = "коек хирургических:";
+            this.label9.Text = "хирург. отделений:";
             // 
             // tbBedsOperating
             // 
@@ -298,9 +298,9 @@
             this.label11.AutoSize = true;
             this.label11.Location = new System.Drawing.Point(27, 103);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(110, 13);
+            this.label11.Size = new System.Drawing.Size(83, 13);
             this.label11.TabIndex = 23;
-            this.label11.Text = "коек операционных:";
+            this.label11.Text = "операционных:";
             // 
             // tbMachineGD
             // 

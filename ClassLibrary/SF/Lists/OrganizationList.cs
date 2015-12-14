@@ -37,13 +37,19 @@ namespace ClassLibrary.SF
             foreach (DataRow row in dt.Rows)
             {
                 Organization organization = Organization.CreateItem(row);
-                _list.Add(organization);
+                Add(organization);
             }
         }
 
         public Organization GetItem(int id)
         {
             return _list.Where(item => item.ID == id).First();
+        }
+
+        internal void Add(Organization organization)
+        {
+            if (!_list.Exists(item => item == organization))
+                _list.Add(organization);
         }
     }
 }
