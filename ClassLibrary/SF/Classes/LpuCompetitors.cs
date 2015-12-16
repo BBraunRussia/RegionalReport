@@ -37,7 +37,7 @@ namespace ClassLibrary.SF
             DataTable dt = new DataTable();
             dt.Columns.Add("id");
             dt.Columns.Add("Официальное название");
-            dt.Columns.Add("Регион");
+            dt.Columns.Add("Регион России");
             dt.Columns.Add("ИНН");
 
             DataRow row = dt.NewRow();

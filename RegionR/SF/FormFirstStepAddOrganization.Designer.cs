@@ -81,7 +81,7 @@
             this.radioButton3.Size = new System.Drawing.Size(185, 17);
             this.radioButton3.TabIndex = 3;
             this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "Администратовное учреждение";
+            this.radioButton3.Text = "Административное учреждение";
             this.radioButton3.UseVisualStyleBackColor = true;
             this.radioButton3.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
@@ -123,7 +123,6 @@
             this.Name = "FormFirstStepAddOrganization";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Добавление Institutions-SF";
-            this.Load += new System.EventHandler(this.FormFirstStepAddOrganization_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

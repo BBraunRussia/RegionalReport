@@ -18,8 +18,12 @@ namespace ClassLibrary.SF
         private string _website;
         private string _phone;
 
+        protected IProvider _provider;
+
         internal Organization(DataRow row)
         {
+            _provider = Provider.GetProvider();
+
             int.TryParse(row[0].ToString(), out _id);
             _numberSF = row[1].ToString();
 
@@ -37,6 +41,8 @@ namespace ClassLibrary.SF
 
         internal Organization(TypeOrg typeOrg)
         {
+            _provider = Provider.GetProvider();
+
             _typeOrg = typeOrg;
             _numberSF = string.Empty;
         }
@@ -112,9 +118,15 @@ namespace ClassLibrary.SF
             }
         }
 
-        public virtual void Save()
+        protected void SetID(int id)
         {
-            
+            _id = id;
         }
+
+        public virtual void Save()
+        { }
+
+        public virtual void Delete()
+        { }
     }
 }

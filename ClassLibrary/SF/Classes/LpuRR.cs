@@ -30,7 +30,7 @@ namespace ClassLibrary.SF
             get
             {
                 LpuList lpuList = new LpuList();
-                return lpuList.GetItem(ID) != null;
+                return lpuList.GetItem(this) != null;
             }
         }
     }

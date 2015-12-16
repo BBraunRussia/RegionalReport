@@ -41,5 +41,10 @@ namespace ClassLibrary.SF
         {
             return _list.Where(item => item.ID == id).First();
         }
+
+        public void Delete(BaseDictionary item)
+        {
+            _list.Remove(item);
+        }
     }
 }

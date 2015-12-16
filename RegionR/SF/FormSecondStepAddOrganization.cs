@@ -15,6 +15,7 @@ namespace RegionR.SF
         private LPU _lpu;
         private LpuCompetitorsList _lpuCompetitorsList;
         private UserLpuRRList _userLpuList;
+        private SearchInDgv _seacher;
 
         public FormSecondStepAddOrganization(LPU lpu)
         {
@@ -24,6 +25,8 @@ namespace RegionR.SF
             _lpuCompetitorsList = LpuCompetitorsList.GetUniqueInstance();
 
             _lpu = lpu;
+
+            _seacher = new SearchInDgv(dgvLPUCompetitors);
         }
 
         private void FormSecondStepAddOrganization_Load(object sender, EventArgs e)
@@ -39,6 +42,9 @@ namespace RegionR.SF
 
             dgvLpuRR.DataSource = _userLpuList.ToDataTable(user);
             dgvLpuRR.Columns[0].Visible = false;
+
+            dgvLpuRR.Columns[1].Width = Convert.ToInt32(dgvLpuRR.Width / 2);
+            dgvLpuRR.Columns[2].Width = Convert.ToInt32(dgvLpuRR.Width / 2);
         }
 
         private void LoadSecondTable()
@@ -81,9 +87,26 @@ namespace RegionR.SF
                 UserLpuRR userLpuRR = _userLpuList.GetItem(idLpuRR) as UserLpuRR;
                 _lpu.LpuRR = userLpuRR.LpuRR;
             }
+        }
 
-            FormAddLPU formAddLPU = new FormAddLPU(_lpu);
-            formAddLPU.ShowDialog();
+        private void tbSearch_TextChanged(object sender, EventArgs e)
+        {
+            _seacher.Find(tbSearch.Text);
+        }
+
+        private void filterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("В процессе разработки", "Функция не реализована", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void sortToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("В процессе разработки", "Функция не реализована", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("В процессе разработки", "Функция не реализована", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

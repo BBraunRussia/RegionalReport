@@ -17,11 +17,6 @@ namespace RegionR.SF
             InitializeComponent();
         }
 
-        private void FormFirstStepAddOrganization_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void radioButton_CheckedChanged(object sender, EventArgs e)
         {
             btnOK.Enabled = true;
@@ -30,13 +25,9 @@ namespace RegionR.SF
         private void btnOK_Click(object sender, EventArgs e)
         {
             if (radioButton1.Checked)
-            {
-                LPU lpu = Organization.CreateItem(TypeOrg.ЛПУ) as LPU;
-
-                FormSecondStepAddOrganization formSecondStepAddOrganization = new FormSecondStepAddOrganization(lpu);
-                formSecondStepAddOrganization.ShowDialog();
-                Close();
-            }
+                FormOrganizationList.typeOrg = TypeOrg.ЛПУ;
+            else
+                FormOrganizationList.typeOrg = TypeOrg.Аптека;
         }
     }
 }

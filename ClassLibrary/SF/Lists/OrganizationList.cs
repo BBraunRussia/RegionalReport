@@ -51,5 +51,10 @@ namespace ClassLibrary.SF
             if (!_list.Exists(item => item == organization))
                 _list.Add(organization);
         }
+
+        public void Delete(Organization item)
+        {
+            _list.Remove(item);
+        }
     }
 }

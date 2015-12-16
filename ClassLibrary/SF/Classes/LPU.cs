@@ -118,43 +118,31 @@ namespace ClassLibrary.SF
             set { int.TryParse(value, out _patientCRRT); }
         }
 
-        public DataRow GetRow()
+        public object[] GetRow()
         {
-            DataTable dt = new DataTable();
-            dt.Columns.Add("id");
-            dt.Columns.Add("Номер SF");
-            dt.Columns.Add("Название организации");
-            dt.Columns.Add("Тип");
-            dt.Columns.Add("ИНН");
-            dt.Columns.Add("Регион федерации");
-            dt.Columns.Add("Город");
-            dt.Columns.Add("Сопоставление ЛПУ-RR");
-            dt.Columns.Add("Регион RR");
-
-            DataRow row = dt.NewRow();
-            row[0] = ID;
-            row[1] = NumberSF;
-            row[2] = Name;
-            row[3] = TypeLPU.Name;
-            row[4] = INN;
-            row[5] = RealRegion.Name;
-            row[6] = City.Name;
-            row[7] = LpuRR.Name;
-            row[8] = LpuRR.RegionRR.Name;
-
-            return row;
+            return new object[] { ID, NumberSF, Name, TypeLPU.Name, INN, RealRegion.Name, City.Name, LpuRR.Name, LpuRR.RegionRR.Name };
         }
 
         public override void Save()
         {
-            IProvider _provider = Provider.GetProvider();
+            int id;
 
-            _provider.Insert("SF_LPU", ID, NumberSF, TypeOrg, Name, ShortName, MainSpec.ID, Email, WebSite, Phone, TypeLPU.ID, Ownership.ID, AdmLevel.ID,
+            int.TryParse(_provider.Insert("SF_LPU", ID, NumberSF, TypeOrg, Name, ShortName, MainSpec.ID, Email, WebSite, Phone, TypeLPU.ID, Ownership.ID, AdmLevel.ID,
                 INN, KPP, PostIndex, City.ID, Street, LpuRR.ID,
-                _bedsTotal, _bedsIC, _surgical, _operating, _machineGD, _machineGDF, _machineCRRT, _shift, _patientGD, _patientPD, _patientCRRT);
+                _bedsTotal, _bedsIC, _surgical, _operating, _machineGD, _machineGDF, _machineCRRT, _shift, _patientGD, _patientPD, _patientCRRT), out id);
+
+            SetID(id);
 
             OrganizationList organizationList = OrganizationList.GetUniqueInstance();
             organizationList.Add(this);
+        }
+
+        public override void Delete()
+        {
+            _provider.Delete("SF_LPU", ID);
+
+            OrganizationList organizationList = OrganizationList.GetUniqueInstance();
+            organizationList.Delete(this);
         }
     }
 }

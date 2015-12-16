@@ -453,6 +453,9 @@
     <Compile Include="RRRent.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="SF\Classes\MainDGV.cs" />
+    <Compile Include="SF\Classes\MyStatusStrip.cs" />
+    <Compile Include="SF\Classes\SearchInDgv.cs" />
     <Compile Include="SF\FormAddLPU.cs">
       <SubType>Form</SubType>
     </Compile>

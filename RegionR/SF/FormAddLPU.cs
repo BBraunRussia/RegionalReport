@@ -195,6 +195,24 @@ namespace RegionR.SF
             _lpu.City = _cityList.GetItem(idCity) as City;
             
             _lpu.Street = tbStreet.Text;
+
+
+            _lpu.BedsTotal = tbBedsTotal.Text;
+            _lpu.BedsIC = tbBedsIC.Text;
+            _lpu.Surgical = tbSurgical.Text;
+            _lpu.Operating = tbOperating.Text;
+            _lpu.MachineGD = tbMachineGD.Text;
+            _lpu.MachineGDF = tbMachineGDF.Text;
+            _lpu.MachineCRRT = tbMachineCRRT.Text;
+            _lpu.Shift = tbShift.Text;
+            _lpu.PatientGD = tbPatientGD.Text;
+            _lpu.PatientPD = tbPatientPD.Text;
+            _lpu.PatientCRRT = tbPatientCRRT.Text;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("В процессе разработки", "Функция не реализована", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

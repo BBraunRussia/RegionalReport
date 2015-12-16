@@ -42,29 +42,29 @@
             this.cbAdmLevel = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.tbBedsTotal = new System.Windows.Forms.TextBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.tbPatientCRRT = new System.Windows.Forms.TextBox();
+            this.tbMachineGD = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.tbPatientPD = new System.Windows.Forms.TextBox();
+            this.tbMachineGDF = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.tbPatientGD = new System.Windows.Forms.TextBox();
+            this.tbMachineCRRT = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.tbShift = new System.Windows.Forms.TextBox();
+            this.tbOperating = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.tbSurgical = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.tbBedsIC = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.tbBedsSurgical = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.tbBedsOperating = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.tbMachineGD = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.tbMachineGDF = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.tbMachineCRRT = new System.Windows.Forms.TextBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.tbShift = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.tbPatientGD = new System.Windows.Forms.TextBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.tbPatientPD = new System.Windows.Forms.TextBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.tbPatientCRRT = new System.Windows.Forms.TextBox();
-            this.label18 = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.tbBedsTotal = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.tbName = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
             this.tbShortName = new System.Windows.Forms.TextBox();
@@ -98,6 +98,7 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.cbLpuRR = new System.Windows.Forms.ComboBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -223,9 +224,9 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.groupBox2);
-            this.groupBox1.Controls.Add(this.tbBedsOperating);
+            this.groupBox1.Controls.Add(this.tbOperating);
             this.groupBox1.Controls.Add(this.label11);
-            this.groupBox1.Controls.Add(this.tbBedsSurgical);
+            this.groupBox1.Controls.Add(this.tbSurgical);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.tbBedsIC);
             this.groupBox1.Controls.Add(this.label8);
@@ -237,182 +238,6 @@
             this.groupBox1.TabIndex = 13;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Количество";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(27, 25);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(70, 13);
-            this.label10.TabIndex = 16;
-            this.label10.Text = "коек общее:";
-            // 
-            // tbBedsTotal
-            // 
-            this.tbBedsTotal.Location = new System.Drawing.Point(157, 22);
-            this.tbBedsTotal.Name = "tbBedsTotal";
-            this.tbBedsTotal.Size = new System.Drawing.Size(35, 20);
-            this.tbBedsTotal.TabIndex = 18;
-            // 
-            // tbBedsIC
-            // 
-            this.tbBedsIC.Location = new System.Drawing.Point(157, 48);
-            this.tbBedsIC.Name = "tbBedsIC";
-            this.tbBedsIC.Size = new System.Drawing.Size(35, 20);
-            this.tbBedsIC.TabIndex = 20;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(27, 51);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(124, 13);
-            this.label8.TabIndex = 19;
-            this.label8.Text = "коек реанимационных:";
-            // 
-            // tbBedsSurgical
-            // 
-            this.tbBedsSurgical.Location = new System.Drawing.Point(157, 74);
-            this.tbBedsSurgical.Name = "tbBedsSurgical";
-            this.tbBedsSurgical.Size = new System.Drawing.Size(35, 20);
-            this.tbBedsSurgical.TabIndex = 22;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(27, 77);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(102, 13);
-            this.label9.TabIndex = 21;
-            this.label9.Text = "хирург. отделений:";
-            // 
-            // tbBedsOperating
-            // 
-            this.tbBedsOperating.Location = new System.Drawing.Point(157, 100);
-            this.tbBedsOperating.Name = "tbBedsOperating";
-            this.tbBedsOperating.Size = new System.Drawing.Size(35, 20);
-            this.tbBedsOperating.TabIndex = 24;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(27, 103);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(83, 13);
-            this.label11.TabIndex = 23;
-            this.label11.Text = "операционных:";
-            // 
-            // tbMachineGD
-            // 
-            this.tbMachineGD.Location = new System.Drawing.Point(130, 19);
-            this.tbMachineGD.Name = "tbMachineGD";
-            this.tbMachineGD.Size = new System.Drawing.Size(35, 20);
-            this.tbMachineGD.TabIndex = 26;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(28, 22);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(62, 13);
-            this.label12.TabIndex = 25;
-            this.label12.Text = "ГД машин:";
-            // 
-            // tbMachineGDF
-            // 
-            this.tbMachineGDF.Location = new System.Drawing.Point(130, 45);
-            this.tbMachineGDF.Name = "tbMachineGDF";
-            this.tbMachineGDF.Size = new System.Drawing.Size(35, 20);
-            this.tbMachineGDF.TabIndex = 28;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(28, 48);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(73, 13);
-            this.label13.TabIndex = 27;
-            this.label13.Text = "ГДФ машин:";
-            // 
-            // tbMachineCRRT
-            // 
-            this.tbMachineCRRT.Location = new System.Drawing.Point(130, 71);
-            this.tbMachineCRRT.Name = "tbMachineCRRT";
-            this.tbMachineCRRT.Size = new System.Drawing.Size(35, 20);
-            this.tbMachineCRRT.TabIndex = 30;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(28, 74);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(77, 13);
-            this.label14.TabIndex = 29;
-            this.label14.Text = "CRRT машин:";
-            // 
-            // tbShift
-            // 
-            this.tbShift.Location = new System.Drawing.Point(130, 97);
-            this.tbShift.Name = "tbShift";
-            this.tbShift.Size = new System.Drawing.Size(35, 20);
-            this.tbShift.TabIndex = 32;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(28, 100);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(37, 13);
-            this.label15.TabIndex = 31;
-            this.label15.Text = "Смен:";
-            // 
-            // tbPatientGD
-            // 
-            this.tbPatientGD.Location = new System.Drawing.Point(130, 123);
-            this.tbPatientGD.Name = "tbPatientGD";
-            this.tbPatientGD.Size = new System.Drawing.Size(35, 20);
-            this.tbPatientGD.TabIndex = 34;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(28, 126);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(81, 13);
-            this.label16.TabIndex = 33;
-            this.label16.Text = "ГД пациентов:";
-            // 
-            // tbPatientPD
-            // 
-            this.tbPatientPD.Location = new System.Drawing.Point(130, 149);
-            this.tbPatientPD.Name = "tbPatientPD";
-            this.tbPatientPD.Size = new System.Drawing.Size(35, 20);
-            this.tbPatientPD.TabIndex = 36;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(28, 152);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(83, 13);
-            this.label17.TabIndex = 35;
-            this.label17.Text = "ПД пациентов:";
-            // 
-            // tbPatientCRRT
-            // 
-            this.tbPatientCRRT.Location = new System.Drawing.Point(130, 175);
-            this.tbPatientCRRT.Name = "tbPatientCRRT";
-            this.tbPatientCRRT.Size = new System.Drawing.Size(35, 20);
-            this.tbPatientCRRT.TabIndex = 38;
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(28, 178);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(96, 13);
-            this.label18.TabIndex = 37;
-            this.label18.Text = "CRRT пациентов:";
             // 
             // groupBox2
             // 
@@ -436,6 +261,182 @@
             this.groupBox2.TabIndex = 39;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Авитум";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(28, 22);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(62, 13);
+            this.label12.TabIndex = 25;
+            this.label12.Text = "ГД машин:";
+            // 
+            // tbPatientCRRT
+            // 
+            this.tbPatientCRRT.Location = new System.Drawing.Point(130, 175);
+            this.tbPatientCRRT.Name = "tbPatientCRRT";
+            this.tbPatientCRRT.Size = new System.Drawing.Size(35, 20);
+            this.tbPatientCRRT.TabIndex = 38;
+            // 
+            // tbMachineGD
+            // 
+            this.tbMachineGD.Location = new System.Drawing.Point(130, 19);
+            this.tbMachineGD.Name = "tbMachineGD";
+            this.tbMachineGD.Size = new System.Drawing.Size(35, 20);
+            this.tbMachineGD.TabIndex = 26;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(28, 178);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(96, 13);
+            this.label18.TabIndex = 37;
+            this.label18.Text = "CRRT пациентов:";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(28, 48);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(73, 13);
+            this.label13.TabIndex = 27;
+            this.label13.Text = "ГДФ машин:";
+            // 
+            // tbPatientPD
+            // 
+            this.tbPatientPD.Location = new System.Drawing.Point(130, 149);
+            this.tbPatientPD.Name = "tbPatientPD";
+            this.tbPatientPD.Size = new System.Drawing.Size(35, 20);
+            this.tbPatientPD.TabIndex = 36;
+            // 
+            // tbMachineGDF
+            // 
+            this.tbMachineGDF.Location = new System.Drawing.Point(130, 45);
+            this.tbMachineGDF.Name = "tbMachineGDF";
+            this.tbMachineGDF.Size = new System.Drawing.Size(35, 20);
+            this.tbMachineGDF.TabIndex = 28;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(28, 152);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(83, 13);
+            this.label17.TabIndex = 35;
+            this.label17.Text = "ПД пациентов:";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(28, 74);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(77, 13);
+            this.label14.TabIndex = 29;
+            this.label14.Text = "CRRT машин:";
+            // 
+            // tbPatientGD
+            // 
+            this.tbPatientGD.Location = new System.Drawing.Point(130, 123);
+            this.tbPatientGD.Name = "tbPatientGD";
+            this.tbPatientGD.Size = new System.Drawing.Size(35, 20);
+            this.tbPatientGD.TabIndex = 34;
+            // 
+            // tbMachineCRRT
+            // 
+            this.tbMachineCRRT.Location = new System.Drawing.Point(130, 71);
+            this.tbMachineCRRT.Name = "tbMachineCRRT";
+            this.tbMachineCRRT.Size = new System.Drawing.Size(35, 20);
+            this.tbMachineCRRT.TabIndex = 30;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(28, 126);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(81, 13);
+            this.label16.TabIndex = 33;
+            this.label16.Text = "ГД пациентов:";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(28, 100);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(37, 13);
+            this.label15.TabIndex = 31;
+            this.label15.Text = "Смен:";
+            // 
+            // tbShift
+            // 
+            this.tbShift.Location = new System.Drawing.Point(130, 97);
+            this.tbShift.Name = "tbShift";
+            this.tbShift.Size = new System.Drawing.Size(35, 20);
+            this.tbShift.TabIndex = 32;
+            // 
+            // tbOperating
+            // 
+            this.tbOperating.Location = new System.Drawing.Point(157, 100);
+            this.tbOperating.Name = "tbOperating";
+            this.tbOperating.Size = new System.Drawing.Size(35, 20);
+            this.tbOperating.TabIndex = 24;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(27, 103);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(83, 13);
+            this.label11.TabIndex = 23;
+            this.label11.Text = "операционных:";
+            // 
+            // tbSurgical
+            // 
+            this.tbSurgical.Location = new System.Drawing.Point(157, 74);
+            this.tbSurgical.Name = "tbSurgical";
+            this.tbSurgical.Size = new System.Drawing.Size(35, 20);
+            this.tbSurgical.TabIndex = 22;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(27, 77);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(102, 13);
+            this.label9.TabIndex = 21;
+            this.label9.Text = "хирург. отделений:";
+            // 
+            // tbBedsIC
+            // 
+            this.tbBedsIC.Location = new System.Drawing.Point(157, 48);
+            this.tbBedsIC.Name = "tbBedsIC";
+            this.tbBedsIC.Size = new System.Drawing.Size(35, 20);
+            this.tbBedsIC.TabIndex = 20;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(27, 51);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(124, 13);
+            this.label8.TabIndex = 19;
+            this.label8.Text = "коек реанимационных:";
+            // 
+            // tbBedsTotal
+            // 
+            this.tbBedsTotal.Location = new System.Drawing.Point(157, 22);
+            this.tbBedsTotal.Name = "tbBedsTotal";
+            this.tbBedsTotal.Size = new System.Drawing.Size(35, 20);
+            this.tbBedsTotal.TabIndex = 18;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(27, 25);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(70, 13);
+            this.label10.TabIndex = 16;
+            this.label10.Text = "коек общее:";
             // 
             // tbName
             // 
@@ -580,9 +581,9 @@
             this.label28.AutoSize = true;
             this.label28.Location = new System.Drawing.Point(297, 216);
             this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(105, 13);
+            this.label28.Size = new System.Drawing.Size(86, 13);
             this.label28.TabIndex = 58;
-            this.label28.Text = "Регион федерации:";
+            this.label28.Text = "Регион России:";
             // 
             // label29
             // 
@@ -650,7 +651,7 @@
             // lbRegionRRSalesDistrict
             // 
             this.lbRegionRRSalesDistrict.AutoSize = true;
-            this.lbRegionRRSalesDistrict.Location = new System.Drawing.Point(860, 112);
+            this.lbRegionRRSalesDistrict.Location = new System.Drawing.Point(853, 143);
             this.lbRegionRRSalesDistrict.Name = "lbRegionRRSalesDistrict";
             this.lbRegionRRSalesDistrict.Size = new System.Drawing.Size(76, 13);
             this.lbRegionRRSalesDistrict.TabIndex = 70;
@@ -659,7 +660,7 @@
             // label33
             // 
             this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(783, 112);
+            this.label33.Location = new System.Drawing.Point(776, 143);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(71, 13);
             this.label33.TabIndex = 69;
@@ -668,7 +669,7 @@
             // lbRegionRR
             // 
             this.lbRegionRR.AutoSize = true;
-            this.lbRegionRR.Location = new System.Drawing.Point(860, 86);
+            this.lbRegionRR.Location = new System.Drawing.Point(853, 117);
             this.lbRegionRR.Name = "lbRegionRR";
             this.lbRegionRR.Size = new System.Drawing.Size(76, 13);
             this.lbRegionRR.TabIndex = 72;
@@ -677,7 +678,7 @@
             // label35
             // 
             this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(783, 86);
+            this.label35.Location = new System.Drawing.Point(776, 117);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(65, 13);
             this.label35.TabIndex = 71;
@@ -685,7 +686,7 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Location = new System.Drawing.Point(788, 138);
+            this.groupBox3.Location = new System.Drawing.Point(781, 169);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(200, 187);
             this.groupBox3.TabIndex = 73;
@@ -723,6 +724,17 @@
             this.cbLpuRR.Size = new System.Drawing.Size(328, 21);
             this.cbLpuRR.TabIndex = 76;
             // 
+            // button1
+            // 
+            this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.button1.Location = new System.Drawing.Point(779, 81);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(148, 23);
+            this.button1.TabIndex = 77;
+            this.button1.Text = "Правила наименования";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // FormAddLPU
             // 
             this.AcceptButton = this.btnSave;
@@ -730,6 +742,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(1000, 581);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.cbLpuRR);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
@@ -821,9 +834,9 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox tbShift;
-        private System.Windows.Forms.TextBox tbBedsOperating;
+        private System.Windows.Forms.TextBox tbOperating;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox tbBedsSurgical;
+        private System.Windows.Forms.TextBox tbSurgical;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox tbBedsIC;
         private System.Windows.Forms.Label label8;
@@ -862,5 +875,6 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.ComboBox cbLpuRR;
+        private System.Windows.Forms.Button button1;
     }
 }
