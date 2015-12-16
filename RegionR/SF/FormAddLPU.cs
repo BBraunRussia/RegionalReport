@@ -19,7 +19,6 @@ namespace RegionR.SF
         private AdmLevelList _admLevelList;
         private MainSpecList _mainSpecList;
         private RealRegionList _realRegionList;
-        private DistrictList _districtList;
         private CityList _cityList;
 
         private bool _isLoad;
@@ -37,7 +36,6 @@ namespace RegionR.SF
             _admLevelList = AdmLevelList.GetUniqueInstance();
             _mainSpecList = MainSpecList.GetUniqueInstance();
             _realRegionList = RealRegionList.GetUniqueInstance();
-            _districtList = DistrictList.GetUniqueInstance();
             _cityList = CityList.GetUniqueInstance();
         }
 
@@ -82,11 +80,11 @@ namespace RegionR.SF
             if (_lpu.RealRegion != null)
                 cbRealRegion.SelectedValue = _lpu.RealRegion.ID;
 
-            if (_lpu.District != null)
-                cbDistrict.SelectedValue = _lpu.District.ID;
-
             if (_lpu.City != null)
+            {
                 cbCity.SelectedValue = _lpu.City.ID;
+                tbPhoneCode.Text = _lpu.City.PhoneCode;
+            }
             
             tbStreet.Text = _lpu.Street;
 
@@ -106,38 +104,28 @@ namespace RegionR.SF
             _isLoad = false;
             LoadDictionary(cbRealRegion, _realRegionList.ToDataTable());
             _isLoad = true;
-            LoadDistrict();
-        }
-
-        private void LoadDistrict()
-        {
-            _isLoad = false;
-            int idRealRegion = Convert.ToInt32(cbRealRegion.SelectedValue);
-            RealRegion realRegion = _realRegionList.GetItem(idRealRegion) as RealRegion;
-            
-            DataTable dt = _districtList.ToDataTable(realRegion);
-            LoadDictionary(cbDistrict, dt);
-            _isLoad = true;
             LoadCity();
         }
 
         private void LoadCity()
         {
-            int idDistrict = Convert.ToInt32(cbDistrict.SelectedValue);
-            District district = _districtList.GetItem(idDistrict) as District;
+            int idRealRegion = Convert.ToInt32(cbRealRegion.SelectedValue);
+            RealRegion realRegion = _realRegionList.GetItem(idRealRegion) as RealRegion;
 
-            DataTable dt = _cityList.ToDataTable(district);
+            DataTable dt = _cityList.ToDataTable(realRegion);
             LoadDictionary(cbCity, dt);
         }
 
         private void LoadDictionary(ComboBox combo, DataTable dt)
         {
+            combo.DataSource = dt;
+
             if (dt == null)
             {
                 MessageBox.Show("Отсутствуют данные в зависимых ячейках", "Нет данных", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
-
-            combo.DataSource = dt;
+            
             combo.ValueMember = dt.Columns[0].ColumnName;
             combo.DisplayMember = dt.Columns[1].ColumnName;
         }
@@ -145,15 +133,9 @@ namespace RegionR.SF
         private void cbRealRegion_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (_isLoad)
-                LoadDistrict();
-        }
-
-        private void cbDistrict_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (_isLoad)
                 LoadCity();
         }
-
+        
         private void tbName_TextChanged(object sender, EventArgs e)
         {
             lbName.Text = tbName.Text.ToUpper();
@@ -161,9 +143,18 @@ namespace RegionR.SF
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            CopyFields();
+            try
+            {
+                CopyFields();
 
-            _lpu.Save();
+                _lpu.Save();
+
+                this.DialogResult = System.Windows.Forms.DialogResult.OK;
+            }
+            catch (NullReferenceException ex)
+            {
+                MessageBox.Show(ex.Message, "Обязательное поле", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void CopyFields()
@@ -180,10 +171,12 @@ namespace RegionR.SF
             int idMainSpec = Convert.ToInt32(cbMainSpec.SelectedValue);
             _lpu.MainSpec = _mainSpecList.GetItem(idMainSpec) as MainSpec;
 
+            CheckedClass.CheckFilled(tbName.Text, "Официальное название");
+            CheckedClass.CheckFilled(tbShortName.Text, "Сокращенное название");
+            CheckedClass.CheckFilled(tbINN.Text, "ИНН");
 
             _lpu.Name = tbName.Text;
             _lpu.ShortName = tbShortName.Text;
-
             _lpu.INN = tbINN.Text;
             _lpu.KPP = tbKPP.Text;
             _lpu.PostIndex = tbPostIndex.Text;
@@ -209,8 +202,23 @@ namespace RegionR.SF
             _lpu.PatientPD = tbPatientPD.Text;
             _lpu.PatientCRRT = tbPatientCRRT.Text;
         }
+        
+        private void btnShowRules_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("В процессе разработки", "Функция не реализована", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnShowEmployees_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("В процессе разработки", "Функция не реализована", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void btnAddEmployee_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("В процессе разработки", "Функция не реализована", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void btnAddSubOrganization_Click(object sender, EventArgs e)
         {
             MessageBox.Show("В процессе разработки", "Функция не реализована", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }

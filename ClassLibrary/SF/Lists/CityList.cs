@@ -22,11 +22,24 @@ namespace ClassLibrary.SF
             return _uniqueInstance;
         }
 
-        public DataTable ToDataTable(District district)
+        public DataTable ToDataTable(RealRegion realRegion)
         {
-            var list = List.Where(item => (item as City).District == district);
+            DataTable dt = new DataTable();
+            dt.Columns.Add("id");
+            dt.Columns.Add("Название");
+            dt.Columns.Add("Телефонный код");
 
-            return (list.Count() == 0) ? null : list.Select(item => item.GetRow()).CopyToDataTable();
+            List<City> list = List.Where(item => (item as City).RealRegion == realRegion).Select(item => item as City).ToList();
+
+            foreach (var item in list)
+                dt.Rows.Add(item.GetRow());
+
+            return dt;
+        }
+
+        public bool IsInList(City city)
+        {
+            return List.Where(item => item.Name == city.Name && (item as City).RealRegion == city.RealRegion).Count() > 0;
         }
     }
 }

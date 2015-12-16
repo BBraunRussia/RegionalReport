@@ -10,31 +10,34 @@ namespace ClassLibrary.SF
     {
         private List<BaseDictionary> _list;
         private IProvider _provider;
+        private string _tableName;
 
         public BaseList(string tableName)
         {
+            _tableName = tableName;
+
             _provider = Provider.GetProvider();
             _list = new List<BaseDictionary>();
 
-            LoadFromDataBase(tableName);
+            LoadFromDataBase();
         }
 
         protected List<BaseDictionary> List { get { return _list; } }
 
-        private void LoadFromDataBase(string tableName)
+        private void LoadFromDataBase()
         {
-            DataTable dt = _provider.Select(tableName);
+            DataTable dt = _provider.Select(_tableName);
 
             foreach (DataRow row in dt.Rows)
             {
-                BaseDictionary baseDictionary = SFFactory.CreateItem(tableName, row);
+                BaseDictionary baseDictionary = SFFactory.CreateItem(_tableName, row);
                 _list.Add(baseDictionary);
             }
         }
 
         public DataTable ToDataTable()
         {
-            return (_list.Count == 0) ? null : _list.Select(item => item.GetRow()).CopyToDataTable();
+            return (_list.Count == 0) ? null : _list.OrderBy(item => item.Name).Select(item => item.GetRow()).CopyToDataTable();
         }
 
         public BaseDictionary GetItem(int id)
@@ -42,9 +45,17 @@ namespace ClassLibrary.SF
             return _list.Where(item => item.ID == id).First();
         }
 
+        public BaseDictionary GetItem(string name)
+        {
+            var list = _list.Where(item => item.Name == name);
+            return (list.Count() == 0) ? null : list.First();
+        }
+
         public void Delete(BaseDictionary item)
         {
             _list.Remove(item);
+
+            _provider.Delete(_tableName, item.ID);
         }
     }
 }

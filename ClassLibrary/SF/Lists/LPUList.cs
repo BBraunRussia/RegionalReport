@@ -60,5 +60,11 @@ namespace ClassLibrary.SF
             var list = _list.Where(item => item.LpuRR == lpuRR);
             return (list.Count() == 0) ? null : list.First();
         }
+
+        public LPU GetItem(City city)
+        {
+            var list = _list.Where(item => item.City == city);
+            return (list.Count() == 0) ? null : list.First();
+        }
     }
 }

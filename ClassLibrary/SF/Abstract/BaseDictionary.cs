@@ -17,8 +17,18 @@ namespace ClassLibrary.SF
             _name = row[1].ToString();
         }
 
-        public string Name { get { return _name; } }
-        public int ID { get { return _id; } }
+        public BaseDictionary() { }
+
+        public string Name
+        {
+            get { return _name; }
+            set { _name = value; }
+        }
+        public int ID
+        {
+            get { return _id; }
+            protected set { _id = value; }
+        }
 
         public virtual DataRow GetRow()
         {

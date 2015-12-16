@@ -162,5 +162,11 @@ namespace RegionR
 
             dgv.CurrentCell = dgv.Rows[rowIndex].Cells[columnIndex];
         }
+
+        private void cityDictionaryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormCityList formCityList = new FormCityList();
+            formCityList.ShowDialog();
+        }
     }
 }

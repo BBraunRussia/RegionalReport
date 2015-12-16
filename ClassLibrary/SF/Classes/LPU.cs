@@ -120,7 +120,7 @@ namespace ClassLibrary.SF
 
         public object[] GetRow()
         {
-            return new object[] { ID, NumberSF, Name, TypeLPU.Name, INN, RealRegion.Name, City.Name, LpuRR.Name, LpuRR.RegionRR.Name };
+            return new object[] { ID, NumberSF, ShortName, TypeLPU.Name, INN, RealRegion.Name, City.Name, LpuRR.Name, LpuRR.RegionRR.Name };
         }
 
         public override void Save()

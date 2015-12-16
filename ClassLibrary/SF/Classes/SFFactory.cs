@@ -18,8 +18,6 @@ namespace ClassLibrary.SF
                     return new LPUChild(row);
                 case "SF_AdmLevel":
                     return new AdmLevel(row);
-                case "SF_District":
-                    return new District(row);
                 case "SF_MainSpec":
                     return new MainSpec(row);
                 case "SF_Ownership":

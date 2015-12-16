@@ -453,14 +453,27 @@
     <Compile Include="RRRent.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="SF\Classes\CheckedClass.cs" />
     <Compile Include="SF\Classes\MainDGV.cs" />
     <Compile Include="SF\Classes\MyStatusStrip.cs" />
     <Compile Include="SF\Classes\SearchInDgv.cs" />
+    <Compile Include="SF\FormAddCity.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SF\FormAddCity.Designer.cs">
+      <DependentUpon>FormAddCity.cs</DependentUpon>
+    </Compile>
     <Compile Include="SF\FormAddLPU.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="SF\FormAddLPU.Designer.cs">
       <DependentUpon>FormAddLPU.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SF\FormCityList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SF\FormCityList.Designer.cs">
+      <DependentUpon>FormCityList.cs</DependentUpon>
     </Compile>
     <Compile Include="SF\FormFirstStepAddOrganization.cs">
       <SubType>Form</SubType>
@@ -658,8 +671,14 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="SF\FormAddCity.resx">
+      <DependentUpon>FormAddCity.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SF\FormAddLPU.resx">
       <DependentUpon>FormAddLPU.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SF\FormCityList.resx">
+      <DependentUpon>FormCityList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SF\FormFirstStepAddOrganization.resx">
       <DependentUpon>FormFirstStepAddOrganization.cs</DependentUpon>

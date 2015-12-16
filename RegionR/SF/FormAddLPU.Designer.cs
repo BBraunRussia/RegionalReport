@@ -83,12 +83,10 @@
             this.tbEmail = new System.Windows.Forms.TextBox();
             this.label27 = new System.Windows.Forms.Label();
             this.label28 = new System.Windows.Forms.Label();
-            this.label29 = new System.Windows.Forms.Label();
             this.label30 = new System.Windows.Forms.Label();
             this.tbStreet = new System.Windows.Forms.TextBox();
             this.label31 = new System.Windows.Forms.Label();
             this.cbRealRegion = new System.Windows.Forms.ComboBox();
-            this.cbDistrict = new System.Windows.Forms.ComboBox();
             this.cbCity = new System.Windows.Forms.ComboBox();
             this.lbRegionRRSalesDistrict = new System.Windows.Forms.Label();
             this.label33 = new System.Windows.Forms.Label();
@@ -98,7 +96,12 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.cbLpuRR = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnShowRules = new System.Windows.Forms.Button();
+            this.tbPhoneCode = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnAddSubOrganization = new System.Windows.Forms.Button();
+            this.btnAddEmployee = new System.Windows.Forms.Button();
+            this.btnShowEmployees = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -451,9 +454,9 @@
             this.label19.AutoSize = true;
             this.label19.Location = new System.Drawing.Point(297, 58);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(131, 13);
+            this.label19.Size = new System.Drawing.Size(135, 13);
             this.label19.TabIndex = 40;
-            this.label19.Text = "Официальное название:";
+            this.label19.Text = "Официальное название*:";
             // 
             // tbShortName
             // 
@@ -467,9 +470,9 @@
             this.label20.AutoSize = true;
             this.label20.Location = new System.Drawing.Point(297, 86);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(131, 13);
+            this.label20.Size = new System.Drawing.Size(135, 13);
             this.label20.TabIndex = 42;
-            this.label20.Text = "Сокращенное название:";
+            this.label20.Text = "Сокращенное название*:";
             // 
             // label21
             // 
@@ -482,7 +485,8 @@
             // 
             // tbINN
             // 
-            this.tbINN.Location = new System.Drawing.Point(434, 135);
+            this.tbINN.Location = new System.Drawing.Point(434, 136);
+            this.tbINN.MaxLength = 10;
             this.tbINN.Name = "tbINN";
             this.tbINN.Size = new System.Drawing.Size(103, 20);
             this.tbINN.TabIndex = 47;
@@ -490,23 +494,23 @@
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(297, 138);
+            this.label22.Location = new System.Drawing.Point(297, 139);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(34, 13);
+            this.label22.Size = new System.Drawing.Size(38, 13);
             this.label22.TabIndex = 46;
-            this.label22.Text = "ИНН:";
+            this.label22.Text = "ИНН*:";
             // 
             // tbKPP
             // 
-            this.tbKPP.Location = new System.Drawing.Point(434, 161);
+            this.tbKPP.Location = new System.Drawing.Point(623, 136);
             this.tbKPP.Name = "tbKPP";
-            this.tbKPP.Size = new System.Drawing.Size(103, 20);
+            this.tbKPP.Size = new System.Drawing.Size(139, 20);
             this.tbKPP.TabIndex = 49;
             // 
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(297, 164);
+            this.label23.Location = new System.Drawing.Point(584, 139);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(33, 13);
             this.label23.TabIndex = 48;
@@ -514,7 +518,7 @@
             // 
             // tbPostIndex
             // 
-            this.tbPostIndex.Location = new System.Drawing.Point(434, 187);
+            this.tbPostIndex.Location = new System.Drawing.Point(434, 216);
             this.tbPostIndex.Name = "tbPostIndex";
             this.tbPostIndex.Size = new System.Drawing.Size(103, 20);
             this.tbPostIndex.TabIndex = 51;
@@ -522,7 +526,7 @@
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(297, 190);
+            this.label24.Location = new System.Drawing.Point(297, 219);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(99, 13);
             this.label24.TabIndex = 50;
@@ -530,31 +534,31 @@
             // 
             // tbPhone
             // 
-            this.tbPhone.Location = new System.Drawing.Point(659, 187);
+            this.tbPhone.Location = new System.Drawing.Point(623, 320);
             this.tbPhone.Name = "tbPhone";
-            this.tbPhone.Size = new System.Drawing.Size(103, 20);
+            this.tbPhone.Size = new System.Drawing.Size(139, 20);
             this.tbPhone.TabIndex = 57;
             // 
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(595, 190);
+            this.label25.Location = new System.Drawing.Point(521, 323);
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(53, 13);
+            this.label25.Size = new System.Drawing.Size(96, 13);
             this.label25.TabIndex = 56;
-            this.label25.Text = "телефон:";
+            this.label25.Text = "Номер телефона:";
             // 
             // tbWebSite
             // 
-            this.tbWebSite.Location = new System.Drawing.Point(659, 161);
+            this.tbWebSite.Location = new System.Drawing.Point(434, 294);
             this.tbWebSite.Name = "tbWebSite";
-            this.tbWebSite.Size = new System.Drawing.Size(103, 20);
+            this.tbWebSite.Size = new System.Drawing.Size(192, 20);
             this.tbWebSite.TabIndex = 55;
             // 
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(595, 164);
+            this.label26.Location = new System.Drawing.Point(297, 297);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(54, 13);
             this.label26.TabIndex = 54;
@@ -562,15 +566,15 @@
             // 
             // tbEmail
             // 
-            this.tbEmail.Location = new System.Drawing.Point(659, 135);
+            this.tbEmail.Location = new System.Drawing.Point(434, 268);
             this.tbEmail.Name = "tbEmail";
-            this.tbEmail.Size = new System.Drawing.Size(103, 20);
+            this.tbEmail.Size = new System.Drawing.Size(192, 20);
             this.tbEmail.TabIndex = 53;
             // 
             // label27
             // 
             this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(595, 138);
+            this.label27.Location = new System.Drawing.Point(297, 271);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(58, 13);
             this.label27.TabIndex = 52;
@@ -579,25 +583,16 @@
             // label28
             // 
             this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(297, 216);
+            this.label28.Location = new System.Drawing.Point(297, 165);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(86, 13);
             this.label28.TabIndex = 58;
             this.label28.Text = "Регион России:";
             // 
-            // label29
-            // 
-            this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(297, 242);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(41, 13);
-            this.label29.TabIndex = 60;
-            this.label29.Text = "Район:";
-            // 
             // label30
             // 
             this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(297, 268);
+            this.label30.Location = new System.Drawing.Point(297, 192);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(105, 13);
             this.label30.TabIndex = 62;
@@ -605,7 +600,7 @@
             // 
             // tbStreet
             // 
-            this.tbStreet.Location = new System.Drawing.Point(434, 291);
+            this.tbStreet.Location = new System.Drawing.Point(434, 242);
             this.tbStreet.Name = "tbStreet";
             this.tbStreet.Size = new System.Drawing.Size(328, 20);
             this.tbStreet.TabIndex = 65;
@@ -613,7 +608,7 @@
             // label31
             // 
             this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(297, 294);
+            this.label31.Location = new System.Drawing.Point(297, 245);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(88, 13);
             this.label31.TabIndex = 64;
@@ -623,29 +618,19 @@
             // 
             this.cbRealRegion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbRealRegion.FormattingEnabled = true;
-            this.cbRealRegion.Location = new System.Drawing.Point(434, 213);
+            this.cbRealRegion.Location = new System.Drawing.Point(434, 162);
             this.cbRealRegion.Name = "cbRealRegion";
-            this.cbRealRegion.Size = new System.Drawing.Size(214, 21);
+            this.cbRealRegion.Size = new System.Drawing.Size(328, 21);
             this.cbRealRegion.TabIndex = 66;
             this.cbRealRegion.SelectedIndexChanged += new System.EventHandler(this.cbRealRegion_SelectedIndexChanged);
-            // 
-            // cbDistrict
-            // 
-            this.cbDistrict.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbDistrict.FormattingEnabled = true;
-            this.cbDistrict.Location = new System.Drawing.Point(434, 239);
-            this.cbDistrict.Name = "cbDistrict";
-            this.cbDistrict.Size = new System.Drawing.Size(214, 21);
-            this.cbDistrict.TabIndex = 67;
-            this.cbDistrict.SelectedIndexChanged += new System.EventHandler(this.cbDistrict_SelectedIndexChanged);
             // 
             // cbCity
             // 
             this.cbCity.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCity.FormattingEnabled = true;
-            this.cbCity.Location = new System.Drawing.Point(434, 265);
+            this.cbCity.Location = new System.Drawing.Point(434, 189);
             this.cbCity.Name = "cbCity";
-            this.cbCity.Size = new System.Drawing.Size(214, 21);
+            this.cbCity.Size = new System.Drawing.Size(328, 21);
             this.cbCity.TabIndex = 68;
             // 
             // lbRegionRRSalesDistrict
@@ -686,16 +671,15 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Location = new System.Drawing.Point(781, 169);
+            this.groupBox3.Location = new System.Drawing.Point(779, 165);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(200, 187);
+            this.groupBox3.Size = new System.Drawing.Size(200, 279);
             this.groupBox3.TabIndex = 73;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Подразделения";
             // 
             // btnSave
             // 
-            this.btnSave.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnSave.Location = new System.Drawing.Point(832, 546);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
@@ -724,16 +708,62 @@
             this.cbLpuRR.Size = new System.Drawing.Size(328, 21);
             this.cbLpuRR.TabIndex = 76;
             // 
-            // button1
+            // btnShowRules
             // 
-            this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.button1.Location = new System.Drawing.Point(779, 81);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(148, 23);
-            this.button1.TabIndex = 77;
-            this.button1.Text = "Правила наименования";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnShowRules.Location = new System.Drawing.Point(779, 81);
+            this.btnShowRules.Name = "btnShowRules";
+            this.btnShowRules.Size = new System.Drawing.Size(148, 23);
+            this.btnShowRules.TabIndex = 77;
+            this.btnShowRules.Text = "Правила наименования";
+            this.btnShowRules.UseVisualStyleBackColor = true;
+            this.btnShowRules.Click += new System.EventHandler(this.btnShowRules_Click);
+            // 
+            // tbPhoneCode
+            // 
+            this.tbPhoneCode.Enabled = false;
+            this.tbPhoneCode.Location = new System.Drawing.Point(434, 320);
+            this.tbPhoneCode.Name = "tbPhoneCode";
+            this.tbPhoneCode.Size = new System.Drawing.Size(74, 20);
+            this.tbPhoneCode.TabIndex = 56;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(297, 323);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(134, 13);
+            this.label1.TabIndex = 78;
+            this.label1.Text = "Телефонный код города:";
+            // 
+            // btnAddSubOrganization
+            // 
+            this.btnAddSubOrganization.Location = new System.Drawing.Point(605, 401);
+            this.btnAddSubOrganization.Name = "btnAddSubOrganization";
+            this.btnAddSubOrganization.Size = new System.Drawing.Size(148, 43);
+            this.btnAddSubOrganization.TabIndex = 79;
+            this.btnAddSubOrganization.Text = "Добавить подразделение";
+            this.btnAddSubOrganization.UseVisualStyleBackColor = true;
+            this.btnAddSubOrganization.Click += new System.EventHandler(this.btnAddSubOrganization_Click);
+            // 
+            // btnAddEmployee
+            // 
+            this.btnAddEmployee.Location = new System.Drawing.Point(451, 401);
+            this.btnAddEmployee.Name = "btnAddEmployee";
+            this.btnAddEmployee.Size = new System.Drawing.Size(148, 43);
+            this.btnAddEmployee.TabIndex = 80;
+            this.btnAddEmployee.Text = "Добавить сотрудника";
+            this.btnAddEmployee.UseVisualStyleBackColor = true;
+            this.btnAddEmployee.Click += new System.EventHandler(this.btnAddEmployee_Click);
+            // 
+            // btnShowEmployees
+            // 
+            this.btnShowEmployees.Location = new System.Drawing.Point(297, 401);
+            this.btnShowEmployees.Name = "btnShowEmployees";
+            this.btnShowEmployees.Size = new System.Drawing.Size(148, 43);
+            this.btnShowEmployees.TabIndex = 81;
+            this.btnShowEmployees.Text = "Показать сотрудников этого ЛПУ";
+            this.btnShowEmployees.UseVisualStyleBackColor = true;
+            this.btnShowEmployees.Click += new System.EventHandler(this.btnShowEmployees_Click);
             // 
             // FormAddLPU
             // 
@@ -742,7 +772,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(1000, 581);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnShowEmployees);
+            this.Controls.Add(this.btnAddEmployee);
+            this.Controls.Add(this.btnAddSubOrganization);
+            this.Controls.Add(this.tbPhoneCode);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.btnShowRules);
             this.Controls.Add(this.cbLpuRR);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
@@ -752,12 +787,10 @@
             this.Controls.Add(this.lbRegionRRSalesDistrict);
             this.Controls.Add(this.label33);
             this.Controls.Add(this.cbCity);
-            this.Controls.Add(this.cbDistrict);
             this.Controls.Add(this.cbRealRegion);
             this.Controls.Add(this.tbStreet);
             this.Controls.Add(this.label31);
             this.Controls.Add(this.label30);
-            this.Controls.Add(this.label29);
             this.Controls.Add(this.label28);
             this.Controls.Add(this.tbPhone);
             this.Controls.Add(this.label25);
@@ -860,12 +893,10 @@
         private System.Windows.Forms.TextBox tbEmail;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.Label label28;
-        private System.Windows.Forms.Label label29;
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.TextBox tbStreet;
         private System.Windows.Forms.Label label31;
         private System.Windows.Forms.ComboBox cbRealRegion;
-        private System.Windows.Forms.ComboBox cbDistrict;
         private System.Windows.Forms.ComboBox cbCity;
         private System.Windows.Forms.Label lbRegionRRSalesDistrict;
         private System.Windows.Forms.Label label33;
@@ -875,6 +906,11 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.ComboBox cbLpuRR;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnShowRules;
+        private System.Windows.Forms.TextBox tbPhoneCode;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnAddSubOrganization;
+        private System.Windows.Forms.Button btnAddEmployee;
+        private System.Windows.Forms.Button btnShowEmployees;
     }
 }

@@ -8,21 +8,47 @@ namespace ClassLibrary.SF
 {
     public class City : BaseDictionary
     {
-        private int _idDistrict;
+        private int _idRealRegion;
+        private string _phoneCode;
 
         public City(DataRow row)
             : base(row)
         {
-            int.TryParse(row[2].ToString(), out _idDistrict);
+            int.TryParse(row[2].ToString(), out _idRealRegion);
+            _phoneCode = row[3].ToString();
         }
 
-        public District District
+        public City(int idRealRegion)
+        {
+            _idRealRegion = idRealRegion;
+        }
+
+        public RealRegion RealRegion
         {
             get
             {
-                DistrictList districtList = DistrictList.GetUniqueInstance();
-                return districtList.GetItem(_idDistrict) as District;
+                RealRegionList realRegionList = RealRegionList.GetUniqueInstance();
+                return realRegionList.GetItem(_idRealRegion) as RealRegion;
             }
+        }
+
+        public string PhoneCode
+        {
+            get { return _phoneCode; }
+            set { _phoneCode = value; }
+        }
+
+        public new object[] GetRow()
+        {
+            return new object[] { ID, Name, PhoneCode };
+        }
+
+        public void Save()
+        {
+            IProvider provider = Provider.GetProvider();
+            int idCity;
+            int.TryParse(provider.Insert("SF_City", ID, Name, RealRegion.ID, PhoneCode), out idCity);
+            ID = idCity;
         }
     }
 }

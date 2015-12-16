@@ -63,21 +63,8 @@ namespace ClassLibrary.SF
             set { _idCity = value.ID; }
         }
 
-        public District District
-        {
-            get
-            {
-                return (City == null) ? null : City.District;
-            }
-        }
-        public RealRegion RealRegion
-        {
-            get
-            {
-                return (District == null) ? null : District.RealRegion;
-            }
-        }
-
+        public RealRegion RealRegion { get { return (City == null) ? null : City.RealRegion; } }
+        
         public TypeLPU TypeLPU
         {
             get

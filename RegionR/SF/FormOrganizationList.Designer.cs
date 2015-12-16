@@ -130,7 +130,7 @@
             this.cityDictionaryToolStripMenuItem.Name = "cityDictionaryToolStripMenuItem";
             this.cityDictionaryToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.cityDictionaryToolStripMenuItem.Text = "Справочник городов";
-            this.cityDictionaryToolStripMenuItem.Click += new System.EventHandler(this.NotImpliment_Click);
+            this.cityDictionaryToolStripMenuItem.Click += new System.EventHandler(this.cityDictionaryToolStripMenuItem_Click);
             // 
             // toolStripMenuItem3
             // 
