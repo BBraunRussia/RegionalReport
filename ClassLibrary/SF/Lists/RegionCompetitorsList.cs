@@ -49,7 +49,7 @@ namespace ClassLibrary.SF
 
         public RegionCompetitors GetItem(int id)
         {
-            return _list.Where(item => item.ID == id).First();
+            return (id == 0) ? null : _list.Where(item => item.ID == id).First();
         }
     }
 }
