@@ -41,5 +41,11 @@ namespace ClassLibrary.SF
         {
             return List.Where(item => item.Name == city.Name && (item as City).RealRegion == city.RealRegion).Count() > 0;
         }
+
+        internal void Add(City city)
+        {
+            if (!List.Exists(item => item.ID == city.ID))
+                List.Add(city);
+        }
     }
 }

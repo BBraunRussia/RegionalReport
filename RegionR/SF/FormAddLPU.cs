@@ -141,15 +141,26 @@ namespace RegionR.SF
             lbName.Text = tbName.Text.ToUpper();
         }
 
+        private void btnSaveAndClose_Click(object sender, EventArgs e)
+        {
+            TrySave();
+
+            this.DialogResult = System.Windows.Forms.DialogResult.OK;
+        }
+
+
         private void btnSave_Click(object sender, EventArgs e)
+        {
+            TrySave();
+        }
+
+        private void TrySave()
         {
             try
             {
                 CopyFields();
 
                 _lpu.Save();
-
-                this.DialogResult = System.Windows.Forms.DialogResult.OK;
             }
             catch (NullReferenceException ex)
             {

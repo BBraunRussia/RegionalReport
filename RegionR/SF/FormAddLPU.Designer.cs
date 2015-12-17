@@ -93,7 +93,7 @@
             this.lbRegionRR = new System.Windows.Forms.Label();
             this.label35 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.btnSave = new System.Windows.Forms.Button();
+            this.btnSaveAndClose = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.cbLpuRR = new System.Windows.Forms.ComboBox();
             this.btnShowRules = new System.Windows.Forms.Button();
@@ -102,6 +102,7 @@
             this.btnAddSubOrganization = new System.Windows.Forms.Button();
             this.btnAddEmployee = new System.Windows.Forms.Button();
             this.btnShowEmployees = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -678,15 +679,15 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Подразделения";
             // 
-            // btnSave
+            // btnSaveAndClose
             // 
-            this.btnSave.Location = new System.Drawing.Point(832, 546);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 23);
-            this.btnSave.TabIndex = 74;
-            this.btnSave.Text = "Сохранить";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.btnSaveAndClose.Location = new System.Drawing.Point(740, 546);
+            this.btnSaveAndClose.Name = "btnSaveAndClose";
+            this.btnSaveAndClose.Size = new System.Drawing.Size(167, 23);
+            this.btnSaveAndClose.TabIndex = 74;
+            this.btnSaveAndClose.Text = "Сохранить и закрыть";
+            this.btnSaveAndClose.UseVisualStyleBackColor = true;
+            this.btnSaveAndClose.Click += new System.EventHandler(this.btnSaveAndClose_Click);
             // 
             // btnCancel
             // 
@@ -765,13 +766,24 @@
             this.btnShowEmployees.UseVisualStyleBackColor = true;
             this.btnShowEmployees.Click += new System.EventHandler(this.btnShowEmployees_Click);
             // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(640, 546);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(94, 23);
+            this.btnSave.TabIndex = 82;
+            this.btnSave.Text = "Сохранить";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
             // FormAddLPU
             // 
-            this.AcceptButton = this.btnSave;
+            this.AcceptButton = this.btnSaveAndClose;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(1000, 581);
+            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnShowEmployees);
             this.Controls.Add(this.btnAddEmployee);
             this.Controls.Add(this.btnAddSubOrganization);
@@ -780,7 +792,7 @@
             this.Controls.Add(this.btnShowRules);
             this.Controls.Add(this.cbLpuRR);
             this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnSave);
+            this.Controls.Add(this.btnSaveAndClose);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.lbRegionRR);
             this.Controls.Add(this.label35);
@@ -903,7 +915,7 @@
         private System.Windows.Forms.Label lbRegionRR;
         private System.Windows.Forms.Label label35;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button btnSaveAndClose;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.ComboBox cbLpuRR;
         private System.Windows.Forms.Button btnShowRules;
@@ -912,5 +924,6 @@
         private System.Windows.Forms.Button btnAddSubOrganization;
         private System.Windows.Forms.Button btnAddEmployee;
         private System.Windows.Forms.Button btnShowEmployees;
+        private System.Windows.Forms.Button btnSave;
     }
 }

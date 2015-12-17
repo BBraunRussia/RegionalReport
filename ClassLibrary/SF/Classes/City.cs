@@ -49,6 +49,9 @@ namespace ClassLibrary.SF
             int idCity;
             int.TryParse(provider.Insert("SF_City", ID, Name, RealRegion.ID, PhoneCode), out idCity);
             ID = idCity;
+
+            CityList cityList = CityList.GetUniqueInstance();
+            cityList.Add(this);
         }
     }
 }
