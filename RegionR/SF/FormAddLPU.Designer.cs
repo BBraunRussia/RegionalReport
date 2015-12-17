@@ -448,7 +448,6 @@
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(554, 20);
             this.tbName.TabIndex = 41;
-            this.tbName.TextChanged += new System.EventHandler(this.tbName_TextChanged);
             // 
             // label19
             // 
@@ -465,6 +464,7 @@
             this.tbShortName.Name = "tbShortName";
             this.tbShortName.Size = new System.Drawing.Size(328, 20);
             this.tbShortName.TabIndex = 43;
+            this.tbShortName.TextChanged += new System.EventHandler(this.tbShortName_TextChanged);
             // 
             // label20
             // 
@@ -637,7 +637,7 @@
             // lbRegionRRSalesDistrict
             // 
             this.lbRegionRRSalesDistrict.AutoSize = true;
-            this.lbRegionRRSalesDistrict.Location = new System.Drawing.Point(853, 143);
+            this.lbRegionRRSalesDistrict.Location = new System.Drawing.Point(877, 143);
             this.lbRegionRRSalesDistrict.Name = "lbRegionRRSalesDistrict";
             this.lbRegionRRSalesDistrict.Size = new System.Drawing.Size(76, 13);
             this.lbRegionRRSalesDistrict.TabIndex = 70;
@@ -648,14 +648,14 @@
             this.label33.AutoSize = true;
             this.label33.Location = new System.Drawing.Point(776, 143);
             this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(71, 13);
+            this.label33.Size = new System.Drawing.Size(95, 13);
             this.label33.TabIndex = 69;
-            this.label33.Text = "Sales District:";
+            this.label33.Text = "SAP Sales District:";
             // 
             // lbRegionRR
             // 
             this.lbRegionRR.AutoSize = true;
-            this.lbRegionRR.Location = new System.Drawing.Point(853, 117);
+            this.lbRegionRR.Location = new System.Drawing.Point(877, 117);
             this.lbRegionRR.Name = "lbRegionRR";
             this.lbRegionRR.Size = new System.Drawing.Size(76, 13);
             this.lbRegionRR.TabIndex = 72;

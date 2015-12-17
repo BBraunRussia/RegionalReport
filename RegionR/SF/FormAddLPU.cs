@@ -135,11 +135,6 @@ namespace RegionR.SF
             if (_isLoad)
                 LoadCity();
         }
-        
-        private void tbName_TextChanged(object sender, EventArgs e)
-        {
-            lbName.Text = tbName.Text.ToUpper();
-        }
 
         private void btnSaveAndClose_Click(object sender, EventArgs e)
         {
@@ -232,6 +227,11 @@ namespace RegionR.SF
         private void btnAddSubOrganization_Click(object sender, EventArgs e)
         {
             MessageBox.Show("В процессе разработки", "Функция не реализована", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void tbShortName_TextChanged(object sender, EventArgs e)
+        {
+            lbName.Text = tbShortName.Text.ToUpper();
         }
     }
 }
