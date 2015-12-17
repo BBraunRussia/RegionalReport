@@ -43,6 +43,8 @@ namespace RegionR.SF
             try
             {
                 Save();
+
+                this.DialogResult = System.Windows.Forms.DialogResult.OK;
             }
             catch (NullReferenceException ex)
             {
