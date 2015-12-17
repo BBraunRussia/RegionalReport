@@ -27,5 +27,10 @@ namespace ClassLibrary.SF
 
             return List.Where(item => userRightList.IsInList(user, (item as RealRegion).RegionRR)).Select(item => (item as RealRegion).RegionCompetitors).ToList();
         }
+
+        public RealRegion GetItem(RegionCompetitors regionCompetitors)
+        {
+            return List.Where(item => (item as RealRegion).RegionCompetitors == regionCompetitors).Select(item => (item as RealRegion)).First();
+        }
     }
 }

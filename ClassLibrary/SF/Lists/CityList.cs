@@ -47,5 +47,10 @@ namespace ClassLibrary.SF
             if (!List.Exists(item => item.ID == city.ID))
                 List.Add(city);
         }
+
+        public City GetItem(RealRegion realRegion)
+        {
+            return List.Where(item => (item as City).RealRegion == realRegion).Select(item => (item as City)).First();
+        }
     }
 }

@@ -64,6 +64,21 @@ namespace ClassLibrary.SF
         }
 
         public RealRegion RealRegion { get { return (City == null) ? null : City.RealRegion; } }
+
+        public RegionCompetitors RegionCompetitors
+        {
+            set
+            {
+                RealRegionList realRegionList = RealRegionList.GetUniqueInstance();
+                RealRegion realRegion = realRegionList.GetItem(value);
+
+                CityList cityList = CityList.GetUniqueInstance();
+
+                City city = cityList.GetItem(realRegion);
+
+                City = city;
+            }
+        }
         
         public TypeLPU TypeLPU
         {

@@ -84,6 +84,7 @@ namespace RegionR.SF
             _lpu.Name = lpuCompetitor.Name;
             _lpu.INN = lpuCompetitor.INN;
             _lpu.KPP = lpuCompetitor.KPP;
+            _lpu.RegionCompetitors = lpuCompetitor.RegionCompetitors;
 
             int idLpuRR;
             int.TryParse(dgvLpuRR.Rows[dgvLpuRR.CurrentCell.RowIndex].Cells[0].Value.ToString(), out idLpuRR);
