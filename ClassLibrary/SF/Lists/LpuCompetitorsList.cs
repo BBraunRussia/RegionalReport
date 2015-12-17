@@ -42,9 +42,22 @@ namespace ClassLibrary.SF
             }
         }
 
-        public DataTable ToDataTable()
+        public DataTable ToDataTable(User user)
         {
-            return (_list.Count == 0) ? null : _list.Select(item => item.GetRow()).CopyToDataTable();
+            if ((user.Role == Roles.Администратор) || (user.Role == Roles.Руководство1) || (user.Role == Roles.Руководство2))
+                return _list.Select(item => item.GetRow()).CopyToDataTable();
+
+            RealRegionList realRegionList = RealRegionList.GetUniqueInstance();
+            List<RegionCompetitors> list = realRegionList.ToList(user);
+
+            var list2 = _list.Where(item => IsInList(list, item.RegionCompetitors)).Select(item => item.GetRow());
+
+            return (list2.Count() == 0) ? null : list2.CopyToDataTable();
+        }
+
+        private bool IsInList(List<RegionCompetitors> list, RegionCompetitors regionCompetitors)
+        {
+            return list.Exists(item => item == regionCompetitors);
         }
 
         public LpuCompetitors GetItem(int id)

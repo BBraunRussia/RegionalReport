@@ -25,5 +25,10 @@ namespace ClassLibrary.SF
         {
             return List.Where(item => (item as UserRight).User == user).Select(item => (item as UserRight).RegionRR).ToList();
         }
+
+        public bool IsInList(User user, RegionRR regionRR)
+        {
+            return List.Exists(item => (item as UserRight).User == user && (item as UserRight).RegionRR == regionRR);
+        }
     }
 }

@@ -20,5 +20,12 @@ namespace ClassLibrary.SF
 
             return _uniqueInstance;
         }
+
+        public List<RegionCompetitors> ToList(User user)
+        {
+            UserRightList userRightList = UserRightList.GetUniqueInstance();
+
+            return List.Where(item => userRightList.IsInList(user, (item as RealRegion).RegionRR)).Select(item => (item as RealRegion).RegionCompetitors).ToList();
+        }
     }
 }

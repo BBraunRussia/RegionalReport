@@ -23,7 +23,7 @@ namespace ClassLibrary.SF
         public string INN { get { return _inn; } }
         public string KPP { get { return _kpp; } }
 
-        private RegionCompetitors RegionCompetitors
+        public RegionCompetitors RegionCompetitors
         {
             get
             {

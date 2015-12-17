@@ -16,6 +16,7 @@ namespace RegionR.SF
         private LpuCompetitorsList _lpuCompetitorsList;
         private UserLpuRRList _userLpuList;
         private SearchInDgv _seacher;
+        private User _user;
 
         public FormSecondStepAddOrganization(LPU lpu)
         {
@@ -25,6 +26,9 @@ namespace RegionR.SF
             _lpuCompetitorsList = LpuCompetitorsList.GetUniqueInstance();
 
             _lpu = lpu;
+
+            UserList userList = UserList.GetUniqueInstance();
+            _user = userList.GetItem(globalData.UserID) as User;
 
             _seacher = new SearchInDgv(dgvLPUCompetitors);
         }
@@ -37,10 +41,7 @@ namespace RegionR.SF
 
         private void LoadFirstTable()
         {
-            UserList userList = UserList.GetUniqueInstance();
-            User user = userList.GetItem(globalData.UserID) as User;
-
-            dgvLpuRR.DataSource = _userLpuList.ToDataTable(user);
+            dgvLpuRR.DataSource = _userLpuList.ToDataTable(_user);
             dgvLpuRR.Columns[0].Visible = false;
 
             dgvLpuRR.Columns[1].Width = Convert.ToInt32(dgvLpuRR.Width / 2);
@@ -49,12 +50,17 @@ namespace RegionR.SF
 
         private void LoadSecondTable()
         {
-            dgvLPUCompetitors.DataSource = _lpuCompetitorsList.ToDataTable();
-            dgvLPUCompetitors.Columns[0].Visible = false;
+            DataTable dt = _lpuCompetitorsList.ToDataTable(_user);
+            dgvLPUCompetitors.DataSource = dt;
 
-            dgvLPUCompetitors.CurrentCell = dgvLPUCompetitors.Rows[0].Cells[1];
+            if (dt != null)
+            {
+                dgvLPUCompetitors.Columns[0].Visible = false;
 
-            ResizeDGV();
+                dgvLPUCompetitors.CurrentCell = dgvLPUCompetitors.Rows[0].Cells[1];
+
+                ResizeDGV();
+            }
         }
 
         private void FormSecondStepAddOrganization_Resize(object sender, EventArgs e)
