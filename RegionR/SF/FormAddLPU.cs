@@ -12,6 +12,8 @@ namespace RegionR.SF
 {
     public partial class FormAddLPU : Form
     {
+        public static TypeOrg typeOrg;
+
         private LPU _lpu;
 
         private TypeLPUList _typeLPUList;
@@ -226,7 +228,8 @@ namespace RegionR.SF
 
         private void btnAddSubOrganization_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("В процессе разработки", "Функция не реализована", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            //Organization organization = Organization.CreateItem(typeOrg);
         }
 
         private void tbShortName_TextChanged(object sender, EventArgs e)

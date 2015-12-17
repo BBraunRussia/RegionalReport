@@ -29,100 +29,105 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.btnNext = new System.Windows.Forms.Button();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.rbBranch = new System.Windows.Forms.RadioButton();
+            this.rbDepartment = new System.Windows.Forms.RadioButton();
+            this.rbDivision = new System.Windows.Forms.RadioButton();
+            this.rbPharmacy = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.radioButton4);
-            this.groupBox1.Controls.Add(this.radioButton3);
-            this.groupBox1.Controls.Add(this.radioButton2);
-            this.groupBox1.Controls.Add(this.radioButton1);
+            this.groupBox1.Controls.Add(this.rbPharmacy);
+            this.groupBox1.Controls.Add(this.rbDivision);
+            this.groupBox1.Controls.Add(this.rbDepartment);
+            this.groupBox1.Controls.Add(this.rbBranch);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 164);
+            this.groupBox1.Size = new System.Drawing.Size(176, 164);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Тип подразделения";
             // 
-            // button1
+            // btnNext
             // 
-            this.button1.Location = new System.Drawing.Point(116, 227);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnNext.Location = new System.Drawing.Point(12, 193);
+            this.btnNext.Name = "btnNext";
+            this.btnNext.Size = new System.Drawing.Size(75, 23);
+            this.btnNext.TabIndex = 1;
+            this.btnNext.Text = "Далее";
+            this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
-            // button2
+            // btnClose
             // 
-            this.button2.Location = new System.Drawing.Point(197, 227);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnClose.Location = new System.Drawing.Point(121, 193);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(75, 23);
+            this.btnClose.TabIndex = 2;
+            this.btnClose.Text = "Отмена";
+            this.btnClose.UseVisualStyleBackColor = true;
             // 
-            // radioButton1
+            // rbBranch
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(18, 31);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(66, 17);
-            this.radioButton1.TabIndex = 0;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Филиал";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.rbBranch.AutoSize = true;
+            this.rbBranch.Location = new System.Drawing.Point(18, 31);
+            this.rbBranch.Name = "rbBranch";
+            this.rbBranch.Size = new System.Drawing.Size(66, 17);
+            this.rbBranch.TabIndex = 0;
+            this.rbBranch.TabStop = true;
+            this.rbBranch.Text = "Филиал";
+            this.rbBranch.UseVisualStyleBackColor = true;
             // 
-            // radioButton2
+            // rbDepartment
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(18, 63);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(80, 17);
-            this.radioButton2.TabIndex = 1;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Отделение";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.rbDepartment.AutoSize = true;
+            this.rbDepartment.Location = new System.Drawing.Point(18, 63);
+            this.rbDepartment.Name = "rbDepartment";
+            this.rbDepartment.Size = new System.Drawing.Size(80, 17);
+            this.rbDepartment.TabIndex = 1;
+            this.rbDepartment.TabStop = true;
+            this.rbDepartment.Text = "Отделение";
+            this.rbDepartment.UseVisualStyleBackColor = true;
             // 
-            // radioButton3
+            // rbDivision
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(18, 97);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(56, 17);
-            this.radioButton3.TabIndex = 2;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "Отдел";
-            this.radioButton3.UseVisualStyleBackColor = true;
+            this.rbDivision.AutoSize = true;
+            this.rbDivision.Location = new System.Drawing.Point(18, 97);
+            this.rbDivision.Name = "rbDivision";
+            this.rbDivision.Size = new System.Drawing.Size(56, 17);
+            this.rbDivision.TabIndex = 2;
+            this.rbDivision.TabStop = true;
+            this.rbDivision.Text = "Отдел";
+            this.rbDivision.UseVisualStyleBackColor = true;
             // 
-            // radioButton4
+            // rbPharmacy
             // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(18, 131);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(150, 17);
-            this.radioButton4.TabIndex = 3;
-            this.radioButton4.TabStop = true;
-            this.radioButton4.Text = "Аптека (отделение ЛПУ)";
-            this.radioButton4.UseVisualStyleBackColor = true;
+            this.rbPharmacy.AutoSize = true;
+            this.rbPharmacy.Location = new System.Drawing.Point(18, 131);
+            this.rbPharmacy.Name = "rbPharmacy";
+            this.rbPharmacy.Size = new System.Drawing.Size(150, 17);
+            this.rbPharmacy.TabIndex = 3;
+            this.rbPharmacy.TabStop = true;
+            this.rbPharmacy.Text = "Аптека (отделение ЛПУ)";
+            this.rbPharmacy.UseVisualStyleBackColor = true;
             // 
             // FormAddBranch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 262);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(208, 233);
+            this.Controls.Add(this.btnClose);
+            this.Controls.Add(this.btnNext);
             this.Controls.Add(this.groupBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FormAddBranch";
-            this.Text = "FormAddBranch";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Добавление Institusions-SF";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -132,11 +137,11 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.RadioButton radioButton4;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton rbBranch;
+        private System.Windows.Forms.Button btnNext;
+        private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.RadioButton rbPharmacy;
+        private System.Windows.Forms.RadioButton rbDivision;
+        private System.Windows.Forms.RadioButton rbDepartment;
     }
 }
