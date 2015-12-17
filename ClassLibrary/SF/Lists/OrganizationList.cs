@@ -20,7 +20,7 @@ namespace ClassLibrary.SF
             LoadFromDataBase(tableName);
         }
 
-        public List<LPU> List { get { return _list.Where(item => item.TypeOrg == TypeOrg.ЛПУ).Select(item => item as LPU).ToList(); } }
+        public List<LPU> ListLpu { get { return _list.Where(item => item.TypeOrg == TypeOrg.ЛПУ).Select(item => item as LPU).ToList(); } }
 
         public static OrganizationList GetUniqueInstance()
         {

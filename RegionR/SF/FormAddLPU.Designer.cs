@@ -103,6 +103,7 @@
             this.btnAddEmployee = new System.Windows.Forms.Button();
             this.btnShowEmployees = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
+            this.lbBranch = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -776,6 +777,16 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // lbBranch
+            // 
+            this.lbBranch.AutoSize = true;
+            this.lbBranch.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbBranch.Location = new System.Drawing.Point(35, 31);
+            this.lbBranch.Name = "lbBranch";
+            this.lbBranch.Size = new System.Drawing.Size(63, 18);
+            this.lbBranch.TabIndex = 83;
+            this.lbBranch.Text = "Филиал";
+            // 
             // FormAddLPU
             // 
             this.AcceptButton = this.btnSaveAndClose;
@@ -783,6 +794,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(1000, 581);
+            this.Controls.Add(this.lbBranch);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnShowEmployees);
             this.Controls.Add(this.btnAddEmployee);
@@ -925,5 +937,6 @@
         private System.Windows.Forms.Button btnAddEmployee;
         private System.Windows.Forms.Button btnShowEmployees;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Label lbBranch;
     }
 }

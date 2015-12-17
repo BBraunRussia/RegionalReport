@@ -20,13 +20,13 @@ namespace ClassLibrary.SF
         public MainOrganization(DataRow row)
             : base(row)
         {
-            int.TryParse(row[9].ToString(), out _idTypeLPU);
-            int.TryParse(row[10].ToString(), out _idOwnership);
-            int.TryParse(row[11].ToString(), out _idAdmLevel);
-            _kpp = row[12].ToString();
-            _postIndex = row[13].ToString();
-            int.TryParse(row[14].ToString(), out _idCity);
-            _street = row[15].ToString();
+            int.TryParse(row[10].ToString(), out _idTypeLPU);
+            int.TryParse(row[11].ToString(), out _idOwnership);
+            int.TryParse(row[12].ToString(), out _idAdmLevel);
+            _kpp = row[13].ToString();
+            _postIndex = row[14].ToString();
+            int.TryParse(row[15].ToString(), out _idCity);
+            _street = row[16].ToString();
         }
 
         public MainOrganization(TypeOrg typeOrg)

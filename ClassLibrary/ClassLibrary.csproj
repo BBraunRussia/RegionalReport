@@ -61,8 +61,6 @@
     <Compile Include="SF\Lists\AdmLevelList.cs" />
     <Compile Include="SF\Classes\City.cs" />
     <Compile Include="SF\Lists\CityList.cs" />
-    <Compile Include="SF\Classes\LPUChild.cs" />
-    <Compile Include="SF\Lists\LPUChildList.cs" />
     <Compile Include="SF\Lists\LpuCompetitorsList.cs" />
     <Compile Include="SF\Lists\LpuList.cs" />
     <Compile Include="SF\Lists\OrganizationList.cs" />

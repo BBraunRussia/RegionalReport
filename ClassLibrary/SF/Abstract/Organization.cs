@@ -18,6 +18,8 @@ namespace ClassLibrary.SF
         private string _website;
         private string _phone;
 
+        private int _idParentLpu;
+
         protected IProvider _provider;
 
         internal Organization(DataRow row)
@@ -37,6 +39,8 @@ namespace ClassLibrary.SF
             _email = row[6].ToString();
             _website = row[7].ToString();
             _phone = row[8].ToString();
+
+            int.TryParse(row[9].ToString(), out _idParentLpu);
         }
 
         internal Organization(TypeOrg typeOrg)
@@ -104,6 +108,18 @@ namespace ClassLibrary.SF
                     return new LPU(row);
                 default:
                     throw new NotImplementedException("Для данного типа не релизован класс");
+            }
+        }
+
+        public LPU ParentLpu
+        {
+            get
+            {
+                if (_idParentLpu == 0)
+                    return null;
+
+                LpuList lpuList = new LpuList();
+                return lpuList.GetItem(_idParentLpu);
             }
         }
 

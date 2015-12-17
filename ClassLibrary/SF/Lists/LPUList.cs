@@ -13,7 +13,7 @@ namespace ClassLibrary.SF
         public LpuList()
         {
             OrganizationList organizationList = OrganizationList.GetUniqueInstance();
-            _list = organizationList.List;
+            _list = organizationList.ListLpu;
         }
 
         public DataTable ToDataTable(User user)

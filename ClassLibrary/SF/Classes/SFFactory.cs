@@ -14,8 +14,6 @@ namespace ClassLibrary.SF
             {
                 case "SF_City":
                     return new City(row);
-                case "SF_LPU_Child":
-                    return new LPUChild(row);
                 case "SF_AdmLevel":
                     return new AdmLevel(row);
                 case "SF_MainSpec":

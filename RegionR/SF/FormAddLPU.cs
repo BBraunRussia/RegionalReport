@@ -231,7 +231,16 @@ namespace RegionR.SF
 
         private void tbShortName_TextChanged(object sender, EventArgs e)
         {
-            lbName.Text = tbShortName.Text.ToUpper();
+            if (_lpu.ParentLpu == null)
+            {
+                lbName.Text = tbShortName.Text.ToUpper();
+                lbBranch.Text = string.Empty;
+            }
+            else
+            {
+                lbName.Text = _lpu.ParentLpu.ShortName;
+                lbBranch.Text = tbShortName.Text.ToUpper();
+            }
         }
     }
 }

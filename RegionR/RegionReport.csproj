@@ -457,6 +457,12 @@
     <Compile Include="SF\Classes\MainDGV.cs" />
     <Compile Include="SF\Classes\MyStatusStrip.cs" />
     <Compile Include="SF\Classes\SearchInDgv.cs" />
+    <Compile Include="SF\FormAddBranch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SF\FormAddBranch.Designer.cs">
+      <DependentUpon>FormAddBranch.cs</DependentUpon>
+    </Compile>
     <Compile Include="SF\FormAddCity.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -671,6 +677,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="SF\FormAddBranch.resx">
+      <DependentUpon>FormAddBranch.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SF\FormAddCity.resx">
       <DependentUpon>FormAddCity.cs</DependentUpon>
     </EmbeddedResource>

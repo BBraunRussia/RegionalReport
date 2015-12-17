@@ -22,28 +22,28 @@ namespace ClassLibrary.SF
         private int _patientGD;
         private int _patientPD;
         private int _patientCRRT;
-
+        
         public LPU(DataRow row)
             : base(row)
         {
-            _inn = row[16].ToString();
+            _inn = row[17].ToString();
 
             int idLpuRR;
-            int.TryParse(row[17].ToString(), out idLpuRR);
+            int.TryParse(row[18].ToString(), out idLpuRR);
             LpuRRList lpuRRList = LpuRRList.GetUniqueInstance();
             _lpuRR = lpuRRList.GetItem(idLpuRR) as LpuRR;
 
-            int.TryParse(row[18].ToString(), out _bedsTotal);
-            int.TryParse(row[19].ToString(), out _bedsIC);
-            int.TryParse(row[20].ToString(), out _surgical);
-            int.TryParse(row[21].ToString(), out _operating);
-            int.TryParse(row[22].ToString(), out _machineGD);
-            int.TryParse(row[23].ToString(), out _machineGDF);
-            int.TryParse(row[24].ToString(), out _machineCRRT);
-            int.TryParse(row[25].ToString(), out _shift);
-            int.TryParse(row[26].ToString(), out _patientGD);
-            int.TryParse(row[27].ToString(), out _patientPD);
-            int.TryParse(row[28].ToString(), out _patientCRRT);
+            int.TryParse(row[19].ToString(), out _bedsTotal);
+            int.TryParse(row[20].ToString(), out _bedsIC);
+            int.TryParse(row[21].ToString(), out _surgical);
+            int.TryParse(row[22].ToString(), out _operating);
+            int.TryParse(row[23].ToString(), out _machineGD);
+            int.TryParse(row[24].ToString(), out _machineGDF);
+            int.TryParse(row[25].ToString(), out _machineCRRT);
+            int.TryParse(row[26].ToString(), out _shift);
+            int.TryParse(row[27].ToString(), out _patientGD);
+            int.TryParse(row[28].ToString(), out _patientPD);
+            int.TryParse(row[29].ToString(), out _patientCRRT);
         }
 
         public LPU(TypeOrg typeOrg)
@@ -122,12 +122,12 @@ namespace ClassLibrary.SF
         {
             return new object[] { ID, NumberSF, ShortName, TypeLPU.Name, INN, RealRegion.Name, City.Name, LpuRR.Name, LpuRR.RegionRR.Name };
         }
-
+        
         public override void Save()
         {
             int id;
 
-            int.TryParse(_provider.Insert("SF_LPU", ID, NumberSF, TypeOrg, Name, ShortName, MainSpec.ID, Email, WebSite, Phone, TypeLPU.ID, Ownership.ID, AdmLevel.ID,
+            int.TryParse(_provider.Insert("SF_LPU", ID, NumberSF, TypeOrg, Name, ShortName, MainSpec.ID, Email, WebSite, Phone, ParentLpu.ID, TypeLPU.ID, Ownership.ID, AdmLevel.ID,
                 INN, KPP, PostIndex, City.ID, Street, LpuRR.ID,
                 _bedsTotal, _bedsIC, _surgical, _operating, _machineGD, _machineGDF, _machineCRRT, _shift, _patientGD, _patientPD, _patientCRRT), out id);
 
