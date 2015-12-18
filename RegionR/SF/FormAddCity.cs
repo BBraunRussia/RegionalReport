@@ -54,7 +54,7 @@ namespace RegionR.SF
 
         private void Save()
         {
-            CheckedClass.CheckFilled(tbName.Text, "Название");
+            ClassForForm.CheckFilled(tbName.Text, "Название");
 
             _city.Name = tbName.Text;
 

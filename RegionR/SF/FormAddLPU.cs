@@ -15,6 +15,7 @@ namespace RegionR.SF
         public static TypeOrg typeOrg;
 
         private LPU _lpu;
+        private LPU _parentLPU;
 
         private TypeLPUList _typeLPUList;
         private OwnershipList _ownershipList;
@@ -30,6 +31,9 @@ namespace RegionR.SF
             InitializeComponent();
 
             _lpu = lpu;
+
+            if (_lpu.ParentOrganization != null)
+                _parentLPU = (_lpu.ParentOrganization as LPU);
 
             _isLoad = false;
 
@@ -64,6 +68,12 @@ namespace RegionR.SF
             
             tbName.Text = _lpu.Name;
             tbShortName.Text = _lpu.ShortName;
+
+            if (_lpu.ShortName == string.Empty)
+            {
+                lbBranch.Text = string.Empty;
+                lbName.Text = string.Empty;
+            }
             
             if (_lpu.LpuRR != null)
             {
@@ -72,39 +82,58 @@ namespace RegionR.SF
                 lbRegionRRSalesDistrict.Text = _lpu.LpuRR.RegionRR.SalesDistrict;
             }
 
-            tbINN.Text = _lpu.INN;
+            if (_lpu.ParentOrganization == null)
+                tbINN.Text = _lpu.INN;
+            else
+            {
+                tbINN.Text = _parentLPU.INN;
+                tbINN.ReadOnly = true;
+            }
+
             tbKPP.Text = _lpu.KPP;
+            tbDistrict.Text = _lpu.District;
             tbPostIndex.Text = _lpu.PostIndex;
             tbEmail.Text = _lpu.Email;
             tbWebSite.Text = _lpu.WebSite;
             tbPhone.Text = _lpu.Phone;
-            
-            if (_lpu.RealRegion != null)
-                cbRealRegion.SelectedValue = _lpu.RealRegion.ID;
 
-            if (_lpu.City != null)
+            if (_lpu.ParentOrganization == null)
             {
-                cbCity.SelectedValue = _lpu.City.ID;
-                tbPhoneCode.Text = _lpu.City.PhoneCode;
+                if (_lpu.RealRegion != null)
+                    cbRealRegion.SelectedValue = _lpu.RealRegion.ID;
+
+                if (_lpu.City != null)
+                {
+                    cbCity.SelectedValue = _lpu.City.ID;
+                    tbPhoneCode.Text = _lpu.City.PhoneCode;
+                }
+            }
+            else
+            {
+                cbRealRegion.SelectedValue = _parentLPU.RealRegion.ID;
+                cbCity.SelectedValue = _parentLPU.City.ID;
+                tbPhoneCode.Text = _parentLPU.City.PhoneCode;
             }
             
             tbStreet.Text = _lpu.Street;
 
             tbBedsTotal.Text = _lpu.BedsTotal.ToString();
             tbBedsIC.Text = _lpu.BedsIC.ToString();
+
+            LoadTree();
         }
 
         private void LoadDictionaries()
         {
             LpuRRList _lpuList = LpuRRList.GetUniqueInstance();
 
-            LoadDictionary(cbLpuRR, _lpuList.ToDataTable());
-            LoadDictionary(cbTypeLpu, _typeLPUList.ToDataTable());
-            LoadDictionary(cbOwnership, _ownershipList.ToDataTable());
-            LoadDictionary(cbAdmLevel, _admLevelList.ToDataTable());
-            LoadDictionary(cbMainSpec, _mainSpecList.ToDataTable());
+            ClassForForm.LoadDictionary(cbLpuRR, _lpuList.ToDataTable());
+            ClassForForm.LoadDictionary(cbTypeLpu, _typeLPUList.ToDataTable());
+            ClassForForm.LoadDictionary(cbOwnership, _ownershipList.ToDataTable());
+            ClassForForm.LoadDictionary(cbAdmLevel, _admLevelList.ToDataTable());
+            ClassForForm.LoadDictionary(cbMainSpec, _mainSpecList.ToDataTable());
             _isLoad = false;
-            LoadDictionary(cbRealRegion, _realRegionList.ToDataTable());
+            ClassForForm.LoadDictionary(cbRealRegion, _realRegionList.ToDataTable());
             _isLoad = true;
             LoadCity();
         }
@@ -115,21 +144,7 @@ namespace RegionR.SF
             RealRegion realRegion = _realRegionList.GetItem(idRealRegion) as RealRegion;
 
             DataTable dt = _cityList.ToDataTable(realRegion);
-            LoadDictionary(cbCity, dt);
-        }
-
-        private void LoadDictionary(ComboBox combo, DataTable dt)
-        {
-            combo.DataSource = dt;
-
-            if (dt == null)
-            {
-                MessageBox.Show("Отсутствуют данные в зависимых ячейках", "Нет данных", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            
-            combo.ValueMember = dt.Columns[0].ColumnName;
-            combo.DisplayMember = dt.Columns[1].ColumnName;
+            ClassForForm.LoadDictionary(cbCity, dt);
         }
 
         private void cbRealRegion_SelectedIndexChanged(object sender, EventArgs e)
@@ -179,13 +194,13 @@ namespace RegionR.SF
             int idMainSpec = Convert.ToInt32(cbMainSpec.SelectedValue);
             _lpu.MainSpec = _mainSpecList.GetItem(idMainSpec) as MainSpec;
 
-            CheckedClass.CheckFilled(tbName.Text, "Официальное название");
-            CheckedClass.CheckFilled(tbShortName.Text, "Сокращенное название");
-            CheckedClass.CheckFilled(tbINN.Text, "ИНН");
+            ClassForForm.CheckFilled(tbName.Text, "Официальное название");
+            ClassForForm.CheckFilled(tbShortName.Text, "Сокращенное название");
+            ClassForForm.CheckFilled(tbINN.Text, "ИНН");
 
             _lpu.Name = tbName.Text;
             _lpu.ShortName = tbShortName.Text;
-            _lpu.INN = tbINN.Text;
+            _lpu.INN = (_parentLPU == null) ? tbINN.Text : string.Empty;
             _lpu.KPP = tbKPP.Text;
             _lpu.PostIndex = tbPostIndex.Text;
             _lpu.Email = tbEmail.Text;
@@ -194,9 +209,9 @@ namespace RegionR.SF
 
             int idCity = Convert.ToInt32(cbCity.SelectedValue);
             _lpu.City = _cityList.GetItem(idCity) as City;
-            
-            _lpu.Street = tbStreet.Text;
 
+            _lpu.District = tbDistrict.Text;
+            _lpu.Street = tbStreet.Text;
 
             _lpu.BedsTotal = tbBedsTotal.Text;
             _lpu.BedsIC = tbBedsIC.Text;
@@ -226,24 +241,143 @@ namespace RegionR.SF
             MessageBox.Show("В процессе разработки", "Функция не реализована", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void btnAddSubOrganization_Click(object sender, EventArgs e)
-        {
-
-            //Organization organization = Organization.CreateItem(typeOrg);
-        }
-
         private void tbShortName_TextChanged(object sender, EventArgs e)
         {
-            if (_lpu.ParentLpu == null)
+            if (_lpu.ParentOrganization == null)
             {
                 lbName.Text = tbShortName.Text.ToUpper();
                 lbBranch.Text = string.Empty;
             }
             else
             {
-                lbName.Text = _lpu.ParentLpu.ShortName;
-                lbBranch.Text = tbShortName.Text.ToUpper();
+                lbName.Text = _lpu.ParentOrganization.ShortName;
             }
+        }
+
+        private void btnAddSubOrganization_Click(object sender, EventArgs e)
+        {
+            FormAddBranch formAddBranch = new FormAddBranch(_parentLPU == null);
+            if (formAddBranch.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                Organization organization = Organization.CreateItem(typeOrg);
+                organization.ParentOrganization = _lpu;
+
+                if (organization is LPU)
+                    (organization as LPU).LpuRR = _lpu.LpuRR;
+
+                ShowFormSubLPU(organization);
+            }
+        }
+        
+        private void treeView1_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (e.Node.BackColor == Color.Green)
+                return;
+
+            OrganizationList organizationList = OrganizationList.GetUniqueInstance();
+            Organization organization = organizationList.GetItem(Convert.ToInt32(e.Node.Name));
+
+            ShowFormSubLPU(organization);
+        }
+
+        private void ShowFormSubLPU(Organization organization)
+        {
+            if (organization is LPU)
+            {
+                FormAddLPU formAddLPU = new FormAddLPU(organization as LPU);
+                formAddLPU.ShowDialog();
+            }
+            else
+            {
+                FormAddOrganization formAddOrganization = new FormAddOrganization(organization);
+                formAddOrganization.ShowDialog();
+            }
+
+            LoadTree();
+        }
+
+        private void LoadTree()
+        {
+            treeView1.Nodes.Clear();
+
+            Organization current = _lpu;
+            Organization parent = current.ParentOrganization;
+
+            while (parent != null)
+            {
+                current = parent;
+                parent = parent.ParentOrganization;
+            }
+
+            treeView1.Nodes.Add(TreeLPU.GetRoot(current));
+            treeView1.ExpandAll();
+
+            TreeNode[] list = treeView1.Nodes.Find(_lpu.ID.ToString(), true);
+
+            if (list.Count() > 0)
+                list.First().BackColor = Color.Green;
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private bool IsHaveChanges()
+        {
+            int idTypeLPU = Convert.ToInt32(cbTypeLpu.SelectedValue);
+            if (_lpu.TypeLPU != (_typeLPUList.GetItem(idTypeLPU) as TypeLPU))
+                return true;
+
+            int idOwnership = Convert.ToInt32(cbOwnership.SelectedValue);
+            if (_lpu.Ownership != (_ownershipList.GetItem(idOwnership) as Ownership))
+                return true;
+
+            int idAdmLevel = Convert.ToInt32(cbAdmLevel.SelectedValue);
+            if (_lpu.AdmLevel != (_admLevelList.GetItem(idAdmLevel) as AdmLevel))
+                return true;
+
+            int idMainSpec = Convert.ToInt32(cbMainSpec.SelectedValue);
+            if (_lpu.MainSpec != (_mainSpecList.GetItem(idMainSpec) as MainSpec))
+                return true;
+            
+            if (_lpu.Name != tbName.Text)
+                return true;
+            if (_lpu.ShortName != tbShortName.Text)
+                return true;
+
+            if (_parentLPU == null)
+            {
+                if (_lpu.INN != tbINN.Text)
+                    return true;
+            }
+            
+            if (_lpu.KPP != tbKPP.Text)
+                return true;
+            _lpu.PostIndex = tbPostIndex.Text;
+            _lpu.Email = tbEmail.Text;
+            _lpu.WebSite = tbWebSite.Text;
+            _lpu.Phone = tbPhone.Text;
+
+            int idCity = Convert.ToInt32(cbCity.SelectedValue);
+            _lpu.City = _cityList.GetItem(idCity) as City;
+
+            _lpu.District = tbDistrict.Text;
+            _lpu.Street = tbStreet.Text;
+
+            _lpu.BedsTotal = tbBedsTotal.Text;
+            _lpu.BedsIC = tbBedsIC.Text;
+            _lpu.Surgical = tbSurgical.Text;
+            _lpu.Operating = tbOperating.Text;
+            _lpu.MachineGD = tbMachineGD.Text;
+            _lpu.MachineGDF = tbMachineGDF.Text;
+            _lpu.MachineCRRT = tbMachineCRRT.Text;
+            _lpu.Shift = tbShift.Text;
+            _lpu.PatientGD = tbPatientGD.Text;
+            _lpu.PatientPD = tbPatientPD.Text;
+            _lpu.PatientCRRT = tbPatientCRRT.Text;
+
+            return false;
         }
     }
 }

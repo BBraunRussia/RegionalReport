@@ -20,7 +20,7 @@ namespace ClassLibrary.SF
             LoadFromDataBase(tableName);
         }
 
-        public List<LPU> ListLpu { get { return _list.Where(item => item.TypeOrg == TypeOrg.ЛПУ).Select(item => item as LPU).ToList(); } }
+        public List<LPU> ListLpu { get { return _list.Where(item => (item is LPU) && item.ParentOrganization == null).Select(item => item as LPU).ToList(); } }
 
         public static OrganizationList GetUniqueInstance()
         {
@@ -55,6 +55,11 @@ namespace ClassLibrary.SF
         public void Delete(Organization item)
         {
             _list.Remove(item);
+        }
+
+        public List<Organization> GetChildList(Organization oraganization)
+        {
+            return _list.Where(item => item.ParentOrganization == oraganization).ToList();
         }
     }
 }

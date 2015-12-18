@@ -6,9 +6,20 @@ using System.Data;
 
 namespace ClassLibrary.SF
 {
-    public class LPU : MainOrganization
+    public class LPU : Organization
     {
         private LpuRR _lpuRR;
+
+        private int _idTypeLPU;
+        private int _idOwnership;
+        private int _idAdmLevel;
+
+        private string _kpp;
+        private string _postIndex;
+        private int _idCity;
+        private string _district;
+        private string _street;
+
         private string _inn;
 
         private int _bedsTotal;
@@ -26,29 +37,131 @@ namespace ClassLibrary.SF
         public LPU(DataRow row)
             : base(row)
         {
-            _inn = row[17].ToString();
+            int.TryParse(row[10].ToString(), out _idTypeLPU);
+            int.TryParse(row[11].ToString(), out _idOwnership);
+            int.TryParse(row[12].ToString(), out _idAdmLevel);
+            _kpp = row[13].ToString();
+            _postIndex = row[14].ToString();
+            int.TryParse(row[15].ToString(), out _idCity);
+            _district = row[16].ToString();
+            _street = row[17].ToString();
+
+            _inn = row[18].ToString();
 
             int idLpuRR;
-            int.TryParse(row[18].ToString(), out idLpuRR);
+            int.TryParse(row[19].ToString(), out idLpuRR);
             LpuRRList lpuRRList = LpuRRList.GetUniqueInstance();
             _lpuRR = lpuRRList.GetItem(idLpuRR) as LpuRR;
 
-            int.TryParse(row[19].ToString(), out _bedsTotal);
-            int.TryParse(row[20].ToString(), out _bedsIC);
-            int.TryParse(row[21].ToString(), out _surgical);
-            int.TryParse(row[22].ToString(), out _operating);
-            int.TryParse(row[23].ToString(), out _machineGD);
-            int.TryParse(row[24].ToString(), out _machineGDF);
-            int.TryParse(row[25].ToString(), out _machineCRRT);
-            int.TryParse(row[26].ToString(), out _shift);
-            int.TryParse(row[27].ToString(), out _patientGD);
-            int.TryParse(row[28].ToString(), out _patientPD);
-            int.TryParse(row[29].ToString(), out _patientCRRT);
+            int.TryParse(row[20].ToString(), out _bedsTotal);
+            int.TryParse(row[21].ToString(), out _bedsIC);
+            int.TryParse(row[22].ToString(), out _surgical);
+            int.TryParse(row[23].ToString(), out _operating);
+            int.TryParse(row[24].ToString(), out _machineGD);
+            int.TryParse(row[25].ToString(), out _machineGDF);
+            int.TryParse(row[26].ToString(), out _machineCRRT);
+            int.TryParse(row[27].ToString(), out _shift);
+            int.TryParse(row[28].ToString(), out _patientGD);
+            int.TryParse(row[29].ToString(), out _patientPD);
+            int.TryParse(row[30].ToString(), out _patientCRRT);
         }
 
         public LPU(TypeOrg typeOrg)
             : base(typeOrg)
         { }
+
+        public string KPP
+        {
+            get { return _kpp; }
+            set { _kpp = value; }
+        }
+
+        public string PostIndex
+        {
+            get { return _postIndex; }
+            set { _postIndex = value; }
+        }
+
+        public string District
+        {
+            get { return _district; }
+            set { _district = value; }
+        }
+
+        public string Street
+        {
+            get { return _street; }
+            set { _street = value; }
+        }
+
+        public City City
+        {
+            get
+            {
+                if (_idCity == 0)
+                    return null;
+
+                CityList cityList = CityList.GetUniqueInstance();
+                return cityList.GetItem(_idCity) as City;
+            }
+            set { _idCity = value.ID; }
+        }
+
+        public RealRegion RealRegion { get { return (City == null) ? null : City.RealRegion; } }
+
+        public RegionCompetitors RegionCompetitors
+        {
+            set
+            {
+                RealRegionList realRegionList = RealRegionList.GetUniqueInstance();
+                RealRegion realRegion = realRegionList.GetItem(value);
+
+                CityList cityList = CityList.GetUniqueInstance();
+
+                City city = cityList.GetItem(realRegion);
+
+                City = city;
+            }
+        }
+
+        public TypeLPU TypeLPU
+        {
+            get
+            {
+                if (_idTypeLPU == 0)
+                    return null;
+
+                TypeLPUList typeLPUList = TypeLPUList.GetUniqueInstance();
+                return typeLPUList.GetItem(_idTypeLPU) as TypeLPU;
+            }
+            set { _idTypeLPU = value.ID; }
+        }
+
+        public AdmLevel AdmLevel
+        {
+            get
+            {
+                if (_idAdmLevel == 0)
+                    return null;
+
+                AdmLevelList admLevelList = AdmLevelList.GetUniqueInstance();
+                return admLevelList.GetItem(_idAdmLevel) as AdmLevel;
+            }
+            set { _idAdmLevel = value.ID; }
+        }
+
+        public Ownership Ownership
+        {
+            get
+            {
+                if (_idOwnership == 0)
+                    return null;
+
+                OwnershipList ownershipList = OwnershipList.GetUniqueInstance();
+                return ownershipList.GetItem(_idOwnership) as Ownership;
+            }
+            set { _idOwnership = value.ID; }
+        }
 
         public string INN
         {
@@ -127,8 +240,11 @@ namespace ClassLibrary.SF
         {
             int id;
 
-            int.TryParse(_provider.Insert("SF_LPU", ID, NumberSF, TypeOrg, Name, ShortName, MainSpec.ID, Email, WebSite, Phone, ParentLpu.ID, TypeLPU.ID, Ownership.ID, AdmLevel.ID,
-                INN, KPP, PostIndex, City.ID, Street, LpuRR.ID,
+            int idParentOrganization;
+            idParentOrganization = (ParentOrganization == null) ? 0 : ParentOrganization.ID;
+
+            int.TryParse(_provider.Insert("SF_LPU", ID, NumberSF, TypeOrg, Name, ShortName, MainSpec.ID, Email, WebSite, Phone, idParentOrganization, TypeLPU.ID, Ownership.ID, AdmLevel.ID,
+                INN, KPP, PostIndex, City.ID, District, Street, LpuRR.ID,
                 _bedsTotal, _bedsIC, _surgical, _operating, _machineGD, _machineGDF, _machineCRRT, _shift, _patientGD, _patientPD, _patientCRRT), out id);
 
             SetID(id);

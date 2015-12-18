@@ -12,9 +12,13 @@ namespace RegionR.SF
 {
     public partial class FormAddBranch : Form
     {
-        public FormAddBranch()
+        private bool _isLPU;
+
+        public FormAddBranch(bool isLPU)
         {
             InitializeComponent();
+
+            _isLPU = isLPU;
         }
 
         private void btnNext_Click(object sender, EventArgs e)
@@ -27,6 +31,11 @@ namespace RegionR.SF
                 FormAddLPU.typeOrg = TypeOrg.Отдел;
             else if (rbPharmacy.Checked)
                 FormAddLPU.typeOrg = TypeOrg.Аптека;
+        }
+
+        private void FormAddBranch_Load(object sender, EventArgs e)
+        {
+            rbBranch.Enabled = _isLPU;
         }
     }
 }

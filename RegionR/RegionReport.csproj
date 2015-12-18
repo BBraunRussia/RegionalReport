@@ -453,10 +453,11 @@
     <Compile Include="RRRent.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SF\Classes\CheckedClass.cs" />
     <Compile Include="SF\Classes\MainDGV.cs" />
     <Compile Include="SF\Classes\MyStatusStrip.cs" />
     <Compile Include="SF\Classes\SearchInDgv.cs" />
+    <Compile Include="SF\Classes\TreeLPU.cs" />
+    <Compile Include="SF\Classes\ClassForForm.cs" />
     <Compile Include="SF\FormAddBranch.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -474,6 +475,12 @@
     </Compile>
     <Compile Include="SF\FormAddLPU.Designer.cs">
       <DependentUpon>FormAddLPU.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SF\FormAddOrganization.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SF\FormAddOrganization.Designer.cs">
+      <DependentUpon>FormAddOrganization.cs</DependentUpon>
     </Compile>
     <Compile Include="SF\FormCityList.cs">
       <SubType>Form</SubType>
@@ -685,6 +692,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SF\FormAddLPU.resx">
       <DependentUpon>FormAddLPU.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SF\FormAddOrganization.resx">
+      <DependentUpon>FormAddOrganization.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SF\FormCityList.resx">
       <DependentUpon>FormCityList.cs</DependentUpon>

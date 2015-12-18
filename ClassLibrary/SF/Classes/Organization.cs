@@ -6,7 +6,7 @@ using System.Data;
 
 namespace ClassLibrary.SF
 {
-    public abstract class Organization
+    public class Organization
     {
         private int _id;
         private string _numberSF;
@@ -18,7 +18,7 @@ namespace ClassLibrary.SF
         private string _website;
         private string _phone;
 
-        private int _idParentLpu;
+        private int _idParentOrganization;
 
         protected IProvider _provider;
 
@@ -40,7 +40,7 @@ namespace ClassLibrary.SF
             _website = row[7].ToString();
             _phone = row[8].ToString();
 
-            int.TryParse(row[9].ToString(), out _idParentLpu);
+            int.TryParse(row[9].ToString(), out _idParentOrganization);
         }
 
         internal Organization(TypeOrg typeOrg)
@@ -49,6 +49,7 @@ namespace ClassLibrary.SF
 
             _typeOrg = typeOrg;
             _numberSF = string.Empty;
+            _sName = string.Empty;
         }
 
         public int ID { get { return _id; } }
@@ -102,36 +103,25 @@ namespace ClassLibrary.SF
         {
             TypeOrg typeOrg = (TypeOrg) Convert.ToInt32(row[2].ToString());
 
-            switch (typeOrg)
-            {
-                case (TypeOrg.ЛПУ):
-                    return new LPU(row);
-                default:
-                    throw new NotImplementedException("Для данного типа не релизован класс");
-            }
+            return (typeOrg == TypeOrg.ЛПУ) ? new LPU(row) : new Organization(row);
         }
 
-        public LPU ParentLpu
+        public Organization ParentOrganization
         {
             get
             {
-                if (_idParentLpu == 0)
+                if (_idParentOrganization == 0)
                     return null;
 
-                LpuList lpuList = new LpuList();
-                return lpuList.GetItem(_idParentLpu);
+                OrganizationList organizationList = OrganizationList.GetUniqueInstance();
+                return organizationList.GetItem(_idParentOrganization);
             }
+            set { _idParentOrganization = value.ID; }
         }
 
         public static Organization CreateItem(TypeOrg typeOrg)
         {
-            switch (typeOrg)
-            {
-                case (TypeOrg.ЛПУ):
-                    return new LPU(typeOrg);
-                default:
-                    throw new NotImplementedException("Для данного типа не релизован класс");
-            }
+            return (typeOrg == TypeOrg.ЛПУ) ? new LPU(typeOrg) : new Organization(typeOrg);
         }
 
         protected void SetID(int id)
@@ -140,7 +130,14 @@ namespace ClassLibrary.SF
         }
 
         public virtual void Save()
-        { }
+        {
+            int id;
+            int.TryParse(_provider.Insert("SF_Organization", ID, NumberSF, TypeOrg, Name, ShortName, MainSpec.ID, Email, WebSite, Phone, ParentOrganization.ID), out id);
+            SetID(id);
+
+            OrganizationList organizationList = OrganizationList.GetUniqueInstance();
+            organizationList.Add(this);
+        }
 
         public virtual void Delete()
         { }

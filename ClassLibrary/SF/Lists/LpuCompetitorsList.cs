@@ -45,12 +45,12 @@ namespace ClassLibrary.SF
         public DataTable ToDataTable(User user)
         {
             if ((user.Role == Roles.Администратор) || (user.Role == Roles.Руководство1) || (user.Role == Roles.Руководство2))
-                return _list.Select(item => item.GetRow()).CopyToDataTable();
+                return _list.OrderBy(item => item.RegionCompetitors.Name).Select(item => item.GetRow()).CopyToDataTable();
 
             RealRegionList realRegionList = RealRegionList.GetUniqueInstance();
             List<RegionCompetitors> list = realRegionList.ToList(user);
 
-            var list2 = _list.Where(item => IsInList(list, item.RegionCompetitors)).Select(item => item.GetRow());
+            var list2 = _list.Where(item => IsInList(list, item.RegionCompetitors)).OrderBy(item => item.RegionCompetitors.Name).Select(item => item.GetRow());
 
             return (list2.Count() == 0) ? null : list2.CopyToDataTable();
         }

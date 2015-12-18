@@ -46,7 +46,7 @@
     <Compile Include="dictionary\Regions.cs" />
     <Compile Include="OfficeDoc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SF\Abstract\Organization.cs" />
+    <Compile Include="SF\Classes\Organization.cs" />
     <Compile Include="SF\Classes\AdmLevel.cs" />
     <Compile Include="SF\Classes\LpuCompetitors.cs" />
     <Compile Include="SF\Classes\LpuRR.cs" />
@@ -72,7 +72,6 @@
     <Compile Include="SF\Classes\RealRegion.cs" />
     <Compile Include="SF\Abstract\BaseDictionary.cs" />
     <Compile Include="SF\Abstract\BaseList.cs" />
-    <Compile Include="SF\Abstract\MainOrganization.cs" />
     <Compile Include="SF\Classes\LPU.cs" />
     <Compile Include="SF\Lists\RealRegionList.cs" />
     <Compile Include="SF\Classes\SFFactory.cs" />
