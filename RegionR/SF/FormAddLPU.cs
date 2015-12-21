@@ -155,28 +155,30 @@ namespace RegionR.SF
 
         private void btnSaveAndClose_Click(object sender, EventArgs e)
         {
-            TrySave();
-
-            this.DialogResult = System.Windows.Forms.DialogResult.OK;
+            if (TrySave())
+                this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }
-
 
         private void btnSave_Click(object sender, EventArgs e)
         {
             TrySave();
         }
 
-        private void TrySave()
+        private bool TrySave()
         {
             try
             {
                 CopyFields();
 
                 _lpu.Save();
+
+                return true;
             }
             catch (NullReferenceException ex)
             {
                 MessageBox.Show(ex.Message, "Обязательное поле", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                
+                return false;
             }
         }
 
@@ -320,7 +322,21 @@ namespace RegionR.SF
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
+            if (IsHaveChanges())
+            {
+                if (MessageBox.Show("На форме имеются не сохранёные изменения, сохранить перед закрытием?", "Сохраненить изменения", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
+                {
+                    if (TrySave())
+                    {
+                        this.DialogResult = System.Windows.Forms.DialogResult.OK;
+                        return;
+                    }
+                    else
+                        return;
+                }
+            }
 
+            this.DialogResult = System.Windows.Forms.DialogResult.Cancel;
         }
 
         private bool IsHaveChanges()
@@ -354,28 +370,46 @@ namespace RegionR.SF
             
             if (_lpu.KPP != tbKPP.Text)
                 return true;
-            _lpu.PostIndex = tbPostIndex.Text;
-            _lpu.Email = tbEmail.Text;
-            _lpu.WebSite = tbWebSite.Text;
-            _lpu.Phone = tbPhone.Text;
+            if (_lpu.PostIndex != tbPostIndex.Text)
+                return true;
+            if (_lpu.Email != tbEmail.Text)
+                return true;
+            if (_lpu.WebSite != tbWebSite.Text)
+                return true;
+            if (_lpu.Phone != tbPhone.Text)
+                return true;
 
             int idCity = Convert.ToInt32(cbCity.SelectedValue);
-            _lpu.City = _cityList.GetItem(idCity) as City;
+            if (_lpu.City != (_cityList.GetItem(idCity) as City))
+                return true;
 
-            _lpu.District = tbDistrict.Text;
-            _lpu.Street = tbStreet.Text;
+            if (_lpu.District != tbDistrict.Text)
+                return true;
+            if (_lpu.Street != tbStreet.Text)
+                return true;
 
-            _lpu.BedsTotal = tbBedsTotal.Text;
-            _lpu.BedsIC = tbBedsIC.Text;
-            _lpu.Surgical = tbSurgical.Text;
-            _lpu.Operating = tbOperating.Text;
-            _lpu.MachineGD = tbMachineGD.Text;
-            _lpu.MachineGDF = tbMachineGDF.Text;
-            _lpu.MachineCRRT = tbMachineCRRT.Text;
-            _lpu.Shift = tbShift.Text;
-            _lpu.PatientGD = tbPatientGD.Text;
-            _lpu.PatientPD = tbPatientPD.Text;
-            _lpu.PatientCRRT = tbPatientCRRT.Text;
+            if (_lpu.BedsTotal != tbBedsTotal.Text)
+                return true;
+            if (_lpu.BedsIC != tbBedsIC.Text)
+                return true;
+            if (_lpu.Surgical != tbSurgical.Text)
+                return true;
+            if (_lpu.Operating != tbOperating.Text)
+                return true;
+            if (_lpu.MachineGD != tbMachineGD.Text)
+                return true;
+            if (_lpu.MachineGDF != tbMachineGDF.Text)
+                return true;
+            if (_lpu.MachineCRRT != tbMachineCRRT.Text)
+                return true;
+            if (_lpu.Shift != tbShift.Text)
+                return true;
+            if (_lpu.PatientGD != tbPatientGD.Text)
+                return true;
+            if (_lpu.PatientPD != tbPatientPD.Text)
+                return true;
+            if (_lpu.PatientCRRT != tbPatientCRRT.Text)
+                return true;
 
             return false;
         }
