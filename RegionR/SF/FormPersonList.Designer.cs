@@ -66,7 +66,7 @@
             this.btnAdd.TabIndex = 5;
             this.btnAdd.Text = "Добавить персону";
             this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.NotImpliment_Click);
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // dgv
             // 

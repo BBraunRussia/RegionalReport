@@ -57,9 +57,9 @@ namespace ClassLibrary.SF
             _list.Remove(item);
         }
 
-        public List<Organization> GetChildList(Organization oraganization)
+        public List<Organization> GetChildList(Organization organization)
         {
-            return _list.Where(item => item.ParentOrganization == oraganization).ToList();
+            return _list.Where(item => item.ParentOrganization == organization).ToList();
         }
     }
 }

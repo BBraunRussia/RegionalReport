@@ -81,6 +81,7 @@
     <Compile Include="SF\Lists\RegionCompetitorsList.cs" />
     <Compile Include="SF\Lists\RegionRRList.cs" />
     <Compile Include="SF\Lists\RoleList.cs" />
+    <Compile Include="SF\Lists\SubOrganizationList.cs" />
     <Compile Include="SF\Lists\TypeLPUList.cs" />
     <Compile Include="SF\Lists\UserList.cs" />
     <Compile Include="SF\Lists\UserLpuRRList.cs" />

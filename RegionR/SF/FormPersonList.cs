@@ -57,5 +57,25 @@ namespace RegionR
         {
             _seacher.Find(tbSearch.Text);
         }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            Add();
+        }
+
+        private void Add()
+        {
+            Person person = new Person();
+
+            FormFirstStepAddPerson formFirstStepAddPerson = new FormFirstStepAddPerson(person);
+            if (formFirstStepAddPerson.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                FormSecondStepAddPerson formSecondStepAddPerson = new FormSecondStepAddPerson(person);
+                if (formSecondStepAddPerson.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+
+                }
+            }
+        }
     }
 }

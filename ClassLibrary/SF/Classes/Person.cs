@@ -21,6 +21,10 @@ namespace ClassLibrary.SF
         private Organization _organization;
         private string _comment;
 
+        public Person()
+        {
+        }
+
         public Person(DataRow row)
             : base(row)
         {
