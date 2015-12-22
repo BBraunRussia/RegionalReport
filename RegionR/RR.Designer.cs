@@ -141,6 +141,7 @@
             this.trackersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.userManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.userBCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.organizationRRToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadLPUToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -652,7 +653,7 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.organizationRRToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.personSFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._dgv1)).BeginInit();
             this._cms1.SuspendLayout();
@@ -1003,7 +1004,8 @@
             this.trackersToolStripMenuItem,
             this.userManagerToolStripMenuItem,
             this.userBCToolStripMenuItem,
-            this.organizationRRToolStripMenuItem});
+            this.organizationRRToolStripMenuItem,
+            this.personSFToolStripMenuItem});
             this.directoriesToolStripMenuItem.Name = "directoriesToolStripMenuItem";
             this.directoriesToolStripMenuItem.Size = new System.Drawing.Size(94, 20);
             this.directoriesToolStripMenuItem.Text = "Справочники";
@@ -1044,7 +1046,7 @@
             // 
             this.listLPUToolStripMenuItem.Name = "listLPUToolStripMenuItem";
             this.listLPUToolStripMenuItem.Size = new System.Drawing.Size(313, 22);
-            this.listLPUToolStripMenuItem.Text = "Список ЛПУ";
+            this.listLPUToolStripMenuItem.Text = "Список ЛПУ-RR";
             this.listLPUToolStripMenuItem.Visible = false;
             this.listLPUToolStripMenuItem.Click += new System.EventHandler(this.listLPUToolStripMenuItem_Click);
             // 
@@ -1117,6 +1119,13 @@
             this.userBCToolStripMenuItem.Text = "Пользователи BC";
             this.userBCToolStripMenuItem.Visible = false;
             this.userBCToolStripMenuItem.Click += new System.EventHandler(this.userBCToolStripMenuItem_Click);
+            // 
+            // organizationRRToolStripMenuItem
+            // 
+            this.organizationRRToolStripMenuItem.Name = "organizationRRToolStripMenuItem";
+            this.organizationRRToolStripMenuItem.Size = new System.Drawing.Size(313, 22);
+            this.organizationRRToolStripMenuItem.Text = "Организации-SF";
+            this.organizationRRToolStripMenuItem.Click += new System.EventHandler(this.organizationRRToolStripMenuItem_Click);
             // 
             // importToolStripMenuItem
             // 
@@ -7243,12 +7252,12 @@
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
-            // organizationRRToolStripMenuItem
+            // personSFToolStripMenuItem
             // 
-            this.organizationRRToolStripMenuItem.Name = "organizationRRToolStripMenuItem";
-            this.organizationRRToolStripMenuItem.Size = new System.Drawing.Size(313, 22);
-            this.organizationRRToolStripMenuItem.Text = "Организации SF";
-            this.organizationRRToolStripMenuItem.Click += new System.EventHandler(this.organizationRRToolStripMenuItem_Click);
+            this.personSFToolStripMenuItem.Name = "personSFToolStripMenuItem";
+            this.personSFToolStripMenuItem.Size = new System.Drawing.Size(313, 22);
+            this.personSFToolStripMenuItem.Text = "Персоны-SF";
+            this.personSFToolStripMenuItem.Click += new System.EventHandler(this.personSFToolStripMenuItem_Click);
             // 
             // RR
             // 
@@ -7936,6 +7945,7 @@
         private System.Windows.Forms.ToolStripMenuItem нДАToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem любойToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem organizationRRToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem personSFToolStripMenuItem;
     }
 }
 

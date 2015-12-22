@@ -32,21 +32,9 @@ namespace ClassLibrary.SF
             }
         }
 
-        public override DataRow GetRow()
+        public override object[] GetRow()
         {
-            DataTable dt = new DataTable();
-            dt.Columns.Add("id");
-            dt.Columns.Add("Официальное название");
-            dt.Columns.Add("Регион России");
-            dt.Columns.Add("ИНН");
-
-            DataRow row = dt.NewRow();
-            row[0] = ID;
-            row[1] = Name;
-            row[2] = RegionCompetitors.Name;
-            row[3] = _inn;
-
-            return row;
+            return new object[] { ID, Name, RegionCompetitors.Name, _inn };
         }
     }
 }

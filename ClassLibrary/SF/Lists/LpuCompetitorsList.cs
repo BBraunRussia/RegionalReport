@@ -45,14 +45,30 @@ namespace ClassLibrary.SF
         public DataTable ToDataTable(User user)
         {
             if ((user.Role == Roles.Администратор) || (user.Role == Roles.Руководство1) || (user.Role == Roles.Руководство2))
-                return _list.OrderBy(item => item.RegionCompetitors.Name).Select(item => item.GetRow()).CopyToDataTable();
+                return CreateTable(_list);
 
             RealRegionList realRegionList = RealRegionList.GetUniqueInstance();
             List<RegionCompetitors> list = realRegionList.ToList(user);
 
-            var list2 = _list.Where(item => IsInList(list, item.RegionCompetitors)).OrderBy(item => item.RegionCompetitors.Name).Select(item => item.GetRow());
+            var list2 = _list.Where(item => IsInList(list, item.RegionCompetitors)).ToList();
 
-            return (list2.Count() == 0) ? null : list2.CopyToDataTable();
+            return CreateTable(list2);
+        }
+
+        private DataTable CreateTable(List<LpuCompetitors> list)
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("id");
+            dt.Columns.Add("Официальное название");
+            dt.Columns.Add("Регион России");
+            dt.Columns.Add("ИНН");
+
+            var listNew = list.OrderBy(item => item.RegionCompetitors.Name).Select(item => item.GetRow()).ToList();
+
+            foreach (var item in listNew)
+                dt.Rows.Add(item);
+
+            return dt;
         }
 
         private bool IsInList(List<RegionCompetitors> list, RegionCompetitors regionCompetitors)

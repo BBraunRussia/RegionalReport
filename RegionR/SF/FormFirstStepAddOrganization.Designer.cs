@@ -56,7 +56,6 @@
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(49, 17);
             this.radioButton1.TabIndex = 1;
-            this.radioButton1.TabStop = true;
             this.radioButton1.Text = "ЛПУ";
             this.radioButton1.UseVisualStyleBackColor = true;
             this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
@@ -68,7 +67,6 @@
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(145, 17);
             this.radioButton2.TabIndex = 2;
-            this.radioButton2.TabStop = true;
             this.radioButton2.Text = "Аптека (коммерческая)";
             this.radioButton2.UseVisualStyleBackColor = true;
             this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
@@ -80,7 +78,6 @@
             this.radioButton3.Name = "radioButton3";
             this.radioButton3.Size = new System.Drawing.Size(185, 17);
             this.radioButton3.TabIndex = 3;
-            this.radioButton3.TabStop = true;
             this.radioButton3.Text = "Административное учреждение";
             this.radioButton3.UseVisualStyleBackColor = true;
             this.radioButton3.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);

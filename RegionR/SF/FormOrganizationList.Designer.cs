@@ -64,7 +64,7 @@
             this.actionsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(853, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1002, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -178,7 +178,7 @@
             this.dgv.Name = "dgv";
             this.dgv.ReadOnly = true;
             this.dgv.RowHeadersVisible = false;
-            this.dgv.Size = new System.Drawing.Size(829, 344);
+            this.dgv.Size = new System.Drawing.Size(978, 344);
             this.dgv.TabIndex = 1;
             this.dgv.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellDoubleClick);
             this.dgv.SelectionChanged += new System.EventHandler(this.dgv_SelectionChanged);
@@ -254,7 +254,7 @@
             // 
             this.statusStrip1.Location = new System.Drawing.Point(0, 403);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(853, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1002, 22);
             this.statusStrip1.TabIndex = 6;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -262,7 +262,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(853, 425);
+            this.ClientSize = new System.Drawing.Size(1002, 425);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.tbSearch);
             this.Controls.Add(this.label1);

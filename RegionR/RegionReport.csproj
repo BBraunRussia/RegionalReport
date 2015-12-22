@@ -500,6 +500,12 @@
     <Compile Include="SF\FormOrganizationList.Designer.cs">
       <DependentUpon>FormOrganizationList.cs</DependentUpon>
     </Compile>
+    <Compile Include="SF\FormPersonList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SF\FormPersonList.Designer.cs">
+      <DependentUpon>FormPersonList.cs</DependentUpon>
+    </Compile>
     <Compile Include="SF\FormSecondStepAddOrganization.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -704,6 +710,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SF\FormOrganizationList.resx">
       <DependentUpon>FormOrganizationList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SF\FormPersonList.resx">
+      <DependentUpon>FormPersonList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SF\FormSecondStepAddOrganization.resx">
       <DependentUpon>FormSecondStepAddOrganization.cs</DependentUpon>

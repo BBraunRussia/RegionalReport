@@ -30,17 +30,9 @@ namespace ClassLibrary.SF
             protected set { _id = value; }
         }
 
-        public virtual DataRow GetRow()
+        public virtual object[] GetRow()
         {
-            DataTable dt = new DataTable();
-            dt.Columns.Add("id");
-            dt.Columns.Add("name");
-
-            DataRow row = dt.NewRow();
-            row[0] = _id;
-            row[1] = _name;
-
-            return row;
+            return new object[] { _id, _name };
         }
     }
 }

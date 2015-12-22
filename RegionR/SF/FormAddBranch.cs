@@ -37,5 +37,10 @@ namespace RegionR.SF
         {
             rbBranch.Enabled = _isLPU;
         }
+
+        private void rb_CheckedChanged(object sender, EventArgs e)
+        {
+            btnNext.Enabled = true;
+        }
     }
 }

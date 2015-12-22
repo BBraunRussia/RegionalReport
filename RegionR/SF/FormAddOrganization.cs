@@ -31,8 +31,9 @@ namespace RegionR.SF
         {
             LoadDictionaries();
 
-            lbBranch.Text = _organization.TypeOrg.ToString();
-            lbName.Text = _parentLPU.ShortName.ToUpper();
+            this.Text = string.Concat("Карточка ", _organization.TypeOrg, " ЛПУ");
+
+            lbLPU.Text = string.Concat("ЛПУ: ", _parentLPU.ShortName.ToUpper());
 
             tbName.Text = _organization.Name;
             tbShortName.Text = _organization.ShortName;
@@ -92,6 +93,11 @@ namespace RegionR.SF
             _organization.Email = tbEmail.Text;
             _organization.WebSite = tbWebSite.Text;
             _organization.Phone = tbPhone.Text;
+        }
+
+        private void tbShortName_TextChanged(object sender, EventArgs e)
+        {
+            lbBranch.Text = string.Concat(_organization.TypeOrg.ToString(), ": ", tbShortName.Text);
         }
     }
 }

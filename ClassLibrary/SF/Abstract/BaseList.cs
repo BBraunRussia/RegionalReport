@@ -35,9 +35,18 @@ namespace ClassLibrary.SF
             }
         }
 
-        public DataTable ToDataTable()
+        public virtual DataTable ToDataTable()
         {
-            return (_list.Count == 0) ? null : _list.OrderBy(item => item.Name).Select(item => item.GetRow()).CopyToDataTable();
+            DataTable dt = new DataTable();
+            dt.Columns.Add("id");
+            dt.Columns.Add("Название");
+
+            var list = _list.OrderBy(item => item.Name);
+
+            foreach (var item in list)
+                dt.Rows.Add(item.GetRow());
+
+            return dt;
         }
 
         public BaseDictionary GetItem(int id)

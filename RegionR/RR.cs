@@ -16088,5 +16088,11 @@ namespace RegionR
             FormOrganizationList formOrganizationList = new FormOrganizationList();
             formOrganizationList.ShowDialog();
         }
+
+        private void personSFToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormPersonList formPersonList = new FormPersonList();
+            formPersonList.ShowDialog();
+        }
     }
 }

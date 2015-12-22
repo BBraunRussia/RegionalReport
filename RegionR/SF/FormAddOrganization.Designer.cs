@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.lbBranch = new System.Windows.Forms.Label();
-            this.lbName = new System.Windows.Forms.Label();
+            this.lbLPU = new System.Windows.Forms.Label();
             this.tbShortName = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.tbName = new System.Windows.Forms.TextBox();
@@ -58,21 +58,21 @@
             // 
             this.lbBranch.AutoSize = true;
             this.lbBranch.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lbBranch.Location = new System.Drawing.Point(35, 31);
+            this.lbBranch.Location = new System.Drawing.Point(13, 30);
             this.lbBranch.Name = "lbBranch";
             this.lbBranch.Size = new System.Drawing.Size(85, 18);
             this.lbBranch.TabIndex = 85;
             this.lbBranch.Text = "Отделение";
             // 
-            // lbName
+            // lbLPU
             // 
-            this.lbName.AutoSize = true;
-            this.lbName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lbName.Location = new System.Drawing.Point(12, 9);
-            this.lbName.Name = "lbName";
-            this.lbName.Size = new System.Drawing.Size(231, 20);
-            this.lbName.TabIndex = 84;
-            this.lbName.Text = "Официальное название ЛПУ";
+            this.lbLPU.AutoSize = true;
+            this.lbLPU.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbLPU.Location = new System.Drawing.Point(12, 9);
+            this.lbLPU.Name = "lbLPU";
+            this.lbLPU.Size = new System.Drawing.Size(51, 20);
+            this.lbLPU.TabIndex = 84;
+            this.lbLPU.Text = "ЛПУ:";
             // 
             // tbShortName
             // 
@@ -80,6 +80,7 @@
             this.tbShortName.Name = "tbShortName";
             this.tbShortName.Size = new System.Drawing.Size(328, 20);
             this.tbShortName.TabIndex = 89;
+            this.tbShortName.TextChanged += new System.EventHandler(this.tbShortName_TextChanged);
             // 
             // label20
             // 
@@ -296,7 +297,7 @@
             this.Controls.Add(this.tbName);
             this.Controls.Add(this.label19);
             this.Controls.Add(this.lbBranch);
-            this.Controls.Add(this.lbName);
+            this.Controls.Add(this.lbLPU);
             this.Name = "FormAddOrganization";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Карточка";
@@ -309,7 +310,7 @@
         #endregion
 
         private System.Windows.Forms.Label lbBranch;
-        private System.Windows.Forms.Label lbName;
+        private System.Windows.Forms.Label lbLPU;
         private System.Windows.Forms.TextBox tbShortName;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.TextBox tbName;

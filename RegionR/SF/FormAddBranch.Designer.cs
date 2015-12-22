@@ -54,54 +54,55 @@
             // rbPharmacy
             // 
             this.rbPharmacy.AutoSize = true;
-            this.rbPharmacy.Location = new System.Drawing.Point(18, 131);
+            this.rbPharmacy.Location = new System.Drawing.Point(18, 96);
             this.rbPharmacy.Name = "rbPharmacy";
             this.rbPharmacy.Size = new System.Drawing.Size(150, 17);
-            this.rbPharmacy.TabIndex = 3;
-            this.rbPharmacy.TabStop = true;
+            this.rbPharmacy.TabIndex = 4;
             this.rbPharmacy.Text = "Аптека (отделение ЛПУ)";
             this.rbPharmacy.UseVisualStyleBackColor = true;
+            this.rbPharmacy.CheckedChanged += new System.EventHandler(this.rb_CheckedChanged);
             // 
             // rbDivision
             // 
             this.rbDivision.AutoSize = true;
-            this.rbDivision.Location = new System.Drawing.Point(18, 97);
+            this.rbDivision.Location = new System.Drawing.Point(18, 62);
             this.rbDivision.Name = "rbDivision";
             this.rbDivision.Size = new System.Drawing.Size(56, 17);
-            this.rbDivision.TabIndex = 2;
-            this.rbDivision.TabStop = true;
+            this.rbDivision.TabIndex = 3;
             this.rbDivision.Text = "Отдел";
             this.rbDivision.UseVisualStyleBackColor = true;
+            this.rbDivision.CheckedChanged += new System.EventHandler(this.rb_CheckedChanged);
             // 
             // rbDepartment
             // 
             this.rbDepartment.AutoSize = true;
-            this.rbDepartment.Location = new System.Drawing.Point(18, 63);
+            this.rbDepartment.Location = new System.Drawing.Point(18, 30);
             this.rbDepartment.Name = "rbDepartment";
             this.rbDepartment.Size = new System.Drawing.Size(80, 17);
-            this.rbDepartment.TabIndex = 1;
-            this.rbDepartment.TabStop = true;
+            this.rbDepartment.TabIndex = 2;
             this.rbDepartment.Text = "Отделение";
             this.rbDepartment.UseVisualStyleBackColor = true;
+            this.rbDepartment.CheckedChanged += new System.EventHandler(this.rb_CheckedChanged);
             // 
             // rbBranch
             // 
             this.rbBranch.AutoSize = true;
-            this.rbBranch.Location = new System.Drawing.Point(18, 31);
+            this.rbBranch.Location = new System.Drawing.Point(18, 129);
             this.rbBranch.Name = "rbBranch";
             this.rbBranch.Size = new System.Drawing.Size(66, 17);
-            this.rbBranch.TabIndex = 0;
-            this.rbBranch.TabStop = true;
+            this.rbBranch.TabIndex = 5;
             this.rbBranch.Text = "Филиал";
             this.rbBranch.UseVisualStyleBackColor = true;
+            this.rbBranch.CheckedChanged += new System.EventHandler(this.rb_CheckedChanged);
             // 
             // btnNext
             // 
             this.btnNext.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnNext.Enabled = false;
             this.btnNext.Location = new System.Drawing.Point(12, 193);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(75, 23);
-            this.btnNext.TabIndex = 1;
+            this.btnNext.TabIndex = 0;
             this.btnNext.Text = "Далее";
             this.btnNext.UseVisualStyleBackColor = true;
             this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
@@ -112,7 +113,7 @@
             this.btnClose.Location = new System.Drawing.Point(121, 193);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 23);
-            this.btnClose.TabIndex = 2;
+            this.btnClose.TabIndex = 1;
             this.btnClose.Text = "Отмена";
             this.btnClose.UseVisualStyleBackColor = true;
             // 

@@ -44,7 +44,16 @@ namespace ClassLibrary.SF
 
         public DataTable ToDataTable()
         {
-            return (_list.Count == 0) ? null : _list.Select(item => item.GetRow()).CopyToDataTable();
+            DataTable dt = new DataTable();
+            dt.Columns.Add("id");
+            dt.Columns.Add("Название");
+            
+            var list = _list.Select(item => item.GetRow()).ToList();
+
+            foreach (var item in list)
+                dt.Rows.Add(item);
+
+            return dt;
         }
 
         public RegionCompetitors GetItem(int id)

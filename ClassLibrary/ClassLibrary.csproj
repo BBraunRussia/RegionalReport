@@ -50,6 +50,7 @@
     <Compile Include="SF\Classes\AdmLevel.cs" />
     <Compile Include="SF\Classes\LpuCompetitors.cs" />
     <Compile Include="SF\Classes\LpuRR.cs" />
+    <Compile Include="SF\Classes\Person.cs" />
     <Compile Include="SF\Classes\RegionCompetitors.cs" />
     <Compile Include="SF\Classes\RegionRR.cs" />
     <Compile Include="SF\Classes\Role.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="SF\Abstract\BaseDictionary.cs" />
     <Compile Include="SF\Abstract\BaseList.cs" />
     <Compile Include="SF\Classes\LPU.cs" />
+    <Compile Include="SF\Lists\PersonList.cs" />
     <Compile Include="SF\Lists\RealRegionList.cs" />
     <Compile Include="SF\Classes\SFFactory.cs" />
     <Compile Include="SF\Classes\TypeLPU.cs" />

@@ -40,8 +40,12 @@ namespace RegionR
 
             dgv.DataSource = dt;
 
-            if (dgv.Columns.Count > 0)
-                dgv.Columns[0].Visible = false;
+            dgv.Columns[0].Visible = false;
+            dgv.Columns[1].Width = 80;
+            dgv.Columns[2].Width = 300;
+            dgv.Columns[3].Width = 80;
+            dgv.Columns[4].Width = 80;
+            dgv.Columns[5].Width = 120;
         }
 
         private void btnAddOrganization_Click(object sender, EventArgs e)
@@ -50,12 +54,19 @@ namespace RegionR
             if (formFirstStepAddOrganization.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 Organization organization = Organization.CreateItem(typeOrg);
-                FormSecondStepAddOrganization formSecondStepAddOrganization = new FormSecondStepAddOrganization(organization as LPU);
-                if (formSecondStepAddOrganization.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                if (organization is LPU)
                 {
-                    FormAddLPU formAddLPU = new FormAddLPU(organization as LPU);
-                    if (formAddLPU.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                        LoadData();
+                    FormSecondStepAddOrganization formSecondStepAddOrganization = new FormSecondStepAddOrganization(organization as LPU);
+                    if (formSecondStepAddOrganization.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                    {
+                        FormAddLPU formAddLPU = new FormAddLPU(organization as LPU);
+                        if (formAddLPU.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                            LoadData();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("В процессе разработки", "Функция не реализована", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
