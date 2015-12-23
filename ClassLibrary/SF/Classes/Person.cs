@@ -65,6 +65,12 @@ namespace ClassLibrary.SF
             set { _secondName = value; }
         }
 
+        public string Appeal
+        {
+            get { return _appeal; }
+            set { _appeal = value; }
+        }
+
         public Organization Organization
         {
             get { return _organization; }
@@ -77,11 +83,37 @@ namespace ClassLibrary.SF
             set { _position = value; }
         }
 
-        public string NumberSF
+        public string Specialization
         {
-            get { return _numberSF; }
-            set { _numberSF = value; }
+            get { return _specialization; }
+            set { _specialization = value; }
         }
+
+        public string Email
+        {
+            get { return _email; }
+            set { _email = value; }
+        }
+
+        public string Mobile
+        {
+            get { return _mobile; }
+            set { _mobile = value; }
+        }
+
+        public string Phone
+        {
+            get { return _phone; }
+            set { _phone = value; }
+        }
+
+        public string Comment
+        {
+            get { return _comment; }
+            set { _comment = value; }
+        }
+
+        public string NumberSF { get { return _numberSF; } }
         
         public override object[] GetRow()
         {

@@ -482,6 +482,12 @@
     <Compile Include="SF\FormAddOrganization.Designer.cs">
       <DependentUpon>FormAddOrganization.cs</DependentUpon>
     </Compile>
+    <Compile Include="SF\FormAddPerson.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SF\FormAddPerson.Designer.cs">
+      <DependentUpon>FormAddPerson.cs</DependentUpon>
+    </Compile>
     <Compile Include="SF\FormCityList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -713,6 +719,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SF\FormAddOrganization.resx">
       <DependentUpon>FormAddOrganization.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SF\FormAddPerson.resx">
+      <DependentUpon>FormAddPerson.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SF\FormCityList.resx">
       <DependentUpon>FormCityList.cs</DependentUpon>

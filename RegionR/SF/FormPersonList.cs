@@ -73,7 +73,11 @@ namespace RegionR
                 FormSecondStepAddPerson formSecondStepAddPerson = new FormSecondStepAddPerson(person);
                 if (formSecondStepAddPerson.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-
+                    FormAddPerson formAddPerson = new FormAddPerson(person);
+                    if (formAddPerson.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                    {
+                        LoadData();
+                    }
                 }
             }
         }
