@@ -35,7 +35,7 @@ namespace RegionR.SF
             UserList userList = UserList.GetUniqueInstance();
             User user = userList.GetItem(globalData.UserID) as User;
 
-            DataTable dt = (user.Role == Roles.Администратор) ? lpuList.ToDataTable() : lpuList.ToDataTable(user);
+            DataTable dt = (user.RoleSF == RolesSF.Администратор) ? lpuList.ToDataTableWithBranch() : lpuList.ToDataTableWithBranch(user);
 
             dgv.DataSource = dt;
 
@@ -44,9 +44,9 @@ namespace RegionR.SF
             dgv.Columns[2].Width = 300;
             dgv.Columns[3].Width = 80;
             dgv.Columns[4].Width = 80;
-            dgv.Columns[5].Visible = false;
-            dgv.Columns[6].Visible = false;
+            dgv.Columns[5].Width = 150;
             dgv.Columns[7].Visible = false;
+            dgv.Columns[8].Visible = false;
         }
 
         private void tbSearch_TextChanged(object sender, EventArgs e)
@@ -56,7 +56,7 @@ namespace RegionR.SF
 
         private void btnNext_Click(object sender, EventArgs e)
         {
-            _person.Organization = GetOrganization();
+            SelectOrganization();
         }
 
         private Organization GetOrganization()
@@ -66,6 +66,17 @@ namespace RegionR.SF
 
             OrganizationList organizationList = OrganizationList.GetUniqueInstance();
             return organizationList.GetItem(id);
+        }
+
+        private void dgv_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            SelectOrganization();
+        }
+
+        private void SelectOrganization()
+        {
+            _person.Organization = GetOrganization();
+            DialogResult = System.Windows.Forms.DialogResult.OK;
         }
     }
 }

@@ -30,7 +30,7 @@ namespace RegionR.SF
             UserList userList = UserList.GetUniqueInstance();
             User user = userList.GetItem(globalData.UserID) as User;
 
-            if ((user.Role == Roles.Администратор) || (user.Role == Roles.Руководство1) || (user.Role == Roles.Руководство2))
+            if (user.RoleSF == RolesSF.Администратор)
             {
                 tbName.ReadOnly = false;
                 tbPhoneCode.ReadOnly = false;

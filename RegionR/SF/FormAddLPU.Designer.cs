@@ -28,7 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lbName = new System.Windows.Forms.Label();
+            this.components = new System.ComponentModel.Container();
+            this.lbLPUName = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.lbNumberSF = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -73,7 +74,7 @@
             this.tbINN = new System.Windows.Forms.TextBox();
             this.label22 = new System.Windows.Forms.Label();
             this.tbKPP = new System.Windows.Forms.TextBox();
-            this.label23 = new System.Windows.Forms.Label();
+            this.lbKPP = new System.Windows.Forms.Label();
             this.tbPostIndex = new System.Windows.Forms.TextBox();
             this.label24 = new System.Windows.Forms.Label();
             this.tbPhone = new System.Windows.Forms.TextBox();
@@ -94,6 +95,10 @@
             this.label35 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.treeView1 = new System.Windows.Forms.TreeView();
+            this.conMenuTree = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.expandToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnSaveAndClose = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.cbLpuRR = new System.Windows.Forms.ComboBox();
@@ -101,26 +106,31 @@
             this.tbPhoneCode = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnAddSubOrganization = new System.Windows.Forms.Button();
-            this.btnAddEmployee = new System.Windows.Forms.Button();
-            this.btnShowEmployees = new System.Windows.Forms.Button();
+            this.btnAddPerson = new System.Windows.Forms.Button();
+            this.btnShowPerson = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.lbBranch = new System.Windows.Forms.Label();
+            this.lbBranchName = new System.Windows.Forms.Label();
             this.tbDistrict = new System.Windows.Forms.TextBox();
             this.label29 = new System.Windows.Forms.Label();
+            this.lbLPU = new System.Windows.Forms.Label();
+            this.lbBranch = new System.Windows.Forms.Label();
+            this.btnDeleteSubOrganization = new System.Windows.Forms.Button();
+            this.label32 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.conMenuTree.SuspendLayout();
             this.SuspendLayout();
             // 
-            // lbName
+            // lbLPUName
             // 
-            this.lbName.AutoSize = true;
-            this.lbName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lbName.Location = new System.Drawing.Point(12, 9);
-            this.lbName.Name = "lbName";
-            this.lbName.Size = new System.Drawing.Size(231, 20);
-            this.lbName.TabIndex = 0;
-            this.lbName.Text = "Официальное название ЛПУ";
+            this.lbLPUName.AutoSize = true;
+            this.lbLPUName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbLPUName.Location = new System.Drawing.Point(69, 9);
+            this.lbLPUName.Name = "lbLPUName";
+            this.lbLPUName.Size = new System.Drawing.Size(231, 20);
+            this.lbLPUName.TabIndex = 0;
+            this.lbLPUName.Text = "Официальное название ЛПУ";
             // 
             // label2
             // 
@@ -283,16 +293,20 @@
             // tbPatientCRRT
             // 
             this.tbPatientCRRT.Location = new System.Drawing.Point(130, 175);
+            this.tbPatientCRRT.MaxLength = 4;
             this.tbPatientCRRT.Name = "tbPatientCRRT";
             this.tbPatientCRRT.Size = new System.Drawing.Size(35, 20);
             this.tbPatientCRRT.TabIndex = 38;
+            this.tbPatientCRRT.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_KeyPress);
             // 
             // tbMachineGD
             // 
             this.tbMachineGD.Location = new System.Drawing.Point(130, 19);
+            this.tbMachineGD.MaxLength = 4;
             this.tbMachineGD.Name = "tbMachineGD";
             this.tbMachineGD.Size = new System.Drawing.Size(35, 20);
             this.tbMachineGD.TabIndex = 26;
+            this.tbMachineGD.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_KeyPress);
             // 
             // label18
             // 
@@ -315,16 +329,20 @@
             // tbPatientPD
             // 
             this.tbPatientPD.Location = new System.Drawing.Point(130, 149);
+            this.tbPatientPD.MaxLength = 4;
             this.tbPatientPD.Name = "tbPatientPD";
             this.tbPatientPD.Size = new System.Drawing.Size(35, 20);
             this.tbPatientPD.TabIndex = 36;
+            this.tbPatientPD.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_KeyPress);
             // 
             // tbMachineGDF
             // 
             this.tbMachineGDF.Location = new System.Drawing.Point(130, 45);
+            this.tbMachineGDF.MaxLength = 4;
             this.tbMachineGDF.Name = "tbMachineGDF";
             this.tbMachineGDF.Size = new System.Drawing.Size(35, 20);
             this.tbMachineGDF.TabIndex = 28;
+            this.tbMachineGDF.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_KeyPress);
             // 
             // label17
             // 
@@ -347,16 +365,20 @@
             // tbPatientGD
             // 
             this.tbPatientGD.Location = new System.Drawing.Point(130, 123);
+            this.tbPatientGD.MaxLength = 4;
             this.tbPatientGD.Name = "tbPatientGD";
             this.tbPatientGD.Size = new System.Drawing.Size(35, 20);
             this.tbPatientGD.TabIndex = 34;
+            this.tbPatientGD.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_KeyPress);
             // 
             // tbMachineCRRT
             // 
             this.tbMachineCRRT.Location = new System.Drawing.Point(130, 71);
+            this.tbMachineCRRT.MaxLength = 4;
             this.tbMachineCRRT.Name = "tbMachineCRRT";
             this.tbMachineCRRT.Size = new System.Drawing.Size(35, 20);
             this.tbMachineCRRT.TabIndex = 30;
+            this.tbMachineCRRT.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_KeyPress);
             // 
             // label16
             // 
@@ -379,16 +401,20 @@
             // tbShift
             // 
             this.tbShift.Location = new System.Drawing.Point(130, 97);
+            this.tbShift.MaxLength = 4;
             this.tbShift.Name = "tbShift";
             this.tbShift.Size = new System.Drawing.Size(35, 20);
             this.tbShift.TabIndex = 32;
+            this.tbShift.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_KeyPress);
             // 
             // tbOperating
             // 
             this.tbOperating.Location = new System.Drawing.Point(157, 100);
+            this.tbOperating.MaxLength = 4;
             this.tbOperating.Name = "tbOperating";
             this.tbOperating.Size = new System.Drawing.Size(35, 20);
             this.tbOperating.TabIndex = 24;
+            this.tbOperating.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_KeyPress);
             // 
             // label11
             // 
@@ -402,25 +428,29 @@
             // tbSurgical
             // 
             this.tbSurgical.Location = new System.Drawing.Point(157, 74);
+            this.tbSurgical.MaxLength = 4;
             this.tbSurgical.Name = "tbSurgical";
             this.tbSurgical.Size = new System.Drawing.Size(35, 20);
             this.tbSurgical.TabIndex = 22;
+            this.tbSurgical.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_KeyPress);
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(27, 77);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(102, 13);
+            this.label9.Size = new System.Drawing.Size(110, 13);
             this.label9.TabIndex = 21;
-            this.label9.Text = "хирург. отделений:";
+            this.label9.Text = "коек хирургических:";
             // 
             // tbBedsIC
             // 
             this.tbBedsIC.Location = new System.Drawing.Point(157, 48);
+            this.tbBedsIC.MaxLength = 4;
             this.tbBedsIC.Name = "tbBedsIC";
             this.tbBedsIC.Size = new System.Drawing.Size(35, 20);
             this.tbBedsIC.TabIndex = 20;
+            this.tbBedsIC.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_KeyPress);
             // 
             // label8
             // 
@@ -434,9 +464,11 @@
             // tbBedsTotal
             // 
             this.tbBedsTotal.Location = new System.Drawing.Point(157, 22);
+            this.tbBedsTotal.MaxLength = 4;
             this.tbBedsTotal.Name = "tbBedsTotal";
             this.tbBedsTotal.Size = new System.Drawing.Size(35, 20);
             this.tbBedsTotal.TabIndex = 18;
+            this.tbBedsTotal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_KeyPress);
             // 
             // label10
             // 
@@ -449,15 +481,17 @@
             // 
             // tbName
             // 
-            this.tbName.Location = new System.Drawing.Point(434, 55);
+            this.tbName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbName.Location = new System.Drawing.Point(408, 55);
             this.tbName.Name = "tbName";
-            this.tbName.Size = new System.Drawing.Size(554, 20);
+            this.tbName.Size = new System.Drawing.Size(652, 20);
             this.tbName.TabIndex = 41;
             // 
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(297, 58);
+            this.label19.Location = new System.Drawing.Point(271, 58);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(135, 13);
             this.label19.TabIndex = 40;
@@ -465,16 +499,16 @@
             // 
             // tbShortName
             // 
-            this.tbShortName.Location = new System.Drawing.Point(434, 83);
+            this.tbShortName.Location = new System.Drawing.Point(408, 83);
             this.tbShortName.Name = "tbShortName";
-            this.tbShortName.Size = new System.Drawing.Size(328, 20);
+            this.tbShortName.Size = new System.Drawing.Size(426, 20);
             this.tbShortName.TabIndex = 43;
             this.tbShortName.TextChanged += new System.EventHandler(this.tbShortName_TextChanged);
             // 
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(297, 86);
+            this.label20.Location = new System.Drawing.Point(271, 86);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(135, 13);
             this.label20.TabIndex = 42;
@@ -483,7 +517,7 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(297, 112);
+            this.label21.Location = new System.Drawing.Point(271, 112);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(116, 13);
             this.label21.TabIndex = 44;
@@ -491,16 +525,17 @@
             // 
             // tbINN
             // 
-            this.tbINN.Location = new System.Drawing.Point(434, 136);
-            this.tbINN.MaxLength = 10;
+            this.tbINN.Location = new System.Drawing.Point(408, 136);
+            this.tbINN.MaxLength = 12;
             this.tbINN.Name = "tbINN";
             this.tbINN.Size = new System.Drawing.Size(103, 20);
             this.tbINN.TabIndex = 47;
+            this.tbINN.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_KeyPress);
             // 
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(297, 139);
+            this.label22.Location = new System.Drawing.Point(271, 139);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(38, 13);
             this.label22.TabIndex = 46;
@@ -508,31 +543,35 @@
             // 
             // tbKPP
             // 
-            this.tbKPP.Location = new System.Drawing.Point(623, 136);
+            this.tbKPP.Location = new System.Drawing.Point(709, 136);
+            this.tbKPP.MaxLength = 9;
             this.tbKPP.Name = "tbKPP";
-            this.tbKPP.Size = new System.Drawing.Size(139, 20);
+            this.tbKPP.Size = new System.Drawing.Size(125, 20);
             this.tbKPP.TabIndex = 49;
+            this.tbKPP.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_KeyPress);
             // 
-            // label23
+            // lbKPP
             // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(584, 139);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(33, 13);
-            this.label23.TabIndex = 48;
-            this.label23.Text = "КПП:";
+            this.lbKPP.AutoSize = true;
+            this.lbKPP.Location = new System.Drawing.Point(666, 139);
+            this.lbKPP.Name = "lbKPP";
+            this.lbKPP.Size = new System.Drawing.Size(37, 13);
+            this.lbKPP.TabIndex = 48;
+            this.lbKPP.Text = "КПП*:";
             // 
             // tbPostIndex
             // 
-            this.tbPostIndex.Location = new System.Drawing.Point(434, 242);
+            this.tbPostIndex.Location = new System.Drawing.Point(408, 242);
+            this.tbPostIndex.MaxLength = 6;
             this.tbPostIndex.Name = "tbPostIndex";
             this.tbPostIndex.Size = new System.Drawing.Size(103, 20);
             this.tbPostIndex.TabIndex = 51;
+            this.tbPostIndex.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_KeyPress);
             // 
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(297, 245);
+            this.label24.Location = new System.Drawing.Point(271, 245);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(99, 13);
             this.label24.TabIndex = 50;
@@ -540,15 +579,17 @@
             // 
             // tbPhone
             // 
-            this.tbPhone.Location = new System.Drawing.Point(623, 346);
+            this.tbPhone.Location = new System.Drawing.Point(597, 346);
+            this.tbPhone.MaxLength = 7;
             this.tbPhone.Name = "tbPhone";
             this.tbPhone.Size = new System.Drawing.Size(139, 20);
             this.tbPhone.TabIndex = 57;
+            this.tbPhone.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_KeyPress);
             // 
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(521, 349);
+            this.label25.Location = new System.Drawing.Point(495, 349);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(96, 13);
             this.label25.TabIndex = 56;
@@ -556,15 +597,15 @@
             // 
             // tbWebSite
             // 
-            this.tbWebSite.Location = new System.Drawing.Point(434, 320);
+            this.tbWebSite.Location = new System.Drawing.Point(408, 320);
             this.tbWebSite.Name = "tbWebSite";
-            this.tbWebSite.Size = new System.Drawing.Size(192, 20);
+            this.tbWebSite.Size = new System.Drawing.Size(426, 20);
             this.tbWebSite.TabIndex = 55;
             // 
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(297, 323);
+            this.label26.Location = new System.Drawing.Point(271, 323);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(54, 13);
             this.label26.TabIndex = 54;
@@ -572,15 +613,15 @@
             // 
             // tbEmail
             // 
-            this.tbEmail.Location = new System.Drawing.Point(434, 294);
+            this.tbEmail.Location = new System.Drawing.Point(408, 294);
             this.tbEmail.Name = "tbEmail";
-            this.tbEmail.Size = new System.Drawing.Size(192, 20);
+            this.tbEmail.Size = new System.Drawing.Size(426, 20);
             this.tbEmail.TabIndex = 53;
             // 
             // label27
             // 
             this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(297, 297);
+            this.label27.Location = new System.Drawing.Point(271, 297);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(58, 13);
             this.label27.TabIndex = 52;
@@ -589,44 +630,44 @@
             // label28
             // 
             this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(297, 165);
+            this.label28.Location = new System.Drawing.Point(271, 165);
             this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(86, 13);
+            this.label28.Size = new System.Drawing.Size(90, 13);
             this.label28.TabIndex = 58;
-            this.label28.Text = "Регион России:";
+            this.label28.Text = "Регион России*:";
             // 
             // label30
             // 
             this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(297, 218);
+            this.label30.Location = new System.Drawing.Point(271, 218);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(105, 13);
+            this.label30.Size = new System.Drawing.Size(109, 13);
             this.label30.TabIndex = 62;
-            this.label30.Text = "Населённый пункт:";
+            this.label30.Text = "Населённый пункт*:";
             // 
             // tbStreet
             // 
-            this.tbStreet.Location = new System.Drawing.Point(434, 268);
+            this.tbStreet.Location = new System.Drawing.Point(408, 268);
             this.tbStreet.Name = "tbStreet";
-            this.tbStreet.Size = new System.Drawing.Size(328, 20);
+            this.tbStreet.Size = new System.Drawing.Size(426, 20);
             this.tbStreet.TabIndex = 65;
             // 
             // label31
             // 
             this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(297, 271);
+            this.label31.Location = new System.Drawing.Point(271, 271);
             this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(88, 13);
+            this.label31.Size = new System.Drawing.Size(92, 13);
             this.label31.TabIndex = 64;
-            this.label31.Text = "Уличный адрес:";
+            this.label31.Text = "Уличный адрес*:";
             // 
             // cbRealRegion
             // 
             this.cbRealRegion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbRealRegion.FormattingEnabled = true;
-            this.cbRealRegion.Location = new System.Drawing.Point(434, 162);
+            this.cbRealRegion.Location = new System.Drawing.Point(408, 162);
             this.cbRealRegion.Name = "cbRealRegion";
-            this.cbRealRegion.Size = new System.Drawing.Size(328, 21);
+            this.cbRealRegion.Size = new System.Drawing.Size(426, 21);
             this.cbRealRegion.TabIndex = 66;
             this.cbRealRegion.SelectedIndexChanged += new System.EventHandler(this.cbRealRegion_SelectedIndexChanged);
             // 
@@ -634,15 +675,15 @@
             // 
             this.cbCity.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCity.FormattingEnabled = true;
-            this.cbCity.Location = new System.Drawing.Point(434, 215);
+            this.cbCity.Location = new System.Drawing.Point(408, 215);
             this.cbCity.Name = "cbCity";
-            this.cbCity.Size = new System.Drawing.Size(328, 21);
+            this.cbCity.Size = new System.Drawing.Size(426, 21);
             this.cbCity.TabIndex = 68;
             // 
             // lbRegionRRSalesDistrict
             // 
             this.lbRegionRRSalesDistrict.AutoSize = true;
-            this.lbRegionRRSalesDistrict.Location = new System.Drawing.Point(877, 143);
+            this.lbRegionRRSalesDistrict.Location = new System.Drawing.Point(958, 143);
             this.lbRegionRRSalesDistrict.Name = "lbRegionRRSalesDistrict";
             this.lbRegionRRSalesDistrict.Size = new System.Drawing.Size(76, 13);
             this.lbRegionRRSalesDistrict.TabIndex = 70;
@@ -651,7 +692,7 @@
             // label33
             // 
             this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(776, 143);
+            this.label33.Location = new System.Drawing.Point(857, 143);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(95, 13);
             this.label33.TabIndex = 69;
@@ -660,7 +701,7 @@
             // lbRegionRR
             // 
             this.lbRegionRR.AutoSize = true;
-            this.lbRegionRR.Location = new System.Drawing.Point(877, 117);
+            this.lbRegionRR.Location = new System.Drawing.Point(958, 117);
             this.lbRegionRR.Name = "lbRegionRR";
             this.lbRegionRR.Size = new System.Drawing.Size(76, 13);
             this.lbRegionRR.TabIndex = 72;
@@ -669,7 +710,7 @@
             // label35
             // 
             this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(776, 117);
+            this.label35.Location = new System.Drawing.Point(857, 117);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(65, 13);
             this.label35.TabIndex = 71;
@@ -681,9 +722,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox3.Controls.Add(this.treeView1);
-            this.groupBox3.Location = new System.Drawing.Point(779, 165);
+            this.groupBox3.Location = new System.Drawing.Point(854, 192);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(200, 279);
+            this.groupBox3.Size = new System.Drawing.Size(247, 397);
             this.groupBox3.TabIndex = 73;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Подразделения";
@@ -693,18 +734,50 @@
             this.treeView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.treeView1.Location = new System.Drawing.Point(7, 20);
+            this.treeView1.ContextMenuStrip = this.conMenuTree;
+            this.treeView1.Location = new System.Drawing.Point(6, 20);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(187, 253);
+            this.treeView1.Size = new System.Drawing.Size(235, 371);
             this.treeView1.TabIndex = 0;
+            this.treeView1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseClick);
             this.treeView1.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
+            this.treeView1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.treeView1_MouseUp);
+            // 
+            // conMenuTree
+            // 
+            this.conMenuTree.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openToolStripMenuItem,
+            this.expandToolStripMenuItem,
+            this.deleteToolStripMenuItem});
+            this.conMenuTree.Name = "conMenuTree";
+            this.conMenuTree.Size = new System.Drawing.Size(136, 70);
+            // 
+            // openToolStripMenuItem
+            // 
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.openToolStripMenuItem.Text = "Открыть";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            // 
+            // expandToolStripMenuItem
+            // 
+            this.expandToolStripMenuItem.Name = "expandToolStripMenuItem";
+            this.expandToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.expandToolStripMenuItem.Text = "Развернуть";
+            this.expandToolStripMenuItem.Click += new System.EventHandler(this.expandToolStripMenuItem_Click);
+            // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.deleteToolStripMenuItem.Text = "Удалить";
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // btnSaveAndClose
             // 
-            this.btnSaveAndClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSaveAndClose.Location = new System.Drawing.Point(740, 546);
+            this.btnSaveAndClose.Location = new System.Drawing.Point(452, 529);
             this.btnSaveAndClose.Name = "btnSaveAndClose";
-            this.btnSaveAndClose.Size = new System.Drawing.Size(167, 23);
+            this.btnSaveAndClose.Size = new System.Drawing.Size(167, 43);
             this.btnSaveAndClose.TabIndex = 74;
             this.btnSaveAndClose.Text = "Сохранить и закрыть";
             this.btnSaveAndClose.UseVisualStyleBackColor = true;
@@ -712,10 +785,10 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.Location = new System.Drawing.Point(913, 546);
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancel.Location = new System.Drawing.Point(669, 529);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.Size = new System.Drawing.Size(92, 43);
             this.btnCancel.TabIndex = 75;
             this.btnCancel.Text = "Закрыть";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -726,14 +799,14 @@
             this.cbLpuRR.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbLpuRR.Enabled = false;
             this.cbLpuRR.FormattingEnabled = true;
-            this.cbLpuRR.Location = new System.Drawing.Point(434, 109);
+            this.cbLpuRR.Location = new System.Drawing.Point(408, 109);
             this.cbLpuRR.Name = "cbLpuRR";
-            this.cbLpuRR.Size = new System.Drawing.Size(328, 21);
+            this.cbLpuRR.Size = new System.Drawing.Size(426, 21);
             this.cbLpuRR.TabIndex = 76;
             // 
             // btnShowRules
             // 
-            this.btnShowRules.Location = new System.Drawing.Point(779, 81);
+            this.btnShowRules.Location = new System.Drawing.Point(854, 81);
             this.btnShowRules.Name = "btnShowRules";
             this.btnShowRules.Size = new System.Drawing.Size(148, 23);
             this.btnShowRules.TabIndex = 77;
@@ -744,15 +817,17 @@
             // tbPhoneCode
             // 
             this.tbPhoneCode.Enabled = false;
-            this.tbPhoneCode.Location = new System.Drawing.Point(434, 346);
+            this.tbPhoneCode.Location = new System.Drawing.Point(408, 346);
+            this.tbPhoneCode.MaxLength = 7;
             this.tbPhoneCode.Name = "tbPhoneCode";
             this.tbPhoneCode.Size = new System.Drawing.Size(74, 20);
             this.tbPhoneCode.TabIndex = 56;
+            this.tbPhoneCode.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_KeyPress);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(297, 349);
+            this.label1.Location = new System.Drawing.Point(271, 349);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(134, 13);
             this.label1.TabIndex = 78;
@@ -760,7 +835,7 @@
             // 
             // btnAddSubOrganization
             // 
-            this.btnAddSubOrganization.Location = new System.Drawing.Point(605, 401);
+            this.btnAddSubOrganization.Location = new System.Drawing.Point(686, 416);
             this.btnAddSubOrganization.Name = "btnAddSubOrganization";
             this.btnAddSubOrganization.Size = new System.Drawing.Size(148, 43);
             this.btnAddSubOrganization.TabIndex = 79;
@@ -768,62 +843,101 @@
             this.btnAddSubOrganization.UseVisualStyleBackColor = true;
             this.btnAddSubOrganization.Click += new System.EventHandler(this.btnAddSubOrganization_Click);
             // 
-            // btnAddEmployee
+            // btnAddPerson
             // 
-            this.btnAddEmployee.Location = new System.Drawing.Point(451, 401);
-            this.btnAddEmployee.Name = "btnAddEmployee";
-            this.btnAddEmployee.Size = new System.Drawing.Size(148, 43);
-            this.btnAddEmployee.TabIndex = 80;
-            this.btnAddEmployee.Text = "Добавить сотрудника";
-            this.btnAddEmployee.UseVisualStyleBackColor = true;
-            this.btnAddEmployee.Click += new System.EventHandler(this.btnAddEmployee_Click);
+            this.btnAddPerson.Location = new System.Drawing.Point(471, 416);
+            this.btnAddPerson.Name = "btnAddPerson";
+            this.btnAddPerson.Size = new System.Drawing.Size(148, 43);
+            this.btnAddPerson.TabIndex = 80;
+            this.btnAddPerson.Text = "Добавить сотрудника";
+            this.btnAddPerson.UseVisualStyleBackColor = true;
+            this.btnAddPerson.Click += new System.EventHandler(this.btnAddPerson_Click);
             // 
-            // btnShowEmployees
+            // btnShowPerson
             // 
-            this.btnShowEmployees.Location = new System.Drawing.Point(297, 401);
-            this.btnShowEmployees.Name = "btnShowEmployees";
-            this.btnShowEmployees.Size = new System.Drawing.Size(148, 43);
-            this.btnShowEmployees.TabIndex = 81;
-            this.btnShowEmployees.Text = "Показать сотрудников этого ЛПУ";
-            this.btnShowEmployees.UseVisualStyleBackColor = true;
-            this.btnShowEmployees.Click += new System.EventHandler(this.btnShowEmployees_Click);
+            this.btnShowPerson.Location = new System.Drawing.Point(274, 416);
+            this.btnShowPerson.Name = "btnShowPerson";
+            this.btnShowPerson.Size = new System.Drawing.Size(148, 43);
+            this.btnShowPerson.TabIndex = 81;
+            this.btnShowPerson.Text = "Показать сотрудников этого ЛПУ";
+            this.btnShowPerson.UseVisualStyleBackColor = true;
+            this.btnShowPerson.Click += new System.EventHandler(this.btnShowPerson_Click);
             // 
             // btnSave
             // 
-            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Location = new System.Drawing.Point(640, 546);
+            this.btnSave.Location = new System.Drawing.Point(305, 529);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(94, 23);
+            this.btnSave.Size = new System.Drawing.Size(94, 43);
             this.btnSave.TabIndex = 82;
             this.btnSave.Text = "Сохранить";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // lbBranch
+            // lbBranchName
             // 
-            this.lbBranch.AutoSize = true;
-            this.lbBranch.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lbBranch.Location = new System.Drawing.Point(35, 31);
-            this.lbBranch.Name = "lbBranch";
-            this.lbBranch.Size = new System.Drawing.Size(63, 18);
-            this.lbBranch.TabIndex = 83;
-            this.lbBranch.Text = "Филиал";
+            this.lbBranchName.AutoSize = true;
+            this.lbBranchName.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbBranchName.Location = new System.Drawing.Point(93, 29);
+            this.lbBranchName.Name = "lbBranchName";
+            this.lbBranchName.Size = new System.Drawing.Size(63, 18);
+            this.lbBranchName.TabIndex = 83;
+            this.lbBranchName.Text = "Филиал";
             // 
             // tbDistrict
             // 
-            this.tbDistrict.Location = new System.Drawing.Point(434, 189);
+            this.tbDistrict.Location = new System.Drawing.Point(408, 189);
             this.tbDistrict.Name = "tbDistrict";
-            this.tbDistrict.Size = new System.Drawing.Size(328, 20);
+            this.tbDistrict.Size = new System.Drawing.Size(426, 20);
             this.tbDistrict.TabIndex = 85;
             // 
             // label29
             // 
             this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(297, 192);
+            this.label29.Location = new System.Drawing.Point(271, 192);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(41, 13);
             this.label29.TabIndex = 84;
             this.label29.Text = "Район:";
+            // 
+            // lbLPU
+            // 
+            this.lbLPU.AutoSize = true;
+            this.lbLPU.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbLPU.Location = new System.Drawing.Point(12, 9);
+            this.lbLPU.Name = "lbLPU";
+            this.lbLPU.Size = new System.Drawing.Size(51, 20);
+            this.lbLPU.TabIndex = 86;
+            this.lbLPU.Text = "ЛПУ:";
+            // 
+            // lbBranch
+            // 
+            this.lbBranch.AutoSize = true;
+            this.lbBranch.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbBranch.Location = new System.Drawing.Point(13, 29);
+            this.lbBranch.Name = "lbBranch";
+            this.lbBranch.Size = new System.Drawing.Size(74, 18);
+            this.lbBranch.TabIndex = 87;
+            this.lbBranch.Text = "Филиал:";
+            this.lbBranch.Visible = false;
+            // 
+            // btnDeleteSubOrganization
+            // 
+            this.btnDeleteSubOrganization.Location = new System.Drawing.Point(686, 465);
+            this.btnDeleteSubOrganization.Name = "btnDeleteSubOrganization";
+            this.btnDeleteSubOrganization.Size = new System.Drawing.Size(148, 43);
+            this.btnDeleteSubOrganization.TabIndex = 88;
+            this.btnDeleteSubOrganization.Text = "Удалить подразделение";
+            this.btnDeleteSubOrganization.UseVisualStyleBackColor = true;
+            this.btnDeleteSubOrganization.Click += new System.EventHandler(this.btnDeleteSubOrganization_Click);
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(272, 385);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(116, 13);
+            this.label32.TabIndex = 89;
+            this.label32.Text = "* Обязательные поля";
             // 
             // FormAddLPU
             // 
@@ -831,13 +945,17 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(1000, 581);
+            this.ClientSize = new System.Drawing.Size(1113, 598);
+            this.Controls.Add(this.label32);
+            this.Controls.Add(this.btnDeleteSubOrganization);
+            this.Controls.Add(this.lbBranch);
+            this.Controls.Add(this.lbLPU);
             this.Controls.Add(this.tbDistrict);
             this.Controls.Add(this.label29);
-            this.Controls.Add(this.lbBranch);
+            this.Controls.Add(this.lbBranchName);
             this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.btnShowEmployees);
-            this.Controls.Add(this.btnAddEmployee);
+            this.Controls.Add(this.btnShowPerson);
+            this.Controls.Add(this.btnAddPerson);
             this.Controls.Add(this.btnAddSubOrganization);
             this.Controls.Add(this.tbPhoneCode);
             this.Controls.Add(this.label1);
@@ -865,7 +983,7 @@
             this.Controls.Add(this.tbPostIndex);
             this.Controls.Add(this.label24);
             this.Controls.Add(this.tbKPP);
-            this.Controls.Add(this.label23);
+            this.Controls.Add(this.lbKPP);
             this.Controls.Add(this.tbINN);
             this.Controls.Add(this.label22);
             this.Controls.Add(this.label21);
@@ -886,9 +1004,9 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.lbNumberSF);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.lbName);
+            this.Controls.Add(this.lbLPUName);
             this.Name = "FormAddLPU";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultBounds;
             this.Text = "Карточка Организации \"ЛПУ\"";
             this.Load += new System.EventHandler(this.FormAddLPU_Load);
             this.groupBox1.ResumeLayout(false);
@@ -896,6 +1014,7 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
+            this.conMenuTree.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -903,7 +1022,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Label lbName;
+        private System.Windows.Forms.Label lbLPUName;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lbNumberSF;
         private System.Windows.Forms.Label label4;
@@ -948,7 +1067,7 @@
         private System.Windows.Forms.TextBox tbINN;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.TextBox tbKPP;
-        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label lbKPP;
         private System.Windows.Forms.TextBox tbPostIndex;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.TextBox tbPhone;
@@ -975,12 +1094,20 @@
         private System.Windows.Forms.TextBox tbPhoneCode;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnAddSubOrganization;
-        private System.Windows.Forms.Button btnAddEmployee;
-        private System.Windows.Forms.Button btnShowEmployees;
+        private System.Windows.Forms.Button btnAddPerson;
+        private System.Windows.Forms.Button btnShowPerson;
         private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.Label lbBranch;
+        private System.Windows.Forms.Label lbBranchName;
         private System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.TextBox tbDistrict;
         private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.Label lbLPU;
+        private System.Windows.Forms.Label lbBranch;
+        private System.Windows.Forms.ContextMenuStrip conMenuTree;
+        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem expandToolStripMenuItem;
+        private System.Windows.Forms.Button btnDeleteSubOrganization;
+        private System.Windows.Forms.Label label32;
     }
 }

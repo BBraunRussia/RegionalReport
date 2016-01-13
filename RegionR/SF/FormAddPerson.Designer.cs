@@ -36,16 +36,13 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.lbNumberSF = new System.Windows.Forms.Label();
-            this.tbAppeal = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.tbPosition = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.tbSpecialization = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.mtbMobile = new System.Windows.Forms.MaskedTextBox();
             this.tbPhone = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.tbMobile = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.tbEmail = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -59,8 +56,11 @@
             this.btnSaveAndClose = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnChangeOrganizationAndSubOrganization = new System.Windows.Forms.Button();
-            this.btnAddPerson = new System.Windows.Forms.Button();
-            this.btnShowPersons = new System.Windows.Forms.Button();
+            this.cbAppeal = new System.Windows.Forms.ComboBox();
+            this.cbPosition = new System.Windows.Forms.ComboBox();
+            this.cbMainSpecPerson = new System.Windows.Forms.ComboBox();
+            this.cbAcademTitle = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -130,13 +130,6 @@
             this.lbNumberSF.TabIndex = 7;
             this.lbNumberSF.Text = "Не определен";
             // 
-            // tbAppeal
-            // 
-            this.tbAppeal.Location = new System.Drawing.Point(437, 22);
-            this.tbAppeal.Name = "tbAppeal";
-            this.tbAppeal.Size = new System.Drawing.Size(225, 20);
-            this.tbAppeal.TabIndex = 9;
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -146,13 +139,6 @@
             this.label6.TabIndex = 8;
             this.label6.Text = "Обращение*:";
             // 
-            // tbPosition
-            // 
-            this.tbPosition.Location = new System.Drawing.Point(437, 48);
-            this.tbPosition.Name = "tbPosition";
-            this.tbPosition.Size = new System.Drawing.Size(225, 20);
-            this.tbPosition.TabIndex = 11;
-            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -161,13 +147,6 @@
             this.label7.Size = new System.Drawing.Size(72, 13);
             this.label7.TabIndex = 10;
             this.label7.Text = "Должность*:";
-            // 
-            // tbSpecialization
-            // 
-            this.tbSpecialization.Location = new System.Drawing.Point(437, 74);
-            this.tbSpecialization.Name = "tbSpecialization";
-            this.tbSpecialization.Size = new System.Drawing.Size(225, 20);
-            this.tbSpecialization.TabIndex = 13;
             // 
             // label8
             // 
@@ -180,9 +159,9 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.mtbMobile);
             this.groupBox1.Controls.Add(this.tbPhone);
             this.groupBox1.Controls.Add(this.label9);
-            this.groupBox1.Controls.Add(this.tbMobile);
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.tbEmail);
             this.groupBox1.Controls.Add(this.label11);
@@ -192,6 +171,14 @@
             this.groupBox1.TabIndex = 14;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Контактная информация";
+            // 
+            // mtbMobile
+            // 
+            this.mtbMobile.Location = new System.Drawing.Point(103, 58);
+            this.mtbMobile.Mask = "+7(000)000-00-00";
+            this.mtbMobile.Name = "mtbMobile";
+            this.mtbMobile.Size = new System.Drawing.Size(225, 20);
+            this.mtbMobile.TabIndex = 20;
             // 
             // tbPhone
             // 
@@ -208,13 +195,6 @@
             this.label9.Size = new System.Drawing.Size(68, 13);
             this.label9.TabIndex = 18;
             this.label9.Text = "тел. офисн.:";
-            // 
-            // tbMobile
-            // 
-            this.tbMobile.Location = new System.Drawing.Point(103, 58);
-            this.tbMobile.Name = "tbMobile";
-            this.tbMobile.Size = new System.Drawing.Size(225, 20);
-            this.tbMobile.TabIndex = 17;
             // 
             // label10
             // 
@@ -246,7 +226,7 @@
             this.tbComment.Location = new System.Drawing.Point(108, 207);
             this.tbComment.Multiline = true;
             this.tbComment.Name = "tbComment";
-            this.tbComment.Size = new System.Drawing.Size(499, 103);
+            this.tbComment.Size = new System.Drawing.Size(539, 103);
             this.tbComment.TabIndex = 20;
             // 
             // label12
@@ -262,7 +242,8 @@
             // 
             this.tbSubOrganization.Location = new System.Drawing.Point(108, 181);
             this.tbSubOrganization.Name = "tbSubOrganization";
-            this.tbSubOrganization.Size = new System.Drawing.Size(499, 20);
+            this.tbSubOrganization.ReadOnly = true;
+            this.tbSubOrganization.Size = new System.Drawing.Size(539, 20);
             this.tbSubOrganization.TabIndex = 18;
             // 
             // label13
@@ -278,7 +259,8 @@
             // 
             this.tbOrganization.Location = new System.Drawing.Point(108, 155);
             this.tbOrganization.Name = "tbOrganization";
-            this.tbOrganization.Size = new System.Drawing.Size(499, 20);
+            this.tbOrganization.ReadOnly = true;
+            this.tbOrganization.Size = new System.Drawing.Size(539, 20);
             this.tbOrganization.TabIndex = 16;
             // 
             // label14
@@ -292,71 +274,102 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(159, 349);
+            this.btnSave.Location = new System.Drawing.Point(161, 325);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(89, 46);
             this.btnSave.TabIndex = 21;
             this.btnSave.Text = "Сохранить";
             this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.notImplement_Click);
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnSaveAndClose
             // 
-            this.btnSaveAndClose.Location = new System.Drawing.Point(281, 349);
+            this.btnSaveAndClose.Location = new System.Drawing.Point(283, 325);
             this.btnSaveAndClose.Name = "btnSaveAndClose";
             this.btnSaveAndClose.Size = new System.Drawing.Size(150, 46);
             this.btnSaveAndClose.TabIndex = 22;
             this.btnSaveAndClose.Text = "Сохранить и закрыть";
             this.btnSaveAndClose.UseVisualStyleBackColor = true;
-            this.btnSaveAndClose.Click += new System.EventHandler(this.notImplement_Click);
+            this.btnSaveAndClose.Click += new System.EventHandler(this.btnSaveAndClose_Click);
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(468, 349);
+            this.btnClose.Location = new System.Drawing.Point(470, 325);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(89, 46);
             this.btnClose.TabIndex = 23;
             this.btnClose.Text = "Закрыть";
             this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.notImplement_Click);
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // btnChangeOrganizationAndSubOrganization
             // 
-            this.btnChangeOrganizationAndSubOrganization.Location = new System.Drawing.Point(732, 178);
+            this.btnChangeOrganizationAndSubOrganization.Location = new System.Drawing.Point(690, 151);
             this.btnChangeOrganizationAndSubOrganization.Name = "btnChangeOrganizationAndSubOrganization";
             this.btnChangeOrganizationAndSubOrganization.Size = new System.Drawing.Size(153, 46);
             this.btnChangeOrganizationAndSubOrganization.TabIndex = 24;
             this.btnChangeOrganizationAndSubOrganization.Text = "Сменить организацию и подразделение";
             this.btnChangeOrganizationAndSubOrganization.UseVisualStyleBackColor = true;
-            this.btnChangeOrganizationAndSubOrganization.Click += new System.EventHandler(this.notImplement_Click);
+            this.btnChangeOrganizationAndSubOrganization.Click += new System.EventHandler(this.btnChangeOrganizationAndSubOrganization_Click);
             // 
-            // btnAddPerson
+            // cbAppeal
             // 
-            this.btnAddPerson.Location = new System.Drawing.Point(732, 243);
-            this.btnAddPerson.Name = "btnAddPerson";
-            this.btnAddPerson.Size = new System.Drawing.Size(153, 46);
-            this.btnAddPerson.TabIndex = 25;
-            this.btnAddPerson.Text = "Добавить сотрудника в эту организацию";
-            this.btnAddPerson.UseVisualStyleBackColor = true;
-            this.btnAddPerson.Click += new System.EventHandler(this.notImplement_Click);
+            this.cbAppeal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbAppeal.FormattingEnabled = true;
+            this.cbAppeal.Items.AddRange(new object[] {
+            "Господин",
+            "Госпожа"});
+            this.cbAppeal.Location = new System.Drawing.Point(476, 22);
+            this.cbAppeal.Name = "cbAppeal";
+            this.cbAppeal.Size = new System.Drawing.Size(121, 21);
+            this.cbAppeal.TabIndex = 27;
             // 
-            // btnShowPersons
+            // cbPosition
             // 
-            this.btnShowPersons.Location = new System.Drawing.Point(732, 307);
-            this.btnShowPersons.Name = "btnShowPersons";
-            this.btnShowPersons.Size = new System.Drawing.Size(153, 46);
-            this.btnShowPersons.TabIndex = 26;
-            this.btnShowPersons.Text = "Показать сотрудников этой организации";
-            this.btnShowPersons.UseVisualStyleBackColor = true;
-            this.btnShowPersons.Click += new System.EventHandler(this.notImplement_Click);
+            this.cbPosition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbPosition.FormattingEnabled = true;
+            this.cbPosition.Location = new System.Drawing.Point(476, 49);
+            this.cbPosition.Name = "cbPosition";
+            this.cbPosition.Size = new System.Drawing.Size(171, 21);
+            this.cbPosition.TabIndex = 28;
+            // 
+            // cbMainSpecPerson
+            // 
+            this.cbMainSpecPerson.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbMainSpecPerson.FormattingEnabled = true;
+            this.cbMainSpecPerson.Location = new System.Drawing.Point(477, 76);
+            this.cbMainSpecPerson.Name = "cbMainSpecPerson";
+            this.cbMainSpecPerson.Size = new System.Drawing.Size(170, 21);
+            this.cbMainSpecPerson.TabIndex = 29;
+            // 
+            // cbAcademTitle
+            // 
+            this.cbAcademTitle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbAcademTitle.FormattingEnabled = true;
+            this.cbAcademTitle.Location = new System.Drawing.Point(477, 103);
+            this.cbAcademTitle.Name = "cbAcademTitle";
+            this.cbAcademTitle.Size = new System.Drawing.Size(171, 21);
+            this.cbAcademTitle.TabIndex = 31;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(341, 104);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(130, 13);
+            this.label5.TabIndex = 30;
+            this.label5.Text = "Уч. степень/должность:";
             // 
             // FormAddPerson
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1049, 422);
-            this.Controls.Add(this.btnShowPersons);
-            this.Controls.Add(this.btnAddPerson);
+            this.ClientSize = new System.Drawing.Size(1049, 392);
+            this.Controls.Add(this.cbAcademTitle);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.cbMainSpecPerson);
+            this.Controls.Add(this.cbPosition);
+            this.Controls.Add(this.cbAppeal);
             this.Controls.Add(this.btnChangeOrganizationAndSubOrganization);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnSaveAndClose);
@@ -368,11 +381,8 @@
             this.Controls.Add(this.tbOrganization);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.tbSpecialization);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.tbPosition);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.tbAppeal);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.lbNumberSF);
             this.Controls.Add(this.label4);
@@ -406,16 +416,12 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lbNumberSF;
-        private System.Windows.Forms.TextBox tbAppeal;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox tbPosition;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox tbSpecialization;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox tbPhone;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox tbMobile;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox tbEmail;
         private System.Windows.Forms.Label label11;
@@ -429,7 +435,11 @@
         private System.Windows.Forms.Button btnSaveAndClose;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnChangeOrganizationAndSubOrganization;
-        private System.Windows.Forms.Button btnAddPerson;
-        private System.Windows.Forms.Button btnShowPersons;
+        private System.Windows.Forms.ComboBox cbAppeal;
+        private System.Windows.Forms.ComboBox cbPosition;
+        private System.Windows.Forms.ComboBox cbMainSpecPerson;
+        private System.Windows.Forms.ComboBox cbAcademTitle;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.MaskedTextBox mtbMobile;
     }
 }

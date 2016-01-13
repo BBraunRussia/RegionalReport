@@ -36,6 +36,16 @@ namespace ClassLibrary.SF
                     return new UserLpuRR(row);
                 case "SF_UserRight":
                     return new UserRight(row);
+                case "SF_Person":
+                    return new Person(row);
+                case "SF_Position":
+                    return new Position(row);
+                case "SF_MainSpecPerson":
+                    return new MainSpecPerson(row);
+                case "SF_AcademTitle":
+                    return new AcademTitle(row);
+                case "SF_UserRoleSF":
+                    return new UserRoleSF(row);
                 default:
                     throw new NotImplementedException("Фабрика не может создать экземпляр данного класса");
             }

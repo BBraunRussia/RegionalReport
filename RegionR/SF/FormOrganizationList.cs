@@ -35,9 +35,9 @@ namespace RegionR
             LpuList lpuList = new LpuList();
             UserList userList = UserList.GetUniqueInstance();
             User user = userList.GetItem(globalData.UserID) as User;
-
-            DataTable dt = (user.Role == Roles.Администратор) ? lpuList.ToDataTable() : lpuList.ToDataTable(user);
-
+            
+            DataTable dt = (user.RoleSF == RolesSF.Администратор) ? lpuList.ToDataTable() : lpuList.ToDataTable(user);
+            
             dgv.DataSource = dt;
 
             dgv.Columns[0].Visible = false;
@@ -63,6 +63,12 @@ namespace RegionR
                         if (formAddLPU.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                             LoadData();
                     }
+                }
+                else if (organization is OtherOrganization)
+                {
+                    FormAddOtherOrganization formAddOtherOrganization = new FormAddOtherOrganization(organization as OtherOrganization);
+                    if (formAddOtherOrganization.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                        LoadData();
                 }
                 else
                 {
@@ -91,16 +97,20 @@ namespace RegionR
                 if (FormAddLPU.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                     LoadData();
             }
+            else if (organization is OtherOrganization)
+            {
+                FormAddOtherOrganization formAddOtherOrganization = new FormAddOtherOrganization(organization as OtherOrganization);
+                if (formAddOtherOrganization.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                    LoadData();
+            }
         }
 
         private void btnDeleteOrganization_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Вы действительно хотите удалить организацию?", "Удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.Yes)
-            {
-                Organization organization = GetOrganization();
-                organization.Delete();
+            Organization organization = GetOrganization();
+
+            if (ClassForForm.DeleteOrganization(organization))
                 LoadData();
-            }
         }
 
         private Organization GetOrganization()
@@ -121,12 +131,7 @@ namespace RegionR
         {
             Close();
         }
-
-        private void tbSearch_TextChanged(object sender, EventArgs e)
-        {
-            _seacher.Find(tbSearch.Text);
-        }
-
+        
         private void dgv_SelectionChanged(object sender, EventArgs e)
         {
             _myStatusStrip.writeStatus();
@@ -134,25 +139,26 @@ namespace RegionR
 
         private void fiterToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("В процессе разработки", "Функция не реализована", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            return;
-
             if (dgv.CurrentCell == null)
                 return;
 
             string columnName = dgv.Columns[dgv.CurrentCell.ColumnIndex].HeaderText;
 
-            Point point = new Point(dgv.CurrentCell.ColumnIndex, dgv.CurrentCell.RowIndex);
+            string value = dgv.CurrentCell.Value.ToString();
 
-            //MyFilter myFilter = (dgv.Name == "_dgvCar") ? MyFilter.GetInstanceCars() : MyFilter.GetInstanceDrivers();
-            //myFilter.SetFilterValue(string.Concat(columnName, ":"), point);
+            ApplyFilter(columnName, value);
+        }
+
+        private void ApplyFilter(string columnName, string value)
+        {
+            foreach (DataGridViewRow row in dgv.Rows)
+                row.Visible = (row.Cells[columnName].Value.ToString() == value);
+
+            btnDeleteFilter.Visible = true;
         }
 
         private void sortToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("В процессе разработки", "Функция не реализована", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            return;
-
             if (dgv.SelectedCells.Count == 0)
                 return;
 
@@ -178,6 +184,62 @@ namespace RegionR
         {
             FormCityList formCityList = new FormCityList();
             formCityList.ShowDialog();
+        }
+
+        private void addPersonToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Organization organization = GetOrganization();
+
+            Person person = new Person();
+            person.Organization = organization;
+
+            FormSecondStepAddPerson formSecondStepAddPerson = new FormSecondStepAddPerson(person);
+            if (formSecondStepAddPerson.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                FormAddPerson formAddPerson = new FormAddPerson(person);
+                formAddPerson.ShowDialog();
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            OrganizationList organizationList = OrganizationList.GetUniqueInstance();
+            organizationList.Reload();
+
+            LoadData();
+        }
+
+        private void dgv_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
+        {
+            if ((e.RowIndex >= 0) && (e.ColumnIndex >= 0))
+                dgv.CurrentCell = dgv.Rows[e.RowIndex].Cells[e.ColumnIndex];
+        }
+
+        private void btnDeleteFilter_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in dgv.Rows)
+                row.Visible = true;
+
+            btnDeleteFilter.Visible = false;
+        }
+
+        private void tbSearch_TextChanged(object sender, EventArgs e)
+        {
+            Search();
+        }
+
+        private void tbSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                Search();
+            }
+        }
+
+        private void Search()
+        {
+            _seacher.Find(tbSearch.Text);
         }
     }
 }

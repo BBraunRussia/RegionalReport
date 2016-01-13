@@ -14,13 +14,14 @@ namespace ClassLibrary.SF
         public SubOrganizationList(Organization organization)
         {
             OrganizationList organizationList = OrganizationList.GetUniqueInstance();
-            _list = organizationList.GetChildList(organization);
+            _list = organizationList.GetSubOrganizationList(organization);
             _organization = organization;
         }
 
         public DataTable ToDataTable()
         {
             DataTable dt = new DataTable();
+            dt.Columns.Add("id");
             dt.Columns.Add("Название подразделения");
             dt.Columns.Add("Тип подразделения");
 

@@ -24,10 +24,12 @@ namespace RegionR.SF
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            if (radioButton1.Checked)
+            if (rbLPU.Checked)
                 FormOrganizationList.typeOrg = TypeOrg.ЛПУ;
-            else
+            else if (rbPharmacy.Checked)
                 FormOrganizationList.typeOrg = TypeOrg.Аптека;
+            else if (rbAdminOrganization.Checked)
+                FormOrganizationList.typeOrg = TypeOrg.Административное_Учреждение;
         }
     }
 }

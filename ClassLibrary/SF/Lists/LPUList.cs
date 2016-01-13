@@ -6,31 +6,72 @@ using System.Data;
 
 namespace ClassLibrary.SF
 {
-    public class LpuList : IDataTable
+    public class LpuList
     {
         private List<LPU> _list;
+        private List<OtherOrganization> _listOther;
 
         public LpuList()
         {
             OrganizationList organizationList = OrganizationList.GetUniqueInstance();
             _list = organizationList.ListLpu;
+            _listOther = organizationList.ListOther;
         }
 
-        public DataTable ToDataTable(User user)
+        public DataTable ToDataTable(User user = null)
+        {
+            if (user == null)
+                return CreateTable(_list, _listOther);
+
+            var list = GetList(user);
+            var listOther = GetListOther(_listOther, user);
+            return CreateTable(list, listOther);
+        }
+
+        private List<LPU> GetList(User user)
         {
             UserRightList userRightList = UserRightList.GetUniqueInstance();
             var userRightList2 = userRightList.ToList(user);
 
-            var list = _list.Where(item => userRightList2.Contains(item.LpuRR.RegionRR)).ToList();
-            return CreateTable(list);
+            return _list.Where(item => userRightList2.Contains(item.LpuRR.RegionRR)).ToList();
         }
 
-        public DataTable ToDataTable()
+        private List<OtherOrganization> GetListOther(List<OtherOrganization> listOther, User user)
         {
-            return CreateTable(_list);
+            UserRightList userRightList = UserRightList.GetUniqueInstance();
+            var userRightList2 = userRightList.ToList(user);
+
+            return listOther.Where(item => userRightList2.Contains(item.RealRegion.RegionRR)).ToList();
         }
 
-        private DataTable CreateTable(List<LPU> list)
+        public DataTable ToDataTableWithBranch(User user = null)
+        {
+            if (user == null)
+                return ToDataTableWithBranch(_list);
+
+            var list = GetList(user);
+            return ToDataTableWithBranch(list);
+        }
+
+        private DataTable ToDataTableWithBranch(List<LPU> list)
+        {
+            OrganizationList organizationList = OrganizationList.GetUniqueInstance();
+
+            List<LPU> listNew = new List<LPU>();
+            
+            foreach (Organization item in list)
+            {
+                listNew.Add(item as LPU);
+
+                var listBranch = organizationList.GetBranchList(item);
+                foreach (Organization itemBranch in listBranch)
+                    listNew.Add(itemBranch as LPU);
+            }
+
+            return CreateTable(listNew, null);
+        }
+
+        private DataTable CreateTable(List<LPU> list, List<OtherOrganization> listOther)
         {
             DataTable dt = new DataTable();
             dt.Columns.Add("id");
@@ -42,9 +83,15 @@ namespace ClassLibrary.SF
             dt.Columns.Add("Город");
             dt.Columns.Add("Сопоставленное ЛПУ-RR");
             dt.Columns.Add("Регион RR");
-
+            
             foreach (LPU lpu in list)
                 dt.Rows.Add(lpu.GetRow());
+
+            if (listOther != null)
+            {
+                foreach (OtherOrganization other in listOther)
+                    dt.Rows.Add(other.GetRow());
+            }
 
             return dt;
         }
@@ -65,6 +112,11 @@ namespace ClassLibrary.SF
         {
             var list = _list.Where(item => item.City == city);
             return (list.Count() == 0) ? null : list.First();
+        }
+
+        public bool IsInList(string inn)
+        {
+            return _list.Exists(item => item.INN == inn);
         }
     }
 }

@@ -28,7 +28,7 @@ namespace RegionR.SF
             UserList userList = UserList.GetUniqueInstance();
             User user = userList.GetItem(globalData.UserID) as User;
 
-            if ((user.Role == Roles.Администратор) || (user.Role == Roles.Руководство1) || (user.Role == Roles.Руководство2))
+            if (user.RoleSF == RolesSF.Администратор)
             {
                 btnAddCity.Enabled = true;
                 btnDeleteCity.Enabled = true;

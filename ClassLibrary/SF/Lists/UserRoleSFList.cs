@@ -6,18 +6,18 @@ using System.Data;
 
 namespace ClassLibrary.SF
 {
-    public class LpuRRList : BaseList
+    public class UserRoleSFList : BaseList
     {
-        private static LpuRRList _uniqueInstance;
+        private static UserRoleSFList _uniqueInstance;
 
-        private LpuRRList(string tableName)
+        private UserRoleSFList(string tableName)
             : base(tableName)
         { }
 
-        public static LpuRRList GetUniqueInstance()
+        public static UserRoleSFList GetUniqueInstance()
         {
             if (_uniqueInstance == null)
-                _uniqueInstance = new LpuRRList("SF_LpuRR");
+                _uniqueInstance = new UserRoleSFList("SF_UserRoleSF");
 
             return _uniqueInstance;
         }
@@ -25,12 +25,10 @@ namespace ClassLibrary.SF
         public override DataTable ToDataTable()
         {
             DataTable dt = new DataTable();
-            dt.Columns.Add("id");
-            dt.Columns.Add("Название");
+            dt.Columns.Add("Пользователь");
+            dt.Columns.Add("Роль");
 
-            var list = List.OrderBy(item => item.Name);
-
-            dt.Rows.Add("0", "Прочие ЛПУ");
+            var list = List.OrderBy(item => (item as UserRoleSF).User.Name);
 
             foreach (var item in list)
                 dt.Rows.Add(item.GetRow());

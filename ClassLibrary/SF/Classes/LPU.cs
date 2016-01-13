@@ -233,7 +233,9 @@ namespace ClassLibrary.SF
 
         public object[] GetRow()
         {
-            return new object[] { ID, NumberSF, ShortName, TypeLPU.Name, INN, RealRegion.Name, City.Name, LpuRR.Name, LpuRR.RegionRR.Name };
+            string typeOrgName = ((TypeOrg == SF.TypeOrg.ЛПУ) && (ParentOrganization != null)) ? "Филиал ЛПУ" : TypeOrg.ToString();
+
+            return new object[] { ID, NumberSF, ShortName, typeOrgName, (ParentOrganization == null) ? INN : (ParentOrganization as LPU).INN, RealRegion.Name, City.Name, (LpuRR == null) ? "Прочие ЛПУ" : LpuRR.Name, (LpuRR == null) ? "Российская федерация" : LpuRR.RegionRR.Name };
         }
         
         public override void Save()
@@ -243,22 +245,16 @@ namespace ClassLibrary.SF
             int idParentOrganization;
             idParentOrganization = (ParentOrganization == null) ? 0 : ParentOrganization.ID;
 
+            int idLPURR = (LpuRR == null) ? 0 : LpuRR.ID;
+
             int.TryParse(_provider.Insert("SF_LPU", ID, NumberSF, TypeOrg, Name, ShortName, MainSpec.ID, Email, WebSite, Phone, idParentOrganization, TypeLPU.ID, Ownership.ID, AdmLevel.ID,
-                INN, KPP, PostIndex, City.ID, District, Street, LpuRR.ID,
+                INN, KPP, PostIndex, City.ID, District, Street, idLPURR,
                 _bedsTotal, _bedsIC, _surgical, _operating, _machineGD, _machineGDF, _machineCRRT, _shift, _patientGD, _patientPD, _patientCRRT), out id);
 
             SetID(id);
 
             OrganizationList organizationList = OrganizationList.GetUniqueInstance();
             organizationList.Add(this);
-        }
-
-        public override void Delete()
-        {
-            _provider.Delete("SF_LPU", ID);
-
-            OrganizationList organizationList = OrganizationList.GetUniqueInstance();
-            organizationList.Delete(this);
         }
     }
 }

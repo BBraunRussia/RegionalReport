@@ -53,6 +53,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tbSearch = new System.Windows.Forms.TextBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.button1 = new System.Windows.Forms.Button();
+            this.btnDeleteFilter = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -118,7 +120,7 @@
             this.addPersonToolStripMenuItem.Name = "addPersonToolStripMenuItem";
             this.addPersonToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.addPersonToolStripMenuItem.Text = "Добавить персону";
-            this.addPersonToolStripMenuItem.Click += new System.EventHandler(this.NotImpliment_Click);
+            this.addPersonToolStripMenuItem.Click += new System.EventHandler(this.addPersonToolStripMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
@@ -180,6 +182,7 @@
             this.dgv.RowHeadersVisible = false;
             this.dgv.Size = new System.Drawing.Size(978, 344);
             this.dgv.TabIndex = 1;
+            this.dgv.CellContextMenuStripNeeded += new System.Windows.Forms.DataGridViewCellContextMenuStripNeededEventHandler(this.dgv_CellContextMenuStripNeeded);
             this.dgv.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellDoubleClick);
             this.dgv.SelectionChanged += new System.EventHandler(this.dgv_SelectionChanged);
             // 
@@ -211,7 +214,7 @@
             this.addPersonToolStripMenuItem1.Name = "addPersonToolStripMenuItem1";
             this.addPersonToolStripMenuItem1.Size = new System.Drawing.Size(260, 22);
             this.addPersonToolStripMenuItem1.Text = "Добавить персону";
-            this.addPersonToolStripMenuItem1.Click += new System.EventHandler(this.NotImpliment_Click);
+            this.addPersonToolStripMenuItem1.Click += new System.EventHandler(this.addPersonToolStripMenuItem_Click);
             // 
             // btnAddOrganization
             // 
@@ -236,7 +239,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(473, 32);
+            this.label1.Location = new System.Drawing.Point(501, 32);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(42, 13);
             this.label1.TabIndex = 4;
@@ -244,11 +247,12 @@
             // 
             // tbSearch
             // 
-            this.tbSearch.Location = new System.Drawing.Point(521, 29);
+            this.tbSearch.Location = new System.Drawing.Point(549, 29);
             this.tbSearch.Name = "tbSearch";
             this.tbSearch.Size = new System.Drawing.Size(159, 20);
             this.tbSearch.TabIndex = 5;
             this.tbSearch.TextChanged += new System.EventHandler(this.tbSearch_TextChanged);
+            this.tbSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbSearch_KeyDown);
             // 
             // statusStrip1
             // 
@@ -258,11 +262,34 @@
             this.statusStrip1.TabIndex = 6;
             this.statusStrip1.Text = "statusStrip1";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(915, 26);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 7;
+            this.button1.Text = "Обновить";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // btnDeleteFilter
+            // 
+            this.btnDeleteFilter.Location = new System.Drawing.Point(372, 27);
+            this.btnDeleteFilter.Name = "btnDeleteFilter";
+            this.btnDeleteFilter.Size = new System.Drawing.Size(90, 23);
+            this.btnDeleteFilter.TabIndex = 8;
+            this.btnDeleteFilter.Text = "Снять фильтр";
+            this.btnDeleteFilter.UseVisualStyleBackColor = true;
+            this.btnDeleteFilter.Visible = false;
+            this.btnDeleteFilter.Click += new System.EventHandler(this.btnDeleteFilter_Click);
+            // 
             // FormOrganizationList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1002, 425);
+            this.Controls.Add(this.btnDeleteFilter);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.tbSearch);
             this.Controls.Add(this.label1);
@@ -310,5 +337,7 @@
         private System.Windows.Forms.ToolStripMenuItem fiterToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sortToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addPersonToolStripMenuItem1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnDeleteFilter;
     }
 }

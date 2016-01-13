@@ -8,14 +8,28 @@ namespace ClassLibrary.SF
 {
     public class User : BaseDictionary
     {
-        private int _idRole;
+        private RolesSF _roleSF;
 
         public User(DataRow row)
             : base(row)
         {
-            int.TryParse(row[2].ToString(), out _idRole);
+            int idRole;
+            int.TryParse(row[2].ToString(), out idRole);
+
+            _roleSF = (idRole == 1) ? RolesSF.Администратор : RolesSF.Пользователь;
         }
 
-        public Roles Role { get { return (Roles)_idRole; } }
+        public RolesSF RoleSF
+        {
+            get
+            {
+                UserRoleSFList userRoleSFList = UserRoleSFList.GetUniqueInstance();
+                UserRoleSF userRoleSF = userRoleSFList.GetItem(ID) as UserRoleSF;
+                if (userRoleSF != null)
+                    _roleSF = userRoleSF.RoleSF;
+
+                return _roleSF;
+            }
+        }
     }
 }

@@ -17,9 +17,8 @@ namespace ClassLibrary.SF
         private string _email;
         private string _website;
         private string _phone;
-
         private int _idParentOrganization;
-
+        
         protected IProvider _provider;
 
         internal Organization(DataRow row)
@@ -98,12 +97,19 @@ namespace ClassLibrary.SF
             }
             set { _idMainSpec = value.ID; }
         }
-
+        
         public static Organization CreateItem(DataRow row)
         {
             TypeOrg typeOrg = (TypeOrg) Convert.ToInt32(row[2].ToString());
-
-            return (typeOrg == TypeOrg.ЛПУ) ? new LPU(row) : new Organization(row);
+            int idParent;
+            int.TryParse(row[9].ToString(), out idParent);
+            
+            if (typeOrg == TypeOrg.ЛПУ)
+                return new LPU(row);
+            else if (idParent != 0)
+                return new Organization(row);
+            else
+                return new OtherOrganization(row);
         }
 
         public Organization ParentOrganization
@@ -119,9 +125,18 @@ namespace ClassLibrary.SF
             set { _idParentOrganization = value.ID; }
         }
 
-        public static Organization CreateItem(TypeOrg typeOrg)
+        public static Organization CreateItem(TypeOrg typeOrg, Organization parentOrganization = null)
         {
-            return (typeOrg == TypeOrg.ЛПУ) ? new LPU(typeOrg) : new Organization(typeOrg);
+            if (typeOrg == TypeOrg.ЛПУ)
+                return new LPU(typeOrg);
+            else if (parentOrganization == null)
+                return new OtherOrganization(typeOrg);
+            else
+            {
+                Organization organization = new Organization(typeOrg);
+                organization.ParentOrganization = parentOrganization;
+                return organization;
+            }
         }
 
         protected void SetID(int id)
@@ -131,8 +146,11 @@ namespace ClassLibrary.SF
 
         public virtual void Save()
         {
+            int idMainSpec = 0;
+            if (MainSpec != null)
+                idMainSpec = MainSpec.ID;
             int id;
-            int.TryParse(_provider.Insert("SF_Organization", ID, NumberSF, TypeOrg, Name, ShortName, MainSpec.ID, Email, WebSite, Phone, ParentOrganization.ID), out id);
+            int.TryParse(_provider.Insert("SF_Organization", ID, NumberSF, TypeOrg, Name, ShortName, idMainSpec, Email, WebSite, Phone, ParentOrganization.ID), out id);
             SetID(id);
 
             OrganizationList organizationList = OrganizationList.GetUniqueInstance();
@@ -140,6 +158,9 @@ namespace ClassLibrary.SF
         }
 
         public virtual void Delete()
-        { }
+        {
+            OrganizationList organizationList = OrganizationList.GetUniqueInstance();
+            organizationList.Delete(this);
+        }
     }
 }

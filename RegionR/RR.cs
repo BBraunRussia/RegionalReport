@@ -211,6 +211,7 @@ namespace RegionR
                 trackersToolStripMenuItem.Visible = true;
                 userManagerToolStripMenuItem.Visible = true;
                 userBCToolStripMenuItem.Visible = true;
+                userRoleSFToolStripMenuItem.Visible = true;
             }
             if ((globalData.UserAccess == 2) || (globalData.UserAccess == 3) || (globalData.UserAccess == 4))
             {
@@ -16093,6 +16094,12 @@ namespace RegionR
         {
             FormPersonList formPersonList = new FormPersonList();
             formPersonList.ShowDialog();
+        }
+
+        private void userRoleSFToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormUserRoleSFList formUserRoleSFList = new FormUserRoleSFList();
+            formUserRoleSFList.ShowDialog();
         }
     }
 }

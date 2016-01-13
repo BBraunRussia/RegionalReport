@@ -74,7 +74,7 @@
             this.dgvLpuRR.RowHeadersVisible = false;
             this.dgvLpuRR.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dgvLpuRR.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLpuRR.Size = new System.Drawing.Size(545, 134);
+            this.dgvLpuRR.Size = new System.Drawing.Size(753, 134);
             this.dgvLpuRR.TabIndex = 1;
             // 
             // label2
@@ -103,8 +103,9 @@
             this.dgvLPUCompetitors.Name = "dgvLPUCompetitors";
             this.dgvLPUCompetitors.ReadOnly = true;
             this.dgvLPUCompetitors.RowHeadersVisible = false;
+            this.dgvLPUCompetitors.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dgvLPUCompetitors.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLPUCompetitors.Size = new System.Drawing.Size(545, 230);
+            this.dgvLPUCompetitors.Size = new System.Drawing.Size(753, 230);
             this.dgvLPUCompetitors.TabIndex = 3;
             // 
             // contextMenuStrip1
@@ -159,6 +160,7 @@
             this.tbSearch.Size = new System.Drawing.Size(159, 20);
             this.tbSearch.TabIndex = 7;
             this.tbSearch.TextChanged += new System.EventHandler(this.tbSearch_TextChanged);
+            this.tbSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbSearch_KeyDown);
             // 
             // label3
             // 
@@ -203,7 +205,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(569, 547);
+            this.ClientSize = new System.Drawing.Size(777, 547);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.label4);

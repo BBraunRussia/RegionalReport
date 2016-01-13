@@ -32,8 +32,9 @@ namespace RegionR.SF
             LoadDictionaries();
 
             this.Text = string.Concat("Карточка ", _organization.TypeOrg, " ЛПУ");
-
-            lbLPU.Text = string.Concat("ЛПУ: ", _parentLPU.ShortName.ToUpper());
+            lbTypeOrgName.Text = string.Concat(_organization.TypeOrg.ToString(), ":");
+            
+            lbLPU.Text = _parentLPU.ShortName.ToUpper();
 
             tbName.Text = _organization.Name;
             tbShortName.Text = _organization.ShortName;
@@ -41,6 +42,24 @@ namespace RegionR.SF
             if (_organization.MainSpec != null)
                 cbMainSpec.SelectedValue = _organization.MainSpec.ID;
 
+            if (_organization.TypeOrg == TypeOrg.Аптека)
+            {
+                cbMainSpec.SelectedValue = 40;
+                cbMainSpec.Enabled = false;
+                lbMainSpec.Visible = false;
+                lbBranch.Location = new Point(85, 32);
+            }
+            else if (_organization.TypeOrg == TypeOrg.Отделение)
+            {
+                lbBranch.Location = new Point(117, 32);
+            }
+            else if (_organization.TypeOrg == TypeOrg.Отдел)
+            {
+                lbBranch.Location = new Point(81, 32);
+                cbMainSpec.Visible = false;
+                lbMainSpec.Visible = false;
+            }
+            
             tbEmail.Text = _organization.Email;
             tbWebSite.Text = _organization.WebSite;
             tbPhone.Text = _organization.Phone;
@@ -66,24 +85,31 @@ namespace RegionR.SF
             TrySave();
         }
 
-        private void TrySave()
+        private bool TrySave()
         {
             try
             {
                 CopyFields();
 
                 _organization.Save();
+
+                return true;
             }
             catch (NullReferenceException ex)
             {
                 MessageBox.Show(ex.Message, "Обязательное поле", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                return false;
             }
         }
 
         private void CopyFields()
         {
-            int idMainSpec = Convert.ToInt32(cbMainSpec.SelectedValue);
-            _organization.MainSpec = _mainSpecList.GetItem(idMainSpec) as MainSpec;
+            if (cbMainSpec.Visible)
+            {
+                int idMainSpec = Convert.ToInt32(cbMainSpec.SelectedValue);
+                _organization.MainSpec = _mainSpecList.GetItem(idMainSpec) as MainSpec;
+            }
 
             ClassForForm.CheckFilled(tbName.Text, "Официальное название");
             ClassForForm.CheckFilled(tbShortName.Text, "Сокращенное название");
@@ -97,7 +123,33 @@ namespace RegionR.SF
 
         private void tbShortName_TextChanged(object sender, EventArgs e)
         {
-            lbBranch.Text = string.Concat(_organization.TypeOrg.ToString(), ": ", tbShortName.Text);
+            lbBranch.Text = tbShortName.Text;
+        }
+
+        private void btnAddEmployee_Click(object sender, EventArgs e)
+        {
+            if (_organization.ID == 0)
+            {
+                if (!TrySave())
+                    return;
+            }
+
+            Person person = new Person();
+            person.Organization = _organization;
+
+            FormAddPerson formAddPerson = new FormAddPerson(person);
+            formAddPerson.ShowDialog();
+        }
+
+        private void btnShowEmployees_Click(object sender, EventArgs e)
+        {
+            FormPersonList formPersonList = new FormPersonList(_organization);
+            formPersonList.ShowDialog();
+        }
+
+        private void tbPhone_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = (!char.IsDigit(e.KeyChar));
         }
     }
 }

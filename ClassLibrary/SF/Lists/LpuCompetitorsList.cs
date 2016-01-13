@@ -44,7 +44,7 @@ namespace ClassLibrary.SF
 
         public DataTable ToDataTable(User user)
         {
-            if ((user.Role == Roles.Администратор) || (user.Role == Roles.Руководство1) || (user.Role == Roles.Руководство2))
+            if (user.RoleSF == RolesSF.Администратор)
                 return CreateTable(_list);
 
             RealRegionList realRegionList = RealRegionList.GetUniqueInstance();
@@ -52,7 +52,7 @@ namespace ClassLibrary.SF
 
             var list2 = _list.Where(item => IsInList(list, item.RegionCompetitors)).ToList();
 
-            return CreateTable(list2);
+            return (list2.Count > 0) ? CreateTable(list2) : CreateTable(_list);
         }
 
         private DataTable CreateTable(List<LpuCompetitors> list)
@@ -63,7 +63,9 @@ namespace ClassLibrary.SF
             dt.Columns.Add("Регион России");
             dt.Columns.Add("ИНН");
 
-            var listNew = list.OrderBy(item => item.RegionCompetitors.Name).Select(item => item.GetRow()).ToList();
+            LpuList lpuList = new LpuList();
+
+            var listNew = list.Where(item => !(lpuList.IsInList(item.INN))).OrderBy(item => item.RegionCompetitors.Name).Select(item => item.GetRow()).ToList();
 
             foreach (var item in listNew)
                 dt.Rows.Add(item);

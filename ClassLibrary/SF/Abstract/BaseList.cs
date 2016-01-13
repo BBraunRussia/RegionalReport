@@ -35,6 +35,13 @@ namespace ClassLibrary.SF
             }
         }
 
+        public void Reload()
+        {
+            _list.Clear();
+
+            LoadFromDataBase();
+        }
+
         public virtual DataTable ToDataTable()
         {
             DataTable dt = new DataTable();
@@ -42,7 +49,7 @@ namespace ClassLibrary.SF
             dt.Columns.Add("Название");
 
             var list = _list.OrderBy(item => item.Name);
-
+            
             foreach (var item in list)
                 dt.Rows.Add(item.GetRow());
 
@@ -51,7 +58,7 @@ namespace ClassLibrary.SF
 
         public BaseDictionary GetItem(int id)
         {
-            return (id == 0) ? null : _list.Where(item => item.ID == id).First();
+            return ((id == 0) || (_list.Count == 0) || (_list.Where(item => item.ID == id).Count() == 0)) ? null : _list.Where(item => item.ID == id).First();
         }
 
         public BaseDictionary GetItem(string name)

@@ -59,6 +59,9 @@ namespace RegionR.SF
 
                 dgvLPUCompetitors.CurrentCell = dgvLPUCompetitors.Rows[0].Cells[1];
 
+                dgvLPUCompetitors.Columns[2].Width = 150;
+                dgvLPUCompetitors.Columns[3].Width = 100;
+
                 ResizeDGV();
             }
         }
@@ -70,9 +73,7 @@ namespace RegionR.SF
 
         private void ResizeDGV()
         {
-            dgvLPUCompetitors.Columns[1].Width = Convert.ToInt32(dgvLPUCompetitors.Width * 0.5);
-            dgvLPUCompetitors.Columns[2].Width = Convert.ToInt32(dgvLPUCompetitors.Width * 0.22);
-            dgvLPUCompetitors.Columns[3].Width = Convert.ToInt32(dgvLPUCompetitors.Width * 0.22);
+            dgvLPUCompetitors.Columns[1].Width = dgvLPUCompetitors.Width - dgvLPUCompetitors.Columns[2].Width - dgvLPUCompetitors.Columns[3].Width;
         }
 
         private void btnOK_Click(object sender, EventArgs e)
@@ -98,7 +99,7 @@ namespace RegionR.SF
 
         private void tbSearch_TextChanged(object sender, EventArgs e)
         {
-            _seacher.Find(tbSearch.Text);
+            Search();
         }
 
         private void filterToolStripMenuItem_Click(object sender, EventArgs e)
@@ -114,6 +115,20 @@ namespace RegionR.SF
         private void btnClear_Click(object sender, EventArgs e)
         {
             MessageBox.Show("В процессе разработки", "Функция не реализована", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void tbSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                Search();
+            }
+        }
+
+        private void Search()
+        {
+            _seacher.Find(tbSearch.Text);
         }
     }
 }

@@ -12,17 +12,21 @@ namespace ClassLibrary.SF
         private string _numberSF;
         private string _firstName;
         private string _secondName;
-        private string _appeal;
-        private string _position;
-        private string _specialization;
+        private int _idAppeal;
+        private Position _position;
+        private MainSpecPerson _mainSpecPerson;
+        private AcademTitle _academTitle;
         private string _email;
         private string _mobile;
         private string _phone;
         private Organization _organization;
         private string _comment;
 
+        private IProvider _provider;
+
         public Person()
         {
+            Init();
         }
 
         public Person(DataRow row)
@@ -32,19 +36,43 @@ namespace ClassLibrary.SF
             _numberSF = row[2].ToString();
             _firstName = row[3].ToString();
             _secondName = row[4].ToString();
-            _appeal = row[5].ToString();
-            _position = row[6].ToString();
-            _specialization = row[7].ToString();
-            _email = row[8].ToString();
-            _mobile = row[9].ToString();
-            _phone = row[10].ToString();
+
+            int.TryParse(row[5].ToString(), out _idAppeal);
+            
+            int idPosition;
+            int.TryParse(row[6].ToString(), out idPosition);
+            PositionList positionList = PositionList.GetUniqueInstance();
+            _position = positionList.GetItem(idPosition) as Position;
+            
+            int idMainSpecPerson;
+            int.TryParse(row[7].ToString(), out idMainSpecPerson);
+            MainSpecPersonList mainSpecPersonList = MainSpecPersonList.GetUniqueInstance();
+            _mainSpecPerson = mainSpecPersonList.GetItem(idMainSpecPerson) as MainSpecPerson;
+
+            int idAcademTitle;
+            int.TryParse(row[8].ToString(), out idAcademTitle);
+            AcademTitleList academTitleList = AcademTitleList.GetUniqueInstance();
+            _academTitle = academTitleList.GetItem(idAcademTitle) as AcademTitle;
+
+            _email = row[9].ToString();
+            _mobile = row[10].ToString();
+            _phone = row[11].ToString();
+            _comment = row[12].ToString();
 
             int idOrganization;
-            int.TryParse(row[11].ToString(), out idOrganization);
+            int.TryParse(row[13].ToString(), out idOrganization);
             OrganizationList organizationList = OrganizationList.GetUniqueInstance();
             _organization = organizationList.GetItem(idOrganization);
 
-            _comment = row[12].ToString();
+            Init();
+        }
+
+        private void Init()
+        {
+            if (_numberSF == null)
+                _numberSF = string.Empty;
+
+            _provider = Provider.GetProvider();
         }
         
         public string LastName
@@ -64,29 +92,35 @@ namespace ClassLibrary.SF
             get { return _secondName; }
             set { _secondName = value; }
         }
-
-        public string Appeal
+        
+        public int Appeal
         {
-            get { return _appeal; }
-            set { _appeal = value; }
+            get { return _idAppeal; }
+            set { _idAppeal = value; }
         }
-
+        
         public Organization Organization
         {
             get { return _organization; }
             set { _organization = value; }
         }
-
-        public string Position
+        
+        public Position Position
         {
             get { return _position; }
             set { _position = value; }
         }
 
-        public string Specialization
+        public MainSpecPerson MainSpecPerson
         {
-            get { return _specialization; }
-            set { _specialization = value; }
+            get { return _mainSpecPerson; }
+            set { _mainSpecPerson = value; }
+        }
+
+        public AcademTitle AcademTitle
+        {
+            get { return _academTitle; }
+            set { _academTitle = value; }
         }
 
         public string Email
@@ -117,9 +151,27 @@ namespace ClassLibrary.SF
         
         public override object[] GetRow()
         {
-            LPU lpu = (Organization as LPU);
+            LPU lpu = (Organization is LPU) ? (Organization as LPU) : (Organization.ParentOrganization as LPU);
+            string subOrganizationShortName = (Organization is LPU) ? "Администрация" : Organization.ShortName;
 
-            return new object[] { ID, LastName, FirstName, SecondName, lpu.ShortName, Position, lpu.City.Name, lpu.RealRegion.RegionRR, NumberSF };
+            return new object[] { ID, LastName, FirstName, SecondName, lpu.ShortName, subOrganizationShortName, Position.Name, lpu.RealRegion.Name, lpu.City.Name, NumberSF };
+        }
+
+        public void Save()
+        {
+            int id;
+            int.TryParse(_provider.Insert("SF_Person", ID, LastName, NumberSF, FirstName, SecondName, Appeal, Position.ID, MainSpecPerson.ID, AcademTitle.ID, Email, Mobile, Phone, Comment, Organization.ID), out id);
+
+            ID = id;
+
+            PersonList personList = PersonList.GetUniqueInstance();
+            personList.Add(this);
+        }
+
+        public void Delete()
+        {
+            PersonList personList = PersonList.GetUniqueInstance();
+            personList.Delete(this);
         }
     }
 }

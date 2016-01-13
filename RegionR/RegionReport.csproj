@@ -482,6 +482,12 @@
     <Compile Include="SF\FormAddOrganization.Designer.cs">
       <DependentUpon>FormAddOrganization.cs</DependentUpon>
     </Compile>
+    <Compile Include="SF\FormAddOtherOrganization.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SF\FormAddOtherOrganization.Designer.cs">
+      <DependentUpon>FormAddOtherOrganization.cs</DependentUpon>
+    </Compile>
     <Compile Include="SF\FormAddPerson.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -530,11 +536,19 @@
     <Compile Include="SF\FormSecondStepAddPerson.Designer.cs">
       <DependentUpon>FormSecondStepAddPerson.cs</DependentUpon>
     </Compile>
+    <Compile Include="SF\FormUserRoleSFList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SF\FormUserRoleSFList.Designer.cs">
+      <DependentUpon>FormUserRoleSFList.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Acc2015.resx">
       <DependentUpon>Acc2015.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="addedit\AddEditCust.resx">
       <DependentUpon>AddEditCust.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="addedit\AddEditKosCust.resx">
       <DependentUpon>AddEditKosCust.cs</DependentUpon>
@@ -546,64 +560,86 @@
     </EmbeddedResource>
     <EmbeddedResource Include="addedit\AddEditMarkAct.resx">
       <DependentUpon>AddEditMarkAct.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="addedit\AddEditMat.resx">
       <DependentUpon>AddEditMat.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="addedit\AddEditNomForAcc.resx">
       <DependentUpon>AddEditNomForAcc.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="addedit\AddEditUser.resx">
       <DependentUpon>AddEditUser.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="addedit\AddEditVisitPlanDay.resx">
       <DependentUpon>AddEditVisitPlanDay.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="addedit\AddEditVisitPlanList.resx">
       <DependentUpon>AddEditVisitPlanList.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="addedit\AddRowReport.resx">
       <DependentUpon>AddRowReport.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="addedit\AECodeName.resx">
       <DependentUpon>AECodeName.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="addedit\AEName.resx">
       <DependentUpon>AEName.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="addedit\AEReport.resx">
       <DependentUpon>AEReport.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="addedit\aeTracker.resx">
       <DependentUpon>aeTracker.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="addedit\AllocCosts.resx" />
+    <EmbeddedResource Include="addedit\AllocCosts.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="addedit\EditUserLPU.resx">
       <DependentUpon>EditUserLPU.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="addedit\Merge.resx">
       <DependentUpon>Merge.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="addedit\RegionAddEdit.resx">
       <DependentUpon>RegionAddEdit.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="aeFR\aeOutlay.resx">
       <DependentUpon>aeOutlay.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="DialogList.resx">
       <DependentUpon>DialogList.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Directories\Buttons.resx">
       <DependentUpon>Buttons.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Directories\CodeName.resx">
       <DependentUpon>CodeName.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Directories\Customers.resx">
       <DependentUpon>Customers.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Directories\KosCust.resx">
       <DependentUpon>KosCust.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Directories\LPU.resx">
       <DependentUpon>LPU.cs</DependentUpon>
@@ -720,6 +756,9 @@
     <EmbeddedResource Include="SF\FormAddOrganization.resx">
       <DependentUpon>FormAddOrganization.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="SF\FormAddOtherOrganization.resx">
+      <DependentUpon>FormAddOtherOrganization.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SF\FormAddPerson.resx">
       <DependentUpon>FormAddPerson.cs</DependentUpon>
     </EmbeddedResource>
@@ -743,6 +782,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SF\FormSecondStepAddPerson.resx">
       <DependentUpon>FormSecondStepAddPerson.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SF\FormUserRoleSFList.resx">
+      <DependentUpon>FormUserRoleSFList.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">
@@ -821,6 +863,12 @@
       <Project>{25649f08-3046-4891-adb8-7ea787b57063}</Project>
       <Name>System.Windows.Forms.Calendar</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\folder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\file.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

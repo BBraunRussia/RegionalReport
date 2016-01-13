@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Data;
 using System.Windows.Forms;
+using ClassLibrary.SF;
+
 
 namespace RegionR.SF
 {
@@ -27,6 +29,34 @@ namespace RegionR.SF
         {
             if (text == string.Empty)
                 throw new NullReferenceException(string.Concat("Не заполнено поле \"", fieldName, "\""));
+        }
+
+        public static bool DeleteOrganization(Organization organization)
+        {
+            if (MessageBox.Show(string.Concat("Вы действительно хотите удалить организацию \"", organization.ShortName, "\"?"), "Удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.Yes)
+            {
+                OrganizationList organizationList = OrganizationList.GetUniqueInstance();
+
+                if (organizationList.GetChildList(organization).Count > 0)
+                {
+                    if (MessageBox.Show("У филиала имеются зависимые организации, они будут также удалены. Продолжить удаление?", "Удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.No)    
+                        return false;
+                }
+
+                PersonList personList = PersonList.GetUniqueInstance();
+
+                if (personList.GetItems(organization).Count > 0)
+                {
+                    if (MessageBox.Show("В организации имеются сотрудники, они будут также удалены. Продолжить удаление?", "Удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.No)
+                        return false;
+                }
+
+                organization.Delete();
+
+                return true;
+            }
+
+            return false;
         }
     }
 }

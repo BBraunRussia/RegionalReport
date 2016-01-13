@@ -23,8 +23,10 @@ namespace RegionR.SF
         private MainSpecList _mainSpecList;
         private RealRegionList _realRegionList;
         private CityList _cityList;
-
+        
         private bool _isLoad;
+
+        private TreeNode _currentNode;
         
         public FormAddLPU(LPU lpu)
         {
@@ -54,6 +56,9 @@ namespace RegionR.SF
 
         private void LoadData()
         {
+            this.Text = (_lpu.ParentOrganization == null) ? "Карточка Организации \"ЛПУ\"" : "Карточка Организации \"Филиал ЛПУ\"";
+            lbKPP.Text = (_lpu.ParentOrganization == null) ? "КПП:" : "КПП*:";
+
             lbNumberSF.Text = (_lpu.NumberSF == string.Empty) ? "не присвоен" : _lpu.NumberSF;
             lbTypeOrg.Text = _lpu.TypeOrg.ToString();
 
@@ -71,8 +76,8 @@ namespace RegionR.SF
 
             if (_lpu.ShortName == string.Empty)
             {
-                lbBranch.Text = string.Empty;
-                lbName.Text = string.Empty;
+                lbBranchName.Text = string.Empty;
+                lbLPUName.Text = string.Empty;
             }
             
             if (_lpu.LpuRR != null)
@@ -117,17 +122,26 @@ namespace RegionR.SF
             
             tbStreet.Text = _lpu.Street;
 
-            tbBedsTotal.Text = _lpu.BedsTotal.ToString();
-            tbBedsIC.Text = _lpu.BedsIC.ToString();
+            tbBedsTotal.Text = _lpu.BedsTotal;
+            tbBedsIC.Text = _lpu.BedsIC;
+            tbSurgical.Text = _lpu.Surgical;
+            tbOperating.Text = _lpu.Operating;
+            tbMachineGD.Text = _lpu.MachineGD;
+            tbMachineGDF.Text = _lpu.MachineGDF;
+            tbMachineCRRT.Text = _lpu.MachineCRRT;
+            tbShift.Text = _lpu.Shift;
+            tbPatientGD.Text = _lpu.PatientGD;
+            tbPatientPD.Text = _lpu.PatientPD;
+            tbPatientCRRT.Text = _lpu.PatientCRRT;
 
             LoadTree();
         }
 
         private void LoadDictionaries()
         {
-            LpuRRList _lpuList = LpuRRList.GetUniqueInstance();
+            LpuRRList _lpuRRList = LpuRRList.GetUniqueInstance();
 
-            ClassForForm.LoadDictionary(cbLpuRR, _lpuList.ToDataTable());
+            ClassForForm.LoadDictionary(cbLpuRR, _lpuRRList.ToDataTable());
             ClassForForm.LoadDictionary(cbTypeLpu, _typeLPUList.ToDataTable());
             ClassForForm.LoadDictionary(cbOwnership, _ownershipList.ToDataTable());
             ClassForForm.LoadDictionary(cbAdmLevel, _admLevelList.ToDataTable());
@@ -176,7 +190,7 @@ namespace RegionR.SF
             }
             catch (NullReferenceException ex)
             {
-                MessageBox.Show(ex.Message, "Обязательное поле", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 
                 return false;
             }
@@ -199,6 +213,19 @@ namespace RegionR.SF
             ClassForForm.CheckFilled(tbName.Text, "Официальное название");
             ClassForForm.CheckFilled(tbShortName.Text, "Сокращенное название");
             ClassForForm.CheckFilled(tbINN.Text, "ИНН");
+            if (_parentLPU != null)
+                ClassForForm.CheckFilled(tbKPP.Text, "КПП");
+
+            ClassForForm.CheckFilled(tbStreet.Text, "Уличный адрес");
+
+            if ((tbINN.Text.Length != 10) && (tbINN.Text.Length != 12))
+                throw new NullReferenceException("Поле ИНН должно содержать 10 или 12 цифр");
+
+            if ((tbINN.Text != _lpu.INN) && (tbINN.Text.Length == 12))
+            {
+                if (MessageBox.Show("Данная организация является ИП?", "ИНН содержит 12 цифр", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.No)
+                    throw new NullReferenceException("Перед сохранением необходимо исправить поле ИНН");
+            }
 
             _lpu.Name = tbName.Text;
             _lpu.ShortName = tbShortName.Text;
@@ -232,27 +259,19 @@ namespace RegionR.SF
         {
             MessageBox.Show("В процессе разработки", "Функция не реализована", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-
-        private void btnShowEmployees_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("В процессе разработки", "Функция не реализована", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
-        private void btnAddEmployee_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("В процессе разработки", "Функция не реализована", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
+        
         private void tbShortName_TextChanged(object sender, EventArgs e)
         {
             if (_lpu.ParentOrganization == null)
             {
-                lbName.Text = tbShortName.Text.ToUpper();
-                lbBranch.Text = string.Empty;
+                lbLPUName.Text = tbShortName.Text.ToUpper();
+                lbBranchName.Visible = false;
+                lbBranch.Visible = false;
             }
             else
             {
-                lbName.Text = _lpu.ParentOrganization.ShortName;
+                lbLPUName.Text = _lpu.ParentOrganization.ShortName;
+                lbBranchName.Text = _lpu.ShortName;
             }
         }
 
@@ -261,8 +280,7 @@ namespace RegionR.SF
             FormAddBranch formAddBranch = new FormAddBranch(_parentLPU == null);
             if (formAddBranch.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                Organization organization = Organization.CreateItem(typeOrg);
-                organization.ParentOrganization = _lpu;
+                Organization organization = Organization.CreateItem(typeOrg, _lpu);
 
                 if (organization is LPU)
                     (organization as LPU).LpuRR = _lpu.LpuRR;
@@ -273,29 +291,47 @@ namespace RegionR.SF
         
         private void treeView1_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            if (e.Node.BackColor == Color.Green)
+            OpenSubOrganization(e.Node);
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenSubOrganization(treeView1.SelectedNode);
+        }
+
+        private void OpenSubOrganization(TreeNode node)
+        {
+            if (node.BackColor == Color.Green)
                 return;
 
-            OrganizationList organizationList = OrganizationList.GetUniqueInstance();
-            Organization organization = organizationList.GetItem(Convert.ToInt32(e.Node.Name));
+            Organization organization = GetOrganization(node);
 
             ShowFormSubLPU(organization);
         }
 
+        private Organization GetOrganization(TreeNode node)
+        {
+            OrganizationList organizationList = OrganizationList.GetUniqueInstance();
+            return organizationList.GetItem(Convert.ToInt32(node.Name));
+        }
+
         private void ShowFormSubLPU(Organization organization)
         {
+            bool result = false;
+
             if (organization is LPU)
             {
                 FormAddLPU formAddLPU = new FormAddLPU(organization as LPU);
-                formAddLPU.ShowDialog();
+                result = (formAddLPU.ShowDialog() == System.Windows.Forms.DialogResult.OK);
             }
             else
             {
                 FormAddOrganization formAddOrganization = new FormAddOrganization(organization);
-                formAddOrganization.ShowDialog();
+                result = (formAddOrganization.ShowDialog() == System.Windows.Forms.DialogResult.OK);
             }
 
-            LoadTree();
+            if (result)
+                LoadTree();
         }
 
         private void LoadTree()
@@ -303,21 +339,23 @@ namespace RegionR.SF
             treeView1.Nodes.Clear();
 
             Organization current = _lpu;
-            Organization parent = current.ParentOrganization;
-
-            while (parent != null)
-            {
-                current = parent;
-                parent = parent.ParentOrganization;
-            }
 
             treeView1.Nodes.Add(TreeLPU.GetRoot(current));
-            treeView1.ExpandAll();
 
+            ImageList imageList = new ImageList();
+
+            imageList.Images.Add(global::RegionR.Properties.Resources.file);
+            imageList.Images.Add(global::RegionR.Properties.Resources.folder);
+
+            treeView1.ImageList = imageList;
+            
             TreeNode[] list = treeView1.Nodes.Find(_lpu.ID.ToString(), true);
 
             if (list.Count() > 0)
+            {
                 list.First().BackColor = Color.Green;
+                list.First().Expand();
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -412,6 +450,74 @@ namespace RegionR.SF
                 return true;
 
             return false;
+        }
+
+        private void btnAddPerson_Click(object sender, EventArgs e)
+        {
+            if (_lpu.ID == 0)
+            {
+                if (!TrySave())
+                    return;
+            }
+
+            Person person = new Person();
+            person.Organization = _lpu;
+
+            FormSecondStepAddPerson formSecondStepAddPerson = new FormSecondStepAddPerson(person);
+            formSecondStepAddPerson.ShowDialog();
+        }
+        
+        private void tb_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Back)
+                return;
+
+            e.Handled = !char.IsDigit(e.KeyChar);
+        }
+
+        private void btnShowPerson_Click(object sender, EventArgs e)
+        {
+            FormPersonList formPersonList = new FormPersonList(_lpu);
+            formPersonList.ShowDialog();
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Organization organization = GetOrganization(_currentNode);
+
+            if (ClassForForm.DeleteOrganization(organization))
+                LoadTree();
+        }
+
+        private void treeView1_MouseUp(object sender, MouseEventArgs e)
+        {
+            treeView1.SelectedNode = _currentNode;
+
+            conMenuTree.Items["deleteToolStripMenuItem"].Enabled = (_currentNode != treeView1.Nodes[0]);
+
+            Organization organization = GetOrganization(_currentNode);
+            conMenuTree.Items["expandToolStripMenuItem"].Enabled = (organization is LPU);
+        }
+
+        private void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            _currentNode = e.Node;
+        }
+
+        private void expandToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _currentNode.Expand();
+        }
+
+        private void btnDeleteSubOrganization_Click(object sender, EventArgs e)
+        {
+            if ((treeView1.SelectedNode != null) && (treeView1.SelectedNode != treeView1.Nodes[0]))
+            {
+                Organization organization = GetOrganization(_currentNode);
+
+                if (ClassForForm.DeleteOrganization(organization))
+                    LoadTree();
+            }
         }
     }
 }
