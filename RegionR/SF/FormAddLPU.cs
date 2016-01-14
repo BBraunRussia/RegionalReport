@@ -301,8 +301,10 @@ namespace RegionR.SF
 
         private void OpenSubOrganization(TreeNode node)
         {
-            if (node.BackColor == Color.Green)
+            if ((node == null) || (node.BackColor == Color.Green))
+            {
                 return;
+            }
 
             Organization organization = GetOrganization(node);
 
@@ -494,6 +496,11 @@ namespace RegionR.SF
             treeView1.SelectedNode = _currentNode;
 
             conMenuTree.Items["deleteToolStripMenuItem"].Enabled = (_currentNode != treeView1.Nodes[0]);
+
+            if (_currentNode == null)
+            {
+                return;
+            }
 
             Organization organization = GetOrganization(_currentNode);
             conMenuTree.Items["expandToolStripMenuItem"].Enabled = (organization is LPU);
