@@ -78,14 +78,27 @@ namespace RegionR.SF
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            int idLpuCompetitor;
-            int.TryParse(dgvLPUCompetitors.Rows[dgvLPUCompetitors.CurrentCell.RowIndex].Cells[0].Value.ToString(), out idLpuCompetitor);
-            LpuCompetitors lpuCompetitor = _lpuCompetitorsList.GetItem(idLpuCompetitor);
+            CopyInfo(true);
+        }
 
-            _lpu.Name = lpuCompetitor.Name;
-            _lpu.INN = lpuCompetitor.INN;
-            _lpu.KPP = lpuCompetitor.KPP;
-            _lpu.RegionCompetitors = lpuCompetitor.RegionCompetitors;
+        private void btnNextNotCopyLPU_Click(object sender, EventArgs e)
+        {
+            CopyInfo(false);
+        }
+
+        private void CopyInfo(bool isNeedCopyLPUFromCONAN)
+        {
+            if (isNeedCopyLPUFromCONAN)
+            {
+                int idLpuCompetitor;
+                int.TryParse(dgvLPUCompetitors.Rows[dgvLPUCompetitors.CurrentCell.RowIndex].Cells[0].Value.ToString(), out idLpuCompetitor);
+                LpuCompetitors lpuCompetitor = _lpuCompetitorsList.GetItem(idLpuCompetitor);
+
+                _lpu.Name = lpuCompetitor.Name;
+                _lpu.INN = lpuCompetitor.INN;
+                _lpu.KPP = lpuCompetitor.KPP;
+                _lpu.RegionCompetitors = lpuCompetitor.RegionCompetitors;
+            }
 
             int idLpuRR;
             int.TryParse(dgvLpuRR.Rows[dgvLpuRR.CurrentCell.RowIndex].Cells[0].Value.ToString(), out idLpuRR);

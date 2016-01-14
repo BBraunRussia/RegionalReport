@@ -43,6 +43,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.btnClear = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
+            this.btnNextNotCopyLPU = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLpuRR)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLPUCompetitors)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -105,7 +106,7 @@
             this.dgvLPUCompetitors.RowHeadersVisible = false;
             this.dgvLPUCompetitors.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dgvLPUCompetitors.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLPUCompetitors.Size = new System.Drawing.Size(753, 230);
+            this.dgvLPUCompetitors.Size = new System.Drawing.Size(753, 243);
             this.dgvLPUCompetitors.TabIndex = 3;
             // 
             // contextMenuStrip1
@@ -146,7 +147,7 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(122, 512);
+            this.btnCancel.Location = new System.Drawing.Point(371, 513);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 5;
@@ -201,11 +202,24 @@
             this.label5.TabIndex = 11;
             this.label5.Text = "3.";
             // 
+            // btnNextNotCopyLPU
+            // 
+            this.btnNextNotCopyLPU.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnNextNotCopyLPU.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnNextNotCopyLPU.Location = new System.Drawing.Point(122, 513);
+            this.btnNextNotCopyLPU.Name = "btnNextNotCopyLPU";
+            this.btnNextNotCopyLPU.Size = new System.Drawing.Size(243, 23);
+            this.btnNextNotCopyLPU.TabIndex = 12;
+            this.btnNextNotCopyLPU.Text = "Далее (ЛПУ отсутствует в базе CONAN)";
+            this.btnNextNotCopyLPU.UseVisualStyleBackColor = true;
+            this.btnNextNotCopyLPU.Click += new System.EventHandler(this.btnNextNotCopyLPU_Click);
+            // 
             // FormSecondStepAddOrganization
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(777, 547);
+            this.Controls.Add(this.btnNextNotCopyLPU);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.label4);
@@ -246,5 +260,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button btnNextNotCopyLPU;
     }
 }
