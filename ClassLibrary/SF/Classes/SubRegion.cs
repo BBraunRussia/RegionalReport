@@ -6,11 +6,11 @@ using System.Data;
 
 namespace ClassLibrary.SF
 {
-    public class RealRegion : BaseDictionary
+    public class SubRegion : BaseDictionary
     {
         private RegionRR _regionRR;
 
-        public RealRegion(DataRow row)
+        public SubRegion(DataRow row)
             : base(row)
         {
             int idRegionRR;
@@ -19,6 +19,9 @@ namespace ClassLibrary.SF
             _regionRR = regionRRList.GetItem(idRegionRR) as RegionRR;
         }
 
-        public RegionRR RegionRR { get { return _regionRR; } }
+        public RegionRR RegionRR
+        {
+            get { return _regionRR; }
+        }
     }
 }

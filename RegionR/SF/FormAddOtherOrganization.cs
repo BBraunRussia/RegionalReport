@@ -262,5 +262,26 @@ namespace RegionR.SF
 
             e.Handled = !char.IsDigit(e.KeyChar);
         }
+
+        private void btnAddPerson_Click(object sender, EventArgs e)
+        {
+            if (_organization.ID == 0)
+            {
+                if (!TrySave())
+                    return;
+            }
+
+            Person person = new Person();
+            person.Organization = _organization;
+            
+            FormAddPerson formAddPerson = new FormAddPerson(person);
+            formAddPerson.ShowDialog();
+        }
+
+        private void btnShowPerson_Click(object sender, EventArgs e)
+        {
+            FormPersonList formPersonList = new FormPersonList(_organization);
+            formPersonList.ShowDialog();
+        }
     }
 }

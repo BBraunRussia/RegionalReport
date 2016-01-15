@@ -41,7 +41,7 @@
             this.tbSearch = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.btnClear = new System.Windows.Forms.Button();
+            this.btnDeleteFilter = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.btnNextNotCopyLPU = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLpuRR)).BeginInit();
@@ -105,9 +105,10 @@
             this.dgvLPUCompetitors.ReadOnly = true;
             this.dgvLPUCompetitors.RowHeadersVisible = false;
             this.dgvLPUCompetitors.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dgvLPUCompetitors.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvLPUCompetitors.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvLPUCompetitors.Size = new System.Drawing.Size(753, 243);
             this.dgvLPUCompetitors.TabIndex = 3;
+            this.dgvLPUCompetitors.CellContextMenuStripNeeded += new System.Windows.Forms.DataGridViewCellContextMenuStripNeededEventHandler(this.dgvLPUCompetitors_CellContextMenuStripNeeded);
             // 
             // contextMenuStrip1
             // 
@@ -181,15 +182,16 @@
             this.label4.TabIndex = 9;
             this.label4.Text = "(для копирования ИНН, КПП и официального названия)";
             // 
-            // btnClear
+            // btnDeleteFilter
             // 
-            this.btnClear.Location = new System.Drawing.Point(15, 234);
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(131, 23);
-            this.btnClear.TabIndex = 10;
-            this.btnClear.Text = "Очистить фильтр";
-            this.btnClear.UseVisualStyleBackColor = true;
-            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            this.btnDeleteFilter.Location = new System.Drawing.Point(15, 234);
+            this.btnDeleteFilter.Name = "btnDeleteFilter";
+            this.btnDeleteFilter.Size = new System.Drawing.Size(90, 23);
+            this.btnDeleteFilter.TabIndex = 10;
+            this.btnDeleteFilter.Text = "Снять фильтр";
+            this.btnDeleteFilter.UseVisualStyleBackColor = true;
+            this.btnDeleteFilter.Visible = false;
+            this.btnDeleteFilter.Click += new System.EventHandler(this.btnDeleteFilter_Click);
             // 
             // label5
             // 
@@ -221,7 +223,7 @@
             this.ClientSize = new System.Drawing.Size(777, 547);
             this.Controls.Add(this.btnNextNotCopyLPU);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.btnClear);
+            this.Controls.Add(this.btnDeleteFilter);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.tbSearch);
             this.Controls.Add(this.label3);
@@ -258,7 +260,7 @@
         private System.Windows.Forms.ToolStripMenuItem filterToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sortToolStripMenuItem;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.Button btnDeleteFilter;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnNextNotCopyLPU;
     }

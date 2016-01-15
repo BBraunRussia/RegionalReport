@@ -458,6 +458,7 @@
     <Compile Include="SF\Classes\SearchInDgv.cs" />
     <Compile Include="SF\Classes\TreeLPU.cs" />
     <Compile Include="SF\Classes\ClassForForm.cs" />
+    <Compile Include="SF\Classes\UserLogged.cs" />
     <Compile Include="SF\FormAddBranch.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -30,6 +30,9 @@ namespace RegionR.SF
             _mainSpecPersonList = MainSpecPersonList.GetUniqueInstance();
             _positionList = PositionList.GetUniqueInstance();
 
+            lbSubOrganization.Visible = !(_person.Organization is OtherOrganization);
+            tbSubOrganization.Visible = !(_person.Organization is OtherOrganization);
+
             _changeSubOrg = false;
         }
         

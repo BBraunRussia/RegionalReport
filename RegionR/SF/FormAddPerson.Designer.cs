@@ -49,7 +49,7 @@
             this.tbComment = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.tbSubOrganization = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
+            this.lbSubOrganization = new System.Windows.Forms.Label();
             this.tbOrganization = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
@@ -246,14 +246,14 @@
             this.tbSubOrganization.Size = new System.Drawing.Size(539, 20);
             this.tbSubOrganization.TabIndex = 18;
             // 
-            // label13
+            // lbSubOrganization
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(12, 184);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(90, 13);
-            this.label13.TabIndex = 17;
-            this.label13.Text = "Подразделение:";
+            this.lbSubOrganization.AutoSize = true;
+            this.lbSubOrganization.Location = new System.Drawing.Point(12, 184);
+            this.lbSubOrganization.Name = "lbSubOrganization";
+            this.lbSubOrganization.Size = new System.Drawing.Size(90, 13);
+            this.lbSubOrganization.TabIndex = 17;
+            this.lbSubOrganization.Text = "Подразделение:";
             // 
             // tbOrganization
             // 
@@ -377,7 +377,7 @@
             this.Controls.Add(this.tbComment);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.tbSubOrganization);
-            this.Controls.Add(this.label13);
+            this.Controls.Add(this.lbSubOrganization);
             this.Controls.Add(this.tbOrganization);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.groupBox1);
@@ -428,7 +428,7 @@
         private System.Windows.Forms.TextBox tbComment;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox tbSubOrganization;
-        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label lbSubOrganization;
         private System.Windows.Forms.TextBox tbOrganization;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Button btnSave;

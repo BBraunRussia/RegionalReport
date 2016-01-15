@@ -193,8 +193,15 @@ namespace RegionR
             Person person = new Person();
             person.Organization = organization;
 
-            FormSecondStepAddPerson formSecondStepAddPerson = new FormSecondStepAddPerson(person);
-            if (formSecondStepAddPerson.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            bool open = true;
+
+            if (organization is LPU)
+            {
+                FormSecondStepAddPerson formSecondStepAddPerson = new FormSecondStepAddPerson(person);
+                open = (formSecondStepAddPerson.ShowDialog() == System.Windows.Forms.DialogResult.OK);
+            }
+
+            if (open)
             {
                 FormAddPerson formAddPerson = new FormAddPerson(person);
                 formAddPerson.ShowDialog();

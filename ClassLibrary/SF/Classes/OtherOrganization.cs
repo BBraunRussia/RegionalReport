@@ -6,7 +6,7 @@ using System.Data;
 
 namespace ClassLibrary.SF
 {
-    public class OtherOrganization : Organization
+    public class OtherOrganization : Organization, IHaveRegion
     {
         private string _kpp;
         private string _inn;
@@ -71,7 +71,11 @@ namespace ClassLibrary.SF
             set { _idCity = value.ID; }
         }
 
-        public RealRegion RealRegion { get { return (City == null) ? null : City.RealRegion; } }
+        public RealRegion RealRegion
+        {
+            get { return (City == null) ? null : City.RealRegion; }
+            set { }
+        }
 
         public string INN
         {

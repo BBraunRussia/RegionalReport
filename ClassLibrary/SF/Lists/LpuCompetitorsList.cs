@@ -48,9 +48,9 @@ namespace ClassLibrary.SF
                 return CreateTable(_list);
 
             RealRegionList realRegionList = RealRegionList.GetUniqueInstance();
-            List<RegionCompetitors> list = realRegionList.ToList(user);
+            List<RealRegion> list = realRegionList.ToList(user);
 
-            var list2 = _list.Where(item => IsInList(list, item.RegionCompetitors)).ToList();
+            var list2 = _list.Where(item => IsInList(list, item.RealRegion)).ToList();
 
             return (list2.Count > 0) ? CreateTable(list2) : CreateTable(_list);
         }
@@ -65,7 +65,7 @@ namespace ClassLibrary.SF
 
             LpuList lpuList = new LpuList();
 
-            var listNew = list.Where(item => !(lpuList.IsInList(item.INN))).OrderBy(item => item.RegionCompetitors.Name).Select(item => item.GetRow()).ToList();
+            var listNew = list.Where(item => !(lpuList.IsInList(item.INN))).OrderBy(item => item.RealRegion.Name).Select(item => item.GetRow()).ToList();
 
             foreach (var item in listNew)
                 dt.Rows.Add(item);
@@ -73,9 +73,9 @@ namespace ClassLibrary.SF
             return dt;
         }
 
-        private bool IsInList(List<RegionCompetitors> list, RegionCompetitors regionCompetitors)
+        private bool IsInList(List<RealRegion> list, RealRegion realRegion)
         {
-            return list.Exists(item => item == regionCompetitors);
+            return list.Exists(item => item == realRegion);
         }
 
         public LpuCompetitors GetItem(int id)

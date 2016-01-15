@@ -6,7 +6,7 @@ using System.Data;
 
 namespace ClassLibrary.SF
 {
-    public class LPU : Organization
+    public class LPU : Organization, IHaveRegion
     {
         private LpuRR _lpuRR;
 
@@ -33,6 +33,8 @@ namespace ClassLibrary.SF
         private int _patientGD;
         private int _patientPD;
         private int _patientCRRT;
+
+        private SubRegion _subRegion;
         
         public LPU(DataRow row)
             : base(row)
@@ -64,6 +66,11 @@ namespace ClassLibrary.SF
             int.TryParse(row[28].ToString(), out _patientGD);
             int.TryParse(row[29].ToString(), out _patientPD);
             int.TryParse(row[30].ToString(), out _patientCRRT);
+
+            int idSubRegion;
+            int.TryParse(row[32].ToString(), out idSubRegion);
+            SubRegionList subRegionList = SubRegionList.GetUniqueInstance();
+            _subRegion = subRegionList.GetItem(idSubRegion) as SubRegion;
         }
 
         public LPU(TypeOrg typeOrg)
@@ -107,23 +114,17 @@ namespace ClassLibrary.SF
             set { _idCity = value.ID; }
         }
 
-        public RealRegion RealRegion { get { return (City == null) ? null : City.RealRegion; } }
-
-        public RegionCompetitors RegionCompetitors
+        public RealRegion RealRegion
         {
+            get { return (City == null) ? null : City.RealRegion; }
             set
             {
-                RealRegionList realRegionList = RealRegionList.GetUniqueInstance();
-                RealRegion realRegion = realRegionList.GetItem(value);
-
                 CityList cityList = CityList.GetUniqueInstance();
-
-                City city = cityList.GetItem(realRegion);
-
+                City city = cityList.GetItem(value);
                 City = city;
             }
         }
-
+        
         public TypeLPU TypeLPU
         {
             get
@@ -231,6 +232,12 @@ namespace ClassLibrary.SF
             set { int.TryParse(value, out _patientCRRT); }
         }
 
+        public SubRegion SubRegion
+        {
+            get { return _subRegion; }
+            set { _subRegion = value; }
+        }
+
         public object[] GetRow()
         {
             string typeOrgName = ((TypeOrg == SF.TypeOrg.ЛПУ) && (ParentOrganization != null)) ? "Филиал ЛПУ" : TypeOrg.ToString();
@@ -249,7 +256,7 @@ namespace ClassLibrary.SF
 
             int.TryParse(_provider.Insert("SF_LPU", ID, NumberSF, TypeOrg, Name, ShortName, MainSpec.ID, Email, WebSite, Phone, idParentOrganization, TypeLPU.ID, Ownership.ID, AdmLevel.ID,
                 INN, KPP, PostIndex, City.ID, District, Street, idLPURR,
-                _bedsTotal, _bedsIC, _surgical, _operating, _machineGD, _machineGDF, _machineCRRT, _shift, _patientGD, _patientPD, _patientCRRT), out id);
+                _bedsTotal, _bedsIC, _surgical, _operating, _machineGD, _machineGDF, _machineCRRT, _shift, _patientGD, _patientPD, _patientCRRT, _subRegion.ID), out id);
 
             SetID(id);
 

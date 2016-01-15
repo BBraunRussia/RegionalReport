@@ -127,16 +127,25 @@ namespace ClassLibrary.SF
 
         public static Organization CreateItem(TypeOrg typeOrg, Organization parentOrganization = null)
         {
+            Organization organization;
+
             if (typeOrg == TypeOrg.ЛПУ)
-                return new LPU(typeOrg);
+            {
+                organization = new LPU(typeOrg);
+            }
             else if (parentOrganization == null)
-                return new OtherOrganization(typeOrg);
+            {
+                organization = new OtherOrganization(typeOrg);
+            }
             else
             {
-                Organization organization = new Organization(typeOrg);
-                organization.ParentOrganization = parentOrganization;
-                return organization;
+                organization = new Organization(typeOrg);
             }
+
+            if (parentOrganization != null)
+                organization.ParentOrganization = parentOrganization;
+
+            return organization;
         }
 
         protected void SetID(int id)

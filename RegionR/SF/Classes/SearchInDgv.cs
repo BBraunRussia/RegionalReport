@@ -48,7 +48,8 @@ namespace RegionR.SF
 
             SetPrevValues(cell);
 
-            _dgv.CurrentCell = cell;
+            if ((cell != null) && (cell.Visible))
+                _dgv.CurrentCell = cell;
         }
 
         private DataGridViewCell BeginSearch(Point beginPoint)

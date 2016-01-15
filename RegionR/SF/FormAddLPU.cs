@@ -23,6 +23,7 @@ namespace RegionR.SF
         private MainSpecList _mainSpecList;
         private RealRegionList _realRegionList;
         private CityList _cityList;
+        private SubRegionList _subRegionList;
         
         private bool _isLoad;
 
@@ -45,6 +46,7 @@ namespace RegionR.SF
             _mainSpecList = MainSpecList.GetUniqueInstance();
             _realRegionList = RealRegionList.GetUniqueInstance();
             _cityList = CityList.GetUniqueInstance();
+            _subRegionList = SubRegionList.GetUniqueInstance();
         }
 
         private void FormAddLPU_Load(object sender, EventArgs e)
@@ -70,6 +72,16 @@ namespace RegionR.SF
                 cbAdmLevel.SelectedValue = _lpu.AdmLevel.ID;
             if (_lpu.MainSpec != null)
                 cbMainSpec.SelectedValue = _lpu.MainSpec.ID;
+
+            if (_lpu.SubRegion != null)
+            {
+                cbSubRegion.SelectedValue = _lpu.SubRegion.ID;
+            }
+            else
+            {
+                RegionRR regionRR = (_parentLPU == null) ? _lpu.RealRegion.RegionRR : _parentLPU.RealRegion.RegionRR;
+                cbSubRegion.SelectedValue = _subRegionList.GetItem(regionRR).ID;
+            }
             
             tbName.Text = _lpu.Name;
             tbShortName.Text = _lpu.ShortName;
@@ -84,7 +96,6 @@ namespace RegionR.SF
             {
                 cbLpuRR.SelectedValue = _lpu.LpuRR.ID;
                 lbRegionRR.Text = _lpu.LpuRR.RegionRR.Name;
-                lbRegionRRSalesDistrict.Text = _lpu.LpuRR.RegionRR.SalesDistrict;
             }
 
             if (_lpu.ParentOrganization == null)
@@ -135,6 +146,11 @@ namespace RegionR.SF
             tbPatientCRRT.Text = _lpu.PatientCRRT;
 
             LoadTree();
+
+            if (tbPhoneCode.Text != string.Empty)
+            {
+                tbPhone.MaxLength = 10 - tbPhoneCode.Text.Length;
+            }
         }
 
         private void LoadDictionaries()
@@ -146,8 +162,14 @@ namespace RegionR.SF
             ClassForForm.LoadDictionary(cbOwnership, _ownershipList.ToDataTable());
             ClassForForm.LoadDictionary(cbAdmLevel, _admLevelList.ToDataTable());
             ClassForForm.LoadDictionary(cbMainSpec, _mainSpecList.ToDataTable());
+            ClassForForm.LoadDictionary(cbSubRegion, _subRegionList.ToDataTable());
             _isLoad = false;
-            ClassForForm.LoadDictionary(cbRealRegion, _realRegionList.ToDataTable());
+
+            if (UserLogged.Get().RoleSF == RolesSF.Администратор)
+                ClassForForm.LoadDictionary(cbRealRegion, _realRegionList.ToDataTable());
+            else
+                ClassForForm.LoadDictionary(cbRealRegion, _realRegionList.ToDataTable());
+
             _isLoad = true;
             LoadCity();
         }
@@ -209,6 +231,9 @@ namespace RegionR.SF
 
             int idMainSpec = Convert.ToInt32(cbMainSpec.SelectedValue);
             _lpu.MainSpec = _mainSpecList.GetItem(idMainSpec) as MainSpec;
+
+            int idSubRegion = Convert.ToInt32(cbSubRegion.SelectedValue);
+            _lpu.SubRegion = _subRegionList.GetItem(idSubRegion) as SubRegion;
 
             ClassForForm.CheckFilled(tbName.Text, "Официальное название");
             ClassForForm.CheckFilled(tbShortName.Text, "Сокращенное название");
@@ -395,6 +420,10 @@ namespace RegionR.SF
 
             int idMainSpec = Convert.ToInt32(cbMainSpec.SelectedValue);
             if (_lpu.MainSpec != (_mainSpecList.GetItem(idMainSpec) as MainSpec))
+                return true;
+
+            int idSubRegion = Convert.ToInt32(cbSubRegion.SelectedValue);
+            if (_lpu.SubRegion != (_subRegionList.GetItem(idSubRegion) as SubRegion))
                 return true;
             
             if (_lpu.Name != tbName.Text)

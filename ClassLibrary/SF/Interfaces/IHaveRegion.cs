@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Data;
 
 namespace ClassLibrary.SF
 {
-    public interface IDataTable
+    public interface IHaveRegion
     {
-        DataTable ToDataTable();
+        RealRegion RealRegion { get; set; }
+        City City { get; set; }
     }
 }

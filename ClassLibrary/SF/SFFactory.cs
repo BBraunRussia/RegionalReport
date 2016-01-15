@@ -46,6 +46,8 @@ namespace ClassLibrary.SF
                     return new AcademTitle(row);
                 case "SF_UserRoleSF":
                     return new UserRoleSF(row);
+                case "SF_SubRegion":
+                    return new SubRegion(row);
                 default:
                     throw new NotImplementedException("Фабрика не может создать экземпляр данного класса");
             }

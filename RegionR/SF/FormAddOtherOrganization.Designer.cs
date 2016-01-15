@@ -69,6 +69,8 @@
             this.label26 = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
+            this.btnShowPerson = new System.Windows.Forms.Button();
+            this.btnAddPerson = new System.Windows.Forms.Button();
             this.gbCategory.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -451,11 +453,33 @@
             this.label32.TabIndex = 131;
             this.label32.Text = "* Обязательные поля";
             // 
+            // btnShowPerson
+            // 
+            this.btnShowPerson.Location = new System.Drawing.Point(16, 285);
+            this.btnShowPerson.Name = "btnShowPerson";
+            this.btnShowPerson.Size = new System.Drawing.Size(224, 32);
+            this.btnShowPerson.TabIndex = 133;
+            this.btnShowPerson.Text = "Показать сотрудников этого ЛПУ";
+            this.btnShowPerson.UseVisualStyleBackColor = true;
+            this.btnShowPerson.Click += new System.EventHandler(this.btnShowPerson_Click);
+            // 
+            // btnAddPerson
+            // 
+            this.btnAddPerson.Location = new System.Drawing.Point(16, 240);
+            this.btnAddPerson.Name = "btnAddPerson";
+            this.btnAddPerson.Size = new System.Drawing.Size(148, 32);
+            this.btnAddPerson.TabIndex = 132;
+            this.btnAddPerson.Text = "Добавить сотрудника";
+            this.btnAddPerson.UseVisualStyleBackColor = true;
+            this.btnAddPerson.Click += new System.EventHandler(this.btnAddPerson_Click);
+            // 
             // FormAddOtherOrganization
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(924, 455);
+            this.Controls.Add(this.btnShowPerson);
+            this.Controls.Add(this.btnAddPerson);
             this.Controls.Add(this.label32);
             this.Controls.Add(this.label29);
             this.Controls.Add(this.label26);
@@ -548,5 +572,7 @@
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.Button btnShowPerson;
+        private System.Windows.Forms.Button btnAddPerson;
     }
 }

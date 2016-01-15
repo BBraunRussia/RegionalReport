@@ -52,7 +52,7 @@ namespace ClassLibrary.SF
             var userRightList2 = userRightList.ToList(user);
 
             var list = (from item in List
-                        where userRightList2.Contains((((item as Person).Organization is LPU) ? ((item as Person).Organization as LPU) : (item as Person).Organization.ParentOrganization as LPU).RealRegion.RegionRR)
+                        where userRightList2.Contains((((item as Person).Organization.ParentOrganization == null) ? ((item as Person).Organization as IHaveRegion) : (item as Person).Organization.ParentOrganization as IHaveRegion).RealRegion.RegionRR)
                         orderby item.Name
                         select (item as Person)).ToList();
 

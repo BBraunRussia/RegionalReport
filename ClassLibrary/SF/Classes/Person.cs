@@ -151,10 +151,10 @@ namespace ClassLibrary.SF
         
         public override object[] GetRow()
         {
-            LPU lpu = (Organization is LPU) ? (Organization as LPU) : (Organization.ParentOrganization as LPU);
-            string subOrganizationShortName = (Organization is LPU) ? "Администрация" : Organization.ShortName;
+            Organization organizationWithRegion = ((Organization is LPU) || (Organization is OtherOrganization)) ? Organization : Organization.ParentOrganization;
+            string subOrganizationShortName = (Organization is LPU) ? "Администрация" : (Organization is OtherOrganization) ? string.Empty : Organization.ShortName;
 
-            return new object[] { ID, LastName, FirstName, SecondName, lpu.ShortName, subOrganizationShortName, Position.Name, lpu.RealRegion.Name, lpu.City.Name, NumberSF };
+            return new object[] { ID, LastName, FirstName, SecondName, organizationWithRegion.ShortName, subOrganizationShortName, Position.Name, (organizationWithRegion as IHaveRegion).RealRegion.Name, (organizationWithRegion as IHaveRegion).City.Name, NumberSF };
         }
 
         public void Save()

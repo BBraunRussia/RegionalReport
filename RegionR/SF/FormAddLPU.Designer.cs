@@ -89,8 +89,6 @@
             this.label31 = new System.Windows.Forms.Label();
             this.cbRealRegion = new System.Windows.Forms.ComboBox();
             this.cbCity = new System.Windows.Forms.ComboBox();
-            this.lbRegionRRSalesDistrict = new System.Windows.Forms.Label();
-            this.label33 = new System.Windows.Forms.Label();
             this.lbRegionRR = new System.Windows.Forms.Label();
             this.label35 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -99,13 +97,14 @@
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.expandToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnAddSubOrganization = new System.Windows.Forms.Button();
+            this.btnDeleteSubOrganization = new System.Windows.Forms.Button();
             this.btnSaveAndClose = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.cbLpuRR = new System.Windows.Forms.ComboBox();
             this.btnShowRules = new System.Windows.Forms.Button();
             this.tbPhoneCode = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnAddSubOrganization = new System.Windows.Forms.Button();
             this.btnAddPerson = new System.Windows.Forms.Button();
             this.btnShowPerson = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
@@ -114,8 +113,9 @@
             this.label29 = new System.Windows.Forms.Label();
             this.lbLPU = new System.Windows.Forms.Label();
             this.lbBranch = new System.Windows.Forms.Label();
-            this.btnDeleteSubOrganization = new System.Windows.Forms.Button();
             this.label32 = new System.Windows.Forms.Label();
+            this.cbSubRegion = new System.Windows.Forms.ComboBox();
+            this.label23 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -680,24 +680,6 @@
             this.cbCity.Size = new System.Drawing.Size(426, 21);
             this.cbCity.TabIndex = 68;
             // 
-            // lbRegionRRSalesDistrict
-            // 
-            this.lbRegionRRSalesDistrict.AutoSize = true;
-            this.lbRegionRRSalesDistrict.Location = new System.Drawing.Point(958, 143);
-            this.lbRegionRRSalesDistrict.Name = "lbRegionRRSalesDistrict";
-            this.lbRegionRRSalesDistrict.Size = new System.Drawing.Size(76, 13);
-            this.lbRegionRRSalesDistrict.TabIndex = 70;
-            this.lbRegionRRSalesDistrict.Text = "не определен";
-            // 
-            // label33
-            // 
-            this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(857, 143);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(95, 13);
-            this.label33.TabIndex = 69;
-            this.label33.Text = "SAP Sales District:";
-            // 
             // lbRegionRR
             // 
             this.lbRegionRR.AutoSize = true;
@@ -722,9 +704,11 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox3.Controls.Add(this.treeView1);
-            this.groupBox3.Location = new System.Drawing.Point(854, 192);
+            this.groupBox3.Controls.Add(this.btnAddSubOrganization);
+            this.groupBox3.Controls.Add(this.btnDeleteSubOrganization);
+            this.groupBox3.Location = new System.Drawing.Point(854, 139);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(247, 397);
+            this.groupBox3.Size = new System.Drawing.Size(247, 433);
             this.groupBox3.TabIndex = 73;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Подразделения";
@@ -735,9 +719,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.treeView1.ContextMenuStrip = this.conMenuTree;
-            this.treeView1.Location = new System.Drawing.Point(6, 20);
+            this.treeView1.Location = new System.Drawing.Point(6, 48);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(235, 371);
+            this.treeView1.Size = new System.Drawing.Size(235, 379);
             this.treeView1.TabIndex = 0;
             this.treeView1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseClick);
             this.treeView1.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
@@ -772,6 +756,26 @@
             this.deleteToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.deleteToolStripMenuItem.Text = "Удалить";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
+            // 
+            // btnAddSubOrganization
+            // 
+            this.btnAddSubOrganization.Location = new System.Drawing.Point(6, 19);
+            this.btnAddSubOrganization.Name = "btnAddSubOrganization";
+            this.btnAddSubOrganization.Size = new System.Drawing.Size(80, 23);
+            this.btnAddSubOrganization.TabIndex = 79;
+            this.btnAddSubOrganization.Text = "Добавить";
+            this.btnAddSubOrganization.UseVisualStyleBackColor = true;
+            this.btnAddSubOrganization.Click += new System.EventHandler(this.btnAddSubOrganization_Click);
+            // 
+            // btnDeleteSubOrganization
+            // 
+            this.btnDeleteSubOrganization.Location = new System.Drawing.Point(92, 20);
+            this.btnDeleteSubOrganization.Name = "btnDeleteSubOrganization";
+            this.btnDeleteSubOrganization.Size = new System.Drawing.Size(80, 23);
+            this.btnDeleteSubOrganization.TabIndex = 88;
+            this.btnDeleteSubOrganization.Text = "Удалить";
+            this.btnDeleteSubOrganization.UseVisualStyleBackColor = true;
+            this.btnDeleteSubOrganization.Click += new System.EventHandler(this.btnDeleteSubOrganization_Click);
             // 
             // btnSaveAndClose
             // 
@@ -833,21 +837,11 @@
             this.label1.TabIndex = 78;
             this.label1.Text = "Телефонный код города:";
             // 
-            // btnAddSubOrganization
-            // 
-            this.btnAddSubOrganization.Location = new System.Drawing.Point(686, 416);
-            this.btnAddSubOrganization.Name = "btnAddSubOrganization";
-            this.btnAddSubOrganization.Size = new System.Drawing.Size(148, 43);
-            this.btnAddSubOrganization.TabIndex = 79;
-            this.btnAddSubOrganization.Text = "Добавить подразделение";
-            this.btnAddSubOrganization.UseVisualStyleBackColor = true;
-            this.btnAddSubOrganization.Click += new System.EventHandler(this.btnAddSubOrganization_Click);
-            // 
             // btnAddPerson
             // 
-            this.btnAddPerson.Location = new System.Drawing.Point(471, 416);
+            this.btnAddPerson.Location = new System.Drawing.Point(334, 457);
             this.btnAddPerson.Name = "btnAddPerson";
-            this.btnAddPerson.Size = new System.Drawing.Size(148, 43);
+            this.btnAddPerson.Size = new System.Drawing.Size(148, 32);
             this.btnAddPerson.TabIndex = 80;
             this.btnAddPerson.Text = "Добавить сотрудника";
             this.btnAddPerson.UseVisualStyleBackColor = true;
@@ -855,9 +849,9 @@
             // 
             // btnShowPerson
             // 
-            this.btnShowPerson.Location = new System.Drawing.Point(274, 416);
+            this.btnShowPerson.Location = new System.Drawing.Point(512, 457);
             this.btnShowPerson.Name = "btnShowPerson";
-            this.btnShowPerson.Size = new System.Drawing.Size(148, 43);
+            this.btnShowPerson.Size = new System.Drawing.Size(224, 32);
             this.btnShowPerson.TabIndex = 81;
             this.btnShowPerson.Text = "Показать сотрудников этого ЛПУ";
             this.btnShowPerson.UseVisualStyleBackColor = true;
@@ -920,24 +914,32 @@
             this.lbBranch.Text = "Филиал:";
             this.lbBranch.Visible = false;
             // 
-            // btnDeleteSubOrganization
-            // 
-            this.btnDeleteSubOrganization.Location = new System.Drawing.Point(686, 465);
-            this.btnDeleteSubOrganization.Name = "btnDeleteSubOrganization";
-            this.btnDeleteSubOrganization.Size = new System.Drawing.Size(148, 43);
-            this.btnDeleteSubOrganization.TabIndex = 88;
-            this.btnDeleteSubOrganization.Text = "Удалить подразделение";
-            this.btnDeleteSubOrganization.UseVisualStyleBackColor = true;
-            this.btnDeleteSubOrganization.Click += new System.EventHandler(this.btnDeleteSubOrganization_Click);
-            // 
             // label32
             // 
             this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(272, 385);
+            this.label32.Location = new System.Drawing.Point(271, 419);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(116, 13);
             this.label32.TabIndex = 89;
             this.label32.Text = "* Обязательные поля";
+            // 
+            // cbSubRegion
+            // 
+            this.cbSubRegion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbSubRegion.FormattingEnabled = true;
+            this.cbSubRegion.Location = new System.Drawing.Point(408, 372);
+            this.cbSubRegion.Name = "cbSubRegion";
+            this.cbSubRegion.Size = new System.Drawing.Size(426, 21);
+            this.cbSubRegion.TabIndex = 92;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(271, 375);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(99, 13);
+            this.label23.TabIndex = 91;
+            this.label23.Text = "SAP Sales District*:";
             // 
             // FormAddLPU
             // 
@@ -946,8 +948,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(1113, 598);
+            this.Controls.Add(this.cbSubRegion);
+            this.Controls.Add(this.label23);
             this.Controls.Add(this.label32);
-            this.Controls.Add(this.btnDeleteSubOrganization);
             this.Controls.Add(this.lbBranch);
             this.Controls.Add(this.lbLPU);
             this.Controls.Add(this.tbDistrict);
@@ -956,7 +959,6 @@
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnShowPerson);
             this.Controls.Add(this.btnAddPerson);
-            this.Controls.Add(this.btnAddSubOrganization);
             this.Controls.Add(this.tbPhoneCode);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnShowRules);
@@ -966,8 +968,6 @@
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.lbRegionRR);
             this.Controls.Add(this.label35);
-            this.Controls.Add(this.lbRegionRRSalesDistrict);
-            this.Controls.Add(this.label33);
             this.Controls.Add(this.cbCity);
             this.Controls.Add(this.cbRealRegion);
             this.Controls.Add(this.tbStreet);
@@ -1082,8 +1082,6 @@
         private System.Windows.Forms.Label label31;
         private System.Windows.Forms.ComboBox cbRealRegion;
         private System.Windows.Forms.ComboBox cbCity;
-        private System.Windows.Forms.Label lbRegionRRSalesDistrict;
-        private System.Windows.Forms.Label label33;
         private System.Windows.Forms.Label lbRegionRR;
         private System.Windows.Forms.Label label35;
         private System.Windows.Forms.GroupBox groupBox3;
@@ -1109,5 +1107,7 @@
         private System.Windows.Forms.ToolStripMenuItem expandToolStripMenuItem;
         private System.Windows.Forms.Button btnDeleteSubOrganization;
         private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.ComboBox cbSubRegion;
+        private System.Windows.Forms.Label label23;
     }
 }
