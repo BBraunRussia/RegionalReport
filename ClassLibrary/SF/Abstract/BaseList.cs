@@ -6,7 +6,7 @@ using System.Data;
 
 namespace ClassLibrary.SF
 {
-    public abstract class BaseList : IDataTable
+    public abstract class BaseList
     {
         private List<BaseDictionary> _list;
         private IProvider _provider;

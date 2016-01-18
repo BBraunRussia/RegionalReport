@@ -6,7 +6,7 @@ using System.Data;
 
 namespace ClassLibrary.SF
 {
-    public class SubOrganizationList : IDataTable
+    public class SubOrganizationList
     {
         private List<Organization> _list;
         private Organization _organization;
