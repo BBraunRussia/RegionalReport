@@ -60,11 +60,17 @@ namespace ClassLibrary.SF
                 _list.Add(organization);
         }
 
-        public void Delete(Organization item)
+        public void Delete(Organization organization)
         {
-            _list.Remove(item);
+            PersonList personList = PersonList.GetUniqueInstance();
+            personList.Delete(organization);
 
-            _provider.Delete("SF_Organization", item.ID);
+            var subOrgList = _list.Where(itemSubOrg => itemSubOrg.ParentOrganization == organization).ToList();
+            subOrgList.ForEach(itemSubOrg => itemSubOrg.Delete());
+
+            _list.Remove(organization);
+
+            _provider.Delete("SF_Organization", organization.ID);
         }
 
         public List<Organization> GetChildList(Organization organization)

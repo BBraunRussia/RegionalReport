@@ -24,7 +24,7 @@ namespace ClassLibrary.SF
 
         private int _bedsTotal;
         private int _bedsIC;
-        private int _surgical;
+        private int _bedsSurgical;
         private int _operating;
         private int _machineGD;
         private int _machineGDF;
@@ -35,6 +35,7 @@ namespace ClassLibrary.SF
         private int _patientCRRT;
 
         private SubRegion _subRegion;
+        private TypeFin _typeFin;
         
         public LPU(DataRow row)
             : base(row)
@@ -57,7 +58,7 @@ namespace ClassLibrary.SF
 
             int.TryParse(row[20].ToString(), out _bedsTotal);
             int.TryParse(row[21].ToString(), out _bedsIC);
-            int.TryParse(row[22].ToString(), out _surgical);
+            int.TryParse(row[22].ToString(), out _bedsSurgical);
             int.TryParse(row[23].ToString(), out _operating);
             int.TryParse(row[24].ToString(), out _machineGD);
             int.TryParse(row[25].ToString(), out _machineGDF);
@@ -71,6 +72,11 @@ namespace ClassLibrary.SF
             int.TryParse(row[32].ToString(), out idSubRegion);
             SubRegionList subRegionList = SubRegionList.GetUniqueInstance();
             _subRegion = subRegionList.GetItem(idSubRegion) as SubRegion;
+
+            int idTypeFin;
+            int.TryParse(row[33].ToString(), out idTypeFin);
+            TypeFinList typeFinList = TypeFinList.GetUniqueInstance();
+            _typeFin = typeFinList.GetItem(idTypeFin) as TypeFin;
         }
 
         public LPU(TypeOrg typeOrg)
@@ -186,10 +192,10 @@ namespace ClassLibrary.SF
             get { return (_bedsIC == 0) ? string.Empty : _bedsIC.ToString(); }
             set { int.TryParse(value, out _bedsIC); }
         }
-        public string Surgical
+        public string BedsSurgical
         {
-            get { return (_surgical == 0) ? string.Empty : _surgical.ToString(); }
-            set { int.TryParse(value, out _surgical); }
+            get { return (_bedsSurgical == 0) ? string.Empty : _bedsSurgical.ToString(); }
+            set { int.TryParse(value, out _bedsSurgical); }
         }
         public string Operating
         {
@@ -238,6 +244,12 @@ namespace ClassLibrary.SF
             set { _subRegion = value; }
         }
 
+        public TypeFin TypeFin
+        {
+            get { return _typeFin; }
+            set { _typeFin = value; }
+        }
+
         public object[] GetRow()
         {
             string typeOrgName = ((TypeOrg == SF.TypeOrg.ЛПУ) && (ParentOrganization != null)) ? "Филиал ЛПУ" : TypeOrg.ToString();
@@ -256,12 +268,17 @@ namespace ClassLibrary.SF
 
             int.TryParse(_provider.Insert("SF_LPU", ID, NumberSF, TypeOrg, Name, ShortName, MainSpec.ID, Email, WebSite, Phone, idParentOrganization, TypeLPU.ID, Ownership.ID, AdmLevel.ID,
                 INN, KPP, PostIndex, City.ID, District, Street, idLPURR,
-                _bedsTotal, _bedsIC, _surgical, _operating, _machineGD, _machineGDF, _machineCRRT, _shift, _patientGD, _patientPD, _patientCRRT, _subRegion.ID), out id);
+                _bedsTotal, _bedsIC, _bedsSurgical, _operating, _machineGD, _machineGDF, _machineCRRT, _shift, _patientGD, _patientPD, _patientCRRT, _subRegion.ID, _typeFin.ID), out id);
 
             SetID(id);
 
             OrganizationList organizationList = OrganizationList.GetUniqueInstance();
             organizationList.Add(this);
+        }
+
+        public bool IsTotalLessThenSum()
+        {
+            return (_bedsTotal < (_bedsIC + _bedsSurgical));
         }
     }
 }

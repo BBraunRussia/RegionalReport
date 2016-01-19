@@ -33,7 +33,7 @@ namespace RegionR.SF
 
         public static bool DeleteOrganization(Organization organization)
         {
-            if (MessageBox.Show(string.Concat("Вы действительно хотите удалить организацию \"", organization.ShortName, "\"?"), "Удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.Yes)
+            if (MessageBox.Show(string.Concat("Вы действительно хотите удалить организацию \"", organization.ShortName, "\"?\n\nПри этом будут удалены входящие в неё подразделения и привязанные к ним персоны, если таковые имеются."), "Удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.Yes)
             {
                 OrganizationList organizationList = OrganizationList.GetUniqueInstance();
 
@@ -57,6 +57,18 @@ namespace RegionR.SF
             }
 
             return false;
+        }
+
+        public static void CheckINN(IHaveRegion organization, string inn)
+        {
+            if ((inn.Length != 10) && (inn.Length != 12))
+                throw new NullReferenceException("Поле ИНН должно содержать 10 или 12 цифр");
+
+            if ((inn != organization.INN) && (inn.Length == 12))
+            {
+                if (MessageBox.Show("Данная организация является ИП?", "ИНН содержит 12 цифр", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.No)
+                    throw new NullReferenceException("Перед сохранением необходимо исправить поле ИНН");
+            }
         }
     }
 }

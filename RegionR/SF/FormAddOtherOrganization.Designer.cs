@@ -173,6 +173,7 @@
             this.cbCity.Name = "cbCity";
             this.cbCity.Size = new System.Drawing.Size(426, 21);
             this.cbCity.TabIndex = 114;
+            this.cbCity.SelectedIndexChanged += new System.EventHandler(this.cbCity_SelectedIndexChanged);
             // 
             // cbRealRegion
             // 
@@ -205,9 +206,9 @@
             this.label30.AutoSize = true;
             this.label30.Location = new System.Drawing.Point(316, 180);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(109, 13);
+            this.label30.Size = new System.Drawing.Size(44, 13);
             this.label30.TabIndex = 110;
-            this.label30.Text = "Населённый пункт*:";
+            this.label30.Text = "Город*:";
             // 
             // label28
             // 
@@ -422,9 +423,9 @@
             this.label22.AutoSize = true;
             this.label22.Location = new System.Drawing.Point(316, 101);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(38, 13);
+            this.label22.Size = new System.Drawing.Size(34, 13);
             this.label22.TabIndex = 128;
-            this.label22.Text = "ИНН*:";
+            this.label22.Text = "ИНН:";
             // 
             // label26
             // 
@@ -457,9 +458,9 @@
             // 
             this.btnShowPerson.Location = new System.Drawing.Point(16, 285);
             this.btnShowPerson.Name = "btnShowPerson";
-            this.btnShowPerson.Size = new System.Drawing.Size(224, 32);
+            this.btnShowPerson.Size = new System.Drawing.Size(237, 32);
             this.btnShowPerson.TabIndex = 133;
-            this.btnShowPerson.Text = "Показать сотрудников этого ЛПУ";
+            this.btnShowPerson.Text = "Показать сотрудников этой организации";
             this.btnShowPerson.UseVisualStyleBackColor = true;
             this.btnShowPerson.Click += new System.EventHandler(this.btnShowPerson_Click);
             // 

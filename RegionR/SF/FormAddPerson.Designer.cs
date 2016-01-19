@@ -41,7 +41,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.mtbMobile = new System.Windows.Forms.MaskedTextBox();
-            this.tbPhone = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.tbEmail = new System.Windows.Forms.TextBox();
@@ -61,6 +60,9 @@
             this.cbMainSpecPerson = new System.Windows.Forms.ComboBox();
             this.cbAcademTitle = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.mtbPhone = new System.Windows.Forms.MaskedTextBox();
+            this.tbPhoneCode = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -159,15 +161,17 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.tbPhoneCode);
+            this.groupBox1.Controls.Add(this.mtbPhone);
+            this.groupBox1.Controls.Add(this.label13);
             this.groupBox1.Controls.Add(this.mtbMobile);
-            this.groupBox1.Controls.Add(this.tbPhone);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.tbEmail);
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Location = new System.Drawing.Point(690, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(349, 123);
+            this.groupBox1.Size = new System.Drawing.Size(349, 135);
             this.groupBox1.TabIndex = 14;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Контактная информация";
@@ -179,13 +183,6 @@
             this.mtbMobile.Name = "mtbMobile";
             this.mtbMobile.Size = new System.Drawing.Size(225, 20);
             this.mtbMobile.TabIndex = 20;
-            // 
-            // tbPhone
-            // 
-            this.tbPhone.Location = new System.Drawing.Point(103, 84);
-            this.tbPhone.Name = "tbPhone";
-            this.tbPhone.Size = new System.Drawing.Size(225, 20);
-            this.tbPhone.TabIndex = 19;
             // 
             // label9
             // 
@@ -304,7 +301,7 @@
             // 
             // btnChangeOrganizationAndSubOrganization
             // 
-            this.btnChangeOrganizationAndSubOrganization.Location = new System.Drawing.Point(690, 151);
+            this.btnChangeOrganizationAndSubOrganization.Location = new System.Drawing.Point(690, 177);
             this.btnChangeOrganizationAndSubOrganization.Name = "btnChangeOrganizationAndSubOrganization";
             this.btnChangeOrganizationAndSubOrganization.Size = new System.Drawing.Size(153, 46);
             this.btnChangeOrganizationAndSubOrganization.TabIndex = 24;
@@ -321,7 +318,7 @@
             "Госпожа"});
             this.cbAppeal.Location = new System.Drawing.Point(476, 22);
             this.cbAppeal.Name = "cbAppeal";
-            this.cbAppeal.Size = new System.Drawing.Size(121, 21);
+            this.cbAppeal.Size = new System.Drawing.Size(171, 21);
             this.cbAppeal.TabIndex = 27;
             // 
             // cbPosition
@@ -354,11 +351,36 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(341, 104);
+            this.label5.Location = new System.Drawing.Point(342, 106);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(130, 13);
+            this.label5.Size = new System.Drawing.Size(111, 13);
             this.label5.TabIndex = 30;
-            this.label5.Text = "Уч. степень/должность:";
+            this.label5.Text = "Уч. степень/звание:";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(150, 107);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(182, 13);
+            this.label13.TabIndex = 21;
+            this.label13.Text = " (без кода города и разделителей)";
+            // 
+            // mtbPhone
+            // 
+            this.mtbPhone.Location = new System.Drawing.Point(157, 84);
+            this.mtbPhone.Mask = "0000000";
+            this.mtbPhone.Name = "mtbPhone";
+            this.mtbPhone.Size = new System.Drawing.Size(169, 20);
+            this.mtbPhone.TabIndex = 22;
+            // 
+            // tbPhoneCode
+            // 
+            this.tbPhoneCode.Location = new System.Drawing.Point(103, 84);
+            this.tbPhoneCode.Name = "tbPhoneCode";
+            this.tbPhoneCode.ReadOnly = true;
+            this.tbPhoneCode.Size = new System.Drawing.Size(50, 20);
+            this.tbPhoneCode.TabIndex = 32;
             // 
             // FormAddPerson
             // 
@@ -420,7 +442,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox tbPhone;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox tbEmail;
@@ -441,5 +462,8 @@
         private System.Windows.Forms.ComboBox cbAcademTitle;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.MaskedTextBox mtbMobile;
+        private System.Windows.Forms.TextBox tbPhoneCode;
+        private System.Windows.Forms.MaskedTextBox mtbPhone;
+        private System.Windows.Forms.Label label13;
     }
 }

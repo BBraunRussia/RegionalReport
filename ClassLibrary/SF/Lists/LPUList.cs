@@ -118,5 +118,11 @@ namespace ClassLibrary.SF
         {
             return _list.Exists(item => item.INN == inn);
         }
+
+        public void ReLoad()
+        {
+            OrganizationList organizationList = OrganizationList.GetUniqueInstance();
+            organizationList.Reload();
+        }
     }
 }

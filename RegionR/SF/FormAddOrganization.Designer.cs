@@ -34,7 +34,6 @@
             this.label20 = new System.Windows.Forms.Label();
             this.tbName = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
-            this.btnShowRules = new System.Windows.Forms.Button();
             this.cbMainSpec = new System.Windows.Forms.ComboBox();
             this.lbMainSpec = new System.Windows.Forms.Label();
             this.tbPhone = new System.Windows.Forms.TextBox();
@@ -108,15 +107,6 @@
             this.label19.Size = new System.Drawing.Size(135, 13);
             this.label19.TabIndex = 86;
             this.label19.Text = "Официальное название*:";
-            // 
-            // btnShowRules
-            // 
-            this.btnShowRules.Location = new System.Drawing.Point(553, 134);
-            this.btnShowRules.Name = "btnShowRules";
-            this.btnShowRules.Size = new System.Drawing.Size(148, 23);
-            this.btnShowRules.TabIndex = 90;
-            this.btnShowRules.Text = "Правила наименования";
-            this.btnShowRules.UseVisualStyleBackColor = true;
             // 
             // cbMainSpec
             // 
@@ -319,7 +309,6 @@
             this.Controls.Add(this.label27);
             this.Controls.Add(this.cbMainSpec);
             this.Controls.Add(this.lbMainSpec);
-            this.Controls.Add(this.btnShowRules);
             this.Controls.Add(this.tbShortName);
             this.Controls.Add(this.label20);
             this.Controls.Add(this.tbName);
@@ -343,7 +332,6 @@
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.TextBox tbName;
         private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.Button btnShowRules;
         private System.Windows.Forms.ComboBox cbMainSpec;
         private System.Windows.Forms.Label lbMainSpec;
         private System.Windows.Forms.TextBox tbPhone;

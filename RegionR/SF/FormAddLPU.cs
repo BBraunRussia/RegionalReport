@@ -24,6 +24,7 @@ namespace RegionR.SF
         private RealRegionList _realRegionList;
         private CityList _cityList;
         private SubRegionList _subRegionList;
+        private TypeFinList _typeFinList;
         
         private bool _isLoad;
 
@@ -47,6 +48,7 @@ namespace RegionR.SF
             _realRegionList = RealRegionList.GetUniqueInstance();
             _cityList = CityList.GetUniqueInstance();
             _subRegionList = SubRegionList.GetUniqueInstance();
+            _typeFinList = TypeFinList.GetUniqueInstance();
         }
 
         private void FormAddLPU_Load(object sender, EventArgs e)
@@ -58,8 +60,8 @@ namespace RegionR.SF
 
         private void LoadData()
         {
-            this.Text = (_lpu.ParentOrganization == null) ? "Карточка Организации \"ЛПУ\"" : "Карточка Организации \"Филиал ЛПУ\"";
-            lbKPP.Text = (_lpu.ParentOrganization == null) ? "КПП:" : "КПП*:";
+            this.Text = (_parentLPU == null) ? "Карточка Организации \"ЛПУ\"" : "Карточка Организации \"Филиал ЛПУ\"";
+            lbKPP.Text = (_parentLPU == null) ? "КПП:" : "КПП*:";
 
             lbNumberSF.Text = (_lpu.NumberSF == string.Empty) ? "не присвоен" : _lpu.NumberSF;
             lbTypeOrg.Text = _lpu.TypeOrg.ToString();
@@ -72,6 +74,8 @@ namespace RegionR.SF
                 cbAdmLevel.SelectedValue = _lpu.AdmLevel.ID;
             if (_lpu.MainSpec != null)
                 cbMainSpec.SelectedValue = _lpu.MainSpec.ID;
+            if (_lpu.TypeFin != null)
+                cbTypeFin.SelectedValue = _lpu.TypeFin.ID;
 
             if (_lpu.SubRegion != null)
             {
@@ -79,8 +83,8 @@ namespace RegionR.SF
             }
             else
             {
-                RegionRR regionRR = (_parentLPU == null) ? _lpu.RealRegion.RegionRR : _parentLPU.RealRegion.RegionRR;
-                cbSubRegion.SelectedValue = _subRegionList.GetItem(regionRR).ID;
+                RealRegion realRegion = (_parentLPU == null) ? _lpu.RealRegion : _parentLPU.RealRegion;
+                cbSubRegion.SelectedValue = _subRegionList.GetItem(realRegion).ID;
             }
             
             tbName.Text = _lpu.Name;
@@ -98,7 +102,7 @@ namespace RegionR.SF
                 lbRegionRR.Text = _lpu.LpuRR.RegionRR.Name;
             }
 
-            if (_lpu.ParentOrganization == null)
+            if (_parentLPU == null)
                 tbINN.Text = _lpu.INN;
             else
             {
@@ -113,7 +117,7 @@ namespace RegionR.SF
             tbWebSite.Text = _lpu.WebSite;
             tbPhone.Text = _lpu.Phone;
 
-            if (_lpu.ParentOrganization == null)
+            if (_parentLPU == null)
             {
                 if (_lpu.RealRegion != null)
                     cbRealRegion.SelectedValue = _lpu.RealRegion.ID;
@@ -135,7 +139,7 @@ namespace RegionR.SF
 
             tbBedsTotal.Text = _lpu.BedsTotal;
             tbBedsIC.Text = _lpu.BedsIC;
-            tbSurgical.Text = _lpu.Surgical;
+            tbBedsSurgical.Text = _lpu.BedsSurgical;
             tbOperating.Text = _lpu.Operating;
             tbMachineGD.Text = _lpu.MachineGD;
             tbMachineGDF.Text = _lpu.MachineGDF;
@@ -162,16 +166,26 @@ namespace RegionR.SF
             ClassForForm.LoadDictionary(cbOwnership, _ownershipList.ToDataTable());
             ClassForForm.LoadDictionary(cbAdmLevel, _admLevelList.ToDataTable());
             ClassForForm.LoadDictionary(cbMainSpec, _mainSpecList.ToDataTable());
+            ClassForForm.LoadDictionary(cbTypeFin, _typeFinList.ToDataTable());
             ClassForForm.LoadDictionary(cbSubRegion, _subRegionList.ToDataTable());
             _isLoad = false;
 
             if (UserLogged.Get().RoleSF == RolesSF.Администратор)
                 ClassForForm.LoadDictionary(cbRealRegion, _realRegionList.ToDataTable());
             else
-                ClassForForm.LoadDictionary(cbRealRegion, _realRegionList.ToDataTable());
+                ClassForForm.LoadDictionary(cbRealRegion, _realRegionList.ToDataTable(UserLogged.Get()));
 
             _isLoad = true;
             LoadCity();
+        }
+
+        private void cbRealRegion_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (_isLoad)
+            {
+                LoadCity();
+                ChangeSalesDistrict();
+            }
         }
 
         private void LoadCity()
@@ -183,10 +197,12 @@ namespace RegionR.SF
             ClassForForm.LoadDictionary(cbCity, dt);
         }
 
-        private void cbRealRegion_SelectedIndexChanged(object sender, EventArgs e)
+        private void ChangeSalesDistrict()
         {
-            if (_isLoad)
-                LoadCity();
+            int idRealRegion;
+            int.TryParse(cbRealRegion.SelectedValue.ToString(), out idRealRegion);
+            RealRegion realRegion = _realRegionList.GetItem(idRealRegion) as RealRegion;
+            cbSubRegion.SelectedValue = _subRegionList.GetItem(realRegion).ID;
         }
 
         private void btnSaveAndClose_Click(object sender, EventArgs e)
@@ -206,6 +222,22 @@ namespace RegionR.SF
             {
                 CopyFields();
 
+                if (_lpu.IsTotalLessThenSum())
+                {
+                    if (MessageBox.Show("Общая сумма коек меньше, чем сумма слагаемых. Сохранить с ошибкой?", "Ошибка ввода", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.No)
+                    {
+                        return false;
+                    }
+                }
+
+                if (!_lpu.IsBelongsINNToRealRegion())
+                {
+                    if (MessageBox.Show("ИНН организации принадлежит другому региону, продолжить сохранение?", "ИНН другого региона", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.No)
+                    {
+                        return false;
+                    }
+                }
+
                 _lpu.Save();
 
                 return true;
@@ -217,7 +249,7 @@ namespace RegionR.SF
                 return false;
             }
         }
-
+        
         private void CopyFields()
         {
             int idTypeLPU = Convert.ToInt32(cbTypeLpu.SelectedValue);
@@ -232,6 +264,9 @@ namespace RegionR.SF
             int idMainSpec = Convert.ToInt32(cbMainSpec.SelectedValue);
             _lpu.MainSpec = _mainSpecList.GetItem(idMainSpec) as MainSpec;
 
+            int idTypeFin = Convert.ToInt32(cbTypeFin.SelectedValue);
+            _lpu.TypeFin = _typeFinList.GetItem(idTypeFin) as TypeFin;
+
             int idSubRegion = Convert.ToInt32(cbSubRegion.SelectedValue);
             _lpu.SubRegion = _subRegionList.GetItem(idSubRegion) as SubRegion;
 
@@ -243,14 +278,7 @@ namespace RegionR.SF
 
             ClassForForm.CheckFilled(tbStreet.Text, "Уличный адрес");
 
-            if ((tbINN.Text.Length != 10) && (tbINN.Text.Length != 12))
-                throw new NullReferenceException("Поле ИНН должно содержать 10 или 12 цифр");
-
-            if ((tbINN.Text != _lpu.INN) && (tbINN.Text.Length == 12))
-            {
-                if (MessageBox.Show("Данная организация является ИП?", "ИНН содержит 12 цифр", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.No)
-                    throw new NullReferenceException("Перед сохранением необходимо исправить поле ИНН");
-            }
+            ClassForForm.CheckINN(_lpu, tbINN.Text);
 
             _lpu.Name = tbName.Text;
             _lpu.ShortName = tbShortName.Text;
@@ -269,7 +297,7 @@ namespace RegionR.SF
 
             _lpu.BedsTotal = tbBedsTotal.Text;
             _lpu.BedsIC = tbBedsIC.Text;
-            _lpu.Surgical = tbSurgical.Text;
+            _lpu.BedsSurgical = tbBedsSurgical.Text;
             _lpu.Operating = tbOperating.Text;
             _lpu.MachineGD = tbMachineGD.Text;
             _lpu.MachineGDF = tbMachineGDF.Text;
@@ -287,7 +315,7 @@ namespace RegionR.SF
         
         private void tbShortName_TextChanged(object sender, EventArgs e)
         {
-            if (_lpu.ParentOrganization == null)
+            if (_parentLPU == null)
             {
                 lbLPUName.Text = tbShortName.Text.ToUpper();
                 lbBranchName.Visible = false;
@@ -295,22 +323,25 @@ namespace RegionR.SF
             }
             else
             {
-                lbLPUName.Text = _lpu.ParentOrganization.ShortName;
+                lbLPUName.Text = _parentLPU.ShortName;
                 lbBranchName.Text = _lpu.ShortName;
             }
         }
 
         private void btnAddSubOrganization_Click(object sender, EventArgs e)
         {
-            FormAddBranch formAddBranch = new FormAddBranch(_parentLPU == null);
-            if (formAddBranch.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (TrySave())
             {
-                Organization organization = Organization.CreateItem(typeOrg, _lpu);
+                FormAddBranch formAddBranch = new FormAddBranch(_parentLPU == null);
+                if (formAddBranch.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    Organization organization = Organization.CreateItem(typeOrg, _lpu);
 
-                if (organization is LPU)
-                    (organization as LPU).LpuRR = _lpu.LpuRR;
+                    if (organization is LPU)
+                        (organization as LPU).LpuRR = _lpu.LpuRR;
 
-                ShowFormSubLPU(organization);
+                    ShowFormSubLPU(organization);
+                }
             }
         }
         
@@ -422,6 +453,10 @@ namespace RegionR.SF
             if (_lpu.MainSpec != (_mainSpecList.GetItem(idMainSpec) as MainSpec))
                 return true;
 
+            int idTypeFin = Convert.ToInt32(cbTypeFin.SelectedValue);
+            if (_lpu.TypeFin != (_typeFinList.GetItem(idTypeFin) as TypeFin))
+                return true;
+
             int idSubRegion = Convert.ToInt32(cbSubRegion.SelectedValue);
             if (_lpu.SubRegion != (_subRegionList.GetItem(idSubRegion) as SubRegion))
                 return true;
@@ -461,7 +496,7 @@ namespace RegionR.SF
                 return true;
             if (_lpu.BedsIC != tbBedsIC.Text)
                 return true;
-            if (_lpu.Surgical != tbSurgical.Text)
+            if (_lpu.BedsSurgical != tbBedsSurgical.Text)
                 return true;
             if (_lpu.Operating != tbOperating.Text)
                 return true;
@@ -553,6 +588,18 @@ namespace RegionR.SF
 
                 if (ClassForForm.DeleteOrganization(organization))
                     LoadTree();
+            }
+        }
+
+        private void cbCity_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int idCity;
+            int.TryParse(cbCity.SelectedValue.ToString(), out idCity);
+
+            if (idCity != 0)
+            {
+                City city = _cityList.GetItem(idCity) as City;
+                tbPhoneCode.Text = city.PhoneCode;
             }
         }
     }

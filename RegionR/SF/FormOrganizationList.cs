@@ -16,6 +16,7 @@ namespace RegionR
         public static TypeOrg typeOrg = TypeOrg.ЛПУ;
         private MyStatusStrip _myStatusStrip;
         private SearchInDgv _seacher;
+        private LpuList _lpuList;
 
         public FormOrganizationList()
         {
@@ -32,11 +33,13 @@ namespace RegionR
 
         private void LoadData()
         {
-            LpuList lpuList = new LpuList();
+            _lpuList = new LpuList();
+            _lpuList.ReLoad();
+
             UserList userList = UserList.GetUniqueInstance();
             User user = userList.GetItem(globalData.UserID) as User;
-            
-            DataTable dt = (user.RoleSF == RolesSF.Администратор) ? lpuList.ToDataTable() : lpuList.ToDataTable(user);
+
+            DataTable dt = (user.RoleSF == RolesSF.Администратор) ? _lpuList.ToDataTable() : _lpuList.ToDataTable(user);
             
             dgv.DataSource = dt;
 
@@ -79,6 +82,9 @@ namespace RegionR
 
         private void dgv_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            if ((e.ColumnIndex < 0) || (e.RowIndex < 0))
+                return;
+
             EditOrganization();
         }
 
@@ -210,8 +216,7 @@ namespace RegionR
 
         private void button1_Click(object sender, EventArgs e)
         {
-            OrganizationList organizationList = OrganizationList.GetUniqueInstance();
-            organizationList.Reload();
+            _lpuList.ReLoad();
 
             LoadData();
         }

@@ -22,9 +22,9 @@ namespace ClassLibrary.SF
             return _uniqueInstance;
         }
 
-        public SubRegion GetItem(RegionRR regionRR)
+        public SubRegion GetItem(RealRegion realRegion)
         {
-            return List.Where(item => (item as SubRegion).RegionRR.ID == regionRR.ID).Select(item => item as SubRegion).First();
+            return List.Where(item => (item as SubRegion).RealRegion.ID == realRegion.ID).Select(item => item as SubRegion).First();
         }
     }
 }

@@ -92,7 +92,11 @@ namespace RegionR.SF
         private void LoadDictionaries()
         {
             _isLoad = false;
-            ClassForForm.LoadDictionary(cbRealRegion, _realRegionList.ToDataTable());
+            if (UserLogged.Get().RoleSF == RolesSF.Администратор)
+                ClassForForm.LoadDictionary(cbRealRegion, _realRegionList.ToDataTable());
+            else
+                ClassForForm.LoadDictionary(cbRealRegion, _realRegionList.ToDataTable(UserLogged.Get()));
+
             _isLoad = true;
             LoadCity();
         }
@@ -129,6 +133,14 @@ namespace RegionR.SF
             {
                 CopyFields();
 
+                if ((_organization.INN != string.Empty) && (!_organization.IsBelongsINNToRealRegion()))
+                {
+                    if (MessageBox.Show("ИНН организации принадлежит другому региону, продолжить сохранение?", "ИНН другого региона", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.No)
+                    {
+                        return false;
+                    }
+                }
+
                 _organization.Save();
 
                 return true;
@@ -145,16 +157,11 @@ namespace RegionR.SF
         {
             ClassForForm.CheckFilled(tbName.Text, "Официальное название");
             ClassForForm.CheckFilled(tbShortName.Text, "Сокращенное название");
-            ClassForForm.CheckFilled(tbINN.Text, "ИНН");
             ClassForForm.CheckFilled(tbStreet.Text, "Уличный адрес");
 
-            if ((tbINN.Text.Length != 10) && (tbINN.Text.Length != 12))
-                throw new NullReferenceException("Поле ИНН должно содержать 10 или 12 цифр");
-
-            if ((tbINN.Text != _organization.INN) && (tbINN.Text.Length == 12))
+            if (tbINN.Text != string.Empty)
             {
-                if (MessageBox.Show("Данная организация является ИП?", "ИНН содержит 12 цифр", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.No)
-                    throw new NullReferenceException("Перед сохранением необходимо исправить поле ИНН");
+                ClassForForm.CheckINN(_organization, tbINN.Text);
             }
 
             _organization.Name = tbName.Text;
@@ -282,6 +289,18 @@ namespace RegionR.SF
         {
             FormPersonList formPersonList = new FormPersonList(_organization);
             formPersonList.ShowDialog();
+        }
+
+        private void cbCity_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int idCity;
+            int.TryParse(cbCity.SelectedValue.ToString(), out idCity);
+
+            if (idCity != 0)
+            {
+                City city = _cityList.GetItem(idCity) as City;
+                tbPhoneCode.Text = city.PhoneCode;
+            }
         }
     }
 }

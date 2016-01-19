@@ -14,20 +14,19 @@ namespace RegionR
     public partial class FormPersonList : Form
     {
         private MyStatusStrip _myStatusStrip;
-        private SearchInDgv _seacher;
-        private Organization _organization;
+        private PersonListController _personListController;
 
         public FormPersonList(Organization organization = null)
         {
             InitializeComponent();
 
-            _organization = organization;
+            if (organization != null)
+                this.Text = string.Concat("Справочник: Персоны-SF, Организация: ", organization.ShortName);
 
-            if (_organization != null)
-                this.Text = string.Concat("Справочник: Персоны-SF, Организация: ", _organization.ShortName);
-
-            _seacher = new SearchInDgv(dgv);
+            
             _myStatusStrip = new MyStatusStrip(dgv, statusStrip1);
+
+            _personListController = new PersonListController(dgv, organization);
         }
         
         private void FormPersonList_Load(object sender, EventArgs e)
@@ -37,17 +36,7 @@ namespace RegionR
 
         private void LoadData()
         {
-            PersonList personList = PersonList.GetUniqueInstance();
-            UserList userList = UserList.GetUniqueInstance();
-            User user = userList.GetItem(globalData.UserID) as User;
-            
-            DataTable dt = (_organization != null) ? personList.ToDataTable(_organization) : (user.RoleSF == RolesSF.Администратор) ? personList.ToDataTable() : personList.ToDataTable(user);
-            
-            dgv.DataSource = dt;
-
-            dgv.Columns[0].Visible = false;
-            dgv.Columns[4].Width = 300;
-            dgv.Columns[5].Width = 150;
+            dgv = _personListController.ToDataGridView();
         }
 
         private void NotImpliment_Click(object sender, EventArgs e)
@@ -62,40 +51,15 @@ namespace RegionR
         
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (_organization == null)
-            {
-                Add();
-            }
-            else
-            {
-                Person person = new Person();
-                person.Organization = _organization;
-                Add(person);
-            }
-        }
-
-        private void Add()
-        {
-            Person person = new Person();
-
-            FormFirstStepAddPerson formFirstStepAddPerson = new FormFirstStepAddPerson(person);
-            if (formFirstStepAddPerson.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                Add(person);
-            }
-        }
-
-        private void Add(Person person)
-        {
-            FormSecondStepAddPerson formSecondStepAddPerson = new FormSecondStepAddPerson(person);
-            if (formSecondStepAddPerson.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
+            if (_personListController.Add())
                 LoadData();
-            }
         }
 
         private void dgv_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            if ((e.ColumnIndex < 0) || (e.RowIndex < 0))
+                return;
+
             EditPerson();
         }
 
@@ -106,32 +70,16 @@ namespace RegionR
 
         private void EditPerson()
         {
-            Person person = GetPerson();
-
-            FormAddPerson formAddPerson = new FormAddPerson(person);
-            if (formAddPerson.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (_personListController.EditPerson())
                 LoadData();
         }
         
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Вы действительно хотите удалить персону?", "Удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.Yes)
-            {
-                Person person = GetPerson();
-                person.Delete();
+            if (_personListController.DeletePerson())
                 LoadData();
-            }
         }
-
-        private Person GetPerson()
-        {
-            int id;
-            int.TryParse(dgv.Rows[dgv.CurrentCell.RowIndex].Cells[0].Value.ToString(), out id);
-
-            PersonList personList = PersonList.GetUniqueInstance();
-            return personList.GetItem(id) as Person;
-        }
-
+        
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
@@ -144,8 +92,7 @@ namespace RegionR
 
         public void RefreshDGV()
         {
-            PersonList personList = PersonList.GetUniqueInstance();
-            personList.Reload();
+            _personListController.ReLoad();
 
             LoadData();
         }
@@ -158,51 +105,27 @@ namespace RegionR
 
         private void sortToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (dgv.SelectedCells.Count == 0)
-                return;
-
-            int rowIndex = dgv.CurrentCell.RowIndex;
-            int columnIndex = dgv.CurrentCell.ColumnIndex;
-
-            DataGridViewColumn column = dgv.Columns[dgv.CurrentCell.ColumnIndex];
-            System.ComponentModel.ListSortDirection sortDirection;
-
-            if ((dgv.SortedColumn == null) || (dgv.SortedColumn != column))
-                sortDirection = System.ComponentModel.ListSortDirection.Ascending;
-            else if (dgv.SortOrder == SortOrder.Ascending)
-                sortDirection = System.ComponentModel.ListSortDirection.Descending;
-            else
-                sortDirection = System.ComponentModel.ListSortDirection.Ascending;
-
-            dgv.Sort(column, sortDirection);
-
-            dgv.CurrentCell = dgv.Rows[rowIndex].Cells[columnIndex];
+            _personListController.Sort();
         }
 
         private void filterToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (dgv.CurrentCell == null)
                 return;
-
-            string columnName = dgv.Columns[dgv.CurrentCell.ColumnIndex].HeaderText;
-
-            string value = dgv.CurrentCell.Value.ToString();
-
-            ApplyFilter(columnName, value);
+            
+            CreateFilter();
         }
 
-        private void ApplyFilter(string columnName, string value)
+        private void CreateFilter()
         {
-            foreach (DataGridViewRow row in dgv.Rows)
-                row.Visible = (row.Cells[columnName].Value.ToString() == value);
+            _personListController.CreateFilter();
 
             btnDeleteFilter.Visible = true;
         }
 
         private void btnDeleteFilter_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow row in dgv.Rows)
-                row.Visible = true;
+            _personListController.DeleteFilter();
 
             btnDeleteFilter.Visible = false;
         }
@@ -220,10 +143,15 @@ namespace RegionR
                 Search();
             }
         }
-        
+
+        private void dgv_Sorted(object sender, EventArgs e)
+        {
+            _personListController.ApplyFilter();
+        }
+
         private void Search()
         {
-            _seacher.Find(tbSearch.Text);
+            _personListController.Search(tbSearch.Text);
         }
     }
 }

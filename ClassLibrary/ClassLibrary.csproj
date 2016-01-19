@@ -58,6 +58,7 @@
     <Compile Include="SF\Classes\RegionRR.cs" />
     <Compile Include="SF\Classes\Role.cs" />
     <Compile Include="SF\Classes\SubRegion.cs" />
+    <Compile Include="SF\Classes\TypeFin.cs" />
     <Compile Include="SF\Classes\User.cs" />
     <Compile Include="SF\Classes\UserLpuRR.cs" />
     <Compile Include="SF\Classes\UserRight.cs" />
@@ -86,6 +87,7 @@
     <Compile Include="SF\Lists\PositionList.cs" />
     <Compile Include="SF\Lists\RealRegionList.cs" />
     <Compile Include="SF\Lists\SubRegionList.cs" />
+    <Compile Include="SF\Lists\TypeFinList.cs" />
     <Compile Include="SF\SFFactory.cs" />
     <Compile Include="SF\Classes\TypeLPU.cs" />
     <Compile Include="SF\Lists\RegionRRList.cs" />

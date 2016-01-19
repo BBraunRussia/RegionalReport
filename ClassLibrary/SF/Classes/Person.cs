@@ -154,7 +154,9 @@ namespace ClassLibrary.SF
             Organization organizationWithRegion = ((Organization is LPU) || (Organization is OtherOrganization)) ? Organization : Organization.ParentOrganization;
             string subOrganizationShortName = (Organization is LPU) ? "Администрация" : (Organization is OtherOrganization) ? string.Empty : Organization.ShortName;
 
-            return new object[] { ID, LastName, FirstName, SecondName, organizationWithRegion.ShortName, subOrganizationShortName, Position.Name, (organizationWithRegion as IHaveRegion).RealRegion.Name, (organizationWithRegion as IHaveRegion).City.Name, NumberSF };
+            string mobileWithOutFormat = Mobile.Replace("+7", "").Replace("(", "").Replace(")", "").Replace("-", "");
+
+            return new object[] { ID, LastName, FirstName, SecondName, organizationWithRegion.ShortName, subOrganizationShortName, Position.Name, mobileWithOutFormat, (organizationWithRegion as IHaveRegion).RealRegion.Name, (organizationWithRegion as IHaveRegion).City.Name };
         }
 
         public void Save()

@@ -41,7 +41,7 @@ namespace ClassLibrary.SF
         public List<Person> GetItems(Organization organization)
         {
             return (from item in List
-                    where (((item as Person).Organization == organization) || (item as Person).Organization.ParentOrganization == organization)
+                    where (((item as Person).Organization.ID == organization.ID) || (((item as Person).Organization.ParentOrganization != null) && (item as Person).Organization.ParentOrganization.ID == organization.ID))
                     orderby item.Name
                     select (item as Person)).ToList();
         }
@@ -69,9 +69,9 @@ namespace ClassLibrary.SF
             dt.Columns.Add("Организация");
             dt.Columns.Add("Подразделение");
             dt.Columns.Add("Должность");
+            dt.Columns.Add("Мобильный телефон");
             dt.Columns.Add("Регион России");
             dt.Columns.Add("Город");
-            dt.Columns.Add("SF номер");
             
             foreach (var item in list)
                 dt.Rows.Add(item.GetRow());
@@ -83,6 +83,17 @@ namespace ClassLibrary.SF
         {
             if (!List.Exists(item => item == person))
                 List.Add(person);
+        }
+
+        public bool CheckNamesake(Person person)
+        {
+            return List.Exists(item => (item as Person).LastName == person.LastName && (item as Person).FirstName == person.FirstName && (item as Person).SecondName == person.SecondName && (item as Person).Organization == person.Organization);
+        }
+
+        public void Delete(Organization organization)
+        {
+            var personList = List.Where(item => (item as Person).Organization.ID == organization.ID).ToList();
+            personList.ForEach(item => (item as Person).Delete());
         }
     }
 }

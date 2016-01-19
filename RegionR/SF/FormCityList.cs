@@ -78,6 +78,9 @@ namespace RegionR.SF
 
         private void dgv_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            if ((e.ColumnIndex < 0) || (e.RowIndex < 0))
+                return;
+
             EditCity();
         }
 

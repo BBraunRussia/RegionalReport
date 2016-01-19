@@ -62,7 +62,7 @@ namespace RegionR.SF
 
             tbEmail.Text = _person.Email;
             mtbMobile.Text = _person.Mobile;
-            tbPhone.Text = _person.Phone;
+            mtbPhone.Text = _person.Phone;
 
             lbNumberSF.Text = _person.NumberSF;
 
@@ -75,6 +75,27 @@ namespace RegionR.SF
                 cbMainSpecPerson.SelectedValue = 86;
                 cbPosition.SelectedValue = 7;
             }
+
+            SetPhoneCode();
+            SetPhoneMask();
+        }
+
+        private void SetPhoneCode()
+        {
+            IHaveRegion organization = ((_person.Organization.ParentOrganization == null) ? _person.Organization : _person.Organization.ParentOrganization) as IHaveRegion;
+            tbPhoneCode.Text = organization.City.PhoneCode;
+        }
+
+        private void SetPhoneMask()
+        {
+            int lenght = (tbPhoneCode.Text == string.Empty) ? 10 : 10 - tbPhoneCode.Text.Length;
+
+            string mask = string.Empty;
+
+            for (int i = 0; i < lenght; i++)
+                mask += "0";
+
+            mtbPhone.Mask = mask;
         }
 
         private void LoadDictionary()
@@ -101,6 +122,12 @@ namespace RegionR.SF
             {
                 CopyFields();
 
+                if (CheckNamesake())
+                {
+                    if (MessageBox.Show("В данной организации уже есть сотрудник с такими ФИО. Продолжить сохранение?", "Вопрос", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.No)
+                        return false;
+                }
+
                 _person.Save();
 
                 return true;
@@ -111,6 +138,15 @@ namespace RegionR.SF
                 
                 return false;
             }
+        }
+
+        private bool CheckNamesake()
+        {
+            if (_person.ID != 0)
+                return false;
+
+            PersonList personList = PersonList.GetUniqueInstance();
+            return personList.CheckNamesake(_person);
         }
 
         private void CopyFields()
@@ -130,7 +166,7 @@ namespace RegionR.SF
 
             _person.Email = tbEmail.Text;
             _person.Mobile = mtbMobile.Text;
-            _person.Phone = tbPhone.Text;
+            _person.Phone = mtbPhone.Text;
 
             _person.Comment = tbComment.Text;
         }
@@ -190,7 +226,7 @@ namespace RegionR.SF
             if (_person.Mobile != mtbMobile.Text)
                 return true;
 
-            if (_person.Phone != tbPhone.Text)
+            if (_person.Phone != mtbPhone.Text)
                 return true;
 
             if (_person.Comment != tbComment.Text)

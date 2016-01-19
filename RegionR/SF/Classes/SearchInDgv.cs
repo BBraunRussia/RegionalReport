@@ -54,21 +54,28 @@ namespace RegionR.SF
 
         private DataGridViewCell BeginSearch(Point beginPoint)
         {
+            int beginRow = beginPoint.Y;
+
             for (int i = beginPoint.X; i < _dgv.Columns.Count; i++)
             {
                 if (_dgv.Columns[i].Visible)
                 {
-                    for (int j = beginPoint.Y; j < _dgv.Rows.Count; j++)
+                    for (int j = beginRow; j < _dgv.Rows.Count; j++)
                     {
-                        DataGridViewCell cell = _dgv.Rows[j].Cells[i];
-                        string cellText = cell.Value.ToString().ToLower();
-
-                        if (cellText.Contains(_currentText))
+                        if (_dgv.Rows[j].Visible)
                         {
-                            return cell;
+                            DataGridViewCell cell = _dgv.Rows[j].Cells[i];
+                            string cellText = cell.Value.ToString().ToLower();
+
+                            if (cellText.Contains(_currentText))
+                            {
+                                return cell;
+                            }
                         }
                     }
                 }
+
+                beginRow = 0;
             }
 
             return null;

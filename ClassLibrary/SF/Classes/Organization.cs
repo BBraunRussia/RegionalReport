@@ -171,5 +171,19 @@ namespace ClassLibrary.SF
             OrganizationList organizationList = OrganizationList.GetUniqueInstance();
             organizationList.Delete(this);
         }
+
+        public bool IsBelongsINNToRealRegion()
+        {
+            if ((ID != 0) || (!(this is IHaveRegion)))
+                return true;
+
+            IHaveRegion organization = this as IHaveRegion;
+            
+            string idRealRegion = organization.RealRegion.ID.ToString();
+            if (organization.RealRegion.ID < 10)
+                idRealRegion = "0" + organization.RealRegion.ID.ToString();
+
+            return idRealRegion == organization.INN.PadLeft(2);
+        }
     }
 }

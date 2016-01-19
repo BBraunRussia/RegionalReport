@@ -99,14 +99,14 @@
             this.dgvLPUCompetitors.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvLPUCompetitors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvLPUCompetitors.ContextMenuStrip = this.contextMenuStrip1;
-            this.dgvLPUCompetitors.Location = new System.Drawing.Point(12, 263);
+            this.dgvLPUCompetitors.Location = new System.Drawing.Point(12, 239);
             this.dgvLPUCompetitors.MultiSelect = false;
             this.dgvLPUCompetitors.Name = "dgvLPUCompetitors";
             this.dgvLPUCompetitors.ReadOnly = true;
             this.dgvLPUCompetitors.RowHeadersVisible = false;
             this.dgvLPUCompetitors.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dgvLPUCompetitors.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvLPUCompetitors.Size = new System.Drawing.Size(753, 243);
+            this.dgvLPUCompetitors.Size = new System.Drawing.Size(753, 267);
             this.dgvLPUCompetitors.TabIndex = 3;
             this.dgvLPUCompetitors.CellContextMenuStripNeeded += new System.Windows.Forms.DataGridViewCellContextMenuStripNeededEventHandler(this.dgvLPUCompetitors_CellContextMenuStripNeeded);
             // 
@@ -157,7 +157,7 @@
             // 
             // tbSearch
             // 
-            this.tbSearch.Location = new System.Drawing.Point(338, 236);
+            this.tbSearch.Location = new System.Drawing.Point(498, 206);
             this.tbSearch.Name = "tbSearch";
             this.tbSearch.Size = new System.Drawing.Size(159, 20);
             this.tbSearch.TabIndex = 7;
@@ -167,7 +167,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(290, 239);
+            this.label3.Location = new System.Drawing.Point(450, 209);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(42, 13);
             this.label3.TabIndex = 6;
@@ -184,7 +184,7 @@
             // 
             // btnDeleteFilter
             // 
-            this.btnDeleteFilter.Location = new System.Drawing.Point(15, 234);
+            this.btnDeleteFilter.Location = new System.Drawing.Point(336, 204);
             this.btnDeleteFilter.Name = "btnDeleteFilter";
             this.btnDeleteFilter.Size = new System.Drawing.Size(90, 23);
             this.btnDeleteFilter.TabIndex = 10;
