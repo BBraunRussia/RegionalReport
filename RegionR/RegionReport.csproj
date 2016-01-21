@@ -117,6 +117,12 @@
     <Compile Include="Acc2015.Designer.cs">
       <DependentUpon>Acc2015.cs</DependentUpon>
     </Compile>
+    <Compile Include="addedit\AddConf.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="addedit\AddConf.Designer.cs">
+      <DependentUpon>AddConf.cs</DependentUpon>
+    </Compile>
     <Compile Include="addedit\AddEditCust.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -147,6 +153,12 @@
     <Compile Include="addedit\AddEditMat.Designer.cs">
       <DependentUpon>AddEditMat.cs</DependentUpon>
     </Compile>
+    <Compile Include="addedit\AddEditMAType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="addedit\AddEditMAType.Designer.cs">
+      <DependentUpon>AddEditMAType.cs</DependentUpon>
+    </Compile>
     <Compile Include="addedit\AddEditNomForAcc.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -170,6 +182,12 @@
     </Compile>
     <Compile Include="addedit\AddEditVisitPlanList.designer.cs">
       <DependentUpon>AddEditVisitPlanList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="addedit\AddMA_Name.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="addedit\AddMA_Name.Designer.cs">
+      <DependentUpon>AddMA_Name.cs</DependentUpon>
     </Compile>
     <Compile Include="addedit\AddRowReport.cs">
       <SubType>Form</SubType>
@@ -548,6 +566,9 @@
       <DependentUpon>Acc2015.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="addedit\AddConf.resx">
+      <DependentUpon>AddConf.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="addedit\AddEditCust.resx">
       <DependentUpon>AddEditCust.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -568,6 +589,9 @@
       <DependentUpon>AddEditMat.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="addedit\AddEditMAType.resx">
+      <DependentUpon>AddEditMAType.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="addedit\AddEditNomForAcc.resx">
       <DependentUpon>AddEditNomForAcc.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -583,6 +607,9 @@
     <EmbeddedResource Include="addedit\AddEditVisitPlanList.resx">
       <DependentUpon>AddEditVisitPlanList.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="addedit\AddMA_Name.resx">
+      <DependentUpon>AddMA_Name.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="addedit\AddRowReport.resx">
       <DependentUpon>AddRowReport.cs</DependentUpon>
