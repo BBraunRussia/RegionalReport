@@ -58,7 +58,10 @@ namespace RegionR
         public RR()
         {
             InitializeComponent();
-                        
+
+            DataBase.InitDataBase();
+            Provider.InitSQLProvider();
+
             /* Закрыть доступ ОPM на косвенные продажи * /
             btnAdd.Enabled =  false;
             btnEdit.Enabled = false;
@@ -208,6 +211,7 @@ namespace RegionR
                 trackersToolStripMenuItem.Visible = true;
                 userManagerToolStripMenuItem.Visible = true;
                 userBCToolStripMenuItem.Visible = true;
+                userRoleSFToolStripMenuItem.Visible = true;
             }
             if ((globalData.UserAccess == 2) || (globalData.UserAccess == 3) || (globalData.UserAccess == 4))
             {
@@ -1183,7 +1187,7 @@ namespace RegionR
                     SelAllReport();
                     tabControl1.SelectedIndex = 13;
                     tabControl1.Visible = true;
-                }                
+                }
                 if (tn1.Text == "Проверка косвенных продаж" || tn1.Text == "Проверка косвенных по номенклатуре" || tn1.Text == "Проверка косвенных по регионам")
                 {
                     if (tn1.Text == "Проверка косвенных по регионам")
@@ -1285,7 +1289,7 @@ namespace RegionR
                     tabControl1.SelectedIndex = 12;
                     tabControl1.Visible = true;
                     selPSAcc();
-                }                
+                }
                 else if (tn1.Parent.Text == "Косвенные продажи")
                 {
                     tabControl1.SelectedIndex = 15;
@@ -4319,7 +4323,7 @@ namespace RegionR
             foreach (DataRow row in dt.Rows)
             {
                 dgv.Rows.Add(row.ItemArray);
-              
+
                 if (dgv.Rows[i].Cells["vc_sum1"].Value.ToString() != "")
                     prVC[0] = Convert.ToDouble(dgv.Rows[i].Cells["vc_sum1"].Value);
                 else
@@ -11665,7 +11669,7 @@ namespace RegionR
                     sql sql1 = new sql();
                     DataTable dt1 = new DataTable();
 
-                        while (xlSh.get_Range("A" + i.ToString(), "A" + i.ToString()).Value2 != null)
+                    while (xlSh.get_Range("A" + i.ToString(), "A" + i.ToString()).Value2 != null)
                     {
                         String s1 = xlSh.get_Range("A" + i.ToString(), "A" + i.ToString()).Value2.ToString();//sdiv
                         String s2 = xlSh.get_Range("C" + i.ToString(), "C" + i.ToString()).Value2.ToString();//pdiv
@@ -16253,6 +16257,23 @@ namespace RegionR
             loadMaterialRegion2(globalData.input);
         }
 
+        private void organizationRRToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormOrganizationList formOrganizationList = new FormOrganizationList();
+            formOrganizationList.ShowDialog();
+        }
+
+        private void personSFToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormPersonList formPersonList = new FormPersonList();
+            formPersonList.ShowDialog();
+        }
+
+        private void userRoleSFToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormUserRoleSFList formUserRoleSFList = new FormUserRoleSFList();
+            formUserRoleSFList.ShowDialog();
+        }
 
         private void прометейToolStripMenuItem_Click(object sender, EventArgs e)
         {
