@@ -6,23 +6,23 @@ using System.Text;
 
 namespace DataLayer
 {
-    public enum DBNames { RegionalR_TestSF, Competitors };
+    public enum DBNames { RegionalR, Competitors };
 
-    public class SQL : IDataBase
+    public class SqlNew : IDataBase
     {
         private const int TIMEOUT = 600;
 
         private string _server = @"bbmru08";
-        private string _database = "RegionalR_TestSF";
+        private string _database;
         private bool _winAuth = false;
         private string _userID;
         private string _password;
 
         private SqlConnection _con;
 
-        public SQL()
+        public SqlNew()
         {
-            _database = DBNames.RegionalR_TestSF.ToString();
+            _database = DBNames.RegionalR.ToString();
 
             if (_server == @"bbmru09")
             {
