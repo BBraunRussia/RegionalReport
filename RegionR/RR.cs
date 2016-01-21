@@ -10010,7 +10010,7 @@ namespace RegionR
                 if (globalData.Div == "AE")
                     dt1 = sql1.GetRecords("exec SelAccPlanNYAE 0, @p1, @p2, 0", cbUsersAccNY.SelectedValue, globalData.Region);
                 else
-                    dt1 = sql1.GetRecords("exec SelAccPlanNY 0, @p1, @p2, 0", cbUsersAccNY.SelectedValue, globalData.Region);
+                    dt1 = sql1.GetRecords("exec SelAccPlanNYWithRub 0, @p1, @p2, 0", cbUsersAccNY.SelectedValue, globalData.Region);
 
                 if (dt1 == null)
                 {
@@ -10047,7 +10047,7 @@ namespace RegionR
                 if (globalData.Div == "AE")
                     dt1 = sql1.GetRecords("exec SelAccPlanNYAE 0, 0, @p1, 0", globalData.Region);
                 else
-                    dt1 = sql1.GetRecords("exec SelAccPlanNY 0, 0, @p1, 0", globalData.Region);
+                    dt1 = sql1.GetRecords("exec SelAccPlanNYWithRub 0, 0, @p1, 0", globalData.Region);
                 //_dgv4.DataSource = dt1;
 
                 if (dt1 == null)
