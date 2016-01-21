@@ -51,5 +51,10 @@ namespace RegionR
         public static string folderName { get; set; }
         public static string filePass { get; set; }
         public static int rowBegin { get; set; }
+
+        /* Маркетинг - ссылка на конференцию из справочника */
+        public static int maplan { get; set; }
+        public static string mayear { get; set; }
+        public static string matype { get; set; }
     }
 }

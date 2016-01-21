@@ -289,6 +289,7 @@ namespace RegionR
                         tn.Nodes.Add("Проверка косвенных продаж");
                         tn.Nodes.Add("По отчётам дистрибьюторов");
                         tn.Nodes.Add("Проверка косвенных по регионам");
+                        tn.Nodes.Add("Ассортиментные планы на год");
 
                         tn2 = tn.Nodes[0];
                         tn2.Nodes.Add("HC");
@@ -1160,6 +1161,7 @@ namespace RegionR
                 loadAccessPM();
                 loadPM();
                 loadRegPM();
+                loadMAType(cbTypeMAPM);
 
                 SelMAPM();
             }
@@ -1181,8 +1183,7 @@ namespace RegionR
                     SelAllReport();
                     tabControl1.SelectedIndex = 13;
                     tabControl1.Visible = true;
-                }
-
+                }                
                 if (tn1.Text == "Проверка косвенных продаж" || tn1.Text == "Проверка косвенных по номенклатуре" || tn1.Text == "Проверка косвенных по регионам")
                 {
                     if (tn1.Text == "Проверка косвенных по регионам")
@@ -1195,7 +1196,13 @@ namespace RegionR
 
                     checkKosReport();
                 }
-
+                if (tn1.Text == "Ассортиментные планы на год")
+                {
+                    tabControl1.SelectedTab = tabPage27;
+                    tabControl1.Visible = true;
+                    cbYearPlan.SelectedItem = globalData.year;
+                    SelComparePlan();
+                }
                 if (tn1.Text == "По отчётам дистрибьюторов")
                 {
                     tabControl1.SelectedIndex = 21;
@@ -1278,7 +1285,7 @@ namespace RegionR
                     tabControl1.SelectedIndex = 12;
                     tabControl1.Visible = true;
                     selPSAcc();
-                }
+                }                
                 else if (tn1.Parent.Text == "Косвенные продажи")
                 {
                     tabControl1.SelectedIndex = 15;
@@ -2572,14 +2579,16 @@ namespace RegionR
                             dgv.Columns.Add("prEuro", "% плана (Евро)");
 
                             dgv.Columns.Add("cyplan", year.ToString() + "\nплан, шт");
-                            dgv.Columns.Add("cydilcost", year.ToString() + "\nДил. цена\nбез НДС");
-                            dgv.Columns.Add("cyplanEuro", year.ToString() + "\nплан, EUR");
+                            dgv.Columns.Add("cydilcost", year.ToString() + "\nДил. цена\nбез НДС");                           
+                            dgv.Columns.Add("cyplanEuro", year.ToString() + "\nплан, EUR");                           
                             dgv.Columns.Add("prCyLyEuro", "План " + year.ToString() + "/\nФакт " + (year - 1).ToString() + " (%)");
                             
                             dgv.Columns.Add("nom_group", "");
                             dgv.Columns.Add("nom_seq", "");
                             dgv.Columns.Add("nom_year1", "");
-                            dgv.Columns.Add("nom_year2", "");
+                            dgv.Columns.Add("nom_year2", "");                            
+                            dgv.Columns.Add("cydilcostRub", year.ToString() + "\nДил. цена\nРУБ");
+                            dgv.Columns.Add("cyplanRub", year.ToString() + "\nплан, РУБ");
                             dgv.Columns.Add("upd", "");
                         }
                         else
@@ -4018,6 +4027,17 @@ namespace RegionR
 
         private void loadDynAll()
         {
+            if (button20.Text == "Общая")
+            {
+                label14.Visible = true;
+                cbRegions.Visible = true;
+            }
+            else
+            {
+                label14.Visible = false;
+                cbRegions.Visible = false;
+            }
+
             sql sql1 = new sql();
             DataTable dt1 = new DataTable();
             dt1 = sql1.GetRecords("exec SelAllDyn @p1, @p2", globalData.Div, cbYearDyn.SelectedItem.ToString());
@@ -4299,7 +4319,7 @@ namespace RegionR
             foreach (DataRow row in dt.Rows)
             {
                 dgv.Rows.Add(row.ItemArray);
-
+              
                 if (dgv.Rows[i].Cells["vc_sum1"].Value.ToString() != "")
                     prVC[0] = Convert.ToDouble(dgv.Rows[i].Cells["vc_sum1"].Value);
                 else
@@ -7233,6 +7253,17 @@ namespace RegionR
 
         private void selDynRD()
         {
+            if (button20.Text == "Общая")
+            {
+                label14.Visible = true;
+                cbRegions.Visible = true;
+            }
+            else
+            {
+                label14.Visible = false;
+                cbRegions.Visible = false;
+            }
+
             sql sql1 = new sql();
             DataTable dt1 = new DataTable();
             dt1 = sql1.GetRecords("exec SelDynRD @p1, @p2, @p3", globalData.Div, cbYearDyn.SelectedItem, globalData.RD);
@@ -8257,6 +8288,17 @@ namespace RegionR
             SelMA();
         }
 
+        void loadTheme()
+        {
+            sql sql1 = new sql();
+
+            globalData.update = false;
+            cbThemeMA.DataSource = sql1.GetRecords("exec MarkAct_Select_ConfTheme");
+            cbThemeMA.DisplayMember = "confth_name";
+            cbThemeMA.ValueMember = "confth_id";
+            globalData.update = true;
+        }
+
         private void SetVisMA()
         {
             tabControl1.SelectedIndex = 7;
@@ -8265,6 +8307,9 @@ namespace RegionR
             btnHideRegMA.Text = "Скрыть регионы";
             btnHideUsersMA.Text = "Скрыть РП";
             cbUsersMA.Visible = true;
+
+            loadMAType(cbTypeMA);
+            loadTheme();
 
             if (globalData.RD != String.Empty)
             {
@@ -8309,13 +8354,12 @@ namespace RegionR
 
             _dgv8.DataSource = null;
 
-
             string userID = "0";
             if (cbUsersMA.Visible)
                 userID = cbUsersMA.SelectedValue.ToString();
 
             string reg = "0";
-            if (globalData.Region == String.Empty)
+            if (globalData.Region == String.Empty)// && globalData.RD != String.Empty)
             {
                 if (cbRegMA.Visible)
                     reg = cbRegMA.SelectedValue.ToString();
@@ -8327,7 +8371,7 @@ namespace RegionR
             if (cbLPUMA.Visible && cbLPUMA.SelectedItem != null)
                 lpu = cbLPUMA.SelectedValue.ToString();
 
-            dt1 = sql1.GetRecords("exec SelMALPU @p1, @p2, @p3, @p4, @p5, @p6", globalData.Div, reg, userID, cbYearMA.SelectedItem, globalData.RD, lpu);
+            dt1 = sql1.GetRecords("exec SelMALPU @p1, @p2, @p3, @p4, @p5, @p6, @p7", globalData.Div, reg, userID, cbYearMA.SelectedItem, globalData.RD, lpu, cbTypeMA.SelectedValue);
 
             _dgv8.DataSource = dt1;
 
@@ -8350,7 +8394,10 @@ namespace RegionR
             _tempdgv.Columns["ma_id"].Visible = false;
             _tempdgv.Columns["db_id"].Visible = false;
             _tempdgv.Columns["num"].Visible = false;
-            _tempdgv.Columns["ma_name"].HeaderText = "Название";
+            _tempdgv.Columns["matype_name"].HeaderText = "Название типа";
+            _tempdgv.Columns["conf_name"].HeaderText = "Название конференции";
+            _tempdgv.Columns["confth_name"].HeaderText = "Тематика конференции";
+            _tempdgv.Columns["ma_name"].HeaderText = "Комментарий";
             _tempdgv.Columns["ma_plan1"].HeaderText = "План, квартал 1";
             _tempdgv.Columns["ma_plan2"].HeaderText = "План, квартал 2";
             _tempdgv.Columns["ma_plan3"].HeaderText = "План, квартал 3";
@@ -8363,10 +8410,19 @@ namespace RegionR
             _tempdgv.Columns["ma_fact_total"].HeaderText = "Факт, Итого";
             _tempdgv.Columns["lpu_sname"].HeaderText = "ЛПУ";
 
-            _tempdgv.Columns["ma_name"].Width = 200;
+            _tempdgv.Columns["matype_name"].Width = 200;
+            _tempdgv.Columns["matype_name"].Frozen = true;
+
+            _tempdgv.Columns["ma_name"].Width = 100;
             _tempdgv.Columns["ma_name"].Frozen = true;
 
-            for (int i = 4; i < _tempdgv.ColumnCount - 1; i++)
+            _tempdgv.Columns["conf_name"].Visible = false;
+            _tempdgv.Columns["conf_name"].Width = 200;
+
+            _tempdgv.Columns["confth_name"].Visible = false;
+            _tempdgv.Columns["confth_name"].Width = 200;
+
+            for (int i = 7; i < _tempdgv.ColumnCount - 1; i++)
             {
                 if ((i % 2) == 1)
                     _tempdgv.Columns[i].DefaultCellStyle.BackColor = bbgray5;
@@ -8657,17 +8713,20 @@ namespace RegionR
                 else if (tn1.Text == "Маркетинговые мероприятия")
                 {
                     ((Excel.Range)xlSh.Columns[1]).ColumnWidth = 50;
-                    ((Excel.Range)xlSh.Columns[2]).ColumnWidth = 16;
-                    ((Excel.Range)xlSh.Columns[3]).ColumnWidth = 16;
-                    ((Excel.Range)xlSh.Columns[4]).ColumnWidth = 16;
+                    ((Excel.Range)xlSh.Columns[2]).ColumnWidth = 25;
+                    ((Excel.Range)xlSh.Columns[3]).ColumnWidth = 25;
+                    ((Excel.Range)xlSh.Columns[4]).ColumnWidth = 50;
                     ((Excel.Range)xlSh.Columns[5]).ColumnWidth = 16;
                     ((Excel.Range)xlSh.Columns[6]).ColumnWidth = 16;
                     ((Excel.Range)xlSh.Columns[7]).ColumnWidth = 16;
                     ((Excel.Range)xlSh.Columns[8]).ColumnWidth = 16;
                     ((Excel.Range)xlSh.Columns[9]).ColumnWidth = 16;
-                    ((Excel.Range)xlSh.Columns[10]).ColumnWidth = 12;
-                    ((Excel.Range)xlSh.Columns[11]).ColumnWidth = 12;
-                    ((Excel.Range)xlSh.Columns[12]).ColumnWidth = 30;
+                    ((Excel.Range)xlSh.Columns[10]).ColumnWidth = 16;
+                    ((Excel.Range)xlSh.Columns[11]).ColumnWidth = 16;
+                    ((Excel.Range)xlSh.Columns[12]).ColumnWidth = 16;
+                    ((Excel.Range)xlSh.Columns[13]).ColumnWidth = 12;
+                    ((Excel.Range)xlSh.Columns[14]).ColumnWidth = 12;
+                    ((Excel.Range)xlSh.Columns[15]).ColumnWidth = 30;                    
                 }
                 else if (tn1.Text == "Выполнение плана")
                 {
@@ -8805,7 +8864,22 @@ namespace RegionR
 
         private void btnExcelMA_Click(object sender, EventArgs e)
         {
+            int flag = 0;
+            _dgv8.Columns["conf_name"].Visible = true;
+            _dgv8.Columns["confth_name"].Visible = true;
+
+            if (_dgv8.Columns["ma_name"].Visible == false)
+            {
+                _dgv8.Columns["ma_name"].Visible = true;
+                flag = 1;
+            }
+
             ExportInExcel(_dgv8);
+
+            _dgv8.Columns["conf_name"].Visible = false;
+            _dgv8.Columns["confth_name"].Visible = false;
+            if (flag == 1)
+                _dgv8.Columns["ma_name"].Visible = false;
         }
 
         private void _dgv13_SelectionChanged(object sender, EventArgs e)
@@ -9604,9 +9678,15 @@ namespace RegionR
             tabControl1.Visible = true;
 
             if (globalData.UserAccess == 1)
+            {
                 btnSaveAccNYDilCost.Visible = true;
+                button71.Visible = true;
+            }
             else
+            {
                 btnSaveAccNYDilCost.Visible = false;
+                button71.Visible = false;
+            }
 
             //load = false;
 
@@ -9669,8 +9749,8 @@ namespace RegionR
 
                 if (globalData.Div == "AE")
                     dt1 = sql1.GetRecords("exec SelAccPlanNYAE @p1, @p2, '', 0", cbLPU.SelectedValue, cbUsers2.SelectedValue);
-                else
-                    dt1 = sql1.GetRecords("exec SelAccPlanNYnew @p1, @p2, '', 0", cbLPU.SelectedValue, cbUsers2.SelectedValue);
+                else /*TODO: SelAccPlanNYnew*/
+                    dt1 = sql1.GetRecords("exec SelAccPlanNYWithRub @p1, @p2, '', 0", cbLPU.SelectedValue, cbUsers2.SelectedValue);
 
                 if (dt1 == null)
                 {
@@ -9736,13 +9816,19 @@ namespace RegionR
                 dgv.Columns["cyplan"].Visible = true;
                 dgv.Columns["pr"].Visible = true;
                 dgv.Columns["prCyLyEuro"].Visible = false;
+                dgv.Columns["cyDilCostRub"].Visible = true;
+                dgv.Columns["cyPlanRub"].Visible = true;
 
                 dgv.Columns["lyplanEuro"].DefaultCellStyle.Format = "N2";
                 dgv.Columns["cyplanEuro"].DefaultCellStyle.Format = "N2";
+                dgv.Columns["cyPlanRub"].DefaultCellStyle.Format = "N2";
+                dgv.Columns["cyDilCostRub"].DefaultCellStyle.Format = "N2";
 
                 dgv.Columns["nom_type"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                 dgv.Columns["lydilcost"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                 dgv.Columns["cydilcost"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                dgv.Columns["cyDilCostRub"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+               
 
                 dgv.Columns["pr"].DefaultCellStyle.Format = "N2";
                 dgv.Columns["pr"].Width = 50;
@@ -9759,6 +9845,9 @@ namespace RegionR
                 dgv.Columns["lyfact"].Visible = false;
                 dgv.Columns["cyplan"].Visible = false;                
                 dgv.Columns["pr"].Visible = false;
+                dgv.Columns["cyDilCostRub"].Visible = false;
+                dgv.Columns["cyPlanRub"].Visible = false;
+                dgv.Columns["prCyLyEuro"].Visible = true;
             }
 
             dgv.Columns["lyplan"].DefaultCellStyle.Format = "N0";
@@ -10121,6 +10210,7 @@ namespace RegionR
                 if (columnIndex == 15)
                 {
                     _dgv14.Rows[rowIndex].Cells["cyplanEuro"].Value = Convert.ToInt32(_dgv14.Rows[rowIndex].Cells["cyplan"].Value) * Convert.ToDouble(_dgv14.Rows[rowIndex].Cells["cydilcost"].Value);
+                    _dgv14.Rows[rowIndex].Cells["cyplanRub"].Value = Convert.ToInt32(_dgv14.Rows[rowIndex].Cells["cyplan"].Value) * Convert.ToDouble(_dgv14.Rows[rowIndex].Cells["cydilcostRub"].Value);
                 }
                 if (columnIndex == 16)
                 {
@@ -10147,12 +10237,14 @@ namespace RegionR
             }
         }
 
+        /*TODO: добавлена sumRub*/
         private void SubSumAccNY(int ColumnIndex, int RowIndex)
         {
             try
             {
                 int sum = 0;
                 Double sumEuro = 0;
+                Double sumRub = 0;
                 int i = RowIndex;
                 int greenindex = 0;
                 bool cicle2 = true;
@@ -10187,6 +10279,11 @@ namespace RegionR
                         if (_dgv14.Rows[i].Cells["cyplanEuro"].Value.ToString() != "")
                             sumEuro += Convert.ToDouble(_dgv14.Rows[i].Cells["cyplanEuro"].Value.ToString());
                     }
+                    if (_dgv14.Rows[i].Cells["cyplanRub"].Value != null)
+                    {
+                        if (_dgv14.Rows[i].Cells["cyplanRub"].Value.ToString() != "")
+                            sumRub += Convert.ToDouble(_dgv14.Rows[i].Cells["cyplanRub"].Value.ToString());
+                    }
                     i--;
                 }
 
@@ -10208,6 +10305,11 @@ namespace RegionR
                         {
                             if (_dgv14.Rows[i].Cells["cyplanEuro"].Value.ToString() != "")
                                 sumEuro += Convert.ToDouble(_dgv14.Rows[i].Cells["cyplanEuro"].Value.ToString());
+                        }
+                        if (_dgv14.Rows[i].Cells["cyplanRub"].Value != null)
+                        {
+                            if (_dgv14.Rows[i].Cells["cyplanRub"].Value.ToString() != "")
+                                sumRub += Convert.ToDouble(_dgv14.Rows[i].Cells["cyplanRub"].Value.ToString());
                         }
                         i++;
                     }
@@ -10231,11 +10333,19 @@ namespace RegionR
                         _dgv14.Rows[greenindex].Cells["cyplan"].Value = sum;
                     else if(_dgv14.Rows[greenindex].Cells["cyplan"].Value.ToString() != "")
                         _dgv14.Rows[greenindex].Cells["cyplan"].Value = "";
+                    
                     if (sumEuro != 0)
                         _dgv14.Rows[greenindex].Cells["cyplanEuro"].Value = sumEuro;
                     else if (_dgv14.Rows[greenindex].Cells["cyplanEuro"].Value.ToString() != "")
                         _dgv14.Rows[greenindex].Cells["cyplanEuro"].Value = "";
 
+                    if (globalData.Div == "HC")
+                    {
+                        if (sumRub != 0)
+                            _dgv14.Rows[greenindex].Cells["cyplanRub"].Value = sumRub;
+                        else if (_dgv14.Rows[greenindex].Cells["cyplanRub"].Value.ToString() != "")
+                            _dgv14.Rows[greenindex].Cells["cyplanRub"].Value = "";
+                    }
                     _dgv14.Rows[greenindex].Cells["upd"].Value = "1";
                     _dgv14.Rows[RowIndex].Cells["upd"].Value = "1";
 
@@ -10256,6 +10366,7 @@ namespace RegionR
             {
                 int sum = 0;
                 Double sumEuro = 0;
+                Double sumRub = 0;
                 int i = 7;
                 int greenindex = 0;
 
@@ -10270,6 +10381,11 @@ namespace RegionR
                     {
                         if ((_dgv14.Rows[i].Cells["cyplanEuro"].Value.ToString() != "") && (Convert.ToInt32(_dgv14.Rows[i].Cells["nom_id"].Value) < 100))
                             sumEuro += Convert.ToDouble(_dgv14.Rows[i].Cells["cyplanEuro"].Value.ToString());
+                    }
+                    if (_dgv14.Rows[i].Cells["cyplanRub"].Value != null)
+                    {
+                        if ((_dgv14.Rows[i].Cells["cyplanRub"].Value.ToString() != "") && (Convert.ToInt32(_dgv14.Rows[i].Cells["nom_id"].Value) < 100))
+                            sumEuro += Convert.ToDouble(_dgv14.Rows[i].Cells["cyplanRub"].Value.ToString());
                     }
                     i--;
                 }
@@ -10292,11 +10408,19 @@ namespace RegionR
                         _dgv14.Rows[greenindex].Cells["cyplan"].Value = sum;
                     else if (_dgv14.Rows[greenindex].Cells["cyplan"].Value.ToString() != "")
                         _dgv14.Rows[greenindex].Cells["cyplan"].Value = "";
+                    
                     if (sumEuro != 0)
                         _dgv14.Rows[greenindex].Cells["cyplanEuro"].Value = sumEuro;
                     else if (_dgv14.Rows[greenindex].Cells["cyplanEuro"].Value.ToString() != "")
                         _dgv14.Rows[greenindex].Cells["cyplanEuro"].Value = "";
 
+                    if (globalData.Div != "AE")
+                    {
+                        if (sumRub != 0)
+                            _dgv14.Rows[greenindex].Cells["cyplanRub"].Value = sumRub;
+                        else if (_dgv14.Rows[greenindex].Cells["cyplanRub"].Value.ToString() != "")
+                            _dgv14.Rows[greenindex].Cells["cyplanRub"].Value = "";
+                    }
                     _dgv14.Rows[greenindex].Cells["upd"].Value = "1";
                     _dgv14.Rows[RowIndex].Cells["upd"].Value = "1";
                 }
@@ -10331,8 +10455,20 @@ namespace RegionR
                                 row.Cells["cyplanEuro"].Value = 0;
 
                             load = true;
-
-                            sql1.GetRecords("exec fillAccPlanNY @p1, @p2, @p3, @p4", row.Cells["acc_id"].Value, row.Cells["cyplan"].Value, row.Cells["cyplanEuro"].Value, cbUsersAccNY.SelectedValue);
+                            /* Заполнение происходит на UserLPU 
+                             * fillAccPlanNY  - сохраняет сразу на ЛПУ
+                             * fillAccPlanNYold - сохраняет без рублей
+                             * 
+                             */
+                            int Rub = 0;
+                            if (globalData.Div == "HC")
+                            {
+                                if (row.Cells["cyplanRub"].Value.ToString() == "")
+                                    Rub = 75 * Convert.ToInt32(row.Cells["cyplanEuro"].Value);
+                                else
+                                    Rub = Convert.ToInt32(row.Cells["cyplanRub"].Value);
+                            }
+                            sql1.GetRecords("exec fillAccPlanNYoldWithRub @p1, @p2, @p3, @p4, @p5", row.Cells["acc_id"].Value, row.Cells["cyplan"].Value, row.Cells["cyplanEuro"].Value, cbUsersAccNY.SelectedValue, Rub);
                         }
                     }
                 }
@@ -11529,7 +11665,7 @@ namespace RegionR
                     sql sql1 = new sql();
                     DataTable dt1 = new DataTable();
 
-                    while (xlSh.get_Range("A" + i.ToString(), "A" + i.ToString()).Value2 != null)
+                        while (xlSh.get_Range("A" + i.ToString(), "A" + i.ToString()).Value2 != null)
                     {
                         String s1 = xlSh.get_Range("A" + i.ToString(), "A" + i.ToString()).Value2.ToString();//sdiv
                         String s2 = xlSh.get_Range("C" + i.ToString(), "C" + i.ToString()).Value2.ToString();//pdiv
@@ -15430,7 +15566,32 @@ namespace RegionR
             {
                 sql sql1 = new sql();
                 DataTable dt1 = new DataTable();
-                dt1 = sql1.GetRecords("exec fillMASBA @p1, @p2", _dgv8.Rows[e.Cell.RowIndex].Cells["ma_id"].Value.ToString(), _dgv8.Rows[e.Cell.RowIndex].Cells["db_id"].Value.ToString());
+                if (_dgv8.Rows[e.Cell.RowIndex].DefaultCellStyle.BackColor == bbgreen3)
+                {
+                    string userID = "0";
+                    if (cbUsersMA.Visible)
+                        userID = cbUsersMA.SelectedValue.ToString();
+
+                    string reg = "0";
+                    if (globalData.Region == String.Empty)
+                    {
+                        if (cbRegMA.Visible)
+                            reg = cbRegMA.SelectedValue.ToString();
+                    }
+                    else
+                        reg = globalData.Region;
+
+                    string lpu = "-1";
+                    if (cbLPUMA.Visible && cbLPUMA.SelectedItem != null)
+                        lpu = cbLPUMA.SelectedValue.ToString();
+
+                    dt1 = sql1.GetRecords("exec fillMASBA_All @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10", 
+                        globalData.Div, globalData.RD, userID, reg, lpu, cbYearMA.SelectedItem.ToString(),
+                        _dgv8.Rows[e.Cell.RowIndex].Cells["ma_fact1"].Value.ToString().Replace(",", "."), _dgv8.Rows[e.Cell.RowIndex].Cells["ma_fact2"].Value.ToString().Replace(",", "."),
+                        _dgv8.Rows[e.Cell.RowIndex].Cells["ma_fact3"].Value.ToString().Replace(",", "."), _dgv8.Rows[e.Cell.RowIndex].Cells["ma_fact4"].Value.ToString().Replace(",", "."));
+                }
+                else
+                    dt1 = sql1.GetRecords("exec fillMASBA @p1, @p2", _dgv8.Rows[e.Cell.RowIndex].Cells["ma_id"].Value.ToString(), _dgv8.Rows[e.Cell.RowIndex].Cells["db_id"].Value.ToString());
 
                 if (_dgvUpd.Rows != null)
                 {
@@ -15612,7 +15773,20 @@ namespace RegionR
 
         private void button61_Click(object sender, EventArgs e)
         {
+            int flag = 0;
+            _dgvMA2.Columns["conf_name"].Visible = true;
+
+            if (_dgvMA2.Columns["ma_name"].Visible == false)
+            {
+                _dgvMA2.Columns["ma_name"].Visible = true;
+                flag = 1;
+            }
+
             ExportInExcel(_dgvMA2);
+
+            _dgvMA2.Columns["conf_name"].Visible = false;
+            if (flag == 1)
+                _dgvMA2.Columns["ma_name"].Visible = false;
         }
 
         private void button57_Click(object sender, EventArgs e)
@@ -15673,7 +15847,6 @@ namespace RegionR
 
             _dgvMA2.DataSource = null;
 
-
             string userID = "0";
             if (comboBox12.Visible)
                 userID = comboBox12.SelectedValue.ToString();
@@ -15687,7 +15860,7 @@ namespace RegionR
             if (cbLPUMA.Visible && cbLPUMA.SelectedItem != null)
                 lpu = cbLPUMA.SelectedValue.ToString();
 
-            dt1 = sql1.GetRecords("exec SelMAPM @p1, @p2, @p3, @p4", "HC", reg, userID, comboBox9.SelectedItem);
+            dt1 = sql1.GetRecords("exec SelMAPM @p1, @p2, @p3, @p4, @p5", "HC", reg, userID, comboBox9.SelectedItem, cbTypeMAPM.SelectedValue);
 
             _dgvMA2.DataSource = dt1;
 
@@ -16079,6 +16252,327 @@ namespace RegionR
 
             loadMaterialRegion2(globalData.input);
         }
-      
+
+
+        private void прометейToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string folderName = "20438696_Прометей";
+
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+
+            openFileDialog1.InitialDirectory = @"J:\Information Technology\Development\отчётность региональщиков\Доработки\загрузка данных от дистрибюторов\" + folderName;
+            openFileDialog1.Filter = "Excel files (*.xlsx)|*.xlsx";
+            openFileDialog1.FilterIndex = 0;
+            openFileDialog1.RestoreDirectory = true;
+            openFileDialog1.Multiselect = false;
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                Cursor = Cursors.WaitCursor;
+                Excel.Application xlApp;
+                Excel.Workbook xlWorkBook;
+                Excel.Worksheet xlSh;
+                xlApp = new Excel.Application();
+                xlWorkBook = xlApp.Workbooks.Open(openFileDialog1.FileName, 0, true, 5, "", "", true, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "\t", false, false, 0, true, 1, 0);
+
+                xlSh = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+
+                object misValue = System.Reflection.Missing.Value;
+                int err = 0;
+
+                InputDialog ind = new InputDialog("Год", "Введите год", true);
+                ind.ShowDialog();
+
+                if (ind.DialogResult == DialogResult.Cancel)
+                    return;
+
+                String year = globalData.input;
+
+                InputDialog id = new InputDialog("Введите месяц", "В формате 1, 2, 3...", true);
+                id.ShowDialog();
+
+                if (ind.DialogResult == DialogResult.Cancel)
+                    return;
+
+                string month = globalData.input;
+
+                string s1 = year + "-" + month + "-01";
+
+                String header = String.Empty;
+
+                string s2 = folderName.Split('_')[0];
+
+                int i = 11;
+
+                try
+                {
+                    sql sql1 = new sql();
+
+                    header = "A";
+                    while (xlSh.get_Range("A" + i.ToString(), "A" + i.ToString()).Value2 != null)
+                    {
+                        header = "A";
+                        string s6 = xlSh.get_Range("A" + i.ToString(), "A" + i.ToString()).Value2.ToString();//LPU
+
+                        string s3 = s6;
+
+                        i++;
+                        while ((bool)(xlSh.get_Range("A" + i.ToString(), "A" + i.ToString()).Font.Bold) == false)
+                        {
+                            if (xlSh.get_Range("D" + i.ToString(), "D" + i.ToString()).Value2.ToString() == " ")
+                                break;
+                            header = "A";
+                            string s4 = xlSh.get_Range("A" + i.ToString(), "A" + i.ToString()).Value2.ToString().Replace("\"", "-");//matName
+                            header = "D";
+                            string s5 = xlSh.get_Range("D" + i.ToString(), "D" + i.ToString()).Value2.ToString().Replace(',', '.');//count
+
+                            string res = sql1.GetRecordsOne("exec InsRepDist 0, @p1, @p2, @p3, @p4, @p5, @p6", s1, s2, s3, s4, s5, s6);
+                            if (res != "1")
+                            {
+                                xlSh.Cells[i, 5] = res;
+                                err++;
+                            }
+                            i++;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ошибка при чтении файла. Системная ошибка: " + ex.Message + " В ячейке " + header + i.ToString(), "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    err++;
+                }
+                finally
+                {
+                    if (err == 0)
+                    {
+                        MessageBox.Show("Загрузка завершена. Ошибок не найдено.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        xlWorkBook.Close(true, misValue, misValue);
+                        xlApp.Quit();
+
+                        releaseObject(xlSh);
+                        releaseObject(xlWorkBook);
+                        releaseObject(xlApp);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Загрузка завершена. Найдено " + err.ToString() + " ошибок.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        xlApp.Visible = true;
+                    }
+                }
+                Cursor = Cursors.Default;
+            }
+        }
+
+
+        private void _dgvUpd_SelectionChanged(object sender, EventArgs e)
+        {
+            CountSelectCell(_dgvUpd);
+        }
+
+        private void button71_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                sql sql1 = new sql();
+
+                load = false;
+
+                if (_dgv14.Rows[0].Cells["nom_id"].Value.ToString() != "0")
+                {
+                    foreach (DataGridViewRow row in _dgv14.Rows)
+                    {
+                        if (row.Cells["upd"].Value != null)
+                        {
+                            if (row.Cells["cyDilCost"].Value.ToString() == "")
+                                continue;
+                            sql1.GetRecords("exec fillAccPlanDilCostRub @p1, @p2, @p3", row.Cells["nom_id"].Value, row.Cells["cyDilCost"].Value, globalData.UserID);
+                            load = true;
+                        }
+                    }
+                }
+                MessageBox.Show("Информация по дилерским ценам сохранена.", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (load)
+                    loadAccPlanByLPUNY(_dgv14, cbLPUAccNY);
+
+                load = true;
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show("Не удалось сохранить информацию по дилерским ценам, системная ошибка: " + err.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnFillPlan_Click(object sender, EventArgs e)
+        {
+            FillComparePlan();
+            SelComparePlan();
+        }
+
+        void FillComparePlan()
+        {
+            sql sql1 = new sql();
+
+            foreach (DataGridViewCell cell in dgvCheckPlan.SelectedCells)
+            {
+                String delta = dgvCheckPlan.Rows[cell.RowIndex].Cells[9].Value.ToString();
+                if (delta == "0")
+                {
+                    delta = dgvCheckPlan.Rows[cell.RowIndex].Cells[10].Value.ToString();
+                    if (delta == "0")
+                        delta = dgvCheckPlan.Rows[cell.RowIndex].Cells[11].Value.ToString();
+                }
+
+                if (dgvCheckPlan.Rows[cell.RowIndex].Cells[1].Value.ToString() != String.Empty && delta != "0")
+                {
+                    sql1.GetRecords("exec TransfAccUserLPUOnLPU @p1, @p2", dgvCheckPlan.Rows[cell.RowIndex].Cells[1].Value.ToString(), cbYearPlan.SelectedItem);
+                }
+            }
+        }
+
+        private void btnClearPlan_Click(object sender, EventArgs e)
+        {
+            SelComparePlan();
+        }
+
+        void formatComparePlan()
+        {
+            dgvCheckPlan.Columns["sumplEurUser"].DefaultCellStyle.Format = "N3";
+            dgvCheckPlan.Columns["sumplRubUser"].DefaultCellStyle.Format = "N3";
+            dgvCheckPlan.Columns["sumplRub"].DefaultCellStyle.Format = "N3";
+            dgvCheckPlan.Columns["sumplEur"].DefaultCellStyle.Format = "N3";
+            dgvCheckPlan.Columns["sumplUser"].DefaultCellStyle.Format = "N3";
+            dgvCheckPlan.Columns["sumpl"].DefaultCellStyle.Format = "N3";
+            dgvCheckPlan.Columns["delta"].DefaultCellStyle.Format = "N3";
+            dgvCheckPlan.Columns["deltaEur"].DefaultCellStyle.Format = "N3";
+            dgvCheckPlan.Columns["deltaRub"].DefaultCellStyle.Format = "N3";
+            
+            dgvCheckPlan.Columns["lpuID"].Visible = false;
+            
+            dgvCheckPlan.Columns["regName"].HeaderText = "Регион";
+            dgvCheckPlan.Columns["lpuSName"].HeaderText = "ЛПУ";
+            dgvCheckPlan.Columns["sumplUser"].HeaderText = "Сумма шт. на UserLPU";
+            dgvCheckPlan.Columns["sumplEurUser"].HeaderText = "Сумма евро на UserLPU";
+            dgvCheckPlan.Columns["sumplRubUser"].HeaderText = "Сумма руб. на UserLPU";
+            dgvCheckPlan.Columns["sumplRub"].HeaderText = "Сумма руб. на ЛПУ";
+            dgvCheckPlan.Columns["sumplEur"].HeaderText = "Сумма евро на ЛПУ";
+            dgvCheckPlan.Columns["sumpl"].HeaderText = "Сумма шт.";
+            dgvCheckPlan.Columns["delta"].HeaderText = "Разница шт.";
+            dgvCheckPlan.Columns["deltaEur"].HeaderText = "Разница евро";
+            dgvCheckPlan.Columns["deltaRub"].HeaderText = "Разница руб.";
+
+            dgvCheckPlan.Columns["sumplEurUser"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvCheckPlan.Columns["sumplRubUser"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvCheckPlan.Columns["sumplRub"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvCheckPlan.Columns["sumplEur"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvCheckPlan.Columns["sumplUser"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvCheckPlan.Columns["sumpl"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvCheckPlan.Columns["delta"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvCheckPlan.Columns["deltaEur"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvCheckPlan.Columns["deltaRub"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            
+        }
+
+        void SelComparePlan()
+        {
+            sql sql1 = new sql();
+            DataTable dt = sql1.GetRecords("exec CompareAccPlan @p1", cbYearPlan.SelectedItem);
+
+            if (dt != null)
+                dgvCheckPlan.DataSource = dt;
+
+            formatComparePlan();
+        }
+        
+        String DelComparePlan()
+        {
+            sql sql1 = new sql();
+            String res = "Не удалось удалить план! Проверьте, что Вы выделили целиком строку!";
+
+            foreach (DataGridViewRow row in dgvCheckPlan.SelectedRows)
+            {
+                res = sql1.GetRecordsOne("exec DelCompareAccPlan @p1, @p2", cbYearPlan.SelectedItem, row.Cells["lpuID"].Value.ToString());               
+            }
+
+            return res;
+        }
+
+        private void button72_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = MessageBox.Show("Вы уверены, что хотите удалить план с ЛПУ?\n Для удаления выделите ВСЮ СТРОКУ!!!", "Удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dr == System.Windows.Forms.DialogResult.Yes)
+            {
+                DelComparePlan();
+            }
+
+        }
+
+        private void cbTypeMA_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (_dgv8.DataSource != null)
+                SelMA();
+        }
+
+        private void _dgv8_MouseDown(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void toolStripMenuItem7_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DataGridView dgv = _dgv8;
+                switch (tabControl1.SelectedIndex)
+                {
+                    case 7:
+                        {
+                            dgv = _dgv8;
+                            break;
+                        }
+                    case 28:
+                        {
+                            dgv = _dgvMA2;
+                            break;
+                        }
+                }
+
+
+                if (dgv.Columns["ma_name"].Visible == true)
+                    dgv.Columns["ma_name"].Visible = false;
+                else
+                    dgv.Columns["ma_name"].Visible = true;
+            }
+            catch
+            {
+            }
+        }
+
+        private void cbTypeMA_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            if (_dgv8.DataSource != null)
+                SelMA();
+        }
+
+        void loadMAType(ComboBox cb)
+        {
+            sql sql1 = new sql();
+            DataTable dt1 = new DataTable();
+
+            dt1 = sql1.GetRecords("exec MarkAct_Sel_Type @p1", 1);
+            fillComboBox(dt1, cb, "matype_name", "matype_id");
+        }
+
+        private void cbTypeMAPM_Click(object sender, EventArgs e)
+        {
+            if (_dgvMA2.DataSource != null)
+                SelMAPM();
+        }
+
+        private void cbTypeMAPM_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (_dgvMA2.DataSource != null)
+                SelMAPM();
+        }
+
     }
 }

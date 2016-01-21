@@ -48,7 +48,8 @@ namespace RegionR
                 s1 = s2[1];
             }
 
-            //s1 = "prokekru";
+            //s1 = "prokekru"; 
+            
 
             DataTable dt1 = new DataTable();
             dt1 = sql1.GetRecords("exec UserLogin @p1, @p2", s1, globalData.UserAccess);

@@ -61,6 +61,16 @@ namespace RegionR.other
             else
                 checkBox2.Checked = true;
 
+            if (dt1.Rows[0].ItemArray[6].ToString() == "0")
+                rbAccHCRead.Checked = true;
+            else  
+                rbAccHCEdit.Checked = true;
+
+            if (dt1.Rows[0].ItemArray[7].ToString() == "0")
+                rbAccAERead.Checked = true;
+            else  
+                rbAccAEEdit.Checked = true;
+
         }
 
         private void btnApply_Click(object sender, EventArgs e)
@@ -72,9 +82,9 @@ namespace RegionR.other
             if(tbRate.Text != String.Empty)
                 sql1.GetRecordsOne("exec SetRate @p1, @p2", dateTimePicker2.Value.Year + "-" + dateTimePicker2.Value.Month + "-01", Convert.ToDouble(tbRate.Text));
 
-            sql1.GetRecordsOne("exec SetSettings @p1, @p2, @p3, @p4, @p5, @p6", 
-                Convert.ToInt32(rbAPHCEdit.Checked), Convert.ToInt32(rbAPAEEdit.Checked), Convert.ToInt32(rbAPOMEdit.Checked), 
-                yearAccPlan.Text, Convert.ToInt32(checkBox1.Checked), Convert.ToInt32(checkBox2.Checked));
+            sql1.GetRecordsOne("exec SetSettings @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8", 
+                Convert.ToInt32(rbAPHCEdit.Checked), Convert.ToInt32(rbAPAEEdit.Checked), Convert.ToInt32(rbAPOMEdit.Checked),
+                yearAccPlan.Text, Convert.ToInt32(checkBox1.Checked), Convert.ToInt32(checkBox2.Checked), Convert.ToInt32(rbAccHCEdit.Checked), Convert.ToInt32(rbAccAEEdit.Checked));
 
             MessageBox.Show("Настройки сохранены", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Information);
 

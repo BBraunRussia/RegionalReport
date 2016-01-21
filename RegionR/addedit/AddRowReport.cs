@@ -440,6 +440,7 @@ namespace RegionR.addedit
             validation(e);
         }
         
+        /* TODO: Добавила год */
         private void cbGroup_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (load)
@@ -447,7 +448,7 @@ namespace RegionR.addedit
                 sql sql1 = new sql();
 
                 DataTable dt = new DataTable();
-                dt = sql1.GetRecords("exec SelNomProd @p1", cbGroup.SelectedValue);
+                dt = sql1.GetRecords("exec SelNomProd @p1, @p2", cbGroup.SelectedValue, dateTimePicker1.Value.Year.ToString());
                 cbNom.DataSource = dt;
                 cbNom.DisplayMember = "nom_name";
                 cbNom.ValueMember = "nom_id";

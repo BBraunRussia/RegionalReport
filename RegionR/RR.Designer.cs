@@ -315,6 +315,8 @@
             this.cbRegAcc = new System.Windows.Forms.ComboBox();
             this._dgv7 = new System.Windows.Forms.DataGridView();
             this.tabPage8 = new System.Windows.Forms.TabPage();
+            this.cbThemeMA = new System.Windows.Forms.ComboBox();
+            this.cbTypeMA = new System.Windows.Forms.ComboBox();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this._dgvUpd = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -323,6 +325,12 @@
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this._dgv8 = new System.Windows.Forms.DataGridView();
+            this._cms8 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.delToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
             this.button47 = new System.Windows.Forms.Button();
             this.button46 = new System.Windows.Forms.Button();
             this.btnHideLPUMA = new System.Windows.Forms.Button();
@@ -387,6 +395,7 @@
             this.dateTimePicker7 = new System.Windows.Forms.DateTimePicker();
             this._dgv13 = new System.Windows.Forms.DataGridView();
             this.tabPage13 = new System.Windows.Forms.TabPage();
+            this.button71 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button44 = new System.Windows.Forms.Button();
             this.bBC = new System.Windows.Forms.Button();
@@ -613,6 +622,7 @@
             this.dtp23 = new System.Windows.Forms.DateTimePicker();
             this._dgvRentRD = new System.Windows.Forms.DataGridView();
             this.tabPage25 = new System.Windows.Forms.TabPage();
+            this.cbTypeMAPM = new System.Windows.Forms.ComboBox();
             this.button57 = new System.Windows.Forms.Button();
             this.button58 = new System.Windows.Forms.Button();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
@@ -641,10 +651,12 @@
             this.button67 = new System.Windows.Forms.Button();
             this.button49 = new System.Windows.Forms.Button();
             this._dgvStorno = new System.Windows.Forms.DataGridView();
-            this._cms8 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.delToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabPage27 = new System.Windows.Forms.TabPage();
+            this.button72 = new System.Windows.Forms.Button();
+            this.cbYearPlan = new System.Windows.Forms.ComboBox();
+            this.btnFillPlan = new System.Windows.Forms.Button();
+            this.btnClearPlan = new System.Windows.Forms.Button();
+            this.dgvCheckPlan = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.prBar1 = new System.Windows.Forms.ProgressBar();
@@ -676,6 +688,7 @@
             this.splitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._dgvUpd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._dgv8)).BeginInit();
+            this._cms8.SuspendLayout();
             this.tabPage9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._dgv9)).BeginInit();
             this.tabPage10.SuspendLayout();
@@ -730,7 +743,8 @@
             ((System.ComponentModel.ISupportInitialize)(this._dgvMA2)).BeginInit();
             this.tabPage26.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._dgvStorno)).BeginInit();
-            this._cms8.SuspendLayout();
+            this.tabPage27.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCheckPlan)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -2021,6 +2035,7 @@
             this.tabControl1.Controls.Add(this.tabPage24);
             this.tabControl1.Controls.Add(this.tabPage25);
             this.tabControl1.Controls.Add(this.tabPage26);
+            this.tabControl1.Controls.Add(this.tabPage27);
             this.tabControl1.ItemSize = new System.Drawing.Size(0, 1);
             this.tabControl1.Location = new System.Drawing.Point(6, 3);
             this.tabControl1.Name = "tabControl1";
@@ -3133,6 +3148,8 @@
             // 
             // tabPage8
             // 
+            this.tabPage8.Controls.Add(this.cbThemeMA);
+            this.tabPage8.Controls.Add(this.cbTypeMA);
             this.tabPage8.Controls.Add(this.splitContainer2);
             this.tabPage8.Controls.Add(this.button47);
             this.tabPage8.Controls.Add(this.button46);
@@ -3155,6 +3172,26 @@
             this.tabPage8.TabIndex = 7;
             this.tabPage8.Text = "tabPage8";
             this.tabPage8.UseVisualStyleBackColor = true;
+            // 
+            // cbThemeMA
+            // 
+            this.cbThemeMA.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbThemeMA.FormattingEnabled = true;
+            this.cbThemeMA.Location = new System.Drawing.Point(480, 34);
+            this.cbThemeMA.Name = "cbThemeMA";
+            this.cbThemeMA.Size = new System.Drawing.Size(20, 21);
+            this.cbThemeMA.TabIndex = 97;
+            this.cbThemeMA.Visible = false;
+            // 
+            // cbTypeMA
+            // 
+            this.cbTypeMA.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbTypeMA.FormattingEnabled = true;
+            this.cbTypeMA.Location = new System.Drawing.Point(297, 34);
+            this.cbTypeMA.Name = "cbTypeMA";
+            this.cbTypeMA.Size = new System.Drawing.Size(170, 21);
+            this.cbTypeMA.TabIndex = 96;
+            this.cbTypeMA.SelectedIndexChanged += new System.EventHandler(this.cbTypeMA_SelectedIndexChanged);
             // 
             // splitContainer2
             // 
@@ -3194,6 +3231,7 @@
             this._dgvUpd.ReadOnly = true;
             this._dgvUpd.Size = new System.Drawing.Size(296, 100);
             this._dgvUpd.TabIndex = 76;
+            this._dgvUpd.SelectionChanged += new System.EventHandler(this._dgvUpd_SelectionChanged);
             // 
             // Column1
             // 
@@ -3243,7 +3281,7 @@
             dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this._dgv8.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle22;
             this._dgv8.ColumnHeadersHeight = 35;
-            this._dgv8.ContextMenuStrip = this._cms1;
+            this._dgv8.ContextMenuStrip = this._cms8;
             dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle23.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle23.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
@@ -3274,6 +3312,51 @@
             this._dgv8.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this._dgv8_CellMouseEnter);
             this._dgv8.CellStateChanged += new System.Windows.Forms.DataGridViewCellStateChangedEventHandler(this._dgv8_CellStateChanged);
             this._dgv8.SelectionChanged += new System.EventHandler(this._dgv8_SelectionChanged);
+            // 
+            // _cms8
+            // 
+            this._cms8.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addToolStripMenuItem,
+            this.editToolStripMenuItem,
+            this.delToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.toolStripMenuItem7});
+            this._cms8.Name = "_cms8";
+            this._cms8.Size = new System.Drawing.Size(248, 98);
+            this._cms8.Opening += new System.ComponentModel.CancelEventHandler(this._cms8_Opening);
+            // 
+            // addToolStripMenuItem
+            // 
+            this.addToolStripMenuItem.Name = "addToolStripMenuItem";
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
+            this.addToolStripMenuItem.Text = "Добавить";
+            this.addToolStripMenuItem.Click += new System.EventHandler(this.addToolStripMenuItem_Click);
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
+            this.editToolStripMenuItem.Text = "Редактировать";
+            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
+            // 
+            // delToolStripMenuItem
+            // 
+            this.delToolStripMenuItem.Name = "delToolStripMenuItem";
+            this.delToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
+            this.delToolStripMenuItem.Text = "Удалить";
+            this.delToolStripMenuItem.Click += new System.EventHandler(this.delToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(244, 6);
+            // 
+            // toolStripMenuItem7
+            // 
+            this.toolStripMenuItem7.Name = "toolStripMenuItem7";
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(247, 22);
+            this.toolStripMenuItem7.Text = "Скрыть/показать комментарий";
+            this.toolStripMenuItem7.Click += new System.EventHandler(this.toolStripMenuItem7_Click);
             // 
             // button47
             // 
@@ -3388,7 +3471,7 @@
             // 
             // btnMA_del
             // 
-            this.btnMA_del.Location = new System.Drawing.Point(592, 30);
+            this.btnMA_del.Location = new System.Drawing.Point(711, 32);
             this.btnMA_del.Name = "btnMA_del";
             this.btnMA_del.Size = new System.Drawing.Size(65, 23);
             this.btnMA_del.TabIndex = 82;
@@ -3398,9 +3481,9 @@
             // 
             // btnMA_edit
             // 
-            this.btnMA_edit.Location = new System.Drawing.Point(483, 30);
+            this.btnMA_edit.Location = new System.Drawing.Point(592, 32);
             this.btnMA_edit.Name = "btnMA_edit";
-            this.btnMA_edit.Size = new System.Drawing.Size(103, 23);
+            this.btnMA_edit.Size = new System.Drawing.Size(113, 23);
             this.btnMA_edit.TabIndex = 81;
             this.btnMA_edit.Text = "Редактировать";
             this.btnMA_edit.UseVisualStyleBackColor = true;
@@ -3408,7 +3491,7 @@
             // 
             // btnMA_fill
             // 
-            this.btnMA_fill.Location = new System.Drawing.Point(387, 30);
+            this.btnMA_fill.Location = new System.Drawing.Point(506, 32);
             this.btnMA_fill.Name = "btnMA_fill";
             this.btnMA_fill.Size = new System.Drawing.Size(80, 23);
             this.btnMA_fill.TabIndex = 80;
@@ -4108,6 +4191,7 @@
             // 
             // tabPage13
             // 
+            this.tabPage13.Controls.Add(this.button71);
             this.tabPage13.Controls.Add(this.groupBox1);
             this.tabPage13.Controls.Add(this.btnExportInExcelAccNY);
             this.tabPage13.Controls.Add(this.btnSaveAccNYDilCost);
@@ -4127,6 +4211,16 @@
             this.tabPage13.Text = "tabPage13";
             this.tabPage13.UseVisualStyleBackColor = true;
             // 
+            // button71
+            // 
+            this.button71.Location = new System.Drawing.Point(777, 34);
+            this.button71.Name = "button71";
+            this.button71.Size = new System.Drawing.Size(135, 23);
+            this.button71.TabIndex = 70;
+            this.button71.Text = "Сохранить цены, руб.";
+            this.button71.UseVisualStyleBackColor = true;
+            this.button71.Click += new System.EventHandler(this.button71_Click);
+            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.button44);
@@ -4134,7 +4228,7 @@
             this.groupBox1.Controls.Add(this.bICU);
             this.groupBox1.Controls.Add(this.bCN);
             this.groupBox1.Controls.Add(this.bCC);
-            this.groupBox1.Location = new System.Drawing.Point(516, 2);
+            this.groupBox1.Location = new System.Drawing.Point(445, 3);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(326, 54);
             this.groupBox1.TabIndex = 69;
@@ -4193,10 +4287,9 @@
             // 
             // btnExportInExcelAccNY
             // 
-            this.btnExportInExcelAccNY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExportInExcelAccNY.Location = new System.Drawing.Point(758, 60);
+            this.btnExportInExcelAccNY.Location = new System.Drawing.Point(777, 6);
             this.btnExportInExcelAccNY.Name = "btnExportInExcelAccNY";
-            this.btnExportInExcelAccNY.Size = new System.Drawing.Size(108, 23);
+            this.btnExportInExcelAccNY.Size = new System.Drawing.Size(135, 23);
             this.btnExportInExcelAccNY.TabIndex = 61;
             this.btnExportInExcelAccNY.Text = "Выгрузка в Excel";
             this.btnExportInExcelAccNY.UseVisualStyleBackColor = true;
@@ -4204,19 +4297,19 @@
             // 
             // btnSaveAccNYDilCost
             // 
-            this.btnSaveAccNYDilCost.Location = new System.Drawing.Point(606, 60);
+            this.btnSaveAccNYDilCost.Location = new System.Drawing.Point(777, 60);
             this.btnSaveAccNYDilCost.Name = "btnSaveAccNYDilCost";
-            this.btnSaveAccNYDilCost.Size = new System.Drawing.Size(114, 23);
+            this.btnSaveAccNYDilCost.Size = new System.Drawing.Size(135, 23);
             this.btnSaveAccNYDilCost.TabIndex = 60;
-            this.btnSaveAccNYDilCost.Text = "Сохранить цены";
+            this.btnSaveAccNYDilCost.Text = "Сохранить цены, евро";
             this.btnSaveAccNYDilCost.UseVisualStyleBackColor = true;
             this.btnSaveAccNYDilCost.Click += new System.EventHandler(this.btnSaveAccNYDilCost_Click);
             // 
             // btnSaveAccNY
             // 
-            this.btnSaveAccNY.Location = new System.Drawing.Point(516, 62);
+            this.btnSaveAccNY.Location = new System.Drawing.Point(564, 63);
             this.btnSaveAccNY.Name = "btnSaveAccNY";
-            this.btnSaveAccNY.Size = new System.Drawing.Size(75, 23);
+            this.btnSaveAccNY.Size = new System.Drawing.Size(104, 23);
             this.btnSaveAccNY.TabIndex = 59;
             this.btnSaveAccNY.Text = "Сохранить";
             this.btnSaveAccNY.UseVisualStyleBackColor = true;
@@ -4224,7 +4317,7 @@
             // 
             // btnHideUsersAccNY
             // 
-            this.btnHideUsersAccNY.Location = new System.Drawing.Point(292, 6);
+            this.btnHideUsersAccNY.Location = new System.Drawing.Point(228, 6);
             this.btnHideUsersAccNY.Name = "btnHideUsersAccNY";
             this.btnHideUsersAccNY.Size = new System.Drawing.Size(150, 23);
             this.btnHideUsersAccNY.TabIndex = 58;
@@ -4265,7 +4358,7 @@
             // lbUsersAccNY
             // 
             this.lbUsersAccNY.AutoSize = true;
-            this.lbUsersAccNY.Location = new System.Drawing.Point(292, 42);
+            this.lbUsersAccNY.Location = new System.Drawing.Point(228, 42);
             this.lbUsersAccNY.Name = "lbUsersAccNY";
             this.lbUsersAccNY.Size = new System.Drawing.Size(83, 13);
             this.lbUsersAccNY.TabIndex = 54;
@@ -4275,7 +4368,7 @@
             // 
             this.cbUsersAccNY.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbUsersAccNY.FormattingEnabled = true;
-            this.cbUsersAccNY.Location = new System.Drawing.Point(292, 62);
+            this.cbUsersAccNY.Location = new System.Drawing.Point(228, 62);
             this.cbUsersAccNY.Name = "cbUsersAccNY";
             this.cbUsersAccNY.Size = new System.Drawing.Size(211, 21);
             this.cbUsersAccNY.TabIndex = 53;
@@ -4929,6 +5022,7 @@
             this.dateTimePicker14.Name = "dateTimePicker14";
             this.dateTimePicker14.Size = new System.Drawing.Size(84, 20);
             this.dateTimePicker14.TabIndex = 34;
+            this.dateTimePicker14.Value = new System.DateTime(2015, 12, 31, 0, 0, 0, 0);
             // 
             // dateTimePicker13
             // 
@@ -6805,6 +6899,7 @@
             // 
             // tabPage25
             // 
+            this.tabPage25.Controls.Add(this.cbTypeMAPM);
             this.tabPage25.Controls.Add(this.button57);
             this.tabPage25.Controls.Add(this.button58);
             this.tabPage25.Controls.Add(this.splitContainer4);
@@ -6824,6 +6919,17 @@
             this.tabPage25.TabIndex = 28;
             this.tabPage25.Text = "tabPage25";
             this.tabPage25.UseVisualStyleBackColor = true;
+            // 
+            // cbTypeMAPM
+            // 
+            this.cbTypeMAPM.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbTypeMAPM.FormattingEnabled = true;
+            this.cbTypeMAPM.Location = new System.Drawing.Point(690, 5);
+            this.cbTypeMAPM.Name = "cbTypeMAPM";
+            this.cbTypeMAPM.Size = new System.Drawing.Size(223, 21);
+            this.cbTypeMAPM.TabIndex = 109;
+            this.cbTypeMAPM.SelectedIndexChanged += new System.EventHandler(this.cbTypeMAPM_SelectedIndexChanged);
+            this.cbTypeMAPM.Click += new System.EventHandler(this.cbTypeMAPM_Click);
             // 
             // button57
             // 
@@ -7157,36 +7263,83 @@
             this._dgvStorno.TabIndex = 0;
             this._dgvStorno.SelectionChanged += new System.EventHandler(this._dgvStorno_SelectionChanged);
             // 
-            // _cms8
+            // tabPage27
             // 
-            this._cms8.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addToolStripMenuItem,
-            this.editToolStripMenuItem,
-            this.delToolStripMenuItem});
-            this._cms8.Name = "_cms8";
-            this._cms8.Size = new System.Drawing.Size(155, 70);
-            this._cms8.Opening += new System.ComponentModel.CancelEventHandler(this._cms8_Opening);
+            this.tabPage27.Controls.Add(this.button72);
+            this.tabPage27.Controls.Add(this.cbYearPlan);
+            this.tabPage27.Controls.Add(this.btnFillPlan);
+            this.tabPage27.Controls.Add(this.btnClearPlan);
+            this.tabPage27.Controls.Add(this.dgvCheckPlan);
+            this.tabPage27.Location = new System.Drawing.Point(4, 5);
+            this.tabPage27.Name = "tabPage27";
+            this.tabPage27.Size = new System.Drawing.Size(918, 490);
+            this.tabPage27.TabIndex = 30;
+            this.tabPage27.Text = "tabPage27";
+            this.tabPage27.UseVisualStyleBackColor = true;
             // 
-            // addToolStripMenuItem
+            // button72
             // 
-            this.addToolStripMenuItem.Name = "addToolStripMenuItem";
-            this.addToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
-            this.addToolStripMenuItem.Text = "Добавить";
-            this.addToolStripMenuItem.Click += new System.EventHandler(this.addToolStripMenuItem_Click);
+            this.button72.Location = new System.Drawing.Point(442, 11);
+            this.button72.Name = "button72";
+            this.button72.Size = new System.Drawing.Size(156, 23);
+            this.button72.TabIndex = 4;
+            this.button72.Text = "Удалить план с ЛПУ";
+            this.button72.UseVisualStyleBackColor = true;
+            this.button72.Click += new System.EventHandler(this.button72_Click);
             // 
-            // editToolStripMenuItem
+            // cbYearPlan
             // 
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
-            this.editToolStripMenuItem.Text = "Редактировать";
-            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
+            this.cbYearPlan.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbYearPlan.FormattingEnabled = true;
+            this.cbYearPlan.Items.AddRange(new object[] {
+            "2015",
+            "2016",
+            "2017",
+            "2018",
+            "2019",
+            "2020"});
+            this.cbYearPlan.Location = new System.Drawing.Point(3, 13);
+            this.cbYearPlan.Name = "cbYearPlan";
+            this.cbYearPlan.Size = new System.Drawing.Size(83, 21);
+            this.cbYearPlan.TabIndex = 3;
             // 
-            // delToolStripMenuItem
+            // btnFillPlan
             // 
-            this.delToolStripMenuItem.Name = "delToolStripMenuItem";
-            this.delToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
-            this.delToolStripMenuItem.Text = "Удалить";
-            this.delToolStripMenuItem.Click += new System.EventHandler(this.delToolStripMenuItem_Click);
+            this.btnFillPlan.BackColor = System.Drawing.Color.SeaGreen;
+            this.btnFillPlan.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnFillPlan.Location = new System.Drawing.Point(759, 4);
+            this.btnFillPlan.Name = "btnFillPlan";
+            this.btnFillPlan.Size = new System.Drawing.Size(156, 37);
+            this.btnFillPlan.TabIndex = 2;
+            this.btnFillPlan.Text = "Перенести план на ЛПУ";
+            this.btnFillPlan.UseVisualStyleBackColor = false;
+            this.btnFillPlan.Click += new System.EventHandler(this.btnFillPlan_Click);
+            // 
+            // btnClearPlan
+            // 
+            this.btnClearPlan.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.btnClearPlan.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnClearPlan.Location = new System.Drawing.Point(604, 11);
+            this.btnClearPlan.Name = "btnClearPlan";
+            this.btnClearPlan.Size = new System.Drawing.Size(137, 23);
+            this.btnClearPlan.TabIndex = 1;
+            this.btnClearPlan.Text = "Применить";
+            this.btnClearPlan.UseVisualStyleBackColor = false;
+            this.btnClearPlan.Click += new System.EventHandler(this.btnClearPlan_Click);
+            // 
+            // dgvCheckPlan
+            // 
+            this.dgvCheckPlan.AllowUserToAddRows = false;
+            this.dgvCheckPlan.AllowUserToDeleteRows = false;
+            this.dgvCheckPlan.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvCheckPlan.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCheckPlan.Location = new System.Drawing.Point(3, 45);
+            this.dgvCheckPlan.Name = "dgvCheckPlan";
+            this.dgvCheckPlan.ReadOnly = true;
+            this.dgvCheckPlan.Size = new System.Drawing.Size(912, 442);
+            this.dgvCheckPlan.TabIndex = 0;
             // 
             // panel1
             // 
@@ -7291,6 +7444,7 @@
             this.splitContainer2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this._dgvUpd)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this._dgv8)).EndInit();
+            this._cms8.ResumeLayout(false);
             this.tabPage9.ResumeLayout(false);
             this.tabPage9.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this._dgv9)).EndInit();
@@ -7359,7 +7513,8 @@
             this.tabPage26.ResumeLayout(false);
             this.tabPage26.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this._dgvStorno)).EndInit();
-            this._cms8.ResumeLayout(false);
+            this.tabPage27.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCheckPlan)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
@@ -7800,20 +7955,8 @@
         private System.Windows.Forms.Button bICU;
         private System.Windows.Forms.Button bCN;
         private System.Windows.Forms.Button bCC;
-        private System.Windows.Forms.Button button47;
-        private System.Windows.Forms.Button button46;
         private System.Windows.Forms.Button btnHideLPUMA;
-        private System.Windows.Forms.ComboBox cbLPUMA;
-        private System.Windows.Forms.ComboBox cbYearMA;
-        private System.Windows.Forms.Button button22;
         private System.Windows.Forms.Button btnExcelMA;
-        private System.Windows.Forms.Button btnHideUsersMA;
-        private System.Windows.Forms.Button btnHideRegMA;
-        private System.Windows.Forms.ComboBox cbRegMA;
-        private System.Windows.Forms.ComboBox cbUsersMA;
-        private System.Windows.Forms.Button btnMA_del;
-        private System.Windows.Forms.Button btnMA_edit;
-        private System.Windows.Forms.Button btnMA_fill;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.DataGridView _dgvUpd;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
@@ -7926,6 +8069,32 @@
         private System.Windows.Forms.ToolStripMenuItem энимедToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem нДАToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem любойToolStripMenuItem1;
+
+        private System.Windows.Forms.Button button71;
+        private System.Windows.Forms.TabPage tabPage27;
+        private System.Windows.Forms.ComboBox cbYearPlan;
+        private System.Windows.Forms.Button btnFillPlan;
+        private System.Windows.Forms.Button btnClearPlan;
+        private System.Windows.Forms.DataGridView dgvCheckPlan;
+        private System.Windows.Forms.Button button72;
+        private System.Windows.Forms.ComboBox cbThemeMA;
+        private System.Windows.Forms.ComboBox cbTypeMA;
+        private System.Windows.Forms.Button button47;
+        private System.Windows.Forms.Button button46;
+        private System.Windows.Forms.ComboBox cbLPUMA;
+        private System.Windows.Forms.ComboBox cbYearMA;
+        private System.Windows.Forms.Button button22;
+        private System.Windows.Forms.Button btnHideUsersMA;
+        private System.Windows.Forms.Button btnHideRegMA;
+        private System.Windows.Forms.ComboBox cbRegMA;
+        private System.Windows.Forms.ComboBox cbUsersMA;
+        private System.Windows.Forms.Button btnMA_del;
+        private System.Windows.Forms.Button btnMA_edit;
+        private System.Windows.Forms.Button btnMA_fill;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem7;
+        private System.Windows.Forms.ComboBox cbTypeMAPM;
+
     }
 }
 
