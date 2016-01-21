@@ -51,6 +51,7 @@ namespace RegionR.SF
             {
                 lbOrganizationName.Location = new Point(93, 9);
 
+                btnShowRules.Visible = true;
                 gbCategory.Visible = true;
 
                 if (_organization.Pharmacy == "A")
@@ -192,7 +193,8 @@ namespace RegionR.SF
 
         private void btnShowRules_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("В процессе разработки", "Функция не реализована", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if (!MyFile.Open(Files.rules_pharmacy))
+                MessageBox.Show("Файл не найден", "Файл отсутствует", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void tbShortName_TextChanged(object sender, EventArgs e)

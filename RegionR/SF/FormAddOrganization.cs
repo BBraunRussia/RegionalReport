@@ -51,6 +51,8 @@ namespace RegionR.SF
             }
             else if (_organization.TypeOrg == TypeOrg.Отделение)
             {
+                btnShowRules.Visible = true;
+
                 lbBranch.Location = new Point(117, 32);
             }
             else if (_organization.TypeOrg == TypeOrg.Отдел)
@@ -150,6 +152,12 @@ namespace RegionR.SF
         private void tbPhone_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = (!char.IsDigit(e.KeyChar));
+        }
+
+        private void btnShowRules_Click(object sender, EventArgs e)
+        {
+            if (!MyFile.Open(Files.rules_department))
+                MessageBox.Show("Файл не найден", "Файл отсутствует", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

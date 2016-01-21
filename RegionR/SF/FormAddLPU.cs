@@ -233,13 +233,13 @@ namespace RegionR.SF
         {
             try
             {
-                CopyFields();
-
-                if (_lpu.IsTotalLessThenSum())
+                if (IsTotalLessThenSum())
                 {
                     MessageBox.Show("Общее количество коек меньше, чем сумма реанимационных и хирургических коек.\nПожалуйста, исправьте.", "Ошибка ввода", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return false;
                 }
+
+                CopyFields();
 
                 if (!_lpu.IsBelongsINNToRealRegion())
                 {
@@ -263,6 +263,16 @@ namespace RegionR.SF
                 
                 return false;
             }
+        }
+
+        private bool IsTotalLessThenSum()
+        {
+            int total, bedsIC, bedsSurgical;
+            int.TryParse(tbBedsTotal.Text, out total);
+            int.TryParse(tbBedsIC.Text, out bedsIC);
+            int.TryParse(tbBedsSurgical.Text, out bedsSurgical);
+
+            return (total < ( bedsIC + bedsSurgical));
         }
         
         private void CopyFields()
