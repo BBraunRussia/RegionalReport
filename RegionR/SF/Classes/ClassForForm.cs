@@ -70,5 +70,25 @@ namespace RegionR.SF
                     throw new NullReferenceException("Перед сохранением необходимо исправить поле ИНН");
             }
         }
+
+        public static bool IsEmail(string address)
+        {
+            address = address.Replace(" ", "");
+
+            if (address == string.Empty)
+                return true;
+
+            return address.First() != '@' && address.First() != '.' && address.Last() != '@' && address.Last() != '.' && address.Contains('@') && address.Contains('.');
+        }
+
+        public static bool IsWebSite(string address)
+        {
+            address = address.Replace(" ", "");
+
+            if (address == string.Empty)
+                return true;
+
+            return address.Last() != '.' && !address.Contains('@') && address.Contains('.');
+        }
     }
 }

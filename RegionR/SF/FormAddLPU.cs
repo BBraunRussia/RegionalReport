@@ -249,6 +249,17 @@ namespace RegionR.SF
                     }
                 }
 
+                if (!ClassForForm.IsEmail(tbEmail.Text))
+                {
+                    MessageBox.Show("Ошибка в электронном адресе. Пожалуйста, исправьте.", "Ошибка ввода", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return false;
+                }
+                if (!ClassForForm.IsWebSite(tbWebSite.Text))
+                {
+                    MessageBox.Show("Ошибка в адресе веб-сайта. Пожалуйста, исправьте.", "Ошибка ввода", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return false;
+                }
+
                 _lpu.Save();
 
                 HistoryOrganization.Create(_lpu, UserLogged.Get(), ClassLibrary.SF.Action.Создал);

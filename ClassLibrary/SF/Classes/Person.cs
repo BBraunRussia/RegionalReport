@@ -21,7 +21,7 @@ namespace ClassLibrary.SF
         private string _phone;
         private Organization _organization;
         private string _comment;
-        
+                
         public Person()
         {
             if (_numberSF == null)
@@ -155,14 +155,37 @@ namespace ClassLibrary.SF
 
             ID = id;
 
-            PersonList personList = PersonList.GetUniqueInstance();
+            PersonList personList = GetPersonList();
             personList.Add(this);
         }
 
         public void Delete()
         {
-            PersonList personList = PersonList.GetUniqueInstance();
+            PersonList personList = GetPersonList();
             personList.Delete(this);
+        }
+
+        public bool CheckNamesake()
+        {
+            if (ID != 0)
+                return false;
+
+            PersonList personList = GetPersonList();
+            return personList.CheckNamesake(this);
+        }
+
+        public bool IsOrganizationHaveUnique()
+        {
+            if ((ID != 0) || (!Position.Unique))
+                return false;
+
+            PersonList personList = GetPersonList();
+            return personList.IsOrganizationHaveUnique(this);
+        }
+
+        private PersonList GetPersonList()
+        {
+            return PersonList.GetUniqueInstance();
         }
     }
 }

@@ -95,5 +95,10 @@ namespace ClassLibrary.SF
             var personList = List.Where(item => (item as Person).Organization.ID == organization.ID).ToList();
             personList.ForEach(item => (item as Person).Delete());
         }
+
+        public bool IsOrganizationHaveUnique(Person person)
+        {
+            return List.Exists(item => (item as Person).Organization == person.Organization && (item as Person).Position == person.Position);
+        }
     }
 }

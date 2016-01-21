@@ -122,10 +122,16 @@ namespace RegionR.SF
             {
                 CopyFields();
 
-                if (CheckNamesake())
+                if (_person.CheckNamesake())
                 {
                     if (MessageBox.Show("В данной организации уже есть сотрудник с такими ФИО. Продолжить сохранение?", "Вопрос", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.No)
                         return false;
+                }
+
+                if (_person.IsOrganizationHaveUnique())
+                {
+                    MessageBox.Show("В данной организации уже есть сотрудник с такой должностью.\nИсправьте пожалуйста.", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return false;
                 }
 
                 _person.Save();
@@ -139,16 +145,7 @@ namespace RegionR.SF
                 return false;
             }
         }
-
-        private bool CheckNamesake()
-        {
-            if (_person.ID != 0)
-                return false;
-
-            PersonList personList = PersonList.GetUniqueInstance();
-            return personList.CheckNamesake(_person);
-        }
-
+        
         private void CopyFields()
         {
             ClassForForm.CheckFilled(tbLastName.Text, "Фамилия");
