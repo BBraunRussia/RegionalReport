@@ -275,10 +275,5 @@ namespace ClassLibrary.SF
             OrganizationList organizationList = OrganizationList.GetUniqueInstance();
             organizationList.Add(this);
         }
-
-        public bool IsTotalLessThenSum()
-        {
-            return (_bedsTotal < (_bedsIC + _bedsSurgical));
-        }
     }
 }

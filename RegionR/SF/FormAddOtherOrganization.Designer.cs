@@ -163,6 +163,7 @@
             this.btnShowRules.TabIndex = 121;
             this.btnShowRules.Text = "Правила наименования";
             this.btnShowRules.UseVisualStyleBackColor = true;
+            this.btnShowRules.Visible = false;
             this.btnShowRules.Click += new System.EventHandler(this.btnShowRules_Click);
             // 
             // cbCity

@@ -53,6 +53,7 @@
             this.btnAddEmployee = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.lbTypeOrgName = new System.Windows.Forms.Label();
+            this.btnShowRules = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lbBranch
@@ -285,11 +286,23 @@
             this.lbTypeOrgName.TabIndex = 111;
             this.lbTypeOrgName.Text = "Отдел:";
             // 
+            // btnShowRules
+            // 
+            this.btnShowRules.Location = new System.Drawing.Point(482, 134);
+            this.btnShowRules.Name = "btnShowRules";
+            this.btnShowRules.Size = new System.Drawing.Size(148, 23);
+            this.btnShowRules.TabIndex = 122;
+            this.btnShowRules.Text = "Правила наименования";
+            this.btnShowRules.UseVisualStyleBackColor = true;
+            this.btnShowRules.Visible = false;
+            this.btnShowRules.Click += new System.EventHandler(this.btnShowRules_Click);
+            // 
             // FormAddOrganization
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(723, 317);
+            this.Controls.Add(this.btnShowRules);
             this.Controls.Add(this.lbTypeOrgName);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnShowEmployees);
@@ -351,5 +364,6 @@
         private System.Windows.Forms.Button btnAddEmployee;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lbTypeOrgName;
+        private System.Windows.Forms.Button btnShowRules;
     }
 }
