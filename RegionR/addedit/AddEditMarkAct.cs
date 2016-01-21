@@ -14,12 +14,14 @@ namespace RegionR.addedit
     {
         int index, db;
         private bool save;
-        public bool edit;
+        private int confID;
+        public bool edit, first;
 
         public AddEditMarkAct(int flag)
         {
             InitializeComponent();
-
+            
+            first = true;
             index = 0;
             save = false;
             edit = false;
@@ -28,35 +30,48 @@ namespace RegionR.addedit
                 loadData();
             else if (flag == 2)
                 loadData2();
+            first = false;
         }
 
         public AddEditMarkAct(int i, int d)
         {
             InitializeComponent();
 
+            first = true;
             index = i;
             db = d;
 
             save = false;
             edit = true;
             loadData();
+            first = false;
         }
 
         public AddEditMarkAct(int i, int d, int f)
         {
             InitializeComponent();
 
+            first = true;
             index = i;
             db = d;
 
             save = false;
             edit = true;
             loadData2();
+            first = false;
         }
 
         private void loadData2()
         {
+            globalData.update = false;
+
             sql sql1 = new sql();
+            
+            cbMAType.DataSource = sql1.GetRecords("exec MarkAct_Sel_Type");
+            cbMAType.DisplayMember = "matype_name";
+            cbMAType.ValueMember = "matype_id";
+
+
             DataTable dt1 = sql1.GetRecords("exec SelUserByID @p1", globalData.UserID2);
 
             lbUserName.Text = dt1.Rows[0].ItemArray[1].ToString();
@@ -67,6 +82,8 @@ namespace RegionR.addedit
             cbLPU.DataSource = sql1.GetRecords("exec SelRegPM @p1", globalData.UserID2);
             cbLPU.DisplayMember = "reg_nameRus";
             cbLPU.ValueMember = "reg_id";
+
+
 
             label4.Visible = false;
             tbRegion.Visible = false;
@@ -86,7 +103,22 @@ namespace RegionR.addedit
 
                 tbName.Text = dt1.Rows[0].ItemArray[1].ToString();
 
+                globalData.maplan = Convert.ToInt32(dt1.Rows[0].ItemArray[19].ToString());
+
                 cbLPU.SelectedValue = Convert.ToInt32(dt1.Rows[0].ItemArray[4]);
+
+                if (Convert.ToInt32(dt1.Rows[0].ItemArray[18]) != 0)
+                    cbMAType.SelectedValue = Convert.ToInt32(dt1.Rows[0].ItemArray[18]);
+
+                int val = Convert.ToInt32(dt1.Rows[0].ItemArray[18]);
+
+                if ((val > 1 && val <= 4) || (val >= 8 && val <= 11))
+                {
+                    loadConfName();
+                    tbConf.Visible = true;
+                    lNameConf.Visible = true;
+                    button6.Visible = true;
+                }
 
                 if (dt1.Rows[0].ItemArray[15].ToString() == "1")
                 {
@@ -155,12 +187,20 @@ namespace RegionR.addedit
 
                 cbLPU.Enabled = true;
             }
+            globalData.update = true;
         }
 
 
         private void loadData()
         {
+            globalData.update = false;
+
             sql sql1 = new sql();
+
+            cbMAType.DataSource = sql1.GetRecords("exec MarkAct_Sel_Type");
+            cbMAType.DisplayMember = "matype_name";
+            cbMAType.ValueMember = "matype_id";
+
             DataTable dt1 = sql1.GetRecords("exec SelUserByID @p1", globalData.UserID2);
 
             lbUserName.Text = dt1.Rows[0].ItemArray[1].ToString();
@@ -183,8 +223,23 @@ namespace RegionR.addedit
                 dt1 = sql1.GetRecords("exec SelMarkActByID @p1, @p2", index, db);
 
                 tbName.Text = dt1.Rows[0].ItemArray[1].ToString();
+                globalData.maplan = Convert.ToInt32(dt1.Rows[0].ItemArray[19].ToString());
+                
+                if (Convert.ToInt32(dt1.Rows[0].ItemArray[18]) != 0)
+                    cbMAType.SelectedValue = Convert.ToInt32(dt1.Rows[0].ItemArray[18]);
 
                 cbLPU.SelectedValue = Convert.ToInt32(dt1.Rows[0].ItemArray[5]);
+
+                int val = Convert.ToInt32(dt1.Rows[0].ItemArray[18]);
+
+                if ((val > 1 && val <= 4) || (val >= 8 && val <= 11))
+                {
+                    loadConfName();
+
+                    tbConf.Visible = true;
+                    lNameConf.Visible = true;
+                    button6.Visible = true;
+                }
 
                 if (dt1.Rows[0].ItemArray[15].ToString() == "1")
                 {
@@ -253,6 +308,7 @@ namespace RegionR.addedit
 
                 cbLPU.Enabled = true;
             }
+            globalData.update = true;
         }
 
         private void cbLPU_SelectedIndexChanged(object sender, EventArgs e)
@@ -267,6 +323,7 @@ namespace RegionR.addedit
 
         private void button2_Click(object sender, EventArgs e)
         {
+            globalData.maplan = 0;
             this.Close();
         }
 
@@ -322,8 +379,24 @@ namespace RegionR.addedit
         }
 
 
+        bool CheckConf()
+        {
+            int val = Convert.ToInt32(cbMAType.SelectedValue.ToString());
+
+            if (tbConf.Text == "Нет в справочнике" && ((val > 1 && val <= 4) || (val >= 8 && val <= 11)))
+                return false;
+            else
+                return true;
+        }
+
         private void SaveMA()
         {
+            /* TODO: проверка на существование в справочнике мероприятий */
+            if (CheckConf() == false)
+            {
+                MessageBox.Show(" Нет названия мероприятия!\n Нужно добавить в справочник (сообщите продакт-менеджерам)\n или выберите другой тип.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             sql sql1 = new sql();
 
             globalData.load = true;
@@ -346,10 +419,11 @@ namespace RegionR.addedit
 
             if (index == 0)
             {
-                dt1 = sql1.GetRecords("exec InsMarkAct 0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13",
+                dt1 = sql1.GetRecords("exec InsMarkAct 0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15",
                     tbName.Text, globalData.UserID2, globalData.Div, reg, lpu, 
                     tbPlan1.Text.Replace(",", "."), tbPlan2.Text.Replace(",", "."), tbPlan3.Text.Replace(",", "."), tbPlan4.Text.Replace(",", "."),
-                    tbFact1.Text.Replace(",", "."), tbFact2.Text.Replace(",", "."), tbFact3.Text.Replace(",", "."), tbFact4.Text.Replace(",", "."));
+                    tbFact1.Text.Replace(",", "."), tbFact2.Text.Replace(",", "."), tbFact3.Text.Replace(",", "."), tbFact4.Text.Replace(",", "."),
+                    cbMAType.SelectedValue.ToString(), globalData.maplan);
 
                 if (dt1 == null)
                 {
@@ -367,9 +441,10 @@ namespace RegionR.addedit
             }
             else
             {
-                dt1 = sql1.GetRecords("exec UpdMarkAct @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14", index, db, globalData.UserID2, tbName.Text, lpu, reg,
+                dt1 = sql1.GetRecords("exec UpdMarkAct @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16", index, db, globalData.UserID2, tbName.Text, lpu, reg,
                    tbPlan1.Text.Replace(",", "."), tbPlan2.Text.Replace(",", "."), tbPlan3.Text.Replace(",", "."), tbPlan4.Text.Replace(",", "."),
-                    tbFact1.Text.Replace(",", "."), tbFact2.Text.Replace(",", "."), tbFact3.Text.Replace(",", "."), tbFact4.Text.Replace(",", "."));
+                    tbFact1.Text.Replace(",", "."), tbFact2.Text.Replace(",", "."), tbFact3.Text.Replace(",", "."), tbFact4.Text.Replace(",", "."),
+                    cbMAType.SelectedValue.ToString(), globalData.maplan);
 
                 if (dt1 == null)
                     MessageBox.Show("Не удалось отредактировать маркетинговое мероприятие.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -381,6 +456,12 @@ namespace RegionR.addedit
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            /* TODO: проверка на существование в справочнике мероприятий */
+            if (CheckConf() == false)
+            {
+                MessageBox.Show(" Нет названия мероприятия!\n Нужно добавить в справочник (сообщите продакт-менеджерам)\n или выберите другой тип.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             sql sql1 = new sql();
 
             globalData.load = true;
@@ -403,19 +484,24 @@ namespace RegionR.addedit
 
             if (index == 0)
             {
-                dt1 = sql1.GetRecords("exec InsMarkAct 0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13",
-                    tbName.Text, globalData.UserID2, globalData.Div, reg, lpu, tbPlan1.Text.Replace(",", "."), tbPlan2.Text.Replace(",", "."), tbPlan3.Text.Replace(",", "."), tbPlan4.Text.Replace(",", "."),
-                    tbFact1.Text.Replace(",", "."), tbFact2.Text.Replace(",", "."), tbFact3.Text.Replace(",", "."), tbFact4.Text.Replace(",", "."));
+                dt1 = sql1.GetRecords("exec InsMarkAct 0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15",
+                    tbName.Text, globalData.UserID2, globalData.Div, reg, lpu, tbPlan1.Text.Replace(",", "."), tbPlan2.Text.Replace(",", "."), 
+                    tbPlan3.Text.Replace(",", "."), tbPlan4.Text.Replace(",", "."),
+                    tbFact1.Text.Replace(",", "."), tbFact2.Text.Replace(",", "."), 
+                    tbFact3.Text.Replace(",", "."), tbFact4.Text.Replace(",", "."),
+                    cbMAType.SelectedValue.ToString(), globalData.maplan);
 
                 if (dt1 == null)
                     MessageBox.Show("Не удалось добавить маркетинговое мероприятие.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else
                     MessageBox.Show("Маркетинговое мероприятие добавлено.", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                globalData.maplan = 0;
                 this.Close();
             }
             else
             {
-                dt1 = sql1.GetRecords("exec UpdMarkAct @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14", 
+                
+                dt1 = sql1.GetRecords("exec UpdMarkAct @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16", 
                     index, 
                     db, 
                     globalData.UserID2, 
@@ -429,12 +515,17 @@ namespace RegionR.addedit
                     tbFact1.Text.Replace(",", "."), 
                     tbFact2.Text.Replace(",", "."), 
                     tbFact3.Text.Replace(",", "."),
-                    tbFact4.Text.Replace(",", "."));
+                    tbFact4.Text.Replace(",", "."),
+                    cbMAType.SelectedValue.ToString(),
+                     globalData.maplan
+                   );
 
                 if (dt1 == null)
                     MessageBox.Show("Не удалось отредактировать маркетинговое мероприятие.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else
                     MessageBox.Show("Маркетинговое мероприятие обновлено.", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                globalData.maplan = 0;
                 this.Close();
             }
 
@@ -485,7 +576,10 @@ namespace RegionR.addedit
         {
             if (!save)
                 SaveMA();
-
+            /* TODO: проверка на существование в справочнике мероприятий */
+            if (CheckConf() == false)
+                return;
+           
             AllocCosts ac;
             //if (index == 0)
             //    ac = new AllocCosts(num);
@@ -499,5 +593,113 @@ namespace RegionR.addedit
             if (ac.price != null || ac.price != "")
                 tb.Text = ac.price.ToString();
         }
+        
+        private bool flag = false;
+
+        private void cbMAType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (globalData.update == false)
+                return;
+
+            if (flag == false)
+                openConfDir();
+            
+            flag = true;
+            if (globalData.matype != null && globalData.matype != "0")
+                cbMAType.SelectedValue = globalData.matype;
+            flag = false;
+        }
+
+
+        void loadConfName()
+        {
+            globalData.update = false;
+            sql sql1 = new sql();
+            
+            DataTable dt = sql1.GetRecords("exec  MarkAct_Select_ConfName @p1", globalData.maplan);
+            tbConf.Text = dt.Rows[1].ItemArray[1].ToString();
+            confID = Convert.ToInt32(dt.Rows[1].ItemArray[0].ToString()); 
+
+            globalData.update = true;
+        }
+
+        void openConfDir()
+        {           
+            try
+            {
+
+                int val = Convert.ToInt32(cbMAType.SelectedValue.ToString());
+
+                if (first == true)
+                {
+                    button6.Visible = false;
+                    if ((val > 1 && val <= 4) || (val >= 8 && val <= 11))
+                    {
+                        if (globalData.maplan != 0)
+                            loadConfName();
+                        else
+                            tbConf.Text = "Нет в справочнике";
+
+                        lNameConf.Visible = true;
+                        tbConf.Visible    = true;
+                        button6.Visible = true;
+                    }
+                    
+                    return;
+                }
+
+
+                if (val > 1 && val <= 4)
+                {
+                    //AddConf ac = new AddConf();
+                    AddMA_Name ac = new AddMA_Name(val);
+                    ac.ShowDialog();//MessageBox.Show("Выберите конференцию из списка!");
+                    tbConf.Visible = true;
+                    lNameConf.Visible = true;
+                    button6.Visible = true;                   
+                }
+                else if (val >= 8 && val <= 11)
+                {
+                    //AddConf ac = new AddConf(true);
+                    AddMA_Name ac = new AddMA_Name(val);
+                    ac.ShowDialog();//MessageBox.Show("Выберите мероприятие Эскулап Академии из списка!");
+                    lNameConf.Visible = true;
+                    tbConf.Visible = true;
+                    button6.Visible = true;                    
+                }
+                else
+                {
+                    globalData.maplan = 0;
+                    globalData.matype = "0";
+                    tbConf.Text = String.Empty;
+                    lNameConf.Visible = false;
+                    tbConf.Visible = false;
+                    button6.Visible = false;
+                }
+
+                if (globalData.maplan != 0)
+                    loadConfName();
+                else
+                    tbConf.Text = "Нет в справочнике";
+
+            }
+            catch (Exception ex)
+            {
+               // this.Close();
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if (flag == false)
+                openConfDir();
+
+            flag = true;
+            if (globalData.matype != null && globalData.matype != "0")
+                cbMAType.SelectedValue = globalData.matype;
+            flag = false;
+
+        }
+
     }
 }

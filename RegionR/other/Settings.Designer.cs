@@ -52,24 +52,30 @@
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.tbYear = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.cbNom = new System.Windows.Forms.CheckBox();
-            this.cbUsers = new System.Windows.Forms.CheckBox();
-            this.cbLPU = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.cbLPU = new System.Windows.Forms.CheckBox();
+            this.cbUsers = new System.Windows.Forms.CheckBox();
+            this.cbNom = new System.Windows.Forms.CheckBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.tbYear = new System.Windows.Forms.TextBox();
+            this.rbAccHCRead = new System.Windows.Forms.RadioButton();
+            this.rbAccHCEdit = new System.Windows.Forms.RadioButton();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.rbAccAEEdit = new System.Windows.Forms.RadioButton();
+            this.rbAccAERead = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox6.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnClose
             // 
             this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnClose.Location = new System.Drawing.Point(182, 488);
+            this.btnClose.Location = new System.Drawing.Point(182, 544);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 23);
             this.btnClose.TabIndex = 2;
@@ -127,7 +133,7 @@
             // 
             this.btnApply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnApply.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnApply.Location = new System.Drawing.Point(91, 488);
+            this.btnApply.Location = new System.Drawing.Point(91, 544);
             this.btnApply.Name = "btnApply";
             this.btnApply.Size = new System.Drawing.Size(75, 23);
             this.btnApply.TabIndex = 8;
@@ -268,11 +274,13 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.rbAccHCEdit);
+            this.groupBox4.Controls.Add(this.rbAccHCRead);
             this.groupBox4.Controls.Add(this.checkBox2);
             this.groupBox4.Controls.Add(this.checkBox1);
-            this.groupBox4.Location = new System.Drawing.Point(16, 313);
+            this.groupBox4.Location = new System.Drawing.Point(16, 312);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(239, 51);
+            this.groupBox4.Size = new System.Drawing.Size(239, 69);
             this.groupBox4.TabIndex = 19;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Асс планы HC";
@@ -307,58 +315,12 @@
             this.groupBox6.Controls.Add(this.cbNom);
             this.groupBox6.Controls.Add(this.label5);
             this.groupBox6.Controls.Add(this.tbYear);
-            this.groupBox6.Location = new System.Drawing.Point(16, 371);
+            this.groupBox6.Location = new System.Drawing.Point(16, 441);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(239, 89);
             this.groupBox6.TabIndex = 21;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Перенести на след. год";
-            // 
-            // tbYear
-            // 
-            this.tbYear.Location = new System.Drawing.Point(40, 19);
-            this.tbYear.Name = "tbYear";
-            this.tbYear.Size = new System.Drawing.Size(96, 20);
-            this.tbYear.TabIndex = 16;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 22);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(28, 13);
-            this.label5.TabIndex = 17;
-            this.label5.Text = "Год:";
-            // 
-            // cbNom
-            // 
-            this.cbNom.AutoSize = true;
-            this.cbNom.Location = new System.Drawing.Point(99, 43);
-            this.cbNom.Name = "cbNom";
-            this.cbNom.Size = new System.Drawing.Size(99, 17);
-            this.cbNom.TabIndex = 18;
-            this.cbNom.Text = "Номенклатуру";
-            this.cbNom.UseVisualStyleBackColor = true;
-            // 
-            // cbUsers
-            // 
-            this.cbUsers.AutoSize = true;
-            this.cbUsers.Location = new System.Drawing.Point(7, 66);
-            this.cbUsers.Name = "cbUsers";
-            this.cbUsers.Size = new System.Drawing.Size(105, 17);
-            this.cbUsers.TabIndex = 19;
-            this.cbUsers.Text = "Пользователей";
-            this.cbUsers.UseVisualStyleBackColor = true;
-            // 
-            // cbLPU
-            // 
-            this.cbLPU.AutoSize = true;
-            this.cbLPU.Location = new System.Drawing.Point(7, 45);
-            this.cbLPU.Name = "cbLPU";
-            this.cbLPU.Size = new System.Drawing.Size(50, 17);
-            this.cbLPU.TabIndex = 20;
-            this.cbLPU.Text = "ЛПУ";
-            this.cbLPU.UseVisualStyleBackColor = true;
             // 
             // button1
             // 
@@ -370,12 +332,114 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // cbLPU
+            // 
+            this.cbLPU.AutoSize = true;
+            this.cbLPU.Location = new System.Drawing.Point(7, 45);
+            this.cbLPU.Name = "cbLPU";
+            this.cbLPU.Size = new System.Drawing.Size(50, 17);
+            this.cbLPU.TabIndex = 20;
+            this.cbLPU.Text = "ЛПУ";
+            this.cbLPU.UseVisualStyleBackColor = true;
+            // 
+            // cbUsers
+            // 
+            this.cbUsers.AutoSize = true;
+            this.cbUsers.Location = new System.Drawing.Point(7, 66);
+            this.cbUsers.Name = "cbUsers";
+            this.cbUsers.Size = new System.Drawing.Size(105, 17);
+            this.cbUsers.TabIndex = 19;
+            this.cbUsers.Text = "Пользователей";
+            this.cbUsers.UseVisualStyleBackColor = true;
+            // 
+            // cbNom
+            // 
+            this.cbNom.AutoSize = true;
+            this.cbNom.Location = new System.Drawing.Point(99, 43);
+            this.cbNom.Name = "cbNom";
+            this.cbNom.Size = new System.Drawing.Size(99, 17);
+            this.cbNom.TabIndex = 18;
+            this.cbNom.Text = "Номенклатуру";
+            this.cbNom.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 22);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(28, 13);
+            this.label5.TabIndex = 17;
+            this.label5.Text = "Год:";
+            // 
+            // tbYear
+            // 
+            this.tbYear.Location = new System.Drawing.Point(40, 19);
+            this.tbYear.Name = "tbYear";
+            this.tbYear.Size = new System.Drawing.Size(96, 20);
+            this.tbYear.TabIndex = 16;
+            // 
+            // rbAccHCRead
+            // 
+            this.rbAccHCRead.AutoSize = true;
+            this.rbAccHCRead.Location = new System.Drawing.Point(7, 43);
+            this.rbAccHCRead.Name = "rbAccHCRead";
+            this.rbAccHCRead.Size = new System.Drawing.Size(76, 17);
+            this.rbAccHCRead.TabIndex = 14;
+            this.rbAccHCRead.TabStop = true;
+            this.rbAccHCRead.Text = "Просмотр";
+            this.rbAccHCRead.UseVisualStyleBackColor = true;
+            // 
+            // rbAccHCEdit
+            // 
+            this.rbAccHCEdit.AutoSize = true;
+            this.rbAccHCEdit.Location = new System.Drawing.Point(99, 43);
+            this.rbAccHCEdit.Name = "rbAccHCEdit";
+            this.rbAccHCEdit.Size = new System.Drawing.Size(109, 17);
+            this.rbAccHCEdit.TabIndex = 14;
+            this.rbAccHCEdit.TabStop = true;
+            this.rbAccHCEdit.Text = "Редактирование";
+            this.rbAccHCEdit.UseVisualStyleBackColor = true;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.rbAccAEEdit);
+            this.groupBox5.Controls.Add(this.rbAccAERead);
+            this.groupBox5.Location = new System.Drawing.Point(16, 387);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(239, 41);
+            this.groupBox5.TabIndex = 20;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Асс планы AE";
+            // 
+            // rbAccAEEdit
+            // 
+            this.rbAccAEEdit.AutoSize = true;
+            this.rbAccAEEdit.Location = new System.Drawing.Point(99, 19);
+            this.rbAccAEEdit.Name = "rbAccAEEdit";
+            this.rbAccAEEdit.Size = new System.Drawing.Size(109, 17);
+            this.rbAccAEEdit.TabIndex = 14;
+            this.rbAccAEEdit.TabStop = true;
+            this.rbAccAEEdit.Text = "Редактирование";
+            this.rbAccAEEdit.UseVisualStyleBackColor = true;
+            // 
+            // rbAccAERead
+            // 
+            this.rbAccAERead.AutoSize = true;
+            this.rbAccAERead.Location = new System.Drawing.Point(7, 19);
+            this.rbAccAERead.Name = "rbAccAERead";
+            this.rbAccAERead.Size = new System.Drawing.Size(76, 17);
+            this.rbAccAERead.TabIndex = 14;
+            this.rbAccAERead.TabStop = true;
+            this.rbAccAERead.Text = "Просмотр";
+            this.rbAccAERead.UseVisualStyleBackColor = true;
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
-            this.ClientSize = new System.Drawing.Size(269, 523);
+            this.ClientSize = new System.Drawing.Size(269, 579);
+            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
@@ -409,6 +473,8 @@
             this.groupBox4.PerformLayout();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -446,5 +512,10 @@
         private System.Windows.Forms.CheckBox cbNom;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox tbYear;
+        private System.Windows.Forms.RadioButton rbAccHCEdit;
+        private System.Windows.Forms.RadioButton rbAccHCRead;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.RadioButton rbAccAEEdit;
+        private System.Windows.Forms.RadioButton rbAccAERead;
     }
 }

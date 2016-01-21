@@ -11,7 +11,8 @@ namespace DataLayer
         //private String _Server = @"bbmru07";
         private String _Server = @"bbmru08";
         //private String _Server = @"bbmru04\sub";
-        private String _Database = "RegionalR_TestSF";
+        private String _Database = "RegionalR";
+        //private String _Database = "RegionalR_Test2";
         //private String _Database = "RegionalR_10042015";
         private Boolean _WinAuth = false;
         private String _UserID;
