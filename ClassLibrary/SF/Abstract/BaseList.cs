@@ -6,17 +6,15 @@ using System.Data;
 
 namespace ClassLibrary.SF
 {
-    public abstract class BaseList
+    public abstract class BaseList : InitProvider
     {
         private List<BaseDictionary> _list;
-        private IProvider _provider;
         private string _tableName;
 
         public BaseList(string tableName)
         {
             _tableName = tableName;
 
-            _provider = Provider.GetProvider();
             _list = new List<BaseDictionary>();
 
             LoadFromDataBase();

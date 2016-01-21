@@ -116,7 +116,14 @@ namespace RegionR
             Organization organization = GetOrganization();
 
             if (ClassForForm.DeleteOrganization(organization))
+            {
                 LoadData();
+
+                if (organization is LPU)
+                {
+                    HistoryOrganization.Create(organization, UserLogged.Get(), ClassLibrary.SF.Action.Удалил);
+                }
+            }
         }
 
         private Organization GetOrganization()

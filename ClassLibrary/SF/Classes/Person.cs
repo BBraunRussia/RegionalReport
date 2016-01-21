@@ -21,12 +21,11 @@ namespace ClassLibrary.SF
         private string _phone;
         private Organization _organization;
         private string _comment;
-
-        private IProvider _provider;
-
+        
         public Person()
         {
-            Init();
+            if (_numberSF == null)
+                _numberSF = string.Empty;
         }
 
         public Person(DataRow row)
@@ -63,16 +62,6 @@ namespace ClassLibrary.SF
             int.TryParse(row[13].ToString(), out idOrganization);
             OrganizationList organizationList = OrganizationList.GetUniqueInstance();
             _organization = organizationList.GetItem(idOrganization);
-
-            Init();
-        }
-
-        private void Init()
-        {
-            if (_numberSF == null)
-                _numberSF = string.Empty;
-
-            _provider = Provider.GetProvider();
         }
         
         public string LastName

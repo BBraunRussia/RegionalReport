@@ -25,6 +25,7 @@ namespace RegionR.SF
         private CityList _cityList;
         private SubRegionList _subRegionList;
         private TypeFinList _typeFinList;
+        private HistoryOrganizationList _historyOrganizationList;
         
         private bool _isLoad;
 
@@ -49,6 +50,7 @@ namespace RegionR.SF
             _cityList = CityList.GetUniqueInstance();
             _subRegionList = SubRegionList.GetUniqueInstance();
             _typeFinList = TypeFinList.GetUniqueInstance();
+            _historyOrganizationList = HistoryOrganizationList.GetUniqueInstance();
         }
 
         private void FormAddLPU_Load(object sender, EventArgs e)
@@ -155,6 +157,17 @@ namespace RegionR.SF
             {
                 tbPhone.MaxLength = 10 - tbPhoneCode.Text.Length;
             }
+
+            ShowHistory();
+        }
+
+        private void ShowHistory()
+        {
+            HistoryOrganization history = _historyOrganizationList.GetItem(_lpu, ClassLibrary.SF.Action.Создал);
+            lbAutor.Text = (history == null) ? string.Empty : history.ToString();
+
+            history = _historyOrganizationList.GetItem(_lpu, ClassLibrary.SF.Action.Редактировал);
+            lbEditor.Text = (history == null) ? string.Empty : history.ToString();
         }
 
         private void LoadDictionaries()
@@ -224,10 +237,8 @@ namespace RegionR.SF
 
                 if (_lpu.IsTotalLessThenSum())
                 {
-                    if (MessageBox.Show("Общая сумма коек меньше, чем сумма слагаемых. Сохранить с ошибкой?", "Ошибка ввода", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.No)
-                    {
-                        return false;
-                    }
+                    MessageBox.Show("Общее количество коек меньше, чем сумма реанимационных и хирургических коек.\nПожалуйста, исправьте.", "Ошибка ввода", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return false;
                 }
 
                 if (!_lpu.IsBelongsINNToRealRegion())
@@ -239,6 +250,10 @@ namespace RegionR.SF
                 }
 
                 _lpu.Save();
+
+                HistoryOrganization.Create(_lpu, UserLogged.Get(), ClassLibrary.SF.Action.Создал);
+
+                ShowHistory();
 
                 return true;
             }
@@ -310,7 +325,8 @@ namespace RegionR.SF
         
         private void btnShowRules_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("В процессе разработки", "Функция не реализована", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if (!MyFile.Open(Files.rules_lpu))
+                MessageBox.Show("Файл не найден", "Файл отсутствует", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         
         private void tbShortName_TextChanged(object sender, EventArgs e)

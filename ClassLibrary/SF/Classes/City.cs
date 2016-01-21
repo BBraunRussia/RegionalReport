@@ -45,9 +45,8 @@ namespace ClassLibrary.SF
 
         public void Save()
         {
-            IProvider provider = Provider.GetProvider();
             int idCity;
-            int.TryParse(provider.Insert("SF_City", ID, Name, RealRegion.ID, PhoneCode), out idCity);
+            int.TryParse(_provider.Insert("SF_City", ID, Name, RealRegion.ID, PhoneCode), out idCity);
             ID = idCity;
 
             CityList cityList = CityList.GetUniqueInstance();

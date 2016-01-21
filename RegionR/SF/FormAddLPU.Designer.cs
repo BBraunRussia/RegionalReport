@@ -1051,6 +1051,7 @@
             this.Controls.Add(this.lbNumberSF);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lbLPUName);
+            this.MinimumSize = new System.Drawing.Size(1080, 600);
             this.Name = "FormAddLPU";
             this.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultBounds;
             this.Text = "Карточка Организации \"ЛПУ\"";

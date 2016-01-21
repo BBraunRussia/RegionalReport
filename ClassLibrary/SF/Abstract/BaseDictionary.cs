@@ -6,11 +6,11 @@ using System.Data;
 
 namespace ClassLibrary.SF
 {
-    public abstract class BaseDictionary
+    public abstract class BaseDictionary : InitProvider
     {
         private int _id;
         private string _name;
-
+        
         public BaseDictionary(DataRow row)
         {
             int.TryParse(row[0].ToString(), out _id);
