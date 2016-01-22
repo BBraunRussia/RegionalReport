@@ -20,7 +20,7 @@ namespace ClassLibrary.SF
             _list = new List<LpuCompetitors>();
 
             LoadFromDataBase(tableName);
-            DataBase.ChangeDataBase(DataLayer.DBNames.RegionalR_TestSF);
+            DataBase.ChangeDataBase(DataLayer.DBNames.RegionalR);
         }
 
         public static LpuCompetitorsList GetUniqueInstance()
