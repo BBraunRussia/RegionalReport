@@ -75,8 +75,15 @@ namespace RegionR.SF
 
         private void SelectOrganization()
         {
-            _person.Organization = GetOrganization();
-            DialogResult = System.Windows.Forms.DialogResult.OK;
+            if (dgv.CurrentCell == null)
+            {
+                DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            }
+            else
+            {
+                _person.Organization = GetOrganization();
+                DialogResult = System.Windows.Forms.DialogResult.OK;
+            }
         }
     }
 }
