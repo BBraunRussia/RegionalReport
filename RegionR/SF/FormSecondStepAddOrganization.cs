@@ -16,13 +16,15 @@ namespace RegionR.SF
         private LpuCompetitorsList _lpuCompetitorsList;
         private UserLpuRRList _userLpuList;
         private SearchInDgv _seacher;
+        private RealRegionList _realRegionList;
 
         public FormSecondStepAddOrganization(LPU lpu)
         {
             InitializeComponent();
 
             _userLpuList = UserLpuRRList.GetUniqueInstance();
-            _lpuCompetitorsList = LpuCompetitorsList.GetUniqueInstance();
+            _realRegionList = RealRegionList.GetUniqueInstance();
+            _lpuCompetitorsList = LpuCompetitorsList.GetUniqueInstance();            
 
             _lpu = lpu;
 
