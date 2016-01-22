@@ -471,12 +471,15 @@
     <Compile Include="RRRent.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="SF\Classes\FilteredDGV.cs" />
     <Compile Include="SF\Classes\MainDGV.cs" />
     <Compile Include="SF\Classes\MyStatusStrip.cs" />
     <Compile Include="SF\Classes\SearchInDgv.cs" />
+    <Compile Include="SF\Classes\SortDGV.cs" />
     <Compile Include="SF\Classes\TreeLPU.cs" />
     <Compile Include="SF\Classes\ClassForForm.cs" />
     <Compile Include="SF\Classes\UserLogged.cs" />
+    <Compile Include="SF\Controllers\OrganizationListController.cs" />
     <Compile Include="SF\Controllers\PersonListController.cs" />
     <Compile Include="SF\FormAddBranch.cs">
       <SubType>Form</SubType>

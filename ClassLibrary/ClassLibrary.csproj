@@ -48,7 +48,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SF\Abstract\InitProvider.cs" />
     <Compile Include="SF\Classes\AcademTitle.cs" />
-    <Compile Include="SF\Classes\HistoryOrganization.cs" />
+    <Compile Include="SF\Classes\History.cs" />
     <Compile Include="SF\Classes\MainSpecPerson.cs" />
     <Compile Include="SF\Classes\Organization.cs" />
     <Compile Include="SF\Classes\AdmLevel.cs" />
@@ -67,11 +67,12 @@
     <Compile Include="SF\Classes\UserRoleSF.cs" />
     <Compile Include="SF\enums.cs" />
     <Compile Include="SF\Interfaces\IHaveRegion.cs" />
+    <Compile Include="SF\Interfaces\IHistory.cs" />
     <Compile Include="SF\Lists\AcademTitleList.cs" />
     <Compile Include="SF\Lists\AdmLevelList.cs" />
     <Compile Include="SF\Classes\City.cs" />
     <Compile Include="SF\Lists\CityList.cs" />
-    <Compile Include="SF\Lists\HistoryOrganizationList.cs" />
+    <Compile Include="SF\Lists\HistoryList.cs" />
     <Compile Include="SF\Lists\LpuCompetitorsList.cs" />
     <Compile Include="SF\Lists\LpuList.cs" />
     <Compile Include="SF\Lists\MainSpecPersonList.cs" />

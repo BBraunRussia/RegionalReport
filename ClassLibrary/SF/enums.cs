@@ -32,4 +32,9 @@ namespace ClassLibrary.SF
     {
         rules_lpu = 1, rules_pharmacy = 2, rules_department = 3
     }
+
+    public enum HistoryType
+    {
+        organization = 1, person = 2
+    }
 }

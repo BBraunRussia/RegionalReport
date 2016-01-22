@@ -6,7 +6,7 @@ using System.Data;
 
 namespace ClassLibrary.SF
 {
-    public class Organization
+    public class Organization : IHistory
     {
         private int _id;
         private string _numberSF;
@@ -174,7 +174,7 @@ namespace ClassLibrary.SF
 
         public bool IsBelongsINNToRealRegion()
         {
-            if ((ID != 0) || (!(this is IHaveRegion)))
+            if ((ID != 0) || (!(this is IHaveRegion)) || (ParentOrganization != null))
                 return true;
 
             IHaveRegion organization = this as IHaveRegion;
@@ -185,5 +185,7 @@ namespace ClassLibrary.SF
 
             return idRealRegion == organization.INN.PadLeft(2);
         }
+        
+        public HistoryType Type { get { return HistoryType.organization; } }
     }
 }

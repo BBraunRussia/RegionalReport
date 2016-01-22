@@ -71,6 +71,8 @@
             this.label32 = new System.Windows.Forms.Label();
             this.btnShowPerson = new System.Windows.Forms.Button();
             this.btnAddPerson = new System.Windows.Forms.Button();
+            this.lbEditor = new System.Windows.Forms.Label();
+            this.lbAutor = new System.Windows.Forms.Label();
             this.gbCategory.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -475,11 +477,31 @@
             this.btnAddPerson.UseVisualStyleBackColor = true;
             this.btnAddPerson.Click += new System.EventHandler(this.btnAddPerson_Click);
             // 
+            // lbEditor
+            // 
+            this.lbEditor.AutoSize = true;
+            this.lbEditor.Location = new System.Drawing.Point(13, 420);
+            this.lbEditor.Name = "lbEditor";
+            this.lbEditor.Size = new System.Drawing.Size(53, 13);
+            this.lbEditor.TabIndex = 135;
+            this.lbEditor.Text = "Изменил";
+            // 
+            // lbAutor
+            // 
+            this.lbAutor.AutoSize = true;
+            this.lbAutor.Location = new System.Drawing.Point(13, 400);
+            this.lbAutor.Name = "lbAutor";
+            this.lbAutor.Size = new System.Drawing.Size(44, 13);
+            this.lbAutor.TabIndex = 134;
+            this.lbAutor.Text = "Создал";
+            // 
             // FormAddOtherOrganization
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(924, 455);
+            this.Controls.Add(this.lbEditor);
+            this.Controls.Add(this.lbAutor);
             this.Controls.Add(this.btnShowPerson);
             this.Controls.Add(this.btnAddPerson);
             this.Controls.Add(this.label32);
@@ -576,5 +598,7 @@
         private System.Windows.Forms.Label label32;
         private System.Windows.Forms.Button btnShowPerson;
         private System.Windows.Forms.Button btnAddPerson;
+        private System.Windows.Forms.Label lbEditor;
+        private System.Windows.Forms.Label lbAutor;
     }
 }

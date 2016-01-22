@@ -22,7 +22,7 @@ namespace DataLayer
 
         public sql()
         {
-            _Database = DBNames.RegionalR.ToString();
+            _Database = DBNames.RegionalR_TestSF.ToString();
 
             if (_Server == @"bbmru09")
             {

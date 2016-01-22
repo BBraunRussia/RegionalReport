@@ -13,6 +13,7 @@ namespace RegionR.SF
     public partial class FormAddOtherOrganization : Form
     {
         private OtherOrganization _organization;
+        private HistoryList _historyList;
 
         private RealRegionList _realRegionList;
         private CityList _cityList;
@@ -27,6 +28,7 @@ namespace RegionR.SF
 
             _realRegionList = RealRegionList.GetUniqueInstance();
             _cityList = CityList.GetUniqueInstance();
+            _historyList = HistoryList.GetUniqueInstance();
         }
 
         private void FormAddOtherOrganization_Load(object sender, EventArgs e)
@@ -88,6 +90,14 @@ namespace RegionR.SF
                 cbCity.SelectedValue = _organization.City.ID;
                 tbPhoneCode.Text = _organization.City.PhoneCode;
             }
+
+            ShowHistory();
+        }
+
+        private void ShowHistory()
+        {
+            lbAutor.Text = _historyList.GetItemString(_organization, ClassLibrary.SF.Action.Создал);
+            lbEditor.Text = _historyList.GetItemString(_organization, ClassLibrary.SF.Action.Редактировал);
         }
 
         private void LoadDictionaries()
@@ -132,17 +142,17 @@ namespace RegionR.SF
         {
             try
             {
-                CopyFields();
+                if (!IsHaveChanges())
+                    return true;
 
-                if ((_organization.INN != string.Empty) && (!_organization.IsBelongsINNToRealRegion()))
-                {
-                    if (MessageBox.Show("ИНН организации принадлежит другому региону, продолжить сохранение?", "ИНН другого региона", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.No)
-                    {
-                        return false;
-                    }
-                }
-
+                if (!CopyFields())
+                    return false;
+                
                 _organization.Save();
+
+                History.Save(_organization, UserLogged.Get());
+
+                ShowHistory();
 
                 return true;
             }
@@ -154,7 +164,7 @@ namespace RegionR.SF
             }
         }
 
-        private void CopyFields()
+        private bool CopyFields()
         {
             ClassForForm.CheckFilled(tbName.Text, "Официальное название");
             ClassForForm.CheckFilled(tbShortName.Text, "Сокращенное название");
@@ -168,6 +178,15 @@ namespace RegionR.SF
             _organization.Name = tbName.Text;
             _organization.ShortName = tbShortName.Text;
             _organization.INN = tbINN.Text;
+
+            if ((_organization.INN != string.Empty) && (!_organization.IsBelongsINNToRealRegion()))
+            {
+                if (MessageBox.Show("ИНН организации принадлежит другому региону, продолжить сохранение?", "ИНН другого региона", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.No)
+                {
+                    return false;
+                }
+            }
+
             _organization.KPP = tbKPP.Text;
             _organization.PostIndex = tbPostIndex.Text;
             _organization.Email = tbEmail.Text;
@@ -189,6 +208,8 @@ namespace RegionR.SF
                 else if (rbC.Checked)
                     _organization.Pharmacy = "C";
             }
+
+            return true;
         }
 
         private void btnShowRules_Click(object sender, EventArgs e)

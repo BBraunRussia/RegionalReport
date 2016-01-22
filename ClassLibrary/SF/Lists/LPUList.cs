@@ -13,6 +13,11 @@ namespace ClassLibrary.SF
 
         public LpuList()
         {
+            InitLists();
+        }
+
+        private void InitLists()
+        {
             OrganizationList organizationList = OrganizationList.GetUniqueInstance();
             _list = organizationList.ListLpu;
             _listOther = organizationList.ListOther;
@@ -33,7 +38,7 @@ namespace ClassLibrary.SF
             UserRightList userRightList = UserRightList.GetUniqueInstance();
             var userRightList2 = userRightList.ToList(user);
 
-            return _list.Where(item => userRightList2.Contains(item.LpuRR.RegionRR)).ToList();
+            return _list.Where(item => userRightList2.Contains(item.RealRegion.RegionRR)).ToList();
         }
 
         private List<OtherOrganization> GetListOther(List<OtherOrganization> listOther, User user)
@@ -123,6 +128,8 @@ namespace ClassLibrary.SF
         {
             OrganizationList organizationList = OrganizationList.GetUniqueInstance();
             organizationList.Reload();
+
+            InitLists();
         }
     }
 }

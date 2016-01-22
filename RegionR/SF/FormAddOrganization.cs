@@ -13,6 +13,7 @@ namespace RegionR.SF
     public partial class FormAddOrganization : Form
     {
         private MainSpecList _mainSpecList;
+        private HistoryList _historyList;
 
         private Organization _organization;
         private LPU _parentLPU;
@@ -25,12 +26,18 @@ namespace RegionR.SF
             _parentLPU = (_organization.ParentOrganization as LPU);
 
             _mainSpecList = MainSpecList.GetUniqueInstance();
+            _historyList = HistoryList.GetUniqueInstance();
         }
 
         private void FormAddOrganization_Load(object sender, EventArgs e)
         {
             LoadDictionaries();
 
+            LoadData();
+        }
+
+        private void LoadData()
+        {
             this.Text = string.Concat("Карточка ", _organization.TypeOrg, " ЛПУ");
             lbTypeOrgName.Text = string.Concat(_organization.TypeOrg.ToString(), ":");
             
@@ -68,6 +75,14 @@ namespace RegionR.SF
 
             lbNumberSF.Text = _organization.NumberSF;
             lbTypeOrg.Text = _organization.TypeOrg.ToString();
+
+            ShowHistory();
+        }
+
+        private void ShowHistory()
+        {
+            lbAutor.Text = _historyList.GetItemString(_organization, ClassLibrary.SF.Action.Создал);
+            lbEditor.Text = _historyList.GetItemString(_organization, ClassLibrary.SF.Action.Редактировал);
         }
 
         private void LoadDictionaries()
@@ -94,6 +109,10 @@ namespace RegionR.SF
                 CopyFields();
 
                 _organization.Save();
+
+                History.Save(_organization, UserLogged.Get());
+
+                ShowHistory();
 
                 return true;
             }

@@ -50,8 +50,8 @@ namespace ClassLibrary.SF
                     return new SubRegion(row);
                 case "SF_TypeFin":
                     return new TypeFin(row);
-                case "SF_HistoryOrganization":
-                    return new HistoryOrganization(row);
+                case "SF_History":
+                    return new History(row);
                 default:
                     throw new NotImplementedException("Фабрика не может создать экземпляр данного класса");
             }

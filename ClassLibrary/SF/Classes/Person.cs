@@ -6,7 +6,7 @@ using System.Data;
 
 namespace ClassLibrary.SF
 {
-    public class Person : BaseDictionary
+    public class Person : BaseDictionary, IHistory
     {
         private string _lastName;
         private string _numberSF;
@@ -21,7 +21,7 @@ namespace ClassLibrary.SF
         private string _phone;
         private Organization _organization;
         private string _comment;
-        
+                
         public Person()
         {
             if (_numberSF == null)
@@ -155,14 +155,40 @@ namespace ClassLibrary.SF
 
             ID = id;
 
-            PersonList personList = PersonList.GetUniqueInstance();
+            PersonList personList = GetPersonList();
             personList.Add(this);
         }
 
         public void Delete()
         {
-            PersonList personList = PersonList.GetUniqueInstance();
+            PersonList personList = GetPersonList();
             personList.Delete(this);
         }
+
+        public bool CheckNamesake()
+        {
+            if (ID != 0)
+                return false;
+
+            PersonList personList = GetPersonList();
+            return personList.CheckNamesake(this);
+        }
+
+        public bool IsOrganizationHaveUnique()
+        {
+            if ((ID != 0) || (!Position.Unique))
+                return false;
+
+            PersonList personList = GetPersonList();
+            return personList.IsOrganizationHaveUnique(this);
+        }
+
+        private PersonList GetPersonList()
+        {
+            return PersonList.GetUniqueInstance();
+        }
+
+        public string ShortName { get { return LastName; } }
+        public HistoryType Type { get { return HistoryType.person; } }
     }
 }
