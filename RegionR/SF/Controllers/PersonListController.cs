@@ -15,9 +15,8 @@ namespace RegionR.SF
         private User _user;
         private DataGridView _dgv;
         private SearchInDgv _seacher;
-
-        string _filterColumnName;
-        string _filterValue;
+        private FilteredDGV _filtredDGV;
+        private SortDGV _sortDGV;
 
         public PersonListController(DataGridView dgv, Organization organization)
         {
@@ -28,12 +27,14 @@ namespace RegionR.SF
             _personList = PersonList.GetUniqueInstance();
             _user = UserLogged.Get();
 
-            _filterColumnName = string.Empty;
-            _filterValue = string.Empty;
+            _filtredDGV = new FilteredDGV(dgv);
+            _sortDGV = new SortDGV(dgv);
         }
 
         public DataGridView ToDataGridView()
         {
+            ReLoad();
+
             DataTable dt = (_organization != null) ? _personList.ToDataTable(_organization) : (_user.RoleSF == RolesSF.Администратор) ? _personList.ToDataTable() : _personList.ToDataTable(_user);
 
             _dgv.DataSource = dt;
@@ -85,81 +86,21 @@ namespace RegionR.SF
 
         public void Sort()
         {
-            if (_dgv.SelectedCells.Count == 0)
-                return;
-            
-            DataGridViewColumn column = _dgv.Columns[_dgv.CurrentCell.ColumnIndex];
-            System.ComponentModel.ListSortDirection sortDirection = (_dgv.SortOrder == SortOrder.Ascending) ? System.ComponentModel.ListSortDirection.Descending : System.ComponentModel.ListSortDirection.Ascending;
-            /*
-            if ((_dgv.SortedColumn == null) || (_dgv.SortedColumn != column))
-                sortDirection = System.ComponentModel.ListSortDirection.Ascending;
-            else if (_dgv.SortOrder == SortOrder.Ascending)
-                sortDirection = System.ComponentModel.ListSortDirection.Descending;
-            else
-                sortDirection = System.ComponentModel.ListSortDirection.Ascending;
-            */
-            _dgv.Sort(column, sortDirection);
+            _sortDGV.Sort();
         }
 
         public void Search(string text)
         {
             _seacher.Find(text);
         }
-
-        public void CreateFilter()
-        {
-            _filterColumnName = _dgv.Columns[_dgv.CurrentCell.ColumnIndex].HeaderText;
-            _filterValue = _dgv.CurrentCell.Value.ToString();
-
-            ApplyFilter();
-        }
-
-        public void DeleteFilter()
-        {
-            foreach (DataGridViewRow row in _dgv.Rows)
-            {
-                if (!row.Visible)
-                    row.Visible = true;
-            }
-
-            _filterColumnName = string.Empty;
-            _filterValue = string.Empty;
-        }
-
-        public void ApplyFilter()
-        {
-            if (_filterColumnName == string.Empty)
-                return;
-
-            int rowIndex = _dgv.CurrentCell.RowIndex;
-            int columnIndex = _dgv.CurrentCell.ColumnIndex;
-
-            _dgv.CurrentCell = null;
-
-            foreach (DataGridViewRow row in _dgv.Rows)
-                row.Visible = (row.Cells[_filterColumnName].Value.ToString() == _filterValue);
-
-            if (!_dgv.Rows[rowIndex].Cells[columnIndex].Visible)
-            {
-                foreach (DataGridViewRow row in _dgv.Rows)
-                {
-                    if (row.Visible)
-                    {
-                        _dgv.CurrentCell = row.Cells[columnIndex];
-                        return;
-                    }
-                }
-            }
-
-            _dgv.CurrentCell = _dgv.Rows[rowIndex].Cells[columnIndex];
-        }
-
+        
         public bool DeletePerson()
         {
             if (MessageBox.Show("Вы действительно хотите удалить персону?", "Удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.Yes)
             {
                 Person person = GetPerson();
                 person.Delete();
+                History.Save(person, UserLogged.Get(), ClassLibrary.SF.Action.Удалил);
                 return true;
             }
 
@@ -180,6 +121,21 @@ namespace RegionR.SF
             int.TryParse(_dgv.Rows[_dgv.CurrentCell.RowIndex].Cells[0].Value.ToString(), out id);
 
             return _personList.GetItem(id) as Person;
+        }
+
+        public void CreateFilter()
+        {
+            _filtredDGV.Create();
+        }
+
+        public void DeleteFilter()
+        {
+            _filtredDGV.Delete();
+        }
+
+        public void ApplyFilter()
+        {
+            _filtredDGV.Apply();
         }
     }
 }

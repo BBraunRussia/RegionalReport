@@ -6,7 +6,7 @@ using System.Data;
 
 namespace ClassLibrary.SF
 {
-    public class Person : BaseDictionary
+    public class Person : BaseDictionary, IHistory
     {
         private string _lastName;
         private string _numberSF;
@@ -187,5 +187,8 @@ namespace ClassLibrary.SF
         {
             return PersonList.GetUniqueInstance();
         }
+
+        public string ShortName { get { return LastName; } }
+        public HistoryType Type { get { return HistoryType.person; } }
     }
 }

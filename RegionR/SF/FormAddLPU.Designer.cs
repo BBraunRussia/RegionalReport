@@ -139,7 +139,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(862, 139);
+            this.label2.Location = new System.Drawing.Point(857, 139);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(60, 13);
             this.label2.TabIndex = 1;
@@ -713,7 +713,7 @@
             this.groupBox3.Controls.Add(this.btnDeleteSubOrganization);
             this.groupBox3.Location = new System.Drawing.Point(854, 185);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(247, 365);
+            this.groupBox3.Size = new System.Drawing.Size(247, 416);
             this.groupBox3.TabIndex = 73;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Подразделения";
@@ -726,7 +726,7 @@
             this.treeView1.ContextMenuStrip = this.conMenuTree;
             this.treeView1.Location = new System.Drawing.Point(6, 48);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(235, 311);
+            this.treeView1.Size = new System.Drawing.Size(235, 362);
             this.treeView1.TabIndex = 0;
             this.treeView1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseClick);
             this.treeView1.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
@@ -968,7 +968,7 @@
             // lbAutor
             // 
             this.lbAutor.AutoSize = true;
-            this.lbAutor.Location = new System.Drawing.Point(765, 9);
+            this.lbAutor.Location = new System.Drawing.Point(9, 569);
             this.lbAutor.Name = "lbAutor";
             this.lbAutor.Size = new System.Drawing.Size(44, 13);
             this.lbAutor.TabIndex = 95;
@@ -977,7 +977,7 @@
             // lbEditor
             // 
             this.lbEditor.AutoSize = true;
-            this.lbEditor.Location = new System.Drawing.Point(765, 29);
+            this.lbEditor.Location = new System.Drawing.Point(9, 589);
             this.lbEditor.Name = "lbEditor";
             this.lbEditor.Size = new System.Drawing.Size(53, 13);
             this.lbEditor.TabIndex = 96;
@@ -989,7 +989,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(1113, 562);
+            this.ClientSize = new System.Drawing.Size(1113, 613);
             this.Controls.Add(this.lbEditor);
             this.Controls.Add(this.lbAutor);
             this.Controls.Add(this.cbTypeFin);

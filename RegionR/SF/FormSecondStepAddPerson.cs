@@ -49,7 +49,8 @@ namespace RegionR.SF
         private void btnAddPerson_Click(object sender, EventArgs e)
         {
             _person = new Person();
-            AddPerson();
+            if (AddPerson())
+                btnCancel.DialogResult = System.Windows.Forms.DialogResult.OK;
         }
 
         private Organization GetOrganization()
@@ -66,18 +67,18 @@ namespace RegionR.SF
             AddPerson();
         }
 
-        private void AddPerson()
+        private bool AddPerson()
         {
             _person.Organization = GetOrganization();
 
             if (_changeOnly)
             {
                 DialogResult = System.Windows.Forms.DialogResult.OK;
-                return;
+                return false;
             }
 
             FormAddPerson formAddPerson = new FormAddPerson(_person);
-            formAddPerson.ShowDialog();
+            return (formAddPerson.ShowDialog() == System.Windows.Forms.DialogResult.OK);
         }
     }
 }

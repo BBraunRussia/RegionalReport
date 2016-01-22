@@ -17,6 +17,7 @@ namespace RegionR.SF
         private AcademTitleList _academTitleList;
         private MainSpecPersonList _mainSpecPersonList;
         private PositionList _positionList;
+        private HistoryList _historyList;
 
         private bool _changeSubOrg;
 
@@ -29,6 +30,7 @@ namespace RegionR.SF
             _academTitleList = AcademTitleList.GetUniqueInstance();
             _mainSpecPersonList = MainSpecPersonList.GetUniqueInstance();
             _positionList = PositionList.GetUniqueInstance();
+            _historyList = HistoryList.GetUniqueInstance();
 
             lbSubOrganization.Visible = !(_person.Organization is OtherOrganization);
             tbSubOrganization.Visible = !(_person.Organization is OtherOrganization);
@@ -78,6 +80,14 @@ namespace RegionR.SF
 
             SetPhoneCode();
             SetPhoneMask();
+
+            ShowHistory();
+        }
+
+        private void ShowHistory()
+        {
+            lbAutor.Text = _historyList.GetItemString(_person, ClassLibrary.SF.Action.Создал);
+            lbEditor.Text = _historyList.GetItemString(_person, ClassLibrary.SF.Action.Редактировал);
         }
 
         private void SetPhoneCode()
@@ -120,21 +130,17 @@ namespace RegionR.SF
         {
             try
             {
-                CopyFields();
+                if (!IsHaveChanges())
+                    return true;
 
-                if (_person.CheckNamesake())
-                {
-                    if (MessageBox.Show("В данной организации уже есть сотрудник с такими ФИО. Продолжить сохранение?", "Вопрос", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.No)
-                        return false;
-                }
-
-                if (_person.IsOrganizationHaveUnique())
-                {
-                    MessageBox.Show("В данной организации уже есть сотрудник с такой должностью.\nИсправьте пожалуйста.", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                if (!CopyFields())
                     return false;
-                }
-
+                                                
                 _person.Save();
+
+                History.Save(_person, UserLogged.Get());
+
+                ShowHistory();
 
                 return true;
             }
@@ -146,18 +152,46 @@ namespace RegionR.SF
             }
         }
         
-        private void CopyFields()
+        private bool CopyFields()
         {
             ClassForForm.CheckFilled(tbLastName.Text, "Фамилия");
             ClassForForm.CheckFilled(tbFirstName.Text, "Имя");
             ClassForForm.CheckFilled(tbSecondName.Text, "Отчество");
-            
+
+            string lastName, firstName, secondName;
+
+            lastName = _person.LastName;
+            firstName = _person.FirstName;
+            secondName = _person.SecondName;
+
             _person.LastName = tbLastName.Text;
             _person.FirstName = tbFirstName.Text;
             _person.SecondName = tbSecondName.Text;
 
+            if (_person.CheckNamesake())
+            {
+                if (MessageBox.Show("В данной организации уже есть сотрудник с такими ФИО. Продолжить сохранение?", "Вопрос", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.No)
+                {
+                    _person.LastName = lastName;
+                    _person.FirstName = firstName;
+                    _person.SecondName = secondName;
+                    return false;
+                }
+            }
+            
             _person.Appeal = cbAppeal.SelectedIndex;
+
+            Position position = _person.Position;
+
             _person.Position = _positionList.GetItem(Convert.ToInt32(cbPosition.SelectedValue)) as Position;
+
+            if (_person.IsOrganizationHaveUnique())
+            {
+                MessageBox.Show("В данной организации уже есть сотрудник с такой должностью.\nИсправьте пожалуйста.", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                _person.Position = position;
+                return false;
+            }
+
             _person.MainSpecPerson = _mainSpecPersonList.GetItem(Convert.ToInt32(cbMainSpecPerson.SelectedValue)) as MainSpecPerson;
             _person.AcademTitle = _academTitleList.GetItem(Convert.ToInt32(cbAcademTitle.SelectedValue)) as AcademTitle;
 
@@ -166,13 +200,17 @@ namespace RegionR.SF
             _person.Phone = mtbPhone.Text;
 
             _person.Comment = tbComment.Text;
+
+            return true;
         }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
             if (SaveIfNeed())
             {
-                DialogResult = System.Windows.Forms.DialogResult.OK;
+                if (TrySave())
+                    DialogResult = System.Windows.Forms.DialogResult.OK;
+
                 return;
             }
 
@@ -234,8 +272,9 @@ namespace RegionR.SF
 
         private void btnChangeOrganizationAndSubOrganization_Click(object sender, EventArgs e)
         {
-            SaveIfNeed();
-
+            if (!TrySave())
+                return;
+            
             FormFirstStepAddPerson formFirstStepAddPerson = new FormFirstStepAddPerson(_person);
             if (formFirstStepAddPerson.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
@@ -254,7 +293,6 @@ namespace RegionR.SF
             {
                 if (MessageBox.Show("На форме имеются не сохранёные изменения, сохранить перед продолжение?", "Сохраненить изменения", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
                 {
-                    TrySave();
                     return true;
                 }
             }

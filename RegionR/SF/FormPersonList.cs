@@ -110,24 +110,21 @@ namespace RegionR
 
         private void filterToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (dgv.CurrentCell == null)
-                return;
-            
-            CreateFilter();
-        }
-
-        private void CreateFilter()
-        {
             _personListController.CreateFilter();
 
             btnDeleteFilter.Visible = true;
         }
-
+        
         private void btnDeleteFilter_Click(object sender, EventArgs e)
         {
             _personListController.DeleteFilter();
 
             btnDeleteFilter.Visible = false;
+        }
+
+        private void dgv_Sorted(object sender, EventArgs e)
+        {
+            _personListController.ApplyFilter();
         }
 
         private void tbSearch_TextChanged(object sender, EventArgs e)
@@ -143,12 +140,7 @@ namespace RegionR
                 Search();
             }
         }
-
-        private void dgv_Sorted(object sender, EventArgs e)
-        {
-            _personListController.ApplyFilter();
-        }
-
+        
         private void Search()
         {
             _personListController.Search(tbSearch.Text);

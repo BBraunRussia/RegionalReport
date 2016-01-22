@@ -25,7 +25,7 @@ namespace RegionR.SF
         private CityList _cityList;
         private SubRegionList _subRegionList;
         private TypeFinList _typeFinList;
-        private HistoryOrganizationList _historyOrganizationList;
+        private HistoryList _historyList;
         
         private bool _isLoad;
 
@@ -50,7 +50,7 @@ namespace RegionR.SF
             _cityList = CityList.GetUniqueInstance();
             _subRegionList = SubRegionList.GetUniqueInstance();
             _typeFinList = TypeFinList.GetUniqueInstance();
-            _historyOrganizationList = HistoryOrganizationList.GetUniqueInstance();
+            _historyList = HistoryList.GetUniqueInstance();
         }
 
         private void FormAddLPU_Load(object sender, EventArgs e)
@@ -163,11 +163,8 @@ namespace RegionR.SF
 
         private void ShowHistory()
         {
-            HistoryOrganization history = _historyOrganizationList.GetItem(_lpu, ClassLibrary.SF.Action.Создал);
-            lbAutor.Text = (history == null) ? string.Empty : history.ToString();
-
-            history = _historyOrganizationList.GetItem(_lpu, ClassLibrary.SF.Action.Редактировал);
-            lbEditor.Text = (history == null) ? string.Empty : history.ToString();
+            lbAutor.Text = _historyList.GetItemString(_lpu, ClassLibrary.SF.Action.Создал);
+            lbEditor.Text = _historyList.GetItemString(_lpu, ClassLibrary.SF.Action.Редактировал);
         }
 
         private void LoadDictionaries()
@@ -233,37 +230,15 @@ namespace RegionR.SF
         {
             try
             {
-                if (IsTotalLessThenSum())
-                {
-                    MessageBox.Show("Общее количество коек меньше, чем сумма реанимационных и хирургических коек.\nПожалуйста, исправьте.", "Ошибка ввода", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                if (!IsHaveChanges())
+                    return true;
+
+                if (!CopyFields())
                     return false;
-                }
-
-                CopyFields();
-
-                if (!_lpu.IsBelongsINNToRealRegion())
-                {
-                    if (MessageBox.Show("ИНН организации принадлежит другому региону, продолжить сохранение?", "ИНН другого региона", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.No)
-                    {
-                        return false;
-                    }
-                }
-
-                if (!ClassForForm.IsEmail(tbEmail.Text))
-                {
-                    MessageBox.Show("Ошибка в электронном адресе. Пожалуйста, исправьте.", "Ошибка ввода", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return false;
-                }
-                if (!ClassForForm.IsWebSite(tbWebSite.Text))
-                {
-                    MessageBox.Show("Ошибка в адресе веб-сайта. Пожалуйста, исправьте.", "Ошибка ввода", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return false;
-                }
-
+                
                 _lpu.Save();
 
-                HistoryOrganization.Create(_lpu, UserLogged.Get(), ClassLibrary.SF.Action.Создал);
-
+                History.Save(_lpu, UserLogged.Get());
                 ShowHistory();
 
                 return true;
@@ -275,18 +250,8 @@ namespace RegionR.SF
                 return false;
             }
         }
-
-        private bool IsTotalLessThenSum()
-        {
-            int total, bedsIC, bedsSurgical;
-            int.TryParse(tbBedsTotal.Text, out total);
-            int.TryParse(tbBedsIC.Text, out bedsIC);
-            int.TryParse(tbBedsSurgical.Text, out bedsSurgical);
-
-            return (total < ( bedsIC + bedsSurgical));
-        }
-        
-        private void CopyFields()
+                
+        private bool CopyFields()
         {
             int idTypeLPU = Convert.ToInt32(cbTypeLpu.SelectedValue);
             _lpu.TypeLPU = _typeLPUList.GetItem(idTypeLPU) as TypeLPU;
@@ -319,10 +284,38 @@ namespace RegionR.SF
             _lpu.Name = tbName.Text;
             _lpu.ShortName = tbShortName.Text;
             _lpu.INN = (_parentLPU == null) ? tbINN.Text : string.Empty;
+
+            if (!_lpu.IsBelongsINNToRealRegion())
+            {
+                if (MessageBox.Show("ИНН организации принадлежит другому региону, продолжить сохранение?", "ИНН другого региона", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.No)
+                {
+                    return false;
+                }
+            }
+
             _lpu.KPP = tbKPP.Text;
             _lpu.PostIndex = tbPostIndex.Text;
+
+            string email = _lpu.Email;
             _lpu.Email = tbEmail.Text;
+
+            if (!ClassForForm.IsEmail(tbEmail.Text))
+            {
+                MessageBox.Show("Ошибка в электронном адресе. Пожалуйста, исправьте.", "Ошибка ввода", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                _lpu.Email = email;
+                return false;
+            }
+
+            string website = _lpu.WebSite;
             _lpu.WebSite = tbWebSite.Text;
+
+            if (!ClassForForm.IsWebSite(tbWebSite.Text))
+            {
+                MessageBox.Show("Ошибка в адресе веб-сайта. Пожалуйста, исправьте.", "Ошибка ввода", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                _lpu.WebSite = website;
+                return false;
+            }
+
             _lpu.Phone = tbPhone.Text;
 
             int idCity = Convert.ToInt32(cbCity.SelectedValue);
@@ -331,9 +324,27 @@ namespace RegionR.SF
             _lpu.District = tbDistrict.Text;
             _lpu.Street = tbStreet.Text;
 
+            string bedsTotal, bedsIC, bedsSurgical;
+
+            bedsTotal = _lpu.BedsTotal;
+            bedsIC = _lpu.BedsIC;
+            bedsSurgical = _lpu.BedsSurgical;
+
             _lpu.BedsTotal = tbBedsTotal.Text;
             _lpu.BedsIC = tbBedsIC.Text;
             _lpu.BedsSurgical = tbBedsSurgical.Text;
+
+            if (_lpu.IsTotalLessThenSum())
+            {
+                MessageBox.Show("Общее количество коек меньше, чем сумма реанимационных и хирургических коек.\nПожалуйста, исправьте.", "Ошибка ввода", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                
+                _lpu.BedsTotal = bedsTotal;
+                _lpu.BedsIC = bedsIC;
+                _lpu.BedsSurgical = bedsSurgical;
+
+                return false;
+            }
+
             _lpu.Operating = tbOperating.Text;
             _lpu.MachineGD = tbMachineGD.Text;
             _lpu.MachineGDF = tbMachineGDF.Text;
@@ -342,6 +353,8 @@ namespace RegionR.SF
             _lpu.PatientGD = tbPatientGD.Text;
             _lpu.PatientPD = tbPatientPD.Text;
             _lpu.PatientCRRT = tbPatientCRRT.Text;
+
+            return true;
         }
         
         private void btnShowRules_Click(object sender, EventArgs e)
@@ -598,7 +611,7 @@ namespace RegionR.SF
 
             conMenuTree.Items["deleteToolStripMenuItem"].Enabled = (_currentNode != treeView1.Nodes[0]);
 
-            if (_currentNode == null)
+            if ((_currentNode == null) || (_currentNode.Text == string.Empty))
             {
                 return;
             }

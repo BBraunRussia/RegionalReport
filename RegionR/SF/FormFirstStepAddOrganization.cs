@@ -12,9 +12,13 @@ namespace RegionR.SF
 {
     public partial class FormFirstStepAddOrganization : Form
     {
-        public FormFirstStepAddOrganization()
+        OrganizationListController _organizationListController;
+
+        public FormFirstStepAddOrganization(OrganizationListController organizationListController)
         {
             InitializeComponent();
+
+            _organizationListController = organizationListController;
         }
 
         private void radioButton_CheckedChanged(object sender, EventArgs e)
@@ -24,12 +28,7 @@ namespace RegionR.SF
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            if (rbLPU.Checked)
-                FormOrganizationList.typeOrg = TypeOrg.ЛПУ;
-            else if (rbPharmacy.Checked)
-                FormOrganizationList.typeOrg = TypeOrg.Аптека;
-            else if (rbAdminOrganization.Checked)
-                FormOrganizationList.typeOrg = TypeOrg.Административное_Учреждение;
+            _organizationListController.SetTypeOrg((rbLPU.Checked) ? TypeOrg.ЛПУ : (rbPharmacy.Checked) ? TypeOrg.Аптека : TypeOrg.Административное_Учреждение);
         }
     }
 }

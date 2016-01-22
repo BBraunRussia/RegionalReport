@@ -54,6 +54,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lbTypeOrgName = new System.Windows.Forms.Label();
             this.btnShowRules = new System.Windows.Forms.Button();
+            this.lbEditor = new System.Windows.Forms.Label();
+            this.lbAutor = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lbBranch
@@ -297,11 +299,31 @@
             this.btnShowRules.Visible = false;
             this.btnShowRules.Click += new System.EventHandler(this.btnShowRules_Click);
             // 
+            // lbEditor
+            // 
+            this.lbEditor.AutoSize = true;
+            this.lbEditor.Location = new System.Drawing.Point(9, 295);
+            this.lbEditor.Name = "lbEditor";
+            this.lbEditor.Size = new System.Drawing.Size(53, 13);
+            this.lbEditor.TabIndex = 137;
+            this.lbEditor.Text = "Изменил";
+            // 
+            // lbAutor
+            // 
+            this.lbAutor.AutoSize = true;
+            this.lbAutor.Location = new System.Drawing.Point(9, 275);
+            this.lbAutor.Name = "lbAutor";
+            this.lbAutor.Size = new System.Drawing.Size(44, 13);
+            this.lbAutor.TabIndex = 136;
+            this.lbAutor.Text = "Создал";
+            // 
             // FormAddOrganization
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(723, 317);
+            this.Controls.Add(this.lbEditor);
+            this.Controls.Add(this.lbAutor);
             this.Controls.Add(this.btnShowRules);
             this.Controls.Add(this.lbTypeOrgName);
             this.Controls.Add(this.label1);
@@ -365,5 +387,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lbTypeOrgName;
         private System.Windows.Forms.Button btnShowRules;
+        private System.Windows.Forms.Label lbEditor;
+        private System.Windows.Forms.Label lbAutor;
     }
 }
