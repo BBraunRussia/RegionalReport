@@ -6,7 +6,7 @@ using System.Text;
 
 namespace DataLayer
 {
-    public enum DBNames { RegionalR_TestSF, Competitors };
+    public enum DBNames { RegionalR, Competitors };
 
     public class SqlNew : IDataBase
     {
@@ -22,7 +22,7 @@ namespace DataLayer
 
         public SqlNew()
         {
-            _database = DBNames.RegionalR_TestSF.ToString();
+            _database = DBNames.RegionalR.ToString();
 
             if (_server == @"bbmru09")
             {

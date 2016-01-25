@@ -86,7 +86,8 @@ namespace RegionR.SF
             else
             {
                 RealRegion realRegion = (_parentLPU == null) ? _lpu.RealRegion : _parentLPU.RealRegion;
-                cbSubRegion.SelectedValue = _subRegionList.GetItem(realRegion).ID;
+                if (realRegion != null)
+                    cbSubRegion.SelectedValue = _subRegionList.GetItem(realRegion).ID;
             }
             
             tbName.Text = _lpu.Name;
