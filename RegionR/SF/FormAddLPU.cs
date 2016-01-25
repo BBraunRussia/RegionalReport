@@ -284,6 +284,10 @@ namespace RegionR.SF
 
             _lpu.Name = tbName.Text;
             _lpu.ShortName = tbShortName.Text;
+
+            int idCity = Convert.ToInt32(cbCity.SelectedValue);
+            _lpu.City = _cityList.GetItem(idCity) as City;
+
             _lpu.INN = (_parentLPU == null) ? tbINN.Text : string.Empty;
 
             if (!_lpu.IsBelongsINNToRealRegion())
@@ -318,10 +322,7 @@ namespace RegionR.SF
             }
 
             _lpu.Phone = tbPhone.Text;
-
-            int idCity = Convert.ToInt32(cbCity.SelectedValue);
-            _lpu.City = _cityList.GetItem(idCity) as City;
-
+            
             _lpu.District = tbDistrict.Text;
             _lpu.Street = tbStreet.Text;
 

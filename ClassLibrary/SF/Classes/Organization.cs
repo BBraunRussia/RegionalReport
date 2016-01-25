@@ -183,7 +183,7 @@ namespace ClassLibrary.SF
             if (organization.RealRegion.ID < 10)
                 idRealRegion = "0" + organization.RealRegion.ID.ToString();
 
-            return idRealRegion == organization.INN.PadLeft(2);
+            return idRealRegion == organization.INN.Substring(0, 2);
         }
         
         public HistoryType Type { get { return HistoryType.organization; } }
