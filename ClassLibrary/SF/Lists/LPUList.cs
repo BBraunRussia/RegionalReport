@@ -33,6 +33,15 @@ namespace ClassLibrary.SF
             return CreateTable(list, listOther);
         }
 
+        public DataTable ToDataTableWithBranch(User user = null)
+        {
+            if (user == null)
+                return ToDataTableWithBranch(_list, _listOther);
+
+            var list = GetList(user);
+            return ToDataTableWithBranch(list, _listOther);
+        }
+
         private List<LPU> GetList(User user)
         {
             UserRightList userRightList = UserRightList.GetUniqueInstance();
@@ -49,16 +58,7 @@ namespace ClassLibrary.SF
             return listOther.Where(item => userRightList2.Contains(item.RealRegion.RegionRR)).ToList();
         }
 
-        public DataTable ToDataTableWithBranch(User user = null)
-        {
-            if (user == null)
-                return ToDataTableWithBranch(_list);
-
-            var list = GetList(user);
-            return ToDataTableWithBranch(list);
-        }
-
-        private DataTable ToDataTableWithBranch(List<LPU> list)
+        private DataTable ToDataTableWithBranch(List<LPU> list, List<OtherOrganization> listOther)
         {
             OrganizationList organizationList = OrganizationList.GetUniqueInstance();
 
@@ -73,7 +73,7 @@ namespace ClassLibrary.SF
                     listNew.Add(itemBranch as LPU);
             }
 
-            return CreateTable(listNew, null);
+            return CreateTable(listNew, listOther);
         }
 
         private DataTable CreateTable(List<LPU> list, List<OtherOrganization> listOther)
