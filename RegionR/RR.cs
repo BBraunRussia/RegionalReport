@@ -130,7 +130,8 @@ namespace RegionR
 
         private void fillComboBoxYear(ComboBox combo)
         {
-            //combo.Items.Add(globalData.CurDate.Year - 3);
+            combo.Items.Add(globalData.CurDate.Year - 4);
+            combo.Items.Add(globalData.CurDate.Year - 3);
             combo.Items.Add(globalData.CurDate.Year - 2);
             combo.Items.Add(globalData.CurDate.Year - 1);
             combo.Items.Add(globalData.CurDate.Year);
@@ -10039,7 +10040,7 @@ namespace RegionR
                 lbLPUAccNY.Visible = false;
                 cbLPUAccNY.Visible = false;
                 cbUsersAccNY.Visible = false;
-                btnHideLPUAccNY.Visible = false;
+                btnHideLPUAccNY.Visible = true;
                 btnSaveAccNY.Enabled = false;
                 sql sql1 = new sql();
                 DataTable dt1 = new DataTable();
