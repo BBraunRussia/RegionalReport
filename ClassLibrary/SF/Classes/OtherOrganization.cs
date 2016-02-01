@@ -85,7 +85,7 @@ namespace ClassLibrary.SF
 
         public string Pharmacy
         {
-            get { return _pharmacy; }
+            get { return (_pharmacy == null) ? string.Empty : _pharmacy; }
             set { _pharmacy = value; }
         }
         

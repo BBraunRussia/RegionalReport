@@ -137,7 +137,7 @@
             this.tbDistrict.Location = new System.Drawing.Point(453, 151);
             this.tbDistrict.Name = "tbDistrict";
             this.tbDistrict.Size = new System.Drawing.Size(426, 20);
-            this.tbDistrict.TabIndex = 123;
+            this.tbDistrict.TabIndex = 5;
             // 
             // tbPhoneCode
             // 
@@ -146,7 +146,7 @@
             this.tbPhoneCode.MaxLength = 7;
             this.tbPhoneCode.Name = "tbPhoneCode";
             this.tbPhoneCode.Size = new System.Drawing.Size(74, 20);
-            this.tbPhoneCode.TabIndex = 106;
+            this.tbPhoneCode.TabIndex = 111;
             // 
             // label1
             // 
@@ -175,7 +175,7 @@
             this.cbCity.Location = new System.Drawing.Point(453, 177);
             this.cbCity.Name = "cbCity";
             this.cbCity.Size = new System.Drawing.Size(426, 21);
-            this.cbCity.TabIndex = 114;
+            this.cbCity.TabIndex = 6;
             this.cbCity.SelectedIndexChanged += new System.EventHandler(this.cbCity_SelectedIndexChanged);
             // 
             // cbRealRegion
@@ -185,7 +185,7 @@
             this.cbRealRegion.Location = new System.Drawing.Point(453, 124);
             this.cbRealRegion.Name = "cbRealRegion";
             this.cbRealRegion.Size = new System.Drawing.Size(426, 21);
-            this.cbRealRegion.TabIndex = 113;
+            this.cbRealRegion.TabIndex = 4;
             this.cbRealRegion.SelectedIndexChanged += new System.EventHandler(this.cbRealRegion_SelectedIndexChanged);
             // 
             // tbStreet
@@ -193,7 +193,7 @@
             this.tbStreet.Location = new System.Drawing.Point(453, 230);
             this.tbStreet.Name = "tbStreet";
             this.tbStreet.Size = new System.Drawing.Size(426, 20);
-            this.tbStreet.TabIndex = 112;
+            this.tbStreet.TabIndex = 8;
             // 
             // label31
             // 
@@ -228,7 +228,7 @@
             this.tbPhone.MaxLength = 7;
             this.tbPhone.Name = "tbPhone";
             this.tbPhone.Size = new System.Drawing.Size(139, 20);
-            this.tbPhone.TabIndex = 108;
+            this.tbPhone.TabIndex = 11;
             this.tbPhone.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_KeyPress);
             // 
             // label25
@@ -245,14 +245,14 @@
             this.tbWebSite.Location = new System.Drawing.Point(453, 282);
             this.tbWebSite.Name = "tbWebSite";
             this.tbWebSite.Size = new System.Drawing.Size(426, 20);
-            this.tbWebSite.TabIndex = 105;
+            this.tbWebSite.TabIndex = 10;
             // 
             // tbEmail
             // 
             this.tbEmail.Location = new System.Drawing.Point(453, 256);
             this.tbEmail.Name = "tbEmail";
             this.tbEmail.Size = new System.Drawing.Size(426, 20);
-            this.tbEmail.TabIndex = 104;
+            this.tbEmail.TabIndex = 9;
             // 
             // label27
             // 
@@ -269,7 +269,7 @@
             this.tbPostIndex.MaxLength = 6;
             this.tbPostIndex.Name = "tbPostIndex";
             this.tbPostIndex.Size = new System.Drawing.Size(103, 20);
-            this.tbPostIndex.TabIndex = 102;
+            this.tbPostIndex.TabIndex = 7;
             this.tbPostIndex.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_KeyPress);
             // 
             // label24
@@ -287,7 +287,7 @@
             this.tbKPP.MaxLength = 9;
             this.tbKPP.Name = "tbKPP";
             this.tbKPP.Size = new System.Drawing.Size(125, 20);
-            this.tbKPP.TabIndex = 100;
+            this.tbKPP.TabIndex = 3;
             this.tbKPP.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_KeyPress);
             // 
             // lbKPP
@@ -305,7 +305,7 @@
             this.tbINN.MaxLength = 12;
             this.tbINN.Name = "tbINN";
             this.tbINN.Size = new System.Drawing.Size(103, 20);
-            this.tbINN.TabIndex = 98;
+            this.tbINN.TabIndex = 2;
             this.tbINN.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_KeyPress);
             // 
             // tbShortName
@@ -313,7 +313,7 @@
             this.tbShortName.Location = new System.Drawing.Point(453, 72);
             this.tbShortName.Name = "tbShortName";
             this.tbShortName.Size = new System.Drawing.Size(272, 20);
-            this.tbShortName.TabIndex = 96;
+            this.tbShortName.TabIndex = 1;
             this.tbShortName.TextChanged += new System.EventHandler(this.tbShortName_TextChanged);
             // 
             // label20
@@ -332,7 +332,7 @@
             this.tbName.Location = new System.Drawing.Point(453, 44);
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(426, 20);
-            this.tbName.TabIndex = 94;
+            this.tbName.TabIndex = 0;
             // 
             // label19
             // 
@@ -348,7 +348,7 @@
             this.btnSave.Location = new System.Drawing.Point(367, 385);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(94, 43);
-            this.btnSave.TabIndex = 126;
+            this.btnSave.TabIndex = 12;
             this.btnSave.Text = "Сохранить";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
@@ -359,7 +359,7 @@
             this.btnCancel.Location = new System.Drawing.Point(731, 385);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(92, 43);
-            this.btnCancel.TabIndex = 125;
+            this.btnCancel.TabIndex = 14;
             this.btnCancel.Text = "Закрыть";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -369,7 +369,7 @@
             this.btnSaveAndClose.Location = new System.Drawing.Point(514, 385);
             this.btnSaveAndClose.Name = "btnSaveAndClose";
             this.btnSaveAndClose.Size = new System.Drawing.Size(167, 43);
-            this.btnSaveAndClose.TabIndex = 124;
+            this.btnSaveAndClose.TabIndex = 13;
             this.btnSaveAndClose.Text = "Сохранить и закрыть";
             this.btnSaveAndClose.UseVisualStyleBackColor = true;
             this.btnSaveAndClose.Click += new System.EventHandler(this.btnSaveAndClose_Click);
