@@ -10,9 +10,12 @@ namespace ClassLibrary.SF
     {
         private int _id;
         private string _name;
+
+        private bool _canAdd;
         
         public BaseDictionary(DataRow row)
         {
+            _canAdd = true;
             int.TryParse(row[0].ToString(), out _id);
             _name = row[1].ToString();
         }
@@ -33,6 +36,12 @@ namespace ClassLibrary.SF
         public virtual object[] GetRow()
         {
             return new object[] { _id, _name };
+        }
+
+        public bool CanAdd
+        {
+            get { return _canAdd; }
+            set { _canAdd = value; }
         }
     }
 }

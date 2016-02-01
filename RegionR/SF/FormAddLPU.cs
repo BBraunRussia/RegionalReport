@@ -78,18 +78,7 @@ namespace RegionR.SF
                 cbMainSpec.SelectedValue = _lpu.MainSpec.ID;
             if (_lpu.TypeFin != null)
                 cbTypeFin.SelectedValue = _lpu.TypeFin.ID;
-
-            if (_lpu.SubRegion != null)
-            {
-                cbSubRegion.SelectedValue = _lpu.SubRegion.ID;
-            }
-            else
-            {
-                RealRegion realRegion = (_parentLPU == null) ? _lpu.RealRegion : _parentLPU.RealRegion;
-                if (realRegion != null)
-                    cbSubRegion.SelectedValue = _subRegionList.GetItem(realRegion).ID;
-            }
-            
+                        
             tbName.Text = _lpu.Name;
             tbShortName.Text = _lpu.ShortName;
 
@@ -137,6 +126,27 @@ namespace RegionR.SF
                 cbCity.SelectedValue = _parentLPU.City.ID;
                 tbPhoneCode.Text = _parentLPU.City.PhoneCode;
             }
+
+            if (_lpu.SubRegion != null)
+            {
+                cbSubRegion.SelectedValue = _lpu.SubRegion.ID;
+            }
+            else
+            {
+                RealRegion realRegion = (_parentLPU == null) ? _lpu.RealRegion : _parentLPU.RealRegion;
+                if (realRegion != null)
+                    cbSubRegion.SelectedValue = _subRegionList.GetItem(realRegion).ID;
+                else
+                {
+                    int idRealRegion;
+                    int.TryParse(cbRealRegion.SelectedValue.ToString(), out idRealRegion);
+                    if (idRealRegion != 0)
+                    {
+                        realRegion = _realRegionList.GetItem(idRealRegion) as RealRegion;
+                        cbSubRegion.SelectedValue = _subRegionList.GetItem(realRegion).ID;
+                    }
+                }
+            }
             
             tbStreet.Text = _lpu.Street;
 
@@ -154,10 +164,7 @@ namespace RegionR.SF
 
             LoadTree();
 
-            if (tbPhoneCode.Text != string.Empty)
-            {
-                tbPhone.MaxLength = 10 - tbPhoneCode.Text.Length;
-            }
+            SetPhoneCodeMask();
 
             ShowHistory();
         }
@@ -166,6 +173,14 @@ namespace RegionR.SF
         {
             lbAutor.Text = _historyList.GetItemString(_lpu, ClassLibrary.SF.Action.Создал);
             lbEditor.Text = _historyList.GetItemString(_lpu, ClassLibrary.SF.Action.Редактировал);
+        }
+
+        private void SetPhoneCodeMask()
+        {
+            if (tbPhoneCode.Text != string.Empty)
+            {
+                tbPhone.MaxLength = 10 - tbPhoneCode.Text.Length;
+            }
         }
 
         private void LoadDictionaries()
@@ -653,6 +668,8 @@ namespace RegionR.SF
                 City city = _cityList.GetItem(idCity) as City;
                 tbPhoneCode.Text = city.PhoneCode;
             }
+
+            SetPhoneCodeMask();
         }
     }
 }

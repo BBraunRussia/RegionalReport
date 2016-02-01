@@ -59,11 +59,7 @@ namespace RegionR.SF
             _city.Name = tbName.Text;
 
             CityList cityList = CityList.GetUniqueInstance();
-            if (cityList.IsInList(_city))
-            {
-                throw new NullReferenceException("Населенный пункт с таким название уже присутствует в списке");
-            }
-            
+                        
             _city.PhoneCode = tbPhoneCode.Text;
             _city.Save();
         }

@@ -18,7 +18,7 @@ namespace ClassLibrary.SF
         private string _website;
         private string _phone;
         private int _idParentOrganization;
-        
+
         protected IProvider _provider;
 
         internal Organization(DataRow row)
@@ -50,7 +50,7 @@ namespace ClassLibrary.SF
             _numberSF = string.Empty;
             _sName = string.Empty;
         }
-
+        
         public int ID { get { return _id; } }
         public string NumberSF { get { return _numberSF; } }
 
