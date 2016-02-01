@@ -208,6 +208,8 @@ namespace RegionR.SF
                 else if (rbC.Checked)
                     _organization.Pharmacy = "C";
             }
+            else
+                _organization.Pharmacy = string.Empty;
 
             return true;
         }
