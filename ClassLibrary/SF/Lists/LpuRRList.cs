@@ -37,12 +37,21 @@ namespace ClassLibrary.SF
 
             return dt;
         }
-
+        
         public DataTable ToDataTable(User user)
         {
-            UserRightList userRightList = UserRightList.GetUniqueInstance();
-            
-            var list = List.Where(item => userRightList.IsInList(user, (item as LpuRR).RegionRR) && !(item as LpuRR).IsInList);
+            List<BaseDictionary> list;
+
+            if (user.RoleSF == RolesSF.Администратор)
+            {
+                list = List.Where(item => !(item as LpuRR).IsInList).OrderBy(item => item.Name).OrderBy(item => (item as LpuRR).RegionRR.Name).ToList();
+            }
+            else
+            {
+                UserRightList userRightList = UserRightList.GetUniqueInstance();
+
+                list = List.Where(item => userRightList.IsInList(user, (item as LpuRR).RegionRR) && !(item as LpuRR).IsInList).ToList();
+            }
 
             DataTable dt = new DataTable();
             dt.Columns.Add("id");

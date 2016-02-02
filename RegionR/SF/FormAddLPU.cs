@@ -51,6 +51,8 @@ namespace RegionR.SF
             _subRegionList = SubRegionList.GetUniqueInstance();
             _typeFinList = TypeFinList.GetUniqueInstance();
             _historyList = HistoryList.GetUniqueInstance();
+
+            cbLpuRR.Enabled = (UserLogged.Get().RoleSF == RolesSF.Администратор);
         }
 
         private void FormAddLPU_Load(object sender, EventArgs e)
@@ -371,6 +373,19 @@ namespace RegionR.SF
             _lpu.PatientPD = tbPatientPD.Text;
             _lpu.PatientCRRT = tbPatientCRRT.Text;
 
+            if (cbLpuRR.Enabled)
+            {
+                LpuRRList lpuRRList = LpuRRList.GetUniqueInstance();
+
+                int idLpuRR;
+                int.TryParse(cbLpuRR.SelectedValue.ToString(), out idLpuRR);
+
+                LpuRR lpuRR = lpuRRList.GetItem(idLpuRR) as LpuRR;
+
+                if (lpuRR != null)
+                    _lpu.LpuRR = lpuRR;
+            }
+
             return true;
         }
         
@@ -553,6 +568,19 @@ namespace RegionR.SF
             int idCity = Convert.ToInt32(cbCity.SelectedValue);
             if (_lpu.City != (_cityList.GetItem(idCity) as City))
                 return true;
+
+            if (cbLpuRR.Enabled)
+            {
+                LpuRRList lpuRRList = LpuRRList.GetUniqueInstance();
+
+                int idLpuRR;
+                int.TryParse(cbLpuRR.SelectedValue.ToString(), out idLpuRR);
+
+                LpuRR lpuRR = lpuRRList.GetItem(idLpuRR) as LpuRR;
+
+                if (lpuRR != null)
+                    return true;
+            }
 
             if (_lpu.District != tbDistrict.Text)
                 return true;

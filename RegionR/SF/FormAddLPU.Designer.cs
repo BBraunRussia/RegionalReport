@@ -806,7 +806,6 @@
             // cbLpuRR
             // 
             this.cbLpuRR.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbLpuRR.Enabled = false;
             this.cbLpuRR.FormattingEnabled = true;
             this.cbLpuRR.Location = new System.Drawing.Point(435, 109);
             this.cbLpuRR.Name = "cbLpuRR";
