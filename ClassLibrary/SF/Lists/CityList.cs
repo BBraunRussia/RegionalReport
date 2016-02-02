@@ -37,11 +37,6 @@ namespace ClassLibrary.SF
             return dt;
         }
 
-        public bool IsInList(City city)
-        {
-            return List.Where(item => item.Name == city.Name && (item as City).RealRegion == city.RealRegion).Count() > 0;
-        }
-
         internal void Add(City city)
         {
             if (!List.Exists(item => item.ID == city.ID))

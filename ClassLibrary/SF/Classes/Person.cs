@@ -62,6 +62,11 @@ namespace ClassLibrary.SF
             int.TryParse(row[13].ToString(), out idOrganization);
             OrganizationList organizationList = OrganizationList.GetUniqueInstance();
             _organization = organizationList.GetItem(idOrganization);
+
+            if (_organization == null)
+            {
+                CanAdd = false;
+            }
         }
         
         public string LastName

@@ -14,17 +14,17 @@ namespace RegionR.SF
     {
         private LPU _lpu;
         private LpuCompetitorsList _lpuCompetitorsList;
-        private UserLpuRRList _userLpuList;
         private SearchInDgv _seacher;
         private RealRegionList _realRegionList;
+        private LpuRRList _lpuRRList;
 
         public FormSecondStepAddOrganization(LPU lpu)
         {
             InitializeComponent();
 
-            _userLpuList = UserLpuRRList.GetUniqueInstance();
             _realRegionList = RealRegionList.GetUniqueInstance();
-            _lpuCompetitorsList = LpuCompetitorsList.GetUniqueInstance();            
+            _lpuCompetitorsList = LpuCompetitorsList.GetUniqueInstance();
+            _lpuRRList = LpuRRList.GetUniqueInstance();
 
             _lpu = lpu;
 
@@ -39,7 +39,7 @@ namespace RegionR.SF
 
         private void LoadFirstTable()
         {
-            dgvLpuRR.DataSource = _userLpuList.ToDataTable(UserLogged.Get());
+            dgvLpuRR.DataSource = _lpuRRList.ToDataTable(UserLogged.Get());
             dgvLpuRR.Columns[0].Visible = false;
 
             dgvLpuRR.Columns[1].Width = Convert.ToInt32(dgvLpuRR.Width / 2);
@@ -103,8 +103,12 @@ namespace RegionR.SF
 
             if (idLpuRR != 0)
             {
-                UserLpuRR userLpuRR = _userLpuList.GetItem(idLpuRR) as UserLpuRR;
-                _lpu.LpuRR = userLpuRR.LpuRR;
+                _lpu.LpuRR = _lpuRRList.GetItem(idLpuRR) as LpuRR;
+                DialogResult = System.Windows.Forms.DialogResult.OK;
+            }
+            else
+            {
+                MessageBox.Show("Сопоставление с прочими ЛПУ приостановлено. Для уточнения деталей обращайтесь с Тельнину Д.П..", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 

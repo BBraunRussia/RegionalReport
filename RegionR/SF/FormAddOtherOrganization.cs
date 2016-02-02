@@ -178,15 +178,7 @@ namespace RegionR.SF
             _organization.Name = tbName.Text;
             _organization.ShortName = tbShortName.Text;
             _organization.INN = tbINN.Text;
-
-            if ((_organization.INN != string.Empty) && (!_organization.IsBelongsINNToRealRegion()))
-            {
-                if (MessageBox.Show("ИНН организации принадлежит другому региону, продолжить сохранение?", "ИНН другого региона", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.No)
-                {
-                    return false;
-                }
-            }
-
+            
             _organization.KPP = tbKPP.Text;
             _organization.PostIndex = tbPostIndex.Text;
             _organization.Email = tbEmail.Text;
@@ -195,6 +187,14 @@ namespace RegionR.SF
 
             int idCity = Convert.ToInt32(cbCity.SelectedValue);
             _organization.City = _cityList.GetItem(idCity) as City;
+
+            if ((_organization.INN != string.Empty) && (!_organization.IsBelongsINNToRealRegion()))
+            {
+                if (MessageBox.Show("ИНН организации принадлежит другому региону, продолжить сохранение?", "ИНН другого региона", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.No)
+                {
+                    return false;
+                }
+            }
 
             _organization.District = tbDistrict.Text;
             _organization.Street = tbStreet.Text;
@@ -208,6 +208,8 @@ namespace RegionR.SF
                 else if (rbC.Checked)
                     _organization.Pharmacy = "C";
             }
+            else
+                _organization.Pharmacy = string.Empty;
 
             return true;
         }

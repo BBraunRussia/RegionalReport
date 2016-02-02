@@ -29,7 +29,8 @@ namespace ClassLibrary.SF
             foreach (DataRow row in dt.Rows)
             {
                 BaseDictionary baseDictionary = SFFactory.CreateItem(_tableName, row);
-                _list.Add(baseDictionary);
+                if (baseDictionary.CanAdd)
+                    _list.Add(baseDictionary);
             }
         }
 

@@ -51,7 +51,7 @@ namespace ClassLibrary.SF
 
         public Organization GetItem(int id)
         {
-            return _list.Where(item => item.ID == id).First();
+            return (_list.Where(item => item.ID == id).Count() > 0) ? _list.Where(item => item.ID == id).First() : null;
         }
 
         internal void Add(Organization organization)
