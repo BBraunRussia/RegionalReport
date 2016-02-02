@@ -135,7 +135,6 @@
             // btnOK
             // 
             this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnOK.Location = new System.Drawing.Point(41, 512);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
@@ -207,7 +206,6 @@
             // btnNextNotCopyLPU
             // 
             this.btnNextNotCopyLPU.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnNextNotCopyLPU.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnNextNotCopyLPU.Location = new System.Drawing.Point(122, 513);
             this.btnNextNotCopyLPU.Name = "btnNextNotCopyLPU";
             this.btnNextNotCopyLPU.Size = new System.Drawing.Size(243, 23);

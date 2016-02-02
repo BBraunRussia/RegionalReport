@@ -32,8 +32,6 @@ namespace ClassLibrary.SF
                     return new RegionRR(row);
                 case "SF_User":
                     return new User(row);
-                case "SF_UserLpuRR":
-                    return new UserLpuRR(row);
                 case "SF_UserRight":
                     return new UserRight(row);
                 case "SF_Person":

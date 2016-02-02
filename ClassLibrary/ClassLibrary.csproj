@@ -62,7 +62,6 @@
     <Compile Include="SF\Classes\SubRegion.cs" />
     <Compile Include="SF\Classes\TypeFin.cs" />
     <Compile Include="SF\Classes\User.cs" />
-    <Compile Include="SF\Classes\UserLpuRR.cs" />
     <Compile Include="SF\Classes\UserRight.cs" />
     <Compile Include="SF\Classes\UserRoleSF.cs" />
     <Compile Include="SF\enums.cs" />
@@ -100,7 +99,6 @@
     <Compile Include="SF\Lists\SubOrganizationList.cs" />
     <Compile Include="SF\Lists\TypeLPUList.cs" />
     <Compile Include="SF\Lists\UserList.cs" />
-    <Compile Include="SF\Lists\UserLpuRRList.cs" />
     <Compile Include="SF\Lists\UserRightList.cs" />
     <Compile Include="SF\Lists\UserRoleSFList.cs" />
     <Compile Include="Test\clAnswer.cs" />
