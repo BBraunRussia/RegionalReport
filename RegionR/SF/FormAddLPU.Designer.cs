@@ -811,6 +811,7 @@
             this.cbLpuRR.Name = "cbLpuRR";
             this.cbLpuRR.Size = new System.Drawing.Size(399, 21);
             this.cbLpuRR.TabIndex = 76;
+            this.cbLpuRR.SelectedIndexChanged += new System.EventHandler(this.cbLpuRR_SelectedIndexChanged);
             // 
             // btnShowRules
             // 

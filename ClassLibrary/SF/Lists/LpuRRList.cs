@@ -37,6 +37,22 @@ namespace ClassLibrary.SF
 
             return dt;
         }
+
+        public DataTable ToDataTable(LpuRR lpuRR)
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("id");
+            dt.Columns.Add("Название");
+
+            var list = List.Where(item => !(item as LpuRR).IsInList || (item as LpuRR) == lpuRR).OrderBy(item => item.Name);
+
+            dt.Rows.Add("0", "Прочие ЛПУ");
+
+            foreach (var item in list)
+                dt.Rows.Add(item.GetRow());
+
+            return dt;
+        }
         
         public DataTable ToDataTable(User user)
         {

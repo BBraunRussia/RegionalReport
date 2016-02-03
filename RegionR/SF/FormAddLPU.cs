@@ -26,6 +26,7 @@ namespace RegionR.SF
         private SubRegionList _subRegionList;
         private TypeFinList _typeFinList;
         private HistoryList _historyList;
+        private LpuRRList _lpuRRList;
         
         private bool _isLoad;
 
@@ -51,6 +52,7 @@ namespace RegionR.SF
             _subRegionList = SubRegionList.GetUniqueInstance();
             _typeFinList = TypeFinList.GetUniqueInstance();
             _historyList = HistoryList.GetUniqueInstance();
+            _lpuRRList = LpuRRList.GetUniqueInstance();
 
             cbLpuRR.Enabled = (UserLogged.Get().RoleSF == RolesSF.Администратор);
         }
@@ -187,9 +189,7 @@ namespace RegionR.SF
 
         private void LoadDictionaries()
         {
-            LpuRRList _lpuRRList = LpuRRList.GetUniqueInstance();
-
-            ClassForForm.LoadDictionary(cbLpuRR, _lpuRRList.ToDataTable());
+            ClassForForm.LoadDictionary(cbLpuRR, _lpuRRList.ToDataTable(_lpu.LpuRR));
             ClassForForm.LoadDictionary(cbTypeLpu, _typeLPUList.ToDataTable());
             ClassForForm.LoadDictionary(cbOwnership, _ownershipList.ToDataTable());
             ClassForForm.LoadDictionary(cbAdmLevel, _admLevelList.ToDataTable());
@@ -375,12 +375,10 @@ namespace RegionR.SF
 
             if (cbLpuRR.Enabled)
             {
-                LpuRRList lpuRRList = LpuRRList.GetUniqueInstance();
-
                 int idLpuRR;
                 int.TryParse(cbLpuRR.SelectedValue.ToString(), out idLpuRR);
 
-                LpuRR lpuRR = lpuRRList.GetItem(idLpuRR) as LpuRR;
+                LpuRR lpuRR = _lpuRRList.GetItem(idLpuRR) as LpuRR;
 
                 if (lpuRR != null)
                     _lpu.LpuRR = lpuRR;
@@ -571,12 +569,10 @@ namespace RegionR.SF
 
             if (cbLpuRR.Enabled)
             {
-                LpuRRList lpuRRList = LpuRRList.GetUniqueInstance();
-
                 int idLpuRR;
                 int.TryParse(cbLpuRR.SelectedValue.ToString(), out idLpuRR);
 
-                LpuRR lpuRR = lpuRRList.GetItem(idLpuRR) as LpuRR;
+                LpuRR lpuRR = _lpuRRList.GetItem(idLpuRR) as LpuRR;
 
                 if (lpuRR != null)
                     return true;
@@ -698,6 +694,17 @@ namespace RegionR.SF
             }
 
             SetPhoneCodeMask();
+        }
+
+        private void cbLpuRR_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int idLpuRR;
+            int.TryParse(cbLpuRR.SelectedValue.ToString(), out idLpuRR);
+
+            LpuRR lpuRR = _lpuRRList.GetItem(idLpuRR) as LpuRR;
+
+            if (lpuRR != null)
+                lbRegionRR.Text = lpuRR.RegionRR.Name;
         }
     }
 }
