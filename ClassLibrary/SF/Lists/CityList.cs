@@ -29,7 +29,7 @@ namespace ClassLibrary.SF
             dt.Columns.Add("Название");
             dt.Columns.Add("Телефонный код");
 
-            List<City> list = List.Where(item => (item as City).RealRegion == realRegion).Select(item => item as City).ToList();
+            List<City> list = List.Where(item => (item as City).RealRegion == realRegion).Select(item => item as City).OrderBy(item => item.Name).ToList();
 
             foreach (var item in list)
                 dt.Rows.Add(item.GetRow());
