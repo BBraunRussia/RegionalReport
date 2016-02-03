@@ -277,9 +277,9 @@
             // 
             this.btnDeleteFilter.Location = new System.Drawing.Point(372, 27);
             this.btnDeleteFilter.Name = "btnDeleteFilter";
-            this.btnDeleteFilter.Size = new System.Drawing.Size(90, 23);
+            this.btnDeleteFilter.Size = new System.Drawing.Size(100, 23);
             this.btnDeleteFilter.TabIndex = 8;
-            this.btnDeleteFilter.Text = "Снять фильтр";
+            this.btnDeleteFilter.Text = "Снять фильтры";
             this.btnDeleteFilter.UseVisualStyleBackColor = true;
             this.btnDeleteFilter.Visible = false;
             this.btnDeleteFilter.Click += new System.EventHandler(this.btnDeleteFilter_Click);

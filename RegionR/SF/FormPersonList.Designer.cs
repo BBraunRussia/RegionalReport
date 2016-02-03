@@ -198,7 +198,7 @@
             // 
             // tbSearch
             // 
-            this.tbSearch.Location = new System.Drawing.Point(524, 30);
+            this.tbSearch.Location = new System.Drawing.Point(536, 30);
             this.tbSearch.Name = "tbSearch";
             this.tbSearch.Size = new System.Drawing.Size(159, 20);
             this.tbSearch.TabIndex = 9;
@@ -208,7 +208,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(476, 33);
+            this.label1.Location = new System.Drawing.Point(488, 33);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(42, 13);
             this.label1.TabIndex = 8;
@@ -237,9 +237,9 @@
             // 
             this.btnDeleteFilter.Location = new System.Drawing.Point(372, 27);
             this.btnDeleteFilter.Name = "btnDeleteFilter";
-            this.btnDeleteFilter.Size = new System.Drawing.Size(90, 23);
+            this.btnDeleteFilter.Size = new System.Drawing.Size(100, 23);
             this.btnDeleteFilter.TabIndex = 13;
-            this.btnDeleteFilter.Text = "Снять фильтр";
+            this.btnDeleteFilter.Text = "Снять фильтры";
             this.btnDeleteFilter.UseVisualStyleBackColor = true;
             this.btnDeleteFilter.Visible = false;
             this.btnDeleteFilter.Click += new System.EventHandler(this.btnDeleteFilter_Click);

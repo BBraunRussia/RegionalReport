@@ -9,15 +9,13 @@ namespace RegionR.SF
     public class FilteredDGV
     {
         private DataGridView _dgv;
-        private string _filterColumnName;
-        private string _filterValue;
+        private Dictionary<string, string> _filter;
 
         public FilteredDGV(DataGridView dgv)
         {
             _dgv = dgv;
 
-            _filterColumnName = string.Empty;
-            _filterValue = string.Empty;
+            _filter = new Dictionary<string, string>();
         }
 
         public void Create()
@@ -25,10 +23,11 @@ namespace RegionR.SF
             if (_dgv.CurrentCell == null)
                 return;
 
-            _filterColumnName = _dgv.Columns[_dgv.CurrentCell.ColumnIndex].HeaderText;
-            _filterValue = _dgv.CurrentCell.Value.ToString();
-
-            Apply();
+            if (!(_filter.ContainsKey(_dgv.Columns[_dgv.CurrentCell.ColumnIndex].HeaderText)))
+            {
+                _filter.Add(_dgv.Columns[_dgv.CurrentCell.ColumnIndex].HeaderText, _dgv.CurrentCell.Value.ToString());
+                Apply();
+            }
         }
 
         public void Delete()
@@ -39,13 +38,12 @@ namespace RegionR.SF
                     row.Visible = true;
             }
 
-            _filterColumnName = string.Empty;
-            _filterValue = string.Empty;
+            _filter.Clear();
         }
 
         public void Apply()
         {
-            if (_filterColumnName == string.Empty)
+            if (_filter.Count == 0)
                 return;
 
             int rowIndex = _dgv.CurrentCell.RowIndex;
@@ -54,7 +52,13 @@ namespace RegionR.SF
             _dgv.CurrentCell = null;
 
             foreach (DataGridViewRow row in _dgv.Rows)
-                row.Visible = (row.Cells[_filterColumnName].Value.ToString() == _filterValue);
+                row.Visible = true;
+
+            foreach (DataGridViewRow row in _dgv.Rows)
+            {
+                foreach (var item in _filter.Keys)
+                    row.Visible = ((_filter.ContainsValue(row.Cells[item.ToString()].Value.ToString())) && (row.Visible));
+            }
 
             if (!_dgv.Rows[rowIndex].Cells[columnIndex].Visible)
             {
