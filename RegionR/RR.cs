@@ -294,7 +294,7 @@ namespace RegionR
                         tn.Nodes.Add("Проверка косвенных продаж");
                         tn.Nodes.Add("По отчётам дистрибьюторов");
                         tn.Nodes.Add("Проверка косвенных по регионам");
-                        tn.Nodes.Add("Ассортиментные планы на год");
+                        tn.Nodes.Add("Ассортиментные планы на год");                        
 
                         tn2 = tn.Nodes[0];
                         tn2.Nodes.Add("HC");
@@ -468,6 +468,7 @@ namespace RegionR
                         tn2.Nodes.Add("Косвенные продажи");
                         tn2.Nodes.Add("Маркетинговые мероприятия");
                         tn2.Nodes.Add("Ассортиментный план " + year);
+                        //tn2.Nodes.Add("Асс. план " + year + " (c историей по ЛПУ)");
                         tn3 = tn2.Nodes[0];
                         tn3.Nodes.Add("Анализ продаж");
 
@@ -651,12 +652,13 @@ namespace RegionR
                         node.Nodes.Add("Выполнение плана");
                         node.Nodes.Add("Маркетинговые мероприятия");
                         node.Nodes.Add("Общий ассортиментный план " + year);
+                        node.Nodes.Add("Общий асс. план " + year + "(с историей по ЛПУ)");
                         node.Nodes.Add("Visits", "Визиты");
                         tn = node.Nodes["Visits"];
                         tn.Nodes.Add("Планировщик");
                         tn.Nodes.Add("Отчёт");
 
-                        for (int j = 1; j < 5; j++)
+                        for (int j = 1; j < 6; j++)
                         {
                             tn2 = node.Nodes[j];
                             tn2.Nodes.Add("HC");
@@ -1456,6 +1458,8 @@ namespace RegionR
                         #region Ассортиментный план HC Новый год
                         if (tn1.Parent.Text == "Общий ассортиментный план " + globalData.year)
                         {
+                            globalData.acc_history = false;
+
                             tabControl1.SelectedIndex = 16;
                             tabControl1.Visible = true;
                             globalData.RD = tn1.Parent.Parent.Text;
@@ -1471,6 +1475,30 @@ namespace RegionR
                             if (cbUsersAllAccNY.Visible)
                                 user = cbUsersAllAccNY.SelectedValue.ToString();
                             
+                            fillLPU(cbLPUAllAccNY, user, reg, globalData.year);
+                        }
+                        #endregion
+
+                        #region Ассортиментный план HC Новый год с историей по ЛПУ
+                        if (tn1.Parent.Text == "Общий асс. план " + globalData.year + "(с историей по ЛПУ)")
+                        {
+                            globalData.acc_history = true;
+
+                            tabControl1.SelectedIndex = 16;
+                            tabControl1.Visible = true;
+                            globalData.RD = tn1.Parent.Parent.Text;
+                            fillRegions(globalData.RD, cbRegAllAccNY);
+
+                            string reg = "0";
+
+                            reg = cbRegAllAccNY.SelectedValue.ToString();
+
+                            fillUsersAcc(cbUsersAllAccNY, reg, year);
+
+                            string user = "0";
+                            if (cbUsersAllAccNY.Visible)
+                                user = cbUsersAllAccNY.SelectedValue.ToString();
+
                             fillLPU(cbLPUAllAccNY, user, reg, globalData.year);
                         }
                         #endregion
@@ -1609,10 +1637,12 @@ namespace RegionR
                         }
                         #endregion
 
-                        #region Ассортиментный план HC Новый год
+                        #region Ассортиментный план АЕ Новый год
 
                         if (tn1.Parent.Text == "Общий ассортиментный план " + globalData.year)
                         {
+                            globalData.acc_history = false;
+
                             tabControl1.SelectedIndex = 16;
                             tabControl1.Visible = true;
 
@@ -1627,6 +1657,30 @@ namespace RegionR
                             if (cbUsersAllAccNY.Visible)
                                 user = cbUsersAllAccNY.SelectedValue.ToString();                            
                             
+                            fillLPU(cbLPUAllAccNY, user, reg, globalData.year);
+                        }
+                        #endregion
+
+                        #region Ассортиментный план АЕ Новый год
+
+                        if (tn1.Parent.Text == "Общий асс. план " + globalData.year + "(с историей по ЛПУ)")
+                        {
+                            globalData.acc_history = true;
+
+                            tabControl1.SelectedIndex = 16;
+                            tabControl1.Visible = true;
+
+                            globalData.RD = tn1.Parent.Parent.Text;
+                            fillRegions(globalData.RD, cbRegAllAccNY);
+
+                            string user = "0", reg = "0";
+                            if (cbRegAllAccNY.Visible)
+                                reg = cbRegAllAccNY.SelectedValue.ToString();
+
+                            fillUsersAcc(cbUsersAllAccNY, reg, year);
+                            if (cbUsersAllAccNY.Visible)
+                                user = cbUsersAllAccNY.SelectedValue.ToString();
+
                             fillLPU(cbLPUAllAccNY, user, reg, globalData.year);
                         }
                         #endregion
@@ -10468,9 +10522,9 @@ namespace RegionR
                             int Rub = 0;
                             if (globalData.Div == "HC")
                             {
-                                if (row.Cells["cyplanRub"].Value.ToString() == "")
+                                if (row.Cells["nom_type"].Value.ToString() == "euro")
                                     Rub = 75 * Convert.ToInt32(row.Cells["cyplanEuro"].Value);
-                                else
+                                else if (row.Cells["cyplan"].Value.ToString() != "0")
                                     Rub = Convert.ToInt32(row.Cells["cyplanRub"].Value);
                             }
                             sql1.GetRecords("exec fillAccPlanNYoldWithRub @p1, @p2, @p3, @p4, @p5", row.Cells["acc_id"].Value, row.Cells["cyplan"].Value, row.Cells["cyplanEuro"].Value, cbUsersAccNY.SelectedValue, Rub);
@@ -11502,7 +11556,10 @@ namespace RegionR
 
         private void button31_Click(object sender, EventArgs e)
         {
-            selAllAccNY();
+            if (globalData.acc_history != true)
+                selAllAccNY();
+            else
+                selAllAccNY_HistoryLPU();
         }
 
         private void selAllAccNY()
@@ -11516,6 +11573,10 @@ namespace RegionR
             string procName = "exec SelAccPlanNY";
             if (globalData.Div == "AE")
                 procName += "AE";
+            if (globalData.Div == "HC")
+                procName += "WithRub";
+            
+
 
             string lpu = "0", reg = "0", user = "0";
 
@@ -11523,6 +11584,58 @@ namespace RegionR
                 lpu = cbLPUAllAccNY.SelectedValue.ToString();
 
           
+            if (cbUsersAllAccNY.Visible)
+                user = cbUsersAllAccNY.SelectedValue.ToString();
+
+            if (cbRegAllAccNY.Visible)
+                reg = cbRegAllAccNY.SelectedValue.ToString();
+
+            dt1 = sql1.GetRecords(procName + " @p1, @p2, '', @p3, @p4", lpu, user, reg, globalData.RD);
+
+            /*
+            if ((cbLPUAllAccNY.Visible) && (cbUsersAllAccNY.Visible))
+                dt1 = sql1.GetRecords(procName + " @p1, @p2, '', @p3, @p4", cbLPUAllAccNY.SelectedValue, cbUsersAllAccNY.SelectedValue, cbRegAllAccNY.SelectedValue, clsData.RD);
+            else if (cbLPUAllAccNY.Visible)
+                dt1 = sql1.GetRecords(procName + " @p1, 0, '', @p2, @p3", cbLPUAllAccNY.SelectedValue, cbRegAllAccNY.SelectedValue, clsData.RD);
+            else if (cbUsersAllAccNY.Visible)
+                dt1 = sql1.GetRecords(procName + " 0, @p1, '', @p2, @p3", cbUsersAllAccNY.SelectedValue, cbRegAllAccNY.SelectedValue, clsData.RD);
+            else if (cbRegAllAccNY.Visible)
+                dt1 = sql1.GetRecords(procName + " 0, 0, '', @p1, @p2", cbRegAllAccNY.SelectedValue, clsData.RD);
+            else
+                dt1 = sql1.GetRecords(procName + " 0, 0, '', 0, @p1", clsData.RD);
+            */
+            if (dt1 == null)
+            {
+                MessageBox.Show("Не удалось получить данные для построения ассортиментного плана.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            fillAccNY(dt1, _dgv16);
+            Cursor = Cursors.Default;
+        }
+
+        private void selAllAccNY_HistoryLPU()
+        {
+            Cursor = Cursors.WaitCursor;
+
+            sql sql1 = new sql();
+
+            DataTable dt1 = new DataTable();
+
+            string procName = "exec AccPlanNY_Select_HistoryLPU_";
+            if (globalData.Div == "AE")
+                procName += "AE";
+            if (globalData.Div == "HC")
+                procName += "HC";
+
+
+
+            string lpu = "0", reg = "0", user = "0";
+
+            if (cbLPUAllAccNY.Visible && cbLPUAllAccNY.Enabled)
+                lpu = cbLPUAllAccNY.SelectedValue.ToString();
+
+
             if (cbUsersAllAccNY.Visible)
                 user = cbUsersAllAccNY.SelectedValue.ToString();
 

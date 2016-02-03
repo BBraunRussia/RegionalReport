@@ -33,6 +33,7 @@
             this.dgv1 = new System.Windows.Forms.DataGridView();
             this._cms = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.добавитьМестоПроведенияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.просмотрМестПроведенияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cbMAType = new System.Windows.Forms.ComboBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label15 = new System.Windows.Forms.Label();
@@ -43,7 +44,6 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.просмотрМестПроведенияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgv1)).BeginInit();
             this._cms.SuspendLayout();
             this.SuspendLayout();
@@ -81,7 +81,7 @@
             this.добавитьМестоПроведенияToolStripMenuItem,
             this.просмотрМестПроведенияToolStripMenuItem});
             this._cms.Name = "_cms";
-            this._cms.Size = new System.Drawing.Size(231, 70);
+            this._cms.Size = new System.Drawing.Size(231, 48);
             // 
             // добавитьМестоПроведенияToolStripMenuItem
             // 
@@ -89,6 +89,13 @@
             this.добавитьМестоПроведенияToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
             this.добавитьМестоПроведенияToolStripMenuItem.Text = "Добавить место проведения";
             this.добавитьМестоПроведенияToolStripMenuItem.Click += new System.EventHandler(this.добавитьМестоПроведенияToolStripMenuItem_Click);
+            // 
+            // просмотрМестПроведенияToolStripMenuItem
+            // 
+            this.просмотрМестПроведенияToolStripMenuItem.Name = "просмотрМестПроведенияToolStripMenuItem";
+            this.просмотрМестПроведенияToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.просмотрМестПроведенияToolStripMenuItem.Text = "Просмотр мест проведения";
+            this.просмотрМестПроведенияToolStripMenuItem.Click += new System.EventHandler(this.просмотрМестПроведенияToolStripMenuItem_Click);
             // 
             // cbMAType
             // 
@@ -146,6 +153,7 @@
             this.button2.TabIndex = 40;
             this.button2.Text = "Добавить";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Visible = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label2
@@ -185,13 +193,6 @@
             this.label3.Size = new System.Drawing.Size(109, 13);
             this.label3.TabIndex = 44;
             this.label3.Text = "Найти по названию:";
-            // 
-            // просмотрМестПроведенияToolStripMenuItem
-            // 
-            this.просмотрМестПроведенияToolStripMenuItem.Name = "просмотрМестПроведенияToolStripMenuItem";
-            this.просмотрМестПроведенияToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
-            this.просмотрМестПроведенияToolStripMenuItem.Text = "Просмотр мест проведения";
-            this.просмотрМестПроведенияToolStripMenuItem.Click += new System.EventHandler(this.просмотрМестПроведенияToolStripMenuItem_Click);
             // 
             // AddMA_Name
             // 

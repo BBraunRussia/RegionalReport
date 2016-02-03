@@ -56,5 +56,8 @@ namespace RegionR
         public static int maplan { get; set; }
         public static string mayear { get; set; }
         public static string matype { get; set; }
+
+        /* Ассортиментный план с историей по ЛПУ или нет */
+        public static bool acc_history { get; set; }
     }
 }
