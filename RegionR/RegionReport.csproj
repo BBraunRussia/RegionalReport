@@ -479,6 +479,8 @@
     <Compile Include="SF\Classes\TreeLPU.cs" />
     <Compile Include="SF\Classes\ClassForForm.cs" />
     <Compile Include="SF\Classes\UserLogged.cs" />
+    <Compile Include="SF\Controllers\BaseController.cs" />
+    <Compile Include="SF\Controllers\IController.cs" />
     <Compile Include="SF\Controllers\OrganizationListController.cs" />
     <Compile Include="SF\Controllers\PersonListController.cs" />
     <Compile Include="SF\FormAddBranch.cs">

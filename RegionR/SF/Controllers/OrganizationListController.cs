@@ -8,27 +8,20 @@ using System.Data;
 
 namespace RegionR.SF
 {
-    public class OrganizationListController
+    public class OrganizationListController : BaseOperations, IController
     {
         private DataGridView _dgv;
-        private SearchInDgv _seacher;
         private LpuList _lpuList;
         private UserList _userList;
         private User _user;
-
-        private FilteredDGV _filtredDGV;
-        private SortDGV _sortDGV;
-
+        
         private TypeOrg _typeOrg;
 
         public OrganizationListController(DataGridView dgv)
+            : base(dgv)
         {
             _dgv = dgv;
-
-            _seacher = new SearchInDgv(_dgv);
-            _filtredDGV = new FilteredDGV(_dgv);
-            _sortDGV = new SortDGV(_dgv);
-
+                        
             _userList = UserList.GetUniqueInstance();
 
             _lpuList = new LpuList();
@@ -38,7 +31,7 @@ namespace RegionR.SF
             _typeOrg = TypeOrg.ЛПУ;
         }
 
-        public DataGridView ToDGV()
+        public DataGridView ToDataGridView()
         {
             ReLoad();
 
@@ -59,32 +52,7 @@ namespace RegionR.SF
         {
             _lpuList.ReLoad();
         }
-
-        public void Search(string text)
-        {
-            _seacher.Find(text);
-        }
-
-        public void CreateFilter()
-        {
-            _filtredDGV.Create();
-        }
-
-        public void DeleteFilter()
-        {
-            _filtredDGV.Delete();
-        }
-
-        public void ApplyFilter()
-        {
-            _filtredDGV.Apply();
-        }
-
-        public void Sort()
-        {
-            _sortDGV.Sort();
-        }
-
+        
         public bool AddOrganization()
         {
             FormFirstStepAddOrganization formFirstStepAddOrganization = new FormFirstStepAddOrganization(this);

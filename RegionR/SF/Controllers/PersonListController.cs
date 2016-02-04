@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace RegionR.SF
 {
-    public class PersonListController
+    public class PersonListController : BaseOperations, IController
     {
         private PersonList _personList;
         private Organization _organization;
@@ -19,6 +19,7 @@ namespace RegionR.SF
         private SortDGV _sortDGV;
 
         public PersonListController(DataGridView dgv, Organization organization)
+            : base(dgv)
         {
             _organization = organization;
             _dgv = dgv;
@@ -83,16 +84,6 @@ namespace RegionR.SF
             FormSecondStepAddPerson formSecondStepAddPerson = new FormSecondStepAddPerson(person);
             return (formSecondStepAddPerson.ShowDialog() == System.Windows.Forms.DialogResult.OK);
         }
-
-        public void Sort()
-        {
-            _sortDGV.Sort();
-        }
-
-        public void Search(string text)
-        {
-            _seacher.Find(text);
-        }
         
         public bool DeletePerson()
         {
@@ -121,21 +112,6 @@ namespace RegionR.SF
             int.TryParse(_dgv.Rows[_dgv.CurrentCell.RowIndex].Cells[0].Value.ToString(), out id);
 
             return _personList.GetItem(id) as Person;
-        }
-
-        public void CreateFilter()
-        {
-            _filtredDGV.Create();
-        }
-
-        public void DeleteFilter()
-        {
-            _filtredDGV.Delete();
-        }
-
-        public void ApplyFilter()
-        {
-            _filtredDGV.Apply();
         }
     }
 }

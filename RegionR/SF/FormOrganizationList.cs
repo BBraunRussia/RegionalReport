@@ -33,7 +33,7 @@ namespace RegionR
 
         private void LoadData()
         {
-            dgv = _organizationListController.ToDGV();
+            dgv = _organizationListController.ToDataGridView();
         }
 
         private void btnAddOrganization_Click(object sender, EventArgs e)
