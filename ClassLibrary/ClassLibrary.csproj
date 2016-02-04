@@ -64,6 +64,7 @@
     <Compile Include="SF\Classes\User.cs" />
     <Compile Include="SF\Classes\UserRight.cs" />
     <Compile Include="SF\Classes\UserRoleSF.cs" />
+    <Compile Include="SF\DataTableToExcel.cs" />
     <Compile Include="SF\enums.cs" />
     <Compile Include="SF\Interfaces\IHaveRegion.cs" />
     <Compile Include="SF\Interfaces\IHistory.cs" />
