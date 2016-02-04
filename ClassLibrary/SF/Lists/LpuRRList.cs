@@ -81,5 +81,46 @@ namespace ClassLibrary.SF
 
             return dt;
         }
+
+        public DataTable ToDataTableWithLpuSF()
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("№ ЛПУ-RR");
+            dt.Columns.Add("Название ЛПУ-RR");
+            dt.Columns.Add("Регион RR");
+            dt.Columns.Add("Название ЛПУ-SF");
+            dt.Columns.Add("Регион России");
+            dt.Columns.Add("Город");
+            dt.Columns.Add("№ ЛПУ-SF");
+
+            LpuList lpuList = new LpuList();
+            
+            foreach (LpuRR lpuRR in List)
+            {
+                LPU lpu = lpuList.GetItem(lpuRR);
+
+                string lpuName = string.Empty;
+                string realRegionName = string.Empty;
+                string cityName = string.Empty;
+                string lpuID = string.Empty;
+
+                if (lpu != null)
+                {
+                    lpuName = lpu.ShortName;
+                    realRegionName = lpu.RealRegion.Name;
+                    cityName = lpu.City.Name;
+                    lpuID = lpu.ID.ToString();
+                }
+
+                dt.Rows.Add(new object[] { lpuRR.ID, lpuRR.Name, lpuRR.RegionRR.Name, lpuName, realRegionName, cityName, lpuID });
+            }
+
+            return dt;
+        }
+
+        public override BaseDictionary GetItem(int id)
+        {
+            return ((List.Count == 0) || (List.Where(item => item.ID == id).Count() == 0)) ? null : List.Where(item => item.ID == id).First();
+        }
     }
 }

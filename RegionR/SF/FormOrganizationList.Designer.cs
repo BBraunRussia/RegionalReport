@@ -53,8 +53,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tbSearch = new System.Windows.Forms.TextBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnReload = new System.Windows.Forms.Button();
             this.btnDeleteFilter = new System.Windows.Forms.Button();
+            this.showOrganizationWithLpuRRToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -79,6 +80,7 @@
             this.toolStripMenuItem1,
             this.addPersonToolStripMenuItem,
             this.toolStripMenuItem2,
+            this.showOrganizationWithLpuRRToolStripMenuItem,
             this.cityDictionaryToolStripMenuItem,
             this.toolStripMenuItem3,
             this.importToolStripMenuItem,
@@ -263,15 +265,15 @@
             this.statusStrip1.TabIndex = 6;
             this.statusStrip1.Text = "statusStrip1";
             // 
-            // button1
+            // btnReload
             // 
-            this.button1.Location = new System.Drawing.Point(915, 26);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "Обновить";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnReload.Location = new System.Drawing.Point(915, 26);
+            this.btnReload.Name = "btnReload";
+            this.btnReload.Size = new System.Drawing.Size(75, 23);
+            this.btnReload.TabIndex = 7;
+            this.btnReload.Text = "Обновить";
+            this.btnReload.UseVisualStyleBackColor = true;
+            this.btnReload.Click += new System.EventHandler(this.btnReload_Click);
             // 
             // btnDeleteFilter
             // 
@@ -284,13 +286,20 @@
             this.btnDeleteFilter.Visible = false;
             this.btnDeleteFilter.Click += new System.EventHandler(this.btnDeleteFilter_Click);
             // 
+            // showOrganizationWithLpuRRToolStripMenuItem
+            // 
+            this.showOrganizationWithLpuRRToolStripMenuItem.Name = "showOrganizationWithLpuRRToolStripMenuItem";
+            this.showOrganizationWithLpuRRToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.showOrganizationWithLpuRRToolStripMenuItem.Text = "Сопоставление ЛПУ RR и SF";
+            this.showOrganizationWithLpuRRToolStripMenuItem.Click += new System.EventHandler(this.showOrganizationWithLpuRRToolStripMenuItem_Click);
+            // 
             // FormOrganizationList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1002, 425);
             this.Controls.Add(this.btnDeleteFilter);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnReload);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.tbSearch);
             this.Controls.Add(this.label1);
@@ -338,7 +347,8 @@
         private System.Windows.Forms.ToolStripMenuItem fiterToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sortToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addPersonToolStripMenuItem1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnReload;
         private System.Windows.Forms.Button btnDeleteFilter;
+        private System.Windows.Forms.ToolStripMenuItem showOrganizationWithLpuRRToolStripMenuItem;
     }
 }

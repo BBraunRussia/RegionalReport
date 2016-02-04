@@ -24,6 +24,8 @@ namespace RegionR
             _myStatusStrip = new MyStatusStrip(dgv, statusStrip1);
 
             _organizationListController = new OrganizationListController(dgv);
+
+            showOrganizationWithLpuRRToolStripMenuItem.Visible = (UserLogged.Get().RoleSF == RolesSF.Администратор);
         }
 
         private void formOrganizationList_Load(object sender, EventArgs e)
@@ -117,7 +119,7 @@ namespace RegionR
             _organizationListController.AddPerson();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnReload_Click(object sender, EventArgs e)
         {
             _organizationListController.ReLoad();
 
@@ -147,6 +149,12 @@ namespace RegionR
         private void Search()
         {
             _organizationListController.Search(tbSearch.Text);
+        }
+
+        private void showOrganizationWithLpuRRToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormOrganizationWithLpuRRList formOrganizationWithLpuRRList = new FormOrganizationWithLpuRRList();
+            formOrganizationWithLpuRRList.ShowDialog();
         }
     }
 }
