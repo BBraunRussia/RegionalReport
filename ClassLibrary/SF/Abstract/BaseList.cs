@@ -55,7 +55,7 @@ namespace ClassLibrary.SF
             return dt;
         }
 
-        public BaseDictionary GetItem(int id)
+        public virtual BaseDictionary GetItem(int id)
         {
             return ((id == 0) || (_list.Count == 0) || (_list.Where(item => item.ID == id).Count() == 0)) ? null : _list.Where(item => item.ID == id).First();
         }

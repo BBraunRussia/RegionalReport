@@ -146,6 +146,7 @@ namespace ClassLibrary.SF
         public override object[] GetRow()
         {
             Organization organizationWithRegion = ((Organization is LPU) || (Organization is OtherOrganization)) ? Organization : Organization.ParentOrganization;
+
             string subOrganizationShortName = (Organization is LPU) ? "Администрация" : (Organization is OtherOrganization) ? string.Empty : Organization.ShortName;
 
             string mobileWithOutFormat = Mobile.Replace("+7", "").Replace("(", "").Replace(")", "").Replace("-", "");
