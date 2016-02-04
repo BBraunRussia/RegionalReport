@@ -224,7 +224,7 @@ namespace RegionR.Directories
             {
                 if (_dgv1.Rows[cell.RowIndex].Cells[0].Value.ToString() != String.Empty)
                 {
-                    sql1.GetRecords("exec InsUserLPU 0, @p1, @p2, @p3", cbUsers.SelectedValue, _dgv1.Rows[cell.RowIndex].Cells[0].Value.ToString(), cbSDiv.SelectedItem);
+                    sql1.GetRecords("exec InsUserLPU 0, @p1, @p2, @p3, @p4", cbUsers.SelectedValue, _dgv1.Rows[cell.RowIndex].Cells[0].Value.ToString(), cbSDiv.SelectedItem, globalData.UserID);
                 }
             }
 

@@ -17,6 +17,7 @@ namespace RegionR.addedit
         {
             InitializeComponent();
 
+            loadvisible();
             loadType();
             loadTheme();
             loadConfName();
@@ -26,12 +27,27 @@ namespace RegionR.addedit
         {
             InitializeComponent();
 
+            loadvisible();
             loadType();
             loadTheme();
 
             cbMAType.SelectedValue = type;
             loadConfName();
 
+        }
+
+        void loadvisible()
+        {
+            if (globalData.UserAccess == 1)
+            {
+                button2.Visible = true;
+                редактироватьToolStripMenuItem.Visible = true;
+            }
+            else
+            {
+                button2.Visible = false;
+                редактироватьToolStripMenuItem.Visible = false;
+            }
         }
 
         void loadTheme()
@@ -262,5 +278,22 @@ namespace RegionR.addedit
                 MessageBox.Show("Не удалось. Обратитесь к администратору системы.");
             }
         }
+
+        private void редактироватьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                globalData.maplan = 0;
+                int ri = dgv1.SelectedCells[0].RowIndex;
+                AddEditMAType am = new AddEditMAType(Convert.ToInt32(dgv1[0, ri].Value), dgv1[1, ri].Value.ToString(), dgv1[2, ri].Value.ToString(), dgv1[3, ri].Value.ToString(), dgv1[4, ri].Value.ToString(), dgv1[5, ri].Value.ToString());
+                am.ShowDialog();
+            }
+            catch
+            {
+                MessageBox.Show("Не удалось. Обратитесь к администратору системы.");
+            }
+        }
+
+        
     }
 }

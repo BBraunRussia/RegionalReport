@@ -44,6 +44,7 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.редактироватьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgv1)).BeginInit();
             this._cms.SuspendLayout();
             this.SuspendLayout();
@@ -79,9 +80,10 @@
             // 
             this._cms.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.добавитьМестоПроведенияToolStripMenuItem,
-            this.просмотрМестПроведенияToolStripMenuItem});
+            this.просмотрМестПроведенияToolStripMenuItem,
+            this.редактироватьToolStripMenuItem});
             this._cms.Name = "_cms";
-            this._cms.Size = new System.Drawing.Size(231, 48);
+            this._cms.Size = new System.Drawing.Size(231, 92);
             // 
             // добавитьМестоПроведенияToolStripMenuItem
             // 
@@ -153,7 +155,6 @@
             this.button2.TabIndex = 40;
             this.button2.Text = "Добавить";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Visible = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label2
@@ -193,6 +194,14 @@
             this.label3.Size = new System.Drawing.Size(109, 13);
             this.label3.TabIndex = 44;
             this.label3.Text = "Найти по названию:";
+            // 
+            // редактироватьToolStripMenuItem
+            // 
+            this.редактироватьToolStripMenuItem.Name = "редактироватьToolStripMenuItem";
+            this.редактироватьToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.редактироватьToolStripMenuItem.Text = "Редактировать";
+            this.редактироватьToolStripMenuItem.Visible = false;
+            this.редактироватьToolStripMenuItem.Click += new System.EventHandler(this.редактироватьToolStripMenuItem_Click);
             // 
             // AddMA_Name
             // 
@@ -235,5 +244,7 @@
         private System.Windows.Forms.ContextMenuStrip _cms;
         private System.Windows.Forms.ToolStripMenuItem добавитьМестоПроведенияToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem просмотрМестПроведенияToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem редактироватьToolStripMenuItem;
     }
 }
