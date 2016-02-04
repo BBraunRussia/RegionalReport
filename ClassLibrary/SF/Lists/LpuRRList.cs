@@ -97,23 +97,28 @@ namespace ClassLibrary.SF
             
             foreach (LpuRR lpuRR in List)
             {
-                LPU lpu = lpuList.GetItem(lpuRR);
+                var listLPU = lpuList.GetList(lpuRR);
 
-                string lpuName = string.Empty;
-                string realRegionName = string.Empty;
-                string cityName = string.Empty;
-                string lpuID = string.Empty;
-
-                if (lpu != null)
+                foreach (LPU lpu in listLPU)
                 {
-                    lpuName = lpu.ShortName;
-                    realRegionName = lpu.RealRegion.Name;
-                    cityName = lpu.City.Name;
-                    lpuID = lpu.ID.ToString();
-                }
+                    string lpuName = string.Empty;
+                    string realRegionName = string.Empty;
+                    string cityName = string.Empty;
+                    string lpuID = string.Empty;
 
-                dt.Rows.Add(new object[] { lpuRR.ID, lpuRR.Name, lpuRR.RegionRR.Name, lpuName, realRegionName, cityName, lpuID });
+                    if (lpu != null)
+                    {
+                        lpuName = lpu.ShortName;
+                        realRegionName = lpu.RealRegion.Name;
+                        cityName = lpu.City.Name;
+                        lpuID = lpu.ID.ToString();
+                    }
+
+                    dt.Rows.Add(new object[] { lpuRR.ID, lpuRR.Name, lpuRR.RegionRR.Name, lpuName, realRegionName, cityName, lpuID });
+                }
             }
+
+            var list = List.Where(item => item.ID == 0).ToList();
 
             return dt;
         }

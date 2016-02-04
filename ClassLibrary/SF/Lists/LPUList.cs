@@ -50,6 +50,11 @@ namespace ClassLibrary.SF
             return _list.Where(item => userRightList2.Contains(item.RealRegion.RegionRR)).ToList();
         }
 
+        public List<LPU> GetList(LpuRR lpuRR)
+        {
+            return _list.Where(item => item.LpuRR == lpuRR).ToList();
+        }
+
         private List<OtherOrganization> GetListOther(List<OtherOrganization> listOther, User user)
         {
             UserRightList userRightList = UserRightList.GetUniqueInstance();
