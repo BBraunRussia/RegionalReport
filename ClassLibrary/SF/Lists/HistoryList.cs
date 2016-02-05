@@ -2,16 +2,45 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data;
 
 namespace ClassLibrary.SF
 {
-    public class HistoryList : BaseList
+    public class HistoryList : InitProvider
     {
+        private List<History> _list;
+        private string _tableName;
+
         private static HistoryList _uniqueInstance;
 
         private HistoryList(string tableName)
-            : base(tableName)
-        { }
+        {
+            _tableName = tableName;
+
+            _list = new List<History>();
+
+            LoadFromDataBase();
+        }
+
+        private void LoadFromDataBase()
+        {
+            DataTable dt = _provider.Select(_tableName);
+
+            foreach (DataRow row in dt.Rows)
+            {
+                History history = new History(row);
+
+                if (history.CanAdd)
+                    Add(history);
+            }
+        }
+
+        public void Reload()
+        {
+            _list.Clear();
+
+            LoadFromDataBase();
+        }
 
         public static HistoryList GetUniqueInstance()
         {
@@ -27,23 +56,16 @@ namespace ClassLibrary.SF
 
             return (list.Count == 0) ? null : list.First();
         }
-        /*
-        public HistoryOrganization GetItem(Organization organization)
-        {
-            var list = GetList(organization);
-
-            return (list.Count == 0) ? null : list.First();
-        }
-        */
+        
         internal List<History> GetList(IHistory orgHistory)
         {
-            return List.Where(item => (item as History).ID == orgHistory.ID && (item as History).Type == orgHistory.Type).Select(item => item as History).ToList();
+            return _list.Where(item => (item as History).ID == orgHistory.ID && (item as History).Type == orgHistory.Type).Select(item => item as History).ToList();
         }
 
         public void Add(History history)
         {
-            if (!List.Exists(item => item == history))
-                List.Add(history);
+            if (!_list.Exists(item => item == history))
+                _list.Add(history);
         }
 
         public string GetItemString(IHistory orgHistory, Action action)
