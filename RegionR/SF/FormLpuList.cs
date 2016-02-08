@@ -6,32 +6,43 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using RegionR.SF;
+using RegionR.Directories;
 
-namespace RegionR.SF
+namespace RegionR
 {
-    public partial class FormOrganizationWithLpuRRList : Form
+    public partial class FormLpuList : Form
     {
         private MyStatusStrip _myStatusStrip;
 
-        private OrganizationWithLpuRRController _organizationWithLpuRRController;
+        private LpuController _lpuController;
 
-        public FormOrganizationWithLpuRRList()
+        public FormLpuList()
         {
             InitializeComponent();
 
             _myStatusStrip = new MyStatusStrip(dgv, statusStrip1);
 
-            _organizationWithLpuRRController = new OrganizationWithLpuRRController(dgv);
+            _lpuController = new LpuController(dgv);
+
+            btnShowLPUForEdit.Visible = (UserLogged.Get().RoleSF == ClassLibrary.SF.RolesSF.Администратор);
         }
 
         private void FormOrganizationWithLpuRRList_Load(object sender, EventArgs e)
         {
             LoadData();
+
+            WriteStatus();
+        }
+        
+        private void WriteStatus()
+        {
+            _myStatusStrip.writeStatus();
         }
 
         private void LoadData()
         {
-            dgv = _organizationWithLpuRRController.ToDataGridView();
+            dgv = _lpuController.ToDataGridView();
         }
 
         private void NotImpliment_Click(object sender, EventArgs e)
@@ -41,7 +52,7 @@ namespace RegionR.SF
 
         private void btnDeleteFilter_Click(object sender, EventArgs e)
         {
-            _organizationWithLpuRRController.DeleteFilter();
+            _lpuController.DeleteFilter();
 
             btnDeleteFilter.Visible = false;
         }
@@ -62,36 +73,41 @@ namespace RegionR.SF
 
         private void Search()
         {
-            _organizationWithLpuRRController.Search(tbSearch.Text);
+            _lpuController.Search(tbSearch.Text);
         }
 
         private void dgv_Sorted(object sender, EventArgs e)
         {
-            _organizationWithLpuRRController.ApplyFilter();
+            _lpuController.ApplyFilter();
         }
 
         private void fiterToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _organizationWithLpuRRController.CreateFilter();
+            _lpuController.CreateFilter();
 
             btnDeleteFilter.Visible = true;
         }
 
         private void sortToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _organizationWithLpuRRController.Sort();
-        }
-
-        private void btnReload_Click(object sender, EventArgs e)
-        {
-            _organizationWithLpuRRController.ReLoad();
-
-            LoadData();
+            _lpuController.Sort();
         }
 
         private void btnExportInExcel_Click(object sender, EventArgs e)
         {
-            
+            _lpuController.ExportInExcel();
+        }
+
+        private void btnShowLPUForEdit_Click(object sender, EventArgs e)
+        {
+            UserLpuAccess userLpuAccess = new UserLpuAccess();
+            userLpuAccess.ShowDialog();
+        }
+
+        private void dgv_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
+        {
+            if ((e.RowIndex >= 0) && (e.ColumnIndex >= 0))
+                dgv.CurrentCell = dgv.Rows[e.RowIndex].Cells[e.ColumnIndex];
         }
     }
 }

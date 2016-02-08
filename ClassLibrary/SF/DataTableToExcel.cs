@@ -33,7 +33,7 @@ namespace ClassLibrary.SF
 
             foreach (DataColumn column in _dt.Columns)
             {
-                excel.setValue(i, 1, column.ColumnName);
+                excel.setValue(1, i, column.ColumnName);
 
                 i++;
             }
@@ -47,7 +47,7 @@ namespace ClassLibrary.SF
             {
                 for (int j = 0; j < row.ItemArray.Count(); j++ )
                 {
-                    excel.setValue(i, j, row.ItemArray[j].ToString());
+                    excel.setValue(i, (j + 1), row.ItemArray[j].ToString());
                 }
 
                 i++;

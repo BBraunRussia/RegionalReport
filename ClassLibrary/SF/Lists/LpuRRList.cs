@@ -82,45 +82,69 @@ namespace ClassLibrary.SF
             return dt;
         }
 
-        public DataTable ToDataTableWithLpuSF()
+        public DataTable ToDataTableWithLpuSF(User user)
         {
             DataTable dt = new DataTable();
             dt.Columns.Add("№ ЛПУ-RR");
-            dt.Columns.Add("Название ЛПУ-RR");
+            dt.Columns.Add("Сокр. название ЛПУ-RR");
+            dt.Columns.Add("Полное название ЛПУ-RR");
             dt.Columns.Add("Регион RR");
-            dt.Columns.Add("Название ЛПУ-SF");
+            dt.Columns.Add("Сокр. название ЛПУ-SF");
             dt.Columns.Add("Регион России");
             dt.Columns.Add("Город");
             dt.Columns.Add("№ ЛПУ-SF");
+            dt.Columns.Add("color");
 
             LpuList lpuList = new LpuList();
-            
-            foreach (LpuRR lpuRR in List)
+
+            List<LpuRR> listNew = new List<LpuRR>();
+            listNew = List.Select(item => item as LpuRR).ToList();
+
+            if (user.RoleSF == RolesSF.Пользователь)
             {
-                var listLPU = lpuList.GetList(lpuRR);
+                UserRightList userRightList = UserRightList.GetUniqueInstance();
 
-                foreach (LPU lpu in listLPU)
+                listNew = listNew.Where(item => userRightList.IsInList(user, item.RegionRR)).ToList();
+            }
+            
+            foreach (LpuRR lpuRR in listNew)
+            {
+                if (lpuRR.ID == 0)
+                    continue;
+
+                LPU lpu = lpuList.GetItem(lpuRR);
+                                
+                string lpuName = string.Empty;
+                string realRegionName = string.Empty;
+                string cityName = string.Empty;
+                string lpuID = string.Empty;
+
+                if (lpu != null)
                 {
-                    string lpuName = string.Empty;
-                    string realRegionName = string.Empty;
-                    string cityName = string.Empty;
-                    string lpuID = string.Empty;
-
-                    if (lpu != null)
-                    {
-                        lpuName = lpu.ShortName;
-                        realRegionName = lpu.RealRegion.Name;
-                        cityName = lpu.City.Name;
-                        lpuID = lpu.ID.ToString();
-                    }
-
-                    dt.Rows.Add(new object[] { lpuRR.ID, lpuRR.Name, lpuRR.RegionRR.Name, lpuName, realRegionName, cityName, lpuID });
+                    lpuName = lpu.ShortName;
+                    realRegionName = lpu.RealRegion.Name;
+                    cityName = lpu.City.Name;
+                    lpuID = lpu.ID.ToString();
                 }
+
+                bool colorWhite = true;
+
+                if (user.RoleSF == RolesSF.Пользователь)
+                {
+                    colorWhite = IsUserLpu(lpuRR, user);
+                }
+
+                dt.Rows.Add(new object[] { lpuRR.ID, lpuRR.Name, lpuRR.FullName, lpuRR.RegionRR.Name, lpuName, realRegionName, cityName, lpuID, colorWhite });
             }
 
-            var list = List.Where(item => item.ID == 0).ToList();
-
             return dt;
+        }
+
+        private bool IsUserLpu(LpuRR lpuRR, User user)
+        {
+            UserLpuRRList userLpuRRList = UserLpuRRList.GetUniqueInstance();
+
+            return userLpuRRList.IsInList(lpuRR, user);
         }
 
         public override BaseDictionary GetItem(int id)

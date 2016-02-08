@@ -1063,7 +1063,6 @@
             this.listLPUToolStripMenuItem.Name = "listLPUToolStripMenuItem";
             this.listLPUToolStripMenuItem.Size = new System.Drawing.Size(313, 22);
             this.listLPUToolStripMenuItem.Text = "Список ЛПУ-RR";
-            this.listLPUToolStripMenuItem.Visible = false;
             this.listLPUToolStripMenuItem.Click += new System.EventHandler(this.listLPUToolStripMenuItem_Click);
             // 
             // nomForAccToolStripMenuItem

@@ -33,6 +33,9 @@ namespace RegionR
         Color bbgray4 = Color.FromArgb(150, 150, 150);
         Color bbgray5 = Color.FromArgb(230, 230, 230);
 
+        int ma_old = 0;
+        int ma_new = 0;
+
         String[] f = new String[6];
         int rb = 5;
         int begval = 0;
@@ -206,7 +209,6 @@ namespace RegionR
                 косвенныеToolStripMenuItem.Visible = true;
                 MatForBtnToolStripMenuItem.Visible = true;
 
-                listLPUToolStripMenuItem.Visible = true;
                 nomForAccToolStripMenuItem.Visible = true;
                 RepDistRightToolStripMenuItem.Visible = true;
                 trackersToolStripMenuItem.Visible = true;
@@ -1369,7 +1371,9 @@ namespace RegionR
 
                         #region Маркетинговые мероприятия HC
                         if (tn1.Parent.Text == "Маркетинговые мероприятия")
-                        {                            
+                        {
+                            ma_old = ma_new;
+
                             if (tn1.Parent.Parent.Text != globalData.Region)
                             {
                                 globalData.RD = tn1.Parent.Parent.Text;
@@ -1377,11 +1381,13 @@ namespace RegionR
                                 fillRegions(globalData.RD, cbRegMA);
                                 fillUsersMA();
                                 fillLPUMA();
+                                ma_new = 1;
                             }
                             else
                             {
                                 globalData.RD = String.Empty;
-                            }                            
+                                ma_new = 2;
+                            }
                             SetVisMA();
                         }
                         #endregion
@@ -1548,18 +1554,23 @@ namespace RegionR
 
                         #region Маркетинговые мероприятия AE
                         if (tn1.Parent.Text == "Маркетинговые мероприятия")
-                        {                           
+                        {
+                            ma_old = ma_new;
+
                             if (tn1.Parent.Parent.Text != globalData.Region)
                             {
                                 globalData.RD = tn1.Parent.Parent.Text;
                                 globalData.Region = String.Empty;
                                 fillRegions(globalData.RD, cbRegMA);
                                 fillUsersMA();
+                                ma_new = 1;
                             }
                             else
                             {
                                 globalData.RD = String.Empty;
+                                ma_new = 2;
                             }
+
                             SetVisMA();
                         }
                         #endregion
@@ -1897,6 +1908,10 @@ namespace RegionR
                         fillRegions(String.Empty, cbRegMA);
                         fillUsersMA();
                         fillLPUMA();
+
+                        ma_old = ma_new;
+                        ma_new = 3;
+
                         SetVisMA();
                         break;
                     }
@@ -8354,7 +8369,7 @@ namespace RegionR
 
         private void SetVisMA()
         {
-            if (tabControl1.SelectedIndex != 7)
+            if (tabControl1.SelectedIndex != 7 || (tabControl1.SelectedIndex == 7 && ma_new - ma_old != 0))
             {
                 tabControl1.SelectedIndex = 7;
                 tabControl1.Visible = true;
@@ -11527,8 +11542,8 @@ namespace RegionR
 
         private void listLPUToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LPU lpu1 = new LPU();
-            lpu1.ShowDialog();
+            FormLpuList formLpuList = new FormLpuList();
+            formLpuList.ShowDialog();
         }
 
         private void nomForAccToolStripMenuItem_Click(object sender, EventArgs e)

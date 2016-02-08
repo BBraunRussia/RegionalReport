@@ -2,73 +2,66 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 using System.Data;
 using ClassLibrary.SF;
-using System.Windows.Forms;
+using System.Drawing;
 
 namespace RegionR.SF
 {
-    public class LPUController
+    public class LpuController : BaseOperations, IController
     {
-        private LPU _lpu;
-        private LPU _parentLPU;
+        private DataGridView _dgv;
+        private LpuRRList _lpuRRList;
 
-        private bool _isLoad;
-
-        private TreeNode _currentNode;
-
-        private SubRegionList _subRegionList;
-
-        public LPUController(LPU lpu)
+        public LpuController(DataGridView dgv)
+            : base(dgv)
         {
-            _lpu = lpu;
-
-            if (_lpu.ParentOrganization != null)
-                _parentLPU = (_lpu.ParentOrganization as LPU);
-
-            _isLoad = false;
-
-            _subRegionList = SubRegionList.GetUniqueInstance();
+            _dgv = dgv;
+            _lpuRRList = LpuRRList.GetUniqueInstance();
         }
 
-        public bool IsLoad
+        public DataGridView ToDataGridView()
         {
-            get { return _isLoad; }
-            set { _isLoad = value; }
-        }
+            DataTable dt = GetDataTable();
 
-        public LPU ParentLPU { get { return _parentLPU; } }
+            _dgv.DataSource = dt;
 
-        public LPU LPU { get { return _lpu; } }
+            _dgv.Columns[0].Width = 70;
+            _dgv.Columns[1].Width = 150;
+            _dgv.Columns[2].Width = 150;
+            _dgv.Columns[3].Width = 100;
+            _dgv.Columns[4].Width = 150;
+            _dgv.Columns[5].Width = 150;
+            _dgv.Columns[6].Width = 150;
+            _dgv.Columns[7].Width = 70;
+            _dgv.Columns[8].Visible = false;
 
-        public int idTypeLPU { get { return (_lpu.TypeLPU == null) ? 1 : _lpu.TypeLPU.ID; } }
-        public int idOwnership { get { return (_lpu.Ownership == null) ? 1 : _lpu.Ownership.ID; } }
-        public int idAdmLevel { get { return (_lpu.AdmLevel == null) ? 1 : _lpu.AdmLevel.ID; } }
-        public int idMainSpec { get { return (_lpu.MainSpec == null) ? 1 : _lpu.MainSpec.ID; } }
-        public int idTypeFin { get { return (_lpu.TypeFin == null) ? 1 : _lpu.TypeFin.ID; } }
-
-        public int idSubRegion
-        {
-            get
+            foreach (DataGridViewRow row in _dgv.Rows)
             {
-                if (_lpu.SubRegion != null)
-                {
-                    return _lpu.SubRegion.ID;
-                }
-                else
-                {
-                    RegionRR regionRR = (_parentLPU == null) ? _lpu.RealRegion.RegionRR : _parentLPU.RealRegion.RegionRR;
-                    return _subRegionList.GetItem(regionRR).ID;
-                }
+                if (row.Cells[8].Value.ToString().ToLower() == "false")
+                    row.DefaultCellStyle.BackColor = Color.Silver;
             }
+
+            return _dgv;
         }
 
-        public string BranchName { get { return (_parentLPU == null) ? string.Empty : _lpu.ShortName; } }
-        public string LPUName { get { return (_parentLPU == null) ? _lpu.ShortName : _lpu.ParentOrganization.ShortName; } }
+        public void ReLoad()
+        {
+            _lpuRRList.Reload();
+        }
 
-        public int idLpuRR { get { return (_lpu.LpuRR == null) ? 0 : _lpu.LpuRR.ID; } }
-        public string RegionRR { get { return (_lpu.LpuRR == null) ? string.Empty : _lpu.LpuRR.RegionRR.Name; } }
+        public void ExportInExcel()
+        {
+            DataTable dt = GetDataTable();
 
-        public string INN { get { return (_parentLPU == null) ? _lpu.INN : _parentLPU.INN; } }
+            CreateExcel excel = new CreateExcel(dt);
+            excel.Show();
+        }
+
+        private DataTable GetDataTable()
+        {
+            return _lpuRRList.ToDataTableWithLpuSF(UserLogged.Get());
+        }
     }
 }

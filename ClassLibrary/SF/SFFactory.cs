@@ -46,6 +46,8 @@ namespace ClassLibrary.SF
                     return new SubRegion(row);
                 case "SF_TypeFin":
                     return new TypeFin(row);
+                case "SF_UserLpuRR":
+                    return new UserLpuRR(row);
                 default:
                     throw new NotImplementedException("Фабрика не может создать экземпляр данного класса");
             }

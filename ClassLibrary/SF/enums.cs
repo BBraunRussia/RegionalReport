@@ -23,18 +23,8 @@ namespace ClassLibrary.SF
         Filter, Sort
     }
 
-    public enum Action
-    {
-        Создал = 1, Редактировал = 2, Удалил = 3
-    }
-
-    public enum Files
-    {
-        rules_lpu = 1, rules_pharmacy = 2, rules_department = 3
-    }
-
-    public enum HistoryType
-    {
-        organization = 1, person = 2
-    }
+    public enum Action { Создал = 1, Редактировал = 2, Удалил = 3 }
+    public enum Files { rules_lpu = 1, rules_pharmacy = 2, rules_department = 3 }
+    public enum HistoryType { organization = 1, person = 2 }
+    public enum SDiv { HC = 1, AE = 2, OM = 3 }
 }

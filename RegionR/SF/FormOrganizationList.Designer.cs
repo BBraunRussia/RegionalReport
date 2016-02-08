@@ -55,7 +55,6 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.btnReload = new System.Windows.Forms.Button();
             this.btnDeleteFilter = new System.Windows.Forms.Button();
-            this.showOrganizationWithLpuRRToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -80,7 +79,6 @@
             this.toolStripMenuItem1,
             this.addPersonToolStripMenuItem,
             this.toolStripMenuItem2,
-            this.showOrganizationWithLpuRRToolStripMenuItem,
             this.cityDictionaryToolStripMenuItem,
             this.toolStripMenuItem3,
             this.importToolStripMenuItem,
@@ -286,13 +284,6 @@
             this.btnDeleteFilter.Visible = false;
             this.btnDeleteFilter.Click += new System.EventHandler(this.btnDeleteFilter_Click);
             // 
-            // showOrganizationWithLpuRRToolStripMenuItem
-            // 
-            this.showOrganizationWithLpuRRToolStripMenuItem.Name = "showOrganizationWithLpuRRToolStripMenuItem";
-            this.showOrganizationWithLpuRRToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
-            this.showOrganizationWithLpuRRToolStripMenuItem.Text = "Сопоставление ЛПУ RR и SF";
-            this.showOrganizationWithLpuRRToolStripMenuItem.Click += new System.EventHandler(this.showOrganizationWithLpuRRToolStripMenuItem_Click);
-            // 
             // FormOrganizationList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -349,6 +340,5 @@
         private System.Windows.Forms.ToolStripMenuItem addPersonToolStripMenuItem1;
         private System.Windows.Forms.Button btnReload;
         private System.Windows.Forms.Button btnDeleteFilter;
-        private System.Windows.Forms.ToolStripMenuItem showOrganizationWithLpuRRToolStripMenuItem;
     }
 }

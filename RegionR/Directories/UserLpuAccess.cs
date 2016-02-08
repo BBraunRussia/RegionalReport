@@ -12,9 +12,9 @@ using DataLayer;
 
 namespace RegionR.Directories
 {
-    public partial class LPU : Form
+    public partial class UserLpuAccess : Form
     {
-        public LPU()
+        public UserLpuAccess()
         {
             InitializeComponent();
 

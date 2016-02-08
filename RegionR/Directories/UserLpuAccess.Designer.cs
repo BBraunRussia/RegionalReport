@@ -1,6 +1,6 @@
 ﻿namespace RegionR.Directories
 {
-    partial class LPU
+    partial class UserLpuAccess
     {
         /// <summary>
         /// Required designer variable.

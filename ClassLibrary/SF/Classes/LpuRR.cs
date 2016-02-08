@@ -8,22 +8,22 @@ namespace ClassLibrary.SF
 {
     public class LpuRR : BaseDictionary
     {
-        private int _idRegionRR;
+        private RegionRR _regionRR;
+        private string _fullName;
 
         public LpuRR(DataRow row)
             : base(row)
         {
-            int.TryParse(row[2].ToString(), out _idRegionRR);
+            int idRegionRR;
+            int.TryParse(row[2].ToString(), out idRegionRR);
+            RegionRRList regionRRList = RegionRRList.GetUniqueInstance();
+            _regionRR = regionRRList.GetItem(idRegionRR) as RegionRR;
+
+            _fullName = row[3].ToString();
         }
 
-        public RegionRR RegionRR
-        {
-            get
-            {
-                RegionRRList regionRRList = RegionRRList.GetUniqueInstance();
-                return regionRRList.GetItem(_idRegionRR) as RegionRR;
-            }
-        }
+        public RegionRR RegionRR { get { return _regionRR; } }
+        public string FullName { get { return _fullName; } }
 
         public bool IsInList
         {
