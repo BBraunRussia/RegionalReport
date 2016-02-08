@@ -161,8 +161,11 @@ namespace RegionR.addedit
                         break;
                     case "39":
                         chAM.Checked = true;
+                        break;
+                    case "34":
+                        chSP.Checked = true;
                         break;                   
-                    /*OM*/
+                    /*OM*/  
                     case "61":
                         ch61.Checked = true;
                         break;
@@ -253,6 +256,8 @@ namespace RegionR.addedit
                     count += InsBD(33);
                 if (Check(chNE) == 1)
                     count += InsBD(31);
+                if (Check(chSP) == 1)
+                    count += InsBD(34);
                 if (Check(chVS) == 1)
                     count += InsBD(36);
                 if (Check(chAM) == 1)
@@ -409,6 +414,7 @@ namespace RegionR.addedit
                chCT.Checked = false;
                chOT.Checked = false;
                chNE.Checked = false;
+               chSP.Checked = false;
                chVS.Checked = false;
                chAM.Checked = false;              
                ch61.Checked = false;
@@ -439,17 +445,18 @@ namespace RegionR.addedit
             globalData.dtSBA.Rows[14][1] = Convert.ToInt32(ch29.Checked);
             globalData.dtSBA.Rows[15][1] = Convert.ToInt32(chST.Checked);
             globalData.dtSBA.Rows[16][1] = Convert.ToInt32(chCT.Checked);
+            globalData.dtSBA.Rows[17][1] = Convert.ToInt32(chSP.Checked);
             globalData.dtSBA.Rows[18][1] = Convert.ToInt32(chOT.Checked);
             globalData.dtSBA.Rows[19][1] = Convert.ToInt32(chNE.Checked);
             globalData.dtSBA.Rows[21][1] = Convert.ToInt32(chVS.Checked);
-            globalData.dtSBA.Rows[22][1] = Convert.ToInt32(chAM.Checked);
-            //globalData.dtSBA.Rows[17][1] = Convert.ToInt32(chPS.Checked);
+            globalData.dtSBA.Rows[22][1] = Convert.ToInt32(chAM.Checked);            
             globalData.dtSBA.Rows[23][1] = Convert.ToInt32(ch61.Checked);
             globalData.dtSBA.Rows[24][1] = Convert.ToInt32(ch62.Checked);
             globalData.dtSBA.Rows[25][1] = Convert.ToInt32(ch63.Checked);
             globalData.dtSBA.Rows[26][1] = Convert.ToInt32(ch64.Checked);
             globalData.dtSBA.Rows[27][1] = Convert.ToInt32(ch66.Checked);
             globalData.dtSBA.Rows[28][1] = Convert.ToInt32(ch69.Checked);
+            
 
             if (chHC.Checked == true)
             {
@@ -479,7 +486,7 @@ namespace RegionR.addedit
                 globalData.dtSBA.Rows[19][1] = 1;
                 globalData.dtSBA.Rows[21][1] = 1;
                 globalData.dtSBA.Rows[22][1] = 1;
-                globalData.dtSBA.Rows[17][1] = 1;
+                globalData.dtSBA.Rows[17][1] = 1;                
             }
             if (chOM.Checked == true)
             {
@@ -521,7 +528,7 @@ namespace RegionR.addedit
                 chNE.Checked = Convert.ToInt32(globalData.dtSBA.Rows[19][1]) == 1 ? true : false;
                 chVS.Checked = Convert.ToInt32(globalData.dtSBA.Rows[21][1]) == 1 ? true : false;
                 chAM.Checked = Convert.ToInt32(globalData.dtSBA.Rows[22][1]) == 1 ? true : false;
-                //chPS.Checked = Convert.ToInt32(globalData.dtSBA.Rows[17][1]) == 1 ? true : false;
+                chSP.Checked = Convert.ToInt32(globalData.dtSBA.Rows[17][1]) == 1 ? true : false;
                 ch61.Checked = Convert.ToInt32(globalData.dtSBA.Rows[23][1]) == 1 ? true : false;
                 ch62.Checked = Convert.ToInt32(globalData.dtSBA.Rows[24][1]) == 1 ? true : false;
                 ch63.Checked = Convert.ToInt32(globalData.dtSBA.Rows[25][1]) == 1 ? true : false;

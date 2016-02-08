@@ -285,7 +285,7 @@ namespace RegionR.addedit
             {
                 globalData.maplan = 0;
                 int ri = dgv1.SelectedCells[0].RowIndex;
-                AddEditMAType am = new AddEditMAType(Convert.ToInt32(dgv1[0, ri].Value), dgv1[1, ri].Value.ToString(), dgv1[2, ri].Value.ToString(), dgv1[3, ri].Value.ToString(), dgv1[4, ri].Value.ToString(), dgv1[5, ri].Value.ToString());
+                AddEditMAType am = new AddEditMAType(Convert.ToInt32(dgv1[0, ri].Value), dgv1[1, ri].Value.ToString(), dgv1[2, ri].Value.ToString(), dgv1[3, ri].Value.ToString(), dgv1[4, ri].Value.ToString(), dgv1[5, ri].Value.ToString(), 1);
                 am.ShowDialog();
             }
             catch

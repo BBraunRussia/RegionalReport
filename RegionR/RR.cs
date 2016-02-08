@@ -1369,10 +1369,7 @@ namespace RegionR
 
                         #region Маркетинговые мероприятия HC
                         if (tn1.Parent.Text == "Маркетинговые мероприятия")
-                        {
-                            tabControl1.SelectedIndex = 7;
-                            tabControl1.Visible = true;
-
+                        {                            
                             if (tn1.Parent.Parent.Text != globalData.Region)
                             {
                                 globalData.RD = tn1.Parent.Parent.Text;
@@ -1551,10 +1548,7 @@ namespace RegionR
 
                         #region Маркетинговые мероприятия AE
                         if (tn1.Parent.Text == "Маркетинговые мероприятия")
-                        {
-                            tabControl1.SelectedIndex = 7;
-                            tabControl1.Visible = true;
-
+                        {                           
                             if (tn1.Parent.Parent.Text != globalData.Region)
                             {
                                 globalData.RD = tn1.Parent.Parent.Text;
@@ -8360,46 +8354,48 @@ namespace RegionR
 
         private void SetVisMA()
         {
-            tabControl1.SelectedIndex = 7;
-            tabControl1.Visible = true;
-
-            btnHideRegMA.Text = "Скрыть регионы";
-            btnHideUsersMA.Text = "Скрыть РП";
-            cbUsersMA.Visible = true;
-
-            loadMAType(cbTypeMA);
-            loadTheme();
-
-            if (globalData.RD != String.Empty)
+            if (tabControl1.SelectedIndex != 7)
             {
-                btnMA_fill.Visible = false;
-                btnMA_edit.Visible = false;
-                btnMA_del.Visible = false;
-                cbRegMA.Visible = true;
-                btnHideRegMA.Visible = true;
-                btnHideUsersMA.Visible = true;
+                tabControl1.SelectedIndex = 7;
+                tabControl1.Visible = true;
+
+                btnHideRegMA.Text = "Скрыть регионы";
+                btnHideUsersMA.Text = "Скрыть РП";
+                cbUsersMA.Visible = true;
+
+                loadMAType(cbTypeMA);
+                loadTheme();
+
+                if (globalData.RD != String.Empty)
+                {
+                    btnMA_fill.Visible = false;
+                    btnMA_edit.Visible = false;
+                    btnMA_del.Visible = false;
+                    cbRegMA.Visible = true;
+                    btnHideRegMA.Visible = true;
+                    btnHideUsersMA.Visible = true;
+                }
+                else if (globalData.Region != String.Empty)
+                {
+                    EnableSave("ma");
+                    btnMA_fill.Visible = true;
+                    btnMA_edit.Visible = true;
+                    btnMA_del.Visible = true;
+                    cbRegMA.Visible = false;
+                    btnHideRegMA.Visible = false;
+                    btnHideUsersMA.Visible = false;
+                    fillLPUMA();
+                }
+                else
+                {
+                    btnMA_fill.Visible = false;
+                    btnMA_edit.Visible = false;
+                    btnMA_del.Visible = false;
+                    cbRegMA.Visible = true;
+                    btnHideRegMA.Visible = true;
+                    btnHideUsersMA.Visible = true;
+                }
             }
-            else if (globalData.Region != String.Empty)
-            {
-                EnableSave("ma");
-                btnMA_fill.Visible = true;
-                btnMA_edit.Visible = true;
-                btnMA_del.Visible = true;
-                cbRegMA.Visible = false;
-                btnHideRegMA.Visible = false;
-                btnHideUsersMA.Visible = false;
-                fillLPUMA();
-            }
-            else
-            {
-                btnMA_fill.Visible = false;
-                btnMA_edit.Visible = false;
-                btnMA_del.Visible = false;
-                cbRegMA.Visible = true;
-                btnHideRegMA.Visible = true;
-                btnHideUsersMA.Visible = true;
-            }
-            
             SelMA();
         }
 
@@ -15629,7 +15625,7 @@ namespace RegionR
             dt1 = sql1.GetRecords("exec SelMALPUWithSBA @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19, @p20,@p21, @p22, @p23, @p24, @p25, @p26, @p27, @p28, @p29, @p30, @p31, @p32, @p33, @p34, @p35, @p36",
                 globalData.Div, reg, userID, cbYearMA.SelectedItem, globalData.RD, lpu,
                 sba[0], sba[1], sba[2], sba[3], sba[4], sba[5], sba[6], sba[7], sba[8], sba[9],
-                sba[10], sba[11], sba[12], sba[13], sba[14], sba[15], sba[16], /*sba[17]*/0, sba[18], sba[19],
+                sba[10], sba[11], sba[12], sba[13], sba[14], sba[15], sba[16], sba[17], sba[18], sba[19],
                 sba[20], sba[21], sba[22], sba[23], sba[24], sba[25], sba[26], sba[27], sba[28], sba[29]);
 
             _dgv8.DataSource = dt1;
@@ -16135,7 +16131,7 @@ namespace RegionR
             dt1 = sql1.GetRecords("exec SelMALPUWithSBA @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19, @p20,@p21, @p22, @p23, @p24, @p25, @p26, @p27, @p28, @p29, @p30, @p31, @p32, @p33, @p34, @p35, @p36",
                "HC", reg, userID, cbYearMA.SelectedItem, globalData.RD, lpu,
                sba[0], sba[1], sba[2], sba[3], sba[4], sba[5], sba[6], sba[7], sba[8], sba[9],
-               sba[10], sba[11], sba[12], sba[13], sba[14], sba[15], sba[16], /*sba[17]*/0, sba[18], sba[19],
+               sba[10], sba[11], sba[12], sba[13], sba[14], sba[15], sba[16], sba[17], sba[18], sba[19],
                sba[20], sba[21], sba[22], sba[23], sba[24], sba[25], sba[26], sba[27], sba[28], sba[29]);
 
             _tempdgv.DataSource = dt1;

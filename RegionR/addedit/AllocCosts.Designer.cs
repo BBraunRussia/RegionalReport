@@ -68,6 +68,7 @@
             this.tbSum = new System.Windows.Forms.TextBox();
             this.btnFilt = new System.Windows.Forms.Button();
             this.btnFiltUse = new System.Windows.Forms.Button();
+            this.chSP = new System.Windows.Forms.CheckBox();
             this.gbAE.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -75,6 +76,7 @@
             // 
             // gbAE
             // 
+            this.gbAE.Controls.Add(this.chSP);
             this.gbAE.Controls.Add(this.chAE);
             this.gbAE.Controls.Add(this.chAM);
             this.gbAE.Controls.Add(this.chVS);
@@ -124,9 +126,9 @@
             this.chNE.AutoSize = true;
             this.chNE.Location = new System.Drawing.Point(145, 42);
             this.chNE.Name = "chNE";
-            this.chNE.Size = new System.Drawing.Size(109, 17);
+            this.chNE.Size = new System.Drawing.Size(113, 17);
             this.chNE.TabIndex = 3;
-            this.chNE.Text = "Spine-Neuro (SN)";
+            this.chNE.Text = "Neurosurgery (NE)";
             this.chNE.UseVisualStyleBackColor = true;
             // 
             // chOT
@@ -499,6 +501,16 @@
             this.btnFiltUse.UseVisualStyleBackColor = true;
             this.btnFiltUse.Click += new System.EventHandler(this.btnFiltUse_Click);
             // 
+            // chSP
+            // 
+            this.chSP.AutoSize = true;
+            this.chSP.Location = new System.Drawing.Point(433, 19);
+            this.chSP.Name = "chSP";
+            this.chSP.Size = new System.Drawing.Size(76, 17);
+            this.chSP.TabIndex = 8;
+            this.chSP.Text = "Spine (SP)";
+            this.chSP.UseVisualStyleBackColor = true;
+            // 
             // AllocCosts
             // 
             this.AcceptButton = this.btnSave;
@@ -570,5 +582,6 @@
         private System.Windows.Forms.TextBox tbSum;
         private System.Windows.Forms.Button btnFilt;
         private System.Windows.Forms.Button btnFiltUse;
+        private System.Windows.Forms.CheckBox chSP;
     }
 }

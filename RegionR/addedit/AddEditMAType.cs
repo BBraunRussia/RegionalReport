@@ -23,10 +23,13 @@ namespace RegionR.addedit
         private string _site = "";
         private string _theme = "";
         private string _type = "";
+        private int _edit = 0;
 
         public AddEditMAType()
         {
             InitializeComponent();
+            
+            button1.Visible = false;
             
             loadType();
             loadTheme();
@@ -38,6 +41,8 @@ namespace RegionR.addedit
         {
             InitializeComponent();
 
+            button1.Visible = false;
+            
             _conf = conf;
             _name = name;
             _sname = sname;
@@ -57,7 +62,38 @@ namespace RegionR.addedit
             cbTheme.Text = _theme;
             cbTypeMA.Text = _type;
         }
-        
+
+
+        public AddEditMAType(int conf, string sname, string name, string site, string theme, string type, int flag_edit)
+        {
+            InitializeComponent();
+
+            button1.Visible = false;
+
+            _conf = conf;
+            _name = name;
+            _sname = sname;
+            _site = site;
+            _theme = theme;
+            _type = type;
+            _edit = flag_edit;
+
+            if (flag_edit == 1)
+                button1.Visible = true;
+
+            loadType();
+            loadTheme();
+            loadCountry();
+            loadCity();
+
+            tbName.Text = _name;
+            tbSname.Text = _sname;
+            tbSite.Text = _site;
+
+            cbTheme.Text = _theme;
+            cbTypeMA.Text = _type;
+        }
+
 
         void loadType()
         {
@@ -139,7 +175,9 @@ namespace RegionR.addedit
             if (tbSname.Text.Trim() == String.Empty || tbSname.Text == sname_dafault)
                 return "Введите сокращенное название!";
             if (tbSite.Text.Trim() == String.Empty || tbSite.Text == site_dafault)
-                return "Введите сайт!";
+                return "Введите сайт!";            
+            if (cbTheme.SelectedIndex == 0)
+                return "Выберите тематику!";           
             if (tbComm.Text.Trim() == String.Empty || tbComm.Text == comm_dafault)
                 return "Введите примечание!";
             
@@ -280,6 +318,11 @@ namespace RegionR.addedit
         {
             if (tbSite.Text == site_dafault)
                 tbSite.Text = String.Empty;     
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {           
+             SavePlanConf();
         }
     }
 }
