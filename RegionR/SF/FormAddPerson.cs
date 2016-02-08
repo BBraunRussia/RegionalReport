@@ -92,7 +92,7 @@ namespace RegionR.SF
 
         private void SetPhoneCode()
         {
-            IHaveRegion organization = ((_person.Organization.ParentOrganization == null) ? _person.Organization : _person.Organization.ParentOrganization) as IHaveRegion;
+            IHaveRegion organization = ((_person.Organization is IHaveRegion) ? _person.Organization : _person.Organization.ParentOrganization) as IHaveRegion;
             tbPhoneCode.Text = organization.City.PhoneCode;
         }
 
