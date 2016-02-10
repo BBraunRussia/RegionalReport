@@ -9,17 +9,17 @@ using System.Windows.Forms;
 
 namespace RegionR
 {
-    public partial class login : Form
+    public partial class FormLogin : Form
     {
-        public login()
+        public FormLogin()
         {
             InitializeComponent();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            globalData.Login = tbLogin.Text;
-            this.Close();
+            FirstPage fPage = new FirstPage(tbLogin.Text);
+            fPage.Show();
         }
     }
 }

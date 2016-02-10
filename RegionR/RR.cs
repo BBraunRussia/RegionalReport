@@ -189,6 +189,31 @@ namespace RegionR
 
         private void setVisibleElementMainMenu()
         {
+            actionToolStripMenuItem.Visible = false;
+            importToolStripMenuItem.Visible = false;
+            logoutToolStripMenuItem.Visible = false;
+            repDistToolStripMenuItem.Visible = false;
+            comparisonMatToolStripMenuItem.Visible = false;
+            settingsToolStripMenuItem.Visible = false;
+            toolStripMenuItem1.Visible = false;
+            toolStripMenuItem2.Visible = false;
+            btnEditReport.Visible = false;
+            toolStripMenuItem6.Visible = false;
+            divideToolStripMenuItem.Visible = false;
+            usersToolStripMenuItem1.Visible = false;
+
+            регионыToolStripMenuItem.Visible = false;
+            отчётыToolStripMenuItem.Visible = false;
+            косвенныеToolStripMenuItem.Visible = false;
+            MatForBtnToolStripMenuItem.Visible = false;
+
+            nomForAccToolStripMenuItem.Visible = false;
+            RepDistRightToolStripMenuItem.Visible = false;
+            trackersToolStripMenuItem.Visible = false;
+            userManagerToolStripMenuItem.Visible = false;
+            userBCToolStripMenuItem.Visible = false;
+            userRoleSFToolStripMenuItem.Visible = false;
+
             if (globalData.UserAccess == 1)
             {
                 actionToolStripMenuItem.Visible = true;
@@ -6394,6 +6419,15 @@ namespace RegionR
             treeView1.Nodes.Clear();
             tabControl1.Visible = false;
 
+            FormLogin log = new FormLogin();
+            if (log.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                Connect();
+            else
+                this.Close();
+            /*
+            treeView1.Nodes.Clear();
+            tabControl1.Visible = false;
+
             login log = new login();
             log.ShowDialog();
 
@@ -6402,14 +6436,16 @@ namespace RegionR
             CreateTree();
             ClearFilter();
             treeView1.Focus();
+            */
             /* Ежедневный отчет */
             //DailyAccess();
-
+            /*
             if (globalData.fp == 1)
             {
                 tabControl1.SelectedIndex = 10;
                 tabControl1.Visible = true;
             }
+            */
         }
 
         private void _dgv1_CellMouseEnter(object sender, DataGridViewCellEventArgs e)

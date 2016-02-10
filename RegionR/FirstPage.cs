@@ -13,15 +13,15 @@ namespace RegionR
 {
     public partial class FirstPage : Form
     {
-        public FirstPage()
+        public FirstPage(string login = null)
         {
             InitializeComponent();
 
-            if (Connect() != 0)
+            if (Connect(login) != 0)
                 return;
         }
 
-        private int Connect()
+        private int Connect(string login)
         {
             globalData.UserID = 0;
             globalData.UserID2 = 0;
@@ -37,35 +37,30 @@ namespace RegionR
                     return 0;
             }
 
-            String s1 = "";
-
-            if ((globalData.admin) && (globalData.Login != String.Empty))
-                s1 = globalData.Login;
-            else
+            if (login == null)
             {
-                s1 = WindowsIdentity.GetCurrent().Name.Replace("\\", "-");
-                String[] s2 = s1.Split('-');
-                s1 = s2[1];
+                login = WindowsIdentity.GetCurrent().Name.Replace("\\", "-");
+                String[] s2 = login.Split('-');
+                login = s2[1];
             }
 
+            //login = "arzynaru";
 
-            //s1 = "arzynaru";
+            //login = "yarostru";
 
-            //s1 = "yarostru";
-
-            //s1 = "plotstru";
+            //login = "plotstru";
 
 
             DataTable dt1 = new DataTable();
-            dt1 = sql1.GetRecords("exec UserLogin @p1, @p2", s1, globalData.UserAccess);
+            dt1 = sql1.GetRecords("exec UserLogin @p1", login);
             if (dt1.Rows.Count == 0)
             {
                 //MessageBox.Show("Пользователь не найден в системе. Вход будет произведён под учётной записью гостя.", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                s1 = "anonimus";
+                login = "anonimus";
             }
 
-            if (s1 == "anonimus")
-                dt1 = sql1.GetRecords("exec UserLogin @p1, @p2", s1, globalData.UserAccess);
+            if (login == "anonimus")
+                dt1 = sql1.GetRecords("exec UserLogin @p1", login);
             if (dt1.Rows.Count == 0)
             {
                 MessageBox.Show("Не удалось войти в систему.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -89,7 +84,7 @@ namespace RegionR
                 str += "  Последний раз вы были в системе: " + sql1.GetRecordsOne("exec LastEvent @p1", globalData.UserID);
 
                 lbUserName.Text = str;
-                globalData.Login = s1;
+                globalData.Login = login;
             }
 
             if (globalData.UserAccess == 1)
@@ -101,7 +96,6 @@ namespace RegionR
             if (globalData.UserID == 0)
                 this.Close();
 
-          
             return 0;
         }
 
