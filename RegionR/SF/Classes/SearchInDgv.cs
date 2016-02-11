@@ -23,7 +23,9 @@ namespace RegionR.SF
 
         public void Find(string text)
         {
-            _currentText = text.ToLower();
+            text = text.ToLower();
+
+            _currentText = text;
 
             if (IsNotValid())
                 return;

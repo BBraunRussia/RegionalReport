@@ -683,7 +683,7 @@ namespace RegionR.addedit
                     tbConf.Text = "Нет в справочнике";
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                // this.Close();
             }

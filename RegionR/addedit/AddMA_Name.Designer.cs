@@ -244,7 +244,6 @@
         private System.Windows.Forms.ContextMenuStrip _cms;
         private System.Windows.Forms.ToolStripMenuItem добавитьМестоПроведенияToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem просмотрМестПроведенияToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem редактироватьToolStripMenuItem;
     }
 }
