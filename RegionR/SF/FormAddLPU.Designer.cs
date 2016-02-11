@@ -120,6 +120,9 @@
             this.label33 = new System.Windows.Forms.Label();
             this.lbAutor = new System.Windows.Forms.Label();
             this.lbEditor = new System.Windows.Forms.Label();
+            this.cmTextBox = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.label34 = new System.Windows.Forms.Label();
+            this.lbNumberLpuID = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -141,9 +144,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(857, 139);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(60, 13);
+            this.label2.Size = new System.Drawing.Size(45, 13);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Номер SF:";
+            this.label2.Text = "CRM id:";
             // 
             // lbNumberSF
             // 
@@ -296,6 +299,7 @@
             // 
             // tbPatientCRRT
             // 
+            this.tbPatientCRRT.ContextMenuStrip = this.cmTextBox;
             this.tbPatientCRRT.Location = new System.Drawing.Point(130, 175);
             this.tbPatientCRRT.MaxLength = 4;
             this.tbPatientCRRT.Name = "tbPatientCRRT";
@@ -305,6 +309,7 @@
             // 
             // tbMachineGD
             // 
+            this.tbMachineGD.ContextMenuStrip = this.cmTextBox;
             this.tbMachineGD.Location = new System.Drawing.Point(130, 19);
             this.tbMachineGD.MaxLength = 4;
             this.tbMachineGD.Name = "tbMachineGD";
@@ -332,6 +337,7 @@
             // 
             // tbPatientPD
             // 
+            this.tbPatientPD.ContextMenuStrip = this.cmTextBox;
             this.tbPatientPD.Location = new System.Drawing.Point(130, 149);
             this.tbPatientPD.MaxLength = 4;
             this.tbPatientPD.Name = "tbPatientPD";
@@ -341,6 +347,7 @@
             // 
             // tbMachineGDF
             // 
+            this.tbMachineGDF.ContextMenuStrip = this.cmTextBox;
             this.tbMachineGDF.Location = new System.Drawing.Point(130, 45);
             this.tbMachineGDF.MaxLength = 4;
             this.tbMachineGDF.Name = "tbMachineGDF";
@@ -368,6 +375,7 @@
             // 
             // tbPatientGD
             // 
+            this.tbPatientGD.ContextMenuStrip = this.cmTextBox;
             this.tbPatientGD.Location = new System.Drawing.Point(130, 123);
             this.tbPatientGD.MaxLength = 4;
             this.tbPatientGD.Name = "tbPatientGD";
@@ -377,6 +385,7 @@
             // 
             // tbMachineCRRT
             // 
+            this.tbMachineCRRT.ContextMenuStrip = this.cmTextBox;
             this.tbMachineCRRT.Location = new System.Drawing.Point(130, 71);
             this.tbMachineCRRT.MaxLength = 4;
             this.tbMachineCRRT.Name = "tbMachineCRRT";
@@ -404,6 +413,7 @@
             // 
             // tbShift
             // 
+            this.tbShift.ContextMenuStrip = this.cmTextBox;
             this.tbShift.Location = new System.Drawing.Point(130, 97);
             this.tbShift.MaxLength = 4;
             this.tbShift.Name = "tbShift";
@@ -413,6 +423,7 @@
             // 
             // tbOperating
             // 
+            this.tbOperating.ContextMenuStrip = this.cmTextBox;
             this.tbOperating.Location = new System.Drawing.Point(157, 100);
             this.tbOperating.MaxLength = 4;
             this.tbOperating.Name = "tbOperating";
@@ -431,6 +442,7 @@
             // 
             // tbBedsSurgical
             // 
+            this.tbBedsSurgical.ContextMenuStrip = this.cmTextBox;
             this.tbBedsSurgical.Location = new System.Drawing.Point(157, 74);
             this.tbBedsSurgical.MaxLength = 4;
             this.tbBedsSurgical.Name = "tbBedsSurgical";
@@ -449,6 +461,7 @@
             // 
             // tbBedsIC
             // 
+            this.tbBedsIC.ContextMenuStrip = this.cmTextBox;
             this.tbBedsIC.Location = new System.Drawing.Point(157, 48);
             this.tbBedsIC.MaxLength = 4;
             this.tbBedsIC.Name = "tbBedsIC";
@@ -467,6 +480,7 @@
             // 
             // tbBedsTotal
             // 
+            this.tbBedsTotal.ContextMenuStrip = this.cmTextBox;
             this.tbBedsTotal.Location = new System.Drawing.Point(157, 22);
             this.tbBedsTotal.MaxLength = 4;
             this.tbBedsTotal.Name = "tbBedsTotal";
@@ -529,6 +543,7 @@
             // 
             // tbINN
             // 
+            this.tbINN.ContextMenuStrip = this.cmTextBox;
             this.tbINN.Location = new System.Drawing.Point(435, 136);
             this.tbINN.MaxLength = 12;
             this.tbINN.Name = "tbINN";
@@ -547,6 +562,7 @@
             // 
             // tbKPP
             // 
+            this.tbKPP.ContextMenuStrip = this.cmTextBox;
             this.tbKPP.Location = new System.Drawing.Point(709, 136);
             this.tbKPP.MaxLength = 9;
             this.tbKPP.Name = "tbKPP";
@@ -565,6 +581,7 @@
             // 
             // tbPostIndex
             // 
+            this.tbPostIndex.ContextMenuStrip = this.cmTextBox;
             this.tbPostIndex.Location = new System.Drawing.Point(435, 242);
             this.tbPostIndex.MaxLength = 6;
             this.tbPostIndex.Name = "tbPostIndex";
@@ -583,6 +600,7 @@
             // 
             // tbPhone
             // 
+            this.tbPhone.ContextMenuStrip = this.cmTextBox;
             this.tbPhone.Location = new System.Drawing.Point(624, 346);
             this.tbPhone.MaxLength = 7;
             this.tbPhone.Name = "tbPhone";
@@ -983,6 +1001,29 @@
             this.lbEditor.TabIndex = 96;
             this.lbEditor.Text = "Изменил";
             // 
+            // cmTextBox
+            // 
+            this.cmTextBox.Name = "cmTextBox";
+            this.cmTextBox.Size = new System.Drawing.Size(61, 4);
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Location = new System.Drawing.Point(857, 162);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(87, 13);
+            this.label34.TabIndex = 98;
+            this.label34.Text = "Номер ЛПУ-SF:";
+            // 
+            // lbNumberLpuID
+            // 
+            this.lbNumberLpuID.AutoSize = true;
+            this.lbNumberLpuID.Location = new System.Drawing.Point(958, 162);
+            this.lbNumberLpuID.Name = "lbNumberLpuID";
+            this.lbNumberLpuID.Size = new System.Drawing.Size(70, 13);
+            this.lbNumberLpuID.TabIndex = 99;
+            this.lbNumberLpuID.Text = "не присвоен";
+            // 
             // FormAddLPU
             // 
             this.AcceptButton = this.btnSaveAndClose;
@@ -990,6 +1031,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(1113, 613);
+            this.Controls.Add(this.lbNumberLpuID);
+            this.Controls.Add(this.label34);
             this.Controls.Add(this.lbEditor);
             this.Controls.Add(this.lbAutor);
             this.Controls.Add(this.cbTypeFin);
@@ -1160,5 +1203,8 @@
         private System.Windows.Forms.Label label33;
         private System.Windows.Forms.Label lbAutor;
         private System.Windows.Forms.Label lbEditor;
+        private System.Windows.Forms.ContextMenuStrip cmTextBox;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.Label lbNumberLpuID;
     }
 }

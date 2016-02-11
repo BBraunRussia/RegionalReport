@@ -35,7 +35,7 @@ namespace RegionR.SF
         public FormAddLPU(LPU lpu)
         {
             InitializeComponent();
-
+            
             _lpu = lpu;
 
             if (_lpu.ParentOrganization != null)
@@ -70,6 +70,7 @@ namespace RegionR.SF
             lbKPP.Text = (_parentLPU == null) ? "КПП:" : "КПП*:";
 
             lbNumberSF.Text = (_lpu.NumberSF == string.Empty) ? "не присвоен" : _lpu.NumberSF;
+            lbNumberLpuID.Text = (_lpu.ID == 0) ? "не присвоен" : _lpu.ID.ToString();
             lbTypeOrg.Text = _lpu.TypeOrg.ToString();
 
             if (_lpu.TypeLPU != null)

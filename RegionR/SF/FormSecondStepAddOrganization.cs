@@ -101,15 +101,16 @@ namespace RegionR.SF
             int idLpuRR;
             int.TryParse(dgvLpuRR.Rows[dgvLpuRR.CurrentCell.RowIndex].Cells[0].Value.ToString(), out idLpuRR);
 
-            if (idLpuRR != 0)
-            {
+            //if (idLpuRR != 0)
+           // {
                 _lpu.LpuRR = _lpuRRList.GetItem(idLpuRR) as LpuRR;
                 DialogResult = System.Windows.Forms.DialogResult.OK;
-            }
+            /*}
             else
             {
                 MessageBox.Show("Сопоставление с прочими ЛПУ приостановлено. Для уточнения деталей обращайтесь с Тельнину Д.П..", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+            */
         }
 
         private void tbSearch_TextChanged(object sender, EventArgs e)
