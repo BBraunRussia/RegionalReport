@@ -82,7 +82,6 @@
     <Compile Include="SF\Lists\LpuRRList.cs" />
     <Compile Include="SF\Lists\MainSpecList.cs" />
     <Compile Include="SF\Classes\Ownership.cs" />
-    <Compile Include="SF\Lists\OtherOrganizationAndLPUList.cs" />
     <Compile Include="SF\Lists\OwnershipList.cs" />
     <Compile Include="SF\Classes\RealRegion.cs" />
     <Compile Include="SF\Abstract\BaseDictionary.cs" />
@@ -109,10 +108,10 @@
     <Compile Include="Test\clQuestion.cs" />
     <Compile Include="Test\clQuestionList.cs" />
     <Compile Include="User.cs" />
-    <Compile Include="Visit.cs" />
+    <Compile Include="Visit\Visit.cs" />
     <Compile Include="dictionary\VisitPlanStatus.cs" />
-    <Compile Include="VisitEnum.cs" />
-    <Compile Include="VisitList.cs" />
+    <Compile Include="Visit\VisitEnum.cs" />
+    <Compile Include="Visit\VisitList.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataLayer\DataLayer.csproj">

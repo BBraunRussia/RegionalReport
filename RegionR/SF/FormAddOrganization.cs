@@ -119,9 +119,13 @@ namespace RegionR.SF
             catch (NullReferenceException ex)
             {
                 MessageBox.Show(ex.Message, "Обязательное поле", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                return false;
             }
+            catch (NotImplementedException ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка создания", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return false;
         }
 
         private void CopyFields()
@@ -135,11 +139,20 @@ namespace RegionR.SF
             ClassForForm.CheckFilled(tbName.Text, "Официальное название");
             ClassForForm.CheckFilled(tbShortName.Text, "Сокращенное название");
 
+            CheckNameAdmin(tbName.Text);
+            CheckNameAdmin(tbShortName.Text);
+
             _organization.Name = tbName.Text;
             _organization.ShortName = tbShortName.Text;
             _organization.Email = tbEmail.Text;
             _organization.WebSite = tbWebSite.Text;
             _organization.Phone = tbPhone.Text;
+        }
+
+        private void CheckNameAdmin(string text)
+        {
+            if (text.ToLower().Replace(" ", "") == "администрация")
+                throw new NotImplementedException("Запрещено создавать подразделение с названием \"Администрация\", если нужно добавить персону в \"Администрацию\" добавляйте напрямую в ЛПУ/филиал.");
         }
 
         private void tbShortName_TextChanged(object sender, EventArgs e)

@@ -10,7 +10,7 @@ using ClassLibrary.SF;
 
 namespace RegionR.SF
 {
-    public partial class FormSecondStepAddOrganization : Form
+    public partial class FormSecondStepAddLPU : Form
     {
         private LPU _lpu;
         private LpuCompetitorsList _lpuCompetitorsList;
@@ -18,7 +18,7 @@ namespace RegionR.SF
         private RealRegionList _realRegionList;
         private LpuRRList _lpuRRList;
 
-        public FormSecondStepAddOrganization(LPU lpu)
+        public FormSecondStepAddLPU(LPU lpu)
         {
             InitializeComponent();
 
@@ -40,10 +40,11 @@ namespace RegionR.SF
         private void LoadFirstTable()
         {
             dgvLpuRR.DataSource = _lpuRRList.ToDataTable(UserLogged.Get());
-            dgvLpuRR.Columns[0].Visible = false;
 
-            dgvLpuRR.Columns[1].Width = Convert.ToInt32(dgvLpuRR.Width / 2);
-            dgvLpuRR.Columns[2].Width = Convert.ToInt32(dgvLpuRR.Width / 2);
+            dgvLpuRR.Columns[0].Width = 70;
+            dgvLpuRR.Columns[1].Width = 200;
+            dgvLpuRR.Columns[2].Width = 370;
+            dgvLpuRR.Columns[3].Width = 100;
         }
 
         private void LoadSecondTable()

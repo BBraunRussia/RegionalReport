@@ -10,11 +10,11 @@ using ClassLibrary.SF;
 
 namespace RegionR.SF
 {
-    public partial class FormFirstStepAddOrganization : Form
+    public partial class FormFirstStepAddLPU : Form
     {
         OrganizationListController _organizationListController;
 
-        public FormFirstStepAddOrganization(OrganizationListController organizationListController)
+        public FormFirstStepAddLPU(OrganizationListController organizationListController)
         {
             InitializeComponent();
 

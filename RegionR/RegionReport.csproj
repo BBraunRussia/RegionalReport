@@ -526,11 +526,11 @@
     <Compile Include="SF\FormCityList.Designer.cs">
       <DependentUpon>FormCityList.cs</DependentUpon>
     </Compile>
-    <Compile Include="SF\FormFirstStepAddOrganization.cs">
+    <Compile Include="SF\FormFirstStepAddLPU.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SF\FormFirstStepAddOrganization.Designer.cs">
-      <DependentUpon>FormFirstStepAddOrganization.cs</DependentUpon>
+    <Compile Include="SF\FormFirstStepAddLPU.Designer.cs">
+      <DependentUpon>FormFirstStepAddLPU.cs</DependentUpon>
     </Compile>
     <Compile Include="SF\FormFirstStepAddPerson.cs">
       <SubType>Form</SubType>
@@ -556,11 +556,11 @@
     <Compile Include="SF\FormPersonList.Designer.cs">
       <DependentUpon>FormPersonList.cs</DependentUpon>
     </Compile>
-    <Compile Include="SF\FormSecondStepAddOrganization.cs">
+    <Compile Include="SF\FormSecondStepAddLPU.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SF\FormSecondStepAddOrganization.Designer.cs">
-      <DependentUpon>FormSecondStepAddOrganization.cs</DependentUpon>
+    <Compile Include="SF\FormSecondStepAddLPU.Designer.cs">
+      <DependentUpon>FormSecondStepAddLPU.cs</DependentUpon>
     </Compile>
     <Compile Include="SF\FormSecondStepAddPerson.cs">
       <SubType>Form</SubType>
@@ -806,8 +806,8 @@
     <EmbeddedResource Include="SF\FormCityList.resx">
       <DependentUpon>FormCityList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SF\FormFirstStepAddOrganization.resx">
-      <DependentUpon>FormFirstStepAddOrganization.cs</DependentUpon>
+    <EmbeddedResource Include="SF\FormFirstStepAddLPU.resx">
+      <DependentUpon>FormFirstStepAddLPU.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SF\FormFirstStepAddPerson.resx">
       <DependentUpon>FormFirstStepAddPerson.cs</DependentUpon>
@@ -821,8 +821,8 @@
     <EmbeddedResource Include="SF\FormPersonList.resx">
       <DependentUpon>FormPersonList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SF\FormSecondStepAddOrganization.resx">
-      <DependentUpon>FormSecondStepAddOrganization.cs</DependentUpon>
+    <EmbeddedResource Include="SF\FormSecondStepAddLPU.resx">
+      <DependentUpon>FormSecondStepAddLPU.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SF\FormSecondStepAddPerson.resx">
       <DependentUpon>FormSecondStepAddPerson.cs</DependentUpon>

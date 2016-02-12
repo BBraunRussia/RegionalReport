@@ -62,7 +62,7 @@ namespace ClassLibrary.SF
         private DataTable CreateTable(List<Person> list)
         {
             DataTable dt = new DataTable();
-            dt.Columns.Add("id");
+            dt.Columns.Add("id", typeof(int));
             dt.Columns.Add("Фамилия");
             dt.Columns.Add("Имя");
             dt.Columns.Add("Отчество");

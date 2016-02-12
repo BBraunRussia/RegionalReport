@@ -70,14 +70,15 @@ namespace ClassLibrary.SF
             }
 
             DataTable dt = new DataTable();
-            dt.Columns.Add("id");
-            dt.Columns.Add("Название");
+            dt.Columns.Add("№ ЛПУ-RR");
+            dt.Columns.Add("Сокр. название ЛПУ-RR");
+            dt.Columns.Add("Полное название ЛПУ-RR");
             dt.Columns.Add("Регион RR");
 
             foreach (LpuRR item in list)
-                dt.Rows.Add(new object[] { item.ID, item.Name, item.RegionRR.Name });
+                dt.Rows.Add(new object[] { item.ID, item.Name, item.FullName, item.RegionRR.Name });
 
-            dt.Rows.Add(new object[] { 0, "Прочие ЛПУ", "Российская федерация" });
+            dt.Rows.Add(new object[] { 0, "Прочие ЛПУ", "Прочие ЛПУ", "Российская федерация" });
 
             return dt;
         }
@@ -85,14 +86,14 @@ namespace ClassLibrary.SF
         public DataTable ToDataTableWithLpuSF(User user)
         {
             DataTable dt = new DataTable();
-            dt.Columns.Add("№ ЛПУ-RR");
+            dt.Columns.Add("№ ЛПУ-RR", typeof(int));
             dt.Columns.Add("Сокр. название ЛПУ-RR");
             dt.Columns.Add("Полное название ЛПУ-RR");
             dt.Columns.Add("Регион RR");
             dt.Columns.Add("Сокр. название ЛПУ-SF");
             dt.Columns.Add("Регион России");
             dt.Columns.Add("Город");
-            dt.Columns.Add("№ ЛПУ-SF");
+            dt.Columns.Add("№ ЛПУ-SF", typeof(int));
             dt.Columns.Add("color");
 
             LpuList lpuList = new LpuList();

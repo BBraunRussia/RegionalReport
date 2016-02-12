@@ -1,6 +1,6 @@
 ﻿namespace RegionR.SF
 {
-    partial class FormFirstStepAddOrganization
+    partial class FormFirstStepAddLPU
     {
         /// <summary>
         /// Required designer variable.
