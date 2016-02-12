@@ -61,7 +61,7 @@ namespace RegionR.addedit
 
         void loadPlan(int conf)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             _dgvConf.DataSource = sql1.GetRecords("exec MarkAct_Select_Plan @p1, @p2, @p3", conf, globalData.year, 2);
             _dgvConf.Columns[0].Visible = false;
             _dgvConf.Columns[1].DefaultCellStyle.Format = "MM - yyyy";
@@ -88,7 +88,7 @@ namespace RegionR.addedit
 
         void loadCountry()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             globalData.update = false;
             comboBox1.DataSource = sql1.GetRecords("exec MarkAct_Select_Country");
@@ -99,7 +99,7 @@ namespace RegionR.addedit
         
         void loadTheme()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             globalData.update = false;
             comboBox3.DataSource = sql1.GetRecords("exec MarkAct_Select_ConfTheme");
@@ -111,7 +111,7 @@ namespace RegionR.addedit
         void loadCity()
         {
             globalData.update = false;
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             int country = 0;
             
             if (comboBox1.SelectedValue != null)
@@ -125,7 +125,7 @@ namespace RegionR.addedit
 
         void loadConf()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             globalData.update = false;
 

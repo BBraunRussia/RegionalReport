@@ -35,7 +35,7 @@ namespace ClassLibrary
 
         private void LoadFromSql()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt = sql1.GetRecords("exec Question_Select");
 
             list.Clear();

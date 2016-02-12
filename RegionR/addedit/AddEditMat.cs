@@ -32,7 +32,7 @@ namespace RegionR.addedit
 
         private void loaddata()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             globalData.load = false;
 
@@ -65,7 +65,7 @@ namespace RegionR.addedit
 
         private void loadNom()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             cbNom.DataSource = sql1.GetRecords("exec SelNom @p1", cbSDiv.SelectedValue);
             cbNom.DisplayMember = "nom_name";
             cbNom.ValueMember = "nom_id";
@@ -73,7 +73,7 @@ namespace RegionR.addedit
 
         private void loadHier()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             cbSBA.DataSource = sql1.GetRecords("exec SelSBAForMat @p1, @p2", cbSDiv.SelectedValue, cbPDiv.SelectedValue);
             cbSBA.DisplayMember = "sba";
@@ -90,7 +90,7 @@ namespace RegionR.addedit
 
         private void loadPDiv()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             globalData.load = false;
 
@@ -103,7 +103,7 @@ namespace RegionR.addedit
 
         private void loadButton()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             cbButton.DataSource = sql1.GetRecords("exec SelButton @p1", cbSDiv.SelectedValue);
             cbButton.DisplayMember = "btn_name";
@@ -123,7 +123,7 @@ namespace RegionR.addedit
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             if (mat_id == "0")
             {

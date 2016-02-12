@@ -13,7 +13,7 @@ namespace ClassLibrary
         private int idQuestion;
         private string text;
         private int right;
-        private sql sql1;
+        private Sql sql1;
 
         public bool Right
         {
@@ -78,7 +78,7 @@ namespace ClassLibrary
 
         private void Init()
         {
-            sql1 = new sql();
+            sql1 = new Sql();
         }
 
         public void Save()

@@ -70,7 +70,7 @@ namespace RegionR.addedit
 
         public void CheckExist()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
          
             DataTable dt1 = new DataTable();
@@ -220,21 +220,21 @@ namespace RegionR.addedit
 
         void UpdFlag( int flag )
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             sql1.GetRecords("exec UpdMarkActFlag @p1, @p2, @p3, @p4", index, db, kvart, flag);
         }
 
         void UpdPlan()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             sql1.GetRecords("exec UpdMarkActPlan @p1, @p2, @p3, @p4", index, db, tbSum.Text.Trim(), kvart);
         }
 
         void DelCosts()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             sql1.GetRecords("exec DeleteCostsMA @p1, @p2, @p3", index, db, kvart);
         }
@@ -338,7 +338,7 @@ namespace RegionR.addedit
         {
             string _sba = "0";
             int _sdiv = 0;
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             if (sbaCode < 0)
             {

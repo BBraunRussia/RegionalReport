@@ -48,7 +48,7 @@ namespace RegionR.addedit
 
         private void AddEditVisitPlanList_Load(object sender, EventArgs e)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = sql1.GetRecords("exec SelVisitPlanByUser @p1, @p2", userID, date);
 
             int y = 0, i = 0;
@@ -321,7 +321,7 @@ namespace RegionR.addedit
             if (firstLoad)
             {
                 firstLoad = false;
-                sql sql1 = new sql();
+                Sql sql1 = new Sql();
 
                 DataTable dt1 = sql1.GetRecords("exec SelVisitPlanByUser @p1, @p2", userID, date);
 

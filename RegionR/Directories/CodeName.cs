@@ -33,7 +33,7 @@ namespace RegionR.Directories
 
         private void CodeName_Activated(object sender, EventArgs e)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             dataGridView1.DataSource = sql1.GetRecords(sel);
             dataGridView1.Columns[0].Visible = false;
             //dataGridView1.FirstDisplayedScrollingRowIndex = clsData.selRow;

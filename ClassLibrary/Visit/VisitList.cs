@@ -27,7 +27,7 @@ namespace ClassLibrary
 
         private void fillList()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt = sql1.GetRecords("exec SelVisitPlanMonthByUser @p1, @p2", new DateTime(date.Year, date.Month, 1), idUser);
 
             foreach (DataRow row in dt.Rows)

@@ -170,7 +170,7 @@ namespace RegionR.Directories
 
         private void loadData(bool mainindex, int index)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             DataTable dt1 = new DataTable();
 
@@ -331,7 +331,7 @@ namespace RegionR.Directories
                 return;
             }
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             String s1 = sql1.GetRecordsOne("exec SetMatBtn @p1, @p2", tbMat.Text, cur);
 
             if (s1 == "notFound")

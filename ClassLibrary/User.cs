@@ -17,7 +17,7 @@ namespace ClassLibrary
 
         public void ClearAcc(DateTime date)
         {
-            sql sql = new sql();
+            Sql sql = new Sql();
             sql.GetRecords("exec Acc_ClearFact_ByUser @p1, @p2", id, date);
         }
     }

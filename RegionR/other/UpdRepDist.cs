@@ -17,7 +17,7 @@ namespace RegionR.other
             InitializeComponent();
 
             DataTable dt1 = new DataTable();
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             dt1 = sql1.GetRecords("exec SelCustRepDist");
 
@@ -40,7 +40,7 @@ namespace RegionR.other
         private void Mat()
         {
             DataTable dt1 = new DataTable();
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             globalData.load = false;
             dt1 = sql1.GetRecords("exec selDistMatUpd @p1, @p2, @p3, @p4", 
@@ -58,7 +58,7 @@ namespace RegionR.other
 
         private void searchRepDist()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = new DataTable();
             
             dt1 = sql1.GetRecords("exec SelRepDist @p1, @p2, @p3", 
@@ -97,7 +97,7 @@ namespace RegionR.other
 
         private void UpdCount( int flag, string text )
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = new DataTable();
             
             dt1 = sql1.GetRecords("exec UpdRepDistCount @p1, @p2, @p3, @p4, @p5, @p6",  
@@ -116,7 +116,7 @@ namespace RegionR.other
 
         private void UpdMat()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = new DataTable();
 
             dt1 = sql1.GetRecords("exec UpdRepDistMat @p1, @p2, @p3, @p4, @p5",
@@ -173,7 +173,7 @@ namespace RegionR.other
             //{
                 if (dgvRepDistUpd.Rows.Count != 0)
                 {
-                    sql sql1 = new sql();
+                    Sql sql1 = new Sql();
 
                     foreach (DataGridViewCell cell in dgvRepDistUpd.SelectedCells)
                     {

@@ -22,7 +22,7 @@ namespace RegionR.Directories
 
         private void loadData()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             _dgv1.DataSource = sql1.GetRecords("exec SelUsersByRole");
             _dgv1.Columns["user_id"].Visible = false;
@@ -32,7 +32,7 @@ namespace RegionR.Directories
 
         private void loadUserBC()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             _dgv2.DataSource = sql1.GetRecords("exec selUserBC");
             _dgv2.Columns["user_id"].Visible = false;
@@ -44,7 +44,7 @@ namespace RegionR.Directories
         {
             int userID = Convert.ToInt32(_dgv1.Rows[_dgv1.SelectedCells[0].RowIndex].Cells[0].Value);
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             sql1.GetRecords("exec insUserBC @p1", userID);
 
@@ -55,7 +55,7 @@ namespace RegionR.Directories
         {
             int userID = Convert.ToInt32(_dgv2.Rows[_dgv2.SelectedCells[0].RowIndex].Cells[0].Value);
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             sql1.GetRecords("exec delUserBC @p1", userID);
 

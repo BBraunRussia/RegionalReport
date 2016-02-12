@@ -85,7 +85,7 @@ namespace RegionR
         {
             String date = DateTime.Today.Year + "-" + DateTime.Today.Month + "-01";
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             String sqldate = sql1.GetRecordsOne("exec GetDateCur @p1", date);
             String serverdate = sql1.GetRecordsOne("exec GetDateServer");
@@ -144,7 +144,7 @@ namespace RegionR
 
         private void getSetting()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             DataTable dtNY = new DataTable();
             dtNY = sql1.GetRecords("exec GetSettings");
@@ -158,7 +158,7 @@ namespace RegionR
 
         private int Connect()
         {            
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             DataTable dt1 = new DataTable();
             String str = "Пользователь: " + globalData.UserName;
@@ -343,7 +343,7 @@ namespace RegionR
                 tn.Nodes.Add("Отчёт");
 
 
-                sql sql1 = new sql();
+                Sql sql1 = new Sql();
                 DataTable dt1 = new DataTable();
                 DataTable dt2 = new DataTable();
                 DataTable dt3 = new DataTable();
@@ -873,7 +873,7 @@ namespace RegionR
                 int i = 2;
                 try
                 {
-                    sql sql1 = new sql();
+                    Sql sql1 = new Sql();
                     while (xlSh.get_Range("B" + i.ToString(), "B" + i.ToString()).Value2 != null)
                     {
                         String s1 = xlSh.get_Range("E" + i.ToString(), "E" + i.ToString()).Value2.ToString();//number
@@ -938,7 +938,7 @@ namespace RegionR
                 int i = 2;
                 try
                 {
-                    sql sql1 = new sql();
+                    Sql sql1 = new Sql();
                     while (xlSh.get_Range("K" + i.ToString(), "K" + i.ToString()).Value2 != null)
                     {
                         String s1 = xlSh.get_Range("K" + i.ToString(), "K" + i.ToString()).Value2.ToString();//number
@@ -1028,7 +1028,7 @@ namespace RegionR
             TreeNode tn1 = new TreeNode();
             tn1 = treeView1.SelectedNode;
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = new DataTable();
             DataTable dt2 = new DataTable();
 
@@ -2117,7 +2117,7 @@ namespace RegionR
 
                             DataGridViewComboBoxColumn comboCol = new DataGridViewComboBoxColumn();
 
-                            sql sql1 = new sql();
+                            Sql sql1 = new Sql();
                             DataTable dt1 = new DataTable();
                             
                             dt1 = sql1.GetRecords("exec selLPU @p1, @p2, @p3, @p4", cbUsers.SelectedValue, globalData.Region, globalData.Div, globalData.CurDate.Year);
@@ -2176,7 +2176,7 @@ namespace RegionR
 
                             if (rb == 5)
                             {
-                                sql sql1 = new sql();
+                                Sql sql1 = new Sql();
                                 DataTable dt1 = new DataTable();
                                 if (cbUsers.Visible == false)
                                     dt1 = sql1.GetRecords("exec selLPU 0, @p1, @p2, @p3", globalData.Region, globalData.Div, globalData.CurDate.Year);
@@ -2645,7 +2645,7 @@ namespace RegionR
                         {
                             dgv.Columns.Clear();
 
-                            sql sql1 = new sql();
+                            Sql sql1 = new Sql();
                             DataTable dt1 = new DataTable();
 
                             dt1 = sql1.GetRecords("exec GetSettings");
@@ -3197,7 +3197,7 @@ namespace RegionR
             if (ind.DialogResult == DialogResult.Cancel)
                 return;
             
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = sql1.GetRecords("exec Region_Select");
             for (int i = 1; i < 7; i++)
             {
@@ -3319,7 +3319,7 @@ namespace RegionR
                         MessageBox.Show("Для сохранения необходимо выбрать пользователя", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
-                    sql sql1 = new sql();
+                    Sql sql1 = new Sql();
                     DataTable dt1 = new DataTable();
                     bool b = false;
                     int i = 0;
@@ -3465,7 +3465,7 @@ namespace RegionR
                 }
                 else
                 {
-                    sql sql1 = new sql();
+                    Sql sql1 = new Sql();
                     DataTable dt1 = new DataTable();
                     bool b = false;
                     int tsubsum = subsum;
@@ -4007,7 +4007,7 @@ namespace RegionR
             {
                 DataGridViewCell cell = _dgv3.SelectedCells[0];
 
-                sql sql1 = new sql();
+                Sql sql1 = new Sql();
                 sql1.GetRecords("exec DelReportKos @p1, @p2, @p3", _dgv3.Rows[cell.RowIndex].Cells["rep_id"].Value.ToString(), _dgv3.Rows[cell.RowIndex].Cells["db_id"].Value.ToString(), globalData.UserID);
 
                 loadData();
@@ -4022,7 +4022,7 @@ namespace RegionR
         {
             try
             {
-                sql sql1 = new sql();
+                Sql sql1 = new Sql();
 
                 DataGridViewCell cell = dgv.SelectedCells[0];
 
@@ -4059,7 +4059,7 @@ namespace RegionR
 
         private void удалитьСторныToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             InputDialog ind = new InputDialog("Год", "Введите год", true);
             ind.ShowDialog();
@@ -4131,7 +4131,7 @@ namespace RegionR
                 cbRegions.Visible = false;
             }
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = new DataTable();
             dt1 = sql1.GetRecords("exec SelAllDyn @p1, @p2", globalData.Div, cbYearDyn.SelectedItem.ToString());
             _dgv5.Columns.Clear();
@@ -4150,7 +4150,7 @@ namespace RegionR
             tabControl1.SelectedIndex = 4;
             tabControl1.Visible = true;
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             _dgv5.DataSource = null;
             _dgv5.Columns.Clear();
             DataTable dt1 = new DataTable();
@@ -4836,7 +4836,7 @@ namespace RegionR
                         globalData.CurDate = Convert.ToDateTime(cbYearAcc.SelectedItem.ToString() + "-" + globalData.input.ToString() + "-01");
                 }
 
-                sql sql1 = new sql();
+                Sql sql1 = new Sql();
                 DataTable dt1 = new DataTable();
                 dt1 = sql1.GetRecords("exec SelLPU @p1, @p2, @p3, @p4", userID, globalData.Region, globalData.Div, globalData.CurDate.Year);
 
@@ -5006,7 +5006,7 @@ namespace RegionR
         {
             if (load)
             {
-                sql sql1 = new sql();
+                Sql sql1 = new Sql();
 
                 DataTable dt1 = new DataTable();
 
@@ -5096,7 +5096,7 @@ namespace RegionR
                 fillFilter = true;
             }
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = new DataTable();
 
             if (loadusers)
@@ -5216,7 +5216,7 @@ namespace RegionR
 
         private void fillUsersAcc(ComboBox cbU, string reg, string year)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = new DataTable();
 
             dt1 = sql1.GetRecords("exec SelUsersForAllAcc @p1, @p2, @p3, @p4", reg, globalData.Div, year, globalData.RD);
@@ -5312,7 +5312,7 @@ namespace RegionR
                 }
             }
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             DataTable dt1 = new DataTable();
 
@@ -5511,7 +5511,7 @@ namespace RegionR
 
             globalData.Region = tn1.Parent.Parent.Text;
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = new DataTable();
 
             fillTableHeader("Kos", _dgv3);
@@ -5548,7 +5548,7 @@ namespace RegionR
         private void SelAcc(string year, string lpu, string user, string reg, string RD, DataGridView dgv)
         {
             Cursor = Cursors.WaitCursor;
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             DataTable dt1 = new DataTable();
             //dt1 = sql1.GetRecords("exec SelAcc @p1, @p2, @p3, @p4, @p5, @p6", globalData.Div, year, lpu, user, reg, RD);
@@ -5667,7 +5667,7 @@ namespace RegionR
             tabControl1.SelectedIndex = 5;
             tabControl1.Visible = true;
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = new DataTable();
 
             dt1 = sql1.GetRecords("exec SelAllPrivSales @p1, @p2, @p3, @p4", globalData.Div, cbYearAllPrivSales.SelectedItem, basic, reg_id);
@@ -5812,7 +5812,7 @@ namespace RegionR
                 }
                 String date2 = y + "-" + m + "-01";
 
-                sql sql1 = new sql();
+                Sql sql1 = new Sql();
 
                 DataTable dt1 = new DataTable();
 
@@ -5845,7 +5845,7 @@ namespace RegionR
 
             if (globalData.UserAccess != 1)
             {
-                sql sql1 = new sql();
+                Sql sql1 = new Sql();
 
                 DataTable dt1 = new DataTable();
                 dt1 = sql1.GetRecords("exec GetUserEdit @p1, @p2, @p3", globalData.UserID, globalData.Region, globalData.Div);
@@ -5988,9 +5988,8 @@ namespace RegionR
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            sql sql1 = new sql();
-            sql1.GetRecords("exec WhiteHistory @p1, 2, null, null", globalData.UserID);
-
+            Sql sql1 = new Sql();
+            sql1.GetRecords("exec WhiteHistory @p1, 2, null, null, null", globalData.UserID);
         }
 
         private void dataGridView1_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
@@ -6197,7 +6196,7 @@ namespace RegionR
         private void fillRegions(String RD, ComboBox cb)
         {
             load = false;
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             DataTable dt1 = new DataTable();
 
@@ -6304,7 +6303,7 @@ namespace RegionR
         {
             try
             {
-                sql sql1 = new sql();
+                Sql sql1 = new Sql();
 
                 if (_dgv8.Rows[_dgv8.SelectedCells[0].RowIndex].Cells["ma_id"].Value.ToString() == "0")
                 {
@@ -6356,7 +6355,7 @@ namespace RegionR
             DialogResult dr = MessageBox.Show("Удалить выделенную строку?", "Удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dr == System.Windows.Forms.DialogResult.Yes)
             {
-                sql sql1 = new sql();
+                Sql sql1 = new Sql();
                 sql1.GetRecords("exec DelMarkAct @p1, @p2", _dgv8.Rows[_dgv8.SelectedCells[0].RowIndex].Cells["ma_id"].Value.ToString(), _dgv8.Rows[_dgv8.SelectedCells[0].RowIndex].Cells["db_id"].Value.ToString());
                 MessageBox.Show("Маркетинговое мероприятие удалено.", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 SelMA();
@@ -6761,7 +6760,7 @@ namespace RegionR
 
                     try
                     {
-                        sql sql1 = new sql();
+                        Sql sql1 = new Sql();
 
                         String[] fname = xlWorkBook.Name.Split('.');
 
@@ -6872,7 +6871,7 @@ namespace RegionR
         {
             if (load)
             {
-                sql sql1 = new sql();
+                Sql sql1 = new Sql();
 
                 DataTable dt1 = new DataTable();
 
@@ -6957,7 +6956,7 @@ namespace RegionR
                     int[] mas = { 2, 3, 4, 5, 1, 7, 8, 9, 10, 6, 11, 11, 13, 14, 15, 16, 17, 18, 12, 20, 21, 22, 23, 24, 25, 19, 27, 28, 29, 30, 26, 32, 33, 34, 35, 31 };
                     try
                     {
-                        sql sql1 = new sql();
+                        Sql sql1 = new Sql();
 
                         String[] fname = xlWorkBook.Name.Split('.');
 
@@ -7047,7 +7046,7 @@ namespace RegionR
 
         private void fillLPU(ComboBox lpu, string user_id, string region, string year)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = new DataTable();
 
             load = false;
@@ -7135,7 +7134,7 @@ namespace RegionR
 
         private void selEvo(DataGridView dgv, string sdiv, string month, string year, string regID, string RD, string userID)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             DataTable dt1 = new DataTable();
 
@@ -7368,7 +7367,7 @@ namespace RegionR
                 cbRegions.Visible = false;
             }
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = new DataTable();
             dt1 = sql1.GetRecords("exec SelDynRD @p1, @p2, @p3", globalData.Div, cbYearDyn.SelectedItem, globalData.RD);
             _dgv5.Columns.Clear();
@@ -7394,7 +7393,7 @@ namespace RegionR
         }
         private void fillUsersMA()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = new DataTable();
 
             string regID = "0";
@@ -7427,7 +7426,7 @@ namespace RegionR
             if (dr == System.Windows.Forms.DialogResult.No)
                 return;
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             DataTable dt1 = new DataTable();
             DataTable dt2 = new DataTable();
@@ -7584,7 +7583,7 @@ namespace RegionR
                 try
                 {
 
-                    sql sql1 = new sql();
+                    Sql sql1 = new Sql();
                     DataTable dt1 = new DataTable();
                     while (xlSh.get_Range("A" + i.ToString(), "A" + i.ToString()).Value2 != null)
                     {
@@ -7656,7 +7655,7 @@ namespace RegionR
                     {
                         xlSh = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(list);
                         i = 3;
-                        sql sql1 = new sql();
+                        Sql sql1 = new Sql();
                         while (xlSh.get_Range("A" + i.ToString(), "A" + i.ToString()).Value2 != null)
                         {
                             if (xlSh.get_Range("F" + i.ToString(), "F" + i.ToString()).Value2 != null)
@@ -7730,7 +7729,7 @@ namespace RegionR
 
                 try
                 {
-                    sql sql1 = new sql();
+                    Sql sql1 = new Sql();
                     while (xlSh.get_Range("M" + i.ToString(), "M" + i.ToString()).Value2 != null)
                     {
                         curh = "R";
@@ -7829,7 +7828,7 @@ namespace RegionR
 
                 try
                 {
-                    sql sql1 = new sql();
+                    Sql sql1 = new Sql();
                     while (xlSh.get_Range("B" + i.ToString(), "B" + i.ToString()).Value2 != null)
                     {
                         header = "A";
@@ -7978,7 +7977,7 @@ namespace RegionR
 
             formatFP();
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             DataTable dt1 = new DataTable();
 
@@ -8057,7 +8056,7 @@ namespace RegionR
 
         private void selPSAcc()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = sql1.GetRecords("exec SelPSAcc @p1, @p2", globalData.Div, dateTimePicker6.Value.Year.ToString() + "-" + dateTimePicker6.Value.Month.ToString() + "-01");
 
             if (dt1 == null)
@@ -8108,7 +8107,7 @@ namespace RegionR
 
         private void SelAllReport()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             DataTable dt1 = new DataTable();
 
@@ -8292,7 +8291,7 @@ namespace RegionR
 
         private void deleteRepPS(DataGridView dgv)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             if (chbOnlyPS.Checked)
             {
@@ -8394,7 +8393,7 @@ namespace RegionR
 
         void loadTheme()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             globalData.update = false;
             cbThemeMA.DataSource = sql1.GetRecords("exec MarkAct_Select_ConfTheme");
@@ -8455,7 +8454,7 @@ namespace RegionR
 
             Cursor = Cursors.WaitCursor;
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = new DataTable();
 
             _dgv8.DataSource = null;
@@ -8547,7 +8546,7 @@ namespace RegionR
         {
             try
             {
-                sql sql1 = new sql();
+                Sql sql1 = new Sql();
 
                 TreeNode tn1 = new TreeNode();
                 tn1 = treeView1.SelectedNode.Parent;
@@ -8902,7 +8901,7 @@ namespace RegionR
                 {
                     String filename = "";
 
-                    sql sql1 = new sql();
+                    Sql sql1 = new Sql();
                     DataTable dt1 = new DataTable();
                     dt1 = sql1.GetRecords("exec GetUserByID @p1", globalData.UserID);
 
@@ -9071,7 +9070,7 @@ namespace RegionR
 
             if (load)
             {
-                sql sql1 = new sql();
+                Sql sql1 = new Sql();
                 DataTable dt1 = new DataTable();
 
                 TreeNode tn1 = new TreeNode();
@@ -9114,7 +9113,7 @@ namespace RegionR
 
         private void insertKosCustFromReportToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             sql1.GetRecords("exec InsKosCustFromReport");
 
@@ -9125,7 +9124,7 @@ namespace RegionR
         {
             if (load)
             {
-                sql sql1 = new sql();
+                Sql sql1 = new Sql();
                 DataTable dt1 = new DataTable();
 
                 if (globalData.UserAccess == 5)
@@ -9176,7 +9175,7 @@ namespace RegionR
             if (count == 0)
                 return;
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             sql1.GetRecords("exec divideReport @p1, @p2, @p3, @p4", _dgv1.Rows[_dgv1.SelectedCells[0].RowIndex].Cells[0].Value,
                 _dgv1.Rows[_dgv1.SelectedCells[0].RowIndex].Cells[1].Value, count, globalData.UserID);
 
@@ -9198,7 +9197,7 @@ namespace RegionR
 
             int lpu_id = Convert.ToInt32(e.Argument);
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             sql1.GetRecords("exec fillFactAcc @p1, @p2, @p3", lpu_id, globalData.Div, globalData.CurDate);
         }
 
@@ -9245,7 +9244,7 @@ namespace RegionR
         {
             try
             {
-                sql sql1 = new sql();
+                Sql sql1 = new Sql();
 
                 load = false;
 
@@ -9599,7 +9598,7 @@ namespace RegionR
             else
                 idUser = Convert.ToInt32(cbUsersAllKos.SelectedValue.ToString());
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = sql1.GetRecords("exec SelRepKosAll @p1, @p2, @p3, @p4, @p5", globalData.Div, idReg, idUser, dateTimePicker8.Value.Year.ToString() + "-" + dateTimePicker8.Value.Month.ToString() + "-01", dateTimePicker9.Value.Year.ToString() + "-" + dateTimePicker9.Value.Month.ToString() + "-01");
 
             if (dt1 == null)
@@ -9715,7 +9714,7 @@ namespace RegionR
 
         private void reConnect()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = new DataTable();
 
             String s1 = globalData.Login;
@@ -9775,7 +9774,7 @@ namespace RegionR
 
         private void SelAccNY()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataSet ds1 = new DataSet();
 
             EnableSave("accNY");
@@ -9850,7 +9849,7 @@ namespace RegionR
         {
             if (cbLPU.SelectedValue != null)
             {
-                sql sql1 = new sql();
+                Sql sql1 = new Sql();
                 DataTable dt1 = new DataTable();
 
                 if (globalData.Div == "AE")
@@ -9983,7 +9982,7 @@ namespace RegionR
             dgv.Columns["nom"].Width = 250;
             dgv.Columns["nom"].Frozen = true;
             
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dtNY = sql1.GetRecords("exec GetSettings");
 
             int year = Convert.ToInt32(dtNY.Rows[0].ItemArray[3].ToString());
@@ -10107,7 +10106,7 @@ namespace RegionR
                 lbLPUAccNY.Visible = false;
                 cbLPUAccNY.Visible = false;
                 btnSaveAccNY.Enabled = false;
-                sql sql1 = new sql();
+                Sql sql1 = new Sql();
                 DataTable dt1 = new DataTable();
                 if (globalData.Div == "AE")
                     dt1 = sql1.GetRecords("exec SelAccPlanNYAE 0, @p1, @p2, 0", cbUsersAccNY.SelectedValue, globalData.Region);
@@ -10143,7 +10142,7 @@ namespace RegionR
                 cbUsersAccNY.Visible = false;
                 btnHideLPUAccNY.Visible = true;
                 btnSaveAccNY.Enabled = false;
-                sql sql1 = new sql();
+                Sql sql1 = new Sql();
                 DataTable dt1 = new DataTable();
 
                 if (globalData.Div == "AE")
@@ -10184,7 +10183,7 @@ namespace RegionR
 
         private void fillUsersAllKos()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = sql1.GetRecords("exec selUsers @p1, @p2, @p3", cbRegAllKos.SelectedValue, globalData.Div, dateTimePicker8.Value.Year);
 
             load = false;
@@ -10253,7 +10252,7 @@ namespace RegionR
         {
             if (load)
             {
-                sql sql1 = new sql();
+                Sql sql1 = new Sql();
                 DataTable dt1 = new DataTable();
 
                 if (globalData.UserAccess == 5)
@@ -10285,7 +10284,7 @@ namespace RegionR
             {
                 //DataGridViewCell cell = dgv.SelectedCells[0];
 
-                sql sql1 = new sql();
+                Sql sql1 = new Sql();
 
                 foreach (DataGridViewCell cell in dgv.SelectedCells)
                     sql1.GetRecords("exec DelReportKos @p1, @p2, @p3", dgv.Rows[cell.RowIndex].Cells["rep_id"].Value.ToString(), dgv.Rows[cell.RowIndex].Cells["db_id"].Value.ToString(), globalData.UserID);
@@ -10540,7 +10539,7 @@ namespace RegionR
         {
             try
             {
-                sql sql1 = new sql();
+                Sql sql1 = new Sql();
 
                 load = false;
 
@@ -10607,7 +10606,7 @@ namespace RegionR
         {
             try
             {
-                sql sql1 = new sql();
+                Sql sql1 = new Sql();
 
                 load = false;
 
@@ -10844,7 +10843,7 @@ namespace RegionR
             {
                 return;
             }
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dtNY = new DataTable();
             DataTable dt1 = new DataTable();
             dtNY = sql1.GetRecords("exec GetSettings");
@@ -10975,7 +10974,7 @@ namespace RegionR
             xlWB = xlApp.Workbooks.Add(misValue);
             xlSh = (Excel.Worksheet)xlWB.Worksheets.get_Item(1);
             
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             int curIndex = cbLPUExcel.SelectedIndex;
 
@@ -11185,7 +11184,7 @@ namespace RegionR
             xlWB = xlApp.Workbooks.Add(misValue);
             xlSh = (Excel.Worksheet)xlWB.Worksheets.get_Item(1);
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             //int curIndex = cbLPUAccNY.SelectedIndex;
             
@@ -11456,7 +11455,7 @@ namespace RegionR
             xlWB = xlApp.Workbooks.Add(misValue);
             xlSh = (Excel.Worksheet)xlWB.Worksheets.get_Item(1);
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             //int curIndexReg = cbRegEvo.SelectedIndex;
 
@@ -11613,7 +11612,7 @@ namespace RegionR
         {
             Cursor = Cursors.WaitCursor;
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             DataTable dt1 = new DataTable();
 
@@ -11665,7 +11664,7 @@ namespace RegionR
         {
             Cursor = Cursors.WaitCursor;
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             DataTable dt1 = new DataTable();
 
@@ -11721,7 +11720,7 @@ namespace RegionR
 
         private void checkNewMessage()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = sql1.GetRecords("exec SelNewMessage @p1", globalData.UserID);
             if (dt1 != null)
             {
@@ -11736,7 +11735,7 @@ namespace RegionR
 
         private void checkNewFirstMessage()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = sql1.GetRecords("exec SelNewFirstMessage @p1", globalData.UserID);
 
             foreach (DataRow row in dt1.Rows)
@@ -11827,7 +11826,7 @@ namespace RegionR
 
                 try
                 {
-                    sql sql1 = new sql();
+                    Sql sql1 = new Sql();
                     DataTable dt1 = new DataTable();
 
                     while (xlSh.get_Range("A" + i.ToString(), "A" + i.ToString()).Value2 != null)
@@ -11898,7 +11897,7 @@ namespace RegionR
                     {
                         xlSh = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(list);
                         i = 3;
-                        sql sql1 = new sql();
+                        Sql sql1 = new Sql();
                         while (xlSh.get_Range("A" + i.ToString(), "A" + i.ToString()).Value2 != null)
                         {
                             if (xlSh.get_Range("F" + i.ToString(), "F" + i.ToString()).Value2 != null)
@@ -11972,7 +11971,7 @@ namespace RegionR
 
                 try
                 {
-                    sql sql1 = new sql();
+                    Sql sql1 = new Sql();
                     while (xlSh.get_Range("M" + i.ToString(), "M" + i.ToString()).Value2 != null)
                     {
                         if (xlSh.get_Range("R" + i.ToString(), "R" + i.ToString()).Value2.ToString() != "0")
@@ -12023,7 +12022,7 @@ namespace RegionR
 
         private void btnApplyCheck_Click(object sender, EventArgs e)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = sql1.GetRecords("exec SelCheck @p1, @p2, @p3", cbRegCheck.SelectedValue, globalData.Div, cbYearCheck.SelectedItem);
 
             if (dt1 != null)
@@ -12157,7 +12156,7 @@ namespace RegionR
 
         private void btnPSAccUpd_Click(object sender, EventArgs e)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = new DataTable();
             DataTable dt2 = new DataTable();
             DataTable dt3 = new DataTable();
@@ -12261,7 +12260,7 @@ namespace RegionR
         {
             DataTable dt = new DataTable();
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             /* Рег.пред. и рег. менеджер */
             if ((globalData.UserAccess == 5) || (globalData.UserAccess == 6))
             {
@@ -12308,7 +12307,7 @@ namespace RegionR
          
         private void LoadLPU(ComboBox cb, int flag, object idUser)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt = sql1.GetRecords("exec SelULPUbyUserID @p1, @p2", idUser, flag);
             load = false;
             if (dt != null)
@@ -12323,7 +12322,7 @@ namespace RegionR
 
         private void LoadUser(ComboBox cb, ComboBox cbreg)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt = new DataTable();
             /* Рег.пред. */
             if (globalData.UserAccess == 5)
@@ -12359,7 +12358,7 @@ namespace RegionR
 
         private void LoadStatus(ComboBox cb, int flag)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt = sql1.GetRecords("exec SelStatus @p1", flag);
 
             load = false;
@@ -12374,7 +12373,7 @@ namespace RegionR
 
         private void LoadPres(ComboBox cb, int flag)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt = sql1.GetRecords("exec SelPres @p1", flag);
 
             load = false;
@@ -12422,7 +12421,7 @@ namespace RegionR
 
             if (dateTimePicker10.MinDate != dateTimePicker10.MaxDate)
             {
-                sql sql1 = new sql();
+                Sql sql1 = new Sql();
                 string serverdate = sql1.GetRecordsOne("exec GetDateServer");
 
                 dateTimePicker10.MinDate = Convert.ToDateTime(serverdate);
@@ -12494,7 +12493,7 @@ namespace RegionR
 
         private void LoadProducts()
         {
-            sql sql1 = new sql();            
+            Sql sql1 = new Sql();            
             DataTable dt2 = sql1.GetRecords("exec SelProd @p1", 3);
 
             if (dt2 != null)
@@ -12564,7 +12563,7 @@ namespace RegionR
                 dataGridView2.Rows.Clear();
             }
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt = sql1.GetRecords("exec SelDaily @p1, @p2, @p3, @p4, @p5, @p6, @p7", cbRegDaily.SelectedValue, cbUserDaily.SelectedValue, cbLPUdaily.SelectedValue, cbStatus.SelectedValue, dateTimePicker13.Value, dateTimePicker14.Value, cbPres.SelectedValue);
 
             if (dt == null)
@@ -12792,7 +12791,7 @@ namespace RegionR
             bool flag4 = false;
             try
             {
-                sql sql1 = new sql();                
+                Sql sql1 = new Sql();                
                 int count = 0;
                 
                 //load = false;
@@ -12946,7 +12945,7 @@ namespace RegionR
         {
             try
             {
-                sql sql1 = new sql();
+                Sql sql1 = new Sql();
          
                 if (dgvDaily.RowCount == 0)
                 {
@@ -13144,7 +13143,7 @@ namespace RegionR
             {
                 if (dataGridView2.Rows.Count != 0)
                 {
-                    sql sql1 = new sql();
+                    Sql sql1 = new Sql();
 
                     foreach (DataGridViewCell cell in dataGridView2.SelectedCells)
                     {                       
@@ -13343,7 +13342,7 @@ namespace RegionR
                 dgvPlan.Rows.Clear();
             }
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt = sql1.GetRecords("exec SelPlanWeek @p1, @p2, @p3, @p4, @p5", comboBox3.SelectedValue, comboBox7.SelectedValue, comboBox11.SelectedValue, dateTimePicker11.Value, dateTimePicker12.Value);
 
             if (dt == null)
@@ -13525,7 +13524,7 @@ namespace RegionR
             {
                 if (dgvPlan.Rows.Count != 0)
                 {
-                    sql sql1 = new sql();
+                    Sql sql1 = new Sql();
 
                     foreach (DataGridViewCell cell in dgvPlan.SelectedCells)
                     {
@@ -13684,7 +13683,7 @@ namespace RegionR
                 return;
             }
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             string str = sql1.GetRecordsOne("exec GetRepDistAllowNew @p1, @p2", _dgv1.Rows[_dgv1.SelectedCells[0].RowIndex].Cells[0].Value, _dgv1.Rows[_dgv1.SelectedCells[0].RowIndex].Cells[1].Value);
 
@@ -13715,7 +13714,7 @@ namespace RegionR
             else
                 btnDelRepDist.Visible = false;
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             DataTable dt1 = new DataTable();
             if (cbSubRegRepDist.Visible == false)
@@ -13848,7 +13847,7 @@ namespace RegionR
 
                 try
                 {
-                    sql sql1 = new sql();
+                    Sql sql1 = new Sql();
 
                     string s4 = folderName.Split('_')[0];
 
@@ -14039,7 +14038,7 @@ namespace RegionR
 
                 try
                 {
-                    sql sql1 = new sql();
+                    Sql sql1 = new Sql();
 
                     InputDialog ind = new InputDialog("Год", "Введите год", true);
                     ind.ShowDialog();
@@ -14147,7 +14146,7 @@ namespace RegionR
 
                 try
                 {
-                    sql sql1 = new sql();
+                    Sql sql1 = new Sql();
 
                     InputDialog ind = new InputDialog("Год", "Введите год", true);
                     ind.ShowDialog();
@@ -14254,7 +14253,7 @@ namespace RegionR
 
                 try
                 {
-                    sql sql1 = new sql();
+                    Sql sql1 = new Sql();
 
                     InputDialog ind = new InputDialog("Год", "Введите год", true);
                     ind.ShowDialog();
@@ -14411,7 +14410,7 @@ namespace RegionR
 
                 try
                 {
-                    sql sql1 = new sql();
+                    Sql sql1 = new Sql();
 
                     header = "A";
                     while (xlSh.get_Range("A" + i.ToString(), "A" + i.ToString()).Value2 != null)
@@ -14531,7 +14530,7 @@ namespace RegionR
 
                 try
                 {
-                    sql sql1 = new sql();
+                    Sql sql1 = new Sql();
 
                     header = "C";
                     while (xlSh.get_Range("C" + i.ToString(), "C" + i.ToString()).Value2 != null)
@@ -14647,7 +14646,7 @@ namespace RegionR
 
                 try
                 {
-                    sql sql1 = new sql();
+                    Sql sql1 = new Sql();
 
                     while (xlSh.get_Range("A" + i.ToString(), "A" + i.ToString()).Value2.ToString() != "Итого")
                     {
@@ -14759,7 +14758,7 @@ namespace RegionR
 
                 try
                 {
-                    sql sql1 = new sql();
+                    Sql sql1 = new Sql();
 
                     while (xlSh.get_Range("A" + i.ToString(), "A" + i.ToString()).Value2 != null || xlSh.get_Range("B" + i.ToString(), "B" + i.ToString()).Value2.ToString() != "Итого:")
                     {
@@ -14815,7 +14814,7 @@ namespace RegionR
 
         private void checkKosReport()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             DataTable dt1 = new DataTable();
             dt1 = sql1.GetRecords("exec selDist");
@@ -14864,7 +14863,7 @@ namespace RegionR
 
         private void checkKosReportLoadData()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = new DataTable();
 
             if (KosReg == false)
@@ -14956,13 +14955,13 @@ namespace RegionR
 
         private void btnDelRepDist_Click(object sender, EventArgs e)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             sql1.GetRecords("exec DelRepDist @p1, @p2", dateTimePicker17.Value.Year.ToString() + "-" + dateTimePicker17.Value.Month.ToString() + "-01", cbCustRepDist.SelectedValue);
         }
 
         private void checkDistReport()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = sql1.GetRecords("exec selDist");
 
             load = false;
@@ -14984,7 +14983,7 @@ namespace RegionR
 
         private void checkDistReportLoadData()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             
             if (_dgv21.Rows != null)
             {   
@@ -15033,7 +15032,7 @@ namespace RegionR
 
         private void cbDist_SelectedIndexChanged(object sender, EventArgs e)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             DataTable dt1 = new DataTable();
             load = false;
@@ -15086,7 +15085,7 @@ namespace RegionR
 
         private void fillReg(ComboBox cbReg)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = sql1.GetRecords("exec SelRegByRD @p1", cbRDEvoRP.SelectedValue);
 
             fillComboBox(dt1, cbReg, "reg_nameRus", "reg_id");
@@ -15094,7 +15093,7 @@ namespace RegionR
 
         private void fillRD(ComboBox cbRD)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = sql1.GetRecords("exec GetRDByUser @p1", globalData.UserID);
 
             fillComboBox(dt1, cbRD, "user_name", "user_id");
@@ -15111,7 +15110,7 @@ namespace RegionR
 
         private void fillUsersEvoRP(ComboBox cbU)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = sql1.GetRecords("exec SelUsersForAllAcc @p1, @p2, @p3, @p4", cbRegEvoRP.SelectedValue, cbSDivEvoRP.SelectedItem, cbYearEvoRP.SelectedItem, cbRDEvoRP.SelectedValue);
 
             fillComboBox(dt1, cbU, "user_name", "user_id");
@@ -15263,7 +15262,7 @@ namespace RegionR
 
         private void loadVisitPlanDays()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             DataTable dt1 = new DataTable();
 
@@ -15424,7 +15423,7 @@ namespace RegionR
 
         private void loadVisitPlanReport()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = sql1.GetRecords("exec VisitPlanDay_Select_Report @p1, @p2, @p3", cbUsersVisitPlanReport.SelectedValue, dateVisitPlanReportBegin.Value, dateVisitPlanReportEnd.Value);
 
             _dgvVisitPlanReport.DataSource = dt1;
@@ -15435,7 +15434,7 @@ namespace RegionR
 
         private void loadUsersVisitPlan(ComboBox cbU)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = new DataTable();
 
             if (globalData.UserAccess == 5)
@@ -15451,7 +15450,7 @@ namespace RegionR
 
         private void loadUsersVisPlan(ComboBox cbU, string year)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = new DataTable();
 
             if (treeView1.SelectedNode.Parent.Parent != null)
@@ -15527,7 +15526,7 @@ namespace RegionR
 
         void fillLPUMA()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             string user = "0";
             string reg = "0";
 
@@ -15578,7 +15577,7 @@ namespace RegionR
 
         private void cbDistDiv_SelectedIndexChanged(object sender, EventArgs e)
         {
-             sql sql1 = new sql();
+             Sql sql1 = new Sql();
 
             DataTable dt1 = new DataTable();
      
@@ -15603,7 +15602,7 @@ namespace RegionR
 
         void AddPlanHC(int nom)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             if (btnHideUsersAccNY.Text != "Показать пользователей" || btnHideLPUAccNY.Text != "Показать ЛПУ")
                 sql1.GetRecords("exec AddAccPlanInLPU @p1, @p2, @p3", _dgv14.Rows[1].Cells["acc_id"].Value, 1, nom);
@@ -15645,7 +15644,7 @@ namespace RegionR
         {
             Cursor = Cursors.WaitCursor;
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = new DataTable();
 
             _dgv8.DataSource = null;
@@ -15693,7 +15692,7 @@ namespace RegionR
 
         private void button47_Click(object sender, EventArgs e)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             if (globalData.dtSBA == null)
                 globalData.dtSBA = sql1.GetRecords("exec fillSBA");
@@ -15729,7 +15728,7 @@ namespace RegionR
         {
             if (_dgv8.Rows.Count > 3 && e.Cell.Selected == true)
             {
-                sql sql1 = new sql();
+                Sql sql1 = new Sql();
                 DataTable dt1 = new DataTable();
                 if (_dgv8.Rows[e.Cell.RowIndex].DefaultCellStyle.BackColor == bbgreen3)
                 {
@@ -15829,7 +15828,7 @@ namespace RegionR
 
                 try
                 {
-                    sql sql1 = new sql();
+                    Sql sql1 = new Sql();
                     while (xlSh.get_Range("B" + i.ToString(), "B" + i.ToString()).Value2 != null)
                     {
                         header = "A";
@@ -15956,7 +15955,7 @@ namespace RegionR
 
         private void button57_Click(object sender, EventArgs e)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             if (globalData.dtSBA == null)
                 globalData.dtSBA = sql1.GetRecords("exec fillSBA");
@@ -15980,7 +15979,7 @@ namespace RegionR
 
         private void loadPM()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = new DataTable();
 
             if (globalData.UserAccess == 3)
@@ -15994,7 +15993,7 @@ namespace RegionR
 
         private void loadRegPM()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = new DataTable();
 
             dt1 = sql1.GetRecords("exec SelRegPM @p1", comboBox12.SelectedValue);
@@ -16007,7 +16006,7 @@ namespace RegionR
         {
             Cursor = Cursors.WaitCursor;
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = new DataTable();
 
             _dgvMA2.DataSource = null;
@@ -16059,7 +16058,7 @@ namespace RegionR
                     return;
                 }
 
-                sql sql1 = new sql();
+                Sql sql1 = new Sql();
                 DataTable dt1 = sql1.GetRecords("exec SelMarkActByID @p1, @p2", Convert.ToInt32(_dgvMA2.Rows[RowIndex].Cells["ma_id"].Value), Convert.ToInt32(_dgvMA2.Rows[RowIndex].Cells["db_id"].Value));
 
                 globalData.UserID2 = Convert.ToInt32(dt1.Rows[0].ItemArray[2].ToString());
@@ -16083,7 +16082,7 @@ namespace RegionR
             DialogResult dr = MessageBox.Show("Удалить выделенную строку?", "Удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dr == System.Windows.Forms.DialogResult.Yes)
             {
-                sql sql1 = new sql();
+                Sql sql1 = new Sql();
                 sql1.GetRecords("exec DelMarkAct @p1, @p2", _dgvMA2.Rows[_dgvMA2.SelectedCells[0].RowIndex].Cells["ma_id"].Value.ToString(), _dgvMA2.Rows[_dgvMA2.SelectedCells[0].RowIndex].Cells["db_id"].Value.ToString());
                 MessageBox.Show("Маркетинговое мероприятие удалено.", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 SelMAPM();
@@ -16129,7 +16128,7 @@ namespace RegionR
         {
             if (_dgvMA2.Rows.Count > 3 && e.Cell.Selected == true)
             {
-                sql sql1 = new sql();
+                Sql sql1 = new Sql();
                 DataTable dt1 = new DataTable();
                 dt1 = sql1.GetRecords("exec fillMASBA @p1, @p2", _dgvMA2.Rows[e.Cell.RowIndex].Cells["ma_id"].Value.ToString(), _dgvMA2.Rows[e.Cell.RowIndex].Cells["db_id"].Value.ToString());
 
@@ -16156,7 +16155,7 @@ namespace RegionR
         {
             Cursor = Cursors.WaitCursor;
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = new DataTable();
 
             _tempdgv.DataSource = null;
@@ -16488,7 +16487,7 @@ namespace RegionR
 
                 try
                 {
-                    sql sql1 = new sql();
+                    Sql sql1 = new Sql();
 
                     header = "A";
                     while (xlSh.get_Range("A" + i.ToString(), "A" + i.ToString()).Value2 != null)
@@ -16555,7 +16554,7 @@ namespace RegionR
         {
             try
             {
-                sql sql1 = new sql();
+                Sql sql1 = new Sql();
 
                 load = false;
 
@@ -16592,7 +16591,7 @@ namespace RegionR
 
         void FillComparePlan()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             foreach (DataGridViewCell cell in dgvCheckPlan.SelectedCells)
             {
@@ -16656,7 +16655,7 @@ namespace RegionR
 
         void SelComparePlan()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt = sql1.GetRecords("exec CompareAccPlan @p1", cbYearPlan.SelectedItem);
 
             if (dt != null)
@@ -16667,7 +16666,7 @@ namespace RegionR
         
         String DelComparePlan()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             String res = "Не удалось удалить план! Проверьте, что Вы выделили целиком строку!";
 
             foreach (DataGridViewRow row in dgvCheckPlan.SelectedRows)
@@ -16737,7 +16736,7 @@ namespace RegionR
 
         void loadMAType(ComboBox cb)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = new DataTable();
 
             dt1 = sql1.GetRecords("exec MarkAct_Sel_Type @p1", 1);

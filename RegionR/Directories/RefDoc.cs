@@ -19,7 +19,7 @@ namespace RegionR.Directories
 
             button2.BackColor = Color.FromArgb(115, 214, 186);
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = new DataTable();
 
             
@@ -43,7 +43,7 @@ namespace RegionR.Directories
 
         private void SearchRef()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             if (textBox1.Text == string.Empty)
             {
@@ -74,7 +74,7 @@ namespace RegionR.Directories
 
         private void button1_Click(object sender, EventArgs e)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             if (textBox1.Text == string.Empty)
             {
@@ -101,7 +101,7 @@ namespace RegionR.Directories
                 try
                 {
                     globalData.update = false;
-                    sql sql1 = new sql();
+                    Sql sql1 = new Sql();
                     string res = String.Empty;
                     int err1 = 0;
 

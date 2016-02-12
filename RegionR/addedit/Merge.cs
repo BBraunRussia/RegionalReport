@@ -19,7 +19,7 @@ namespace RegionR.addedit
 
         private void btnSearchMat_Click(object sender, EventArgs e)
         {            
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             DataTable dt = sql1.GetRecords("exec SelMergeMat @p1, @p2, @p3", textBox1.Text, textBox2.Text, textBox3.Text);
 
@@ -29,14 +29,14 @@ namespace RegionR.addedit
 
         private void btnSaveMat_Click(object sender, EventArgs e)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             DataTable dt = sql1.GetRecords("exec InsMergeMat @p1, @p2, @p3", textBox1.Text, textBox2.Text, textBox3.Text);
         }
 
         private void btnSearchCust_Click(object sender, EventArgs e)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             DataTable dt = sql1.GetRecords("exec SelMergeCust @p1, @p2", textBox6.Text, textBox5.Text);
 
@@ -45,7 +45,7 @@ namespace RegionR.addedit
 
         private void btnSaveCust_Click(object sender, EventArgs e)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             DataTable dt = sql1.GetRecords("exec InsMergeCust @p1, @p2", textBox6.Text, textBox5.Text);
 

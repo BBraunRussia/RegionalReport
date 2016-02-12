@@ -35,7 +35,7 @@ namespace RegionR.Directories
         {
             setButtonColor();
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = sql1.GetRecords("exec SelAllMaterials @p1, @p2", sdiv, btnCur);
 
             if (dt1.Rows.Count > 0)

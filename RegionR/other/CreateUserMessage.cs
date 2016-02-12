@@ -31,7 +31,7 @@ namespace RegionR.other
                 return;
             }
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             DateTime date = dtpDate.Value;
 

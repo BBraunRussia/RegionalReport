@@ -31,7 +31,7 @@ namespace RegionR.Directories
         {
             globalData.load = false;
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt = sql1.GetRecords("exec Region_Select");
 
             if (dt != null)
@@ -48,7 +48,7 @@ namespace RegionR.Directories
         {
             globalData.load = false;
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt = sql1.GetRecords("exec SelULPUbyRegID @p1", cbRegionULPU.SelectedValue);
 
             if (dt != null)
@@ -70,7 +70,7 @@ namespace RegionR.Directories
 
             globalData.load = false;
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = sql1.GetRecords("exec SelUserByLPUID @p1", cbULPU.SelectedValue);
 
             if (dt1 == null)

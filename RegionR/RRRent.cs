@@ -91,7 +91,7 @@ namespace RegionR
         /* Установка даты отчета */
         private void CheckDate()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             if (User2_rent.SelectedValue != null)
                 dtpRent.Value = Convert.ToDateTime(sql1.GetRecordsOne("exec Rent_Select_UrtDate @p1", User2_rent.SelectedValue));
@@ -432,7 +432,7 @@ namespace RegionR
             if (checkBox1.Checked == true)
                 rd = "0";
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = new DataTable();
 
             dt1 = sql1.GetRecords("exec  Rent_Select_UserAccess @p1", rd);
@@ -461,7 +461,7 @@ namespace RegionR
                                                                    ComboBox cbRD = null )
         {
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt = new DataTable();
             string reg = "0", rd = "0", div = "0", user = globalData.UserID.ToString();
             string _name = "user_name", _id = "user_id";
@@ -880,7 +880,7 @@ namespace RegionR
         private void SelectRent(bool flagRD = false)
         {
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = new DataTable();
 
             string rd = "0";
@@ -1156,7 +1156,7 @@ namespace RegionR
             
             fillTableHeaderReportRent(_dgvRentRD);
             
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = new DataTable();
             string rd = "0", user = "0";
 
@@ -1204,7 +1204,7 @@ namespace RegionR
         {
             fillTableHeaderSvodRent(_dgvRentRD);
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = new DataTable();
             string rd = "0", user = "0";
 
@@ -1238,7 +1238,7 @@ namespace RegionR
         /* Вывод сторно */
         private void SelectStorno()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = new DataTable(); 
 
             fillTableHeaderSvodSt(_dgvStorno);
@@ -1257,7 +1257,7 @@ namespace RegionR
         /* Отчёт для контроллинга */
         private void SelectKontrol()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = new DataTable();
 
             fillTableHeaderSvodKontr(_dgvStorno);
@@ -1579,7 +1579,7 @@ namespace RegionR
             }
             else
             {
-                sql sql1 = new sql();
+                Sql sql1 = new Sql();
 
                 string res = sql1.GetRecordsOne("exec Rent_Insert_RDAccess @p1, @p2, @p3", cbRD.SelectedValue, cbRP.SelectedValue, _date.Value.Year.ToString() + "-" + _date.Value.Month + "-01");
                 MessageBox.Show(res, "Подтверждение");
@@ -1590,7 +1590,7 @@ namespace RegionR
         {
             if (_dgvRentRD.RowCount != 0)
             {
-                sql sql1 = new sql();
+                Sql sql1 = new Sql();
                 DataTable dt = new DataTable();
                 string rd = "0", rp = "0";
                 string res = "Отчёт готов: \n";
@@ -1737,7 +1737,7 @@ namespace RegionR
         {
             try
             {
-                sql sql1 = new sql();
+                Sql sql1 = new Sql();
 
                 string ps, db, sba, lpu, user2;
                 double rent, rentsum;
@@ -1825,7 +1825,7 @@ namespace RegionR
         {
             try
             {
-                sql sql1 = new sql();
+                Sql sql1 = new Sql();
 
                 string comm;
                 int flag;
@@ -1883,7 +1883,7 @@ namespace RegionR
         {
             try
             {
-                sql sql1 = new sql();
+                Sql sql1 = new Sql();
 
                 string comm;
                 DateTime dps, dps2;
@@ -1998,7 +1998,7 @@ namespace RegionR
             if (checkBox1.Checked == true)
                 rd = "0";
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = new DataTable();
 
             dt1 = sql1.GetRecords("exec Rent_Update_Access @p1, @p2, @p3", 0, 0, rd);
@@ -2059,7 +2059,7 @@ namespace RegionR
         /* Обновить сторно */
         private void button67_Click(object sender, EventArgs e)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             sql1.GetRecords("exec Rent_Update_Storno");
 
@@ -2079,7 +2079,7 @@ namespace RegionR
 
         private void button70_Click(object sender, EventArgs e)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             sql1.GetRecords("exec Rent_Insert_Kontrol @p1", globalData.UserID);
 
@@ -2129,7 +2129,7 @@ namespace RegionR
         {
             if (globalData.tabFlagRD == false)
             {
-                sql sql1 = new sql();
+                Sql sql1 = new Sql();
 
                 if (User2_rent.SelectedValue != null && User2_rent.SelectedValue.ToString() != "System.Data.DataRowView")
                 {
@@ -2275,7 +2275,7 @@ namespace RegionR
 
         private void _dgvUsRent_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = new DataTable();
 
             dt1 = sql1.GetRecords("exec Rent_Update_Access @p1, @p2", _dgvUsRent.Rows[e.RowIndex].Cells[2].Value,_dgvUsRent.Rows[e.RowIndex].Cells[0].Value);

@@ -40,7 +40,7 @@ namespace ClassLibrary
 
         private DataTable getRegionInfo()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             return sql1.GetRecords("exec Region_Select_Info @p1", id);
         }
 
@@ -66,13 +66,13 @@ namespace ClassLibrary
 
         public string save(string code, string name, string nameRus)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             return sql1.GetRecordsOne("exec region_Insert @p1, @p2, @p3, @p4", id, code, name, nameRus);
         }
 
         public static DataTable getDataTable()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             return sql1.GetRecords("exec Region_Select");
         }
     }

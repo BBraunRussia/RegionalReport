@@ -34,7 +34,7 @@ namespace RegionR.addedit
             repID = Convert.ToInt32(rep_id);
             idDB = Convert.ToInt32(db_id);
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = sql1.GetRecords("exec selRepKosByID @p1, @p2", rep_id, db_id);
 
             dateTimePicker1.Value = Convert.ToDateTime(dt1.Rows[0].ItemArray[0].ToString());
@@ -88,7 +88,7 @@ namespace RegionR.addedit
 
         private void loaddata()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt = sql1.GetRecords("exec SelUserByID @p1", globalData.UserID2);
 
             lbUserName.Text = dt.Rows[0].ItemArray[1].ToString();
@@ -180,7 +180,7 @@ namespace RegionR.addedit
             {
                 if (globalData.Div == "HC")
                 {
-                    sql sql1 = new sql();
+                    Sql sql1 = new Sql();
                     String type;
 
                     if (cbNom.SelectedValue == null)
@@ -214,7 +214,7 @@ namespace RegionR.addedit
 
                 if ((globalData.Div == "OM") && (cbNom.SelectedValue != null))
                 {
-                    sql sql1 = new sql();
+                    Sql sql1 = new Sql();
 
                     String type = sql1.GetRecordsOne("exec SelNomType @p1", cbNom.SelectedValue.ToString());
                     
@@ -253,7 +253,7 @@ namespace RegionR.addedit
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             int count = 1;
             double sumEuro = 0, sumRub = 0;
 
@@ -422,7 +422,7 @@ namespace RegionR.addedit
 
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt = new DataTable();
 
             dt = sql1.GetRecords("exec selLPUbySubReg @p1, @p2", globalData.UserID2, cbSubReg.SelectedValue);
@@ -445,7 +445,7 @@ namespace RegionR.addedit
         {
             if (load)
             {
-                sql sql1 = new sql();
+                Sql sql1 = new Sql();
 
                 DataTable dt = new DataTable();
                 dt = sql1.GetRecords("exec SelNomProd @p1, @p2", cbGroup.SelectedValue, dateTimePicker1.Value.Year.ToString());
@@ -578,7 +578,7 @@ namespace RegionR.addedit
                 {
                     if (tbCount.Text != "")
                     {
-                        sql sql1 = new sql();
+                        Sql sql1 = new Sql();
                         String str = "";
 
                         if (cbNom.SelectedValue != null)

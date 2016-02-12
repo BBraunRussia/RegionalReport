@@ -52,7 +52,7 @@ namespace RegionR.addedit
 
         void loadTheme()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             globalData.update = false;
             comboBox1.DataSource = sql1.GetRecords("exec MarkAct_Select_ConfTheme");
@@ -63,7 +63,7 @@ namespace RegionR.addedit
 
         void loadType()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             globalData.update = false;
             cbMAType.DataSource = sql1.GetRecords("exec MarkAct_Sel_Type @p1", -2);
@@ -80,7 +80,7 @@ namespace RegionR.addedit
                 dgv1.Rows.Clear();
             }
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             globalData.update = false;
 
@@ -151,7 +151,7 @@ namespace RegionR.addedit
             {
                 if (e.RowIndex != -1 && e.ColumnIndex != 3)
                 {
-                    sql sql1 = new sql();
+                    Sql sql1 = new Sql();
 
                     string count = sql1.GetRecordsOne("exec MarkAct_Select_Plan @p1, @p2, @p3", dgv1[0, e.RowIndex].Value.ToString(), globalData.year, 0);
 

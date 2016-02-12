@@ -18,7 +18,7 @@ namespace RegionR.other
         {
             InitializeComponent();
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = sql1.GetRecords("exec SelSubRegionByUserID @p1", globalData.UserID);
 
             globalData.load = false;
@@ -83,7 +83,7 @@ namespace RegionR.other
                 }
             }
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             string res = sql1.GetRecordsOne("exec MoveReport 0, @p1, @p2, @p3, @p4, @p5", idRep, db, cbSubReg.SelectedValue, globalData.UserID, tbCount.Text);
 
             if (res == "1")
@@ -105,7 +105,7 @@ namespace RegionR.other
         {
             if ((globalData.load) && (globalData.Div == "HC"))
             {
-                sql sql1 = new sql();
+                Sql sql1 = new Sql();
                 tbTail.Text = sql1.GetRecordsOne("exec TailForRaspNew @p1, @p2, @p3", idRep, db, cbSubReg.SelectedValue);
             }
         }

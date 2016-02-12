@@ -65,7 +65,7 @@ namespace RegionR.addedit
         {
             globalData.update = false;
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             
             cbMAType.DataSource = sql1.GetRecords("exec MarkAct_Sel_Type");
             cbMAType.DisplayMember = "matype_name";
@@ -195,7 +195,7 @@ namespace RegionR.addedit
         {
             globalData.update = false;
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             cbMAType.DataSource = sql1.GetRecords("exec MarkAct_Sel_Type");
             cbMAType.DisplayMember = "matype_name";
@@ -313,7 +313,7 @@ namespace RegionR.addedit
 
         private void cbLPU_SelectedIndexChanged(object sender, EventArgs e)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             tbRegion.Text = sql1.GetRecordsOne("exec SelRegByLPUid @p1", cbLPU.SelectedValue);
 
@@ -397,7 +397,7 @@ namespace RegionR.addedit
                 MessageBox.Show(" Нет названия мероприятия!\n Нужно добавить в справочник (сообщите продакт-менеджерам)\n или выберите другой тип.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             globalData.load = true;
 
@@ -462,7 +462,7 @@ namespace RegionR.addedit
                 MessageBox.Show(" Нет названия мероприятия!\n Нужно добавить в справочник (сообщите продакт-менеджерам)\n или выберите другой тип.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             globalData.load = true;
 
@@ -614,7 +614,7 @@ namespace RegionR.addedit
         void loadConfName()
         {
             globalData.update = false;
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             
             DataTable dt = sql1.GetRecords("exec  MarkAct_Select_ConfName @p1", globalData.maplan);
             tbConf.Text = dt.Rows[1].ItemArray[1].ToString();

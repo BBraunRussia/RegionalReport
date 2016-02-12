@@ -30,7 +30,7 @@ namespace RegionR.addedit
                 idRep = idRep1;
                 idDB = idDB1;
 
-                sql sql1 = new sql();
+                Sql sql1 = new Sql();
                 DataTable dt1 = sql1.GetRecords("exec GetReportByID @p1, @p2", idRep, idDB);
 
                 if (dt1 == null)
@@ -76,7 +76,7 @@ namespace RegionR.addedit
 
         private void loadData()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = new DataTable();
 
             dt1 = sql1.GetRecords("exec Region_Select");
@@ -106,7 +106,7 @@ namespace RegionR.addedit
             try
             {
                 globalData.update = false;
-                sql sql1 = new sql();
+                Sql sql1 = new Sql();
                 DataTable dt1 = sql1.GetRecords("exec UpdReport @p1, @p2, @p3, @p4, @p5, @p6, @p7", idRep, idDB, cbReg.SelectedValue, cbSubReg.SelectedValue, globalData.UserID2, dateTimePicker1.Value.Year.ToString() + "-" + dateTimePicker1.Value.Month.ToString() + "-01", cbSDiv.SelectedValue);
 
                 if (dt1 == null)

@@ -47,7 +47,7 @@ namespace RegionR.addedit
         {
             loadRegion();
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = sql1.GetRecords("exec GetCustByID @p1", id);
 
             if (dt1 != null)
@@ -66,7 +66,7 @@ namespace RegionR.addedit
 
         private void loadRegion()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = sql1.GetRecords("exec Region_Select '', '', 1");
 
             cbReg.DataSource = dt1;
@@ -76,7 +76,7 @@ namespace RegionR.addedit
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             
             if (tbCustCode.Text == "")
             {

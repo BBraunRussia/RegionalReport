@@ -16,7 +16,7 @@ namespace RegionR.addedit
         {
             InitializeComponent();
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             cbDiv.DataSource = sql1.GetRecords("exec SelSDiv");
             cbDiv.DisplayMember = "sdiv_code";
@@ -37,7 +37,7 @@ namespace RegionR.addedit
 
         private void button1_Click(object sender, EventArgs e)
         {
-            sql sql1 = new sql();            
+            Sql sql1 = new Sql();            
             sql1.GetRecords("exec InsKosCust @p1, @p2, @p3, @p4", cbReg.SelectedValue, cbCust.SelectedValue, cbRegCust.SelectedValue, cbDiv.SelectedValue);
 
             globalData.load = true;

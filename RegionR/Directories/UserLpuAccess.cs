@@ -40,7 +40,7 @@ namespace RegionR.Directories
         {
             globalData.load = false;
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt = sql1.GetRecords("exec Region_Select '', @p1", cbSDiv.SelectedItem);
 
             if (dt != null)
@@ -57,7 +57,7 @@ namespace RegionR.Directories
         {
             globalData.load = false;
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = sql1.GetRecords("exec SelUsersAP @p1, @p2", cbSDiv.SelectedItem, cbRegions.SelectedValue);
 
             if (dt1 != null)
@@ -72,7 +72,7 @@ namespace RegionR.Directories
 
         private void loadData1()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             _dgv1.DataSource = sql1.GetRecords("exec SelLPUbyRegID @p1", cbRegions.SelectedValue);
             
             _dgv1.Columns["lpu_id"].Visible = false;
@@ -86,7 +86,7 @@ namespace RegionR.Directories
 
         private void loadData2()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = sql1.GetRecords("exec SelLPU @p1, @p2, @p3", cbUsers.SelectedValue, cbRegions.SelectedValue, cbSDiv.SelectedItem);            
 
             if (_dgv2.Columns.Count == 0)
@@ -197,7 +197,7 @@ namespace RegionR.Directories
         
         private void deleteLPU()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             if (globalData.UserAccess == 1)
             {
@@ -218,7 +218,7 @@ namespace RegionR.Directories
 
         private void btnAddUserLPU_Click(object sender, EventArgs e)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             foreach (DataGridViewCell cell in _dgv1.SelectedCells)
             {
@@ -252,7 +252,7 @@ namespace RegionR.Directories
 
         private void btnDelUserLPU_Click(object sender, EventArgs e)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             foreach (DataGridViewCell cell in _dgv2.SelectedCells)
             {

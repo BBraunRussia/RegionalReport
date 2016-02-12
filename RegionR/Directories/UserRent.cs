@@ -32,7 +32,7 @@ namespace RegionR.Directories
 
          private void loadRD()
          {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt = new DataTable();
              
             if ((globalData.UserAccess == 1) || (globalData.UserID == 6) || (globalData.UserAccess == 13))
@@ -58,7 +58,7 @@ namespace RegionR.Directories
         private void loadData()
         {
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             _dgv1.DataSource = sql1.GetRecords("exec Rent_Select_UserRent @p1, @p2, @p3, @p4, @p5", 3, 0, 0, comboBox1.SelectedValue.ToString(), "0");
                 
@@ -75,7 +75,7 @@ namespace RegionR.Directories
             if (_dgv2.RowCount > 0)
                 _dgv2.Rows.Clear();
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             DataTable dt = sql1.GetRecords("exec Rent_Select_UserRent @p1, @p2, @p3, @p4, @p5", 0, 0, 0, comboBox1.SelectedValue.ToString(), "0");
                 
@@ -103,7 +103,7 @@ namespace RegionR.Directories
         {
             int userID = Convert.ToInt32(_dgv1.Rows[_dgv1.SelectedCells[0].RowIndex].Cells[0].Value);
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             sql1.GetRecords("exec Rent_Insert_UserRent @p1, @p2", userID, dateRent.Value);
 
@@ -115,7 +115,7 @@ namespace RegionR.Directories
         {
             int userID = Convert.ToInt32(_dgv2.Rows[_dgv2.SelectedCells[0].RowIndex].Cells[0].Value);
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             sql1.GetRecords("exec Rent_Delect_UserRent @p1", userID);
 
@@ -125,7 +125,7 @@ namespace RegionR.Directories
 
         private void button1_Click(object sender, EventArgs e)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
                         
             sql1.GetRecords("exec Rent_Update_UrtDate @p1", dateRent.Value.Year.ToString() + dateRent.Value.Month.ToString() + "01" );
 
@@ -143,7 +143,7 @@ namespace RegionR.Directories
 
         private void сделатьНеактивнымToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             string res = sql1.GetRecordsOne("exec Rent_Update_UserEnable @p1", _dgv2["user_id", _dgv2.CurrentCell.RowIndex].Value.ToString());
 

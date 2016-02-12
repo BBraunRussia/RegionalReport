@@ -56,7 +56,7 @@ namespace RegionR.addedit
                 label1.Enabled = false;
             }
             
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = sql1.GetRecords("exec SelUserByID @p1, @p2", uid, urid);
                         
             tbUserName.Text = dt1.Rows[0].ItemArray[1].ToString();
@@ -140,7 +140,7 @@ namespace RegionR.addedit
         {
             try
             {
-                sql sql1 = new sql();
+                Sql sql1 = new Sql();
 
                 cbRole.DataSource = sql1.GetRecords("exec SelRole");
                 cbRole.DisplayMember = "role_name";
@@ -158,7 +158,7 @@ namespace RegionR.addedit
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             int ap;
             if (rbAPRead.Checked)

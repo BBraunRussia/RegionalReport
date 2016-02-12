@@ -38,7 +38,7 @@ namespace RegionR.addedit
         {
             if ((tbName.Text != "") && (tbSName.Text != ""))
             {
-                sql sql1 = new sql();
+                Sql sql1 = new Sql();
 
                 if (idLPU != "0")
                     sql1.GetRecords("exec UpdLPU @p1, @p2, @p3", idLPU, tbSName.Text, tbName.Text);

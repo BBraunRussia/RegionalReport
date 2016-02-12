@@ -20,7 +20,7 @@ namespace RegionR.addedit
 
             tracID = tracID1;
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = sql1.GetRecords("exec SelUsersForTracker");
 
             fillComboBox(dt1, cbUser, "user_name", "user_id");
@@ -43,7 +43,7 @@ namespace RegionR.addedit
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             string res = sql1.GetRecordsOne("exec InsTracker @p1, @p2, @p3", tracID, tbNumber.Text, cbUser.SelectedValue);
 

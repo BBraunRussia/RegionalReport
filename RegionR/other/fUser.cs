@@ -15,7 +15,7 @@ namespace RegionR.other
         public fUser(String fio, String login, String role)
         {
             InitializeComponent();
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             DataTable dt1 = new DataTable();
             dt1 = sql1.GetRecords("exec GetUserReg @p1", fio);

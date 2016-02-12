@@ -16,7 +16,7 @@ namespace RegionR.Directories
         {
             InitializeComponent();
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = new DataTable();
 
             userID = Convert.ToInt32(sql1.GetRecordsOne("exec GetUserID @p1", UserName));
@@ -137,7 +137,7 @@ namespace RegionR.Directories
         {
             if (cbLPU.SelectedValue != null)
             {
-                sql sql1 = new sql();
+                Sql sql1 = new Sql();
                 dataGridView1.Columns.Clear();
                 DataTable dt1 = new DataTable();
                 if (globalData.Div == "AE")
@@ -331,7 +331,7 @@ namespace RegionR.Directories
                 btnHideLPU.Text = "Показать ЛПУ";
                 label13.Visible = false;
                 cbLPU.Visible = false;
-                sql sql1 = new sql();
+                Sql sql1 = new Sql();
                 dataGridView1.Columns.Clear();
                 DataTable dt1 = new DataTable();
                 if (globalData.Div == "AE")

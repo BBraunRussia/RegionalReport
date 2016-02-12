@@ -34,7 +34,7 @@ namespace RegionR.Directories
 
         public void loadData()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = sql1.GetRecords("exec SelNomBySDiv @p1, @p2", cbSDiv.SelectedItem, cbYear.SelectedItem);
 
             if (dt1 != null)

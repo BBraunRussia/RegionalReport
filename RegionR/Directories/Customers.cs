@@ -32,7 +32,7 @@ namespace RegionR.Directories
         {
             setButtonColor();
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = sql1.GetRecords("exec SelCustomers @p1", new1);
 
             if (dt1.Rows.Count > 0)

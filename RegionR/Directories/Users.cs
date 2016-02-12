@@ -22,7 +22,7 @@ namespace RegionR.Directories
 
             globalData.Div = cbSDiv.SelectedItem.ToString();
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt = sql1.GetRecords("exec SelRole");
 
             if (dt != null)
@@ -86,7 +86,7 @@ namespace RegionR.Directories
 
         private void loadData1()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = new DataTable();
 
             if (_dgv1.Columns.Count == 0)
@@ -136,7 +136,7 @@ namespace RegionR.Directories
                 _dgv2.Columns["user_year2"].Visible = false;
             }
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = sql1.GetRecords("exec SelUsers2 @p1, @p2, @p3", cbRoles.SelectedValue, cbRegions.SelectedValue, cbSDiv.SelectedItem);
 
             int i = 0;
@@ -156,7 +156,7 @@ namespace RegionR.Directories
 
         private void btnAddUserLPU_Click(object sender, EventArgs e)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             foreach (DataGridViewCell cell in _dgv1.SelectedCells)
             {
@@ -194,7 +194,7 @@ namespace RegionR.Directories
 
         private void btnDelUserLPU_Click(object sender, EventArgs e)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             foreach (DataGridViewCell cell in _dgv2.SelectedCells)
             {

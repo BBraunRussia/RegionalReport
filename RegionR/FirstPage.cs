@@ -26,7 +26,7 @@ namespace RegionR
             globalData.UserID = 0;
             globalData.UserID2 = 0;
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             
             if (sql1 == null)
             {

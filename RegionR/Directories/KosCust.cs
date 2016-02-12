@@ -17,7 +17,7 @@ namespace RegionR.Directories
         {
             InitializeComponent();
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             cbReg.DataSource = sql1.GetRecords("exec Region_Select");
             cbReg.DisplayMember = "reg_nameRus";
@@ -51,7 +51,7 @@ namespace RegionR.Directories
 
         private void loadKosCust()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             dataGridView1.DataSource = sql1.GetRecords("exec SelKosCustByID @p1, @p2", cbReg.SelectedValue, cbDiv.SelectedValue);
 
             dataGridView1.Columns["KosCust_id"].Visible = false;
@@ -85,7 +85,7 @@ namespace RegionR.Directories
 
         private void btnDel_Click(object sender, EventArgs e)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             sql1.GetRecords("exec DelKosCust @p1", dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
 
             loadKosCust();

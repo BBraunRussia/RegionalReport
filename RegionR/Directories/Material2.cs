@@ -16,7 +16,7 @@ namespace RegionR.Directories
         {
             InitializeComponent();
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = sql1.GetRecords("exec SelCustMat2");
 
             globalData.load = false;
@@ -31,7 +31,7 @@ namespace RegionR.Directories
 
         private void loadData()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             _dgv1.DataSource = sql1.GetRecords("exec SelMaterial2 @p1", cbCustomer.SelectedValue);
 

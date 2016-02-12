@@ -28,7 +28,7 @@ namespace RegionR.other
 
         private void loaddata()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = sql1.GetRecords("exec SelRepDistRight @p1", cbYear.SelectedItem);
 
             format();
@@ -155,7 +155,7 @@ namespace RegionR.other
             {
                 _dgv1[e.ColumnIndex, e.RowIndex].Value = !Convert.ToBoolean(_dgv1[e.ColumnIndex, e.RowIndex].Value);
 
-                sql sql1 = new sql();
+                Sql sql1 = new Sql();
                 sql1.GetRecords("exec ChangeRepDistRight @p1, @p2", _dgv1[0, e.RowIndex].Value, cbYear.SelectedItem.ToString() + "-" + (e.ColumnIndex-2).ToString() + "-01");
             }            
         }
@@ -184,7 +184,7 @@ namespace RegionR.other
                 return;
             String monthR = globalData.input;
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = sql1.GetRecords("exec InsRepDistRight @p1, @p2", code, yearR + "-" + monthR + "-01");
         }
     }

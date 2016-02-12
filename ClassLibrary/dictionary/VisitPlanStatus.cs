@@ -11,7 +11,7 @@ namespace ClassLibrary
     {
         public static DataTable getDataTable()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             return sql1.GetRecords("exec SelVPStatus");
         }

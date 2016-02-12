@@ -27,7 +27,7 @@ namespace ClassLibrary
         private bool _editPlan;
         private bool _editFact;
 
-        private sql _sql1;
+        private Sql _sql1;
 
         public int IdULPU { get { return _idULPU; } }
         public string Plan { get { return _plan; } }
@@ -93,7 +93,7 @@ namespace ClassLibrary
 
         private void Init()
         {
-            _sql1 = new sql();
+            _sql1 = new Sql();
         }
 
         private void SetDefaultHour()
@@ -245,13 +245,13 @@ namespace ClassLibrary
 
         public static DataTable GetDataTableForDayByUser(int userID, DateTime date)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             return sql1.GetRecords("exec VisitPlanDay_Select_ByUser @p1, @p2", userID, date);
         }
 
         public static DataTable GetDataTableForMonthByUser(int userID, DateTime date)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             return sql1.GetRecords("exec VisitPlanDay_Select_ByMonthByUser @p1, @p2", userID, date);
         }
 

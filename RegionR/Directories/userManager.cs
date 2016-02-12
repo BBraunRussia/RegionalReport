@@ -32,7 +32,7 @@ namespace RegionR.Directories
 
         private void loadData()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = sql1.GetRecords("exec SelUsersByRole");
 
             _dgv1.DataSource = dt1;
@@ -56,7 +56,7 @@ namespace RegionR.Directories
         /* добавление людей в маркетинг 1*/
         private void loadData2()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt1 = sql1.GetRecords("exec SelUsersByRole");
 
             _dgv1.DataSource = dt1;
@@ -83,7 +83,7 @@ namespace RegionR.Directories
             int managerID = Convert.ToInt32(manager.SelectedValue);
             int userID = Convert.ToInt32(_dgv1.Rows[_dgv1.SelectedCells[0].RowIndex].Cells[0].Value);
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             if (rent == 0)
             {
                 sql1.GetRecords("exec insUserManager @p1, @p2", managerID, userID);
@@ -103,7 +103,7 @@ namespace RegionR.Directories
             int managerID = Convert.ToInt32(manager.SelectedValue);
             int userID = Convert.ToInt32(_dgv2.Rows[_dgv2.SelectedCells[0].RowIndex].Cells[0].Value);
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             sql1.GetRecords("exec delUserManager @p1, @p2", managerID, userID);
 
             loadUserManager(managerID);
@@ -124,7 +124,7 @@ namespace RegionR.Directories
 
         private void loadUserManager(int managerID)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             _dgv2.DataSource = sql1.GetRecords("exec SelUserManager @p1", managerID);
 
             if (_dgv2 != null)
@@ -137,7 +137,7 @@ namespace RegionR.Directories
         
         private void loadUserManager2(int managerID)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             _dgv2.DataSource = sql1.GetRecords("exec SelUserRent2 @p1", managerID);
 
             if (_dgv2 != null)

@@ -26,7 +26,7 @@ namespace RegionR.other
 
         private void getRateDate()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             dateTimePicker2.Value = Convert.ToDateTime(sql1.GetRecordsOne("exec GetDateCur @p1", dateTimePicker1.Value.Year + "-" + dateTimePicker1.Value.Month + "-01"));
             tbRate.Text = sql1.GetRecordsOne("exec GetRate @p1", dateTimePicker2.Value.Year + "-" + dateTimePicker2.Value.Month + "-01");
@@ -75,7 +75,7 @@ namespace RegionR.other
 
         private void btnApply_Click(object sender, EventArgs e)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             sql1.GetRecordsOne("exec SetDateCur @p1, @p2", dateTimePicker1.Value.Year + "-" + dateTimePicker1.Value.Month + "-01", dateTimePicker2.Value.Year + "-" + dateTimePicker2.Value.Month + "-01");
 
@@ -111,7 +111,7 @@ namespace RegionR.other
 
         private void button1_Click(object sender, EventArgs e)
         {
-             sql sql1 = new sql();
+             Sql sql1 = new Sql();
 
              if (tbYear.Text != String.Empty)
                  sql1.GetRecordsOne("exec SetNextYear @p1, @p2, @p3, @p4", tbYear.Text, cbLPU.Checked, cbNom.Checked, cbUsers.Checked);

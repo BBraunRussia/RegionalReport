@@ -97,7 +97,7 @@ namespace RegionR.addedit
 
         void loadType()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             globalData.update = false;
             cbTypeMA.DataSource = sql1.GetRecords("exec MarkAct_Sel_Type @p1", -1);
@@ -108,7 +108,7 @@ namespace RegionR.addedit
 
         void loadTheme()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             globalData.update = false;
             cbTheme.DataSource = sql1.GetRecords("exec MarkAct_Select_ConfTheme");
@@ -119,7 +119,7 @@ namespace RegionR.addedit
 
         void loadCountry()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             globalData.update = false;
             cbCountry.DataSource = sql1.GetRecords("exec MarkAct_Select_Country @p1", 1);
@@ -131,7 +131,7 @@ namespace RegionR.addedit
         void loadCity()
         {
             globalData.update = false;
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             int country = 0;
 
             if (cbCountry.SelectedValue != null)
@@ -186,7 +186,7 @@ namespace RegionR.addedit
 
         void SavePlanConf()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             string res = sql1.GetRecordsOne("exec MarkAct_Insert_Conf @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10",
                 dtpMA.Value.Year.ToString() + "-" + dtpMA.Value.Month.ToString() + "-01",
@@ -212,21 +212,21 @@ namespace RegionR.addedit
 
         void SaveTheme()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             sql1.GetRecords("exec MarkAct_Insert_Theme @p1", tbTheme.Text.Trim());
         }
 
         void SaveCity()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             sql1.GetRecords("exec MarkAct_Insert_City @p1, @p2", cbCountry.SelectedValue, tbCity.Text.Trim());
         }
 
         void SaveCountry()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             sql1.GetRecords("exec MarkAct_Insert_Country @p1", tbCountry.Text.Trim());
         }

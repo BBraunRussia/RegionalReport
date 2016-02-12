@@ -34,7 +34,7 @@ namespace RegionR.other
         {
             if(mes_id != "0")
             {
-                sql sql1 = new sql();
+                Sql sql1 = new Sql();
 
                 if (cbRead.Checked)
                     sql1.GetRecords("exec UpdMesHide @p1", mes_id);

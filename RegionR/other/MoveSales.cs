@@ -25,7 +25,7 @@ namespace RegionR.other
             reg_id = reg_id1;
             sdiv_id = sdiv_id1;
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             cbUserLPU.DataSource = sql1.GetRecords("exec SelLPU @p1, @p2, @p3", user_id, reg_id, sdiv_id);
             cbUserLPU.DisplayMember = "lpu_sname";
@@ -35,7 +35,7 @@ namespace RegionR.other
 
         private void btnMoveSales_Click(object sender, EventArgs e)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             sql1.GetRecords("exec MoveSales @p1, @p2", ulpu_id, cbUserLPU.SelectedValue);
         }
 

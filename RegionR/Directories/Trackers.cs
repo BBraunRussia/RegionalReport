@@ -22,7 +22,7 @@ namespace RegionR.Directories
 
         private void loadData()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             _dgv1.DataSource = sql1.GetRecords("exec SelTrackers");
 

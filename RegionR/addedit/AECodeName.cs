@@ -30,7 +30,7 @@ namespace RegionR.addedit
 
         private void button1_Click(object sender, EventArgs e)
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
 
             if (this.Text == "Добавление")
                 sql1.GetRecords(ins + " @p1, @p2 ", textBox1.Text, textBox2.Text);

@@ -13,7 +13,7 @@ namespace ClassLibrary
         private int idUser;
         private int time;
         private string text;
-        private sql sql1;
+        private Sql sql1;
 
         public string Time
         {
@@ -54,7 +54,7 @@ namespace ClassLibrary
 
         private void Init()
         {
-            sql1 = new sql();
+            sql1 = new Sql();
         }
 
         private void fillFields(DataRow row)

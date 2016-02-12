@@ -57,7 +57,7 @@ namespace RegionR.addedit
 
         public void fillNom()
         {
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt = sql1.GetRecords("exec SelNomGroup @p1", globalData.Div);
 
             if (dt != null)
@@ -72,7 +72,7 @@ namespace RegionR.addedit
         {
             if (tbName.Text != "")
             {
-                sql sql1 = new sql();
+                Sql sql1 = new Sql();
 
                 if (idNom == "0")
                     sql1.GetRecords("exec InsNom @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8", tbName.Text, cbNomGroup.SelectedValue, cbType.SelectedItem, tbDilCost.Text.Replace(',', '.'), tbSeq.Text, dtYear1.Value.Year, dtYear2.Value.Year, globalData.Div);
@@ -86,7 +86,7 @@ namespace RegionR.addedit
         {
             if ((tbYearDilCost.Text != String.Empty) && (tbDilCost.Text != String.Empty) && (idNom != "0"))
             {
-                sql sql1 = new sql();
+                Sql sql1 = new Sql();
                 sql1.GetRecords("exec UpdDilCost @p1, @p2, @p3", idNom, tbDilCost.Text.Replace(',', '.'), tbYearDilCost.Text);
             }
             else

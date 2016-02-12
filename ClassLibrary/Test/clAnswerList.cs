@@ -36,7 +36,7 @@ namespace ClassLibrary
         {
             list.Clear();
 
-            sql sql1 = new sql();
+            Sql sql1 = new Sql();
             DataTable dt = sql1.GetRecords("exec Answer_Select");
 
             foreach (DataRow row in dt.Rows)
