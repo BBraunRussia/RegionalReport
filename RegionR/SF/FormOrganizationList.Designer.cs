@@ -56,6 +56,7 @@
             this.btnReload = new System.Windows.Forms.Button();
             this.btnDeleteFilter = new System.Windows.Forms.Button();
             this.btnContinue = new System.Windows.Forms.Button();
+            this.userLpuListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -81,6 +82,7 @@
             this.addPersonToolStripMenuItem,
             this.toolStripMenuItem2,
             this.cityDictionaryToolStripMenuItem,
+            this.userLpuListToolStripMenuItem,
             this.toolStripMenuItem3,
             this.importToolStripMenuItem,
             this.exportToolStripMenuItem,
@@ -93,76 +95,76 @@
             // addOrganizationToolStripMenuItem
             // 
             this.addOrganizationToolStripMenuItem.Name = "addOrganizationToolStripMenuItem";
-            this.addOrganizationToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+            this.addOrganizationToolStripMenuItem.Size = new System.Drawing.Size(270, 22);
             this.addOrganizationToolStripMenuItem.Text = "Добавить организацию";
             this.addOrganizationToolStripMenuItem.Click += new System.EventHandler(this.btnAddOrganization_Click);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(270, 22);
             this.deleteToolStripMenuItem.Text = "Удалить";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.btnDeleteOrganization_Click);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(270, 22);
             this.editToolStripMenuItem.Text = "Редактировать";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(200, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(267, 6);
             // 
             // addPersonToolStripMenuItem
             // 
             this.addPersonToolStripMenuItem.Name = "addPersonToolStripMenuItem";
-            this.addPersonToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+            this.addPersonToolStripMenuItem.Size = new System.Drawing.Size(270, 22);
             this.addPersonToolStripMenuItem.Text = "Добавить персону";
             this.addPersonToolStripMenuItem.Click += new System.EventHandler(this.addPersonToolStripMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(200, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(267, 6);
             // 
             // cityDictionaryToolStripMenuItem
             // 
             this.cityDictionaryToolStripMenuItem.Name = "cityDictionaryToolStripMenuItem";
-            this.cityDictionaryToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+            this.cityDictionaryToolStripMenuItem.Size = new System.Drawing.Size(270, 22);
             this.cityDictionaryToolStripMenuItem.Text = "Справочник городов";
             this.cityDictionaryToolStripMenuItem.Click += new System.EventHandler(this.cityDictionaryToolStripMenuItem_Click);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(200, 6);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(267, 6);
             // 
             // importToolStripMenuItem
             // 
             this.importToolStripMenuItem.Name = "importToolStripMenuItem";
-            this.importToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+            this.importToolStripMenuItem.Size = new System.Drawing.Size(270, 22);
             this.importToolStripMenuItem.Text = "Импорт";
             this.importToolStripMenuItem.Click += new System.EventHandler(this.NotImpliment_Click);
             // 
             // exportToolStripMenuItem
             // 
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(270, 22);
             this.exportToolStripMenuItem.Text = "Экспорт";
             this.exportToolStripMenuItem.Click += new System.EventHandler(this.NotImpliment_Click);
             // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(200, 6);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(267, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(270, 22);
             this.exitToolStripMenuItem.Text = "Выход";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -295,6 +297,13 @@
             this.btnContinue.UseVisualStyleBackColor = true;
             this.btnContinue.Click += new System.EventHandler(this.tbSearch_TextChanged);
             // 
+            // userLpuListToolStripMenuItem
+            // 
+            this.userLpuListToolStripMenuItem.Name = "userLpuListToolStripMenuItem";
+            this.userLpuListToolStripMenuItem.Size = new System.Drawing.Size(270, 22);
+            this.userLpuListToolStripMenuItem.Text = "ЛПУ региональных представителей";
+            this.userLpuListToolStripMenuItem.Click += new System.EventHandler(this.userLpuListToolStripMenuItem_Click);
+            // 
             // FormOrganizationList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -353,5 +362,6 @@
         private System.Windows.Forms.Button btnReload;
         private System.Windows.Forms.Button btnDeleteFilter;
         private System.Windows.Forms.Button btnContinue;
+        private System.Windows.Forms.ToolStripMenuItem userLpuListToolStripMenuItem;
     }
 }

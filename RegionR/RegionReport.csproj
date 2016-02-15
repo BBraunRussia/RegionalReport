@@ -484,6 +484,7 @@
     <Compile Include="SF\Controllers\OrganizationListController.cs" />
     <Compile Include="SF\Controllers\LpuController.cs" />
     <Compile Include="SF\Controllers\PersonListController.cs" />
+    <Compile Include="SF\Controllers\UserLpuRRListController.cs" />
     <Compile Include="SF\FormAddBranch.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -567,6 +568,12 @@
     </Compile>
     <Compile Include="SF\FormSecondStepAddPerson.Designer.cs">
       <DependentUpon>FormSecondStepAddPerson.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SF\FormUserLpuRRList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SF\FormUserLpuRRList.Designer.cs">
+      <DependentUpon>FormUserLpuRRList.cs</DependentUpon>
     </Compile>
     <Compile Include="SF\FormUserRoleSFList.cs">
       <SubType>Form</SubType>
@@ -826,6 +833,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SF\FormSecondStepAddPerson.resx">
       <DependentUpon>FormSecondStepAddPerson.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SF\FormUserLpuRRList.resx">
+      <DependentUpon>FormUserLpuRRList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SF\FormUserRoleSFList.resx">
       <DependentUpon>FormUserRoleSFList.cs</DependentUpon>

@@ -148,10 +148,11 @@ namespace RegionR
         {
             _organizationListController.Search(tbSearch.Text);
         }
-
-        private void showOrganizationWithLpuRRToolStripMenuItem_Click(object sender, EventArgs e)
+        
+        private void userLpuListToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+            FormUserLpuRRList formUserLpuRRList = new FormUserLpuRRList();
+            formUserLpuRRList.ShowDialog();
         }
     }
 }

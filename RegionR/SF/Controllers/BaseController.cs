@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using ClassLibrary.SF;
+using System.Data;
 
 namespace RegionR.SF
 {
@@ -11,12 +13,15 @@ namespace RegionR.SF
         private FilteredDGV _filtredDGV;
         private SortDGV _sortDGV;
         private SearchInDgv _seacher;
+        private DataGridView _dgv;
 
         public BaseOperations(DataGridView dgv)
         {
             _filtredDGV = new FilteredDGV(dgv);
             _sortDGV = new SortDGV(dgv);
             _seacher = new SearchInDgv(dgv);
+
+            _dgv = dgv;
         }
 
         public void CreateFilter()
@@ -42,6 +47,14 @@ namespace RegionR.SF
         public void Search(string text)
         {
             _seacher.Find(text);
+        }
+
+        public void ExportInExcel()
+        {
+            DataTable dt = _dgv.DataSource as DataTable;
+
+            CreateExcel excel = new CreateExcel(dt);
+            excel.Show();
         }
     }
 }

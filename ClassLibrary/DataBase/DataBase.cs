@@ -12,7 +12,7 @@ namespace ClassLibrary
 
         public static void InitDataBase()
         {
-            _database = new Sql();
+            _database = new SqlNew();
         }
 
         public static void ChangeDataBase(DBNames name)

@@ -1,36 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Data.SqlClient;
 using System.Data;
+using System.Data.SqlClient;
+using System.Text;
 
 namespace DataLayer
 {
-    internal class sql1
+    public enum DBNames { RegionalR, Competitors };
+    public enum ServerName { bbmru08, bbmru09 };
+
+    public class SqlNew : IDataBase
     {
-        private String _server;
-        private String _database;
-        private Boolean _WinAuth = false;
-        private String _UserID;
-        private String _Password;
+        private const int TIMEOUT = 600;
+
+        private string _server;
+        private string _database;
+        private bool _winAuth = false;
+        private string _userID;
+        private string _password;
 
         private SqlConnection _con;
 
-        public sql1()
+        public SqlNew()
         {
             _database = DBNames.RegionalR.ToString();
+            _server = ServerName.bbmru09.ToString();
 
-            if (_server == @"bbmru09")
+            if (_server == ServerName.bbmru09.ToString())
             {
-                _UserID = "sa";
-                _Password = "gfdtk";
+                _userID = "sa";
+                _password = "gfdtk";
             }
             else
             {
-                _UserID = "RegionalR_user";
-                _Password = "regionalr78";
+                _userID = "RegionalR_user";
+                _password = "regionalr78";
             }
 
+            Init();
+        }
+
+        public void ChangeDataBase(DBNames name)
+        {
+            _database = name.ToString();
             Init();
         }
 
@@ -39,21 +51,22 @@ namespace DataLayer
             SqlConnectionStringBuilder csb = new SqlConnectionStringBuilder();
             csb.DataSource = _server;
             csb.InitialCatalog = _database;
-            csb.IntegratedSecurity = _WinAuth;
-            if (!_WinAuth)
+            csb.IntegratedSecurity = _winAuth;
+            if (!_winAuth)
             {
-                csb.UserID = _UserID;
-                csb.Password = _Password;
+                csb.UserID = _userID;
+                csb.Password = _password;
             }
             try
             {
                 _con = new SqlConnection(csb.ConnectionString);
+                _con.Open();
                 return String.Empty;
             }
             catch (Exception ex) { return ex.Message; }
-        }       
+        }
 
-        public String Disconnect()
+        private String Disconnect()
         {
             try
             {
@@ -106,27 +119,34 @@ namespace DataLayer
 
         private DataTable tryToGetRecords(String SQL, params Object[] Params)
         {
-            DataTable outDT = new DataTable();
-            try
-            {
-                SqlCommand _com = new SqlCommand(SQL, _con);
-                _com.CommandTimeout = 600;
-                for (int i = 0; i < Params.Length; i++)
-                {
-                    int nump = i + 1;
-                    SqlParameter _prm = new SqlParameter(String.Format("p{0}", nump.ToString()), Params[i]);
-                    _com.Parameters.Add(_prm);
-                }
-                SqlDataAdapter _da = new SqlDataAdapter(_com);
-                _da.Fill(outDT);
-                Disconnect();
-                return outDT;
-            }
-            catch
-            {
-                Disconnect();
-                return null;
-            }
+            DataTable Out = new DataTable();
+
+            SqlDataAdapter sqlDataAdapter = CreateSqlDataAdapter(SQL, Params);
+            sqlDataAdapter.Fill(Out);
+            Disconnect();
+            return Out;
+        }
+
+        private SqlDataAdapter CreateSqlDataAdapter(String SQL, params Object[] Params)
+        {
+            SqlCommand sqlCommand = CreateSqlCommand(SQL, Params);
+            return new SqlDataAdapter(sqlCommand);
+        }
+
+        private SqlCommand CreateSqlCommand(String SQL, params Object[] Params)
+        {
+            SqlCommand sqlCommand = new SqlCommand(SQL, _con);
+            sqlCommand.CommandTimeout = TIMEOUT;
+
+            for (int i = 0; i < Params.Length; i++)
+                sqlCommand.Parameters.Add(GetParam(i, Params));
+
+            return sqlCommand;
+        }
+
+        private SqlParameter GetParam(int paramIndex, params Object[] Params)
+        {
+            return new SqlParameter(String.Format("p{0}", (paramIndex + 1).ToString()), Params[paramIndex]);
         }
     }
 }
