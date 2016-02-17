@@ -24,6 +24,8 @@ namespace RegionR
             _myStatusStrip = new MyStatusStrip(dgv, statusStrip1);
 
             _organizationListController = new OrganizationListController(dgv);
+
+            userLpuListToolStripMenuItem.Visible = (UserLogged.Get().RoleSF == RolesSF.Администратор);
         }
 
         private void formOrganizationList_Load(object sender, EventArgs e)

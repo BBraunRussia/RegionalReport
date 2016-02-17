@@ -19,7 +19,7 @@ namespace DataLayer
         public Sql()
         {
             _database = DBNames.RegionalR.ToString();
-            _server = ServerName.bbmru09.ToString();
+            _server = ServerName.bbmru08.ToString();
 
             if (_server == ServerName.bbmru09.ToString())
             {

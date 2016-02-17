@@ -93,7 +93,7 @@ namespace ClassLibrary.SF
             dt.Columns.Add("Сокр. название ЛПУ-SF");
             dt.Columns.Add("Регион России");
             dt.Columns.Add("Город");
-            dt.Columns.Add("№ ЛПУ-SF", typeof(int));
+            dt.Columns.Add("№ ЛПУ-SF");
             dt.Columns.Add("color");
 
             LpuList lpuList = new LpuList();
