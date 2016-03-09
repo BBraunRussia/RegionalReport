@@ -252,7 +252,7 @@ namespace ClassLibrary.SF
 
         public object[] GetRow()
         {
-            string typeOrgName = ((TypeOrg == SF.TypeOrg.ЛПУ) && (ParentOrganization != null)) ? "Филиал ЛПУ" : TypeOrg.ToString();
+            string typeOrgName = ((TypeOrg == TypeOrg.ЛПУ) && (ParentOrganization != null)) ? "Филиал ЛПУ" : TypeOrg.ToString();
 
             return new object[] { ID, ShortName, typeOrgName, (ParentOrganization == null) ? INN : (ParentOrganization as LPU).INN, RealRegion.Name, City.Name, (LpuRR == null) ? "Прочие ЛПУ" : LpuRR.Name, (LpuRR == null) ? "Российская федерация" : LpuRR.RegionRR.Name };
         }

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data;
+using ClassLibrary.SF;
 
-namespace ClassLibrary.SF
+namespace ClassLibrary
 {
-    public static class SFFactory
+    public static class Factory
     {
         public static BaseDictionary CreateItem(string tableName, DataRow row)
         {
@@ -24,7 +25,7 @@ namespace ClassLibrary.SF
                     return new TypeLPU(row);
                 case "SF_RealRegion":
                     return new RealRegion(row);
-                case "SF_LpuRR":
+                case "LPU":
                     return new LpuRR(row);
                 case "SF_Role":
                     return new Role(row);
@@ -46,7 +47,7 @@ namespace ClassLibrary.SF
                     return new SubRegion(row);
                 case "SF_TypeFin":
                     return new TypeFin(row);
-                case "SF_UserLpuRR":
+                case "UserLpu":
                     return new UserLpuRR(row);
                 default:
                     throw new NotImplementedException("Фабрика не может создать экземпляр данного класса");

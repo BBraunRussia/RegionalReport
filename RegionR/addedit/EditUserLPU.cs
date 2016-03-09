@@ -7,49 +7,70 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using DataLayer;
+using ClassLibrary;
 
 namespace RegionR.addedit
 {
     public partial class EditUserLPU : Form
     {
-        public EditUserLPU(string ulpu, string sdiv, string reg, string user)
+        private UserLpuRR _userLPU;
+
+        public EditUserLPU(UserLpuRR userLPU)
         {
             InitializeComponent();
 
-            ulpu_id = ulpu;
+            _userLPU = userLPU;
+        }
+
+        private void EditUserLPU_Load(object sender, EventArgs e)
+        {
+            tbReg.Text = _userLPU.LpuRR.RegionRR.Name;
+            tbLPU.Text = _userLPU.LpuRR.Name;
+            tbYear1.Text = _userLPU.YearBegin.ToString();
+            tbYear2.Text = _userLPU.YearEnd.ToString();
 
             Sql sql1 = new Sql();
-            DataTable dt1 = sql1.GetRecords("exec SelUserLPUByID @p1", ulpu);
 
-            tbReg.Text = dt1.Rows[0].ItemArray[1].ToString();
-            tbLPU.Text = dt1.Rows[0].ItemArray[2].ToString();
-            tbYear1.Text = dt1.Rows[0].ItemArray[3].ToString();
-            tbYear2.Text = dt1.Rows[0].ItemArray[4].ToString();
-
-            dt1 = sql1.GetRecords("exec SelUsersAP @p1, @p2", sdiv, reg);
+            DataTable dt1 = sql1.GetRecords("exec SelUsersAP @p1, @p2", _userLPU.Sdiv.ToString(), _userLPU.LpuRR.RegionRR.ID);
             cbUsers.DataSource = dt1;
             cbUsers.DisplayMember = "user_name";
             cbUsers.ValueMember = "user_id";
 
-            cbUsers.SelectedValue = user;
+            cbUsers.SelectedValue = _userLPU.User.ID;
         }
-
-        string ulpu_id;
-
+        
         private void btnOK_Click(object sender, EventArgs e)
         {
-            Sql sql1 = new Sql();
-            string res = sql1.GetRecordsOne("exec UpdUserLPU @p1, @p2, @p3, @p4", ulpu_id, tbYear1.Text, tbYear2.Text, cbUsers.SelectedValue);
+            CopyFields();
+
+            string res = _userLPU.Save(UserLogged.Get());
 
             if (res == "1")
             {
-                globalData.update = true;
-                Close();
+                DialogResult = System.Windows.Forms.DialogResult.OK;
             }
             else
             {
                 MessageBox.Show("Перемещение не возможно, так как " + res, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }            
+            }
+        }
+
+        private void CopyFields()
+        {
+            int yearBegin;
+            int.TryParse(tbYear1.Text, out yearBegin);
+            _userLPU.YearBegin = yearBegin;
+
+            int yearEnd;
+            int.TryParse(tbYear2.Text, out yearEnd);
+            _userLPU.YearEnd = yearEnd;
+
+            UserList userList = UserList.GetUniqueInstance();
+            int idUser;
+            int.TryParse(cbUsers.SelectedValue.ToString(), out idUser);
+            User user = userList.GetItem(idUser) as User;
+
+            _userLPU.User = user;
         }
     }
 }

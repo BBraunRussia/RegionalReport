@@ -173,6 +173,7 @@
             this.Name = "EditUserLPU";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Редактирование ЛПУ";
+            this.Load += new System.EventHandler(this.EditUserLPU_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

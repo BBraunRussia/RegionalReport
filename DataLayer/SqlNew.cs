@@ -11,6 +11,9 @@ namespace DataLayer
 
     public class SqlNew : IDataBase
     {
+        public const ServerName CURRENT_SERVER = ServerName.bbmru08;
+        public const DBNames CURRENT_DATABASE = DBNames.RegionalR;
+
         private const int TIMEOUT = 600;
 
         private string _server;
@@ -23,8 +26,8 @@ namespace DataLayer
 
         public SqlNew()
         {
-            _database = DBNames.RegionalR.ToString();
-            _server = ServerName.bbmru08.ToString();
+            _database = CURRENT_DATABASE.ToString();
+            _server = CURRENT_SERVER.ToString();
 
             if (_server == ServerName.bbmru09.ToString())
             {

@@ -6,47 +6,46 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using DataLayer;
+using ClassLibrary;
 
 namespace RegionR.addedit
 {
     public partial class AddEditLPU : Form
     {
-        string idLPU;
-        string idReg;
-
-        public AddEditLPU(string reg_id)
+        private LpuRR _lpuRR;
+        
+        public AddEditLPU(LpuRR lpuRR)
         {
             InitializeComponent();
 
-            idLPU = "0";
-            idReg = reg_id;
+            _lpuRR = lpuRR;
         }
-
-        public AddEditLPU(string lpu_id, string sname, string name)
+        
+        private void AddEditLPU_Load(object sender, EventArgs e)
         {
-            InitializeComponent();
-
-            tbSName.Text = sname;
-            tbName.Text = name;
-
-            idReg = "0";
-            idLPU = lpu_id;
+            tbSName.Text = _lpuRR.Name;
+            tbName.Text = _lpuRR.FullName;
+            chbStatus.Checked = (_lpuRR.StatusLPU == StatusLPU.Активен);
         }
-
+        
         private void btnOK_Click(object sender, EventArgs e)
         {
-            if ((tbName.Text != "") && (tbSName.Text != ""))
+            if (CopyFields())
             {
-                Sql sql1 = new Sql();
-
-                if (idLPU != "0")
-                    sql1.GetRecords("exec UpdLPU @p1, @p2, @p3", idLPU, tbSName.Text, tbName.Text);
-                else
-                    sql1.GetRecords("exec InsLPU @p1, @p2, @p3", tbSName.Text, tbName.Text, idReg);
-
-                globalData.update = true;
+                _lpuRR.Save();
             }
+        }
+
+        private bool CopyFields()
+        {
+            if ((tbName.Text == "") || (tbSName.Text == ""))
+                return false;
+
+            _lpuRR.Name = tbSName.Text;
+            _lpuRR.FullName = tbName.Text;
+            _lpuRR.StatusLPU = (chbStatus.Checked) ? StatusLPU.Активен : StatusLPU.Неактивен;
+
+            return true;
         }
     }
 }

@@ -46,6 +46,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label12 = new System.Windows.Forms.Label();
             this.tbPatientCRRT = new System.Windows.Forms.TextBox();
+            this.cmTextBox = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tbMachineGD = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
@@ -120,9 +121,10 @@
             this.label33 = new System.Windows.Forms.Label();
             this.lbAutor = new System.Windows.Forms.Label();
             this.lbEditor = new System.Windows.Forms.Label();
-            this.cmTextBox = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.label34 = new System.Windows.Forms.Label();
             this.lbNumberLpuID = new System.Windows.Forms.Label();
+            this.lbLpuRRId = new System.Windows.Forms.Label();
+            this.label37 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -306,6 +308,11 @@
             this.tbPatientCRRT.Size = new System.Drawing.Size(35, 20);
             this.tbPatientCRRT.TabIndex = 38;
             this.tbPatientCRRT.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_KeyPress);
+            // 
+            // cmTextBox
+            // 
+            this.cmTextBox.Name = "cmTextBox";
+            this.cmTextBox.Size = new System.Drawing.Size(61, 4);
             // 
             // tbMachineGD
             // 
@@ -827,7 +834,7 @@
             this.cbLpuRR.FormattingEnabled = true;
             this.cbLpuRR.Location = new System.Drawing.Point(435, 109);
             this.cbLpuRR.Name = "cbLpuRR";
-            this.cbLpuRR.Size = new System.Drawing.Size(399, 21);
+            this.cbLpuRR.Size = new System.Drawing.Size(232, 21);
             this.cbLpuRR.TabIndex = 76;
             this.cbLpuRR.SelectedIndexChanged += new System.EventHandler(this.cbLpuRR_SelectedIndexChanged);
             // 
@@ -1001,11 +1008,6 @@
             this.lbEditor.TabIndex = 96;
             this.lbEditor.Text = "Изменил";
             // 
-            // cmTextBox
-            // 
-            this.cmTextBox.Name = "cmTextBox";
-            this.cmTextBox.Size = new System.Drawing.Size(61, 4);
-            // 
             // label34
             // 
             this.label34.AutoSize = true;
@@ -1024,6 +1026,24 @@
             this.lbNumberLpuID.TabIndex = 99;
             this.lbNumberLpuID.Text = "не присвоен";
             // 
+            // lbLpuRRId
+            // 
+            this.lbLpuRRId.AutoSize = true;
+            this.lbLpuRRId.Location = new System.Drawing.Point(764, 112);
+            this.lbLpuRRId.Name = "lbLpuRRId";
+            this.lbLpuRRId.Size = new System.Drawing.Size(70, 13);
+            this.lbLpuRRId.TabIndex = 101;
+            this.lbLpuRRId.Text = "не присвоен";
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(673, 112);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(90, 13);
+            this.label37.TabIndex = 100;
+            this.label37.Text = "Номер ЛПУ-RR:";
+            // 
             // FormAddLPU
             // 
             this.AcceptButton = this.btnSaveAndClose;
@@ -1031,6 +1051,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(1113, 613);
+            this.Controls.Add(this.lbLpuRRId);
+            this.Controls.Add(this.label37);
             this.Controls.Add(this.lbNumberLpuID);
             this.Controls.Add(this.label34);
             this.Controls.Add(this.lbEditor);
@@ -1206,5 +1228,7 @@
         private System.Windows.Forms.ContextMenuStrip cmTextBox;
         private System.Windows.Forms.Label label34;
         private System.Windows.Forms.Label lbNumberLpuID;
+        private System.Windows.Forms.Label lbLpuRRId;
+        private System.Windows.Forms.Label label37;
     }
 }

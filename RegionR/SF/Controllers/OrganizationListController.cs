@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using ClassLibrary.SF;
 using System.Data;
+using ClassLibrary;
+using ClassLibrary.SF;
 
 namespace RegionR.SF
 {
@@ -107,7 +108,7 @@ namespace RegionR.SF
 
             if (ClassForForm.DeleteOrganization(organization))
             {
-                History.Save(organization, UserLogged.Get(), ClassLibrary.SF.Action.Удалил);
+                History.Save(organization, UserLogged.Get(), HistoryAction.Удалил);
                 return true;
             }
 

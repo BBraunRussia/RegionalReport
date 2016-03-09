@@ -5,7 +5,7 @@ using System.Text;
 using System.Data;
 using System.Collections;
 
-namespace ClassLibrary.SF
+namespace ClassLibrary
 {
     public abstract class BaseList : InitProvider
     {
@@ -29,9 +29,9 @@ namespace ClassLibrary.SF
 
             foreach (DataRow row in dt.Rows)
             {
-                BaseDictionary baseDictionary = SFFactory.CreateItem(_tableName, row);
+                BaseDictionary baseDictionary = Factory.CreateItem(_tableName, row);
                 if (baseDictionary.CanAdd)
-                    _list.Add(baseDictionary.ID, baseDictionary);
+                    Add(baseDictionary);
             }
         }
 
@@ -70,11 +70,17 @@ namespace ClassLibrary.SF
             return (list.Count() == 0) ? null : list.First().Value;
         }
 
-        public void Delete(BaseDictionary item)
+        public string Delete(BaseDictionary item)
         {
             _list.Remove(item.ID);
 
-            _provider.Delete(_tableName, item.ID);
+            return _provider.Delete(_tableName, item.ID);
+        }
+
+        protected void Add(BaseDictionary item)
+        {
+            if (!_list.ContainsKey(item.ID))
+                _list.Add(item.ID, item);
         }
     }
 }

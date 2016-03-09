@@ -32,11 +32,24 @@ namespace RegionR
         private void FormPersonList_Load(object sender, EventArgs e)
         {
             LoadData();
+
+            SetEnabledComponent();
         }
 
         private void LoadData()
         {
             dgv = _personListController.ToDataGridView();
+        }
+
+        private void SetEnabledComponent()
+        {
+            ControlEditMode controlEditMode = new ControlEditMode(this.Controls, btnRefresh);
+            controlEditMode.SetEnableValue(btnContinue, true);
+            controlEditMode.SetEnableValue(btnDeleteFilter, true);
+            controlEditMode.SetEnableValue(tbSearch, true);
+            controlEditMode.SetEnableValue(menuStrip1, true);
+            addToolStripMenuItem.Enabled = controlEditMode.IsEditMode();
+            deleteToolStripMenuItem.Enabled = controlEditMode.IsEditMode();
         }
 
         private void NotImpliment_Click(object sender, EventArgs e)

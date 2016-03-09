@@ -12,6 +12,7 @@ namespace ClassLibrary
         string Insert(string tableName, params object[] Params);
         DataTable DoOther(string sql, params object[] Params);
         string SelectOne(string tableName);
-        void Delete(string tableName, int id);
+        string Delete(string tableName, int id);
+        string Update(string tableName, params object[] Params);
     }
 }

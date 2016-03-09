@@ -50,7 +50,7 @@ namespace ClassLibrary.SF
             return _uniqueInstance;
         }
 
-        public History GetItem(IHistory orgHistory, Action action)
+        public History GetItem(IHistory orgHistory, HistoryAction action)
         {
             var list = GetList(orgHistory).Where(item => item.Action == action).ToList();
 
@@ -68,7 +68,7 @@ namespace ClassLibrary.SF
                 _list.Add(history);
         }
 
-        public string GetItemString(IHistory orgHistory, Action action)
+        public string GetItemString(IHistory orgHistory, HistoryAction action)
         {
             History history = GetItem(orgHistory, action);
 

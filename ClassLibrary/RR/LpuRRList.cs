@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data;
+using ClassLibrary.SF;
 
-namespace ClassLibrary.SF
+namespace ClassLibrary
 {
     public class LpuRRList : BaseList
     {
@@ -17,7 +18,7 @@ namespace ClassLibrary.SF
         public static LpuRRList GetUniqueInstance()
         {
             if (_uniqueInstance == null)
-                _uniqueInstance = new LpuRRList("SF_LpuRR");
+                _uniqueInstance = new LpuRRList("LPU");
 
             return _uniqueInstance;
         }
@@ -44,7 +45,9 @@ namespace ClassLibrary.SF
             dt.Columns.Add("id");
             dt.Columns.Add("Название");
 
-            var list = List.Where(item => !(item as LpuRR).IsInList || (item as LpuRR) == lpuRR).OrderBy(item => item.Name);
+            var list = List.Select(item => item as LpuRR).ToList();
+
+            list = list.Where(item => (!item.IsInList || item == lpuRR) && !item.Name.Contains("Прочие")).OrderBy(item => item.Name).ToList();
 
             dt.Rows.Add("0", "Прочие ЛПУ");
 
@@ -56,17 +59,14 @@ namespace ClassLibrary.SF
         
         public DataTable ToDataTable(User user)
         {
-            List<BaseDictionary> list;
+            List<LpuRR> list = List.Select(item => item as LpuRR).ToList();
+            list = list.Where(item => !item.IsInList && !item.Name.ToLower().Contains("прочие") && !item.FullName.ToLower().Contains("прочие") && item.StatusLPU == StatusLPU.Активен).OrderBy(item => item.Name).OrderBy(item => item.RegionRR.Name).ToList();
 
-            if (user.RoleSF == RolesSF.Администратор)
-            {
-                list = List.Where(item => !(item as LpuRR).IsInList).OrderBy(item => item.Name).OrderBy(item => (item as LpuRR).RegionRR.Name).ToList();
-            }
-            else
+            if (user.RoleSF == RolesSF.Пользователь)
             {
                 UserRightList userRightList = UserRightList.GetUniqueInstance();
-
-                list = List.Where(item => userRightList.IsInList(user, (item as LpuRR).RegionRR) && !(item as LpuRR).IsInList).ToList();
+                
+                list = list.Where(item => userRightList.IsInList(user, item.RegionRR)).ToList();
             }
 
             DataTable dt = new DataTable();
@@ -90,6 +90,7 @@ namespace ClassLibrary.SF
             dt.Columns.Add("Сокр. название ЛПУ-RR");
             dt.Columns.Add("Полное название ЛПУ-RR");
             dt.Columns.Add("Регион RR");
+            dt.Columns.Add("Статус");
             dt.Columns.Add("Сокр. название ЛПУ-SF");
             dt.Columns.Add("Регион России");
             dt.Columns.Add("Город");
@@ -135,8 +136,26 @@ namespace ClassLibrary.SF
                     colorWhite = IsUserLpu(lpuRR, user);
                 }
 
-                dt.Rows.Add(new object[] { lpuRR.ID, lpuRR.Name, lpuRR.FullName, lpuRR.RegionRR.Name, lpuName, realRegionName, cityName, lpuID, colorWhite });
+                dt.Rows.Add(new object[] { lpuRR.ID, lpuRR.Name, lpuRR.FullName, lpuRR.RegionRR.Name, lpuRR.StatusLPU.ToString(), lpuName, realRegionName, cityName, lpuID, colorWhite });
             }
+
+            return dt;
+        }
+
+        public DataTable ToDataTable(RegionRR regionRR)
+        {
+            var list = List.Select(item => (item as LpuRR)).ToList();
+
+            list = list.Where(item => item.RegionRR == regionRR).OrderBy(item => item.Name).ToList();
+
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Номер", typeof(int));
+            dt.Columns.Add("Сокр. название ЛПУ");
+            dt.Columns.Add("Полное название ЛПУ");
+            dt.Columns.Add("Статус");
+
+            foreach (var item in list)
+                dt.Rows.Add(new object[] { item.ID, item.Name, item.FullName, item.StatusLPU.ToString() });
 
             return dt;
         }
@@ -151,6 +170,11 @@ namespace ClassLibrary.SF
         public override BaseDictionary GetItem(int id)
         {
             return ((List.Count == 0) || (List.Where(item => item.ID == id).Count() == 0)) ? null : List.Where(item => item.ID == id).First();
+        }
+
+        public void Add(LpuRR lpuRR)
+        {
+            base.Add(lpuRR);
         }
     }
 }

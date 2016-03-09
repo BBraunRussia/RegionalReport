@@ -5,7 +5,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
 
-namespace RegionR.SF
+namespace RegionR
 {
     public class SearchInDgv
     {

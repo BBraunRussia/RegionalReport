@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using ClassLibrary.SF;
+using ClassLibrary;
 
 namespace RegionR.SF
 {
@@ -36,6 +37,8 @@ namespace RegionR.SF
             LoadDictionaries();
 
             LoadData();
+
+            SetEnabledComponent();
         }
 
         private void LoadData()
@@ -96,8 +99,16 @@ namespace RegionR.SF
 
         private void ShowHistory()
         {
-            lbAutor.Text = _historyList.GetItemString(_organization, ClassLibrary.SF.Action.Создал);
-            lbEditor.Text = _historyList.GetItemString(_organization, ClassLibrary.SF.Action.Редактировал);
+            lbAutor.Text = _historyList.GetItemString(_organization, HistoryAction.Создал);
+            lbEditor.Text = _historyList.GetItemString(_organization, HistoryAction.Редактировал);
+        }
+
+        private void SetEnabledComponent()
+        {
+            ControlEditMode controlEditMode = new ControlEditMode(this.Controls, btnCancel);
+            controlEditMode.SetEnable(gbCategory.Controls);
+            controlEditMode.SetEnableValue(btnShowRules, true);
+            controlEditMode.SetEnableValue(btnShowPerson, true);
         }
 
         private void LoadDictionaries()

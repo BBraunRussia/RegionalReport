@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using ClassLibrary;
 using ClassLibrary.SF;
 
 namespace RegionR.SF
@@ -53,24 +54,27 @@ namespace RegionR.SF
             _typeFinList = TypeFinList.GetUniqueInstance();
             _historyList = HistoryList.GetUniqueInstance();
             _lpuRRList = LpuRRList.GetUniqueInstance();
-
-            cbLpuRR.Enabled = (UserLogged.Get().RoleSF == RolesSF.Администратор);
         }
 
         private void FormAddLPU_Load(object sender, EventArgs e)
         {
             LoadDictionaries();
 
+            SetEnabledComponent();
+
             LoadData();
         }
 
         private void LoadData()
         {
+            cbLpuRR.Enabled = (UserLogged.Get().RoleSF == RolesSF.Администратор);
+
             this.Text = (_parentLPU == null) ? "Карточка Организации \"ЛПУ\"" : "Карточка Организации \"Филиал ЛПУ\"";
             lbKPP.Text = (_parentLPU == null) ? "КПП:" : "КПП*:";
 
             lbNumberSF.Text = (_lpu.NumberSF == string.Empty) ? "не присвоен" : _lpu.NumberSF;
             lbNumberLpuID.Text = (_lpu.ID == 0) ? "не присвоен" : _lpu.ID.ToString();
+            lbLpuRRId.Text = (_lpu.LpuRR == null) ? "не присвоен" : _lpu.LpuRR.ID.ToString();
             lbTypeOrg.Text = _lpu.TypeOrg.ToString();
 
             if (_lpu.TypeLPU != null)
@@ -174,10 +178,17 @@ namespace RegionR.SF
             ShowHistory();
         }
 
+        private void SetEnabledComponent()
+        {
+            ControlEditMode controlEditMode = new ControlEditMode(this.Controls, btnCancel);
+            controlEditMode.SetEnable(groupBox3.Controls);
+            controlEditMode.SetEnableValue(treeView1, true);
+        }
+
         private void ShowHistory()
         {
-            lbAutor.Text = _historyList.GetItemString(_lpu, ClassLibrary.SF.Action.Создал);
-            lbEditor.Text = _historyList.GetItemString(_lpu, ClassLibrary.SF.Action.Редактировал);
+            lbAutor.Text = _historyList.GetItemString(_lpu, HistoryAction.Создал);
+            lbEditor.Text = _historyList.GetItemString(_lpu, HistoryAction.Редактировал);
         }
 
         private void SetPhoneCodeMask()
@@ -705,7 +716,10 @@ namespace RegionR.SF
             LpuRR lpuRR = _lpuRRList.GetItem(idLpuRR) as LpuRR;
 
             if (lpuRR != null)
+            {
                 lbRegionRR.Text = lpuRR.RegionRR.Name;
+                lbLpuRRId.Text = lpuRR.ID.ToString();
+            }
         }
     }
 }

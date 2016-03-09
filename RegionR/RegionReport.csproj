@@ -471,6 +471,7 @@
     <Compile Include="RRRent.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="SF\Classes\ControlEditMode.cs" />
     <Compile Include="SF\Classes\FilteredDGV.cs" />
     <Compile Include="SF\Classes\MainDGV.cs" />
     <Compile Include="SF\Classes\MyStatusStrip.cs" />
@@ -479,12 +480,12 @@
     <Compile Include="SF\Classes\TreeLPU.cs" />
     <Compile Include="SF\Classes\ClassForForm.cs" />
     <Compile Include="SF\Classes\UserLogged.cs" />
-    <Compile Include="SF\Controllers\BaseController.cs" />
-    <Compile Include="SF\Controllers\IController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\IController.cs" />
     <Compile Include="SF\Controllers\OrganizationListController.cs" />
-    <Compile Include="SF\Controllers\LpuController.cs" />
+    <Compile Include="Controllers\LpuRRController.cs" />
     <Compile Include="SF\Controllers\PersonListController.cs" />
-    <Compile Include="SF\Controllers\UserLpuRRListController.cs" />
+    <Compile Include="Controllers\UserLpuRRListController.cs" />
     <Compile Include="SF\FormAddBranch.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -568,6 +569,12 @@
     </Compile>
     <Compile Include="SF\FormSecondStepAddPerson.Designer.cs">
       <DependentUpon>FormSecondStepAddPerson.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SF\FormSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SF\FormSettings.Designer.cs">
+      <DependentUpon>FormSettings.cs</DependentUpon>
     </Compile>
     <Compile Include="SF\FormUserLpuRRList.cs">
       <SubType>Form</SubType>
@@ -833,6 +840,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SF\FormSecondStepAddPerson.resx">
       <DependentUpon>FormSecondStepAddPerson.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SF\FormSettings.resx">
+      <DependentUpon>FormSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SF\FormUserLpuRRList.resx">
       <DependentUpon>FormUserLpuRRList.cs</DependentUpon>

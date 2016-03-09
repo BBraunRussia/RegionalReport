@@ -38,6 +38,7 @@
             this.addPersonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.cityDictionaryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.userLpuListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
             this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,7 +57,9 @@
             this.btnReload = new System.Windows.Forms.Button();
             this.btnDeleteFilter = new System.Windows.Forms.Button();
             this.btnContinue = new System.Windows.Forms.Button();
-            this.userLpuListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
+            this.excelAllFieldsRusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -87,6 +90,8 @@
             this.importToolStripMenuItem,
             this.exportToolStripMenuItem,
             this.toolStripMenuItem4,
+            this.settingsToolStripMenuItem,
+            this.toolStripMenuItem5,
             this.exitToolStripMenuItem});
             this.actionsToolStripMenuItem.Name = "actionsToolStripMenuItem";
             this.actionsToolStripMenuItem.Size = new System.Drawing.Size(70, 20);
@@ -137,6 +142,13 @@
             this.cityDictionaryToolStripMenuItem.Text = "Справочник городов";
             this.cityDictionaryToolStripMenuItem.Click += new System.EventHandler(this.cityDictionaryToolStripMenuItem_Click);
             // 
+            // userLpuListToolStripMenuItem
+            // 
+            this.userLpuListToolStripMenuItem.Name = "userLpuListToolStripMenuItem";
+            this.userLpuListToolStripMenuItem.Size = new System.Drawing.Size(270, 22);
+            this.userLpuListToolStripMenuItem.Text = "ЛПУ региональных представителей";
+            this.userLpuListToolStripMenuItem.Click += new System.EventHandler(this.userLpuListToolStripMenuItem_Click);
+            // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
@@ -151,10 +163,11 @@
             // 
             // exportToolStripMenuItem
             // 
+            this.exportToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.excelAllFieldsRusToolStripMenuItem});
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
             this.exportToolStripMenuItem.Size = new System.Drawing.Size(270, 22);
             this.exportToolStripMenuItem.Text = "Экспорт";
-            this.exportToolStripMenuItem.Click += new System.EventHandler(this.NotImpliment_Click);
             // 
             // toolStripMenuItem4
             // 
@@ -297,12 +310,24 @@
             this.btnContinue.UseVisualStyleBackColor = true;
             this.btnContinue.Click += new System.EventHandler(this.tbSearch_TextChanged);
             // 
-            // userLpuListToolStripMenuItem
+            // settingsToolStripMenuItem
             // 
-            this.userLpuListToolStripMenuItem.Name = "userLpuListToolStripMenuItem";
-            this.userLpuListToolStripMenuItem.Size = new System.Drawing.Size(270, 22);
-            this.userLpuListToolStripMenuItem.Text = "ЛПУ региональных представителей";
-            this.userLpuListToolStripMenuItem.Click += new System.EventHandler(this.userLpuListToolStripMenuItem_Click);
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(270, 22);
+            this.settingsToolStripMenuItem.Text = "Настройки";
+            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem5
+            // 
+            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(267, 6);
+            // 
+            // excelAllFieldsRusToolStripMenuItem
+            // 
+            this.excelAllFieldsRusToolStripMenuItem.Name = "excelAllFieldsRusToolStripMenuItem";
+            this.excelAllFieldsRusToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+            this.excelAllFieldsRusToolStripMenuItem.Text = "Excel, все поля, русский язык";
+            this.excelAllFieldsRusToolStripMenuItem.Click += new System.EventHandler(this.excelAllFieldsRusToolStripMenuItem_Click);
             // 
             // FormOrganizationList
             // 
@@ -363,5 +388,8 @@
         private System.Windows.Forms.Button btnDeleteFilter;
         private System.Windows.Forms.Button btnContinue;
         private System.Windows.Forms.ToolStripMenuItem userLpuListToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
+        private System.Windows.Forms.ToolStripMenuItem excelAllFieldsRusToolStripMenuItem;
     }
 }

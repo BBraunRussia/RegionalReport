@@ -6,9 +6,9 @@ using System.Windows.Forms;
 using ClassLibrary.SF;
 using System.Data;
 
-namespace RegionR.SF
+namespace RegionR
 {
-    public class BaseOperations
+    public abstract class BaseOperations
     {
         private FilteredDGV _filtredDGV;
         private SortDGV _sortDGV;

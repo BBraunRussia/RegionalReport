@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using ClassLibrary.SF;
+using ClassLibrary;
 
 namespace RegionR.SF
 {
@@ -43,6 +44,8 @@ namespace RegionR.SF
             LoadDictionary();
 
             LoadData();
+
+            SetEnabledComponent();
         }
 
         private void LoadData()
@@ -86,8 +89,13 @@ namespace RegionR.SF
 
         private void ShowHistory()
         {
-            lbAutor.Text = _historyList.GetItemString(_person, ClassLibrary.SF.Action.Создал);
-            lbEditor.Text = _historyList.GetItemString(_person, ClassLibrary.SF.Action.Редактировал);
+            lbAutor.Text = _historyList.GetItemString(_person, HistoryAction.Создал);
+            lbEditor.Text = _historyList.GetItemString(_person, HistoryAction.Редактировал);
+        }
+
+        private void SetEnabledComponent()
+        {
+            ControlEditMode controlEditMode = new ControlEditMode(this.Controls, btnClose);
         }
 
         private void SetPhoneCode()
@@ -298,6 +306,19 @@ namespace RegionR.SF
             }
 
             return false;
+        }
+
+        private void btnChangeSubOrganization_Click(object sender, EventArgs e)
+        {
+            if (!TrySave())
+                return;
+
+            FormSecondStepAddPerson formSecondStepAddPerson = new FormSecondStepAddPerson(_person, true);
+            if (formSecondStepAddPerson.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                _changeSubOrg = true;
+                LoadData();
+            }
         }
     }
 }

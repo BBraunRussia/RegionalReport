@@ -5,6 +5,7 @@ using System.Text;
 using System.Data;
 using ClassLibrary.SF;
 using System.Windows.Forms;
+using ClassLibrary;
 
 namespace RegionR.SF
 {
@@ -91,7 +92,7 @@ namespace RegionR.SF
             {
                 Person person = GetPerson();
                 person.Delete();
-                History.Save(person, UserLogged.Get(), ClassLibrary.SF.Action.Удалил);
+                History.Save(person, UserLogged.Get(), HistoryAction.Удалил);
                 return true;
             }
 

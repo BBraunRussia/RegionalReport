@@ -9,6 +9,10 @@ namespace ClassLibrary.SF
     {
         RealRegion RealRegion { get; set; }
         City City { get; set; }
+        string District { get; set; }
         string INN { get; set; }
+        string KPP { get; set; }
+        string PostIndex { get; set; }
+        string Street { get; set; }
     }
 }

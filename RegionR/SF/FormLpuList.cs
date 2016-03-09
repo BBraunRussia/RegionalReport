@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using RegionR.SF;
 using RegionR.Directories;
+using ClassLibrary;
 
 namespace RegionR
 {
@@ -15,7 +16,7 @@ namespace RegionR
     {
         private MyStatusStrip _myStatusStrip;
 
-        private LpuController _lpuController;
+        private LpuRRController _lpuController;
 
         public FormLpuList()
         {
@@ -23,26 +24,26 @@ namespace RegionR
 
             _myStatusStrip = new MyStatusStrip(dgv, statusStrip1);
 
-            _lpuController = new LpuController(dgv);
+            _lpuController = new LpuRRController(dgv);
 
-            btnShowLPUForEdit.Visible = (UserLogged.Get().RoleSF == ClassLibrary.SF.RolesSF.Администратор);
+            btnShowLPUForEdit.Visible = (UserLogged.Get().RoleSF == RolesSF.Администратор);
         }
 
         private void FormOrganizationWithLpuRRList_Load(object sender, EventArgs e)
         {
             LoadData();
-
-            WriteStatus();
         }
         
-        private void WriteStatus()
-        {
-            _myStatusStrip.writeStatus();
-        }
-
         private void LoadData()
         {
             dgv = _lpuController.ToDataGridView();
+
+            WriteStatus();
+        }
+
+        private void WriteStatus()
+        {
+            _myStatusStrip.writeStatus();
         }
 
         private void NotImpliment_Click(object sender, EventArgs e)
@@ -79,6 +80,10 @@ namespace RegionR
         private void dgv_Sorted(object sender, EventArgs e)
         {
             _lpuController.ApplyFilter();
+
+            _lpuController.SetStyle();
+
+            WriteStatus();
         }
 
         private void fiterToolStripMenuItem_Click(object sender, EventArgs e)
@@ -86,6 +91,8 @@ namespace RegionR
             _lpuController.CreateFilter();
 
             btnDeleteFilter.Visible = true;
+
+            WriteStatus();
         }
 
         private void sortToolStripMenuItem_Click(object sender, EventArgs e)

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace RegionR.SF
+namespace RegionR
 {
     public interface IController
     {

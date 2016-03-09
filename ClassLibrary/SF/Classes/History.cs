@@ -11,7 +11,7 @@ namespace ClassLibrary.SF
         private HistoryType _type;
 
         private User _user;
-        private Action _action;
+        private HistoryAction _action;
         private DateTime _datetime;
 
         public History(DataRow row)
@@ -28,18 +28,18 @@ namespace ClassLibrary.SF
 
             int idAction;
             int.TryParse(row[4].ToString(), out idAction);
-            _action = (Action)idAction;
+            _action = (HistoryAction)idAction;
 
             DateTime.TryParse(row[5].ToString(), out _datetime);
         }
 
-        public static void Save(IHistory orgHistory, User user, Action action = Action.Создал)
+        public static void Save(IHistory orgHistory, User user, HistoryAction action = HistoryAction.Создал)
         {
             HistoryList historyList = HistoryList.GetUniqueInstance();
 
             History history;
             
-            if (action == Action.Удалил)
+            if (action == HistoryAction.Удалил)
             {
                 history = new History(orgHistory, user);
                 history._action = action;
@@ -50,13 +50,13 @@ namespace ClassLibrary.SF
                 
                 if (list.Count == 2)
                 {
-                    history = historyList.GetItem(orgHistory, Action.Редактировал);
+                    history = historyList.GetItem(orgHistory, HistoryAction.Редактировал);
                     history._user = user;
                 }
                 else
                 {
                     history = new History(orgHistory, user);
-                    history._action = (list.Count == 0) ? Action.Создал : Action.Редактировал;
+                    history._action = (list.Count == 0) ? HistoryAction.Создал : HistoryAction.Редактировал;
                 }
             }
 
@@ -76,7 +76,7 @@ namespace ClassLibrary.SF
         }
 
         public HistoryType Type { get { return _type; } }
-        public Action Action { get { return _action; } }
+        public HistoryAction Action { get { return _action; } }
                 
         public override string ToString()
         {

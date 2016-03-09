@@ -65,6 +65,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.lbEditor = new System.Windows.Forms.Label();
             this.lbAutor = new System.Windows.Forms.Label();
+            this.btnChangeSubOrganization = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -402,11 +403,22 @@
             this.lbAutor.TabIndex = 138;
             this.lbAutor.Text = "Создал";
             // 
+            // btnChangeSubOrganization
+            // 
+            this.btnChangeSubOrganization.Location = new System.Drawing.Point(690, 229);
+            this.btnChangeSubOrganization.Name = "btnChangeSubOrganization";
+            this.btnChangeSubOrganization.Size = new System.Drawing.Size(153, 46);
+            this.btnChangeSubOrganization.TabIndex = 140;
+            this.btnChangeSubOrganization.Text = "Сменить подразделение";
+            this.btnChangeSubOrganization.UseVisualStyleBackColor = true;
+            this.btnChangeSubOrganization.Click += new System.EventHandler(this.btnChangeSubOrganization_Click);
+            // 
             // FormAddPerson
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1049, 392);
+            this.Controls.Add(this.btnChangeSubOrganization);
             this.Controls.Add(this.lbEditor);
             this.Controls.Add(this.lbAutor);
             this.Controls.Add(this.cbAcademTitle);
@@ -489,5 +501,6 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label lbEditor;
         private System.Windows.Forms.Label lbAutor;
+        private System.Windows.Forms.Button btnChangeSubOrganization;
     }
 }

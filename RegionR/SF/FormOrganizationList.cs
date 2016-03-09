@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using ClassLibrary.SF;
 using RegionR.SF;
+using ClassLibrary;
 
 namespace RegionR
 {
@@ -26,16 +27,37 @@ namespace RegionR
             _organizationListController = new OrganizationListController(dgv);
 
             userLpuListToolStripMenuItem.Visible = (UserLogged.Get().RoleSF == RolesSF.Администратор);
+            settingsToolStripMenuItem.Visible = (UserLogged.Get().RoleSF == RolesSF.Администратор);
+            importToolStripMenuItem.Visible = (UserLogged.Get().RoleSF == RolesSF.Администратор);
+            exportToolStripMenuItem.Visible = (UserLogged.Get().RoleSF == RolesSF.Администратор);
+            toolStripMenuItem4.Visible = (UserLogged.Get().RoleSF == RolesSF.Администратор);
+            toolStripMenuItem5.Visible = (UserLogged.Get().RoleSF == RolesSF.Администратор);
         }
 
         private void formOrganizationList_Load(object sender, EventArgs e)
         {
             LoadData();
+
+            SetEnabledComponent();
         }
 
         private void LoadData()
         {
             dgv = _organizationListController.ToDataGridView();
+        }
+
+        private void SetEnabledComponent()
+        {
+            ControlEditMode controlEditMode = new ControlEditMode(this.Controls, btnReload);
+            controlEditMode.SetEnableValue(btnContinue, true);
+            controlEditMode.SetEnableValue(btnDeleteFilter, true);
+            controlEditMode.SetEnableValue(tbSearch, true);
+            controlEditMode.SetEnableValue(dgv, true);
+            controlEditMode.SetEnableValue(menuStrip1, true);
+            addOrganizationToolStripMenuItem.Enabled = controlEditMode.IsEditMode();
+            deleteToolStripMenuItem.Enabled = controlEditMode.IsEditMode();
+            addPersonToolStripMenuItem.Enabled = controlEditMode.IsEditMode();
+            addPersonToolStripMenuItem1.Enabled = controlEditMode.IsEditMode();
         }
 
         private void btnAddOrganization_Click(object sender, EventArgs e)
@@ -155,6 +177,18 @@ namespace RegionR
         {
             FormUserLpuRRList formUserLpuRRList = new FormUserLpuRRList();
             formUserLpuRRList.ShowDialog();
+        }
+
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormSettings formSettings = new FormSettings();
+            formSettings.ShowDialog();
+        }
+
+        private void excelAllFieldsRusToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExportOrganization exportOrganization = new ExportOrganization();
+            exportOrganization.Export();
         }
     }
 }

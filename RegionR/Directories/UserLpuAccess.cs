@@ -9,15 +9,35 @@ using System.Windows.Forms;
 using RegionR.addedit;
 using RegionR.other;
 using DataLayer;
+using ClassLibrary;
 
 namespace RegionR.Directories
 {
     public partial class UserLpuAccess : Form
     {
+        private LpuRRController _lpuRRController;
+        private UserLpuRRListController _userLpuRRListController;
+
+        private RegionRRList _regionRRList;
+        private LpuRRList _lpuRRList;
+        private UserLpuRRList _userLpuRRList;
+        private UserList _userList;
+
+        Color bbgreen3 = Color.FromArgb(115, 214, 186);
+        Color bbgray4 = Color.FromArgb(150, 150, 150);
+
         public UserLpuAccess()
         {
             InitializeComponent();
 
+            _regionRRList = RegionRRList.GetUniqueInstance();
+            _lpuRRList = LpuRRList.GetUniqueInstance();
+            _userLpuRRList = UserLpuRRList.GetUniqueInstance();
+            _userList = UserList.GetUniqueInstance();
+
+            _lpuRRController = new LpuRRController(_dgv1);
+            _userLpuRRListController = new UserLpuRRListController(_dgv2);
+            
             globalData.load = false;
 
             cbSDiv.SelectedIndex = 0;
@@ -28,28 +48,24 @@ namespace RegionR.Directories
 
             fillRegion();
             fillUsers();
+        }
 
+        private void UserLpuAccess_Load(object sender, EventArgs e)
+        {
             loadData1();
             loadData2();
         }
-
-        Color bbgreen3 = Color.FromArgb(115, 214, 186);
-        Color bbgray4 = Color.FromArgb(150, 150, 150);
-
+        
         private void fillRegion()
         {
             globalData.load = false;
 
-            Sql sql1 = new Sql();
-            DataTable dt = sql1.GetRecords("exec Region_Select '', @p1", cbSDiv.SelectedItem);
+            DataTable dt = _regionRRList.ToDataTable();
 
-            if (dt != null)
-            {
-                cbRegions.DataSource = dt;
-                cbRegions.DisplayMember = "reg_nameRus";
-                cbRegions.ValueMember = "reg_id";
-            }
-
+            cbRegions.DataSource = dt;
+            cbRegions.DisplayMember = dt.Columns[1].ColumnName;
+            cbRegions.ValueMember = dt.Columns[0].ColumnName;
+            
             globalData.load = true;
         }
 
@@ -72,55 +88,51 @@ namespace RegionR.Directories
 
         private void loadData1()
         {
-            Sql sql1 = new Sql();
-            _dgv1.DataSource = sql1.GetRecords("exec SelLPUbyRegID @p1", cbRegions.SelectedValue);
-            
-            _dgv1.Columns["lpu_id"].Visible = false;
-            _dgv1.Columns["lpu_sname"].Width = 88;
-            _dgv1.Columns["lpu_name"].Width = 335;
-            
+            RegionRR regionRR = GetRegionRR();
 
-            _dgv1.Columns["lpu_sname"].HeaderText = "Сокращенное наименование";
-        _dgv1.Columns["lpu_name"].HeaderText = "Полное наименование";
+            _dgv1 = _lpuRRController.ToDataGridView(regionRR);
+        }
+
+        private RegionRR GetRegionRR()
+        {
+            int idRegionRR;
+            int.TryParse(cbRegions.SelectedValue.ToString(), out idRegionRR);
+            return _regionRRList.GetItem(idRegionRR) as RegionRR;
+        }
+
+        private LpuRR GetLpuRR()
+        {
+            int idLPU;
+            int.TryParse(_dgv1.Rows[_dgv1.SelectedCells[0].RowIndex].Cells[0].Value.ToString(), out idLPU);
+            return _lpuRRList.GetItem(idLPU) as LpuRR;
+        }
+
+        private UserLpuRR GetUserLpuRR()
+        {
+            int idUserLpu;
+            int.TryParse(_dgv2.Rows[_dgv2.SelectedCells[0].RowIndex].Cells[0].Value.ToString(), out idUserLpu);
+            return _userLpuRRList.GetItem(idUserLpu) as UserLpuRR;
+        }
+
+        private User GetUser()
+        {
+            int idUser;
+            int.TryParse(cbUsers.SelectedValue.ToString(), out idUser);
+            return _userList.GetItem(idUser) as User;
+        }
+
+        private SDiv GetSDiv()
+        {
+            return (SDiv)(cbSDiv.SelectedIndex + 1);
         }
 
         private void loadData2()
         {
-            Sql sql1 = new Sql();
-            DataTable dt1 = sql1.GetRecords("exec SelLPU @p1, @p2, @p3", cbUsers.SelectedValue, cbRegions.SelectedValue, cbSDiv.SelectedItem);            
-
-            if (_dgv2.Columns.Count == 0)
-            {
-                _dgv2.Columns.Add("ulpu_id", "");
-                _dgv2.Columns.Add("lpu_sname", "");
-                _dgv2.Columns.Add("lpu_name", "");
-                _dgv2.Columns.Add("ulpu_year1", "");
-                _dgv2.Columns.Add("ulpu_year2", "");
-
-                _dgv2.Columns["ulpu_id"].Visible = false;
-                _dgv2.Columns["lpu_sname"].Width = 88;
-                _dgv2.Columns["lpu_name"].Width = 200;
-                _dgv2.Columns["ulpu_year1"].Width = 65;
-                _dgv2.Columns["ulpu_year2"].Width = 65;
-
-                _dgv2.Columns["lpu_sname"].HeaderText = "Сокращенное наименование";
-                _dgv2.Columns["lpu_name"].HeaderText = "Полное наименование";
-
-                _dgv2.Columns["ulpu_year1"].HeaderText = "Начало отчётности";
-                _dgv2.Columns["ulpu_year2"].HeaderText = "Окончание отчётности";
-            }
-
-            int i = 0;
-
-            _dgv2.Rows.Clear();
+            User user = GetUser();
+            RegionRR regionRR = GetRegionRR();
+            SDiv sdiv = GetSDiv();
             
-            foreach (DataRow row in dt1.Rows)
-            {
-                _dgv2.Rows.Add(row.ItemArray);
-                if(Convert.ToInt32(row.ItemArray[4].ToString()) < globalData.CurDate.Year)
-                    _dgv2.Rows[i].DefaultCellStyle.BackColor = bbgray4;
-                i++;
-            }
+            _dgv2 = _userLpuRRListController.ToDataGridView(user, regionRR, sdiv);
         }
 
         private void cbSDiv_SelectedIndexChanged(object sender, EventArgs e)
@@ -153,27 +165,25 @@ namespace RegionR.Directories
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            AddEditLPU aeLPU = new AddEditLPU(cbRegions.SelectedValue.ToString());
-            aeLPU.ShowDialog();
+            RegionRR regionRR = GetRegionRR();
+
+            LpuRR lpuRR = new LpuRR(regionRR);
+
+            AddEditLPU aeLPU = new AddEditLPU(lpuRR);
+            if (aeLPU.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                loadData1();
         }
 
         private void _dgv1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            try
-            {
-                if (_dgv1.Rows[_dgv1.SelectedCells[0].RowIndex].Cells["lpu_id"].Value.ToString() == "0")
-                {
-                    MessageBox.Show("Для редактирования выделите ЛПУ.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
+            if ((e.RowIndex < 0) || (e.ColumnIndex < 0))
+                return;
 
-                AddEditLPU aeLPU = new AddEditLPU(_dgv1.Rows[_dgv1.SelectedCells[0].RowIndex].Cells["lpu_id"].Value.ToString(), _dgv1.Rows[_dgv1.SelectedCells[0].RowIndex].Cells["lpu_sname"].Value.ToString(), _dgv1.Rows[_dgv1.SelectedCells[0].RowIndex].Cells["lpu_name"].Value.ToString());
-                aeLPU.ShowDialog();
-            }
-            catch
-            {
-                MessageBox.Show("Не удалось войти в режим редактирования.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            LpuRR lpuRR = GetLpuRR();
+            
+            AddEditLPU aeLPU = new AddEditLPU(lpuRR);
+            if (aeLPU.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                loadData1();
         }
 
         private void LPU_Activated(object sender, EventArgs e)
@@ -185,90 +195,112 @@ namespace RegionR.Directories
             }
         }
 
-        private void _dgv1_KeyDown(object sender, KeyEventArgs e)
+        private void btnDelete_Click(object sender, EventArgs e)
         {
-            /*
-            if (e.KeyData == Keys.Delete)
-            {
-                deleteLPU();
-            }
-            */
+            DeleteLPU();
         }
         
-        private void deleteLPU()
+        private void DeleteLPU()
         {
-            Sql sql1 = new Sql();
-
             if (globalData.UserAccess == 1)
             {
-                DialogResult dr = MessageBox.Show("Удалить выделенные строки?", "Удаление ЛПУ", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (dr == System.Windows.Forms.DialogResult.Yes)
+                LpuRR lpuRR = GetLpuRR();
+
+                if (lpuRR.StatusLPU == StatusLPU.Активен)
                 {
-                    foreach (DataGridViewCell cell in _dgv1.SelectedCells)
-                    {
-                        if (_dgv1.Rows[cell.RowIndex].Cells[0].Value.ToString() != String.Empty)
-                        {
-                            sql1.GetRecords("exec DelLPU @p1", _dgv1.Rows[cell.RowIndex].Cells[0].Value.ToString());
-                        }
-                    }
-                    loadData1();
+                    MessageBox.Show("Перед удалением нужно задать статус ЛПУ \"Неактивен\"", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                if (_userLpuRRList.IsInList(lpuRR))
+                {
+                    MessageBox.Show("Перед удалением нужно удалить из списка \"ЛПУ пользователя\"", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                string preDeleteMessage = CreatePreDeleteMessage(lpuRR);
+                
+                if (MessageBox.Show(preDeleteMessage, "Удаление ЛПУ", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
+                {
+                    if (_lpuRRList.Delete(lpuRR) == "1")
+                        loadData1();
+                    else
+                        MessageBox.Show("Не удалось удалить, сначала необходимо удалить ЛПУ из списка \"ЛПУ пользователя\"", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+        }
+
+        private string CreatePreDeleteMessage(LpuRR lpuRR)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("Удалить ЛПУ?");
+            sb.Append("Сокр. наим.: ");
+            sb.AppendLine(lpuRR.Name);
+            sb.Append("Полное наим.: ");
+            sb.AppendLine(lpuRR.FullName);
+            sb.Append("Номер: ");
+            sb.AppendLine(lpuRR.ID.ToString());
+
+            return sb.ToString();
         }
 
         private void btnAddUserLPU_Click(object sender, EventArgs e)
         {
-            Sql sql1 = new Sql();
+            LpuRR lpuRR = GetLpuRR();
 
-            foreach (DataGridViewCell cell in _dgv1.SelectedCells)
+            if (lpuRR.StatusLPU == StatusLPU.Неактивен)
             {
-                if (_dgv1.Rows[cell.RowIndex].Cells[0].Value.ToString() != String.Empty)
-                {
-                    sql1.GetRecords("exec InsUserLPU 0, @p1, @p2, @p3, @p4", cbUsers.SelectedValue, _dgv1.Rows[cell.RowIndex].Cells[0].Value.ToString(), cbSDiv.SelectedItem, globalData.UserID);
-                }
+                MessageBox.Show("Невозможно прикрепить ЛПУ к пользователю, ЛПУ имеет статус \"Неактивен\"", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
+
+            User user = GetUser();
+            SDiv sdiv = GetSDiv();
+
+            UserLpuRR userLpuRR = new UserLpuRR(user, lpuRR, sdiv);
+            userLpuRR.Save(UserLogged.Get());
 
             loadData2();
         }
-
-        private void _dgv2_MouseDoubleClick(object sender, MouseEventArgs e)
+        
+        private void _dgv2_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            try
-            {
-                if (_dgv2.Rows[_dgv2.SelectedCells[0].RowIndex].Cells["ulpu_id"].Value.ToString() == "0")
-                {
-                    MessageBox.Show("Для редактирования выделите ЛПУ.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
+            if ((e.ColumnIndex < 0) || (e.RowIndex < 0))
+                return;
 
-                EditUserLPU eULPU = new EditUserLPU(_dgv2.Rows[_dgv2.SelectedCells[0].RowIndex].Cells["ulpu_id"].Value.ToString(), cbSDiv.SelectedItem.ToString(), cbRegions.SelectedValue.ToString(), cbUsers.SelectedValue.ToString());
-                eULPU.ShowDialog();
-            }
-            catch
-            {
-                MessageBox.Show("Не удалось войти в режим редактирования.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            UserLpuRR userLpu = GetUserLpuRR();
+
+            EditUserLPU editUserLPU = new EditUserLPU(userLpu);
+            if (editUserLPU.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                loadData2();
         }
 
         private void btnDelUserLPU_Click(object sender, EventArgs e)
         {
-            Sql sql1 = new Sql();
+            UserLpuRR userLpuRR = GetUserLpuRR();
 
-            foreach (DataGridViewCell cell in _dgv2.SelectedCells)
-            {
-                if (_dgv2.Rows[cell.RowIndex].Cells[0].Value.ToString() != String.Empty)
-                {
-                    sql1.GetRecords("exec DelUserLPU @p1", _dgv2.Rows[cell.RowIndex].Cells[0].Value.ToString());
-                }
-            }
+            string res = _userLpuRRList.Delete(userLpuRR);
 
-            loadData2();
+            if (res == "1")
+                loadData2();
+            else
+                MessageBox.Show("Удаление невозможно, на ЛПУ разнесены продажи", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void btnMoveSales_Click(object sender, EventArgs e)
         {
             MoveSales ms = new MoveSales(_dgv2.Rows[_dgv2.SelectedCells[0].RowIndex].Cells["ulpu_id"].Value.ToString(), _dgv2.Rows[_dgv2.SelectedCells[0].RowIndex].Cells["lpu_sname"].Value.ToString(), cbUsers.SelectedValue.ToString(), cbRegions.SelectedValue.ToString(), cbSDiv.SelectedItem.ToString());
             ms.ShowDialog();
+        }
+
+        private void _dgv2_Sorted(object sender, EventArgs e)
+        {
+            _userLpuRRListController.SetStyle();
+        }
+
+        private void _dgv1_Sorted(object sender, EventArgs e)
+        {
+            _lpuRRController.SetStyle();
         }
     }
 }

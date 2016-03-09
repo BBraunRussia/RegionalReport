@@ -47,6 +47,9 @@ namespace ClassLibrary.SF
             {
                 for (int j = 0; j < row.ItemArray.Count(); j++ )
                 {
+                    if (row.ItemArray[j].ToString() == string.Empty)
+                        continue;
+
                     excel.setValue(i, (j + 1), row.ItemArray[j].ToString());
                 }
 

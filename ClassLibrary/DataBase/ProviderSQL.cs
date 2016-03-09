@@ -33,6 +33,16 @@ namespace ClassLibrary
 
         public string Insert(string tableName, params object[] Params)
         {
+            return _db.GetRecordsOne("exec " + tableName + "_Insert " + CreateParamsString(Params), Params);
+        }
+                
+        public string Update(string tableName, params object[] Params)
+        {
+            return _db.GetRecordsOne("exec " + tableName + "_Update " + CreateParamsString(Params), Params);
+        }
+
+        private string CreateParamsString(params object[] Params)
+        {
             StringBuilder paramList = new StringBuilder();
 
             for (int i = 1; i <= Params.Count(); i++)
@@ -42,14 +52,13 @@ namespace ClassLibrary
                 paramList.Append("@p" + i);
             }
 
-            return _db.GetRecordsOne("exec " + tableName + "_Insert " + paramList.ToString(), Params);
+            return paramList.ToString();
         }
 
-        public void Delete(string tableName, int id)
+        public string Delete(string tableName, int id)
         {
-            _db.GetRecords("exec " + tableName + "_Delete @p1", id);
+            return _db.GetRecordsOne("exec " + tableName + "_Delete @p1", id);
         }
-
 
         public DataTable DoOther(string sql, params object[] Params)
         {

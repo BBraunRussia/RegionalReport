@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data;
+using System.Collections;
 
 namespace ClassLibrary.SF
 {
-    public class OrganizationList
+    public class OrganizationList : IEnumerable
     {
         private Dictionary<int, Organization> _list;
         private IProvider _provider;
@@ -20,6 +21,7 @@ namespace ClassLibrary.SF
             LoadFromDataBase();
         }
 
+        public Dictionary<int, Organization> List { get { return _list; } }
         public List<LPU> ListLpu { get { return _list.Where(item => (item.Value is LPU) && item.Value.ParentOrganization == null).Select(item => item.Value as LPU).ToList(); } }
         public List<OtherOrganization> ListOther { get { return _list.Where(item => item.Value is OtherOrganization).Select(item => item.Value as OtherOrganization).ToList(); } }
 
@@ -92,5 +94,35 @@ namespace ClassLibrary.SF
         {
             return _list.Where(item => item.Value.ParentOrganization == organization && (item.Value is LPU)).OrderBy(item => item.Value.ShortName).Select(item => item.Value).ToList();
         }
+
+        public IEnumerator GetEnumerator()
+        {
+            return _list.GetEnumerator();
+        }
+        /*
+        private class OrganizationListEnumerator : IEnumerator
+        {
+            private int _key;
+            private Dictionary<int, Organization> _list;
+
+            public OrganizationListEnumerator(OrganizationList organizationList)
+            {
+                _list = organizationList._list;
+                _key = -1;
+            }
+
+            public object Current { get { return _list[_key]; } }
+
+            public bool MoveNext()
+            {
+                _list.GetEnumerator();
+            }
+
+            public void Reset()
+            {
+                _key = -1;
+            }
+        }
+        */
     }
 }

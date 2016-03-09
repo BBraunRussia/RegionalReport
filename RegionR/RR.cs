@@ -15494,12 +15494,13 @@ namespace RegionR
 
         private void btnClearUserAcc_Click(object sender, EventArgs e)
         {
+            Sql sql = new Sql();
+
             foreach (DataGridViewCell cell in _dgv12.SelectedCells)
             {
                 int id = Convert.ToInt32(_dgv12.Rows[cell.RowIndex].Cells[0].Value);
-
-                User user = new User(id);
-                user.ClearAcc(dateTimePicker6.Value);
+                
+                sql.GetRecords("exec Acc_ClearFact_ByUser @p1, @p2", id, dateTimePicker6.Value);
             }
 
             selPSAcc();
