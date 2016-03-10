@@ -71,6 +71,8 @@ namespace RegionR
 
                 if (lpuRR.StatusLPU == StatusLPU.Неактивен)
                     row.DefaultCellStyle.ForeColor = Color.Red;
+                else if (lpuRR.StatusLPU == StatusLPU.Групповой)
+                    row.DefaultCellStyle.ForeColor = Color.Blue;
             }
         }
 

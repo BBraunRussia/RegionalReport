@@ -105,8 +105,8 @@ namespace RegionR.SF
         public bool DeleteOrganization()
         {
             Organization organization = GetOrganization();
-
-            if (ClassForForm.DeleteOrganization(organization))
+            
+            if ((organization != null) && (ClassForForm.DeleteOrganization(organization)))
             {
                 History.Save(organization, UserLogged.Get(), HistoryAction.Удалил);
                 return true;
@@ -139,6 +139,9 @@ namespace RegionR.SF
         
         private Organization GetOrganization()
         {
+            if (_dgv.CurrentCell == null)
+                return null;
+
             int id;
             int.TryParse(_dgv.Rows[_dgv.CurrentCell.RowIndex].Cells[0].Value.ToString(), out id);
 
