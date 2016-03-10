@@ -33,12 +33,12 @@ namespace RegionR
             _dgv.Columns[2].Width = 260;
             _dgv.Columns[3].Width = 80;
 
-            SetTextColor();
+            SetStyle();
 
             return _dgv;
         }
 
-        public void SetTextColor()
+        public void SetStyle()
         {
             foreach (DataGridViewRow row in _dgv.Rows)
             {
@@ -72,7 +72,7 @@ namespace RegionR
                     row.DefaultCellStyle.BackColor = Color.Silver;
             }
 
-            SetTextColor();
+            SetStyle();
 
             return _dgv;
         }

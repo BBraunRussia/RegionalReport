@@ -148,5 +148,11 @@ namespace RegionR.SF
             OrganizationList organizationList = OrganizationList.GetUniqueInstance();
             return organizationList.GetItem(id);
         }
+
+
+        public void SetStyle()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

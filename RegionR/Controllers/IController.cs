@@ -10,5 +10,12 @@ namespace RegionR
     {
         DataGridView ToDataGridView();
         void ReLoad();
+        void DeleteFilter();
+        void CreateFilter();
+        void ApplyFilter();
+        void Sort();
+        void Search(string text);
+        void ExportInExcel();
+        void SetStyle();
     }
 }

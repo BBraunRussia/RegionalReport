@@ -114,5 +114,11 @@ namespace RegionR.SF
 
             return _personList.GetItem(id) as Person;
         }
+
+
+        public void SetStyle()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

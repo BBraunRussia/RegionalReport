@@ -16,7 +16,12 @@ namespace RegionR
     {
         private MyStatusStrip _myStatusStrip;
 
-        private LpuRRController _lpuController;
+        private IController _userLpuRRListController;
+        private IController _lpuRRController;
+
+        private IController _controller;
+
+        private Color _bbgreen3 = Color.FromArgb(115, 214, 186);
 
         public FormLpuList()
         {
@@ -24,7 +29,10 @@ namespace RegionR
 
             _myStatusStrip = new MyStatusStrip(dgv, statusStrip1);
 
-            _lpuController = new LpuRRController(dgv);
+            _lpuRRController = new LpuRRController(dgv);
+            _userLpuRRListController = new UserLpuRRListController(dgv);
+
+            _controller = _lpuRRController;
 
             btnShowLPUForEdit.Visible = (UserLogged.Get().RoleSF == RolesSF.Администратор);
         }
@@ -36,7 +44,7 @@ namespace RegionR
         
         private void LoadData()
         {
-            dgv = _lpuController.ToDataGridView();
+            dgv = _controller.ToDataGridView();
 
             WriteStatus();
         }
@@ -53,7 +61,7 @@ namespace RegionR
 
         private void btnDeleteFilter_Click(object sender, EventArgs e)
         {
-            _lpuController.DeleteFilter();
+            _controller.DeleteFilter();
 
             btnDeleteFilter.Visible = false;
         }
@@ -74,21 +82,21 @@ namespace RegionR
 
         private void Search()
         {
-            _lpuController.Search(tbSearch.Text);
+            _controller.Search(tbSearch.Text);
         }
 
         private void dgv_Sorted(object sender, EventArgs e)
         {
-            _lpuController.ApplyFilter();
+            _controller.ApplyFilter();
 
-            _lpuController.SetTextColor();
+            _controller.SetStyle();
 
             WriteStatus();
         }
 
         private void fiterToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _lpuController.CreateFilter();
+            _controller.CreateFilter();
 
             btnDeleteFilter.Visible = true;
 
@@ -97,12 +105,12 @@ namespace RegionR
 
         private void sortToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _lpuController.Sort();
+            _controller.Sort();
         }
 
         private void btnExportInExcel_Click(object sender, EventArgs e)
         {
-            _lpuController.ExportInExcel();
+            _controller.ExportInExcel();
         }
 
         private void btnShowLPUForEdit_Click(object sender, EventArgs e)
@@ -115,6 +123,17 @@ namespace RegionR
         {
             if ((e.RowIndex >= 0) && (e.ColumnIndex >= 0))
                 dgv.CurrentCell = dgv.Rows[e.RowIndex].Cells[e.ColumnIndex];
+        }
+
+        private void btnShowUserLPU_Click(object sender, EventArgs e)
+        {
+            btnShowUserLPU.BackColor = (btnShowUserLPU.BackColor == Color.Transparent) ? _bbgreen3 : Color.Transparent;
+
+            _controller = (btnShowUserLPU.BackColor == _bbgreen3) ? _userLpuRRListController : _lpuRRController;
+
+            btnDeleteFilter.Visible = false;
+
+            LoadData();
         }
     }
 }

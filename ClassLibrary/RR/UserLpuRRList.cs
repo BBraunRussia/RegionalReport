@@ -66,15 +66,7 @@ namespace ClassLibrary
 
             return ToDataTableWithSF(list);
         }
-
-        public DataTable ToDataTableWithSF(SDiv sdiv)
-        {
-            var list = List.Select(item => item as UserLpuRR).ToList();
-            list = list.Where(item => item.Sdiv == sdiv).ToList();
-
-            return ToDataTableWithSF(list);
-        }
-
+        
         private DataTable ToDataTableWithSF(List<UserLpuRR> list)
         {
             list = list.Where(item => item.YearEnd == DateTime.Today.Year && item.LpuRR.StatusLPU == StatusLPU.Активен).ToList();

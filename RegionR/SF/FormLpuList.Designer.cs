@@ -40,13 +40,14 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.btnShowLPUForEdit = new System.Windows.Forms.Button();
             this.btnContinue = new System.Windows.Forms.Button();
+            this.btnShowUserLPU = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnDeleteFilter
             // 
-            this.btnDeleteFilter.Location = new System.Drawing.Point(254, 6);
+            this.btnDeleteFilter.Location = new System.Drawing.Point(341, 5);
             this.btnDeleteFilter.Name = "btnDeleteFilter";
             this.btnDeleteFilter.Size = new System.Drawing.Size(100, 23);
             this.btnDeleteFilter.TabIndex = 15;
@@ -57,7 +58,7 @@
             // 
             // tbSearch
             // 
-            this.tbSearch.Location = new System.Drawing.Point(431, 8);
+            this.tbSearch.Location = new System.Drawing.Point(676, 8);
             this.tbSearch.Name = "tbSearch";
             this.tbSearch.Size = new System.Drawing.Size(159, 20);
             this.tbSearch.TabIndex = 13;
@@ -67,7 +68,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(383, 11);
+            this.label1.Location = new System.Drawing.Point(628, 11);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(42, 13);
             this.label1.TabIndex = 12;
@@ -145,7 +146,7 @@
             // 
             // btnContinue
             // 
-            this.btnContinue.Location = new System.Drawing.Point(596, 7);
+            this.btnContinue.Location = new System.Drawing.Point(841, 7);
             this.btnContinue.Name = "btnContinue";
             this.btnContinue.Size = new System.Drawing.Size(125, 23);
             this.btnContinue.TabIndex = 19;
@@ -153,11 +154,23 @@
             this.btnContinue.UseVisualStyleBackColor = true;
             this.btnContinue.Click += new System.EventHandler(this.tbSearch_TextChanged);
             // 
+            // btnShowUserLPU
+            // 
+            this.btnShowUserLPU.BackColor = System.Drawing.Color.Transparent;
+            this.btnShowUserLPU.Location = new System.Drawing.Point(254, 6);
+            this.btnShowUserLPU.Name = "btnShowUserLPU";
+            this.btnShowUserLPU.Size = new System.Drawing.Size(81, 23);
+            this.btnShowUserLPU.TabIndex = 20;
+            this.btnShowUserLPU.Text = "ЛПУ РП";
+            this.btnShowUserLPU.UseVisualStyleBackColor = false;
+            this.btnShowUserLPU.Click += new System.EventHandler(this.btnShowUserLPU_Click);
+            // 
             // FormLpuList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1088, 425);
+            this.Controls.Add(this.btnShowUserLPU);
             this.Controls.Add(this.btnContinue);
             this.Controls.Add(this.btnShowLPUForEdit);
             this.Controls.Add(this.statusStrip1);
@@ -190,5 +203,6 @@
         private System.Windows.Forms.ToolStripMenuItem sortToolStripMenuItem;
         private System.Windows.Forms.Button btnShowLPUForEdit;
         private System.Windows.Forms.Button btnContinue;
+        private System.Windows.Forms.Button btnShowUserLPU;
     }
 }
