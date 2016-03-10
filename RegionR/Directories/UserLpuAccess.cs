@@ -300,7 +300,7 @@ namespace RegionR.Directories
 
         private void _dgv1_Sorted(object sender, EventArgs e)
         {
-            _lpuRRController.SetStyle();
+            _lpuRRController.SetTextColor();
         }
     }
 }

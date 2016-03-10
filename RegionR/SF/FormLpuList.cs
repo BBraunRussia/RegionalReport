@@ -81,7 +81,7 @@ namespace RegionR
         {
             _lpuController.ApplyFilter();
 
-            _lpuController.SetStyle();
+            _lpuController.SetTextColor();
 
             WriteStatus();
         }
