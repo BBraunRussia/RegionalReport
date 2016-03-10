@@ -6,13 +6,13 @@ using System.Text;
 
 namespace DataLayer
 {
-    public enum DBNames { RegionalR, Competitors };
+    public enum DBNames { RegionalR_TestSF, Competitors };
     public enum ServerName { bbmru08, bbmru09 };
 
     public class SqlNew : IDataBase
     {
         public const ServerName CURRENT_SERVER = ServerName.bbmru08;
-        public const DBNames CURRENT_DATABASE = DBNames.RegionalR;
+        public const DBNames CURRENT_DATABASE = DBNames.RegionalR_TestSF;
 
         private const int TIMEOUT = 600;
 
