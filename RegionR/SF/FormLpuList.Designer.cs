@@ -47,7 +47,7 @@
             // 
             // btnDeleteFilter
             // 
-            this.btnDeleteFilter.Location = new System.Drawing.Point(341, 5);
+            this.btnDeleteFilter.Location = new System.Drawing.Point(220, 6);
             this.btnDeleteFilter.Name = "btnDeleteFilter";
             this.btnDeleteFilter.Size = new System.Drawing.Size(100, 23);
             this.btnDeleteFilter.TabIndex = 15;
@@ -136,7 +136,7 @@
             // 
             // btnShowLPUForEdit
             // 
-            this.btnShowLPUForEdit.Location = new System.Drawing.Point(133, 7);
+            this.btnShowLPUForEdit.Location = new System.Drawing.Point(326, 7);
             this.btnShowLPUForEdit.Name = "btnShowLPUForEdit";
             this.btnShowLPUForEdit.Size = new System.Drawing.Size(115, 23);
             this.btnShowLPUForEdit.TabIndex = 18;
@@ -157,7 +157,7 @@
             // btnShowUserLPU
             // 
             this.btnShowUserLPU.BackColor = System.Drawing.Color.Transparent;
-            this.btnShowUserLPU.Location = new System.Drawing.Point(254, 6);
+            this.btnShowUserLPU.Location = new System.Drawing.Point(133, 6);
             this.btnShowUserLPU.Name = "btnShowUserLPU";
             this.btnShowUserLPU.Size = new System.Drawing.Size(81, 23);
             this.btnShowUserLPU.TabIndex = 20;

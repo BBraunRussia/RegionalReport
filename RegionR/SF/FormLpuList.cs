@@ -44,6 +44,7 @@ namespace RegionR
         
         private void LoadData()
         {
+            dgv.Columns.Clear();
             dgv = _controller.ToDataGridView();
 
             WriteStatus();

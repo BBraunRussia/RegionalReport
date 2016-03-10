@@ -26,7 +26,7 @@ namespace RegionR
         
         public DataGridView ToDataGridView()
         {
-            DataTable dt = _userLpuRRList.ToDataTableWithSF();
+            DataTable dt = _userLpuRRList.ToDataTableWithSF(UserLogged.Get());
 
             return GetDataGridView(dt);
         }
@@ -42,6 +42,8 @@ namespace RegionR
             _dgv.Columns[4].Width = 150;
             _dgv.Columns[5].Width = 150;
             _dgv.Columns[6].Width = 150;
+
+            SetStyle();
 
             return _dgv;
         }
@@ -72,7 +74,7 @@ namespace RegionR
                     row.DefaultCellStyle.BackColor = bbgray4;
 
                 int idLPU;
-                int.TryParse(row.Cells["Номер"].Value.ToString(), out idLPU);
+                int.TryParse(row.Cells["№ ЛПУ-RR"].Value.ToString(), out idLPU);
 
                 LpuRRList lpuRRList = LpuRRList.GetUniqueInstance();
                 LpuRR lpuRR = lpuRRList.GetItem(idLPU) as LpuRR;
