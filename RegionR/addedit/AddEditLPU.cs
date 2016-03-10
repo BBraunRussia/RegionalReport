@@ -25,7 +25,10 @@ namespace RegionR.addedit
         {
             tbSName.Text = _lpuRR.Name;
             tbName.Text = _lpuRR.FullName;
-            chbStatus.Checked = (_lpuRR.StatusLPU == StatusLPU.Активен);
+            rbActive.Checked = (_lpuRR.StatusLPU == StatusLPU.Активен);
+            rbNonActive.Checked = (_lpuRR.StatusLPU == StatusLPU.Неактивен);
+            rbGroup.Checked = (_lpuRR.StatusLPU == StatusLPU.Групповой);
+            lbLpuID.Text = _lpuRR.ID.ToString();
         }
         
         private void btnOK_Click(object sender, EventArgs e)
@@ -43,7 +46,7 @@ namespace RegionR.addedit
 
             _lpuRR.Name = tbSName.Text;
             _lpuRR.FullName = tbName.Text;
-            _lpuRR.StatusLPU = (chbStatus.Checked) ? StatusLPU.Активен : StatusLPU.Неактивен;
+            _lpuRR.StatusLPU = (rbActive.Checked) ? StatusLPU.Активен : (rbNonActive.Checked) ? StatusLPU.Неактивен : StatusLPU.Групповой;
 
             return true;
         }
