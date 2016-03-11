@@ -60,7 +60,7 @@ namespace ClassLibrary
         public DataTable ToDataTable(User user)
         {
             List<LpuRR> list = List.Select(item => item as LpuRR).ToList();
-            list = list.Where(item => !item.IsInList && !item.Name.ToLower().Contains("прочие") && !item.FullName.ToLower().Contains("прочие") && item.StatusLPU == StatusLPU.Активен).OrderBy(item => item.Name).OrderBy(item => item.RegionRR.Name).ToList();
+            list = list.Where(item => !item.IsInList && item.StatusLPU == StatusLPU.Активен).OrderBy(item => item.Name).OrderBy(item => item.RegionRR.Name).ToList();
 
             if (user.RoleSF == RolesSF.Пользователь)
             {
