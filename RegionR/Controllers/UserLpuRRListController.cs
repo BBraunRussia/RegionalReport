@@ -37,12 +37,12 @@ namespace RegionR
 
             _dgv.Columns[0].Width = 70;
             _dgv.Columns[1].Width = 150;
-            _dgv.Columns[2].Width = 150;
-            _dgv.Columns[3].Width = 100;
-            _dgv.Columns[4].Width = 150;
+            _dgv.Columns[2].Width = 70;
+            _dgv.Columns[3].Width = 70;
+            _dgv.Columns[4].Width = 70;
             _dgv.Columns[5].Width = 150;
             _dgv.Columns[6].Width = 150;
-
+            
             SetStyle();
 
             return _dgv;

@@ -126,13 +126,16 @@ namespace RegionR
                 dgv.CurrentCell = dgv.Rows[e.RowIndex].Cells[e.ColumnIndex];
         }
 
-        private void btnShowUserLPU_Click(object sender, EventArgs e)
+        private void rbLPU_CheckedChanged(object sender, EventArgs e)
         {
-            btnShowUserLPU.BackColor = (btnShowUserLPU.BackColor == Color.Transparent) ? _bbgreen3 : Color.Transparent;
+            _controller = _lpuRRController;
 
-            _controller = (btnShowUserLPU.BackColor == _bbgreen3) ? _userLpuRRListController : _lpuRRController;
+            LoadData();
+        }
 
-            btnDeleteFilter.Visible = false;
+        private void rbUserLPU_CheckedChanged(object sender, EventArgs e)
+        {
+            _controller = _userLpuRRListController;
 
             LoadData();
         }

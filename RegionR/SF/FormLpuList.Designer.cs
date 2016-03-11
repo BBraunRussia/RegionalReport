@@ -40,14 +40,15 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.btnShowLPUForEdit = new System.Windows.Forms.Button();
             this.btnContinue = new System.Windows.Forms.Button();
-            this.btnShowUserLPU = new System.Windows.Forms.Button();
+            this.rbLPU = new System.Windows.Forms.RadioButton();
+            this.rbUserLPU = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnDeleteFilter
             // 
-            this.btnDeleteFilter.Location = new System.Drawing.Point(220, 6);
+            this.btnDeleteFilter.Location = new System.Drawing.Point(320, 6);
             this.btnDeleteFilter.Name = "btnDeleteFilter";
             this.btnDeleteFilter.Size = new System.Drawing.Size(100, 23);
             this.btnDeleteFilter.TabIndex = 15;
@@ -136,7 +137,7 @@
             // 
             // btnShowLPUForEdit
             // 
-            this.btnShowLPUForEdit.Location = new System.Drawing.Point(326, 7);
+            this.btnShowLPUForEdit.Location = new System.Drawing.Point(426, 6);
             this.btnShowLPUForEdit.Name = "btnShowLPUForEdit";
             this.btnShowLPUForEdit.Size = new System.Drawing.Size(115, 23);
             this.btnShowLPUForEdit.TabIndex = 18;
@@ -154,23 +155,37 @@
             this.btnContinue.UseVisualStyleBackColor = true;
             this.btnContinue.Click += new System.EventHandler(this.tbSearch_TextChanged);
             // 
-            // btnShowUserLPU
+            // rbLPU
             // 
-            this.btnShowUserLPU.BackColor = System.Drawing.Color.Transparent;
-            this.btnShowUserLPU.Location = new System.Drawing.Point(133, 6);
-            this.btnShowUserLPU.Name = "btnShowUserLPU";
-            this.btnShowUserLPU.Size = new System.Drawing.Size(81, 23);
-            this.btnShowUserLPU.TabIndex = 20;
-            this.btnShowUserLPU.Text = "ЛПУ РП";
-            this.btnShowUserLPU.UseVisualStyleBackColor = false;
-            this.btnShowUserLPU.Click += new System.EventHandler(this.btnShowUserLPU_Click);
+            this.rbLPU.AutoSize = true;
+            this.rbLPU.Checked = true;
+            this.rbLPU.Location = new System.Drawing.Point(133, 9);
+            this.rbLPU.Name = "rbLPU";
+            this.rbLPU.Size = new System.Drawing.Size(108, 17);
+            this.rbLPU.TabIndex = 21;
+            this.rbLPU.TabStop = true;
+            this.rbLPU.Text = "Список ЛПУ-RR";
+            this.rbLPU.UseVisualStyleBackColor = true;
+            this.rbLPU.CheckedChanged += new System.EventHandler(this.rbLPU_CheckedChanged);
+            // 
+            // rbUserLPU
+            // 
+            this.rbUserLPU.AutoSize = true;
+            this.rbUserLPU.Location = new System.Drawing.Point(247, 9);
+            this.rbUserLPU.Name = "rbUserLPU";
+            this.rbUserLPU.Size = new System.Drawing.Size(67, 17);
+            this.rbUserLPU.TabIndex = 22;
+            this.rbUserLPU.Text = "ЛПУ РП";
+            this.rbUserLPU.UseVisualStyleBackColor = true;
+            this.rbUserLPU.CheckedChanged += new System.EventHandler(this.rbUserLPU_CheckedChanged);
             // 
             // FormLpuList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1088, 425);
-            this.Controls.Add(this.btnShowUserLPU);
+            this.Controls.Add(this.rbUserLPU);
+            this.Controls.Add(this.rbLPU);
             this.Controls.Add(this.btnContinue);
             this.Controls.Add(this.btnShowLPUForEdit);
             this.Controls.Add(this.statusStrip1);
@@ -203,6 +218,7 @@
         private System.Windows.Forms.ToolStripMenuItem sortToolStripMenuItem;
         private System.Windows.Forms.Button btnShowLPUForEdit;
         private System.Windows.Forms.Button btnContinue;
-        private System.Windows.Forms.Button btnShowUserLPU;
+        private System.Windows.Forms.RadioButton rbLPU;
+        private System.Windows.Forms.RadioButton rbUserLPU;
     }
 }

@@ -37,9 +37,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.lbLpuID = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.rbActive = new System.Windows.Forms.RadioButton();
-            this.rbNonActive = new System.Windows.Forms.RadioButton();
             this.rbGroup = new System.Windows.Forms.RadioButton();
+            this.rbNonActive = new System.Windows.Forms.RadioButton();
+            this.rbActive = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -89,7 +89,6 @@
             // btnOK
             // 
             this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnOK.Location = new System.Drawing.Point(341, 158);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
@@ -129,16 +128,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Статус";
             // 
-            // rbActive
+            // rbGroup
             // 
-            this.rbActive.AutoSize = true;
-            this.rbActive.Location = new System.Drawing.Point(13, 19);
-            this.rbActive.Name = "rbActive";
-            this.rbActive.Size = new System.Drawing.Size(67, 17);
-            this.rbActive.TabIndex = 0;
-            this.rbActive.TabStop = true;
-            this.rbActive.Text = "Активен";
-            this.rbActive.UseVisualStyleBackColor = true;
+            this.rbGroup.AutoSize = true;
+            this.rbGroup.Location = new System.Drawing.Point(13, 65);
+            this.rbGroup.Name = "rbGroup";
+            this.rbGroup.Size = new System.Drawing.Size(78, 17);
+            this.rbGroup.TabIndex = 2;
+            this.rbGroup.TabStop = true;
+            this.rbGroup.Text = "Групповой";
+            this.rbGroup.UseVisualStyleBackColor = true;
             // 
             // rbNonActive
             // 
@@ -151,16 +150,16 @@
             this.rbNonActive.Text = "Неактивен";
             this.rbNonActive.UseVisualStyleBackColor = true;
             // 
-            // rbGroup
+            // rbActive
             // 
-            this.rbGroup.AutoSize = true;
-            this.rbGroup.Location = new System.Drawing.Point(13, 65);
-            this.rbGroup.Name = "rbGroup";
-            this.rbGroup.Size = new System.Drawing.Size(78, 17);
-            this.rbGroup.TabIndex = 2;
-            this.rbGroup.TabStop = true;
-            this.rbGroup.Text = "Групповой";
-            this.rbGroup.UseVisualStyleBackColor = true;
+            this.rbActive.AutoSize = true;
+            this.rbActive.Location = new System.Drawing.Point(13, 19);
+            this.rbActive.Name = "rbActive";
+            this.rbActive.Size = new System.Drawing.Size(67, 17);
+            this.rbActive.TabIndex = 0;
+            this.rbActive.TabStop = true;
+            this.rbActive.Text = "Активен";
+            this.rbActive.UseVisualStyleBackColor = true;
             // 
             // AddEditLPU
             // 

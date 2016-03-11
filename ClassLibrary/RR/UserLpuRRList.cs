@@ -9,6 +9,7 @@ namespace ClassLibrary
 {
     public class UserLpuRRList : BaseList
     {
+        private const int ROLE_RP_ID = 5;
         private static UserLpuRRList _uniqueInstance;
 
         private UserLpuRRList(string tableName)
@@ -67,8 +68,14 @@ namespace ClassLibrary
             if (user.RoleSF == RolesSF.Пользователь)
             {
                 UserRightList userRightList = UserRightList.GetUniqueInstance();
-
+                
                 list = list.Where(item => userRightList.IsInList(user, item.LpuRR.RegionRR)).ToList();
+
+                RoleList roleList = RoleList.GetUniqueInstance();
+                Role role = roleList.GetItem(ROLE_RP_ID) as Role;
+
+                if (user.Role == role)
+                    list = list.Where(item => item.User == user).ToList();
             }
 
             //list = list.Where(item => item.YearEnd == DateTime.Today.Year).ToList();
