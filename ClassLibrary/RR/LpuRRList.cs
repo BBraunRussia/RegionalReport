@@ -47,7 +47,7 @@ namespace ClassLibrary
 
             var list = List.Select(item => item as LpuRR).ToList();
 
-            list = list.Where(item => (!item.IsInList || item == lpuRR) && !item.Name.Contains("Прочие")).OrderBy(item => item.Name).ToList();
+            list = list.Where(item => (!item.IsInList || item == lpuRR) && item.StatusLPU == StatusLPU.Активен).OrderBy(item => item.Name).ToList();
 
             dt.Rows.Add("0", "Прочие ЛПУ");
 

@@ -17,8 +17,8 @@ namespace UnitTestProjectSF
         [TestCase("ЛПУ", Result="ЛПУ")]
         public void TestGetOrgType()
         {
-            ExportOrganization ex = new ExportOrganization();
-            ex.GetRecordType();
+            //ExportOrganization ex = new ExportOrganization();
+            //ex.GetRecordType();
         }
     }
 }

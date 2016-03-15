@@ -46,13 +46,13 @@ namespace RegionR.addedit
             if ((tbName.Text == "") || (tbSName.Text == ""))
                 return false;
 
-            if (rbNonActive.Checked)
+            if ((rbNonActive.Checked) || (rbGroup.Checked))
             {
                 LpuList lpuList = new LpuList();
                 LPU lpu = lpuList.GetItem(_lpuRR);
                 if (lpu != null)
                 {
-                    MessageBox.Show("Установить статус \"неактивен\" нельзя - имеется сопоставление с ЛПУ-SF № " + lpu.ID, "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Установить статус " + ((rbNonActive.Checked) ? "\"неактивен\"" : "\"групповой\"") + " нельзя - имеется сопоставление с ЛПУ-SF № " + lpu.ID, "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return false;
                 }
             }
