@@ -32,18 +32,20 @@ namespace RegionR.SF
 
         private void FormAddOrganization_Load(object sender, EventArgs e)
         {
+            SetEnabledComponent();
+
             LoadDictionaries();
 
             LoadData();
-
-            SetEnabledComponent();
         }
 
         private void LoadData()
         {
             this.Text = string.Concat("Карточка ", _organization.TypeOrg, " ЛПУ");
             lbTypeOrgName.Text = string.Concat(_organization.TypeOrg.ToString(), ":");
-            
+
+            lbNumberLpuID.Text = _organization.ParentOrganization.ID.ToString();
+
             lbLPU.Text = _parentLPU.ShortName.ToUpper();
 
             tbName.Text = _organization.Name;
@@ -56,7 +58,6 @@ namespace RegionR.SF
             {
                 cbMainSpec.SelectedValue = 40;
                 cbMainSpec.Enabled = false;
-                lbMainSpec.Visible = false;
                 lbBranch.Location = new Point(85, 32);
             }
             else if (_organization.TypeOrg == TypeOrg.Отделение)
@@ -76,6 +77,10 @@ namespace RegionR.SF
             tbWebSite.Text = _organization.WebSite;
             tbPhone.Text = _organization.Phone;
 
+            tbPhoneCode.Text = (_organization.ParentOrganization as LPU).City.PhoneCode;
+
+            SetPhoneCodeMask();
+
             lbNumberSF.Text = _organization.NumberSF;
             lbTypeOrg.Text = _organization.TypeOrg.ToString();
 
@@ -86,6 +91,11 @@ namespace RegionR.SF
         {
             lbAutor.Text = _historyList.GetItemString(_organization, HistoryAction.Создал);
             lbEditor.Text = _historyList.GetItemString(_organization, HistoryAction.Редактировал);
+        }
+
+        private void SetPhoneCodeMask()
+        {
+            tbPhone.MaxLength = Phone.GetPhoneLenght(tbPhoneCode.Text);
         }
 
         private void SetEnabledComponent()
@@ -193,7 +203,10 @@ namespace RegionR.SF
 
         private void tbPhone_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = (!char.IsDigit(e.KeyChar));
+            if (e.KeyChar == (char)Keys.Back)
+                return;
+
+            e.Handled = !char.IsDigit(e.KeyChar);
         }
 
         private void btnShowRules_Click(object sender, EventArgs e)

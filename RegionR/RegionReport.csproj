@@ -475,6 +475,7 @@
     <Compile Include="SF\Classes\FilteredDGV.cs" />
     <Compile Include="SF\Classes\MainDGV.cs" />
     <Compile Include="SF\Classes\MyStatusStrip.cs" />
+    <Compile Include="SF\Classes\Phone.cs" />
     <Compile Include="SF\Classes\SearchInDgv.cs" />
     <Compile Include="SF\Classes\SortDGV.cs" />
     <Compile Include="SF\Classes\TreeLPU.cs" />

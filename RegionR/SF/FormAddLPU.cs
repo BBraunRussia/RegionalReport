@@ -193,10 +193,7 @@ namespace RegionR.SF
 
         private void SetPhoneCodeMask()
         {
-            if (tbPhoneCode.Text != string.Empty)
-            {
-                tbPhone.MaxLength = 10 - tbPhoneCode.Text.Length;
-            }
+            tbPhone.MaxLength = Phone.GetPhoneLenght(tbPhoneCode.Text);
         }
 
         private void LoadDictionaries()

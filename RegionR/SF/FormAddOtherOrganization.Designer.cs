@@ -128,9 +128,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(12, 51);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(60, 13);
+            this.label2.Size = new System.Drawing.Size(45, 13);
             this.label2.TabIndex = 89;
-            this.label2.Text = "Номер SF:";
+            this.label2.Text = "CRM id:";
             // 
             // tbDistrict
             // 
@@ -331,7 +331,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbName.Location = new System.Drawing.Point(453, 44);
             this.tbName.Name = "tbName";
-            this.tbName.Size = new System.Drawing.Size(426, 20);
+            this.tbName.Size = new System.Drawing.Size(399, 20);
             this.tbName.TabIndex = 0;
             // 
             // label19
@@ -499,7 +499,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(924, 455);
+            this.ClientSize = new System.Drawing.Size(897, 441);
             this.Controls.Add(this.lbEditor);
             this.Controls.Add(this.lbAutor);
             this.Controls.Add(this.btnShowPerson);
@@ -542,6 +542,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lbOrganization);
             this.Controls.Add(this.lbOrganizationName);
+            this.MinimumSize = new System.Drawing.Size(913, 479);
             this.Name = "FormAddOtherOrganization";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FormAddOtherOrganization";
