@@ -9,6 +9,7 @@ namespace ClassLibrary
 {
     public class UserLpuRRList : BaseList
     {
+        private const int ROLE_RP_ID = 5;
         private static UserLpuRRList _uniqueInstance;
 
         private UserLpuRRList(string tableName)
@@ -36,7 +37,7 @@ namespace ClassLibrary
         {
             DataTable dt = new DataTable();
             dt.Columns.Add("ID", typeof(int));
-            dt.Columns.Add("Номер", typeof(int));
+            dt.Columns.Add("№ ЛПУ-RR", typeof(int));
             dt.Columns.Add("Сокращенное наименование");
             dt.Columns.Add("Полное наименование");
             dt.Columns.Add("Начало отчётности");
@@ -60,31 +61,37 @@ namespace ClassLibrary
             return list.Exists(item => item.LpuRR == lpuRR);
         }
 
-        public DataTable ToDataTableWithSF()
+        public DataTable ToDataTableWithSF(User user)
         {
             var list = List.Select(item => item as UserLpuRR).ToList();
 
-            return ToDataTableWithSF(list);
-        }
+            if (user.RoleSF == RolesSF.Пользователь)
+            {
+                UserRightList userRightList = UserRightList.GetUniqueInstance();
+                
+                list = list.Where(item => userRightList.IsInList(user, item.LpuRR.RegionRR)).ToList();
 
-        public DataTable ToDataTableWithSF(SDiv sdiv)
-        {
-            var list = List.Select(item => item as UserLpuRR).ToList();
-            list = list.Where(item => item.Sdiv == sdiv).ToList();
+                RoleList roleList = RoleList.GetUniqueInstance();
+                Role role = roleList.GetItem(ROLE_RP_ID) as Role;
 
-            return ToDataTableWithSF(list);
-        }
+                if (user.Role == role)
+                    list = list.Where(item => item.User == user).ToList();
+            }
 
-        private DataTable ToDataTableWithSF(List<UserLpuRR> list)
-        {
-            list = list.Where(item => item.YearEnd == DateTime.Today.Year && item.LpuRR.StatusLPU == StatusLPU.Активен).ToList();
+            //list = list.Where(item => item.YearEnd == DateTime.Today.Year).ToList();
 
             DataTable dt = new DataTable();
-            dt.Columns.Add("№ ЛПУ-RR");
-            dt.Columns.Add("ФИО рег. преда");
+            dt.Columns.Add("№ ЛПУ-RR", typeof(int));
+            dt.Columns.Add("ФИО РП");
+            dt.Columns.Add("Дивизион");
+            dt.Columns.Add("Начало отчётности");
+            dt.Columns.Add("Окончание отчётности");
+            dt.Columns.Add("Сокр. название ЛПУ-RR");
             dt.Columns.Add("Полное название ЛПУ-RR");
             dt.Columns.Add("Регион RR");
+            dt.Columns.Add("Статус");
             dt.Columns.Add("Сокр. название ЛПУ-SF");
+            dt.Columns.Add("Регион России");
             dt.Columns.Add("Город");
             dt.Columns.Add("№ ЛПУ-SF");
 
@@ -92,11 +99,12 @@ namespace ClassLibrary
 
             foreach (UserLpuRR item in list)
             {
-                if (item.LpuRR == null)
+                if ((item.LpuRR == null) || (item.User == null))
                     continue;
 
                 string lpuSFID = string.Empty;
                 string lpuSFName = string.Empty;
+                string lpuSFRealRegion = string.Empty;
                 string lpuSFCity = string.Empty;
 
                 LPU lpu = lpuList.GetItem(item.LpuRR);
@@ -105,10 +113,12 @@ namespace ClassLibrary
                 {
                     lpuSFID = lpu.ID.ToString();
                     lpuSFName = lpu.ShortName;
+                    lpuSFRealRegion = lpu.RealRegion.Name;
                     lpuSFCity = lpu.City.Name;
                 }
 
-                dt.Rows.Add(new object[] { item.LpuRR.ID, item.User.Name, item.LpuRR.FullName, item.LpuRR.RegionRR.Name, lpuSFName, lpuSFCity, lpuSFID });
+                dt.Rows.Add(new object[] { item.LpuRR.ID, item.User.Name, item.Sdiv.ToString(), item.YearBegin, item.YearEnd, item.LpuRR.Name, item.LpuRR.FullName,
+                    item.LpuRR.RegionRR.Name, item.LpuRR.StatusLPU.ToString(), lpuSFName, lpuSFRealRegion, lpuSFCity, lpuSFID });
             }
 
             return dt;

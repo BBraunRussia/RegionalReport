@@ -10,7 +10,7 @@ namespace ClassLibrary
     {
         private RegionRR _regionRR;
         private User _user;
-
+        
         public UserRight(DataRow row)
         {
             int idUser;
@@ -20,7 +20,6 @@ namespace ClassLibrary
 
             int idRegionRR;
             int.TryParse(row[1].ToString(), out idRegionRR);
-
             RegionRRList regionRRList = RegionRRList.GetUniqueInstance();
             _regionRR = regionRRList.GetItem(idRegionRR) as RegionRR;
         }

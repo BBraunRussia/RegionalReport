@@ -54,6 +54,8 @@ namespace ClassLibrary.SF
                 string subRegion = (lpu != null) ? lpu.SubRegion.Name.Split(' ')[0] : string.Empty;
                 string idLpuRR = ((lpu != null) && (lpu.ParentOrganization == null)) ? lpu.LpuRR.ID.ToString() : string.Empty;
 
+
+
                 object[] row = { organization.ID, parentID, CRM_ID, recordType,
                                organization.TypeOrg.ToString(), organization.Name, organization.ShortName,
                                inn, kpp, realRegionName, distinct, city, postIndex, street, organization.Email, organization.WebSite,

@@ -8514,6 +8514,8 @@ namespace RegionR
             _tempdgv.Columns["ma_plan_total"].HeaderText = "План, Итого";
             _tempdgv.Columns["ma_fact_total"].HeaderText = "Факт, Итого";
             _tempdgv.Columns["lpu_sname"].HeaderText = "ЛПУ";
+            _tempdgv.Columns["reg_nameRus"].HeaderText = "Регион";
+            _tempdgv.Columns["city_name"].HeaderText = "Город проведения конф.";
 
             _tempdgv.Columns["matype_name"].Width = 200;
             _tempdgv.Columns["matype_name"].Frozen = true;
@@ -8817,8 +8819,8 @@ namespace RegionR
                 }
                 else if (tn1.Text == "Маркетинговые мероприятия")
                 {
-                    ((Excel.Range)xlSh.Columns[1]).ColumnWidth = 50;
-                    ((Excel.Range)xlSh.Columns[2]).ColumnWidth = 25;
+                    ((Excel.Range)xlSh.Columns[1]).ColumnWidth = 80;
+                    ((Excel.Range)xlSh.Columns[2]).ColumnWidth = 100;
                     ((Excel.Range)xlSh.Columns[3]).ColumnWidth = 25;
                     ((Excel.Range)xlSh.Columns[4]).ColumnWidth = 50;
                     ((Excel.Range)xlSh.Columns[5]).ColumnWidth = 16;
@@ -8831,7 +8833,9 @@ namespace RegionR
                     ((Excel.Range)xlSh.Columns[12]).ColumnWidth = 16;
                     ((Excel.Range)xlSh.Columns[13]).ColumnWidth = 12;
                     ((Excel.Range)xlSh.Columns[14]).ColumnWidth = 12;
-                    ((Excel.Range)xlSh.Columns[15]).ColumnWidth = 30;                    
+                    ((Excel.Range)xlSh.Columns[15]).ColumnWidth = 30;
+                    ((Excel.Range)xlSh.Columns[16]).ColumnWidth = 30;
+                    ((Excel.Range)xlSh.Columns[17]).ColumnWidth = 30;       
                 }
                 else if (tn1.Text == "Выполнение плана")
                 {
@@ -10126,8 +10130,9 @@ namespace RegionR
                 btnHideLPUAccNY.Text = "Скрыть ЛПУ";
                 lbLPUAccNY.Visible = true;
                 cbLPUAccNY.Visible = true;
-                btnSaveAccNY.Enabled = true;
+                //btnSaveAccNY.Enabled = true;
                 loadAccPlanByLPUNY(_dgv14, cbLPUAccNY);
+                EnableSave("accNY");
             }
         }
 
@@ -10176,7 +10181,8 @@ namespace RegionR
                 btnHideUsersAccNY.Text = "Скрыть пользователей";
                 lbUsersAccNY.Visible = true;
                 cbUsersAccNY.Visible = true;
-                btnSaveAccNY.Enabled = true;
+                //btnSaveAccNY.Enabled = true;
+                EnableSave("accNY");
             }
         }
         

@@ -58,7 +58,7 @@
     <Compile Include="SF\Classes\Person.cs" />
     <Compile Include="SF\Classes\Position.cs" />
     <Compile Include="RR\RegionRR.cs" />
-    <Compile Include="SF\Classes\Role.cs" />
+    <Compile Include="RR\Role.cs" />
     <Compile Include="SF\Classes\Settings.cs" />
     <Compile Include="SF\Classes\SubRegion.cs" />
     <Compile Include="SF\Classes\TypeFin.cs" />
@@ -99,7 +99,7 @@
     <Compile Include="Factory.cs" />
     <Compile Include="SF\Classes\TypeLPU.cs" />
     <Compile Include="RR\RegionRRList.cs" />
-    <Compile Include="SF\Lists\RoleList.cs" />
+    <Compile Include="RR\RoleList.cs" />
     <Compile Include="SF\Lists\SubOrganizationList.cs" />
     <Compile Include="SF\Lists\TypeLPUList.cs" />
     <Compile Include="RR\UserList.cs" />

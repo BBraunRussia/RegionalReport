@@ -44,9 +44,11 @@ namespace RegionR
             {
                 if (row.Cells["Статус"].Value.ToString() == StatusLPU.Неактивен.ToString())
                     row.DefaultCellStyle.ForeColor = Color.Red;
+                else if (row.Cells["Статус"].Value.ToString() == StatusLPU.Групповой.ToString())
+                    row.DefaultCellStyle.ForeColor = Color.Blue;
             }
         }
-
+        
         public DataGridView ToDataGridView()
         {
             DataTable dt = _lpuRRList.ToDataTableWithLpuSF(UserLogged.Get());
@@ -68,10 +70,9 @@ namespace RegionR
             {
                 if (row.Cells["color"].Value.ToString().ToLower() == "false")
                     row.DefaultCellStyle.BackColor = Color.Silver;
-
-                if (row.Cells["Статус"].Value.ToString() == StatusLPU.Неактивен.ToString())
-                    row.DefaultCellStyle.ForeColor = Color.Red;
             }
+
+            SetStyle();
 
             return _dgv;
         }

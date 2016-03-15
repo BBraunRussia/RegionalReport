@@ -23,19 +23,29 @@ namespace RegionR
             _dgv = dgv;
             _userLpuRRList = UserLpuRRList.GetUniqueInstance();
         }
-
-        public DataGridView ToDataGridView(SDiv sdiv)
+        
+        public DataGridView ToDataGridView()
         {
-            DataTable dt = _userLpuRRList.ToDataTableWithSF(sdiv);
+            DataTable dt = _userLpuRRList.ToDataTableWithSF(UserLogged.Get());
 
             return GetDataGridView(dt);
         }
 
-        public DataGridView ToDataGridView()
+        private DataGridView GetDataGridView(DataTable dt)
         {
-            DataTable dt = _userLpuRRList.ToDataTableWithSF();
+            _dgv.DataSource = dt;
 
-            return GetDataGridView(dt);
+            _dgv.Columns[0].Width = 70;
+            _dgv.Columns[1].Width = 150;
+            _dgv.Columns[2].Width = 70;
+            _dgv.Columns[3].Width = 70;
+            _dgv.Columns[4].Width = 70;
+            _dgv.Columns[5].Width = 150;
+            _dgv.Columns[6].Width = 150;
+            
+            SetStyle();
+
+            return _dgv;
         }
 
         public DataGridView ToDataGridView(User user, RegionRR regionRR, SDiv sdiv)
@@ -64,29 +74,16 @@ namespace RegionR
                     row.DefaultCellStyle.BackColor = bbgray4;
 
                 int idLPU;
-                int.TryParse(row.Cells["Номер"].Value.ToString(), out idLPU);
+                int.TryParse(row.Cells["№ ЛПУ-RR"].Value.ToString(), out idLPU);
 
                 LpuRRList lpuRRList = LpuRRList.GetUniqueInstance();
                 LpuRR lpuRR = lpuRRList.GetItem(idLPU) as LpuRR;
 
                 if (lpuRR.StatusLPU == StatusLPU.Неактивен)
                     row.DefaultCellStyle.ForeColor = Color.Red;
+                else if (lpuRR.StatusLPU == StatusLPU.Групповой)
+                    row.DefaultCellStyle.ForeColor = Color.Blue;
             }
-        }
-
-        private DataGridView GetDataGridView(DataTable dt)
-        {
-            _dgv.DataSource = dt;
-
-            _dgv.Columns[0].Width = 70;
-            _dgv.Columns[1].Width = 150;
-            _dgv.Columns[2].Width = 150;
-            _dgv.Columns[3].Width = 100;
-            _dgv.Columns[4].Width = 150;
-            _dgv.Columns[5].Width = 150;
-            _dgv.Columns[6].Width = 150;
-
-            return _dgv;
         }
 
         public void ReLoad()

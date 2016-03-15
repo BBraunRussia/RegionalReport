@@ -26,7 +26,6 @@ namespace RegionR
 
             _organizationListController = new OrganizationListController(dgv);
 
-            userLpuListToolStripMenuItem.Visible = (UserLogged.Get().RoleSF == RolesSF.Администратор);
             settingsToolStripMenuItem.Visible = (UserLogged.Get().RoleSF == RolesSF.Администратор);
             importToolStripMenuItem.Visible = (UserLogged.Get().RoleSF == RolesSF.Администратор);
             exportToolStripMenuItem.Visible = (UserLogged.Get().RoleSF == RolesSF.Администратор);
@@ -173,12 +172,6 @@ namespace RegionR
             _organizationListController.Search(tbSearch.Text);
         }
         
-        private void userLpuListToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FormUserLpuRRList formUserLpuRRList = new FormUserLpuRRList();
-            formUserLpuRRList.ShowDialog();
-        }
-
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormSettings formSettings = new FormSettings();

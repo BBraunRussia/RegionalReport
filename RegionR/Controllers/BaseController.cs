@@ -51,10 +51,37 @@ namespace RegionR
 
         public void ExportInExcel()
         {
-            DataTable dt = _dgv.DataSource as DataTable;
+            DataTable dt = CreateDataTable();
+
+            foreach (DataGridViewRow row in _dgv.Rows)
+            {
+                if (row.Visible)
+                {
+                    object[] items = new object[row.Cells.Count];
+
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        items[cell.ColumnIndex] = cell.Value.ToString();
+                    }
+
+                    dt.Rows.Add(items);
+                }
+            }
 
             CreateExcel excel = new CreateExcel(dt);
             excel.Show();
+        }
+
+        private DataTable CreateDataTable()
+        {
+            DataTable dt = new DataTable();// _dgv.DataSource as DataTable;
+
+            foreach (DataGridViewColumn column in _dgv.Columns)
+            {
+                dt.Columns.Add(column.HeaderText);
+            }
+
+            return dt;
         }
     }
 }
