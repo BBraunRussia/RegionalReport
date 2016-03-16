@@ -174,7 +174,7 @@ namespace ClassLibrary
         {
             UserLpuRRList userLpuRRList = UserLpuRRList.GetUniqueInstance();
 
-            return userLpuRRList.IsInList(lpuRR);
+            return userLpuRRList.IsInList(lpuRR, DateTime.Today.Year);
         }
 
         public override BaseDictionary GetItem(int id)

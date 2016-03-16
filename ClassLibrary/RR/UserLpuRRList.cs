@@ -61,6 +61,12 @@ namespace ClassLibrary
             return list.Exists(item => item.LpuRR == lpuRR);
         }
 
+        public bool IsInList(LpuRR lpuRR, int year)
+        {
+            var list = List.Select(item => item as UserLpuRR).ToList();
+            return list.Exists(item => item.LpuRR == lpuRR && item.YearEnd == year);
+        }
+
         public DataTable ToDataTableWithSF(User user)
         {
             var list = List.Select(item => item as UserLpuRR).ToList();
