@@ -44,7 +44,7 @@ namespace RegionR.SF
             this.Text = string.Concat("Карточка ", _organization.TypeOrg, " ЛПУ");
             lbTypeOrgName.Text = string.Concat(_organization.TypeOrg.ToString(), ":");
 
-            lbNumberLpuID.Text = _organization.ParentOrganization.ID.ToString();
+            lbID.Text = _organization.ID.ToString();
 
             lbLPU.Text = _parentLPU.ShortName.ToUpper();
 

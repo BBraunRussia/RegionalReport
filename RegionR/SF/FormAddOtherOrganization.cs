@@ -39,6 +39,8 @@ namespace RegionR.SF
             LoadData();
 
             SetEnabledComponent();
+
+            lbID.Text = _organization.ID.ToString();
         }
 
         private void LoadData()

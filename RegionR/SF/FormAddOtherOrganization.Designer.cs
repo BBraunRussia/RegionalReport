@@ -73,6 +73,8 @@
             this.btnAddPerson = new System.Windows.Forms.Button();
             this.lbEditor = new System.Windows.Forms.Label();
             this.lbAutor = new System.Windows.Forms.Label();
+            this.lbID = new System.Windows.Forms.Label();
+            this.label34 = new System.Windows.Forms.Label();
             this.gbCategory.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -99,7 +101,7 @@
             // lbTypeOrg
             // 
             this.lbTypeOrg.AutoSize = true;
-            this.lbTypeOrg.Location = new System.Drawing.Point(115, 75);
+            this.lbTypeOrg.Location = new System.Drawing.Point(115, 99);
             this.lbTypeOrg.Name = "lbTypeOrg";
             this.lbTypeOrg.Size = new System.Drawing.Size(170, 13);
             this.lbTypeOrg.TabIndex = 92;
@@ -108,7 +110,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 76);
+            this.label4.Location = new System.Drawing.Point(12, 99);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(97, 13);
             this.label4.TabIndex = 91;
@@ -117,7 +119,7 @@
             // lbNumberSF
             // 
             this.lbNumberSF.AutoSize = true;
-            this.lbNumberSF.Location = new System.Drawing.Point(115, 51);
+            this.lbNumberSF.Location = new System.Drawing.Point(115, 44);
             this.lbNumberSF.Name = "lbNumberSF";
             this.lbNumberSF.Size = new System.Drawing.Size(70, 13);
             this.lbNumberSF.TabIndex = 90;
@@ -126,7 +128,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 51);
+            this.label2.Location = new System.Drawing.Point(12, 44);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(45, 13);
             this.label2.TabIndex = 89;
@@ -379,7 +381,7 @@
             this.gbCategory.Controls.Add(this.rbC);
             this.gbCategory.Controls.Add(this.rbB);
             this.gbCategory.Controls.Add(this.rbA);
-            this.gbCategory.Location = new System.Drawing.Point(16, 105);
+            this.gbCategory.Location = new System.Drawing.Point(16, 128);
             this.gbCategory.Name = "gbCategory";
             this.gbCategory.Size = new System.Drawing.Size(93, 119);
             this.gbCategory.TabIndex = 127;
@@ -459,7 +461,7 @@
             // 
             // btnShowPerson
             // 
-            this.btnShowPerson.Location = new System.Drawing.Point(16, 285);
+            this.btnShowPerson.Location = new System.Drawing.Point(16, 308);
             this.btnShowPerson.Name = "btnShowPerson";
             this.btnShowPerson.Size = new System.Drawing.Size(237, 32);
             this.btnShowPerson.TabIndex = 133;
@@ -469,7 +471,7 @@
             // 
             // btnAddPerson
             // 
-            this.btnAddPerson.Location = new System.Drawing.Point(16, 240);
+            this.btnAddPerson.Location = new System.Drawing.Point(16, 263);
             this.btnAddPerson.Name = "btnAddPerson";
             this.btnAddPerson.Size = new System.Drawing.Size(148, 32);
             this.btnAddPerson.TabIndex = 132;
@@ -495,11 +497,31 @@
             this.lbAutor.TabIndex = 134;
             this.lbAutor.Text = "Создал";
             // 
+            // lbID
+            // 
+            this.lbID.AutoSize = true;
+            this.lbID.Location = new System.Drawing.Point(115, 70);
+            this.lbID.Name = "lbID";
+            this.lbID.Size = new System.Drawing.Size(70, 13);
+            this.lbID.TabIndex = 141;
+            this.lbID.Text = "не присвоен";
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Location = new System.Drawing.Point(12, 70);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(60, 13);
+            this.label34.TabIndex = 140;
+            this.label34.Text = "Номер SF:";
+            // 
             // FormAddOtherOrganization
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(897, 441);
+            this.Controls.Add(this.lbID);
+            this.Controls.Add(this.label34);
             this.Controls.Add(this.lbEditor);
             this.Controls.Add(this.lbAutor);
             this.Controls.Add(this.btnShowPerson);
@@ -601,5 +623,7 @@
         private System.Windows.Forms.Button btnAddPerson;
         private System.Windows.Forms.Label lbEditor;
         private System.Windows.Forms.Label lbAutor;
+        private System.Windows.Forms.Label lbID;
+        private System.Windows.Forms.Label label34;
     }
 }

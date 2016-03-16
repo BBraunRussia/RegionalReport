@@ -56,7 +56,7 @@
             this.btnShowRules = new System.Windows.Forms.Button();
             this.lbEditor = new System.Windows.Forms.Label();
             this.lbAutor = new System.Windows.Forms.Label();
-            this.lbNumberLpuID = new System.Windows.Forms.Label();
+            this.lbID = new System.Windows.Forms.Label();
             this.label34 = new System.Windows.Forms.Label();
             this.tbPhoneCode = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -321,23 +321,23 @@
             this.lbAutor.TabIndex = 136;
             this.lbAutor.Text = "Создал";
             // 
-            // lbNumberLpuID
+            // lbID
             // 
-            this.lbNumberLpuID.AutoSize = true;
-            this.lbNumberLpuID.Location = new System.Drawing.Point(143, 83);
-            this.lbNumberLpuID.Name = "lbNumberLpuID";
-            this.lbNumberLpuID.Size = new System.Drawing.Size(70, 13);
-            this.lbNumberLpuID.TabIndex = 139;
-            this.lbNumberLpuID.Text = "не присвоен";
+            this.lbID.AutoSize = true;
+            this.lbID.Location = new System.Drawing.Point(143, 83);
+            this.lbID.Name = "lbID";
+            this.lbID.Size = new System.Drawing.Size(70, 13);
+            this.lbID.TabIndex = 139;
+            this.lbID.Text = "не присвоен";
             // 
             // label34
             // 
             this.label34.AutoSize = true;
             this.label34.Location = new System.Drawing.Point(10, 83);
             this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(87, 13);
+            this.label34.Size = new System.Drawing.Size(60, 13);
             this.label34.TabIndex = 138;
-            this.label34.Text = "Номер ЛПУ-SF:";
+            this.label34.Text = "Номер SF:";
             // 
             // tbPhoneCode
             // 
@@ -364,7 +364,7 @@
             this.ClientSize = new System.Drawing.Size(723, 371);
             this.Controls.Add(this.tbPhoneCode);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.lbNumberLpuID);
+            this.Controls.Add(this.lbID);
             this.Controls.Add(this.label34);
             this.Controls.Add(this.lbEditor);
             this.Controls.Add(this.lbAutor);
@@ -434,7 +434,7 @@
         private System.Windows.Forms.Button btnShowRules;
         private System.Windows.Forms.Label lbEditor;
         private System.Windows.Forms.Label lbAutor;
-        private System.Windows.Forms.Label lbNumberLpuID;
+        private System.Windows.Forms.Label lbID;
         private System.Windows.Forms.Label label34;
         private System.Windows.Forms.TextBox tbPhoneCode;
         private System.Windows.Forms.Label label3;
