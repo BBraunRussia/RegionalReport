@@ -91,6 +91,7 @@ namespace ClassLibrary
             dt.Columns.Add("Полное название ЛПУ-RR");
             dt.Columns.Add("Регион RR");
             dt.Columns.Add("Статус");
+            dt.Columns.Add("Использование");
             dt.Columns.Add("Сокр. название ЛПУ-SF");
             dt.Columns.Add("Регион России");
             dt.Columns.Add("Город");
@@ -136,7 +137,9 @@ namespace ClassLibrary
                     colorWhite = IsUserLpu(lpuRR, user);
                 }
 
-                dt.Rows.Add(new object[] { lpuRR.ID, lpuRR.Name, lpuRR.FullName, lpuRR.RegionRR.Name, lpuRR.StatusLPU.ToString(), lpuName, realRegionName, cityName, lpuID, colorWhite });
+                dt.Rows.Add(new object[] { lpuRR.ID, lpuRR.Name, lpuRR.FullName, lpuRR.RegionRR.Name, lpuRR.StatusLPU.ToString(),
+                    (IsLpuUsed(lpuRR) ? "Используется" : "Не используется"),
+                    lpuName, realRegionName, cityName, lpuID, colorWhite });
             }
 
             return dt;
@@ -165,6 +168,13 @@ namespace ClassLibrary
             UserLpuRRList userLpuRRList = UserLpuRRList.GetUniqueInstance();
 
             return userLpuRRList.IsInList(lpuRR, user);
+        }
+
+        private bool IsLpuUsed(LpuRR lpuRR)
+        {
+            UserLpuRRList userLpuRRList = UserLpuRRList.GetUniqueInstance();
+
+            return userLpuRRList.IsInList(lpuRR);
         }
 
         public override BaseDictionary GetItem(int id)

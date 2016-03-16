@@ -15,6 +15,8 @@ namespace RegionR
         private DataGridView _dgv;
         private LpuRRList _lpuRRList;
 
+        private Color _bbgreen3 = Color.FromArgb(115, 214, 186);
+
         public LpuRRController(DataGridView dgv)
             : base(dgv)
         {
@@ -40,6 +42,8 @@ namespace RegionR
 
         public void SetStyle()
         {
+            SetStyleLpuUsed();
+
             foreach (DataGridViewRow row in _dgv.Rows)
             {
                 if (row.Cells["Статус"].Value.ToString() == StatusLPU.Неактивен.ToString())
@@ -63,18 +67,33 @@ namespace RegionR
             _dgv.Columns[5].Width = 150;
             _dgv.Columns[6].Width = 150;
             _dgv.Columns[7].Width = 150;
-            _dgv.Columns[8].Width = 70;
+            _dgv.Columns[8].Width = 150;
+            _dgv.Columns[9].Width = 70;
             _dgv.Columns["color"].Visible = false;
+            
+            SetStyle();
+
+            return _dgv;
+        }
+
+        private void SetStyleLpuUsed()
+        {
+            if (!_dgv.Columns.Contains("color"))
+                return;
 
             foreach (DataGridViewRow row in _dgv.Rows)
             {
                 if (row.Cells["color"].Value.ToString().ToLower() == "false")
                     row.DefaultCellStyle.BackColor = Color.Silver;
+
+                if (row.Cells["Использование"].Value.ToString().ToLower() == "не используется")
+                {
+                    if ((row.Cells["Статус"].Value.ToString() == StatusLPU.Активен.ToString()) && (string.IsNullOrEmpty(row.Cells["Сокр. название ЛПУ-SF"].Value.ToString())))
+                        row.DefaultCellStyle.ForeColor = Color.Green;
+                    else
+                        row.Cells["Использование"].Style.ForeColor = Color.Green;
+                }
             }
-
-            SetStyle();
-
-            return _dgv;
         }
 
         public void ReLoad()

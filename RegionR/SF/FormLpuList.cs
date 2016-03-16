@@ -20,9 +20,7 @@ namespace RegionR
         private IController _lpuRRController;
 
         private IController _controller;
-
-        private Color _bbgreen3 = Color.FromArgb(115, 214, 186);
-
+        
         public FormLpuList()
         {
             InitializeComponent();
