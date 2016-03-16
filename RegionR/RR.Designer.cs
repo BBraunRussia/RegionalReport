@@ -3349,7 +3349,7 @@
             this.toolStripSeparator1,
             this.toolStripMenuItem7});
             this._cms8.Name = "_cms8";
-            this._cms8.Size = new System.Drawing.Size(248, 98);
+            this._cms8.Size = new System.Drawing.Size(248, 120);
             this._cms8.Opening += new System.ComponentModel.CancelEventHandler(this._cms8_Opening);
             // 
             // addToolStripMenuItem

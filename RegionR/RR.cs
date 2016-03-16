@@ -844,8 +844,9 @@ namespace RegionR
 
         private void отчётыToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Name cn = new Name("exec SelTypeReport", "exec InsTypeReport", "exec UpdTypeReport");
-            cn.ShowDialog();
+          
+           /* Name cn = new Name("exec SelTypeReport", "exec InsTypeReport", "exec UpdTypeReport");
+            cn.ShowDialog();*/
         }
 
         private void customersToolStripMenuItem_Click(object sender, EventArgs e)
@@ -6364,7 +6365,10 @@ namespace RegionR
 
         private void _dgv8_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            editMarkAct(e.RowIndex);
+            if (btnMA_edit.Enabled == true)
+                editMarkAct(e.RowIndex);
+            else
+                MessageBox.Show("У Вас нет доступа к редактированию мероприятий!");
         }
 
         private void btnMA_edit_Click(object sender, EventArgs e)
@@ -6385,17 +6389,26 @@ namespace RegionR
 
         private void addToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            addMarkAct();
+            if (btnMA_fill.Enabled == true)
+                addMarkAct();
+            else
+                MessageBox.Show("У Вас нет доступа к добавлению мероприятий!");
         }
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            editMarkAct(_dgv8.SelectedCells[0].RowIndex);
+            if (btnMA_edit.Enabled == true)
+                editMarkAct(_dgv8.SelectedCells[0].RowIndex);
+            else
+                MessageBox.Show("У Вас нет доступа к редактированию мероприятий!");
         }
 
         private void delToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            delMarkAct();
+            if (btnMA_del.Enabled == true)
+                delMarkAct();
+            else
+                MessageBox.Show("У Вас нет доступа к удалению мероприятий!");
         }
 
         private void _cms8_Opening(object sender, CancelEventArgs e)
