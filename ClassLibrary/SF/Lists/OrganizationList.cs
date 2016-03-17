@@ -51,6 +51,11 @@ namespace ClassLibrary.SF
             LoadFromDataBase();
         }
 
+        public Organization GetFirst()
+        {
+            return _list.First().Value;
+        }
+
         public Organization GetItem(int id)
         {
             return (_list.ContainsKey(id)) ? _list[id] : null;

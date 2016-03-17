@@ -6,6 +6,8 @@ using System.Data;
 
 namespace ClassLibrary.SF
 {
+    public enum RecordType { RU_Institution, RU_Department, RU_Pharmacy, RU_Other, RU_Buying_institution }
+
     public class ExportOrganization
     {
         private const int CRM_ID = 0;
@@ -22,6 +24,11 @@ namespace ClassLibrary.SF
             "Sales District", "Номер ЛПУ-RR", "Кол-во коек общее", "Кол-во коек реанимационных", "Кол-во коек хирургических", "Кол-во операционных", "Кол-во ГД машин",
             "Кол-во ГДФ машин", "Кол-во CRRT машин", "Кол-во смен", "Кол-во ГД пациентов", "Кол-во ПД пациентов", "Кол-во CRRT пациентов" };
 
+        private string[] _typeOrgRus = {"ЛПУ", "Филиал ЛПУ", "Отделение ЛПУ", "Аптека ЛПУ", "Отдел ЛПУ", "Аптека коммерческая", "Административное учреждение",
+                                       "Дистрибьютор", "Дистрибьютор (пока не покупал)"};
+        private string[] _typeOrgEng = {"Hospital", "Hospital branch", "Hospital department (medical)", "Hospital pharmacy", "Hospital department (non-medical)",
+                                       "Pharmacy", "Governmental-administrative establishment", "Distributor (Buying)", "Distributor (Non-Buying)"};
+        
         public void Export()
         {
             OrganizationList organizationList = OrganizationList.GetUniqueInstance();
@@ -53,9 +60,7 @@ namespace ClassLibrary.SF
                 string mainSpec = (organization.MainSpec != null) ? organization.MainSpec.Name : string.Empty;
                 string subRegion = (lpu != null) ? lpu.SubRegion.Name.Split(' ')[0] : string.Empty;
                 string idLpuRR = ((lpu != null) && (lpu.ParentOrganization == null)) ? lpu.LpuRR.ID.ToString() : string.Empty;
-
-
-
+                
                 object[] row = { organization.ID, parentID, CRM_ID, recordType,
                                organization.TypeOrg.ToString(), organization.Name, organization.ShortName,
                                inn, kpp, realRegionName, distinct, city, postIndex, street, organization.Email, organization.WebSite,
@@ -84,16 +89,50 @@ namespace ClassLibrary.SF
             return dt;
         }
 
-        private string GetRecordType(Organization organization)
+        public string GetRecordType(Organization organization)
         {
             if (organization.TypeOrg == TypeOrg.ЛПУ)
-                return "RU_Institution";
+                return RecordType.RU_Institution.ToString();
             if ((organization.TypeOrg == TypeOrg.Отделение) || ((organization.TypeOrg == TypeOrg.Аптека) && (organization.ParentOrganization != null)))
-                return "RU_Department";
+                return RecordType.RU_Department.ToString();
             if (organization.TypeOrg == TypeOrg.Аптека)
-                return "RU_Pharmacy";
+                return RecordType.RU_Pharmacy.ToString();
 
-            return "RU_Other";
+            return RecordType.RU_Other.ToString();
+        }
+
+        public string GetFormatTypeOrgRus(Organization organization)
+        {
+            return GetFormatTypeOrg(organization, true);
+        }
+
+        public string GetFormatTypeOrgEng(Organization organization)
+        {
+            return GetFormatTypeOrg(organization, false);
+        }
+
+        private string GetFormatTypeOrg(Organization organization, bool isRus)
+        {
+            string[] typeOrg = (isRus) ? _typeOrgRus : _typeOrgEng;
+
+            if ((organization.TypeOrg == TypeOrg.ЛПУ) && (organization.ParentOrganization == null))
+                return typeOrg[0];
+            else if (organization.TypeOrg == TypeOrg.ЛПУ)
+                return typeOrg[1];
+            else if (organization.TypeOrg == TypeOrg.Отделение)
+                return typeOrg[2];
+            else if ((organization.TypeOrg == TypeOrg.Аптека) && (organization.ParentOrganization != null))
+                return typeOrg[3];
+            else if (organization.TypeOrg == TypeOrg.Отдел)
+                return typeOrg[4];
+            else if (organization.TypeOrg == TypeOrg.Аптека)
+                return typeOrg[5];
+            else if (organization.TypeOrg == TypeOrg.Административное_Учреждение)
+                return typeOrg[6];
+            else if (organization.TypeOrg == TypeOrg.Дистрибьютор)
+                return typeOrg[8];
+
+            return typeOrg[9];
         }
     }
 }

@@ -42,7 +42,7 @@ namespace ClassLibrary.SF
             int.TryParse(row[9].ToString(), out _idParentOrganization);
         }
 
-        internal Organization(TypeOrg typeOrg)
+        public Organization(TypeOrg typeOrg)
         {
             _provider = Provider.GetProvider();
 
