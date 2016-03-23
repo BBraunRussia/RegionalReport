@@ -32,7 +32,7 @@ namespace RegionR
 
             _controller = _lpuRRController;
 
-            btnShowLPUForEdit.Visible = (UserLogged.Get().RoleSF == RolesSF.Администратор);
+            btnShowLPUForEdit.Visible = (UserLogged.Get().Role.ID == 1);
         }
 
         private void FormOrganizationWithLpuRRList_Load(object sender, EventArgs e)
