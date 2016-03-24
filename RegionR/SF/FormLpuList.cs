@@ -62,6 +62,8 @@ namespace RegionR
         {
             _controller.DeleteFilter();
 
+            WriteStatus();
+
             btnDeleteFilter.Visible = false;
         }
 

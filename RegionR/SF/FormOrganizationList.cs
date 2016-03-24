@@ -38,6 +38,13 @@ namespace RegionR
             LoadData();
 
             SetEnabledComponent();
+
+            WriteStatus();
+        }
+
+        private void WriteStatus()
+        {
+            _myStatusStrip.writeStatus();
         }
 
         private void LoadData()
@@ -102,7 +109,7 @@ namespace RegionR
         
         private void dgv_SelectionChanged(object sender, EventArgs e)
         {
-            _myStatusStrip.writeStatus();
+            WriteStatus();
         }
 
         private void fiterToolStripMenuItem_Click(object sender, EventArgs e)
@@ -115,6 +122,8 @@ namespace RegionR
         private void btnDeleteFilter_Click(object sender, EventArgs e)
         {
             _organizationListController.DeleteFilter();
+
+            WriteStatus();
 
             btnDeleteFilter.Visible = false;
         }
@@ -180,8 +189,19 @@ namespace RegionR
 
         private void excelAllFieldsRusToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ExportOrganization exportOrganization = new ExportOrganization();
-            exportOrganization.Export();
+            ExportOrganization exportOrganization = CreateExportOrganization();
+            exportOrganization.ExportRus();
+        }
+
+        private void excelAllFieldsEngToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExportOrganization exportOrganization = CreateExportOrganization();
+            exportOrganization.ExportEng();
+        }
+
+        private ExportOrganization CreateExportOrganization()
+        {
+            return new ExportOrganization();
         }
     }
 }

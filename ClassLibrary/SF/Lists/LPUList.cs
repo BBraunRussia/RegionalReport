@@ -86,6 +86,7 @@ namespace ClassLibrary.SF
             dt.Columns.Add("Регион России");
             dt.Columns.Add("Город");
             dt.Columns.Add("Сопоставленное ЛПУ-RR");
+            dt.Columns.Add("Сопоставленное ЛПУ-RR 2");
             dt.Columns.Add("Регион RR");
             
             foreach (LPU lpu in list)

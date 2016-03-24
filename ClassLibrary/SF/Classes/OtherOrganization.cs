@@ -106,7 +106,7 @@ namespace ClassLibrary.SF
         {
             string typeOrgName = TypeOrg.ToString();
 
-            return new object[] { ID, ShortName, typeOrgName, INN, RealRegion.Name, City.Name, string.Empty, string.Empty };
+            return new object[] { ID, ShortName, typeOrgName, INN, RealRegion.Name, City.Name, string.Empty, string.Empty, string.Empty };
         }
     }
 }

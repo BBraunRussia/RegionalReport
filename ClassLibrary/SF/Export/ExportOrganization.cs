@@ -7,7 +7,7 @@ using System.Data;
 namespace ClassLibrary.SF
 {
     public enum RecordType { RU_Institution, RU_Department, RU_Pharmacy, RU_Other, RU_Buying_institution }
-
+    
     public class ExportOrganization
     {
         private const int CRM_ID = 0;
@@ -28,12 +28,24 @@ namespace ClassLibrary.SF
                                        "Дистрибьютор", "Дистрибьютор (пока не покупал)"};
         private string[] _typeOrgEng = {"Hospital", "Hospital branch", "Hospital department (medical)", "Hospital pharmacy", "Hospital department (non-medical)",
                                        "Pharmacy", "Governmental-administrative establishment", "Distributor (Buying)", "Distributor (Non-Buying)"};
-        
-        public void Export()
+
+        public void ExportRus()
+        {
+            Export(Language.Rus);
+        }
+
+        public void ExportEng()
+        {
+            Export(Language.Eng);
+        }
+
+        private void Export(Language lang)
         {
             OrganizationList organizationList = OrganizationList.GetUniqueInstance();
 
-            DataTable dt = CreateDataTable(_columnNamesRus);
+            string[] columnNames = (lang == Language.Rus) ? _columnNamesRus : _columnNamesEng;
+
+            DataTable dt = CreateDataTable(columnNames);
 
             foreach (var item in organizationList.List)
             {
@@ -53,11 +65,11 @@ namespace ClassLibrary.SF
                 string street = (mainOrganization != null) ? mainOrganization.Street : string.Empty;
                 string phoneCode = (mainOrganization != null) ? mainOrganization.City.PhoneCode : (organization.ParentOrganization as IHaveRegion).City.PhoneCode;
                 string pharmacy = ((organization.TypeOrg == TypeOrg.Аптека) && (organization.ParentOrganization == null)) ? (organization as OtherOrganization).Pharmacy : string.Empty;
-                string typeLPU = (lpu != null) ? lpu.TypeLPU.Name : string.Empty;
-                string ownership = (lpu != null) ? lpu.Ownership.Name : string.Empty;
-                string adminLevel = (lpu != null) ? lpu.AdmLevel.Name : string.Empty;
-                string typeFin = (lpu != null) ? lpu.TypeFin.Name : string.Empty;
-                string mainSpec = (organization.MainSpec != null) ? organization.MainSpec.Name : string.Empty;
+                string typeLPU = (lpu != null) ? lpu.TypeLPU.GetName(lang) : string.Empty;
+                string ownership = (lpu != null) ? lpu.Ownership.GetName(lang) : string.Empty;
+                string adminLevel = (lpu != null) ? lpu.AdmLevel.GetName(lang) : string.Empty;
+                string typeFin = (lpu != null) ? lpu.TypeFin.GetName(lang) : string.Empty;
+                string mainSpec = (organization.MainSpec != null) ? organization.MainSpec.GetName(lang) : string.Empty;
                 string subRegion = (lpu != null) ? lpu.SubRegion.Name.Split(' ')[0] : string.Empty;
                 string idLpuRR = ((lpu != null) && (lpu.ParentOrganization == null)) ? lpu.LpuRR.ID.ToString() : string.Empty;
                 
@@ -103,17 +115,17 @@ namespace ClassLibrary.SF
 
         public string GetFormatTypeOrgRus(Organization organization)
         {
-            return GetFormatTypeOrg(organization, true);
+            return GetFormatTypeOrg(organization, Language.Rus);
         }
 
         public string GetFormatTypeOrgEng(Organization organization)
         {
-            return GetFormatTypeOrg(organization, false);
+            return GetFormatTypeOrg(organization, Language.Eng);
         }
 
-        private string GetFormatTypeOrg(Organization organization, bool isRus)
+        private string GetFormatTypeOrg(Organization organization, Language lang)
         {
-            string[] typeOrg = (isRus) ? _typeOrgRus : _typeOrgEng;
+            string[] typeOrg = (lang == Language.Rus) ? _typeOrgRus : _typeOrgEng;
 
             if ((organization.TypeOrg == TypeOrg.ЛПУ) && (organization.ParentOrganization == null))
                 return typeOrg[0];

@@ -59,6 +59,7 @@
             this.btnReload = new System.Windows.Forms.Button();
             this.btnDeleteFilter = new System.Windows.Forms.Button();
             this.btnContinue = new System.Windows.Forms.Button();
+            this.excelAllFieldsEngToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -155,7 +156,8 @@
             // exportToolStripMenuItem
             // 
             this.exportToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.excelAllFieldsRusToolStripMenuItem});
+            this.excelAllFieldsRusToolStripMenuItem,
+            this.excelAllFieldsEngToolStripMenuItem});
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
             this.exportToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.exportToolStripMenuItem.Text = "Экспорт";
@@ -163,7 +165,7 @@
             // excelAllFieldsRusToolStripMenuItem
             // 
             this.excelAllFieldsRusToolStripMenuItem.Name = "excelAllFieldsRusToolStripMenuItem";
-            this.excelAllFieldsRusToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+            this.excelAllFieldsRusToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
             this.excelAllFieldsRusToolStripMenuItem.Text = "Excel, все поля, русский язык";
             this.excelAllFieldsRusToolStripMenuItem.Click += new System.EventHandler(this.excelAllFieldsRusToolStripMenuItem_Click);
             // 
@@ -320,6 +322,13 @@
             this.btnContinue.UseVisualStyleBackColor = true;
             this.btnContinue.Click += new System.EventHandler(this.tbSearch_TextChanged);
             // 
+            // excelAllFieldsEngToolStripMenuItem
+            // 
+            this.excelAllFieldsEngToolStripMenuItem.Name = "excelAllFieldsEngToolStripMenuItem";
+            this.excelAllFieldsEngToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.excelAllFieldsEngToolStripMenuItem.Text = "Excel, все поля, английский язык";
+            this.excelAllFieldsEngToolStripMenuItem.Click += new System.EventHandler(this.excelAllFieldsEngToolStripMenuItem_Click);
+            // 
             // FormOrganizationList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -381,5 +390,6 @@
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
         private System.Windows.Forms.ToolStripMenuItem excelAllFieldsRusToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem excelAllFieldsEngToolStripMenuItem;
     }
 }
