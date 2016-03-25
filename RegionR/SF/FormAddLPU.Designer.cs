@@ -129,6 +129,8 @@
             this.label38 = new System.Windows.Forms.Label();
             this.cbLpuRR2 = new System.Windows.Forms.ComboBox();
             this.label39 = new System.Windows.Forms.Label();
+            this.lbRegionRR2 = new System.Windows.Forms.Label();
+            this.label40 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -148,7 +150,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(857, 139);
+            this.label2.Location = new System.Drawing.Point(857, 164);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(45, 13);
             this.label2.TabIndex = 1;
@@ -157,7 +159,7 @@
             // lbNumberSF
             // 
             this.lbNumberSF.AutoSize = true;
-            this.lbNumberSF.Location = new System.Drawing.Point(958, 139);
+            this.lbNumberSF.Location = new System.Drawing.Point(958, 164);
             this.lbNumberSF.Name = "lbNumberSF";
             this.lbNumberSF.Size = new System.Drawing.Size(70, 13);
             this.lbNumberSF.TabIndex = 2;
@@ -740,9 +742,9 @@
             this.groupBox3.Controls.Add(this.treeView1);
             this.groupBox3.Controls.Add(this.btnAddSubOrganization);
             this.groupBox3.Controls.Add(this.btnDeleteSubOrganization);
-            this.groupBox3.Location = new System.Drawing.Point(854, 185);
+            this.groupBox3.Location = new System.Drawing.Point(854, 215);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(247, 416);
+            this.groupBox3.Size = new System.Drawing.Size(247, 386);
             this.groupBox3.TabIndex = 73;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Подразделения";
@@ -755,7 +757,7 @@
             this.treeView1.ContextMenuStrip = this.conMenuTree;
             this.treeView1.Location = new System.Drawing.Point(6, 48);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(235, 362);
+            this.treeView1.Size = new System.Drawing.Size(235, 332);
             this.treeView1.TabIndex = 0;
             this.treeView1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseClick);
             this.treeView1.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
@@ -1015,7 +1017,7 @@
             // label34
             // 
             this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(857, 162);
+            this.label34.Location = new System.Drawing.Point(856, 188);
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(87, 13);
             this.label34.TabIndex = 98;
@@ -1024,7 +1026,7 @@
             // lbNumberLpuID
             // 
             this.lbNumberLpuID.AutoSize = true;
-            this.lbNumberLpuID.Location = new System.Drawing.Point(958, 162);
+            this.lbNumberLpuID.Location = new System.Drawing.Point(957, 188);
             this.lbNumberLpuID.Name = "lbNumberLpuID";
             this.lbNumberLpuID.Size = new System.Drawing.Size(70, 13);
             this.lbNumberLpuID.TabIndex = 99;
@@ -1085,6 +1087,24 @@
             this.label39.TabIndex = 102;
             this.label39.Text = "Сопоставление с RR 2:";
             // 
+            // lbRegionRR2
+            // 
+            this.lbRegionRR2.AutoSize = true;
+            this.lbRegionRR2.Location = new System.Drawing.Point(958, 140);
+            this.lbRegionRR2.Name = "lbRegionRR2";
+            this.lbRegionRR2.Size = new System.Drawing.Size(76, 13);
+            this.lbRegionRR2.TabIndex = 107;
+            this.lbRegionRR2.Text = "не определен";
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Location = new System.Drawing.Point(857, 140);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(65, 13);
+            this.label40.TabIndex = 106;
+            this.label40.Text = "Регион RR:";
+            // 
             // FormAddLPU
             // 
             this.AcceptButton = this.btnSaveAndClose;
@@ -1092,6 +1112,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(1113, 613);
+            this.Controls.Add(this.lbRegionRR2);
+            this.Controls.Add(this.label40);
             this.Controls.Add(this.lbLpuRR2Id);
             this.Controls.Add(this.label38);
             this.Controls.Add(this.cbLpuRR2);
@@ -1279,5 +1301,7 @@
         private System.Windows.Forms.Label label38;
         private System.Windows.Forms.ComboBox cbLpuRR2;
         private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.Label lbRegionRR2;
+        private System.Windows.Forms.Label label40;
     }
 }

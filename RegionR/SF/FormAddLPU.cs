@@ -107,6 +107,7 @@ namespace RegionR.SF
             if (_lpu.LpuRR2 != null)
             {
                 cbLpuRR2.SelectedValue = _lpu.LpuRR2.ID;
+                lbRegionRR2.Text = _lpu.LpuRR2.RegionRR.Name;
             }
 
             if (_parentLPU == null)
@@ -757,6 +758,7 @@ namespace RegionR.SF
 
             if (lpuRR2 != null)
             {
+                lbRegionRR2.Text = lpuRR2.RegionRR.Name;
                 lbLpuRR2Id.Text = lpuRR2.ID.ToString();
             }
         }

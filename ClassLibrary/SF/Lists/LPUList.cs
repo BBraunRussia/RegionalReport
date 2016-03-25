@@ -109,7 +109,7 @@ namespace ClassLibrary.SF
 
         public LPU GetItem(LpuRR lpuRR)
         {
-            var list = _list.Where(item => item.LpuRR == lpuRR);
+            var list = _list.Where(item => ((item.LpuRR == lpuRR) || (item.LpuRR2 == lpuRR)));
             return (list.Count() == 0) ? null : list.First();
         }
 
