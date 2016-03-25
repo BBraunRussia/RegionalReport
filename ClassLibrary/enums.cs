@@ -25,4 +25,6 @@ namespace ClassLibrary
     public enum HistoryType { organization = 1, person = 2 }
     public enum SDiv { HC = 1, AE = 2, OM = 3 }
     public enum StatusLPU { Активен = 1, Неактивен = 2, Групповой = 3 }
+
+    public enum Language { Rus, Eng }
 }

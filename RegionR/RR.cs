@@ -15991,9 +15991,9 @@ namespace RegionR
 
         private void loadAccessPM()
         {
-            if (globalData.UserAccess == 3)
-                button62.Visible = false;
-            else
+            //if (globalData.UserAccess == 3)
+            //    button62.Visible = false;
+            //else
                 button62.Visible = true;
         }
 
@@ -16002,9 +16002,9 @@ namespace RegionR
             Sql sql1 = new Sql();
             DataTable dt1 = new DataTable();
 
-            if (globalData.UserAccess == 3)
-                dt1 = sql1.GetRecords("exec selUserbyID @p1", globalData.UserID);
-            else
+            //if (globalData.UserAccess == 3)
+            //    dt1 = sql1.GetRecords("exec selUserbyID @p1", globalData.UserID);
+            //else
                 dt1 = sql1.GetRecords("exec SelUsersByRole @p1", 3);
 
             fillComboBox(dt1, comboBox12, "user_name", "user_id");

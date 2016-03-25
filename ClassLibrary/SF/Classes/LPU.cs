@@ -9,6 +9,7 @@ namespace ClassLibrary.SF
     public class LPU : Organization, IHaveRegion
     {
         private LpuRR _lpuRR;
+        private LpuRR _lpuRR2;
 
         private int _idTypeLPU;
         private int _idOwnership;
@@ -77,6 +78,10 @@ namespace ClassLibrary.SF
             int.TryParse(row[33].ToString(), out idTypeFin);
             TypeFinList typeFinList = TypeFinList.GetUniqueInstance();
             _typeFin = typeFinList.GetItem(idTypeFin) as TypeFin;
+
+            int idLpuRR2;
+            int.TryParse(row[34].ToString(), out idLpuRR2);
+            _lpuRR2 = lpuRRList.GetItem(idLpuRR2) as LpuRR;
         }
 
         public LPU(TypeOrg typeOrg)
@@ -182,6 +187,12 @@ namespace ClassLibrary.SF
             set { _lpuRR = value; }
         }
 
+        public LpuRR LpuRR2
+        {
+            get { return _lpuRR2; }
+            set { _lpuRR2 = value; }
+        }
+
         public string BedsTotal
         {
             get { return (_bedsTotal == 0) ? string.Empty : _bedsTotal.ToString(); }
@@ -254,7 +265,7 @@ namespace ClassLibrary.SF
         {
             string typeOrgName = ((TypeOrg == TypeOrg.ЛПУ) && (ParentOrganization != null)) ? "Филиал ЛПУ" : TypeOrg.ToString();
 
-            return new object[] { ID, ShortName, typeOrgName, (ParentOrganization == null) ? INN : (ParentOrganization as LPU).INN, RealRegion.Name, City.Name, (LpuRR == null) ? "Прочие ЛПУ" : LpuRR.Name, (LpuRR == null) ? "Российская федерация" : LpuRR.RegionRR.Name };
+            return new object[] { ID, ShortName, typeOrgName, (ParentOrganization == null) ? INN : (ParentOrganization as LPU).INN, RealRegion.Name, City.Name, (LpuRR == null) ? "Прочие ЛПУ" : LpuRR.Name, ((LpuRR2 == null) || (LpuRR2.ID == 0)) ? String.Empty : LpuRR2.Name, (LpuRR == null) ? "Российская федерация" : LpuRR.RegionRR.Name };
         }
         
         public override void Save()
@@ -265,10 +276,11 @@ namespace ClassLibrary.SF
             idParentOrganization = (ParentOrganization == null) ? 0 : ParentOrganization.ID;
 
             int idLPURR = (LpuRR == null) ? 0 : LpuRR.ID;
+            int idLPURR2 = (LpuRR2 == null) ? 0 : LpuRR2.ID;
 
             int.TryParse(_provider.Insert("SF_LPU", ID, NumberSF, TypeOrg, Name, ShortName, MainSpec.ID, Email, WebSite, Phone, idParentOrganization, TypeLPU.ID, Ownership.ID, AdmLevel.ID,
                 INN, KPP, PostIndex, City.ID, District, Street, idLPURR,
-                _bedsTotal, _bedsIC, _bedsSurgical, _operating, _machineGD, _machineGDF, _machineCRRT, _shift, _patientGD, _patientPD, _patientCRRT, _subRegion.ID, _typeFin.ID), out id);
+                _bedsTotal, _bedsIC, _bedsSurgical, _operating, _machineGD, _machineGDF, _machineCRRT, _shift, _patientGD, _patientPD, _patientCRRT, _subRegion.ID, _typeFin.ID, idLPURR2), out id);
 
             SetID(id);
 

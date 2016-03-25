@@ -34,6 +34,13 @@ namespace RegionR
             LoadData();
 
             SetEnabledComponent();
+
+            WriteStatus();
+        }
+
+        private void WriteStatus()
+        {
+            _myStatusStrip.writeStatus();
         }
 
         private void LoadData()
@@ -59,7 +66,7 @@ namespace RegionR
 
         private void dgv_SelectionChanged(object sender, EventArgs e)
         {
-            _myStatusStrip.writeStatus();
+            WriteStatus();
         }
         
         private void btnAdd_Click(object sender, EventArgs e)
@@ -131,6 +138,8 @@ namespace RegionR
         private void btnDeleteFilter_Click(object sender, EventArgs e)
         {
             _personListController.DeleteFilter();
+
+            WriteStatus();
 
             btnDeleteFilter.Visible = false;
         }

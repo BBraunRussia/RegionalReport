@@ -86,6 +86,7 @@ namespace ClassLibrary.SF
             dt.Columns.Add("Регион России");
             dt.Columns.Add("Город");
             dt.Columns.Add("Сопоставленное ЛПУ-RR");
+            dt.Columns.Add("Сопоставленное ЛПУ-RR 2");
             dt.Columns.Add("Регион RR");
             
             foreach (LPU lpu in list)
@@ -108,7 +109,7 @@ namespace ClassLibrary.SF
 
         public LPU GetItem(LpuRR lpuRR)
         {
-            var list = _list.Where(item => item.LpuRR == lpuRR);
+            var list = _list.Where(item => ((item.LpuRR == lpuRR) || (item.LpuRR2 == lpuRR)));
             return (list.Count() == 0) ? null : list.First();
         }
 

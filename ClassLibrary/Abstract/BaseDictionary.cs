@@ -10,6 +10,7 @@ namespace ClassLibrary
     {
         private int _id;
         private string _name;
+        private string _nameEng;
 
         private bool _canAdd;
         
@@ -18,6 +19,7 @@ namespace ClassLibrary
             _canAdd = true;
             int.TryParse(row[0].ToString(), out _id);
             _name = row[1].ToString();
+            _nameEng = row[2].ToString();
         }
 
         public BaseDictionary() { }
@@ -27,6 +29,7 @@ namespace ClassLibrary
             get { return _name; }
             set { _name = value; }
         }
+
         public int ID
         {
             get { return _id; }
@@ -42,6 +45,11 @@ namespace ClassLibrary
         {
             get { return _canAdd; }
             set { _canAdd = value; }
+        }
+
+        public string GetName(Language lang)
+        {
+            return (lang == Language.Rus) ? _name : _nameEng;
         }
     }
 }

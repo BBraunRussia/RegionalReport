@@ -14,7 +14,7 @@ namespace ClassLibrary.SF
             : base(row)
         {
             int idUnique;
-            int.TryParse(row[2].ToString(), out idUnique);
+            int.TryParse(row[3].ToString(), out idUnique);
 
             _unique = (idUnique == 1);
         }

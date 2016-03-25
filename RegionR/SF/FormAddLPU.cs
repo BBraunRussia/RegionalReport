@@ -68,6 +68,7 @@ namespace RegionR.SF
         private void LoadData()
         {
             cbLpuRR.Enabled = (UserLogged.Get().RoleSF == RolesSF.Администратор);
+            cbLpuRR2.Enabled = (UserLogged.Get().RoleSF == RolesSF.Администратор);
 
             this.Text = (_parentLPU == null) ? "Карточка Организации \"ЛПУ\"" : "Карточка Организации \"Филиал ЛПУ\"";
             lbKPP.Text = (_parentLPU == null) ? "КПП:" : "КПП*:";
@@ -101,6 +102,12 @@ namespace RegionR.SF
             {
                 cbLpuRR.SelectedValue = _lpu.LpuRR.ID;
                 lbRegionRR.Text = _lpu.LpuRR.RegionRR.Name;
+            }
+
+            if (_lpu.LpuRR2 != null)
+            {
+                cbLpuRR2.SelectedValue = _lpu.LpuRR2.ID;
+                lbRegionRR2.Text = _lpu.LpuRR2.RegionRR.Name;
             }
 
             if (_parentLPU == null)
@@ -199,6 +206,7 @@ namespace RegionR.SF
         private void LoadDictionaries()
         {
             ClassForForm.LoadDictionary(cbLpuRR, _lpuRRList.ToDataTable(_lpu.LpuRR));
+            ClassForForm.LoadDictionary(cbLpuRR2, _lpuRRList.ToDataTable(_lpu.LpuRR2));
             ClassForForm.LoadDictionary(cbTypeLpu, _typeLPUList.ToDataTable());
             ClassForForm.LoadDictionary(cbOwnership, _ownershipList.ToDataTable());
             ClassForForm.LoadDictionary(cbAdmLevel, _admLevelList.ToDataTable());
@@ -391,6 +399,17 @@ namespace RegionR.SF
 
                 if (lpuRR != null)
                     _lpu.LpuRR = lpuRR;
+            }
+
+            if (cbLpuRR2.Enabled)
+            {
+                int idLpuRR2;
+                int.TryParse(cbLpuRR2.SelectedValue.ToString(), out idLpuRR2);
+
+                LpuRR lpuRR2 = _lpuRRList.GetItem(idLpuRR2) as LpuRR;
+
+                if (lpuRR2 != null)
+                    _lpu.LpuRR2 = lpuRR2;
             }
 
             return true;
@@ -587,6 +606,17 @@ namespace RegionR.SF
                     return true;
             }
 
+            if (cbLpuRR2.Enabled)
+            {
+                int idLpuRR2;
+                int.TryParse(cbLpuRR2.SelectedValue.ToString(), out idLpuRR2);
+
+                LpuRR lpuRR2 = _lpuRRList.GetItem(idLpuRR2) as LpuRR;
+
+                if (lpuRR2 != null)
+                    return true;
+            }
+
             if (_lpu.District != tbDistrict.Text)
                 return true;
             if (_lpu.Street != tbStreet.Text)
@@ -716,6 +746,20 @@ namespace RegionR.SF
             {
                 lbRegionRR.Text = lpuRR.RegionRR.Name;
                 lbLpuRRId.Text = lpuRR.ID.ToString();
+            }
+        }
+
+        private void cbLpuRR2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int idLpuRR2;
+            int.TryParse(cbLpuRR2.SelectedValue.ToString(), out idLpuRR2);
+
+            LpuRR lpuRR2 = _lpuRRList.GetItem(idLpuRR2) as LpuRR;
+
+            if (lpuRR2 != null)
+            {
+                lbRegionRR2.Text = lpuRR2.RegionRR.Name;
+                lbLpuRR2Id.Text = lpuRR2.ID.ToString();
             }
         }
     }
