@@ -10,11 +10,13 @@ namespace ClassLibrary.SF
     {
         private const int CRM_ID = 0;
 
-        private string[] _columnNamesEng = { "Person ID", "Institution ID", "Last name", "First Name", "Second Name", "Title", "Position", "Main speciality",
-                                               "Academic title", "Email", "Moble phone", "Office phone", "Comment", "", "" };
+        private string[] _columnNamesEng = { "Person ID", "Institution ID", "Last name", "First Name", "Second Name", "Title", "Institution", "Department",
+                                               "Position", "Main speciality", "Academic title", "Email", "Moble phone", "Office phone", "Comment", "Created by",
+                                               "Creation Date and Time", "Modified by", "Modification Date and Time" };
 
-        private string[] _columnNamesRus = { "№ персоны", "№ организации", "Фамилия", "Имя", "Отчество", "Обращение", "Должность", "Специализация", "Учёная степень/звание",
-                                               "Эл. почта", "Телефон мобильный", "Телефон офисный", "Примечание", "Автор", "Редактировал" };
+        private string[] _columnNamesRus = { "№ персоны", "№ организации", "Фамилия", "Имя", "Отчество", "Обращение", "Организация", "Подразделение", "Должность",
+                                               "Специализация", "Учёная степень/звание", "Эл. почта", "Телефон мобильный", "Телефон офисный", "Примечание",
+                                               "Создал", "Дата и время создания", "Изменил", "Дата и время изменения" };
 
         private string[] _titleRus = { "Господин", "Госпожа" };
         private string[] _titleEng = { "Mr.", "Mrs." };
@@ -41,13 +43,16 @@ namespace ClassLibrary.SF
             
             foreach (var person in personList.GetList())
             {
-                string author = (lang == Language.Rus) ? historyList.GetItemString(person, HistoryAction.Создал) : string.Empty;
-                string editor = (lang == Language.Rus) ? historyList.GetItemString(person, HistoryAction.Редактировал) : string.Empty;
-                
+                History created = historyList.GetItem(person, HistoryAction.Создал);
+                History modifed = historyList.GetItem(person, HistoryAction.Редактировал);
+                string modifedAuthor = (modifed != null) ? modifed.Author : string.Empty;
+                string modifedDatetime = (modifed != null) ? modifed.datetime : string.Empty;
+                                
                 object[] row = { person.ID, person.Organization.ID, person.LastName, person.FirstName,
-                               person.SecondName, GetTitle(lang, person.Appeal), person.Position.GetName(lang),
-                               person.MainSpecPerson.GetName(lang), person.AcademTitle.GetName(lang),
-                               person.Email, person.Mobile, person.Phone, person.Comment, author, editor };
+                               person.SecondName, GetTitle(lang, person.Appeal), person.GetOrganizationName(), person.GetSubOrganizationName(),
+                               person.Position.GetName(lang), person.MainSpecPerson.GetName(lang), person.AcademTitle.GetName(lang),
+                               person.Email, person.Mobile, person.Phone, person.Comment, created.Author, created.datetime,
+                               modifedAuthor, modifedDatetime };
 
                 dt.Rows.Add(row);
             }

@@ -145,19 +145,17 @@ namespace ClassLibrary.SF
         
         public override object[] GetRow()
         {
-            Organization organizationWithRegion = ((Organization is LPU) || (Organization is OtherOrganization)) ? Organization : Organization.ParentOrganization;
-
-            string subOrganizationShortName = (Organization is LPU) ? "Администрация" : (Organization is OtherOrganization) ? string.Empty : Organization.ShortName;
+            IHaveRegion region = ((_organization is IHaveRegion) ? _organization : _organization.ParentOrganization) as IHaveRegion;
 
             string mobileWithOutFormat = Mobile.Replace("+7", "").Replace("(", "").Replace(")", "").Replace("-", "");
 
-            return new object[] { ID, LastName, FirstName, SecondName, organizationWithRegion.ShortName, subOrganizationShortName, Position.Name, mobileWithOutFormat, (organizationWithRegion as IHaveRegion).RealRegion.Name, (organizationWithRegion as IHaveRegion).City.Name };
+            return new object[] { ID, LastName, FirstName, SecondName, _organization.ShortName, GetSubOrganizationName(), Position.Name, mobileWithOutFormat, region.RealRegion.Name, region.City.Name };
         }
 
         public void Save()
         {
             int id;
-            int.TryParse(_provider.Insert("SF_Person", ID, LastName, NumberSF, FirstName, SecondName, Appeal, Position.ID, MainSpecPerson.ID, AcademTitle.ID, Email, Mobile, Phone, Comment, Organization.ID), out id);
+            int.TryParse(_provider.Insert("SF_Person", ID, LastName, NumberSF, FirstName, SecondName, Appeal, Position.ID, MainSpecPerson.ID, AcademTitle.ID, Email, Mobile, Phone, Comment, _organization.ID), out id);
 
             ID = id;
 
@@ -196,5 +194,15 @@ namespace ClassLibrary.SF
 
         public string ShortName { get { return LastName; } }
         public HistoryType Type { get { return HistoryType.person; } }
+
+        public string GetOrganizationName()
+        {
+            return (_organization.ParentOrganization == null) ? _organization.ShortName : _organization.ParentOrganization.ShortName;
+        }
+
+        public string GetSubOrganizationName()
+        {
+            return (_organization is OtherOrganization) ? string.Empty : (_organization.ParentOrganization == null) ? "Администрация" : _organization.ShortName;
+        }
     }
 }

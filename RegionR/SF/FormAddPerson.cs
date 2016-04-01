@@ -77,8 +77,8 @@ namespace RegionR.SF
                 lbNumberSF.Text = _person.NumberSF;
             }
 
-            tbOrganization.Text = (_person.Organization.ParentOrganization == null) ? _person.Organization.ShortName : _person.Organization.ParentOrganization.ShortName;
-            tbSubOrganization.Text = (_person.Organization.ParentOrganization == null) ? "Администрация" : _person.Organization.ShortName;
+            tbOrganization.Text = _person.GetOrganizationName();
+            tbSubOrganization.Text = _person.GetSubOrganizationName();
             tbComment.Text = _person.Comment;
 
             if ((_person.ID == 0) && (_person.Organization.TypeOrg == TypeOrg.Аптека))

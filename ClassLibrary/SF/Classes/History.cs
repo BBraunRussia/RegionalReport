@@ -77,6 +77,8 @@ namespace ClassLibrary.SF
 
         public HistoryType Type { get { return _type; } }
         public HistoryAction Action { get { return _action; } }
+        public string Author { get { return _user.Name; } }
+        public string datetime { get { return _datetime.ToString(); } }
                 
         public override string ToString()
         {
