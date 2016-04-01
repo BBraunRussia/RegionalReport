@@ -62,7 +62,7 @@ namespace ClassLibrary.SF
         private DataTable CreateTable(List<Person> list)
         {
             DataTable dt = new DataTable();
-            dt.Columns.Add("id", typeof(int));
+            dt.Columns.Add("№ персоны", typeof(int));
             dt.Columns.Add("Фамилия");
             dt.Columns.Add("Имя");
             dt.Columns.Add("Отчество");
@@ -99,6 +99,11 @@ namespace ClassLibrary.SF
         public bool IsOrganizationHaveUnique(Person person)
         {
             return List.Exists(item => (item as Person).Organization == person.Organization && (item as Person).Position == person.Position);
+        }
+
+        public List<Person> GetList()
+        {
+            return List.Select(item => item as Person).ToList();
         }
     }
 }

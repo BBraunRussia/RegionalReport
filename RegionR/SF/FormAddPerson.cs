@@ -50,6 +50,9 @@ namespace RegionR.SF
 
         private void LoadData()
         {
+            lbPersonID.Text = _person.ID.ToString();
+            SetRealRegionAndCity();
+
             tbLastName.Text = _person.LastName;
             tbFirstName.Text = _person.FirstName;
             tbSecondName.Text = _person.SecondName;
@@ -69,7 +72,10 @@ namespace RegionR.SF
             mtbMobile.Text = _person.Mobile;
             mtbPhone.Text = _person.Phone;
 
-            lbNumberSF.Text = _person.NumberSF;
+            if (!string.IsNullOrEmpty(_person.NumberSF))
+            {
+                lbNumberSF.Text = _person.NumberSF;
+            }
 
             tbOrganization.Text = (_person.Organization.ParentOrganization == null) ? _person.Organization.ShortName : _person.Organization.ParentOrganization.ShortName;
             tbSubOrganization.Text = (_person.Organization.ParentOrganization == null) ? "Администрация" : _person.Organization.ShortName;
@@ -96,6 +102,8 @@ namespace RegionR.SF
         private void SetEnabledComponent()
         {
             ControlEditMode controlEditMode = new ControlEditMode(this.Controls, btnClose);
+            controlEditMode.SetEnableValue(tbOrganization, false);
+            controlEditMode.SetEnableValue(tbSubOrganization, false);
         }
 
         private void SetPhoneCode()
@@ -114,6 +122,14 @@ namespace RegionR.SF
                 mask += "0";
 
             mtbPhone.Mask = mask;
+        }
+
+        private void SetRealRegionAndCity()
+        {
+            IHaveRegion region = (_person.Organization is IHaveRegion) ? _person.Organization as IHaveRegion : _person.Organization.ParentOrganization as IHaveRegion;
+
+            lbCity.Text = region.City.Name;
+            lbRealRegion.Text = region.RealRegion.Name;
         }
 
         private void LoadDictionary()
@@ -266,7 +282,7 @@ namespace RegionR.SF
             if (_person.Email != tbEmail.Text)
                 return true;
 
-            if (_person.Mobile != mtbMobile.Text)
+            if ((mtbMobile.Text != "+7(   )   -  -") && (_person.Mobile != mtbMobile.Text))
                 return true;
 
             if (_person.Phone != mtbPhone.Text)

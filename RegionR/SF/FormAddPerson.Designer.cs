@@ -66,13 +66,19 @@
             this.lbEditor = new System.Windows.Forms.Label();
             this.lbAutor = new System.Windows.Forms.Label();
             this.btnChangeSubOrganization = new System.Windows.Forms.Button();
+            this.lbPersonID = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.lbCity = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.lbRealRegion = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 25);
+            this.label1.Location = new System.Drawing.Point(13, 36);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(63, 13);
             this.label1.TabIndex = 0;
@@ -80,14 +86,14 @@
             // 
             // tbLastName
             // 
-            this.tbLastName.Location = new System.Drawing.Point(81, 22);
+            this.tbLastName.Location = new System.Drawing.Point(109, 33);
             this.tbLastName.Name = "tbLastName";
             this.tbLastName.Size = new System.Drawing.Size(225, 20);
             this.tbLastName.TabIndex = 1;
             // 
             // tbFirstName
             // 
-            this.tbFirstName.Location = new System.Drawing.Point(81, 48);
+            this.tbFirstName.Location = new System.Drawing.Point(109, 59);
             this.tbFirstName.Name = "tbFirstName";
             this.tbFirstName.Size = new System.Drawing.Size(225, 20);
             this.tbFirstName.TabIndex = 3;
@@ -95,7 +101,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 51);
+            this.label2.Location = new System.Drawing.Point(13, 62);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(36, 13);
             this.label2.TabIndex = 2;
@@ -103,7 +109,7 @@
             // 
             // tbSecondName
             // 
-            this.tbSecondName.Location = new System.Drawing.Point(81, 74);
+            this.tbSecondName.Location = new System.Drawing.Point(109, 85);
             this.tbSecondName.Name = "tbSecondName";
             this.tbSecondName.Size = new System.Drawing.Size(225, 20);
             this.tbSecondName.TabIndex = 5;
@@ -111,7 +117,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 77);
+            this.label3.Location = new System.Drawing.Point(13, 88);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(61, 13);
             this.label3.TabIndex = 4;
@@ -120,25 +126,25 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 109);
+            this.label4.Location = new System.Drawing.Point(222, 7);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(60, 13);
+            this.label4.Size = new System.Drawing.Size(45, 13);
             this.label4.TabIndex = 6;
-            this.label4.Text = "Номер SF:";
+            this.label4.Text = "CRM id:";
             // 
             // lbNumberSF
             // 
             this.lbNumberSF.AutoSize = true;
-            this.lbNumberSF.Location = new System.Drawing.Point(78, 109);
+            this.lbNumberSF.Location = new System.Drawing.Point(280, 7);
             this.lbNumberSF.Name = "lbNumberSF";
-            this.lbNumberSF.Size = new System.Drawing.Size(78, 13);
+            this.lbNumberSF.Size = new System.Drawing.Size(54, 13);
             this.lbNumberSF.TabIndex = 7;
-            this.lbNumberSF.Text = "Не определен";
+            this.lbNumberSF.Text = "Не задан";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(342, 25);
+            this.label6.Location = new System.Drawing.Point(343, 10);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(73, 13);
             this.label6.TabIndex = 8;
@@ -147,7 +153,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(342, 51);
+            this.label7.Location = new System.Drawing.Point(343, 36);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(72, 13);
             this.label7.TabIndex = 10;
@@ -156,7 +162,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(342, 77);
+            this.label8.Location = new System.Drawing.Point(343, 62);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(89, 13);
             this.label8.TabIndex = 12;
@@ -172,7 +178,7 @@
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.tbEmail);
             this.groupBox1.Controls.Add(this.label11);
-            this.groupBox1.Location = new System.Drawing.Point(690, 12);
+            this.groupBox1.Location = new System.Drawing.Point(666, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(349, 135);
             this.groupBox1.TabIndex = 14;
@@ -248,16 +254,16 @@
             // 
             // tbComment
             // 
-            this.tbComment.Location = new System.Drawing.Point(108, 207);
+            this.tbComment.Location = new System.Drawing.Point(109, 179);
             this.tbComment.Multiline = true;
             this.tbComment.Name = "tbComment";
-            this.tbComment.Size = new System.Drawing.Size(539, 103);
+            this.tbComment.Size = new System.Drawing.Size(539, 115);
             this.tbComment.TabIndex = 20;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(12, 210);
+            this.label12.Location = new System.Drawing.Point(13, 182);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(73, 13);
             this.label12.TabIndex = 19;
@@ -265,7 +271,7 @@
             // 
             // tbSubOrganization
             // 
-            this.tbSubOrganization.Location = new System.Drawing.Point(108, 181);
+            this.tbSubOrganization.Location = new System.Drawing.Point(109, 153);
             this.tbSubOrganization.Name = "tbSubOrganization";
             this.tbSubOrganization.ReadOnly = true;
             this.tbSubOrganization.Size = new System.Drawing.Size(539, 20);
@@ -274,7 +280,7 @@
             // lbSubOrganization
             // 
             this.lbSubOrganization.AutoSize = true;
-            this.lbSubOrganization.Location = new System.Drawing.Point(12, 184);
+            this.lbSubOrganization.Location = new System.Drawing.Point(13, 156);
             this.lbSubOrganization.Name = "lbSubOrganization";
             this.lbSubOrganization.Size = new System.Drawing.Size(90, 13);
             this.lbSubOrganization.TabIndex = 17;
@@ -282,7 +288,7 @@
             // 
             // tbOrganization
             // 
-            this.tbOrganization.Location = new System.Drawing.Point(108, 155);
+            this.tbOrganization.Location = new System.Drawing.Point(109, 127);
             this.tbOrganization.Name = "tbOrganization";
             this.tbOrganization.ReadOnly = true;
             this.tbOrganization.Size = new System.Drawing.Size(539, 20);
@@ -291,7 +297,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(12, 158);
+            this.label14.Location = new System.Drawing.Point(13, 130);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(77, 13);
             this.label14.TabIndex = 15;
@@ -299,7 +305,8 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(331, 325);
+            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnSave.Location = new System.Drawing.Point(389, 312);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(89, 46);
             this.btnSave.TabIndex = 21;
@@ -309,7 +316,8 @@
             // 
             // btnSaveAndClose
             // 
-            this.btnSaveAndClose.Location = new System.Drawing.Point(453, 325);
+            this.btnSaveAndClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnSaveAndClose.Location = new System.Drawing.Point(511, 312);
             this.btnSaveAndClose.Name = "btnSaveAndClose";
             this.btnSaveAndClose.Size = new System.Drawing.Size(150, 46);
             this.btnSaveAndClose.TabIndex = 22;
@@ -319,7 +327,8 @@
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(640, 325);
+            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnClose.Location = new System.Drawing.Point(698, 312);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(89, 46);
             this.btnClose.TabIndex = 23;
@@ -329,7 +338,7 @@
             // 
             // btnChangeOrganizationAndSubOrganization
             // 
-            this.btnChangeOrganizationAndSubOrganization.Location = new System.Drawing.Point(690, 177);
+            this.btnChangeOrganizationAndSubOrganization.Location = new System.Drawing.Point(666, 231);
             this.btnChangeOrganizationAndSubOrganization.Name = "btnChangeOrganizationAndSubOrganization";
             this.btnChangeOrganizationAndSubOrganization.Size = new System.Drawing.Size(153, 46);
             this.btnChangeOrganizationAndSubOrganization.TabIndex = 24;
@@ -344,7 +353,7 @@
             this.cbAppeal.Items.AddRange(new object[] {
             "Господин",
             "Госпожа"});
-            this.cbAppeal.Location = new System.Drawing.Point(476, 22);
+            this.cbAppeal.Location = new System.Drawing.Point(477, 7);
             this.cbAppeal.Name = "cbAppeal";
             this.cbAppeal.Size = new System.Drawing.Size(171, 21);
             this.cbAppeal.TabIndex = 27;
@@ -353,7 +362,7 @@
             // 
             this.cbPosition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbPosition.FormattingEnabled = true;
-            this.cbPosition.Location = new System.Drawing.Point(476, 49);
+            this.cbPosition.Location = new System.Drawing.Point(477, 34);
             this.cbPosition.Name = "cbPosition";
             this.cbPosition.Size = new System.Drawing.Size(171, 21);
             this.cbPosition.TabIndex = 28;
@@ -362,7 +371,7 @@
             // 
             this.cbMainSpecPerson.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbMainSpecPerson.FormattingEnabled = true;
-            this.cbMainSpecPerson.Location = new System.Drawing.Point(477, 76);
+            this.cbMainSpecPerson.Location = new System.Drawing.Point(478, 61);
             this.cbMainSpecPerson.Name = "cbMainSpecPerson";
             this.cbMainSpecPerson.Size = new System.Drawing.Size(170, 21);
             this.cbMainSpecPerson.TabIndex = 29;
@@ -371,7 +380,7 @@
             // 
             this.cbAcademTitle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbAcademTitle.FormattingEnabled = true;
-            this.cbAcademTitle.Location = new System.Drawing.Point(477, 103);
+            this.cbAcademTitle.Location = new System.Drawing.Point(478, 88);
             this.cbAcademTitle.Name = "cbAcademTitle";
             this.cbAcademTitle.Size = new System.Drawing.Size(171, 21);
             this.cbAcademTitle.TabIndex = 31;
@@ -379,7 +388,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(342, 106);
+            this.label5.Location = new System.Drawing.Point(343, 91);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(111, 13);
             this.label5.TabIndex = 30;
@@ -388,7 +397,7 @@
             // lbEditor
             // 
             this.lbEditor.AutoSize = true;
-            this.lbEditor.Location = new System.Drawing.Point(12, 362);
+            this.lbEditor.Location = new System.Drawing.Point(13, 343);
             this.lbEditor.Name = "lbEditor";
             this.lbEditor.Size = new System.Drawing.Size(53, 13);
             this.lbEditor.TabIndex = 139;
@@ -397,7 +406,7 @@
             // lbAutor
             // 
             this.lbAutor.AutoSize = true;
-            this.lbAutor.Location = new System.Drawing.Point(12, 342);
+            this.lbAutor.Location = new System.Drawing.Point(13, 323);
             this.lbAutor.Name = "lbAutor";
             this.lbAutor.Size = new System.Drawing.Size(44, 13);
             this.lbAutor.TabIndex = 138;
@@ -405,7 +414,7 @@
             // 
             // btnChangeSubOrganization
             // 
-            this.btnChangeSubOrganization.Location = new System.Drawing.Point(690, 229);
+            this.btnChangeSubOrganization.Location = new System.Drawing.Point(844, 231);
             this.btnChangeSubOrganization.Name = "btnChangeSubOrganization";
             this.btnChangeSubOrganization.Size = new System.Drawing.Size(153, 46);
             this.btnChangeSubOrganization.TabIndex = 140;
@@ -413,11 +422,71 @@
             this.btnChangeSubOrganization.UseVisualStyleBackColor = true;
             this.btnChangeSubOrganization.Click += new System.EventHandler(this.btnChangeSubOrganization_Click);
             // 
+            // lbPersonID
+            // 
+            this.lbPersonID.AutoSize = true;
+            this.lbPersonID.Location = new System.Drawing.Point(106, 7);
+            this.lbPersonID.Name = "lbPersonID";
+            this.lbPersonID.Size = new System.Drawing.Size(54, 13);
+            this.lbPersonID.TabIndex = 142;
+            this.lbPersonID.Text = "Не задан";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(13, 7);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(68, 13);
+            this.label16.TabIndex = 141;
+            this.label16.Text = "№ персоны:";
+            // 
+            // lbCity
+            // 
+            this.lbCity.AutoSize = true;
+            this.lbCity.Location = new System.Drawing.Point(765, 187);
+            this.lbCity.Name = "lbCity";
+            this.lbCity.Size = new System.Drawing.Size(54, 13);
+            this.lbCity.TabIndex = 146;
+            this.lbCity.Text = "Не задан";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(673, 187);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(40, 13);
+            this.label17.TabIndex = 145;
+            this.label17.Text = "Город:";
+            // 
+            // lbRealRegion
+            // 
+            this.lbRealRegion.AutoSize = true;
+            this.lbRealRegion.Location = new System.Drawing.Point(765, 162);
+            this.lbRealRegion.Name = "lbRealRegion";
+            this.lbRealRegion.Size = new System.Drawing.Size(54, 13);
+            this.lbRealRegion.TabIndex = 144;
+            this.lbRealRegion.Text = "Не задан";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(673, 162);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(86, 13);
+            this.label19.TabIndex = 143;
+            this.label19.Text = "Регион России:";
+            // 
             // FormAddPerson
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1049, 392);
+            this.ClientSize = new System.Drawing.Size(1027, 375);
+            this.Controls.Add(this.lbCity);
+            this.Controls.Add(this.label17);
+            this.Controls.Add(this.lbRealRegion);
+            this.Controls.Add(this.label19);
+            this.Controls.Add(this.lbPersonID);
+            this.Controls.Add(this.label16);
             this.Controls.Add(this.btnChangeSubOrganization);
             this.Controls.Add(this.lbEditor);
             this.Controls.Add(this.lbAutor);
@@ -502,5 +571,11 @@
         private System.Windows.Forms.Label lbEditor;
         private System.Windows.Forms.Label lbAutor;
         private System.Windows.Forms.Button btnChangeSubOrganization;
+        private System.Windows.Forms.Label lbPersonID;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label lbCity;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label lbRealRegion;
+        private System.Windows.Forms.Label label19;
     }
 }

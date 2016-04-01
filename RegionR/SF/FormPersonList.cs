@@ -167,5 +167,28 @@ namespace RegionR
         {
             _personListController.Search(tbSearch.Text);
         }
+
+        private void excelAllFieldsRusToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExportPerson exportPerson = CreateExport();
+            exportPerson.ExportRus();
+        }
+        
+        private void excelAllFieldsEngToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExportPerson exportPerson = CreateExport();
+            exportPerson.ExportEng();
+        }
+
+        private void excelAllFieldsIDsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExportPerson exportPerson = CreateExport();
+            exportPerson.ExportIDs();
+        }
+
+        private ExportPerson CreateExport()
+        {
+            return new ExportPerson();
+        }
     }
 }

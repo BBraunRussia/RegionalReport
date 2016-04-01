@@ -69,6 +69,7 @@
     <Compile Include="SF\CreateExcel.cs" />
     <Compile Include="enums.cs" />
     <Compile Include="SF\Export\ExportOrganization.cs" />
+    <Compile Include="SF\Export\ExportPerson.cs" />
     <Compile Include="SF\Interfaces\IHaveRegion.cs" />
     <Compile Include="SF\Interfaces\IHistory.cs" />
     <Compile Include="SF\Lists\AcademTitleList.cs" />

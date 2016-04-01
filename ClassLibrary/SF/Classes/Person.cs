@@ -125,7 +125,7 @@ namespace ClassLibrary.SF
 
         public string Mobile
         {
-            get { return _mobile; }
+            get { return (_mobile == "+7(   )   -  -") ? string.Empty : _mobile; }
             set { _mobile = value; }
         }
 

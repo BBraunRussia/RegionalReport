@@ -110,14 +110,6 @@ namespace RegionR.SF
                 lbRegionRR2.Text = _lpu.LpuRR2.RegionRR.Name;
             }
 
-            if (_parentLPU == null)
-                tbINN.Text = _lpu.INN;
-            else
-            {
-                tbINN.Text = _parentLPU.INN;
-                tbINN.ReadOnly = true;
-            }
-
             tbKPP.Text = _lpu.KPP;
             tbDistrict.Text = _lpu.District;
             tbPostIndex.Text = _lpu.PostIndex;
@@ -125,22 +117,23 @@ namespace RegionR.SF
             tbWebSite.Text = _lpu.WebSite;
             tbPhone.Text = _lpu.Phone;
 
+            if (_lpu.RealRegion != null)
+                cbRealRegion.SelectedValue = _lpu.RealRegion.ID;
+
+            if (_lpu.City != null)
+            {
+                cbCity.SelectedValue = _lpu.City.ID;
+                tbPhoneCode.Text = _lpu.City.PhoneCode;
+            }
+
             if (_parentLPU == null)
             {
-                if (_lpu.RealRegion != null)
-                    cbRealRegion.SelectedValue = _lpu.RealRegion.ID;
-
-                if (_lpu.City != null)
-                {
-                    cbCity.SelectedValue = _lpu.City.ID;
-                    tbPhoneCode.Text = _lpu.City.PhoneCode;
-                }
+                tbINN.Text = _lpu.INN;                
             }
             else
             {
-                cbRealRegion.SelectedValue = _parentLPU.RealRegion.ID;
-                cbCity.SelectedValue = _parentLPU.City.ID;
-                tbPhoneCode.Text = _parentLPU.City.PhoneCode;
+                tbINN.Text = _parentLPU.INN;
+                tbINN.ReadOnly = true;
             }
 
             if (_lpu.SubRegion != null)
@@ -149,7 +142,8 @@ namespace RegionR.SF
             }
             else
             {
-                RealRegion realRegion = (_parentLPU == null) ? _lpu.RealRegion : _parentLPU.RealRegion;
+                RealRegion realRegion = _lpu.RealRegion;
+
                 if (realRegion != null)
                     cbSubRegion.SelectedValue = _subRegionList.GetItem(realRegion).ID;
                 else
@@ -423,11 +417,12 @@ namespace RegionR.SF
         
         private void tbShortName_TextChanged(object sender, EventArgs e)
         {
+            lbBranchName.Visible = (_parentLPU != null);
+            lbBranch.Visible = (_parentLPU != null);
+
             if (_parentLPU == null)
             {
                 lbLPUName.Text = tbShortName.Text.ToUpper();
-                lbBranchName.Visible = false;
-                lbBranch.Visible = false;
             }
             else
             {
@@ -444,10 +439,6 @@ namespace RegionR.SF
                 if (formAddBranch.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     Organization organization = Organization.CreateItem(typeOrg, _lpu);
-
-                    if (organization is LPU)
-                        (organization as LPU).LpuRR = _lpu.LpuRR;
-
                     ShowFormSubLPU(organization);
                 }
             }
@@ -602,7 +593,7 @@ namespace RegionR.SF
 
                 LpuRR lpuRR = _lpuRRList.GetItem(idLpuRR) as LpuRR;
 
-                if (lpuRR != null)
+                if ((lpuRR != null) && (lpuRR != _lpu.LpuRR))
                     return true;
             }
 
@@ -613,7 +604,7 @@ namespace RegionR.SF
 
                 LpuRR lpuRR2 = _lpuRRList.GetItem(idLpuRR2) as LpuRR;
 
-                if (lpuRR2 != null)
+                if ((lpuRR2 != null) && (lpuRR2 != _lpu.LpuRR2))
                     return true;
             }
 
