@@ -9,6 +9,7 @@ namespace ClassLibrary.SF
     public class LpuList
     {
         private List<LPU> _list;
+        private List<LPU> _listBranch;
         private List<OtherOrganization> _listOther;
 
         public LpuList()
@@ -20,6 +21,7 @@ namespace ClassLibrary.SF
         {
             OrganizationList organizationList = OrganizationList.GetUniqueInstance();
             _list = organizationList.ListLpu;
+            _listBranch = organizationList.ListBranch;
             _listOther = organizationList.ListOther;
         }
 
@@ -110,7 +112,8 @@ namespace ClassLibrary.SF
         public LPU GetItem(LpuRR lpuRR)
         {
             var list = _list.Where(item => ((item.LpuRR == lpuRR) || (item.LpuRR2 == lpuRR)));
-            return (list.Count() == 0) ? null : list.First();
+            var listBranch = _listBranch.Where(item => ((item.LpuRR == lpuRR) || (item.LpuRR2 == lpuRR)));
+            return ((list.Count() == 0) && (listBranch.Count() == 0)) ? null : (list.Count() != 0) ? list.First() : listBranch.First();
         }
 
         public LPU GetItem(City city)

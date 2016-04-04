@@ -23,6 +23,7 @@ namespace ClassLibrary.SF
 
         public Dictionary<int, Organization> List { get { return _list; } }
         public List<LPU> ListLpu { get { return _list.Where(item => (item.Value is LPU) && item.Value.ParentOrganization == null).Select(item => item.Value as LPU).ToList(); } }
+        public List<LPU> ListBranch { get { return _list.Where(item => (item.Value is LPU) && item.Value.ParentOrganization != null).Select(item => item.Value as LPU).ToList(); } }
         public List<OtherOrganization> ListOther { get { return _list.Where(item => item.Value is OtherOrganization).Select(item => item.Value as OtherOrganization).ToList(); } }
 
         public static OrganizationList GetUniqueInstance()
