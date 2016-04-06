@@ -12,7 +12,7 @@ namespace DataLayer
     public class SqlNew : IDataBase
     {
         public const ServerName CURRENT_SERVER = ServerName.bbmru08;
-        public const DBNames CURRENT_DATABASE = DBNames.RegionalR;
+        public const DBNames CURRENT_DATABASE = (DBNames)0;
 
         private const int TIMEOUT = 600;
 

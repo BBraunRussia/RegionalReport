@@ -14,15 +14,22 @@ namespace ClassLibrary.SF
 
         private string[] _columnNamesEng = { "ID", "Parent ID", "CRM ID", "Record type", "Institution type", "Official name", "Short name", "INN", "KPP",
             "Russian Region", "District", "City", "Post code", "Address", "E-mail", "Web site", "City phone code", "Phone number", "Pharmacy Category", "Hospital type", "Ownership",
-            "Administrative level", "Financing channel", "Main speciality", "Sales District", "LPU-RR id", "LPU-RR2 id", "Number of beds total", "Number of beds resuscitation",
+            "Administrative level", "Financing channel", "Main speciality", "Sales District", "LPU-RR id", "LPU-RR2 id",  "Number of beds total", "Number of beds resuscitation",
             "Number of surgical beds", "Number of operating", "Number of GD machines", "Number of GDF machines", "Number of CRRT machines", "Number of shifts",
-            "Number of GD patients", "Number of PD patients", "Number of CRRT patients" };
+            "Number of GD patients", "Number of PD patients", "Number of CRRT patients", "Created by", "Creation Date and Time", "Modified by", "Modification Date and Time" };
 
         private string[] _columnNamesRus = { "ID", "Parent ID", "CRM ID", "Тип записи", "Тип организации", "Официальное название организации", "Сокращённое название",
             "ИНН", "КПП", "Регион России", "Район ", "Город", "Индекс", "Уличный адрес", "Адрес эл. почты", "Веб-сайт", "Телефонный код города", "Телефонный номер",
             "Категория коммерческой аптеки", "Тип ЛПУ", "Форма собственности", "Административное подчинение", "Тип финансирования", "Основная специализация",
             "Sales District", "Номер ЛПУ-RR", "Номер ЛПУ-RR2", "Кол-во коек общее", "Кол-во коек реанимационных", "Кол-во коек хирургических", "Кол-во операционных", "Кол-во ГД машин",
-            "Кол-во ГДФ машин", "Кол-во CRRT машин", "Кол-во смен", "Кол-во ГД пациентов", "Кол-во ПД пациентов", "Кол-во CRRT пациентов" };
+            "Кол-во ГДФ машин", "Кол-во CRRT машин", "Кол-во смен", "Кол-во ГД пациентов", "Кол-во ПД пациентов", "Кол-во CRRT пациентов",
+            "Создал", "Дата и время создания", "Изменил", "Дата и время изменения" };
+
+        private string[] _columnNamesIDs = { "ID", "Parent ID", "CRM ID", "Record type", "Institution type", "Official name", "Short name", "INN", "KPP",
+            "Russian Region", "District", "City", "Post code", "Address", "E-mail", "Web site", "City phone code", "Phone number", "Pharmacy Category", "Hospital type", "Ownership",
+            "Administrative level", "Financing channel", "Main speciality", "Sales District", "Number of beds total", "Number of beds resuscitation",
+            "Number of surgical beds", "Number of operating", "Number of GD machines", "Number of GDF machines", "Number of CRRT machines", "Number of shifts",
+            "Number of GD patients", "Number of PD patients", "Number of CRRT patients" };
 
         private string[] _typeOrgRus = {"ЛПУ", "Филиал ЛПУ", "Отделение ЛПУ", "Аптека ЛПУ", "Отдел ЛПУ", "Аптека коммерческая", "Административное учреждение",
                                        "Дистрибьютор", "Дистрибьютор (пока не покупал)"};
@@ -46,6 +53,8 @@ namespace ClassLibrary.SF
             string[] columnNames = (lang == Language.Rus) ? _columnNamesRus : _columnNamesEng;
 
             DataTable dt = CreateDataTable(columnNames);
+
+            HistoryList historyList = HistoryList.GetUniqueInstance();
 
             foreach (var item in organizationList.List)
             {
@@ -80,6 +89,13 @@ namespace ClassLibrary.SF
                 string pharmacy = ((organization.TypeOrg == TypeOrg.Аптека) && (organization.ParentOrganization == null)) ? (organization as OtherOrganization).Pharmacy : string.Empty;
                 string mainSpec = (organization.MainSpec != null) ? organization.MainSpec.GetName(lang) : string.Empty;
 
+                History created = historyList.GetItem(organization, HistoryAction.Создал);
+                History modifed = historyList.GetItem(organization, HistoryAction.Редактировал);
+                string createdAuthor = (created != null) ? created.Author : string.Empty;
+                string createdDatetime = (created != null) ? created.datetime : string.Empty;
+                string modifedAuthor = (modifed != null) ? modifed.Author : string.Empty;
+                string modifedDatetime = (modifed != null) ? modifed.datetime : string.Empty;
+
                 string typeLPU = string.Empty;
                 string ownership = string.Empty;
                 string adminLevel = string.Empty;
@@ -107,8 +123,8 @@ namespace ClassLibrary.SF
                                (lpu != null) ? lpu.BedsTotal : string.Empty, (lpu != null) ? lpu.BedsIC : string.Empty, (lpu != null) ? lpu.BedsSurgical : string.Empty,
                                (lpu != null) ? lpu.Operating : string.Empty, (lpu != null) ? lpu.MachineGD : string.Empty, (lpu != null) ? lpu.MachineGDF : string.Empty,
                                (lpu != null) ? lpu.MachineCRRT : string.Empty, (lpu != null) ? lpu.Shift : string.Empty, (lpu != null) ? lpu.PatientGD : string.Empty,
-                               (lpu != null) ? lpu.PatientPD : string.Empty, (lpu != null) ? lpu.PatientCRRT : string.Empty
-                                };
+                               (lpu != null) ? lpu.PatientPD : string.Empty, (lpu != null) ? lpu.PatientCRRT : string.Empty,
+                               createdAuthor, createdDatetime, modifedAuthor, modifedDatetime };
 
                 dt.Rows.Add(row);
             }
@@ -122,7 +138,7 @@ namespace ClassLibrary.SF
         {
             OrganizationList organizationList = OrganizationList.GetUniqueInstance();
 
-            string[] columnNames = (lang == Language.Rus) ? _columnNamesRus : _columnNamesEng;
+            string[] columnNames = _columnNamesIDs;
 
             DataTable dt = CreateDataTable(columnNames);
 
@@ -139,7 +155,7 @@ namespace ClassLibrary.SF
                 string kpp = (mainOrganization != null) ? mainOrganization.KPP : string.Empty;
                 string realRegionName = (mainOrganization != null) ? mainOrganization.RealRegion.ID.ToString() : string.Empty;
                 string distinct = (mainOrganization != null) ? mainOrganization.District : string.Empty;
-                string city = (mainOrganization != null) ? mainOrganization.City.ID.ToString() : string.Empty;
+                string city = (mainOrganization != null) ? mainOrganization.City.Name : string.Empty;
                 string postIndex = (mainOrganization != null) ? mainOrganization.PostIndex : string.Empty;
                 string street = (mainOrganization != null) ? mainOrganization.Street : string.Empty;
                 string phoneCode = (mainOrganization != null) ? mainOrganization.City.PhoneCode : (organization.ParentOrganization as IHaveRegion).City.PhoneCode;
@@ -156,12 +172,11 @@ namespace ClassLibrary.SF
                 object[] row = { organization.ID, parentID, CRM_ID, recordType,
                                GetFormatTypeOrgID(organization), organization.Name, organization.ShortName,
                                inn, kpp, realRegionName, distinct, city, postIndex, street, organization.Email, organization.WebSite,
-                               phoneCode, organization.Phone, pharmacy, typeLPU, ownership, adminLevel, typeFin, mainSpec, subRegion, idLpuRR, idLpuRR2,
+                               phoneCode, organization.Phone, pharmacy, typeLPU, ownership, adminLevel, typeFin, mainSpec, subRegion,
                                (lpu != null) ? lpu.BedsTotal : string.Empty, (lpu != null) ? lpu.BedsIC : string.Empty, (lpu != null) ? lpu.BedsSurgical : string.Empty,
                                (lpu != null) ? lpu.Operating : string.Empty, (lpu != null) ? lpu.MachineGD : string.Empty, (lpu != null) ? lpu.MachineGDF : string.Empty,
                                (lpu != null) ? lpu.MachineCRRT : string.Empty, (lpu != null) ? lpu.Shift : string.Empty, (lpu != null) ? lpu.PatientGD : string.Empty,
-                               (lpu != null) ? lpu.PatientPD : string.Empty, (lpu != null) ? lpu.PatientCRRT : string.Empty
-                                };
+                               (lpu != null) ? lpu.PatientPD : string.Empty, (lpu != null) ? lpu.PatientCRRT : string.Empty };
 
                 dt.Rows.Add(row);
             }

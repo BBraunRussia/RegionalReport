@@ -47,6 +47,8 @@
     <Compile Include="OfficeDoc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Abstract\InitProvider.cs" />
+    <Compile Include="Reports\Report.cs" />
+    <Compile Include="RR\PersSalesReport.cs" />
     <Compile Include="SF\Classes\AcademTitle.cs" />
     <Compile Include="SF\Classes\History.cs" />
     <Compile Include="SF\Classes\MainSpecPerson.cs" />

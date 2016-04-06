@@ -13,7 +13,7 @@ namespace RegionR
         private FilteredDGV _filtredDGV;
         private SortDGV _sortDGV;
         private SearchInDgv _seacher;
-        private DataGridView _dgv;
+        protected DataGridView _dgv;
 
         public BaseOperations(DataGridView dgv)
         {

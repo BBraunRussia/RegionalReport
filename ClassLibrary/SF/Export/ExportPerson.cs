@@ -47,7 +47,7 @@ namespace ClassLibrary.SF
                 History modifed = historyList.GetItem(person, HistoryAction.Редактировал);
                 string modifedAuthor = (modifed != null) ? modifed.Author : string.Empty;
                 string modifedDatetime = (modifed != null) ? modifed.datetime : string.Empty;
-                                
+
                 object[] row = { person.ID, person.Organization.ID, person.LastName, person.FirstName,
                                person.SecondName, GetTitle(lang, person.Appeal), person.GetOrganizationName(), person.GetSubOrganizationName(),
                                person.Position.GetName(lang), person.MainSpecPerson.GetName(lang), person.AcademTitle.GetName(lang),
@@ -74,12 +74,12 @@ namespace ClassLibrary.SF
             string[] columnNames = (lang == Language.Rus) ? _columnNamesRus : _columnNamesEng;
 
             DataTable dt = CreateDataTable(columnNames);
-
+            
             foreach (var person in personList.GetList())
             {
                 object[] row = { person.ID, person.Organization.ID, person.LastName, person.FirstName,
-                               person.SecondName, person.Appeal, person.Position.ID,
-                               person.MainSpecPerson.ID, person.AcademTitle.ID,
+                               person.SecondName, person.Appeal, person.GetOrganizationName(), person.GetSubOrganizationName(),
+                               person.Position.ID, person.MainSpecPerson.ID, person.AcademTitle.ID,
                                person.Email, person.Mobile, person.Phone, person.Comment };
 
                 dt.Rows.Add(row);

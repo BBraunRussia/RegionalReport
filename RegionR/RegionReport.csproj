@@ -101,8 +101,11 @@
   </PropertyGroup>
   <PropertyGroup />
   <ItemGroup>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Deployment" />
@@ -430,6 +433,12 @@
     <Compile Include="other\VisitPlanDay.designer.cs">
       <DependentUpon>VisitPlanDay.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reports\FormPersSalesReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\FormPersSalesReport.Designer.cs">
+      <DependentUpon>FormPersSalesReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="RR.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -481,7 +490,7 @@
     <Compile Include="SF\Classes\TreeLPU.cs" />
     <Compile Include="SF\Classes\ClassForForm.cs" />
     <Compile Include="SF\Classes\UserLogged.cs" />
-    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\BaseOperations.cs" />
     <Compile Include="Controllers\IController.cs" />
     <Compile Include="SF\Controllers\OrganizationListController.cs" />
     <Compile Include="Controllers\LpuRRController.cs" />
@@ -766,6 +775,10 @@
     <EmbeddedResource Include="other\VisitPlanDay.resx">
       <DependentUpon>VisitPlanDay.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\FormPersSalesReport.resx">
+      <DependentUpon>FormPersSalesReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Report1.rdlc" />
     <EmbeddedResource Include="RR.resx">
       <DependentUpon>RR.cs</DependentUpon>
     </EmbeddedResource>
@@ -843,6 +856,7 @@
       <DependentUpon>FormUserRoleSFList.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
+    <None Include="Properties\DataSources\ClassLibrary.Report.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

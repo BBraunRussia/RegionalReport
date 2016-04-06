@@ -667,6 +667,8 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.persSalesReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._dgv1)).BeginInit();
             this._cms1.SuspendLayout();
@@ -781,7 +783,8 @@
             this.importToolStripMenuItem,
             this.repDistToolStripMenuItem,
             this.comparisonMatToolStripMenuItem,
-            this.помощьToolStripMenuItem});
+            this.помощьToolStripMenuItem,
+            this.reportsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1181, 24);
@@ -3349,7 +3352,7 @@
             this.toolStripSeparator1,
             this.toolStripMenuItem7});
             this._cms8.Name = "_cms8";
-            this._cms8.Size = new System.Drawing.Size(248, 120);
+            this._cms8.Size = new System.Drawing.Size(248, 98);
             this._cms8.Opening += new System.ComponentModel.CancelEventHandler(this._cms8_Opening);
             // 
             // addToolStripMenuItem
@@ -7421,6 +7424,21 @@
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
+            // reportsToolStripMenuItem
+            // 
+            this.reportsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.persSalesReportToolStripMenuItem});
+            this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
+            this.reportsToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
+            this.reportsToolStripMenuItem.Text = "Reports";
+            // 
+            // persSalesReportToolStripMenuItem
+            // 
+            this.persSalesReportToolStripMenuItem.Name = "persSalesReportToolStripMenuItem";
+            this.persSalesReportToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.persSalesReportToolStripMenuItem.Text = "PersSalesReport";
+            this.persSalesReportToolStripMenuItem.Click += new System.EventHandler(this.persSalesReportToolStripMenuItem_Click);
+            // 
             // RR
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -8124,6 +8142,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem7;
         private System.Windows.Forms.ComboBox cbTypeMAPM;
+        private System.Windows.Forms.ToolStripMenuItem reportsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem persSalesReportToolStripMenuItem;
     }
 }
 

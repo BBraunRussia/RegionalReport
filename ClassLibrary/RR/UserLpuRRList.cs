@@ -112,10 +112,10 @@ namespace ClassLibrary
                 string lpuSFName = string.Empty;
                 string lpuSFRealRegion = string.Empty;
                 string lpuSFCity = string.Empty;
-
+                
                 LPU lpu = lpuList.GetItem(item.LpuRR);
 
-                if ((lpu != null) && (lpu.ParentOrganization == null))
+                if (lpu != null)
                 {
                     lpuSFID = lpu.ID.ToString();
                     lpuSFName = lpu.ShortName;
