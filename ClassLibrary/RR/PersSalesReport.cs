@@ -6,7 +6,7 @@ using System.Data;
 
 namespace ClassLibrary
 {
-    public class PersSalesReport : InitProvider
+    public class PersSalesReport
     {
         private LpuRR _lpuRR;
         private User _user;
@@ -49,10 +49,5 @@ namespace ClassLibrary
         public string SDiv { get { return _sdiv.ToString(); } }
         public double Euro { get { return _euro; } }
         public double Rub { get { return _rub; } }
-
-        public DataTable ToDataTable(int year)
-        {
-            return _provider.DoOther("exec PersSalesReport_Select", year);
-        }
     }
 }

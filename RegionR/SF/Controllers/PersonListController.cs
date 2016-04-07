@@ -14,7 +14,6 @@ namespace RegionR.SF
         private PersonList _personList;
         private Organization _organization;
         private User _user;
-        private DataGridView _dgv;
         private SearchInDgv _seacher;
         private FilteredDGV _filtredDGV;
         private SortDGV _sortDGV;

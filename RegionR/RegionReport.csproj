@@ -856,6 +856,7 @@
       <DependentUpon>FormUserRoleSFList.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
+    <None Include="Properties\DataSources\ClassLibrary.PersSalesReport.datasource" />
     <None Include="Properties\DataSources\ClassLibrary.Report.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

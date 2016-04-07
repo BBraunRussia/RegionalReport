@@ -25,14 +25,14 @@ namespace RegionR.Reports
 
             LocalReport localReport = reportViewer1.LocalReport;
 
-            localReport.ReportPath = "Report1.rdlc";
+            localReport.ReportPath = "..\\..\\Reports\\Report1.rdlc";
 
-            PersSalesReport persSalesReport = new PersSalesReport();
+            PersSalesReportList persSalesReportList = PersSalesReportList.GetUniqueInstance(DateTime.Today.Year);
 
-            DataTable dt = persSalesReport.ToDataTable(2016);
+            List<PersSalesReport> list = persSalesReportList.GetList();
                         
             // Create a report data source for the sales order data
-            ReportDataSource dsSalesOrder = new ReportDataSource("SalesOrder", dt);
+            ReportDataSource dsSalesOrder = new ReportDataSource("PersSalesList", list);
 
             localReport.DataSources.Add(dsSalesOrder);
             /*

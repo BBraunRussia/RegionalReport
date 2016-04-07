@@ -11,7 +11,6 @@ namespace RegionR.SF
 {
     public class OrganizationListController : BaseOperations, IController
     {
-        private DataGridView _dgv;
         private LpuList _lpuList;
         private UserList _userList;
         private User _user;
