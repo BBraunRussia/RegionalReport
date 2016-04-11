@@ -1451,16 +1451,8 @@
         <RepeatColumnHeaders>true</RepeatColumnHeaders>
         <FixedColumnHeaders>true</FixedColumnHeaders>
         <DataSetName>PersSalesList</DataSetName>
-        <SortExpressions>
-          <SortExpression>
-            <Value>=Fields!LpuSName.Value</Value>
-          </SortExpression>
-          <SortExpression>
-            <Value>=Fields!UserName.Value</Value>
-          </SortExpression>
-        </SortExpressions>
         <Height>3.6cm</Height>
-        <Width>37.36959cm</Width>
+        <Width>37.3696cm</Width>
         <Style>
           <Border>
             <Style>None</Style>

@@ -50,7 +50,7 @@ namespace ClassLibrary
         public int idLPU { get { return _lpuRR.ID; } }
         public string LpuSName { get { return _lpuRR.Name; } }
         public string LpuName { get { return _lpuRR.FullName; } }
-        public string UserName { get { return _user.Name; } }
+        public string UserName { get { return (_user == null) ? "сотрудник уволен" : _user.Name; } }
         public string RegionName { get { return _regionRR.Name; } }
         public string SDiv { get { return _sdiv.ToString(); } }
         public string RDName { get { return (_rd == null) ? "нет директора" : _rd.Name; } }
