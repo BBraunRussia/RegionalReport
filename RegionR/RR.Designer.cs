@@ -192,12 +192,12 @@
             this.медикалИнтертрейдToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.энимедToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.нДАToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.persSalesReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.помощьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
             this.AboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.persSalesReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.comboBox5 = new System.Windows.Forms.ComboBox();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
@@ -1544,6 +1544,22 @@
             this.нДАToolStripMenuItem.Text = "НДА";
             this.нДАToolStripMenuItem.Click += new System.EventHandler(this.нДАToolStripMenuItem_Click);
             // 
+            // reportsToolStripMenuItem
+            // 
+            this.reportsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.persSalesReportToolStripMenuItem});
+            this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
+            this.reportsToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
+            this.reportsToolStripMenuItem.Text = "Отчёты";
+            this.reportsToolStripMenuItem.Visible = false;
+            // 
+            // persSalesReportToolStripMenuItem
+            // 
+            this.persSalesReportToolStripMenuItem.Name = "persSalesReportToolStripMenuItem";
+            this.persSalesReportToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.persSalesReportToolStripMenuItem.Text = "Отчёт по продажам";
+            this.persSalesReportToolStripMenuItem.Click += new System.EventHandler(this.persSalesReportToolStripMenuItem_Click);
+            // 
             // помощьToolStripMenuItem
             // 
             this.помощьToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1572,21 +1588,6 @@
             this.AboutToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
             this.AboutToolStripMenuItem.Text = "О программе RegionalReport";
             this.AboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
-            // 
-            // reportsToolStripMenuItem
-            // 
-            this.reportsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.persSalesReportToolStripMenuItem});
-            this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
-            this.reportsToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
-            this.reportsToolStripMenuItem.Text = "Отчёты";
-            // 
-            // persSalesReportToolStripMenuItem
-            // 
-            this.persSalesReportToolStripMenuItem.Name = "persSalesReportToolStripMenuItem";
-            this.persSalesReportToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
-            this.persSalesReportToolStripMenuItem.Text = "Отчёт по продажам";
-            this.persSalesReportToolStripMenuItem.Click += new System.EventHandler(this.persSalesReportToolStripMenuItem_Click);
             // 
             // statusStrip1
             // 

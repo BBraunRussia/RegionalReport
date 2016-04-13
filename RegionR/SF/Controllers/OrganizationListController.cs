@@ -35,7 +35,7 @@ namespace RegionR.SF
         {
             ReLoad();
 
-            DataTable dt = (_user.RoleSF == RolesSF.Администратор) ? _lpuList.ToDataTable() : _lpuList.ToDataTable(_user);
+            DataTable dt = (_user.RoleSF == RolesSF.Пользователь) ? _lpuList.ToDataTable(_user) : _lpuList.ToDataTable();
 
             _dgv.DataSource = dt;
 

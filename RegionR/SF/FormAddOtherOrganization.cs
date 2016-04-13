@@ -116,10 +116,10 @@ namespace RegionR.SF
         private void LoadDictionaries()
         {
             _isLoad = false;
-            if (UserLogged.Get().RoleSF == RolesSF.Администратор)
-                ClassForForm.LoadDictionary(cbRealRegion, _realRegionList.ToDataTable());
-            else
+            if (UserLogged.Get().RoleSF == RolesSF.Пользователь)
                 ClassForForm.LoadDictionary(cbRealRegion, _realRegionList.ToDataTable(UserLogged.Get()));
+            else
+                ClassForForm.LoadDictionary(cbRealRegion, _realRegionList.ToDataTable());
 
             _isLoad = true;
             LoadCity();

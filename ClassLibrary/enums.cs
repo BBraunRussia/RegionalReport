@@ -7,7 +7,7 @@ namespace ClassLibrary
 {
     public enum TypeOrg { ЛПУ = 1, Отдел = 2, Отделение = 3, Аптека = 4, Дистрибьютор = 5, Административное_Учреждение = 6 }
 
-    public enum RolesSF { Администратор = 1, Пользователь = 2 }
+    public enum RolesSF { Администратор = 1, Пользователь = 2, Редактор = 3 }
 
     public enum ContextMenuItem
     {
