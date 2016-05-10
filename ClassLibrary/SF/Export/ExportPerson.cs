@@ -10,16 +10,15 @@ namespace ClassLibrary.SF
     {
         private const int CRM_ID = 0;
 
-        private string[] _columnNamesEng = { "Person ID", "Institution ID", "Last name", "First Name", "Second Name", "Salutation", "Institution", "Department",
-                                               "Position", "Speciality", "Academic title", "Email", "Moble phone", "Office phone", "Description", "Created by",
-                                               "Creation Date and Time", "Modified by", "Modification Date and Time" };
+        private string[] _columnNamesEng = { "Person RR ID", "Institution RR ID", "Last name", "First Name", "Second Name", "Salutation",
+                                               "Function", "Main Speciality", "Academic title", "Email", "Moble phone", "Office phone", "Description" };
 
         private string[] _columnNamesRus = { "№ персоны", "№ организации", "Фамилия", "Имя", "Отчество", "Обращение", "Организация", "Подразделение", "Должность",
                                                "Специализация", "Учёная степень/звание", "Эл. почта", "Телефон мобильный", "Телефон офисный", "Примечание",
                                                "Создал", "Дата и время создания", "Изменил", "Дата и время изменения" };
 
         private string[] _titleRus = { "Господин", "Госпожа" };
-        private string[] _titleEng = { "Mr.", "Mrs." };
+        private string[] _titleEng = { "1", "3" };
 
         public void ExportRus()
         {
@@ -48,45 +47,33 @@ namespace ClassLibrary.SF
                 string modifedAuthor = (modifed != null) ? modifed.Author : string.Empty;
                 string modifedDatetime = (modifed != null) ? modifed.datetime : string.Empty;
 
-                object[] row = { person.ID, person.Organization.ID, person.LastName, person.FirstName,
+                object[] row;
+
+                if (lang == Language.Rus)
+                {
+                    row = new object[] { person.ID, person.Organization.ID, person.LastName, person.FirstName,
                                person.SecondName, GetTitle(lang, person.Appeal), person.GetOrganizationName(), person.GetSubOrganizationName(),
                                person.Position.GetName(lang), person.MainSpecPerson.GetName(lang), person.AcademTitle.GetName(lang),
                                person.Email, person.Mobile, person.Phone, person.Comment, created.Author, created.datetime,
                                modifedAuthor, modifedDatetime };
+                }
+                else
+                {
+                    row = new object[] { person.ID, person.Organization.ID, person.LastName, person.FirstName, person.SecondName,
+                        GetTitle(lang, person.Appeal), person.Position.GetName(lang), person.MainSpecPerson.GetName(lang),
+                        person.AcademTitle.GetName(lang), person.Email, person.Mobile, GetPhoneWithCode(person), person.Comment };
+                }
 
                 dt.Rows.Add(row);
             }
 
             CreateExcel excel = new CreateExcel(dt);
             excel.Show();
-
         }
 
         private string GetTitle(Language lang, int appeal)
         {
             return (lang == Language.Eng) ? _titleEng[appeal] : _titleRus[appeal];
-        }
-
-        public void ExportIDs(Language lang = Language.Eng)
-        {
-            PersonList personList = PersonList.GetUniqueInstance();
-
-            string[] columnNames = (lang == Language.Rus) ? _columnNamesRus : _columnNamesEng;
-
-            DataTable dt = CreateDataTable(columnNames);
-            
-            foreach (var person in personList.GetList())
-            {
-                object[] row = { person.ID, person.Organization.ID, person.LastName, person.FirstName,
-                               person.SecondName, person.Appeal, person.GetOrganizationName(), person.GetSubOrganizationName(),
-                               person.Position.ID, person.MainSpecPerson.ID, person.AcademTitle.ID,
-                               person.Email, person.Mobile, person.Phone, person.Comment };
-
-                dt.Rows.Add(row);
-            }
-
-            CreateExcel excel = new CreateExcel(dt);
-            excel.Show();
         }
 
         private DataTable CreateDataTable(string[] columnNames)
@@ -97,6 +84,20 @@ namespace ClassLibrary.SF
                 dt.Columns.Add(item);
 
             return dt;
+        }
+
+        private string GetPhoneWithCode(Person person)
+        {
+            string phone = string.Empty;
+
+            if (!string.IsNullOrEmpty(person.Phone))
+            {
+                IHaveRegion organization = ((person.Organization is IHaveRegion) ? person.Organization : person.Organization.ParentOrganization) as IHaveRegion;
+
+                phone = organization.City.PhoneCode + person.Phone;
+            }
+
+            return phone;
         }
     }
 }

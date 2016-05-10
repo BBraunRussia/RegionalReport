@@ -199,12 +199,6 @@ namespace RegionR
             exportOrganization.ExportEng();
         }
         
-        private void excelallFieldsIDsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ExportOrganization exportOrganization = CreateExportOrganization();
-            exportOrganization.ExportIDs();
-        }
-
         private ExportOrganization CreateExportOrganization()
         {
             return new ExportOrganization();

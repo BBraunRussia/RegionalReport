@@ -180,12 +180,6 @@ namespace RegionR
             exportPerson.ExportEng();
         }
 
-        private void excelAllFieldsIDsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ExportPerson exportPerson = CreateExport();
-            exportPerson.ExportIDs();
-        }
-
         private ExportPerson CreateExport()
         {
             return new ExportPerson();
