@@ -12,21 +12,21 @@ namespace ClassLibrary.SF
     {
         private const int CRM_ID = 0;
 
-        private string[] _columnNamesEng = { "ID", "Parent ID", "CRM ID", "Record type", "Institution type", "Official name", "Short name", "INN", "KPP",
-            "Russian Region", "District", "City", "Post code", "Address", "E-mail", "Web site", "City phone code", "Phone number", "Pharmacy Category", "Hospital type", "Ownership",
+        private string[] _columnNamesEng = { "RR ID", "RR Parent ID", "CRM ID", "Record type", "Institution type (RUS)", "Client type", "Full name", "Short name", "TIN", "CRR",
+            "State/Province", "City", "Post code", "Address", "E-mail", "Web site", "City phone code", "Phone number", "Pharmacy Category", "Hospital type", "Ownership",
             "Administrative level", "Financing channel", "Main speciality", "Sales District", "LPU-RR id", "LPU-RR2 id",  "Number of beds total", "Number of beds resuscitation",
             "Number of surgical beds", "Number of operating", "Number of GD machines", "Number of GDF machines", "Number of CRRT machines", "Number of shifts",
             "Number of GD patients", "Number of PD patients", "Number of CRRT patients", "Created by", "Creation Date and Time", "Modified by", "Modification Date and Time" };
 
-        private string[] _columnNamesRus = { "ID", "Parent ID", "CRM ID", "Тип записи", "Тип организации", "Официальное название организации", "Сокращённое название",
-            "ИНН", "КПП", "Регион России", "Район ", "Город", "Индекс", "Уличный адрес", "Адрес эл. почты", "Веб-сайт", "Телефонный код города", "Телефонный номер",
+        private string[] _columnNamesRus = { "ID", "Parent ID", "CRM ID", "Тип записи", "Тип организации", "Client type", "Официальное название организации", "Сокращённое название",
+            "ИНН", "КПП", "Регион России", "Город", "Индекс", "Уличный адрес", "Адрес эл. почты", "Веб-сайт", "Телефонный код города", "Телефонный номер",
             "Категория коммерческой аптеки", "Тип ЛПУ", "Форма собственности", "Административное подчинение", "Тип финансирования", "Основная специализация",
             "Sales District", "Номер ЛПУ-RR", "Номер ЛПУ-RR2", "Кол-во коек общее", "Кол-во коек реанимационных", "Кол-во коек хирургических", "Кол-во операционных", "Кол-во ГД машин",
             "Кол-во ГДФ машин", "Кол-во CRRT машин", "Кол-во смен", "Кол-во ГД пациентов", "Кол-во ПД пациентов", "Кол-во CRRT пациентов",
             "Создал", "Дата и время создания", "Изменил", "Дата и время изменения" };
 
-        private string[] _columnNamesIDs = { "ID", "Parent ID", "CRM ID", "Record type", "Institution type", "Official name", "Short name", "INN", "KPP",
-            "Russian Region", "District", "City", "Post code", "Address", "E-mail", "Web site", "City phone code", "Phone number", "Pharmacy Category", "Hospital type", "Ownership",
+        private string[] _columnNamesIDs = { "RR ID", "RR Parent ID", "CRM ID", "Record type", "Institution type (RUS)", "Client type", "Full name", "Short name", "TIN", "CRR",
+            "State/Province", "City", "Post code", "Address", "E-mail", "Web site", "City phone code", "Phone number", "Pharmacy Category", "Hospital type", "Ownership",
             "Administrative level", "Financing channel", "Main speciality", "Sales District", "Number of beds total", "Number of beds resuscitation",
             "Number of surgical beds", "Number of operating", "Number of GD machines", "Number of GDF machines", "Number of CRRT machines", "Number of shifts",
             "Number of GD patients", "Number of PD patients", "Number of CRRT patients" };
@@ -35,6 +35,8 @@ namespace ClassLibrary.SF
                                        "Дистрибьютор", "Дистрибьютор (пока не покупал)"};
         private string[] _typeOrgEng = {"Hospital", "Hospital branch", "Hospital department (medical)", "Hospital pharmacy", "Hospital department (non-medical)",
                                        "Pharmacy", "Governmental-administrative establishment", "Distributor (Buying)", "Distributor (Non-Buying)"};
+
+        private string[] _clientType = { "Department", "Governmental-administrative establishment", "Dealer" };
 
         public void ExportRus()
         {
@@ -117,8 +119,9 @@ namespace ClassLibrary.SF
                 }
                                 
                 object[] row = { organization.ID, parentID, CRM_ID, recordType,
-                               GetFormatTypeOrg(organization, lang), organization.Name, organization.ShortName,
-                               inn, kpp, realRegionName, distinct, city, postIndex, street, organization.Email, organization.WebSite,
+                               GetFormatTypeOrg(organization, lang), GetClientType(organization),
+                               organization.Name, organization.ShortName,
+                               inn, kpp, realRegionName, city, postIndex, GetAddressWithDistrict(distinct, street), organization.Email, organization.WebSite,
                                phoneCode, organization.Phone, pharmacy, typeLPU, ownership, adminLevel, typeFin, mainSpec, subRegion, idLpuRR, idLpuRR2,
                                (lpu != null) ? lpu.BedsTotal : string.Empty, (lpu != null) ? lpu.BedsIC : string.Empty, (lpu != null) ? lpu.BedsSurgical : string.Empty,
                                (lpu != null) ? lpu.Operating : string.Empty, (lpu != null) ? lpu.MachineGD : string.Empty, (lpu != null) ? lpu.MachineGDF : string.Empty,
@@ -170,8 +173,9 @@ namespace ClassLibrary.SF
                 string idLpuRR2 = ((lpu != null) && (lpu.ParentOrganization == null) && (lpu.LpuRR2.ID != 0)) ? lpu.LpuRR2.ID.ToString() : string.Empty;
 
                 object[] row = { organization.ID, parentID, CRM_ID, recordType,
-                               GetFormatTypeOrgID(organization), organization.Name, organization.ShortName,
-                               inn, kpp, realRegionName, distinct, city, postIndex, street, organization.Email, organization.WebSite,
+                               GetFormatTypeOrgID(organization), GetClientType(organization), 
+                               organization.Name, organization.ShortName,
+                               inn, kpp, realRegionName, city, postIndex, GetAddressWithDistrict(distinct, street), organization.Email, organization.WebSite,
                                phoneCode, organization.Phone, pharmacy, typeLPU, ownership, adminLevel, typeFin, mainSpec, subRegion,
                                (lpu != null) ? lpu.BedsTotal : string.Empty, (lpu != null) ? lpu.BedsIC : string.Empty, (lpu != null) ? lpu.BedsSurgical : string.Empty,
                                (lpu != null) ? lpu.Operating : string.Empty, (lpu != null) ? lpu.MachineGD : string.Empty, (lpu != null) ? lpu.MachineGDF : string.Empty,
@@ -252,6 +256,28 @@ namespace ClassLibrary.SF
                 return 8;
 
             return 9;
+        }
+
+        private string GetClientType(Organization organization)
+        {
+            if (organization.TypeOrg == TypeOrg.Отдел)
+                return _clientType[0];
+            else if (organization.TypeOrg == TypeOrg.Административное_Учреждение)
+                return _clientType[1];
+            else if (organization.TypeOrg == TypeOrg.Дистрибьютор)
+                return _clientType[2];
+
+            return string.Empty;
+        }
+
+        private string GetAddressWithDistrict(string distinct, string street)
+        {
+            if (string.IsNullOrEmpty(distinct))
+                return street;
+            if (string.IsNullOrEmpty(street))
+                return distinct;
+
+            return distinct + ", " + street;
         }
     }
 }

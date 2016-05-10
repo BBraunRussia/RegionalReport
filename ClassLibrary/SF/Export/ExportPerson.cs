@@ -10,8 +10,8 @@ namespace ClassLibrary.SF
     {
         private const int CRM_ID = 0;
 
-        private string[] _columnNamesEng = { "Person ID", "Institution ID", "Last name", "First Name", "Second Name", "Title", "Institution", "Department",
-                                               "Position", "Main speciality", "Academic title", "Email", "Moble phone", "Office phone", "Comment", "Created by",
+        private string[] _columnNamesEng = { "Person ID", "Institution ID", "Last name", "First Name", "Second Name", "Salutation", "Institution", "Department",
+                                               "Position", "Speciality", "Academic title", "Email", "Moble phone", "Office phone", "Description", "Created by",
                                                "Creation Date and Time", "Modified by", "Modification Date and Time" };
 
         private string[] _columnNamesRus = { "№ персоны", "№ организации", "Фамилия", "Имя", "Отчество", "Обращение", "Организация", "Подразделение", "Должность",
