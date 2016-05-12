@@ -10,8 +10,9 @@ namespace ClassLibrary.SF
     {
         private const int CRM_ID = 0;
 
-        private string[] _columnNamesEng = { "Person RR ID", "Institution RR ID", "Last name", "First Name", "Second Name", "Salutation",
-                                               "Function", "Main Speciality", "Academic title", "Email", "Moble phone", "Office phone", "Description" };
+        private string[] _columnNamesEng = { "Z_RU_RR_Person__c", "Z_RU_RR_Institution__c", "Last name", "First Name", "Middle Name", "Salutation",
+                                               "Z_ES_Function__c", "Z_Major_Specialties_RU__pc", "Z_Cd_Academic_Title__pc", "Z_Email__c", "Z_Mobile_Phone__c",
+                                               "Z_Tel_No__c", "Z_Description__c" };
 
         private string[] _columnNamesRus = { "№ персоны", "№ организации", "Фамилия", "Имя", "Отчество", "Обращение", "Организация", "Подразделение", "Должность",
                                                "Специализация", "Учёная степень/звание", "Эл. почта", "Телефон мобильный", "Телефон офисный", "Примечание",
@@ -52,10 +53,10 @@ namespace ClassLibrary.SF
                 if (lang == Language.Rus)
                 {
                     row = new object[] { person.ID, person.Organization.ID, person.LastName, person.FirstName,
-                               person.SecondName, GetTitle(lang, person.Appeal), person.GetOrganizationName(), person.GetSubOrganizationName(),
-                               person.Position.GetName(lang), person.MainSpecPerson.GetName(lang), person.AcademTitle.GetName(lang),
-                               person.Email, person.Mobile, person.Phone, person.Comment, created.Author, created.datetime,
-                               modifedAuthor, modifedDatetime };
+                        person.SecondName, GetTitle(lang, person.Appeal), person.GetOrganizationName(), person.GetSubOrganizationName(),
+                        person.Position.GetName(lang), person.MainSpecPerson.GetName(lang), person.AcademTitle.GetName(lang),
+                        person.Email, person.Mobile, person.Phone, person.Comment, created.Author, created.datetime,
+                        modifedAuthor, modifedDatetime };
                 }
                 else
                 {
@@ -81,7 +82,9 @@ namespace ClassLibrary.SF
             DataTable dt = new DataTable();
 
             foreach (var item in columnNames)
+            {
                 dt.Columns.Add(item);
+            }
 
             return dt;
         }

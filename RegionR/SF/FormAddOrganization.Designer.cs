@@ -60,6 +60,22 @@
             this.label34 = new System.Windows.Forms.Label();
             this.tbPhoneCode = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.gbAvitum = new System.Windows.Forms.GroupBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.tbPatientCRRT = new System.Windows.Forms.TextBox();
+            this.tbMachineGD = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.tbPatientPD = new System.Windows.Forms.TextBox();
+            this.tbMachineGDF = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.tbPatientGD = new System.Windows.Forms.TextBox();
+            this.tbMachineCRRT = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.tbShift = new System.Windows.Forms.TextBox();
+            this.gbAvitum.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbBranch
@@ -103,7 +119,7 @@
             // 
             this.tbName.Location = new System.Drawing.Point(147, 131);
             this.tbName.Name = "tbName";
-            this.tbName.Size = new System.Drawing.Size(554, 20);
+            this.tbName.Size = new System.Drawing.Size(483, 20);
             this.tbName.TabIndex = 87;
             // 
             // label19
@@ -222,7 +238,7 @@
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Location = new System.Drawing.Point(363, 336);
+            this.btnSave.Location = new System.Drawing.Point(487, 336);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(94, 23);
             this.btnSave.TabIndex = 107;
@@ -234,7 +250,7 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(636, 336);
+            this.btnCancel.Location = new System.Drawing.Point(760, 336);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 106;
@@ -244,7 +260,7 @@
             // btnSaveAndClose
             // 
             this.btnSaveAndClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSaveAndClose.Location = new System.Drawing.Point(463, 336);
+            this.btnSaveAndClose.Location = new System.Drawing.Point(587, 336);
             this.btnSaveAndClose.Name = "btnSaveAndClose";
             this.btnSaveAndClose.Size = new System.Drawing.Size(167, 23);
             this.btnSaveAndClose.TabIndex = 105;
@@ -305,8 +321,9 @@
             // 
             // lbEditor
             // 
+            this.lbEditor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbEditor.AutoSize = true;
-            this.lbEditor.Location = new System.Drawing.Point(9, 318);
+            this.lbEditor.Location = new System.Drawing.Point(7, 349);
             this.lbEditor.Name = "lbEditor";
             this.lbEditor.Size = new System.Drawing.Size(53, 13);
             this.lbEditor.TabIndex = 137;
@@ -314,8 +331,9 @@
             // 
             // lbAutor
             // 
+            this.lbAutor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbAutor.AutoSize = true;
-            this.lbAutor.Location = new System.Drawing.Point(9, 298);
+            this.lbAutor.Location = new System.Drawing.Point(7, 329);
             this.lbAutor.Name = "lbAutor";
             this.lbAutor.Size = new System.Drawing.Size(44, 13);
             this.lbAutor.TabIndex = 136;
@@ -357,11 +375,155 @@
             this.label3.TabIndex = 141;
             this.label3.Text = "Телефонный код города:";
             // 
+            // gbAvitum
+            // 
+            this.gbAvitum.Controls.Add(this.label12);
+            this.gbAvitum.Controls.Add(this.tbPatientCRRT);
+            this.gbAvitum.Controls.Add(this.tbMachineGD);
+            this.gbAvitum.Controls.Add(this.label18);
+            this.gbAvitum.Controls.Add(this.label13);
+            this.gbAvitum.Controls.Add(this.tbPatientPD);
+            this.gbAvitum.Controls.Add(this.tbMachineGDF);
+            this.gbAvitum.Controls.Add(this.label17);
+            this.gbAvitum.Controls.Add(this.label14);
+            this.gbAvitum.Controls.Add(this.tbPatientGD);
+            this.gbAvitum.Controls.Add(this.tbMachineCRRT);
+            this.gbAvitum.Controls.Add(this.label16);
+            this.gbAvitum.Controls.Add(this.label15);
+            this.gbAvitum.Controls.Add(this.tbShift);
+            this.gbAvitum.Location = new System.Drawing.Point(651, 12);
+            this.gbAvitum.Name = "gbAvitum";
+            this.gbAvitum.Size = new System.Drawing.Size(183, 202);
+            this.gbAvitum.TabIndex = 142;
+            this.gbAvitum.TabStop = false;
+            this.gbAvitum.Text = "Авитум";
+            this.gbAvitum.Visible = false;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(28, 22);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(62, 13);
+            this.label12.TabIndex = 25;
+            this.label12.Text = "ГД машин:";
+            // 
+            // tbPatientCRRT
+            // 
+            this.tbPatientCRRT.Location = new System.Drawing.Point(130, 175);
+            this.tbPatientCRRT.MaxLength = 4;
+            this.tbPatientCRRT.Name = "tbPatientCRRT";
+            this.tbPatientCRRT.Size = new System.Drawing.Size(35, 20);
+            this.tbPatientCRRT.TabIndex = 38;
+            // 
+            // tbMachineGD
+            // 
+            this.tbMachineGD.Location = new System.Drawing.Point(130, 19);
+            this.tbMachineGD.MaxLength = 4;
+            this.tbMachineGD.Name = "tbMachineGD";
+            this.tbMachineGD.Size = new System.Drawing.Size(35, 20);
+            this.tbMachineGD.TabIndex = 26;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(28, 178);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(96, 13);
+            this.label18.TabIndex = 37;
+            this.label18.Text = "CRRT пациентов:";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(28, 48);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(73, 13);
+            this.label13.TabIndex = 27;
+            this.label13.Text = "ГДФ машин:";
+            // 
+            // tbPatientPD
+            // 
+            this.tbPatientPD.Location = new System.Drawing.Point(130, 149);
+            this.tbPatientPD.MaxLength = 4;
+            this.tbPatientPD.Name = "tbPatientPD";
+            this.tbPatientPD.Size = new System.Drawing.Size(35, 20);
+            this.tbPatientPD.TabIndex = 36;
+            // 
+            // tbMachineGDF
+            // 
+            this.tbMachineGDF.Location = new System.Drawing.Point(130, 45);
+            this.tbMachineGDF.MaxLength = 4;
+            this.tbMachineGDF.Name = "tbMachineGDF";
+            this.tbMachineGDF.Size = new System.Drawing.Size(35, 20);
+            this.tbMachineGDF.TabIndex = 28;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(28, 152);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(83, 13);
+            this.label17.TabIndex = 35;
+            this.label17.Text = "ПД пациентов:";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(28, 74);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(77, 13);
+            this.label14.TabIndex = 29;
+            this.label14.Text = "CRRT машин:";
+            // 
+            // tbPatientGD
+            // 
+            this.tbPatientGD.Location = new System.Drawing.Point(130, 123);
+            this.tbPatientGD.MaxLength = 4;
+            this.tbPatientGD.Name = "tbPatientGD";
+            this.tbPatientGD.Size = new System.Drawing.Size(35, 20);
+            this.tbPatientGD.TabIndex = 34;
+            // 
+            // tbMachineCRRT
+            // 
+            this.tbMachineCRRT.Location = new System.Drawing.Point(130, 71);
+            this.tbMachineCRRT.MaxLength = 4;
+            this.tbMachineCRRT.Name = "tbMachineCRRT";
+            this.tbMachineCRRT.Size = new System.Drawing.Size(35, 20);
+            this.tbMachineCRRT.TabIndex = 30;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(28, 126);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(81, 13);
+            this.label16.TabIndex = 33;
+            this.label16.Text = "ГД пациентов:";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(28, 100);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(37, 13);
+            this.label15.TabIndex = 31;
+            this.label15.Text = "Смен:";
+            // 
+            // tbShift
+            // 
+            this.tbShift.Location = new System.Drawing.Point(130, 97);
+            this.tbShift.MaxLength = 4;
+            this.tbShift.Name = "tbShift";
+            this.tbShift.Size = new System.Drawing.Size(35, 20);
+            this.tbShift.TabIndex = 32;
+            // 
             // FormAddOrganization
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(723, 371);
+            this.ClientSize = new System.Drawing.Size(847, 371);
+            this.Controls.Add(this.gbAvitum);
             this.Controls.Add(this.tbPhoneCode);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.lbID);
@@ -399,6 +561,8 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Карточка";
             this.Load += new System.EventHandler(this.FormAddOrganization_Load);
+            this.gbAvitum.ResumeLayout(false);
+            this.gbAvitum.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -438,5 +602,20 @@
         private System.Windows.Forms.Label label34;
         private System.Windows.Forms.TextBox tbPhoneCode;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.GroupBox gbAvitum;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox tbPatientCRRT;
+        private System.Windows.Forms.TextBox tbMachineGD;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox tbPatientPD;
+        private System.Windows.Forms.TextBox tbMachineGDF;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox tbPatientGD;
+        private System.Windows.Forms.TextBox tbMachineCRRT;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox tbShift;
     }
 }

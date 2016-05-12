@@ -15,7 +15,7 @@ namespace ClassLibrary.SF
         private string _district;
         private string _street;
         private string _pharmacy;
-
+        
         public OtherOrganization(DataRow row)
             : base(row)
         {
@@ -24,9 +24,8 @@ namespace ClassLibrary.SF
             int.TryParse(row[15].ToString(), out _idCity);
             _district = row[16].ToString();
             _street = row[17].ToString();
-            
             _inn = row[18].ToString();
-
+            
             _pharmacy = row[31].ToString();
         }
 

@@ -12,11 +12,14 @@ namespace ClassLibrary.SF
     {
         private const int CRM_ID = 0;
 
-        private string[] _columnNamesEng = { "RR ID", "RR Parent ID", "Record type", "Institution Sub-Type", "Full name", "Short name", "TIN", "CRR",
-            "State/Province", "City", "Post code", "Address", "E-mail", "Web site", "Phone number", "Customer Classification", "Hospital type", "Ownership",
-            "Administrative level", "Financing channel", "Main speciality", "Sales District", "Number of beds (Total)", "Number of ICU Beds",
-            "Number of acute beds", "Number of surgical rooms", "Number of HD machines", "Number of HDF machines", "Number of CRRT machines", "Number of shifts",
-            "Number of HD patients", "Number of PD patients", "Number of CRRT patients" };
+        private string[] _columnNamesEng = { "Z_RU_RR_Institution__c", "Parent", "Z_Record_Type_Developer_Name__c", "Z_RU_Customer_long_name__c",
+                                               "Name", "Z_RU_TIN__c", "Z_RU_CRR__c", "BILLINGSTATE", "BILLINGCITY", "BILLINGPOSTALCODE", "BILLINGSTREET",
+                                               "Z_R3_Email_Address__c", "Website", "Phone", "Z_Customer_Classification__c", "Z_RU_Institution_Sub_Type__c",
+                                               "Z_Hospital_Type__c", "Ownership", "Z_RU_Type_of_geographical_level__c", "Z_SEE_Financial_Status__c",
+                                               "Z_RU_Institution_Main_Specialities__c", "Z_R3_Territories_RU__c", "Z_Cd_Number_of_Beds__c", "Z_ICU_Beds__c",
+                                               "Z_Number_of_acute_beds_in_hospital__c", "Z_RU_Number_of_surgical_rooms__c", "Z_RU_Number_of_HD_dialysis_machines__c",
+                                               "Z_RU_Number_of_HDF_dialysis_machines__c", "Z_RU_Number_of_CRRT_machines__c", "Z_RU_Number_of_shifts__c",
+                                               "Z_RU_Number_of_patient_HD__c", "Z_RU_Number_of_patient_PD__c", "Z_RU_Number_of_accute_patients_per_year__c" };
 
         private string[] _columnNamesRus = { "ID", "Parent ID", "CRM ID", "Тип записи", "Тип организации", "Client type", "Официальное название организации", "Сокращённое название",
             "ИНН", "КПП", "Регион России", "Город", "Индекс", "Район", "Уличный адрес", "Адрес эл. почты", "Веб-сайт", "Телефонный код города", "Телефонный номер",
@@ -131,22 +134,20 @@ namespace ClassLibrary.SF
                                organization.Email, organization.WebSite, phoneCode, organization.Phone, pharmacy, typeLPU, ownership, adminLevel, typeFin, mainSpec,
                                subRegion, idLpuRR, idLpuRR2,
                                (lpu != null) ? lpu.BedsTotal : string.Empty, (lpu != null) ? lpu.BedsIC : string.Empty, (lpu != null) ? lpu.BedsSurgical : string.Empty,
-                               (lpu != null) ? lpu.Operating : string.Empty, (lpu != null) ? lpu.MachineGD : string.Empty, (lpu != null) ? lpu.MachineGDF : string.Empty,
-                               (lpu != null) ? lpu.MachineCRRT : string.Empty, (lpu != null) ? lpu.Shift : string.Empty, (lpu != null) ? lpu.PatientGD : string.Empty,
-                               (lpu != null) ? lpu.PatientPD : string.Empty, (lpu != null) ? lpu.PatientCRRT : string.Empty,
-                               createdAuthor, createdDatetime, modifedAuthor, modifedDatetime };
+                               (lpu != null) ? lpu.Operating : string.Empty,
+                               organization.MachineGD, organization.MachineGDF, organization.MachineCRRT, organization.Shift, organization.PatientGD,
+                               organization.PatientPD, organization.PatientCRRT, createdAuthor, createdDatetime, modifedAuthor, modifedDatetime };
                 }
                 else
                 {
                     string phoneWithCode = (string.IsNullOrEmpty(organization.Phone)) ? string.Empty : string.Concat(phoneCode, organization.Phone);
 
-                    row = new object[] { organization.ID, parentID, recordType, GetClientType(organization),
+                    row = new object[] { organization.ID, parentID, recordType,
                                organization.Name, organization.ShortName, inn, kpp, realRegionName, city, postIndex, GetAddressWithDistrict(organization),
-                               organization.Email, organization.WebSite, phoneWithCode, pharmacy, typeLPU, ownership, adminLevel, typeFin, mainSpec, subRegion,
+                               organization.Email, organization.WebSite, phoneWithCode, pharmacy, GetClientType(organization), typeLPU, ownership, adminLevel, typeFin, mainSpec, subRegion,
                                (lpu != null) ? lpu.BedsTotal : string.Empty, (lpu != null) ? lpu.BedsIC : string.Empty, (lpu != null) ? lpu.BedsSurgical : string.Empty,
-                               (lpu != null) ? lpu.Operating : string.Empty, (lpu != null) ? lpu.MachineGD : string.Empty, (lpu != null) ? lpu.MachineGDF : string.Empty,
-                               (lpu != null) ? lpu.MachineCRRT : string.Empty, (lpu != null) ? lpu.Shift : string.Empty, (lpu != null) ? lpu.PatientGD : string.Empty,
-                               (lpu != null) ? lpu.PatientPD : string.Empty, (lpu != null) ? lpu.PatientCRRT : string.Empty };
+                               (lpu != null) ? lpu.Operating : string.Empty, organization.MachineGD, organization.MachineGDF, organization.MachineCRRT, organization.Shift, organization.PatientGD,
+                               organization.PatientPD, organization.PatientCRRT };
                 }
 
                 dt.Rows.Add(row);
@@ -235,7 +236,7 @@ namespace ClassLibrary.SF
 
             return string.Empty;
         }
-
+        
         private string GetAddressWithDistrict(Organization organization)
         {
             string district = string.Empty;
@@ -248,13 +249,13 @@ namespace ClassLibrary.SF
                 district = mainOrganization.District;
                 street = mainOrganization.Street;
             }
+            
+            return CheckIsEmpty(district, street);
+        }
 
-            if (string.IsNullOrEmpty(district))
-                return street;
-            if (string.IsNullOrEmpty(street))
-                return district;
-
-            return district + ", " + street;
+        private string CheckIsEmpty(string district, string street)
+        {
+            return string.IsNullOrEmpty(district) ? street : string.IsNullOrEmpty(street) ? district : district + ", " + street;
         }
     }
 }

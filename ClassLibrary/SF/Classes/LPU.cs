@@ -6,7 +6,7 @@ using System.Data;
 
 namespace ClassLibrary.SF
 {
-    public class LPU : Organization, IHaveRegion
+    public class LPU : Organization, IHaveRegion, IAvitum
     {
         private LpuRR _lpuRR;
         private LpuRR _lpuRR2;
@@ -27,14 +27,7 @@ namespace ClassLibrary.SF
         private int _bedsIC;
         private int _bedsSurgical;
         private int _operating;
-        private int _machineGD;
-        private int _machineGDF;
-        private int _machineCRRT;
-        private int _shift;
-        private int _patientGD;
-        private int _patientPD;
-        private int _patientCRRT;
-
+        
         private SubRegion _subRegion;
         private TypeFin _typeFin;
         
@@ -61,14 +54,7 @@ namespace ClassLibrary.SF
             int.TryParse(row[21].ToString(), out _bedsIC);
             int.TryParse(row[22].ToString(), out _bedsSurgical);
             int.TryParse(row[23].ToString(), out _operating);
-            int.TryParse(row[24].ToString(), out _machineGD);
-            int.TryParse(row[25].ToString(), out _machineGDF);
-            int.TryParse(row[26].ToString(), out _machineCRRT);
-            int.TryParse(row[27].ToString(), out _shift);
-            int.TryParse(row[28].ToString(), out _patientGD);
-            int.TryParse(row[29].ToString(), out _patientPD);
-            int.TryParse(row[30].ToString(), out _patientCRRT);
-
+            
             int idSubRegion;
             int.TryParse(row[32].ToString(), out idSubRegion);
             SubRegionList subRegionList = SubRegionList.GetUniqueInstance();
@@ -213,42 +199,7 @@ namespace ClassLibrary.SF
             get { return (_operating == 0) ? string.Empty : _operating.ToString(); }
             set { int.TryParse(value, out _operating); }
         }
-        public string MachineGD
-        {
-            get { return (_machineGD == 0) ? string.Empty : _machineGD.ToString(); }
-            set { int.TryParse(value, out _machineGD); }
-        }
-        public string MachineGDF
-        {
-            get { return (_machineGDF == 0) ? string.Empty : _machineGDF.ToString(); }
-            set { int.TryParse(value, out _machineGDF); }
-        }
-        public string MachineCRRT
-        {
-            get { return (_machineCRRT == 0) ? string.Empty : _machineCRRT.ToString(); }
-            set { int.TryParse(value, out _machineCRRT); }
-        }
-        public string Shift
-        {
-            get { return (_shift == 0) ? string.Empty : _shift.ToString(); }
-            set { int.TryParse(value, out _shift); }
-        }
-        public string PatientGD
-        {
-            get { return (_patientGD == 0) ? string.Empty : _patientGD.ToString(); }
-            set { int.TryParse(value, out _patientGD); }
-        }
-        public string PatientPD
-        {
-            get { return (_patientPD == 0) ? string.Empty : _patientPD.ToString(); }
-            set { int.TryParse(value, out _patientPD); }
-        }
-        public string PatientCRRT
-        {
-            get { return (_patientCRRT == 0) ? string.Empty : _patientCRRT.ToString(); }
-            set { int.TryParse(value, out _patientCRRT); }
-        }
-
+        
         public SubRegion SubRegion
         {
             get { return _subRegion; }

@@ -48,7 +48,9 @@ namespace RegionR.SF
             string typeOrg = _organization.TypeOrg.ToString();
 
             if (_organization.TypeOrg == TypeOrg.Административное_Учреждение)
+            {
                 typeOrg = "Административное Учреждение";
+            }
 
             this.Text = string.Concat("Карточка Организации \"", typeOrg, "\"");
             lbOrganization.Text = typeOrg;
@@ -69,9 +71,13 @@ namespace RegionR.SF
                     rbC.Checked = true;
             }
             else if (_organization.TypeOrg == TypeOrg.Дистрибьютор)
+            {
                 lbOrganizationName.Location = new Point(157, 9);
+            }
             else if (_organization.TypeOrg == TypeOrg.Административное_Учреждение)
+            {
                 lbOrganizationName.Location = new Point(307, 9);
+            }
 
             lbNumberSF.Text = _organization.NumberSF;
             lbTypeOrg.Text = _organization.TypeOrg.ToString();
@@ -88,7 +94,9 @@ namespace RegionR.SF
             tbPhone.Text = _organization.Phone;
 
             if (_organization.RealRegion != null)
+            {
                 cbRealRegion.SelectedValue = _organization.RealRegion.ID;
+            }
 
             if (_organization.City != null)
             {
@@ -222,7 +230,9 @@ namespace RegionR.SF
                     _organization.Pharmacy = "C";
             }
             else
+            {
                 _organization.Pharmacy = string.Empty;
+            }
 
             return true;
         }
