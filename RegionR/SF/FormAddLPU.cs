@@ -164,14 +164,45 @@ namespace RegionR.SF
             tbBedsIC.Text = _lpu.BedsIC;
             tbBedsSurgical.Text = _lpu.BedsSurgical;
             tbOperating.Text = _lpu.Operating;
-            tbMachineGD.Text = _lpu.MachineGD;
-            tbMachineGDF.Text = _lpu.MachineGDF;
-            tbMachineCRRT.Text = _lpu.MachineCRRT;
-            tbShift.Text = _lpu.Shift;
-            tbPatientGD.Text = _lpu.PatientGD;
-            tbPatientPD.Text = _lpu.PatientPD;
-            tbPatientCRRT.Text = _lpu.PatientCRRT;
 
+            SetReadOnlyAvitum();
+
+            if (_lpu.IsHaveDepartment())
+            {
+                OrganizationList organizationoList = OrganizationList.GetUniqueInstance();
+                
+                var childList = from item in organizationoList.GetChildList(_lpu)
+                                where item.TypeOrg == TypeOrg.Отделение
+                                select new
+                                {
+                                    MachineGD = string.IsNullOrEmpty(item.MachineGD) ? 0 : Convert.ToInt32(item.MachineGD),
+                                    MachineGDF = string.IsNullOrEmpty(item.MachineGDF) ? 0 : Convert.ToInt32(item.MachineGDF),
+                                    MachineCRRT = string.IsNullOrEmpty(item.MachineCRRT) ? 0 : Convert.ToInt32(item.MachineCRRT),
+                                    Shift = string.IsNullOrEmpty(item.Shift) ? 0 : Convert.ToInt32(item.Shift),
+                                    PatientGD = string.IsNullOrEmpty(item.PatientGD) ? 0 : Convert.ToInt32(item.PatientGD),
+                                    PatientPD = string.IsNullOrEmpty(item.PatientPD) ? 0 : Convert.ToInt32(item.PatientPD),
+                                    PatientCRRT = string.IsNullOrEmpty(item.PatientCRRT) ? 0 : Convert.ToInt32(item.PatientCRRT)
+                                };
+
+
+                tbMachineGD.Text = childList.Sum(item => item.MachineGD).ToString();
+                tbMachineGDF.Text = childList.Sum(item => item.MachineGDF).ToString();
+                tbMachineCRRT.Text = childList.Sum(item => item.MachineCRRT).ToString();
+                tbShift.Text = childList.Sum(item => item.Shift).ToString();
+                tbPatientGD.Text = childList.Sum(item => item.PatientGD).ToString();
+                tbPatientPD.Text = childList.Sum(item => item.PatientPD).ToString();
+                tbPatientCRRT.Text = childList.Sum(item => item.PatientCRRT).ToString();
+            }
+            else
+            {
+                tbMachineGD.Text = _lpu.MachineGD;
+                tbMachineGDF.Text = _lpu.MachineGDF;
+                tbMachineCRRT.Text = _lpu.MachineCRRT;
+                tbShift.Text = _lpu.Shift;
+                tbPatientGD.Text = _lpu.PatientGD;
+                tbPatientPD.Text = _lpu.PatientPD;
+                tbPatientCRRT.Text = _lpu.PatientCRRT;
+            }
             LoadTree();
 
             SetPhoneCodeMask();
@@ -376,13 +407,27 @@ namespace RegionR.SF
             }
 
             _lpu.Operating = tbOperating.Text;
-            _lpu.MachineGD = tbMachineGD.Text;
-            _lpu.MachineGDF = tbMachineGDF.Text;
-            _lpu.MachineCRRT = tbMachineCRRT.Text;
-            _lpu.Shift = tbShift.Text;
-            _lpu.PatientGD = tbPatientGD.Text;
-            _lpu.PatientPD = tbPatientPD.Text;
-            _lpu.PatientCRRT = tbPatientCRRT.Text;
+
+            if (_lpu.IsHaveDepartment())
+            {
+                _lpu.MachineGD = string.Empty;
+                _lpu.MachineGDF = string.Empty;
+                _lpu.MachineCRRT = string.Empty;
+                _lpu.Shift = string.Empty;
+                _lpu.PatientGD = string.Empty;
+                _lpu.PatientPD = string.Empty;
+                _lpu.PatientCRRT = string.Empty;
+            }
+            else
+            {
+                _lpu.MachineGD = tbMachineGD.Text;
+                _lpu.MachineGDF = tbMachineGDF.Text;
+                _lpu.MachineCRRT = tbMachineCRRT.Text;
+                _lpu.Shift = tbShift.Text;
+                _lpu.PatientGD = tbPatientGD.Text;
+                _lpu.PatientPD = tbPatientPD.Text;
+                _lpu.PatientCRRT = tbPatientCRRT.Text;
+            }
 
             if (cbLpuRR.Enabled)
             {
@@ -621,20 +666,24 @@ namespace RegionR.SF
                 return true;
             if (_lpu.Operating != tbOperating.Text)
                 return true;
-            if (_lpu.MachineGD != tbMachineGD.Text)
-                return true;
-            if (_lpu.MachineGDF != tbMachineGDF.Text)
-                return true;
-            if (_lpu.MachineCRRT != tbMachineCRRT.Text)
-                return true;
-            if (_lpu.Shift != tbShift.Text)
-                return true;
-            if (_lpu.PatientGD != tbPatientGD.Text)
-                return true;
-            if (_lpu.PatientPD != tbPatientPD.Text)
-                return true;
-            if (_lpu.PatientCRRT != tbPatientCRRT.Text)
-                return true;
+
+            if (!_lpu.IsHaveDepartment())
+            {
+                if (_lpu.MachineGD != tbMachineGD.Text)
+                    return true;
+                if (_lpu.MachineGDF != tbMachineGDF.Text)
+                    return true;
+                if (_lpu.MachineCRRT != tbMachineCRRT.Text)
+                    return true;
+                if (_lpu.Shift != tbShift.Text)
+                    return true;
+                if (_lpu.PatientGD != tbPatientGD.Text)
+                    return true;
+                if (_lpu.PatientPD != tbPatientPD.Text)
+                    return true;
+                if (_lpu.PatientCRRT != tbPatientCRRT.Text)
+                    return true;
+            }
 
             return false;
         }
@@ -751,6 +800,30 @@ namespace RegionR.SF
             {
                 lbRegionRR2.Text = lpuRR2.RegionRR.Name;
                 lbLpuRR2Id.Text = lpuRR2.ID.ToString();
+            }
+        }
+
+        private void SetReadOnlyAvitum()
+        {
+            if (_lpu.IsHaveDepartment())
+            {
+                tbMachineGD.ReadOnly = true;
+                tbMachineGDF.ReadOnly = true;
+                tbMachineCRRT.ReadOnly = true;
+                tbShift.ReadOnly = true;
+                tbPatientGD.ReadOnly = true;
+                tbPatientPD.ReadOnly = true;
+                tbPatientCRRT.ReadOnly = true;
+            }
+            else
+            {
+                tbMachineGD.ReadOnly = false;
+                tbMachineGDF.ReadOnly = false;
+                tbMachineCRRT.ReadOnly = false;
+                tbShift.ReadOnly = false;
+                tbPatientGD.ReadOnly = false;
+                tbPatientPD.ReadOnly = false;
+                tbPatientCRRT.ReadOnly = false;
             }
         }
     }

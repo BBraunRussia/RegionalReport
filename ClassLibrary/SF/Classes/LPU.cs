@@ -243,5 +243,12 @@ namespace ClassLibrary.SF
         {
             return (_bedsTotal < (_bedsIC + _bedsSurgical));
         }
+
+        public bool IsHaveDepartment()
+        {
+            OrganizationList organizationList = OrganizationList.GetUniqueInstance();
+
+            return organizationList.GetChildList(this).Exists(item => item.TypeOrg == ClassLibrary.TypeOrg.Отделение);
+        }
     }
 }
