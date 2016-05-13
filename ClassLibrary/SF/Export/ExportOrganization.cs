@@ -142,12 +142,75 @@ namespace ClassLibrary.SF
                 {
                     string phoneWithCode = (string.IsNullOrEmpty(organization.Phone)) ? string.Empty : string.Concat(phoneCode, organization.Phone);
 
+                    string MachineGD = string.Empty;
+                    string MachineGDF = string.Empty;
+                    string MachineCRRT = string.Empty;
+                    string Shift = string.Empty;
+                    string PatientGD = string.Empty;
+                    string PatientPD = string.Empty;
+                    string PatientCRRT = string.Empty;
+
+                    if ((lpu != null) && (lpu.IsHaveDepartment()))
+                    {
+                        OrganizationList organizationoList = OrganizationList.GetUniqueInstance();
+
+                        var childList = from child in organizationoList.GetChildList(lpu)
+                                        where child.TypeOrg == TypeOrg.Отделение
+                                        select new
+                                        {
+                                            MachineGD = string.IsNullOrEmpty(child.MachineGD) ? 0 : Convert.ToInt32(child.MachineGD),
+                                            MachineGDF = string.IsNullOrEmpty(child.MachineGDF) ? 0 : Convert.ToInt32(child.MachineGDF),
+                                            MachineCRRT = string.IsNullOrEmpty(child.MachineCRRT) ? 0 : Convert.ToInt32(child.MachineCRRT),
+                                            Shift = string.IsNullOrEmpty(child.Shift) ? 0 : Convert.ToInt32(child.Shift),
+                                            PatientGD = string.IsNullOrEmpty(child.PatientGD) ? 0 : Convert.ToInt32(child.PatientGD),
+                                            PatientPD = string.IsNullOrEmpty(child.PatientPD) ? 0 : Convert.ToInt32(child.PatientPD),
+                                            PatientCRRT = string.IsNullOrEmpty(child.PatientCRRT) ? 0 : Convert.ToInt32(child.PatientCRRT)
+                                        };
+                        
+                        MachineGD = childList.Sum(child => child.MachineGD).ToString();
+                        if (MachineGD == "0")
+                            MachineGD = string.Empty;
+
+                        MachineGDF = childList.Sum(child => child.MachineGDF).ToString();
+                        if (MachineGDF == "0")
+                            MachineGDF = string.Empty;
+
+                        MachineCRRT = childList.Sum(child => child.MachineCRRT).ToString();
+                        if (MachineCRRT == "0")
+                            MachineCRRT = string.Empty;
+
+                        Shift = childList.Sum(child => child.Shift).ToString();
+                        if (Shift == "0")
+                            Shift = string.Empty;
+
+                        PatientGD = childList.Sum(child => child.PatientGD).ToString();
+                        if (PatientGD == "0")
+                            PatientGD = string.Empty;
+
+                        PatientPD = childList.Sum(child => child.PatientPD).ToString();
+                        if (PatientPD == "0")
+                            PatientPD = string.Empty;
+
+                        PatientCRRT = childList.Sum(child => child.PatientCRRT).ToString();
+                        if (PatientCRRT == "0")
+                            PatientCRRT = string.Empty;
+                    }
+                    else
+                    {
+                        MachineGD = organization.MachineGD;
+                        MachineGDF = organization.MachineGDF;
+                        MachineCRRT = organization.MachineCRRT;
+                        Shift = organization.Shift;
+                        PatientGD = organization.PatientGD;
+                        PatientPD = organization.PatientPD;
+                        PatientCRRT = organization.PatientCRRT;
+                    }
+
                     row = new object[] { organization.ID, parentID, recordType,
                                organization.Name, organization.ShortName, inn, kpp, realRegionName, city, postIndex, GetAddressWithDistrict(organization),
                                organization.Email, organization.WebSite, phoneWithCode, pharmacy, GetClientType(organization), typeLPU, ownership, adminLevel, typeFin, mainSpec, subRegion,
                                (lpu != null) ? lpu.BedsTotal : string.Empty, (lpu != null) ? lpu.BedsIC : string.Empty, (lpu != null) ? lpu.BedsSurgical : string.Empty,
-                               (lpu != null) ? lpu.Operating : string.Empty, organization.MachineGD, organization.MachineGDF, organization.MachineCRRT, organization.Shift, organization.PatientGD,
-                               organization.PatientPD, organization.PatientCRRT };
+                               (lpu != null) ? lpu.Operating : string.Empty, MachineGD, MachineGDF, MachineCRRT, Shift, PatientGD, PatientPD, PatientCRRT };
                 }
 
                 dt.Rows.Add(row);
