@@ -65,14 +65,34 @@ namespace RegionR.SF
                 btnShowRules.Visible = true;
 
                 lbBranch.Location = new Point(117, 32);
+             
+                gbAvitum.Visible = true;
+                tbMachineGD.Text = _organization.MachineGD;
+                tbMachineGDF.Text = _organization.MachineGDF;
+                tbMachineCRRT.Text = _organization.MachineCRRT;
+                tbShift.Text = _organization.Shift;
+                tbPatientGD.Text = _organization.PatientGD;
+                tbPatientPD.Text = _organization.PatientPD;
+                tbPatientCRRT.Text = _organization.PatientCRRT;
             }
+
             else if (_organization.TypeOrg == TypeOrg.Отдел)
             {
                 lbBranch.Location = new Point(81, 32);
                 cbMainSpec.Visible = false;
                 lbMainSpec.Visible = false;
             }
-            
+            else
+            {
+                tbMachineGD.Text = string.Empty;
+                tbMachineGDF.Text = string.Empty;
+                tbMachineCRRT.Text = string.Empty;
+                tbShift.Text = string.Empty;
+                tbPatientGD.Text = string.Empty;
+                tbPatientPD.Text = string.Empty;
+                tbPatientCRRT.Text = string.Empty;
+            }
+
             tbEmail.Text = _organization.Email;
             tbWebSite.Text = _organization.WebSite;
             tbPhone.Text = _organization.Phone;
@@ -167,6 +187,27 @@ namespace RegionR.SF
             _organization.Email = tbEmail.Text;
             _organization.WebSite = tbWebSite.Text;
             _organization.Phone = tbPhone.Text;
+
+            if (_organization.TypeOrg == TypeOrg.Отделение)
+            {
+                _organization.MachineGD = tbMachineGD.Text;
+                _organization.MachineGDF = tbMachineGDF.Text;
+                _organization.MachineCRRT = tbMachineCRRT.Text;
+                _organization.Shift = tbShift.Text;
+                _organization.PatientGD = tbPatientGD.Text;
+                _organization.PatientPD = tbPatientPD.Text;
+                _organization.PatientCRRT = tbPatientCRRT.Text;
+            }
+            else
+            {
+                _organization.MachineGD = string.Empty;
+                _organization.MachineGDF = string.Empty;
+                _organization.MachineCRRT = string.Empty;
+                _organization.Shift = string.Empty;
+                _organization.PatientGD = string.Empty;
+                _organization.PatientPD = string.Empty;
+                _organization.PatientCRRT = string.Empty;
+            }
         }
 
         private void CheckNameAdmin(string text)

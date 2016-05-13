@@ -12,7 +12,6 @@ namespace RegionR
 {
     public class LpuRRController : BaseOperations, IController
     {
-        private DataGridView _dgv;
         private LpuRRList _lpuRRList;
 
         private Color _bbgreen3 = Color.FromArgb(115, 214, 186);
@@ -20,7 +19,6 @@ namespace RegionR
         public LpuRRController(DataGridView dgv)
             : base(dgv)
         {
-            _dgv = dgv;
             _lpuRRList = LpuRRList.GetUniqueInstance();
         }
         

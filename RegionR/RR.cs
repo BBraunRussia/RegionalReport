@@ -16775,5 +16775,10 @@ namespace RegionR
                 SelMAPM();
         }
 
+        private void persSalesReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RegionR.Reports.FormPersSalesReport formPersSalesReport = new Reports.FormPersSalesReport();
+            formPersSalesReport.ShowDialog();
+        }
     }
 }

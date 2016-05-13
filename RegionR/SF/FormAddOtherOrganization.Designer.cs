@@ -481,8 +481,9 @@
             // 
             // lbEditor
             // 
+            this.lbEditor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbEditor.AutoSize = true;
-            this.lbEditor.Location = new System.Drawing.Point(13, 420);
+            this.lbEditor.Location = new System.Drawing.Point(13, 582);
             this.lbEditor.Name = "lbEditor";
             this.lbEditor.Size = new System.Drawing.Size(53, 13);
             this.lbEditor.TabIndex = 135;
@@ -490,8 +491,9 @@
             // 
             // lbAutor
             // 
+            this.lbAutor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbAutor.AutoSize = true;
-            this.lbAutor.Location = new System.Drawing.Point(13, 400);
+            this.lbAutor.Location = new System.Drawing.Point(13, 562);
             this.lbAutor.Name = "lbAutor";
             this.lbAutor.Size = new System.Drawing.Size(44, 13);
             this.lbAutor.TabIndex = 134;
@@ -519,7 +521,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(897, 441);
+            this.ClientSize = new System.Drawing.Size(897, 603);
             this.Controls.Add(this.lbID);
             this.Controls.Add(this.label34);
             this.Controls.Add(this.lbEditor);

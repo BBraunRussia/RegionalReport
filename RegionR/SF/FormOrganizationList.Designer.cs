@@ -60,7 +60,6 @@
             this.btnReload = new System.Windows.Forms.Button();
             this.btnDeleteFilter = new System.Windows.Forms.Button();
             this.btnContinue = new System.Windows.Forms.Button();
-            this.excelallFieldsIDsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -158,8 +157,7 @@
             // 
             this.exportToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.excelAllFieldsRusToolStripMenuItem,
-            this.excelAllFieldsEngToolStripMenuItem,
-            this.excelallFieldsIDsToolStripMenuItem});
+            this.excelAllFieldsEngToolStripMenuItem});
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
             this.exportToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.exportToolStripMenuItem.Text = "Экспорт";
@@ -331,13 +329,6 @@
             this.btnContinue.UseVisualStyleBackColor = true;
             this.btnContinue.Click += new System.EventHandler(this.tbSearch_TextChanged);
             // 
-            // excelallFieldsIDsToolStripMenuItem
-            // 
-            this.excelallFieldsIDsToolStripMenuItem.Name = "excelallFieldsIDsToolStripMenuItem";
-            this.excelallFieldsIDsToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
-            this.excelallFieldsIDsToolStripMenuItem.Text = "Excel, все поля, IDs";
-            this.excelallFieldsIDsToolStripMenuItem.Click += new System.EventHandler(this.excelallFieldsIDsToolStripMenuItem_Click);
-            // 
             // FormOrganizationList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -400,6 +391,5 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
         private System.Windows.Forms.ToolStripMenuItem excelAllFieldsRusToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem excelAllFieldsEngToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem excelallFieldsIDsToolStripMenuItem;
     }
 }

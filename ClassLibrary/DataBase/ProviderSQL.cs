@@ -62,7 +62,7 @@ namespace ClassLibrary
 
         public DataTable DoOther(string sql, params object[] Params)
         {
-            return _db.GetRecords(sql, Params);
+            return _db.GetRecords(sql + " " + CreateParamsString(Params), Params);
         }
     }
 }

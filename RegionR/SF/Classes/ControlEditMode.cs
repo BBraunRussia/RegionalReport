@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using ClassLibrary.SF;
+using ClassLibrary;
 
 namespace RegionR.SF
 {
@@ -34,10 +35,10 @@ namespace RegionR.SF
         private void GetSettings()
         {
             Settings settings = new Settings();
-            if (UserLogged.Get().RoleSF == ClassLibrary.RolesSF.Пользователь)
-                SetEditMode(settings.GetEditMode());
-            else
+            if (UserLogged.Get().RoleSF == RolesSF.Администратор)
                 SetEditMode(true);
+            else
+                SetEditMode(settings.GetEditMode());
         }
 
         private void DefaulEditModeChanged(Object sender, EditModeEventArgs e)

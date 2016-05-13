@@ -101,8 +101,28 @@
   </PropertyGroup>
   <PropertyGroup />
   <ItemGroup>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Report.Viewer.11.0.0.0\lib\net\Microsoft.ReportViewer.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Report.Viewer.11.0.0.0\lib\net\Microsoft.ReportViewer.ProcessingObjectModel.DLL</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Report.Viewer.11.0.0.0\lib\net\Microsoft.ReportViewer.WebForms.DLL</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Types.11.0.2\lib\net20\Microsoft.SqlServer.Types.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Deployment" />
@@ -430,6 +450,12 @@
     <Compile Include="other\VisitPlanDay.designer.cs">
       <DependentUpon>VisitPlanDay.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reports\FormPersSalesReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\FormPersSalesReport.Designer.cs">
+      <DependentUpon>FormPersSalesReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="RR.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -481,7 +507,7 @@
     <Compile Include="SF\Classes\TreeLPU.cs" />
     <Compile Include="SF\Classes\ClassForForm.cs" />
     <Compile Include="SF\Classes\UserLogged.cs" />
-    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\BaseOperations.cs" />
     <Compile Include="Controllers\IController.cs" />
     <Compile Include="SF\Controllers\OrganizationListController.cs" />
     <Compile Include="Controllers\LpuRRController.cs" />
@@ -583,6 +609,7 @@
     <Compile Include="SF\FormUserRoleSFList.Designer.cs">
       <DependentUpon>FormUserRoleSFList.cs</DependentUpon>
     </Compile>
+    <Compile Include="SqlServerTypes\Loader.cs" />
     <EmbeddedResource Include="Acc2015.resx">
       <DependentUpon>Acc2015.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -766,6 +793,12 @@
     <EmbeddedResource Include="other\VisitPlanDay.resx">
       <DependentUpon>VisitPlanDay.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report1.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\FormPersSalesReport.resx">
+      <DependentUpon>FormPersSalesReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="RR.resx">
       <DependentUpon>RR.cs</DependentUpon>
     </EmbeddedResource>
@@ -843,6 +876,9 @@
       <DependentUpon>FormUserRoleSFList.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\DataSources\ClassLibrary.PersSalesReport.datasource" />
+    <None Include="Properties\DataSources\ClassLibrary.Report.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -925,6 +961,25 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\file.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\packages\Microsoft.SqlServer.Types.11.0.2\nativeBinaries\x64\msvcr100.dll">
+      <Link>SqlServerTypes\x64\msvcr100.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\packages\Microsoft.SqlServer.Types.11.0.2\nativeBinaries\x64\SqlServerSpatial110.dll">
+      <Link>SqlServerTypes\x64\SqlServerSpatial110.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\packages\Microsoft.SqlServer.Types.11.0.2\nativeBinaries\x86\msvcr100.dll">
+      <Link>SqlServerTypes\x86\msvcr100.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\packages\Microsoft.SqlServer.Types.11.0.2\nativeBinaries\x86\SqlServerSpatial110.dll">
+      <Link>SqlServerTypes\x86\SqlServerSpatial110.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\readme.htm" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

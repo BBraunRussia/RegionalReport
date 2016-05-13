@@ -36,7 +36,7 @@ namespace RegionR.SF
             UserList userList = UserList.GetUniqueInstance();
             User user = userList.GetItem(globalData.UserID) as User;
 
-            DataTable dt = (user.RoleSF == RolesSF.Администратор) ? lpuList.ToDataTableWithBranch() : lpuList.ToDataTableWithBranch(user);
+            DataTable dt = (user.RoleSF == RolesSF.Пользователь) ? lpuList.ToDataTableWithBranch(user) : lpuList.ToDataTableWithBranch();
 
             dgv.DataSource = dt;
         }

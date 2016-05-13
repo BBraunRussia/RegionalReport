@@ -14,7 +14,6 @@ namespace RegionR.SF
         private PersonList _personList;
         private Organization _organization;
         private User _user;
-        private DataGridView _dgv;
         private SearchInDgv _seacher;
         private FilteredDGV _filtredDGV;
         private SortDGV _sortDGV;
@@ -37,7 +36,7 @@ namespace RegionR.SF
         {
             ReLoad();
 
-            DataTable dt = (_organization != null) ? _personList.ToDataTable(_organization) : (_user.RoleSF == RolesSF.Администратор) ? _personList.ToDataTable() : _personList.ToDataTable(_user);
+            DataTable dt = (_organization != null) ? _personList.ToDataTable(_organization) : (_user.RoleSF == RolesSF.Пользователь) ? _personList.ToDataTable(_user) : _personList.ToDataTable();
 
             _dgv.DataSource = dt;
 
