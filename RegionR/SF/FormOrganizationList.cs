@@ -31,6 +31,8 @@ namespace RegionR
             exportToolStripMenuItem.Visible = (UserLogged.Get().RoleSF == RolesSF.Администратор);
             toolStripMenuItem4.Visible = (UserLogged.Get().RoleSF == RolesSF.Администратор);
             toolStripMenuItem5.Visible = (UserLogged.Get().RoleSF == RolesSF.Администратор);
+
+            btnDeleteOrganization.Visible = (UserLogged.Get().RoleSF == RolesSF.Администратор);
         }
 
         private void formOrganizationList_Load(object sender, EventArgs e)
