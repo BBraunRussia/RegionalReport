@@ -8,28 +8,16 @@ namespace ClassLibrary.SF
 {
     public class LPU : Organization, IHaveRegion, IAvitum
     {
-        private LpuRR _lpuRR;
-        private LpuRR _lpuRR2;
-
         private int _idTypeLPU;
         private int _idOwnership;
         private int _idAdmLevel;
-
-        private string _kpp;
-        private string _postIndex;
+        
         private int _idCity;
-        private string _district;
-        private string _street;
-
-        private string _inn;
 
         private int _bedsTotal;
         private int _bedsIC;
         private int _bedsSurgical;
         private int _operating;
-        
-        private SubRegion _subRegion;
-        private TypeFin _typeFin;
         
         public LPU(DataRow row)
             : base(row)
@@ -37,18 +25,18 @@ namespace ClassLibrary.SF
             int.TryParse(row[10].ToString(), out _idTypeLPU);
             int.TryParse(row[11].ToString(), out _idOwnership);
             int.TryParse(row[12].ToString(), out _idAdmLevel);
-            _kpp = row[13].ToString();
-            _postIndex = row[14].ToString();
+            KPP = row[13].ToString();
+            PostIndex = row[14].ToString();
             int.TryParse(row[15].ToString(), out _idCity);
-            _district = row[16].ToString();
-            _street = row[17].ToString();
+            District = row[16].ToString();
+            Street = row[17].ToString();
 
-            _inn = row[18].ToString();
+            INN = row[18].ToString();
 
             int idLpuRR;
             int.TryParse(row[19].ToString(), out idLpuRR);
             LpuRRList lpuRRList = LpuRRList.GetUniqueInstance();
-            _lpuRR = lpuRRList.GetItem(idLpuRR) as LpuRR;
+            LpuRR = lpuRRList.GetItem(idLpuRR) as LpuRR;
 
             int.TryParse(row[20].ToString(), out _bedsTotal);
             int.TryParse(row[21].ToString(), out _bedsIC);
@@ -58,46 +46,32 @@ namespace ClassLibrary.SF
             int idSubRegion;
             int.TryParse(row[32].ToString(), out idSubRegion);
             SubRegionList subRegionList = SubRegionList.GetUniqueInstance();
-            _subRegion = subRegionList.GetItem(idSubRegion) as SubRegion;
+            SubRegion = subRegionList.GetItem(idSubRegion) as SubRegion;
 
             int idTypeFin;
             int.TryParse(row[33].ToString(), out idTypeFin);
             TypeFinList typeFinList = TypeFinList.GetUniqueInstance();
-            _typeFin = typeFinList.GetItem(idTypeFin) as TypeFin;
+            TypeFin = typeFinList.GetItem(idTypeFin) as TypeFin;
 
             int idLpuRR2;
             int.TryParse(row[34].ToString(), out idLpuRR2);
-            _lpuRR2 = lpuRRList.GetItem(idLpuRR2) as LpuRR;
+            LpuRR2 = lpuRRList.GetItem(idLpuRR2) as LpuRR;
         }
 
         public LPU(TypeOrg typeOrg)
             : base(typeOrg)
         { }
 
-        public string KPP
-        {
-            get { return _kpp; }
-            set { _kpp = value; }
-        }
-
-        public string PostIndex
-        {
-            get { return _postIndex; }
-            set { _postIndex = value; }
-        }
-
-        public string District
-        {
-            get { return _district; }
-            set { _district = value; }
-        }
-
-        public string Street
-        {
-            get { return _street; }
-            set { _street = value; }
-        }
-
+        public string KPP { get; set; }
+        public string PostIndex { get; set; }
+        public string District { get; set; }
+        public string Street { get; set; }
+        public string INN { get; set; }
+        public LpuRR LpuRR { get; set; }
+        public LpuRR LpuRR2 { get; set; }
+        public SubRegion SubRegion { get; set; }
+        public TypeFin TypeFin { get; set; }
+        
         public City City
         {
             get
@@ -160,25 +134,7 @@ namespace ClassLibrary.SF
             }
             set { _idOwnership = value.ID; }
         }
-
-        public string INN
-        {
-            get { return _inn; }
-            set { _inn = value; }
-        }
-
-        public LpuRR LpuRR
-        {
-            get { return _lpuRR; }
-            set { _lpuRR = value; }
-        }
-
-        public LpuRR LpuRR2
-        {
-            get { return _lpuRR2; }
-            set { _lpuRR2 = value; }
-        }
-
+        
         public string BedsTotal
         {
             get { return (_bedsTotal == 0) ? string.Empty : _bedsTotal.ToString(); }
@@ -200,18 +156,6 @@ namespace ClassLibrary.SF
             set { int.TryParse(value, out _operating); }
         }
         
-        public SubRegion SubRegion
-        {
-            get { return _subRegion; }
-            set { _subRegion = value; }
-        }
-
-        public TypeFin TypeFin
-        {
-            get { return _typeFin; }
-            set { _typeFin = value; }
-        }
-
         public object[] GetRow()
         {
             string typeOrgName = ((TypeOrg == TypeOrg.ЛПУ) && (ParentOrganization != null)) ? "Филиал ЛПУ" : TypeOrg.ToString();
@@ -237,7 +181,7 @@ namespace ClassLibrary.SF
             int id;
             int.TryParse(_provider.Insert("SF_LPU", ID, NumberSF, TypeOrg, Name, ShortName, MainSpec.ID, Email, WebSite, Phone, idParentOrganization, TypeLPU.ID, Ownership.ID, AdmLevel.ID,
                 INN, KPP, PostIndex, City.ID, District, Street, idLPURR,
-                _bedsTotal, _bedsIC, _bedsSurgical, _operating, _machineGD, _machineGDF, _machineCRRT, _shift, _patientGD, _patientPD, _patientCRRT, _subRegion.ID, _typeFin.ID, idLPURR2), out id);
+                _bedsTotal, _bedsIC, _bedsSurgical, _operating, _machineGD, _machineGDF, _machineCRRT, _shift, _patientGD, _patientPD, _patientCRRT, SubRegion.ID, TypeFin.ID, idLPURR2), out id);
 
             SetID(id);
 

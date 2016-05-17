@@ -8,34 +8,28 @@ namespace ClassLibrary.SF
 {
     public class City : BaseDictionary
     {
-        private int _idRealRegion;
-        private string _phoneCode;
+        public RealRegion RealRegion
+        {
+            get;
+            private set;
+        }
+
+        public string PhoneCode { get; set; }
 
         public City(DataRow row)
             : base(row)
         {
-            int.TryParse(row[2].ToString(), out _idRealRegion);
-            _phoneCode = row[3].ToString();
+            int idRealRegion;
+            RealRegionList realRegionList = RealRegionList.GetUniqueInstance();
+            int.TryParse(row[2].ToString(), out idRealRegion);
+            RealRegion = realRegionList.GetItem(idRealRegion) as RealRegion;
+
+            PhoneCode = row[3].ToString();
         }
 
-        public City(int idRealRegion)
+        public City(RealRegion realRegion)
         {
-            _idRealRegion = idRealRegion;
-        }
-
-        public RealRegion RealRegion
-        {
-            get
-            {
-                RealRegionList realRegionList = RealRegionList.GetUniqueInstance();
-                return realRegionList.GetItem(_idRealRegion) as RealRegion;
-            }
-        }
-
-        public string PhoneCode
-        {
-            get { return _phoneCode; }
-            set { _phoneCode = value; }
+            RealRegion = realRegion;
         }
 
         public new object[] GetRow()

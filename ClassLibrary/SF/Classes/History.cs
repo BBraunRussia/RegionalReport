@@ -8,10 +8,7 @@ namespace ClassLibrary.SF
 {
     public class History : BaseDictionary
     {
-        private HistoryType _type;
-
         private User _user;
-        private HistoryAction _action;
         private DateTime _datetime;
 
         public History(DataRow row)
@@ -19,7 +16,7 @@ namespace ClassLibrary.SF
         {
             int idType;
             int.TryParse(row[2].ToString(), out idType);
-            _type = (HistoryType)idType;
+            Type = (HistoryType)idType;
 
             int idUser;
             int.TryParse(row[3].ToString(), out idUser);
@@ -28,7 +25,7 @@ namespace ClassLibrary.SF
 
             int idAction;
             int.TryParse(row[4].ToString(), out idAction);
-            _action = (HistoryAction)idAction;
+            Action = (HistoryAction)idAction;
 
             DateTime.TryParse(row[5].ToString(), out _datetime);
         }
@@ -42,7 +39,7 @@ namespace ClassLibrary.SF
             if (action == HistoryAction.Удалил)
             {
                 history = new History(orgHistory, user);
-                history._action = action;
+                history.Action = action;
             }
             else
             {
@@ -56,7 +53,7 @@ namespace ClassLibrary.SF
                 else
                 {
                     history = new History(orgHistory, user);
-                    history._action = (list.Count == 0) ? HistoryAction.Создал : HistoryAction.Редактировал;
+                    history.Action = (list.Count == 0) ? HistoryAction.Создал : HistoryAction.Редактировал;
                 }
             }
 
@@ -71,19 +68,19 @@ namespace ClassLibrary.SF
         {
             ID = history.ID;
             Name = history.ShortName;
-            _type = history.Type;
+            Type = history.Type;
             _user = user;
         }
 
-        public HistoryType Type { get { return _type; } }
-        public HistoryAction Action { get { return _action; } }
+        public HistoryType Type { get; private set; }
+        public HistoryAction Action { get; private set; }
         public string Author { get { return _user.Name; } }
         public string datetime { get { return _datetime.ToString(); } }
                 
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append(_action);
+            sb.Append(Action);
             sb.Append(": ");
             sb.Append(_user.Name);
             sb.Append(" ");
@@ -94,7 +91,7 @@ namespace ClassLibrary.SF
 
         private void Save()
         {
-            _provider.Insert("SF_History", ID, Name, _type, _user.ID, _action);
+            _provider.Insert("SF_History", ID, Name, Type, _user.ID, Action);
         }
     }
 }

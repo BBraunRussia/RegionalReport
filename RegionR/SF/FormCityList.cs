@@ -101,9 +101,9 @@ namespace RegionR.SF
         
         private void btnAddCity_Click(object sender, EventArgs e)
         {
-            int idRealRegion;
-            int.TryParse(cbRealRegion.SelectedValue.ToString(), out idRealRegion);
-            City city = new City(idRealRegion);
+            RealRegion realRegion = GetRealRegion();
+
+            City city = new City(realRegion);
 
             OpenAddCity(city);
         }
@@ -119,13 +119,17 @@ namespace RegionR.SF
         {
             if (_isLoad)
             {
-                int idRealRegion;
-                int.TryParse(cbRealRegion.SelectedValue.ToString(), out idRealRegion);
-                RealRegion realRegion = _realRegionList.GetItem(idRealRegion) as RealRegion;
-
+                RealRegion realRegion = GetRealRegion();
                 dgv.DataSource = _cityList.ToDataTable(realRegion);
                 dgv.Columns[0].Visible = false;
             }
+        }
+
+        private RealRegion GetRealRegion()
+        {
+            int idRealRegion;
+            int.TryParse(cbRealRegion.SelectedValue.ToString(), out idRealRegion);
+            return _realRegionList.GetItem(idRealRegion) as RealRegion;
         }
     }
 }

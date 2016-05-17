@@ -213,6 +213,10 @@ namespace ClassLibrary.SF
                         realRegionName = mainOrganization.RealRegion.Name;
                         city = mainOrganization.City.Name;
                         postIndex = mainOrganization.PostIndex;
+
+                        //индексы совпадают
+                        SubRegionList subRegionList = SubRegionList.GetUniqueInstance();
+                        subRegion = subRegionList.GetItem(mainOrganization.RealRegion.ID).Name.Split(' ')[0];
                     }
 
                     row = new object[] { organization.ID, parentID, recordType,
