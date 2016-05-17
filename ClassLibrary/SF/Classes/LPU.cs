@@ -221,7 +221,12 @@ namespace ClassLibrary.SF
         
         public override void Save()
         {
-            int id;
+            if (ID == 0)
+            {
+                LpuList lpuList = new LpuList();
+                if (lpuList.IsInList(INN))
+                    throw new NullReferenceException("В списке уже есть организация с таким ИНН");
+            }
 
             int idParentOrganization;
             idParentOrganization = (ParentOrganization == null) ? 0 : ParentOrganization.ID;
@@ -229,6 +234,7 @@ namespace ClassLibrary.SF
             int idLPURR = (LpuRR == null) ? 0 : LpuRR.ID;
             int idLPURR2 = (LpuRR2 == null) ? 0 : LpuRR2.ID;
 
+            int id;
             int.TryParse(_provider.Insert("SF_LPU", ID, NumberSF, TypeOrg, Name, ShortName, MainSpec.ID, Email, WebSite, Phone, idParentOrganization, TypeLPU.ID, Ownership.ID, AdmLevel.ID,
                 INN, KPP, PostIndex, City.ID, District, Street, idLPURR,
                 _bedsTotal, _bedsIC, _bedsSurgical, _operating, _machineGD, _machineGDF, _machineCRRT, _shift, _patientGD, _patientPD, _patientCRRT, _subRegion.ID, _typeFin.ID, idLPURR2), out id);

@@ -2203,7 +2203,7 @@ namespace RegionR
 
         private void dtp23_ValueChanged(object sender, EventArgs e)
         {
-            if (globalData.tabFlagSvod == false)
+            if (globalData.tabFlagSvod == false && globalData.update == true)
                 rent_fill("UserForDM", globalData.role, rp_rdRent, null, div_rdRent, null, rd_rdRent);
         }
 

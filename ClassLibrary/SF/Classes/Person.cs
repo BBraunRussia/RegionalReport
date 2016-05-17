@@ -149,7 +149,7 @@ namespace ClassLibrary.SF
 
             string mobileWithOutFormat = Mobile.Replace("+7", "").Replace("(", "").Replace(")", "").Replace("-", "");
 
-            return new object[] { ID, LastName, FirstName, SecondName, _organization.ShortName, GetSubOrganizationName(), Position.Name, mobileWithOutFormat, region.RealRegion.Name, region.City.Name };
+            return new object[] { ID, LastName, FirstName, SecondName, GetOrganizationName(), GetSubOrganizationName(), Position.Name, mobileWithOutFormat, region.RealRegion.Name, region.City.Name };
         }
 
         public void Save()

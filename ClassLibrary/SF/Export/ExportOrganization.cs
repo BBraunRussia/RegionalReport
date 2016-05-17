@@ -6,7 +6,7 @@ using System.Data;
 
 namespace ClassLibrary.SF
 {
-    public enum RecordType { RU_Institution, RU_Department, RU_Pharmacy, RU_Other, RU_Buying_institution }
+    public enum RecordType { RU_Hospital, RU_Department, RU_Pharmacy, RU_Other, RU_Buying_institution }
     
     public class ExportOrganization
     {
@@ -140,7 +140,7 @@ namespace ClassLibrary.SF
                 }
                 else
                 {
-                    string phoneWithCode = (string.IsNullOrEmpty(organization.Phone)) ? string.Empty : string.Concat(phoneCode, organization.Phone);
+                    string phoneWithCode = (string.IsNullOrEmpty(organization.Phone)) ? string.Empty : string.Concat("+7(", phoneCode, ")", organization.Phone);
 
                     string MachineGD = string.Empty;
                     string MachineGDF = string.Empty;
@@ -206,6 +206,15 @@ namespace ClassLibrary.SF
                         PatientCRRT = organization.PatientCRRT;
                     }
 
+                    mainOrganization = (organization is IHaveRegion) ? (organization as IHaveRegion) : (organization.ParentOrganization != null) ? organization.ParentOrganization as IHaveRegion : null;
+
+                    if (mainOrganization != null)
+                    {
+                        realRegionName = mainOrganization.RealRegion.Name;
+                        city = mainOrganization.City.Name;
+                        postIndex = mainOrganization.PostIndex;
+                    }
+
                     row = new object[] { organization.ID, parentID, recordType,
                                organization.Name, organization.ShortName, inn, kpp, realRegionName, city, postIndex, GetAddressWithDistrict(organization),
                                organization.Email, organization.WebSite, phoneWithCode, pharmacy, GetClientType(organization), typeLPU, ownership, adminLevel, typeFin, mainSpec, subRegion,
@@ -233,7 +242,7 @@ namespace ClassLibrary.SF
         public string GetRecordType(Organization organization)
         {
             if (organization.TypeOrg == TypeOrg.ЛПУ)
-                return RecordType.RU_Institution.ToString();
+                return RecordType.RU_Hospital.ToString();
             if ((organization.TypeOrg == TypeOrg.Отделение) || ((organization.TypeOrg == TypeOrg.Аптека) && (organization.ParentOrganization != null)))
                 return RecordType.RU_Department.ToString();
             if (organization.TypeOrg == TypeOrg.Аптека)

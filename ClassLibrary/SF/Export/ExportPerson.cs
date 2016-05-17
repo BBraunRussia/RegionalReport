@@ -97,7 +97,7 @@ namespace ClassLibrary.SF
             {
                 IHaveRegion organization = ((person.Organization is IHaveRegion) ? person.Organization : person.Organization.ParentOrganization) as IHaveRegion;
 
-                phone = organization.City.PhoneCode + person.Phone;
+                phone = string.Concat("+7(", organization.City.PhoneCode, ")", person.Phone);
             }
 
             return phone;

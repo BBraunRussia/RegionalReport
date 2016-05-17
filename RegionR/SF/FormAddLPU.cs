@@ -295,7 +295,7 @@ namespace RegionR.SF
 
                 if (!CopyFields())
                     return false;
-                
+
                 _lpu.Save();
 
                 History.Save(_lpu, UserLogged.Get());
@@ -306,7 +306,7 @@ namespace RegionR.SF
             catch (NullReferenceException ex)
             {
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                
+
                 return false;
             }
         }
