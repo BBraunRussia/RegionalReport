@@ -56,6 +56,8 @@ namespace RegionR.SF
             tbLastName.Text = _person.LastName;
             tbFirstName.Text = _person.FirstName;
             tbSecondName.Text = _person.SecondName;
+
+            dtpDateBirth.Value = (_person.DateBirth.HasValue) ? _person.DateBirth.Value : DateTimePicker.MinimumDateTime;
             
             cbAppeal.SelectedIndex = _person.Appeal;
 

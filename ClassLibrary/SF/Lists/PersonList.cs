@@ -62,14 +62,14 @@ namespace ClassLibrary.SF
         private DataTable CreateTable(List<Person> list)
         {
             DataTable dt = new DataTable();
-            dt.Columns.Add("№ персоны", typeof(int));
+            dt.Columns.Add("RR ID", typeof(int));
+            dt.Columns.Add("SF ID");
             dt.Columns.Add("Фамилия");
             dt.Columns.Add("Имя");
             dt.Columns.Add("Отчество");
             dt.Columns.Add("Организация");
             dt.Columns.Add("Подразделение");
             dt.Columns.Add("Должность");
-            dt.Columns.Add("Мобильный телефон");
             dt.Columns.Add("Регион России");
             dt.Columns.Add("Город");
             
@@ -104,6 +104,13 @@ namespace ClassLibrary.SF
         public List<Person> GetList()
         {
             return List.Select(item => item as Person).ToList();
+        }
+
+        public new Person GetItem(string numberSF)
+        {
+            var list = List.Where(item => (item as Person).NumberSF == numberSF).Select(item => item as Person).ToList();
+
+            return (list.Count > 0) ? list.First() : null;
         }
     }
 }

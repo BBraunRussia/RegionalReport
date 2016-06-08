@@ -66,7 +66,9 @@ namespace ClassLibrary
 
         public BaseDictionary GetItem(string name)
         {
-            var list = _list.Where(item => item.Value.Name == name);
+            name = name.ToLower();
+
+            var list = _list.Where(item => item.Value.Name.ToLower() == name || item.Value.NameEng.ToLower() == name);
             return (list.Count() == 0) ? null : list.First().Value;
         }
 

@@ -33,12 +33,20 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\Logger.cs" />
+    <Compile Include="SF\Import\OrganizationModel.cs" />
+    <Compile Include="SF\Import\PersonModel.cs" />
+    <Compile Include="SF\Import\ReadFilePerson.cs" />
+    <Compile Include="SF\Import\ReadFileRelationship.cs" />
+    <Compile Include="SF\Import\RelationshipModel.cs" />
+    <Compile Include="SF\Import\SettingsImportSF.cs" />
     <Compile Include="DataBase\DataBase.cs" />
     <Compile Include="DataBase\IProvider.cs" />
     <Compile Include="DataBase\ProviderSQL.cs" />
@@ -72,6 +80,8 @@
     <Compile Include="enums.cs" />
     <Compile Include="SF\Export\ExportOrganization.cs" />
     <Compile Include="SF\Export\ExportPerson.cs" />
+    <Compile Include="SF\Import\ReadFile.cs" />
+    <Compile Include="SF\Import\ReadFileOrganization.cs" />
     <Compile Include="SF\Interfaces\IAvitum.cs" />
     <Compile Include="SF\Interfaces\IHaveRegion.cs" />
     <Compile Include="SF\Interfaces\IHistory.cs" />
@@ -162,7 +172,6 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

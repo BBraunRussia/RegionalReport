@@ -114,7 +114,7 @@ namespace RegionR.SF
             tbDistrict.Text = _lpu.District;
             tbPostIndex.Text = _lpu.PostIndex;
             tbEmail.Text = _lpu.Email;
-            tbWebSite.Text = _lpu.WebSite;
+            tbWebSite.Text = _lpu.Website;
             tbPhone.Text = _lpu.Phone;
 
             if (_lpu.RealRegion != null)
@@ -370,13 +370,13 @@ namespace RegionR.SF
                 return false;
             }
 
-            string website = _lpu.WebSite;
-            _lpu.WebSite = tbWebSite.Text;
+            string website = _lpu.Website;
+            _lpu.Website = tbWebSite.Text;
 
             if (!ClassForForm.IsWebSite(tbWebSite.Text))
             {
                 MessageBox.Show("Ошибка в адресе веб-сайта. Пожалуйста, исправьте.", "Ошибка ввода", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                _lpu.WebSite = website;
+                _lpu.Website = website;
                 return false;
             }
 
@@ -622,7 +622,7 @@ namespace RegionR.SF
                 return true;
             if (_lpu.Email != tbEmail.Text)
                 return true;
-            if (_lpu.WebSite != tbWebSite.Text)
+            if (_lpu.Website != tbWebSite.Text)
                 return true;
             if (_lpu.Phone != tbPhone.Text)
                 return true;

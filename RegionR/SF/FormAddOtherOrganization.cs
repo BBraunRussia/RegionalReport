@@ -90,7 +90,7 @@ namespace RegionR.SF
             tbPostIndex.Text = _organization.PostIndex;
             tbStreet.Text = _organization.Street;
             tbEmail.Text = _organization.Email;
-            tbWebSite.Text = _organization.WebSite;
+            tbWebSite.Text = _organization.Website;
             tbPhone.Text = _organization.Phone;
 
             if (_organization.RealRegion != null)
@@ -203,7 +203,7 @@ namespace RegionR.SF
             _organization.KPP = tbKPP.Text;
             _organization.PostIndex = tbPostIndex.Text;
             _organization.Email = tbEmail.Text;
-            _organization.WebSite = tbWebSite.Text;
+            _organization.Website = tbWebSite.Text;
             _organization.Phone = tbPhone.Text;
 
             int idCity = Convert.ToInt32(cbCity.SelectedValue);
@@ -283,7 +283,7 @@ namespace RegionR.SF
                 return true;
             if (_organization.Email != tbEmail.Text)
                 return true;
-            if (_organization.WebSite != tbWebSite.Text)
+            if (_organization.Website != tbWebSite.Text)
                 return true;
             if (_organization.Phone != tbPhone.Text)
                 return true;

@@ -40,6 +40,7 @@ namespace RegionR.SF
 
             _dgv.DataSource = dt;
 
+            _dgv.Columns[1].Width = 122;
             _dgv.Columns[4].Width = 300;
             _dgv.Columns[5].Width = 150;
             

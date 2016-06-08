@@ -92,8 +92,8 @@ namespace ClassLibrary.SF
         {
             int id;
             
-            int.TryParse(_provider.Insert("SF_OtherOrganization", ID, NumberSF, TypeOrg, Name, ShortName, Email, WebSite, Phone,
-                INN, KPP, PostIndex, City.ID, District, Street, Pharmacy), out id);
+            int.TryParse(_provider.Insert("SF_OtherOrganization", ID, NumberSF, TypeOrg, Name, ShortName, Email, Website, Phone,
+                INN, KPP, PostIndex, City.ID, District, Street, Pharmacy, Deleted.ToString()), out id);
 
             SetID(id);
 
@@ -105,7 +105,7 @@ namespace ClassLibrary.SF
         {
             string typeOrgName = TypeOrg.ToString();
 
-            return new object[] { ID, ShortName, typeOrgName, INN, RealRegion.Name, City.Name, string.Empty, string.Empty, string.Empty };
+            return new object[] { ID, NumberSF, ShortName, typeOrgName, INN, RealRegion.Name, City.Name, string.Empty, string.Empty, string.Empty };
         }
     }
 }

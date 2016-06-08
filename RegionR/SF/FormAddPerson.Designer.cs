@@ -72,6 +72,8 @@
             this.label17 = new System.Windows.Forms.Label();
             this.lbRealRegion = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.dtpDateBirth = new System.Windows.Forms.DateTimePicker();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -126,7 +128,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(222, 7);
+            this.label4.Location = new System.Drawing.Point(166, 7);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(45, 13);
             this.label4.TabIndex = 6;
@@ -135,7 +137,7 @@
             // lbNumberSF
             // 
             this.lbNumberSF.AutoSize = true;
-            this.lbNumberSF.Location = new System.Drawing.Point(280, 7);
+            this.lbNumberSF.Location = new System.Drawing.Point(217, 7);
             this.lbNumberSF.Name = "lbNumberSF";
             this.lbNumberSF.Size = new System.Drawing.Size(54, 13);
             this.lbNumberSF.TabIndex = 7;
@@ -254,16 +256,16 @@
             // 
             // tbComment
             // 
-            this.tbComment.Location = new System.Drawing.Point(109, 179);
+            this.tbComment.Location = new System.Drawing.Point(110, 208);
             this.tbComment.Multiline = true;
             this.tbComment.Name = "tbComment";
-            this.tbComment.Size = new System.Drawing.Size(539, 115);
+            this.tbComment.Size = new System.Drawing.Size(539, 98);
             this.tbComment.TabIndex = 20;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(13, 182);
+            this.label12.Location = new System.Drawing.Point(14, 211);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(73, 13);
             this.label12.TabIndex = 19;
@@ -271,7 +273,7 @@
             // 
             // tbSubOrganization
             // 
-            this.tbSubOrganization.Location = new System.Drawing.Point(109, 153);
+            this.tbSubOrganization.Location = new System.Drawing.Point(110, 182);
             this.tbSubOrganization.Name = "tbSubOrganization";
             this.tbSubOrganization.ReadOnly = true;
             this.tbSubOrganization.Size = new System.Drawing.Size(539, 20);
@@ -280,7 +282,7 @@
             // lbSubOrganization
             // 
             this.lbSubOrganization.AutoSize = true;
-            this.lbSubOrganization.Location = new System.Drawing.Point(13, 156);
+            this.lbSubOrganization.Location = new System.Drawing.Point(14, 185);
             this.lbSubOrganization.Name = "lbSubOrganization";
             this.lbSubOrganization.Size = new System.Drawing.Size(90, 13);
             this.lbSubOrganization.TabIndex = 17;
@@ -288,7 +290,7 @@
             // 
             // tbOrganization
             // 
-            this.tbOrganization.Location = new System.Drawing.Point(109, 127);
+            this.tbOrganization.Location = new System.Drawing.Point(110, 156);
             this.tbOrganization.Name = "tbOrganization";
             this.tbOrganization.ReadOnly = true;
             this.tbOrganization.Size = new System.Drawing.Size(539, 20);
@@ -297,7 +299,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(13, 130);
+            this.label14.Location = new System.Drawing.Point(14, 159);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(77, 13);
             this.label14.TabIndex = 15;
@@ -476,11 +478,29 @@
             this.label19.TabIndex = 143;
             this.label19.Text = "Регион России:";
             // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(13, 114);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(89, 13);
+            this.label15.TabIndex = 147;
+            this.label15.Text = "Дата рождения:";
+            // 
+            // dtpDateBirth
+            // 
+            this.dtpDateBirth.Location = new System.Drawing.Point(109, 111);
+            this.dtpDateBirth.Name = "dtpDateBirth";
+            this.dtpDateBirth.Size = new System.Drawing.Size(225, 20);
+            this.dtpDateBirth.TabIndex = 148;
+            // 
             // FormAddPerson
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1027, 375);
+            this.Controls.Add(this.dtpDateBirth);
+            this.Controls.Add(this.label15);
             this.Controls.Add(this.lbCity);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.lbRealRegion);
@@ -577,5 +597,7 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label lbRealRegion;
         private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.DateTimePicker dtpDateBirth;
     }
 }

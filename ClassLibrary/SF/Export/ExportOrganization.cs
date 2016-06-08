@@ -6,12 +6,10 @@ using System.Data;
 
 namespace ClassLibrary.SF
 {
-    public enum RecordType { RU_Hospital, RU_Department, RU_Pharmacy, RU_Other, RU_Buying_institution }
+    public enum RecordType { RU_Hospital, RU_Department, RU_Pharmacy, RU_Other, RU_Institution_Buying }
     
     public class ExportOrganization
     {
-        private const int CRM_ID = 0;
-
         private string[] _columnNamesEng = { "Z_RU_RR_Institution__c", "Parent", "Z_Record_Type_Developer_Name__c", "Z_RU_Customer_long_name__c",
                                                "Name", "Z_RU_TIN__c", "Z_RU_CRR__c", "BILLINGSTATE", "BILLINGCITY", "BILLINGPOSTALCODE", "BILLINGSTREET",
                                                "Z_R3_Email_Address__c", "Website", "Phone", "Z_Customer_Classification__c", "Z_RU_Institution_Sub_Type__c",
@@ -33,7 +31,7 @@ namespace ClassLibrary.SF
         private string[] _typeOrgEng = {"Hospital", "Hospital branch", "Hospital department (medical)", "Hospital pharmacy", "Hospital department (non-medical)",
                                        "Pharmacy", "Governmental-administrative establishment", "Distributor (Buying)", "Distributor (Non-Buying)"};
 
-        private string[] _clientType = { "Department (purchasing dep., etc)", "Governmental-administrative establishment", "Dealer" };
+        public static readonly string[] clientType = { "Department (purchasing dep., etc)", "Governmental-administrative establishment", "Dealer" };
 
         public void ExportRus()
         {
@@ -74,8 +72,8 @@ namespace ClassLibrary.SF
 
                 if (mainOrganization != null)
                 {
-                    inn = mainOrganization.INN;
-                    kpp = mainOrganization.KPP;
+                    inn = "'" + mainOrganization.INN;
+                    kpp = "'" + mainOrganization.KPP;
                     realRegionName = mainOrganization.RealRegion.Name;
                     city = mainOrganization.City.Name;
                     postIndex = mainOrganization.PostIndex;
@@ -129,9 +127,9 @@ namespace ClassLibrary.SF
                     string modifedAuthor = (modifed != null) ? modifed.Author : string.Empty;
                     string modifedDatetime = (modifed != null) ? modifed.datetime : string.Empty;
 
-                    row = new object[] { organization.ID, parentID, CRM_ID, recordType, GetFormatTypeOrg(organization), GetClientType(organization),
+                    row = new object[] { organization.ID, parentID, organization.NumberSF, recordType, GetFormatTypeOrg(organization), GetClientType(organization),
                                organization.Name, organization.ShortName, inn, kpp, realRegionName, city, postIndex, district, street,
-                               organization.Email, organization.WebSite, phoneCode, organization.Phone, pharmacy, typeLPU, ownership, adminLevel, typeFin, mainSpec,
+                               organization.Email, organization.Website, phoneCode, organization.Phone, pharmacy, typeLPU, ownership, adminLevel, typeFin, mainSpec,
                                subRegion, idLpuRR, idLpuRR2,
                                (lpu != null) ? lpu.BedsTotal : string.Empty, (lpu != null) ? lpu.BedsIC : string.Empty, (lpu != null) ? lpu.BedsSurgical : string.Empty,
                                (lpu != null) ? lpu.Operating : string.Empty,
@@ -214,14 +212,16 @@ namespace ClassLibrary.SF
                         city = mainOrganization.City.Name;
                         postIndex = mainOrganization.PostIndex;
 
-                        //индексы совпадают
-                        SubRegionList subRegionList = SubRegionList.GetUniqueInstance();
-                        subRegion = subRegionList.GetItem(mainOrganization.RealRegion.ID).Name.Split(' ')[0];
+                        if (string.IsNullOrEmpty(subRegion))
+                        {
+                            SubRegionList subRegionList = SubRegionList.GetUniqueInstance();
+                            subRegion = subRegionList.GetItem(mainOrganization.RealRegion).Name.Split(' ')[0];
+                        }
                     }
 
                     row = new object[] { organization.ID, parentID, recordType,
                                organization.Name, organization.ShortName, inn, kpp, realRegionName, city, postIndex, GetAddressWithDistrict(organization),
-                               organization.Email, organization.WebSite, phoneWithCode, pharmacy, GetClientType(organization), typeLPU, ownership, adminLevel, typeFin, mainSpec, subRegion,
+                               organization.Email, organization.Website, phoneWithCode, pharmacy, GetClientType(organization), typeLPU, ownership, adminLevel, typeFin, mainSpec, subRegion,
                                (lpu != null) ? lpu.BedsTotal : string.Empty, (lpu != null) ? lpu.BedsIC : string.Empty, (lpu != null) ? lpu.BedsSurgical : string.Empty,
                                (lpu != null) ? lpu.Operating : string.Empty, MachineGD, MachineGDF, MachineCRRT, Shift, PatientGD, PatientPD, PatientCRRT };
                 }
@@ -279,36 +279,14 @@ namespace ClassLibrary.SF
             return typeOrg[8];
         }
 
-        private int GetFormatTypeOrgID(Organization organization)
-        {
-            if ((organization.TypeOrg == TypeOrg.ЛПУ) && (organization.ParentOrganization == null))
-                return 1;
-            else if (organization.TypeOrg == TypeOrg.ЛПУ)
-                return 2;
-            else if (organization.TypeOrg == TypeOrg.Отделение)
-                return 3;
-            else if ((organization.TypeOrg == TypeOrg.Аптека) && (organization.ParentOrganization != null))
-                return 4;
-            else if (organization.TypeOrg == TypeOrg.Отдел)
-                return 5;
-            else if (organization.TypeOrg == TypeOrg.Аптека)
-                return 6;
-            else if (organization.TypeOrg == TypeOrg.Административное_Учреждение)
-                return 7;
-            else if (organization.TypeOrg == TypeOrg.Дистрибьютор)
-                return 8;
-
-            return 9;
-        }
-
         private string GetClientType(Organization organization)
         {
             if (organization.TypeOrg == TypeOrg.Отдел)
-                return _clientType[0];
+                return clientType[0];
             else if (organization.TypeOrg == TypeOrg.Административное_Учреждение)
-                return _clientType[1];
+                return clientType[1];
             else if (organization.TypeOrg == TypeOrg.Дистрибьютор)
-                return _clientType[2];
+                return clientType[2];
 
             return string.Empty;
         }

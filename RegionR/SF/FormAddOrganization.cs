@@ -94,7 +94,7 @@ namespace RegionR.SF
             }
 
             tbEmail.Text = _organization.Email;
-            tbWebSite.Text = _organization.WebSite;
+            tbWebSite.Text = _organization.Website;
             tbPhone.Text = _organization.Phone;
 
             tbPhoneCode.Text = (_organization.ParentOrganization as LPU).City.PhoneCode;
@@ -185,7 +185,7 @@ namespace RegionR.SF
             _organization.Name = tbName.Text;
             _organization.ShortName = tbShortName.Text;
             _organization.Email = tbEmail.Text;
-            _organization.WebSite = tbWebSite.Text;
+            _organization.Website = tbWebSite.Text;
             _organization.Phone = tbPhone.Text;
 
             if (_organization.TypeOrg == TypeOrg.Отделение)

@@ -105,30 +105,12 @@ namespace ClassLibrary.SF
         {
             return _list.GetEnumerator();
         }
-        /*
-        private class OrganizationListEnumerator : IEnumerator
+
+        internal Organization GetItem(string numberSF)
         {
-            private int _key;
-            private Dictionary<int, Organization> _list;
+            var organizationList = _list.Where(item => item.Value.NumberSF == numberSF).ToList();
 
-            public OrganizationListEnumerator(OrganizationList organizationList)
-            {
-                _list = organizationList._list;
-                _key = -1;
-            }
-
-            public object Current { get { return _list[_key]; } }
-
-            public bool MoveNext()
-            {
-                _list.GetEnumerator();
-            }
-
-            public void Reset()
-            {
-                _key = -1;
-            }
+            return (organizationList.Count == 0) ? null : organizationList.First().Value;
         }
-        */
     }
 }

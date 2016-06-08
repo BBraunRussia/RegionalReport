@@ -81,7 +81,8 @@ namespace ClassLibrary.SF
         private DataTable CreateTable(List<LPU> list, List<OtherOrganization> listOther)
         {
             DataTable dt = new DataTable();
-            dt.Columns.Add("Номер записи", typeof(int));
+            dt.Columns.Add("RR ID", typeof(int));
+            dt.Columns.Add("SF ID");
             dt.Columns.Add("Название организации");
             dt.Columns.Add("Тип");
             dt.Columns.Add("ИНН");

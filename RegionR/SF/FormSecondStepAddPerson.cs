@@ -14,7 +14,7 @@ namespace RegionR.SF
     {
         private Person _person;
         private bool _changeOnly;
-
+        
         public FormSecondStepAddPerson(Person person, bool changeOnly = false)
         {
             InitializeComponent();
@@ -38,7 +38,9 @@ namespace RegionR.SF
 
         private void LoadData()
         {
-            SubOrganizationList subOrganizationList = new SubOrganizationList(_person.Organization);
+            Organization organization = (_person.Organization is IHaveRegion) ? _person.Organization : _person.Organization.ParentOrganization;
+
+            SubOrganizationList subOrganizationList = new SubOrganizationList(organization);
 
             DataTable dt = subOrganizationList.ToDataTable();
             dgv.DataSource = dt;

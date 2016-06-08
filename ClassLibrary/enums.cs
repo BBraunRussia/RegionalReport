@@ -27,4 +27,6 @@ namespace ClassLibrary
     public enum StatusLPU { Активен = 1, Неактивен = 2, Групповой = 3 }
 
     public enum Language { Rus, Eng }
+
+    public enum ImportFileType { Organization, Person, Relationship }
 }

@@ -8,48 +8,33 @@ namespace ClassLibrary
 {
     public abstract class BaseDictionary : InitProvider
     {
-        private int _id;
-        private string _name;
-        private string _nameEng;
-
-        private bool _canAdd;
-        
         public BaseDictionary(DataRow row)
         {
-            _canAdd = true;
-            int.TryParse(row[0].ToString(), out _id);
-            _name = row[1].ToString();
-            _nameEng = row[2].ToString();
+            CanAdd = true;
+
+            int id;
+            int.TryParse(row[0].ToString(), out id);
+            ID = id;
+
+            Name = row[1].ToString();
+            NameEng = row[2].ToString();
         }
 
         public BaseDictionary() { }
 
-        public string Name
-        {
-            get { return _name; }
-            set { _name = value; }
-        }
-
-        public int ID
-        {
-            get { return _id; }
-            protected set { _id = value; }
-        }
+        public int ID { get; protected set; }
+        public string Name { get; set; }
+        public string NameEng { get; private set; }
+        public bool CanAdd { get; set; }
 
         public virtual object[] GetRow()
         {
-            return new object[] { _id, _name };
-        }
-
-        public bool CanAdd
-        {
-            get { return _canAdd; }
-            set { _canAdd = value; }
+            return new object[] { ID, Name };
         }
 
         public string GetName(Language lang)
         {
-            return (lang == Language.Rus) ? _name : _nameEng;
+            return (lang == Language.Rus) ? Name : NameEng;
         }
     }
 }

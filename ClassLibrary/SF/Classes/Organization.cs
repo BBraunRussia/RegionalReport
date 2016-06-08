@@ -9,14 +9,7 @@ namespace ClassLibrary.SF
     public class Organization : IHistory, IAvitum
     {
         private int _id;
-        private string _numberSF;
-        private TypeOrg _typeOrg;
-        private string _name;
-        private string _sName;
         private int _idMainSpec;
-        private string _email;
-        private string _website;
-        private string _phone;
         private int _idParentOrganization;
 
         protected int _machineGD;
@@ -34,18 +27,18 @@ namespace ClassLibrary.SF
             _provider = Provider.GetProvider();
 
             int.TryParse(row[0].ToString(), out _id);
-            _numberSF = row[1].ToString();
+            NumberSF = row[1].ToString();
 
             int idTypeOrg;
             int.TryParse(row[2].ToString(), out idTypeOrg);
-            _typeOrg = (TypeOrg)idTypeOrg;
+            TypeOrg = (TypeOrg)idTypeOrg;
 
-            _name = row[3].ToString();
-            _sName = row[4].ToString();
+            Name = row[3].ToString();
+            ShortName = row[4].ToString();
             int.TryParse(row[5].ToString(), out _idMainSpec);
-            _email = row[6].ToString();
-            _website = row[7].ToString();
-            _phone = row[8].ToString();
+            Email = row[6].ToString();
+            Website = row[7].ToString();
+            Phone = row[8].ToString();
 
             int.TryParse(row[9].ToString(), out _idParentOrganization);
 
@@ -56,51 +49,30 @@ namespace ClassLibrary.SF
             int.TryParse(row[28].ToString(), out _patientGD);
             int.TryParse(row[29].ToString(), out _patientPD);
             int.TryParse(row[30].ToString(), out _patientCRRT);
+
+            bool deleted;
+            bool.TryParse(row[35].ToString(), out deleted);
+            Deleted = deleted;
         }
 
         public Organization(TypeOrg typeOrg)
         {
             _provider = Provider.GetProvider();
 
-            _typeOrg = typeOrg;
-            _numberSF = string.Empty;
-            _sName = string.Empty;
+            TypeOrg = typeOrg;
+            NumberSF = string.Empty;
+            ShortName = string.Empty;
         }
         
         public int ID { get { return _id; } }
-        public string NumberSF { get { return _numberSF; } }
-
-        public string Name
-        {
-            get { return _name; }
-            set { _name = value; }
-        }
-
-        public string ShortName
-        {
-            get { return _sName; }
-            set { _sName = value; }
-        }
-        public TypeOrg TypeOrg { get { return _typeOrg; } }
-
-        public string Email
-        {
-            get { return _email; }
-            set { _email = value; }
-        }
-
-        public string WebSite
-        {
-            get { return _website; }
-            set { _website = value; }
-        }
-
-        public string Phone
-        {
-            get { return _phone; }
-            set { _phone = value; }
-        }
-
+        public string NumberSF { get; set; }
+        public string Name { get; set; }
+        public string ShortName { get; set; }
+        public TypeOrg TypeOrg { get; private set; }
+        public string Email { get; set; }
+        public string Website { get; set; }
+        public string Phone { get; set; }
+        
         public MainSpec MainSpec
         {
             get
@@ -149,6 +121,8 @@ namespace ClassLibrary.SF
             get { return (_patientCRRT == 0) ? string.Empty : _patientCRRT.ToString(); }
             set { int.TryParse(value, out _patientCRRT); }
         }
+
+        public bool Deleted { get; set; }
         
         public static Organization CreateItem(DataRow row)
         {
@@ -174,7 +148,11 @@ namespace ClassLibrary.SF
                 OrganizationList organizationList = OrganizationList.GetUniqueInstance();
                 return organizationList.GetItem(_idParentOrganization);
             }
-            set { _idParentOrganization = value.ID; }
+            set
+            {
+                if (value != null)
+                    _idParentOrganization = value.ID;
+            }
         }
 
         public static Organization CreateItem(TypeOrg typeOrg, Organization parentOrganization = null)
@@ -211,8 +189,9 @@ namespace ClassLibrary.SF
             if (MainSpec != null)
                 idMainSpec = MainSpec.ID;
             int id;
-            int.TryParse(_provider.Insert("SF_Organization", ID, NumberSF, TypeOrg, Name, ShortName, idMainSpec, Email, WebSite, Phone, ParentOrganization.ID,
-                _machineGD, _machineGDF, _machineCRRT, _shift, _patientGD, _patientPD, _patientCRRT), out id);
+            int.TryParse(_provider.Insert("SF_Organization", ID, NumberSF, TypeOrg, Name, ShortName, idMainSpec, Email, Website, Phone,
+                (ParentOrganization == null) ? 0 : ParentOrganization.ID,
+                _machineGD, _machineGDF, _machineCRRT, _shift, _patientGD, _patientPD, _patientCRRT, Deleted.ToString()), out id);
             SetID(id);
 
             OrganizationList organizationList = OrganizationList.GetUniqueInstance();

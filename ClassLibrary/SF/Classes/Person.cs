@@ -8,154 +8,93 @@ namespace ClassLibrary.SF
 {
     public class Person : BaseDictionary, IHistory
     {
-        private string _lastName;
-        private string _numberSF;
-        private string _firstName;
-        private string _secondName;
-        private int _idAppeal;
-        private Position _position;
-        private MainSpecPerson _mainSpecPerson;
-        private AcademTitle _academTitle;
-        private string _email;
         private string _mobile;
-        private string _phone;
-        private Organization _organization;
-        private string _comment;
                 
         public Person()
         {
-            if (_numberSF == null)
-                _numberSF = string.Empty;
+            if (NumberSF == null)
+                NumberSF = string.Empty;
         }
 
         public Person(DataRow row)
             : base(row)
         {
-            _lastName = row[1].ToString();
-            _numberSF = row[2].ToString();
-            _firstName = row[3].ToString();
-            _secondName = row[4].ToString();
+            LastName = row[1].ToString();
+            NumberSF = row[2].ToString();
+            FirstName = row[3].ToString();
+            SecondName = row[4].ToString();
 
-            int.TryParse(row[5].ToString(), out _idAppeal);
+            Appeal = Convert.ToInt32(row[5].ToString());
             
             int idPosition;
             int.TryParse(row[6].ToString(), out idPosition);
             PositionList positionList = PositionList.GetUniqueInstance();
-            _position = positionList.GetItem(idPosition) as Position;
+            Position = positionList.GetItem(idPosition) as Position;
             
             int idMainSpecPerson;
             int.TryParse(row[7].ToString(), out idMainSpecPerson);
             MainSpecPersonList mainSpecPersonList = MainSpecPersonList.GetUniqueInstance();
-            _mainSpecPerson = mainSpecPersonList.GetItem(idMainSpecPerson) as MainSpecPerson;
+            MainSpecPerson = mainSpecPersonList.GetItem(idMainSpecPerson) as MainSpecPerson;
 
             int idAcademTitle;
             int.TryParse(row[8].ToString(), out idAcademTitle);
             AcademTitleList academTitleList = AcademTitleList.GetUniqueInstance();
-            _academTitle = academTitleList.GetItem(idAcademTitle) as AcademTitle;
+            AcademTitle = academTitleList.GetItem(idAcademTitle) as AcademTitle;
 
-            _email = row[9].ToString();
-            _mobile = row[10].ToString();
-            _phone = row[11].ToString();
-            _comment = row[12].ToString();
+            Email = row[9].ToString();
+            Mobile = row[10].ToString();
+            Phone = row[11].ToString();
+            Comment = row[12].ToString();
 
             int idOrganization;
             int.TryParse(row[13].ToString(), out idOrganization);
             OrganizationList organizationList = OrganizationList.GetUniqueInstance();
-            _organization = organizationList.GetItem(idOrganization);
+            Organization = organizationList.GetItem(idOrganization);
 
-            if (_organization == null)
+            if (Organization == null)
             {
                 CanAdd = false;
             }
+
+            Deleted = Convert.ToBoolean(row[14].ToString());
         }
+
+        public string LastName { get; set; }
+        public string FirstName { get; set; }
+        public string SecondName { get; set; }
+        public Organization Organization { get; set; }
+        public Position Position { get; set; }
+        public MainSpecPerson MainSpecPerson { get; set; }
+        public AcademTitle AcademTitle { get; set; }
+        public string Email { get; set; }
+        public string Phone { get; set; }
+        public string Comment { get; set; }
+        public DateTime? DateBirth { get; set; }
+        public string NumberSF { get; set; }
+        public int Appeal { get; set; }
+        public string ShortName { get { return LastName; } }
+        public HistoryType Type { get { return HistoryType.person; } }
+        public bool Deleted { get; set; }
         
-        public string LastName
-        {
-            get { return _lastName; }
-            set { _lastName = value; }
-        }
-
-        public string FirstName
-        {
-            get { return _firstName; }
-            set { _firstName = value; }
-        }
-
-        public string SecondName
-        {
-            get { return _secondName; }
-            set { _secondName = value; }
-        }
-        
-        public int Appeal
-        {
-            get { return _idAppeal; }
-            set { _idAppeal = value; }
-        }
-        
-        public Organization Organization
-        {
-            get { return _organization; }
-            set { _organization = value; }
-        }
-        
-        public Position Position
-        {
-            get { return _position; }
-            set { _position = value; }
-        }
-
-        public MainSpecPerson MainSpecPerson
-        {
-            get { return _mainSpecPerson; }
-            set { _mainSpecPerson = value; }
-        }
-
-        public AcademTitle AcademTitle
-        {
-            get { return _academTitle; }
-            set { _academTitle = value; }
-        }
-
-        public string Email
-        {
-            get { return _email; }
-            set { _email = value; }
-        }
-
         public string Mobile
         {
             get { return (_mobile == "+7(   )   -  -") ? string.Empty : _mobile; }
             set { _mobile = value; }
         }
 
-        public string Phone
-        {
-            get { return _phone; }
-            set { _phone = value; }
-        }
-
-        public string Comment
-        {
-            get { return _comment; }
-            set { _comment = value; }
-        }
-
-        public string NumberSF { get { return _numberSF; } }
-        
         public override object[] GetRow()
         {
-            IHaveRegion region = ((_organization is IHaveRegion) ? _organization : _organization.ParentOrganization) as IHaveRegion;
+            IHaveRegion region = ((Organization is IHaveRegion) ? Organization : Organization.ParentOrganization) as IHaveRegion;
 
-            string mobileWithOutFormat = Mobile.Replace("+7", "").Replace("(", "").Replace(")", "").Replace("-", "");
-
-            return new object[] { ID, LastName, FirstName, SecondName, GetOrganizationName(), GetSubOrganizationName(), Position.Name, mobileWithOutFormat, region.RealRegion.Name, region.City.Name };
+            return new object[] { ID, NumberSF, LastName, FirstName, SecondName, GetOrganizationName(), GetSubOrganizationName(), Position.Name, region.RealRegion.Name, region.City.Name };
         }
 
+        //TODO: Сделать сохранение дня рождения
         public void Save()
         {
             int id;
-            int.TryParse(_provider.Insert("SF_Person", ID, LastName, NumberSF, FirstName, SecondName, Appeal, Position.ID, MainSpecPerson.ID, AcademTitle.ID, Email, Mobile, Phone, Comment, _organization.ID), out id);
+            int.TryParse(_provider.Insert("SF_Person", ID, LastName, NumberSF, FirstName, SecondName, Appeal, Position.ID, MainSpecPerson.ID, AcademTitle.ID,
+                Email, Mobile, Phone, Comment, (Organization == null) ? 0 : Organization.ID, Deleted.ToString()), out id);
 
             ID = id;
 
@@ -191,18 +130,15 @@ namespace ClassLibrary.SF
         {
             return PersonList.GetUniqueInstance();
         }
-
-        public string ShortName { get { return LastName; } }
-        public HistoryType Type { get { return HistoryType.person; } }
-
+        
         public string GetOrganizationName()
         {
-            return (_organization.ParentOrganization == null) ? _organization.ShortName : _organization.ParentOrganization.ShortName;
+            return (Organization.ParentOrganization == null) ? Organization.ShortName : Organization.ParentOrganization.ShortName;
         }
 
         public string GetSubOrganizationName()
         {
-            return (_organization is OtherOrganization) ? string.Empty : (_organization.ParentOrganization == null) ? "Администрация" : _organization.ShortName;
+            return (Organization is OtherOrganization) ? string.Empty : (Organization.ParentOrganization == null) ? "Администрация" : Organization.ShortName;
         }
     }
 }
