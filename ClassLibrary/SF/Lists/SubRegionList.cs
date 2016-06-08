@@ -26,5 +26,10 @@ namespace ClassLibrary.SF
         {
             return List.Where(item => (item as SubRegion).RealRegion.ID == realRegion.ID).Select(item => item as SubRegion).First();
         }
+
+        public SubRegion GetItemByCode(string code)
+        {
+            return List.Where(item => item.Name.Split(' ')[0] == code).Select(item => item as SubRegion).First();
+        }
     }
 }
