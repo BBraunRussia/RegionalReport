@@ -28,8 +28,6 @@ namespace ImportFromFileSF
             Console.WriteLine("Start loading relationship");
             ReadFileRelationship();
             Console.WriteLine("Finish loading relationship " + (DateTime.Now - datetime));
-            
-            Console.ReadLine();
         }
 
         private static void Init()
@@ -55,17 +53,17 @@ namespace ImportFromFileSF
 
         private static void ReadFilePerson()
         {
-            try
-            {
+            //try
+            //{
                 ReadFilePerson readFilePerson = new ReadFilePerson();
                 readFilePerson.Start();
                 Logger.Write("Person loading done");
-            }
-            catch (ArgumentException ex)
-            {
-                Console.WriteLine(ex.Message);
-                Logger.Write("Person loading with error");
-            }
+            //}
+            //catch (ArgumentException ex)
+           // {
+             //   Console.WriteLine(ex.Message);
+            //    Logger.Write("Person loading with error");
+            //}
         }
 
         private static void ReadFileRelationship()

@@ -14,6 +14,7 @@ namespace ClassLibrary.SF.Import
         private const char SPLITER = ';';
         private List<string[]> splitedLines;
         private string fileName;
+        private int index;
 
         public DataTable dt { get; private set; }
 
@@ -50,32 +51,78 @@ namespace ClassLibrary.SF.Import
                 dt.Columns.Add(new DataColumn(columnName));
             }
             
-            for (int i = 1; i < lines.Count(); i++)
+            index = 1;
+            while (index < lines.Count())
             {
-                string[] line = SplitLine(lines[i], count, i);
+                string[] line = SplitLine(lines, count);
+
+                if (index == 193)
+                    index = 193;
 
                 if (line != null)
                 {
                     splitedLines.Add(line);
                     dt.Rows.Add(line);
                 }
+
+                index++;
             }
         }
 
-        private string[] SplitLine(string line, int count, int currentIndex)
+        private string[] SplitLine(string[] lines, int count)
         {
-            //в файле разделитель запятая, заменяем её на точку с запятой
-            string newLine = line.Remove(line.Count() - 1, 1).Remove(0, 1).Replace(";", ",").Replace("\",\"", ";");
-            
-            string[] tempLine = newLine.Split(SPLITER);
-            
-            if (tempLine.Count() != count)
+            string[] newLine = GetSplitedLine(lines[index]);
+
+            if (newLine.Count() != count)
             {
-                Logger.Write(string.Concat("Не удалось распознать строку №", (currentIndex + 1), " в файле", Path.GetFileName(fileName)));
+                StringBuilder sb = new StringBuilder();
+                int endIndex = GetEndLineIndex(lines, count, index);
+                while (index < endIndex)
+                {
+                    sb.Append(lines[index]);
+                    index++;
+                }
+
+                index--;
+                newLine = GetSplitedLine(sb.ToString());
+            }
+
+            if (newLine.Count() != count)
+            {
+                Logger.Write(string.Concat("Не удалось распознать строку №", (index + 1), " в файле", Path.GetFileName(fileName)));
                 return null;
             }
-            
-            return tempLine;
+
+            return newLine;
+        }
+
+        private string[] GetSplitedLine(string line)
+        {
+            try
+            {
+                //в файле разделитель запятая, заменяем её на точку с запятой
+                string newLine = line.Remove(line.Count() - 1, 1).Remove(0, 1).Replace(";", ",").Replace("\",\"", ";");
+
+                return newLine.Split(SPLITER);
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                return new string[]{};
+            }
+        }
+
+        private int GetEndLineIndex(string[] lines, int count, int currentIndex)
+        {            
+            string[] newLine;
+
+            do
+            {
+                newLine = GetSplitedLine(lines[currentIndex]);
+                currentIndex++;
+            }
+            while (newLine.Count() != count);
+
+            return currentIndex - 1;
         }
         
         private void MoveFile(string fileName)
