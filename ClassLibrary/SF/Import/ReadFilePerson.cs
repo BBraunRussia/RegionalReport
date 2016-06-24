@@ -59,7 +59,8 @@ namespace ClassLibrary.SF.Import
         {
             PersonList personList = PersonList.GetUniqueInstance();
 
-            int id = Convert.ToInt32(model.ID);
+            int id;
+            int.TryParse(model.ID, out id);
 
             //create person if not find it
             return (personList.GetItem(id) as Person) ?? new Person();

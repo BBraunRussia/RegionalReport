@@ -138,36 +138,9 @@ namespace ClassLibrary.SF.Import
 
         public IEnumerator GetEnumerator()
         {
-            return new ReadFileEnumerator(this);
-        }
-
-        private class ReadFileEnumerator : IEnumerator
-        {
-            private ReadFile readFile;
-            private int index;
-
-            public ReadFileEnumerator(ReadFile readFile)
+            foreach (var item in dt.Rows)
             {
-                this.readFile = readFile;
-                index = -1;
-            }
-
-            public object Current { get { return readFile.dt.Rows[index]; } }
-
-            public bool MoveNext()
-            {
-                if (index + 1 < readFile.dt.Rows.Count)
-                {
-                    index++;
-                    return true;
-                }
-
-                return false;
-            }
-
-            public void Reset()
-            {
-                index = -1;
+                yield return item;
             }
         }
     }

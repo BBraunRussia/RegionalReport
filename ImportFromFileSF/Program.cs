@@ -38,17 +38,17 @@ namespace ImportFromFileSF
 
         private static void ReadFileOrganization()
         {
-            try
-            {
+            //try
+            //{
                 ReadFileOrganization readFileOrganization = new ReadFileOrganization();
                 readFileOrganization.Start();
                 Logger.Write("Organization loading done");
-            }
-            catch (ArgumentException ex)
-            {
-                Console.WriteLine(ex.Message);
-                Logger.Write("Organization loading with error");
-            }
+            //}
+            //catch (ArgumentException ex)
+            //{
+            //    Console.WriteLine(ex.Message);
+            //    Logger.Write("Organization loading with error");
+            //}
         }
 
         private static void ReadFilePerson()

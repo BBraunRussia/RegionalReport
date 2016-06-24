@@ -167,6 +167,8 @@ namespace ClassLibrary.SF.Import
                 return TypeOrg.Отделение;
             if (RecordType.RU_Institution_Buying.ToString() == model.RecordType)
                 return TypeOrg.Дистрибьютор;
+            //if (RecordType.RU_Other.ToString() == model.RecordType)
+            //    return TypeOrg.Дистрибьютор;
             if (model.ClientType == ExportOrganization.clientType[0])
                 return TypeOrg.Отдел;
             if (model.ClientType == ExportOrganization.clientType[1])
