@@ -29,7 +29,9 @@ namespace ClassLibrary.SF
 
         public SubRegion GetItemByCode(string code)
         {
-            return List.Where(item => item.Name.Split(' ')[0] == code).Select(item => item as SubRegion).First();
+            var listNew = List.Where(item => item.Name.Split(' ')[0] == code);
+
+            return (listNew.Count() == 0) ? null : listNew.Select(item => item as SubRegion).First();
         }
     }
 }

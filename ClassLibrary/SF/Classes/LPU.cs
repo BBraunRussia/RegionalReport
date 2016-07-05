@@ -8,12 +8,6 @@ namespace ClassLibrary.SF
 {
     public class LPU : Organization, IHaveRegion, IAvitum
     {
-        private int _idTypeLPU;
-        private int _idOwnership;
-        private int _idAdmLevel;
-        
-        private int _idCity;
-
         private int _bedsTotal;
         private int _bedsIC;
         private int _bedsSurgical;
@@ -22,12 +16,25 @@ namespace ClassLibrary.SF
         public LPU(DataRow row)
             : base(row)
         {
-            int.TryParse(row[10].ToString(), out _idTypeLPU);
-            int.TryParse(row[11].ToString(), out _idOwnership);
-            int.TryParse(row[12].ToString(), out _idAdmLevel);
+            int idTypeLPU;
+            int.TryParse(row[10].ToString(), out idTypeLPU);
+            TypeLPU = TypeLPUList.GetUniqueInstance().GetItem(idTypeLPU) as TypeLPU;
+
+            int idOwnership;
+            int.TryParse(row[11].ToString(), out idOwnership);
+            Ownership = OwnershipList.GetUniqueInstance().GetItem(idOwnership) as Ownership;
+
+            int idAdmLevel;
+            int.TryParse(row[12].ToString(), out idAdmLevel);
+            AdmLevel = AdmLevelList.GetUniqueInstance().GetItem(idAdmLevel) as AdmLevel;
+
             KPP = row[13].ToString();
             PostIndex = row[14].ToString();
-            int.TryParse(row[15].ToString(), out _idCity);
+            
+            int idCity;
+            int.TryParse(row[15].ToString(), out idCity);
+            City = CityList.GetUniqueInstance().GetItem(idCity) as City;
+
             District = row[16].ToString();
             Street = row[17].ToString();
 
@@ -71,19 +78,7 @@ namespace ClassLibrary.SF
         public LpuRR LpuRR2 { get; set; }
         public SubRegion SubRegion { get; set; }
         public TypeFin TypeFin { get; set; }
-        
-        public City City
-        {
-            get
-            {
-                if (_idCity == 0)
-                    return null;
-
-                CityList cityList = CityList.GetUniqueInstance();
-                return cityList.GetItem(_idCity) as City;
-            }
-            set { _idCity = value.ID; }
-        }
+        public City City { get; set; }        
 
         public RealRegion RealRegion
         {
@@ -95,45 +90,10 @@ namespace ClassLibrary.SF
                 City = city;
             }
         }
-        
-        public TypeLPU TypeLPU
-        {
-            get
-            {
-                if (_idTypeLPU == 0)
-                    return null;
 
-                TypeLPUList typeLPUList = TypeLPUList.GetUniqueInstance();
-                return typeLPUList.GetItem(_idTypeLPU) as TypeLPU;
-            }
-            set { _idTypeLPU = value.ID; }
-        }
-
-        public AdmLevel AdmLevel
-        {
-            get
-            {
-                if (_idAdmLevel == 0)
-                    return null;
-
-                AdmLevelList admLevelList = AdmLevelList.GetUniqueInstance();
-                return admLevelList.GetItem(_idAdmLevel) as AdmLevel;
-            }
-            set { _idAdmLevel = value.ID; }
-        }
-
-        public Ownership Ownership
-        {
-            get
-            {
-                if (_idOwnership == 0)
-                    return null;
-
-                OwnershipList ownershipList = OwnershipList.GetUniqueInstance();
-                return ownershipList.GetItem(_idOwnership) as Ownership;
-            }
-            set { _idOwnership = value.ID; }
-        }
+        public TypeLPU TypeLPU { get; set; }
+        public AdmLevel AdmLevel { get; set; }
+        public Ownership Ownership { get; set; }
         
         public string BedsTotal
         {
@@ -179,15 +139,15 @@ namespace ClassLibrary.SF
             int idLPURR2 = (LpuRR2 == null) ? 0 : LpuRR2.ID;
 
             int id;
-            int.TryParse(_provider.Insert("SF_LPU", ID, NumberSF, TypeOrg, Name, ShortName, MainSpec.ID, Email, Website, Phone, idParentOrganization, TypeLPU.ID, Ownership.ID, AdmLevel.ID,
-                INN, KPP, PostIndex, City.ID, District, Street, idLPURR,
-                _bedsTotal, _bedsIC, _bedsSurgical, _operating, _machineGD, _machineGDF, _machineCRRT, _shift, _patientGD, _patientPD, _patientCRRT, SubRegion.ID, TypeFin.ID, idLPURR2,
-                Deleted.ToString()), out id);
+            int.TryParse(_provider.Insert("SF_LPU", ID, NumberSF, TypeOrg, Name, ShortName, (MainSpec == null) ? 0 : MainSpec.ID, Email, Website, Phone,
+                idParentOrganization, (TypeLPU == null) ? 0 : TypeLPU.ID, (Ownership == null) ? 0 : Ownership.ID, (AdmLevel == null) ? 0 : AdmLevel.ID,
+                INN, KPP, PostIndex, (City == null) ? 0 : City.ID, District, Street, idLPURR, _bedsTotal, _bedsIC, _bedsSurgical, _operating, _machineGD,
+                _machineGDF, _machineCRRT, _shift, _patientGD, _patientPD, _patientCRRT, (SubRegion == null) ? 0 : SubRegion.ID,
+                (TypeFin == null) ? 0 :TypeFin.ID, idLPURR2, Deleted.ToString()), out id);
 
-            SetID(id);
+            ID = id;
 
-            OrganizationList organizationList = OrganizationList.GetUniqueInstance();
-            organizationList.Add(this);
+            OrganizationList.GetUniqueInstance().Add(this);
         }
 
         public bool IsTotalLessThenSum()
@@ -197,9 +157,7 @@ namespace ClassLibrary.SF
 
         public bool IsHaveDepartment()
         {
-            OrganizationList organizationList = OrganizationList.GetUniqueInstance();
-
-            return organizationList.GetChildList(this).Exists(item => item.TypeOrg == ClassLibrary.TypeOrg.Отделение);
+            return OrganizationList.GetUniqueInstance().GetChildList(this).Exists(item => item.TypeOrg == ClassLibrary.TypeOrg.Отделение);
         }
     }
 }

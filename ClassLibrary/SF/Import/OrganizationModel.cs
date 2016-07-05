@@ -6,8 +6,10 @@ using System.Data;
 
 namespace ClassLibrary.SF.Import
 {
-    internal class OrganizationModel
+    public class OrganizationModel
     {
+        public OrganizationModel() { }
+
         internal OrganizationModel(DataRow row)
         {
             Parse(row);
@@ -15,7 +17,6 @@ namespace ClassLibrary.SF.Import
 
         public string NumberSF { get; private set; }
         public string RrID { get; private set; }
-        public string RecordType { get; private set; }
         public string ParentNumberSF { get; private set; }
         public string Name { get; private set; }
         public string ShortName { get; private set; }
@@ -27,7 +28,6 @@ namespace ClassLibrary.SF.Import
         public string Street { get; private set; }
         public string AdmLevel { get; private set; }
         public string TypeFin { get; private set; }
-        public string MainSpec { get; private set; }
         public string SubRegion { get; private set; }
         public string BedsTotal { get; private set; }
         public string BedsIC { get; private set; }
@@ -44,10 +44,13 @@ namespace ClassLibrary.SF.Import
         public string Website { get; private set; }
         public string Phone { get; private set; }
         public string Pharmacy { get; private set; }
-        public string ClientType { get; private set; }
         public string TypeLPU { get; private set; }
         public string Ownership { get; private set; }
         public bool Deleted { get; private set; }
+
+        public string RecordType { get; set; }
+        public string MainSpec { get; set; }
+        public string ClientType { get; set; }
 
         private void Parse(DataRow row)
         {

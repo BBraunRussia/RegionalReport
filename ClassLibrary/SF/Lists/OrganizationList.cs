@@ -45,6 +45,12 @@ namespace ClassLibrary.SF
             }
         }
 
+        internal void Add(Organization organization)
+        {
+            if (!_list.ContainsKey(organization.ID))
+                _list.Add(organization.ID, organization);
+        }
+
         public void Reload()
         {
             _list.Clear();
@@ -61,13 +67,7 @@ namespace ClassLibrary.SF
         {
             return (_list.ContainsKey(id)) ? _list[id] : null;
         }
-
-        internal void Add(Organization organization)
-        {
-            if (!_list.ContainsKey(organization.ID))
-                _list.Add(organization.ID, organization);
-        }
-
+        
         public void Delete(Organization organization)
         {
             PersonList personList = PersonList.GetUniqueInstance();

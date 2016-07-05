@@ -51,6 +51,10 @@ namespace RegionR.SF
             {
                 typeOrg = "Административное Учреждение";
             }
+            else if (_organization.TypeOrg == TypeOrg.Ветеренарная_клиника)
+            {
+                typeOrg = "Ветеренарная клиника";
+            }
 
             this.Text = string.Concat("Карточка Организации \"", typeOrg, "\"");
             lbOrganization.Text = typeOrg;
@@ -74,7 +78,7 @@ namespace RegionR.SF
             {
                 lbOrganizationName.Location = new Point(157, 9);
             }
-            else if (_organization.TypeOrg == TypeOrg.Административное_Учреждение)
+            else if ((_organization.TypeOrg == TypeOrg.Административное_Учреждение) || (_organization.TypeOrg == TypeOrg.Ветеренарная_клиника))
             {
                 lbOrganizationName.Location = new Point(307, 9);
             }

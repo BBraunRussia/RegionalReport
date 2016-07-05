@@ -66,24 +66,32 @@ namespace ClassLibrary.SF.Import
                 IHaveRegion orgHaveRegion = organization as IHaveRegion;
                 orgHaveRegion.INN = model.INN;
                 orgHaveRegion.KPP = model.KPP;
-                orgHaveRegion.RealRegion = realRegionList.GetItem(model.RealRegion) as RealRegion;
-                orgHaveRegion.City = cityList.GetItem(model.City) as City;
+                orgHaveRegion.RealRegion = GetItem(realRegionList, model.RealRegion, "Регион", model.NumberSF) as RealRegion;
+                orgHaveRegion.City = GetItem(cityList, model.City, "Город", model.NumberSF) as City;
                 orgHaveRegion.PostIndex = model.PostIndex;
                 orgHaveRegion.Street = model.Street;
             }
             if (organization is LPU)
             {
                 LPU lpu = organization as LPU;
-                lpu.AdmLevel = admLevelList.GetItem(model.AdmLevel) as AdmLevel;
-                lpu.TypeFin = typeFinList.GetItem(model.TypeFin) as TypeFin;
-                lpu.MainSpec = mainSpecList.GetItem(model.MainSpec) as MainSpec;
-                lpu.SubRegion = subRegionList.GetItemByCode(model.SubRegion);
+                lpu.AdmLevel = GetItem(admLevelList, model.AdmLevel, "AdmLevel", model.NumberSF) as AdmLevel;
+                lpu.TypeFin = GetItem(typeFinList, model.TypeFin, "TypeFin", model.NumberSF) as TypeFin;
+                lpu.MainSpec = GetItem(mainSpecList, model.MainSpec, "MainSpec", model.NumberSF) as MainSpec;
+
+                SubRegion subRegion = subRegionList.GetItemByCode(model.SubRegion);
+                lpu.SubRegion = subRegion;
+                if (subRegion == null)
+                {
+                    WriteToLog(model.SubRegion, "Субрегион", model.NumberSF);
+                }
+                
                 lpu.BedsTotal = model.BedsTotal;
                 lpu.BedsIC = model.BedsIC;
                 lpu.BedsSurgical = model.BedsSurgical;
                 lpu.Operating = model.Operating;
-                lpu.TypeLPU = typeLPUList.GetItem(model.TypeLPU) as TypeLPU;
-                lpu.Ownership = ownershipList.GetItem(model.Ownership) as Ownership;
+                
+                lpu.TypeLPU = GetItem(typeLPUList, model.TypeLPU, "Тип ЛПУ", model.NumberSF) as TypeLPU;
+                lpu.Ownership = GetItem(ownershipList, model.Ownership, "Ownership", model.NumberSF) as Ownership;
             }
             if (organization is IAvitum)
             {
@@ -105,59 +113,36 @@ namespace ClassLibrary.SF.Import
             organization.Save();
         }
 
-        private Organization GetOrganization(string[] fields)
+        private BaseDictionary GetItem(BaseList list, string name, string nameHeader, string numberSF)
         {
-            int idOrganization;
-            int.TryParse(fields[2], out idOrganization);
+            BaseDictionary item = list.GetItem(name);
+            if (item == null)
+            {
+                WriteToLog(name, nameHeader, numberSF);
+            }
 
-            if (idOrganization == 0)
-            {
-                TypeOrg typeOrg = GetTypeOrg(fields);
-                return new Organization(typeOrg);
-            }
-            else
-            {
-                return organizationList.GetItem(idOrganization);
-            }
+            return item;
         }
 
-        private TypeOrg GetTypeOrg(string[] fields)
+        private void WriteToLog(string name, string nameHeader, string numberSF)
         {
-            string recordType = fields[1];
-            string parent = fields[3];
-            string mainSpec = fields[14];
-            string clientType = fields[31];
-
-            if (RecordType.RU_Hospital.ToString() == recordType)
-                return TypeOrg.ЛПУ;
-            if (((RecordType.RU_Department.ToString() == recordType) && (mainSpec == "Pharmaciuticals")) || (RecordType.RU_Pharmacy.ToString() == recordType))
-                return TypeOrg.Аптека;
-            if (RecordType.RU_Department.ToString() == recordType)
-                return TypeOrg.Отделение;
-            if (clientType == ExportOrganization.clientType[0])
-                return TypeOrg.Отдел;
-            if (clientType == ExportOrganization.clientType[1])
-                return TypeOrg.Административное_Учреждение;
-            if (clientType == ExportOrganization.clientType[2])
-                return TypeOrg.Дистрибьютор;
-
-            throw new NullReferenceException("Не удалось определеть тип организации");
+            Logger.Write(string.Format("{0} не найден: {1}, SFNumber: {2}", nameHeader, name, numberSF));
         }
-
+        
         private Organization GetOrganization(OrganizationModel model)
         {
-            if (model.RrID == "")
+            Organization organization = organizationList.GetItem(model.NumberSF);
+
+            if (organization == null)
             {
                 TypeOrg typeOrg = GetTypeOrg(model);
-                return new Organization(typeOrg);
+                organization = new Organization(typeOrg);
             }
-            else
-            {
-                return organizationList.GetItem(Convert.ToInt32(model.RrID));
-            }
+
+            return organization;
         }
 
-        private TypeOrg GetTypeOrg(OrganizationModel model)
+        public TypeOrg GetTypeOrg(OrganizationModel model)
         {
             if (RecordType.RU_Hospital.ToString() == model.RecordType)
                 return TypeOrg.ЛПУ;
@@ -167,14 +152,16 @@ namespace ClassLibrary.SF.Import
                 return TypeOrg.Отделение;
             if (RecordType.RU_Institution_Buying.ToString() == model.RecordType)
                 return TypeOrg.Дистрибьютор;
-            //if (RecordType.RU_Other.ToString() == model.RecordType)
-            //    return TypeOrg.Дистрибьютор;
             if (model.ClientType == ExportOrganization.clientType[0])
                 return TypeOrg.Отдел;
             if (model.ClientType == ExportOrganization.clientType[1])
                 return TypeOrg.Административное_Учреждение;
             if (model.ClientType == ExportOrganization.clientType[2])
                 return TypeOrg.Дистрибьютор;
+            if (model.ClientType == ExportOrganization.clientType[3])
+                return TypeOrg.Ветеренарная_клиника;
+            if (model.ClientType == ExportOrganization.clientType[4])
+                return TypeOrg.Стоматология;
             
             throw new NullReferenceException("Не удалось определеть тип организации");
         }

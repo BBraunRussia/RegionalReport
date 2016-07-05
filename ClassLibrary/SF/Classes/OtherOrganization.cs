@@ -8,67 +8,33 @@ namespace ClassLibrary.SF
 {
     public class OtherOrganization : Organization, IHaveRegion
     {
-        private string _kpp;
-        private string _inn;
-        private string _postIndex;
-        private int _idCity;
-        private string _district;
-        private string _street;
-        private string _pharmacy;
-        
         public OtherOrganization(DataRow row)
             : base(row)
         {
-            _kpp = row[13].ToString();
-            _postIndex = row[14].ToString();
-            int.TryParse(row[15].ToString(), out _idCity);
-            _district = row[16].ToString();
-            _street = row[17].ToString();
-            _inn = row[18].ToString();
-            
-            _pharmacy = row[31].ToString();
+            KPP = row[13].ToString();
+            PostIndex = row[14].ToString();
+
+            int idCity;
+            int.TryParse(row[15].ToString(), out idCity);
+            City = CityList.GetUniqueInstance().GetItem(idCity) as City;
+
+            District = row[16].ToString();
+            Street = row[17].ToString();
+            INN = row[18].ToString();
+            Pharmacy = row[31].ToString();
         }
 
         public OtherOrganization(TypeOrg typeOrg)
             : base(typeOrg)
         { }
 
-        public string KPP
-        {
-            get { return _kpp; }
-            set { _kpp = value; }
-        }
-
-        public string PostIndex
-        {
-            get { return _postIndex; }
-            set { _postIndex = value; }
-        }
-
-        public string District
-        {
-            get { return _district; }
-            set { _district = value; }
-        }
-
-        public string Street
-        {
-            get { return _street; }
-            set { _street = value; }
-        }
-
-        public City City
-        {
-            get
-            {
-                if (_idCity == 0)
-                    return null;
-
-                CityList cityList = CityList.GetUniqueInstance();
-                return cityList.GetItem(_idCity) as City;
-            }
-            set { _idCity = value.ID; }
-        }
+        public string KPP { get; set; }
+        public string PostIndex { get; set; }
+        public string District { get; set; }
+        public string Street { get; set; }
+        public City City { get; set; }
+        public string INN { get; set; }
+        public string Pharmacy { get; set; }
 
         public RealRegion RealRegion
         {
@@ -76,26 +42,14 @@ namespace ClassLibrary.SF
             set { }
         }
 
-        public string INN
-        {
-            get { return _inn; }
-            set { _inn = value; }
-        }
-
-        public string Pharmacy
-        {
-            get { return (_pharmacy == null) ? string.Empty : _pharmacy; }
-            set { _pharmacy = value; }
-        }
-        
         public override void Save()
         {
             int id;
             
             int.TryParse(_provider.Insert("SF_OtherOrganization", ID, NumberSF, TypeOrg, Name, ShortName, Email, Website, Phone,
-                INN, KPP, PostIndex, City.ID, District, Street, Pharmacy, Deleted.ToString()), out id);
+                INN, KPP, PostIndex, (City == null) ? 0 : ID, District, Street, Pharmacy, Deleted.ToString()), out id);
 
-            SetID(id);
+            ID = id;
 
             OrganizationList organizationList = OrganizationList.GetUniqueInstance();
             organizationList.Add(this);

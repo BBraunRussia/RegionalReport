@@ -31,7 +31,8 @@ namespace ClassLibrary.SF
         private string[] _typeOrgEng = {"Hospital", "Hospital branch", "Hospital department (medical)", "Hospital pharmacy", "Hospital department (non-medical)",
                                        "Pharmacy", "Governmental-administrative establishment", "Distributor (Buying)", "Distributor (Non-Buying)"};
 
-        public static readonly string[] clientType = { "Department (purchasing dep., etc)", "Governmental-administrative establishment", "Dealer" };
+        public static readonly string[] clientType = { "Department (purchasing dep., etc)", "Governmental-administrative establishment", "Dealer",
+                                                     "Veterinary clinic", "Dentistry" };
 
         public void ExportRus()
         {

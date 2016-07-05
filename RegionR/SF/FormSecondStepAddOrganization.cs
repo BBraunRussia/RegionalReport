@@ -11,7 +11,7 @@ using ClassLibrary.SF;
 
 namespace RegionR.SF
 {
-    public partial class FormSecondStepAddLPU : Form
+    public partial class FormSecondStepAddOrganization : Form
     {
         private LPU _lpu;
         private LpuCompetitorsList _lpuCompetitorsList;
@@ -19,7 +19,7 @@ namespace RegionR.SF
         private RealRegionList _realRegionList;
         private LpuRRList _lpuRRList;
 
-        public FormSecondStepAddLPU(LPU lpu)
+        public FormSecondStepAddOrganization(LPU lpu)
         {
             InitializeComponent();
 

@@ -56,13 +56,13 @@ namespace RegionR.SF
         
         public bool AddOrganization()
         {
-            FormFirstStepAddLPU formFirstStepAddOrganization = new FormFirstStepAddLPU(this);
+            FormFirstStepAddOrganization formFirstStepAddOrganization = new FormFirstStepAddOrganization(this);
             if (formFirstStepAddOrganization.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 Organization organization = Organization.CreateItem(_typeOrg);
                 if (organization is LPU)
                 {
-                    FormSecondStepAddLPU formSecondStepAddOrganization = new FormSecondStepAddLPU(organization as LPU);
+                    FormSecondStepAddOrganization formSecondStepAddOrganization = new FormSecondStepAddOrganization(organization as LPU);
                     if (formSecondStepAddOrganization.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                     {
                         FormAddLPU formAddLPU = new FormAddLPU(organization as LPU);
