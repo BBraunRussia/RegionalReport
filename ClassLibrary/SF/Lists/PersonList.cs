@@ -3,16 +3,45 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data;
+using System.Collections;
 
 namespace ClassLibrary.SF
 {
-    public class PersonList : BaseList
+    public class PersonList : InitProvider, IEnumerable<Person>
     {
         private static PersonList _uniqueInstance;
+        private Dictionary<string, Person> list;
+        private string tableName;
 
         private PersonList(string tableName)
-            : base(tableName)
-        { }
+        {
+            this.tableName = tableName;
+
+            list = new Dictionary<string, Person>();
+
+            LoadFromDataBase();
+        }
+
+        public void Reload()
+        {
+            list.Clear();
+
+            LoadFromDataBase();
+        }
+
+        private void LoadFromDataBase()
+        {
+            DataTable dt = _provider.Select(tableName);
+
+            foreach (DataRow row in dt.Rows)
+            {
+                Person person = Factory.CreateItem(tableName, row) as Person;
+                if (person.CanAdd)
+                {
+                    Add(person);
+                }
+            }
+        }
 
         public static PersonList GetUniqueInstance()
         {
@@ -22,28 +51,22 @@ namespace ClassLibrary.SF
             return _uniqueInstance;
         }
 
-        public override DataTable ToDataTable()
+        public DataTable ToDataTable()
         {
-            var list = from item in List
-                       orderby item.Name
-                       select (item as Person);
-
-            return CreateTable(list.ToList());
+            return CreateTable(list.OrderBy(p => p.Value.Name));
         }
 
         public DataTable ToDataTable(Organization organization)
         {
-            var list = GetItems(organization);
-
             return CreateTable(list);
         }
 
         public List<Person> GetItems(Organization organization)
         {
-            return (from item in List
-                    where (((item as Person).Organization.ID == organization.ID) || (((item as Person).Organization.ParentOrganization != null) && (item as Person).Organization.ParentOrganization.ID == organization.ID))
-                    orderby item.Name
-                    select (item as Person)).ToList();
+            return (from item in list
+                    where ((item.Value.Organization.ID == organization.ID) || ((item.Value.Organization.ParentOrganization != null) && item.Value.Organization.ParentOrganization.ID == organization.ID))
+                    orderby item.Value.Name
+                    select item.Value).ToList();
         }
 
         public DataTable ToDataTable(User user)
@@ -51,15 +74,15 @@ namespace ClassLibrary.SF
             UserRightList userRightList = UserRightList.GetUniqueInstance();
             var userRightList2 = userRightList.ToList(user);
 
-            var list = (from item in List
-                        where userRightList2.Contains((((item as Person).Organization.ParentOrganization == null) ? ((item as Person).Organization as IHaveRegion) : (item as Person).Organization.ParentOrganization as IHaveRegion).RealRegion.RegionRR)
-                        orderby item.Name
-                        select (item as Person)).ToList();
+            var listPerson = (from item in list
+                              where userRightList2.Contains(((item.Value.Organization.ParentOrganization == null) ? (item.Value.Organization as IHaveRegion) : item.Value.Organization.ParentOrganization as IHaveRegion).RealRegion.RegionRR)
+                              orderby item.Value.Name
+                              select item);
 
-            return CreateTable(list);
+            return CreateTable(listPerson);
         }
 
-        private DataTable CreateTable(List<Person> list)
+        private DataTable CreateTable(IEnumerable<KeyValuePair<string, Person>> list)
         {
             DataTable dt = new DataTable();
             dt.Columns.Add("RR ID", typeof(int));
@@ -72,45 +95,72 @@ namespace ClassLibrary.SF
             dt.Columns.Add("Должность");
             dt.Columns.Add("Регион России");
             dt.Columns.Add("Город");
-            
+
             foreach (var item in list)
-                dt.Rows.Add(item.GetRow());
+                dt.Rows.Add(item.Value.GetRow());
 
             return dt;
         }
 
         public void Add(Person person)
         {
-            if (!List.Exists(item => item == person))
-                List.Add(person);
+            if (!IsExist(person.NumberSF))
+            {
+                list.Add(person.NumberSF, person);
+            }
         }
 
         public bool CheckNamesake(Person person)
         {
-            return List.Exists(item => (item as Person).LastName == person.LastName && (item as Person).FirstName == person.FirstName && (item as Person).SecondName == person.SecondName && (item as Person).Organization == person.Organization);
+            return list.Values.ToList().Exists(p => p.LastName == person.LastName && p.FirstName == person.FirstName && p.SecondName == person.SecondName && p.Organization == person.Organization);
+        }
+
+        public string Delete(Person person)
+        {
+            list.Remove(person.NumberSF);
+
+            return _provider.Delete(tableName, person.ID);
         }
 
         public void Delete(Organization organization)
         {
-            var personList = List.Where(item => (item as Person).Organization.ID == organization.ID).ToList();
-            personList.ForEach(item => (item as Person).Delete());
+            var personList = list.Where(item => item.Value.Organization.ID == organization.ID).ToList();
+            personList.ForEach(item => item.Value.Delete());
         }
 
         public bool IsOrganizationHaveUnique(Person person)
         {
-            return List.Exists(item => (item as Person).Organization == person.Organization && (item as Person).Position == person.Position);
+            return list.Values.ToList().Exists(item => (item as Person).Organization == person.Organization && (item as Person).Position == person.Position);
         }
 
-        public List<Person> GetList()
+        public Person GetItem(string numberSF)
         {
-            return List.Select(item => item as Person).ToList();
+            return (IsExist(numberSF)) ? list[numberSF] : null;
         }
 
-        public new Person GetItem(string numberSF)
+        public Person GetItem(int id)
         {
-            var list = List.Where(item => (item as Person).NumberSF == numberSF).Select(item => item as Person).ToList();
+            var listNew = list.Where(p => p.Value.ID == id);
 
-            return (list.Count > 0) ? list.First() : null;
+            return listNew.Count() == 0 ? null : listNew.First().Value;
+        }
+
+        private bool IsExist(string numberSF)
+        {
+            return list.ContainsKey(numberSF);
+        }
+
+        public IEnumerator<Person> GetEnumerator()
+        {
+            foreach (var p in list)
+            {
+                yield return p.Value;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }

@@ -13,7 +13,9 @@ namespace ClassLibrary.SF
         public Person()
         {
             if (NumberSF == null)
+            {
                 NumberSF = string.Empty;
+            }
         }
 
         public Person(DataRow row)
@@ -50,12 +52,12 @@ namespace ClassLibrary.SF
             int.TryParse(row[13].ToString(), out idOrganization);
             OrganizationList organizationList = OrganizationList.GetUniqueInstance();
             Organization = organizationList.GetItem(idOrganization);
-
+            /*
             if (Organization == null)
             {
                 CanAdd = false;
             }
-
+            */
             Deleted = Convert.ToBoolean(row[14].ToString());
         }
 
@@ -75,7 +77,7 @@ namespace ClassLibrary.SF
         public string ShortName { get { return LastName; } }
         public HistoryType Type { get { return HistoryType.person; } }
         public bool Deleted { get; set; }
-        
+
         public string Mobile
         {
             get { return (_mobile == "+7(   )   -  -") ? string.Empty : _mobile; }
@@ -93,7 +95,8 @@ namespace ClassLibrary.SF
         public void Save()
         {
             int id;
-            int.TryParse(_provider.Insert("SF_Person", ID, LastName, NumberSF, FirstName, SecondName, Appeal, Position.ID, MainSpecPerson.ID, AcademTitle.ID,
+            int.TryParse(_provider.Insert("SF_Person", ID, LastName, NumberSF, FirstName, SecondName, Appeal, (Position == null) ? 0 : Position.ID,
+                (MainSpecPerson == null) ? 0 : MainSpecPerson.ID, (AcademTitle == null) ? 0 : AcademTitle.ID,
                 Email, Mobile, Phone, Comment, (Organization == null) ? 0 : Organization.ID, Deleted.ToString()), out id);
 
             ID = id;

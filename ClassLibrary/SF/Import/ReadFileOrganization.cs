@@ -82,7 +82,7 @@ namespace ClassLibrary.SF.Import
                 lpu.SubRegion = subRegion;
                 if (subRegion == null)
                 {
-                    WriteToLog(model.SubRegion, "Субрегион", model.NumberSF);
+                    Logger.WriteNotFound(model.SubRegion, "Субрегион", model.NumberSF);
                 }
                 
                 lpu.BedsTotal = model.BedsTotal;
@@ -118,15 +118,10 @@ namespace ClassLibrary.SF.Import
             BaseDictionary item = list.GetItem(name);
             if (item == null)
             {
-                WriteToLog(name, nameHeader, numberSF);
+                Logger.WriteNotFound(name, nameHeader, numberSF);
             }
 
             return item;
-        }
-
-        private void WriteToLog(string name, string nameHeader, string numberSF)
-        {
-            Logger.Write(string.Format("{0} не найден: \"{1}\", SFNumber: {2}", nameHeader, name, numberSF));
         }
         
         private Organization GetOrganization(OrganizationModel model)
@@ -135,8 +130,15 @@ namespace ClassLibrary.SF.Import
 
             if (organization == null)
             {
-                TypeOrg typeOrg = GetTypeOrg(model);
-                organization = new Organization(typeOrg);
+                try
+                {
+                    TypeOrg typeOrg = GetTypeOrg(model);
+                    organization = new Organization(typeOrg);
+                }
+                catch (NullReferenceException)
+                {
+                    Logger.WriteNotFound(string.Concat(model.RecordType, " ", model.ClientType), "Тип организации", model.NumberSF);
+                }
             }
 
             return organization;
@@ -165,105 +167,5 @@ namespace ClassLibrary.SF.Import
             
             throw new NullReferenceException("Не удалось определеть тип организации");
         }
-        /*
-        private void Update(DataRow row)
-        {
-            Organization organization = GetOrganization(row);
-            if (organization == null)
-                return;
-
-            organization.NumberSF = fields[0];
-            organization.ParentOrganization = (fields[3] == string.Empty) ? null : organizationList.GetItem(fields[3]);
-            organization.Name = fields[4];
-            organization.ShortName = fields[5];
-            if (organization is IHaveRegion)
-            {
-                IHaveRegion orgHaveRegion = organization as IHaveRegion;
-                orgHaveRegion.INN = fields[6];
-                orgHaveRegion.KPP = fields[7];
-                orgHaveRegion.RealRegion = realRegionList.GetItem(fields[8]) as RealRegion;
-                orgHaveRegion.City = cityList.GetItem(fields[9]) as City;
-                orgHaveRegion.PostIndex = fields[10];
-                orgHaveRegion.Street = fields[11];
-            }
-            if (organization is LPU)
-            {
-                LPU lpu = organization as LPU;
-                lpu.AdmLevel = admLevelList.GetItem(fields[12]) as AdmLevel;
-                lpu.TypeFin = typeFinList.GetItem(fields[13]) as TypeFin;
-                lpu.MainSpec = mainSpecList.GetItem(fields[14]) as MainSpec;
-                lpu.SubRegion = subRegionList.GetItemByCode(fields[15]);
-                lpu.BedsTotal = fields[16];
-                lpu.BedsIC = fields[17];
-                lpu.BedsSurgical = fields[18];
-                lpu.Operating = fields[19];
-                lpu.TypeLPU = typeLPUList.GetItem(fields[32]) as TypeLPU;
-                lpu.Ownership = ownershipList.GetItem(fields[33]) as Ownership;
-            }
-            if (organization is IAvitum)
-            {
-                IAvitum avitum = organization as IAvitum;
-                avitum.MachineGD = fields[20];
-                avitum.MachineGDF = fields[21];
-                avitum.MachineCRRT = fields[22];
-                avitum.Shift = fields[23];
-                avitum.PatientGD = fields[24];
-                avitum.PatientPD = fields[25];
-                avitum.PatientCRRT = fields[26];
-            }
-
-            organization.Email = fields[27];
-            organization.Website = fields[28];
-            organization.Phone = fields[29];
-
-            if (organization is OtherOrganization)
-            {
-                (organization as OtherOrganization).Pharmacy = fields[30];
-            }
-
-            organization.Deleted = Convert.ToBoolean(fields[34]);
-
-            organization.Save();
-        }
-        
-        private Organization GetOrganization(DataRow row)
-        {
-            int idOrganization;
-            int.TryParse(row[Columns.sf_id.ToString()].ToString(), out idOrganization);
-
-            if (idOrganization == 0)
-            {
-                TypeOrg typeOrg = GetTypeOrg(row);
-                return new Organization(typeOrg);
-            }
-            else
-            {
-                return organizationList.GetItem(idOrganization);
-            }
-        }
-
-        private TypeOrg GetTypeOrg(DataRow row)
-        {
-            string recordType = row[Columns.recordType.ToString()].ToString();
-            string parent = row[Columns.sf_parent_id.ToString()].ToString();
-            string mainSpec = row[Columns.mainSpec.ToString()].ToString();
-            string typeOrg = row[Columns.typeOrg.ToString()].ToString();
-
-            if (RecordType.RU_Hospital.ToString() == recordType)
-                return TypeOrg.ЛПУ;
-            if (((RecordType.RU_Department.ToString() == recordType) && (mainSpec == "Pharmaciuticals")) || (RecordType.RU_Pharmacy.ToString() == recordType))
-                return TypeOrg.Аптека;
-            if (RecordType.RU_Department.ToString() == recordType)
-                return TypeOrg.Отделение;
-            if (typeOrg == ExportOrganization.clientType[0])
-                return TypeOrg.Отдел;
-            if (typeOrg == ExportOrganization.clientType[1])
-                return TypeOrg.Административное_Учреждение;
-            if (typeOrg == ExportOrganization.clientType[2])
-                return TypeOrg.Дистрибьютор;
-
-            throw new NullReferenceException("Не удалось определеть тип организации");
-        }
-        */
     }
 }

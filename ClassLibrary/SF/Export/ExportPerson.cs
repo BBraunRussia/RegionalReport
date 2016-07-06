@@ -41,7 +41,7 @@ namespace ClassLibrary.SF
 
             HistoryList historyList = HistoryList.GetUniqueInstance();
             
-            foreach (var person in personList.GetList())
+            foreach (var person in personList)
             {
                 History created = historyList.GetItem(person, HistoryAction.Создал);
                 History modifed = historyList.GetItem(person, HistoryAction.Редактировал);

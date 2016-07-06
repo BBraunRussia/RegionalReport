@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data;
+using ClassLibrary.Common;
 
 namespace ClassLibrary.SF.Import
 {
@@ -24,7 +25,9 @@ namespace ClassLibrary.SF.Import
             ReadFile readFile = new ReadFile(ImportFileType.Person);
 
             if (readFile.dt == null)
+            {
                 return;
+            }
 
             foreach (DataRow row in readFile)
             {
@@ -36,16 +39,19 @@ namespace ClassLibrary.SF.Import
         {
             Person person = GetPerson(model);
             if (person == null)
+            {
+                Logger.Write("Не удалось создать персону " + model.NumberSF);
                 return;
+            }
 
             person.NumberSF = model.NumberSF;
             person.LastName = model.LastName;
             person.FirstName = model.FirstName;
             person.SecondName = model.SecondName;
             person.Appeal = model.Appeal;
-            person.AcademTitle = academTitleList.GetItem(model.AcademTitle) as AcademTitle;
-            person.MainSpecPerson = mainSpecPersonList.GetItem(model.MainSpecPerson) as MainSpecPerson;
-            person.Position = positionList.GetItem(model.Position) as Position;
+            person.AcademTitle = GetItem(academTitleList, model.AcademTitle, "AcademTitle", model.NumberSF) as AcademTitle;
+            person.MainSpecPerson = GetItem(mainSpecPersonList, model.MainSpecPerson, "MainSpecPerson", model.NumberSF) as MainSpecPerson;
+            person.Position = GetItem(positionList, model.Position, "Position", model.NumberSF) as Position;
             person.Email = model.Email;
             person.Mobile = model.Mobile;
             person.Phone = model.Phone;
@@ -58,12 +64,20 @@ namespace ClassLibrary.SF.Import
         private Person GetPerson(PersonModel model)
         {
             PersonList personList = PersonList.GetUniqueInstance();
-
-            int id;
-            int.TryParse(model.ID, out id);
-
+            
             //create person if not find it
-            return (personList.GetItem(id) as Person) ?? new Person();
+            return (personList.GetItem(model.NumberSF) as Person) ?? new Person();
+        }
+
+        private BaseDictionary GetItem(BaseList list, string name, string nameHeader, string numberSF)
+        {
+            BaseDictionary item = list.GetItem(name);
+            if (item == null)
+            {
+                Logger.WriteNotFound(name, nameHeader, numberSF);
+            }
+
+            return item;
         }
     }
 }
