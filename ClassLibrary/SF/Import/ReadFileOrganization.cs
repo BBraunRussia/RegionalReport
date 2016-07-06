@@ -126,7 +126,7 @@ namespace ClassLibrary.SF.Import
 
         private void WriteToLog(string name, string nameHeader, string numberSF)
         {
-            Logger.Write(string.Format("{0} не найден: {1}, SFNumber: {2}", nameHeader, name, numberSF));
+            Logger.Write(string.Format("{0} не найден: \"{1}\", SFNumber: {2}", nameHeader, name, numberSF));
         }
         
         private Organization GetOrganization(OrganizationModel model)

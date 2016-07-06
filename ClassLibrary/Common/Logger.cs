@@ -16,8 +16,10 @@ namespace ClassLibrary.Common
             {
                 File.Create(FILENAME);
             }
+            
+            
 
-            using (StreamWriter stream = new StreamWriter(FILENAME))
+            using (StreamWriter stream = File.AppendText(FILENAME)) //new StreamWriter(FILENAME))
             {
                 stream.WriteLine(string.Concat(DateTime.Now.ToString(), " ", message));
             }

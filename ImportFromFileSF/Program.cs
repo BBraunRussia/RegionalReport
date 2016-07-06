@@ -38,47 +38,26 @@ namespace ImportFromFileSF
 
         private static void ReadFileOrganization()
         {
-            //try
-            //{
-                ReadFileOrganization readFileOrganization = new ReadFileOrganization();
-                readFileOrganization.Start();
-                Logger.Write("Organization loading done");
-            //}
-            //catch (ArgumentException ex)
-            //{
-            //    Console.WriteLine(ex.Message);
-            //    Logger.Write("Organization loading with error");
-            //}
+            Logger.Write("Organization start loading");
+            ReadFileOrganization readFileOrganization = new ReadFileOrganization();
+            readFileOrganization.Start();
+            Logger.Write("Organization loading is done");
         }
 
         private static void ReadFilePerson()
         {
-            //try
-            //{
-                ReadFilePerson readFilePerson = new ReadFilePerson();
-                readFilePerson.Start();
-                Logger.Write("Person loading done");
-            //}
-            //catch (ArgumentException ex)
-           // {
-             //   Console.WriteLine(ex.Message);
-            //    Logger.Write("Person loading with error");
-            //}
+            Logger.Write("Person start loading");
+            ReadFilePerson readFilePerson = new ReadFilePerson();
+            readFilePerson.Start();
+            Logger.Write("Person loading is done");
         }
 
         private static void ReadFileRelationship()
         {
-            try
-            {
-                ReadFileRelationship readFileRelationship = new ReadFileRelationship();
-                readFileRelationship.Start();
-                Logger.Write("Relationship loading done");
-            }
-            catch (ArgumentException ex)
-            {
-                Console.WriteLine(ex.Message);
-                Logger.Write("Relationship loading with error");
-            }
+            Logger.Write("Relationship start loading");
+            ReadFileRelationship readFileRelationship = new ReadFileRelationship();
+            readFileRelationship.Start();
+            Logger.Write("Relationship loading is done");
         }
     }
 }
