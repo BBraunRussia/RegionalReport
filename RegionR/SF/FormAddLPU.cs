@@ -230,8 +230,8 @@ namespace RegionR.SF
 
         private void LoadDictionaries()
         {
-            ClassForForm.LoadDictionary(cbLpuRR, _lpuRRList.ToDataTable(_lpu.LpuRR));
-            ClassForForm.LoadDictionary(cbLpuRR2, _lpuRRList.ToDataTable(_lpu.LpuRR2));
+            ClassForForm.LoadDictionary(cbLpuRR, _lpuRRList.ToDataTable(_lpu.LpuRR), false);
+            ClassForForm.LoadDictionary(cbLpuRR2, _lpuRRList.ToDataTable(_lpu.LpuRR2), false);
             ClassForForm.LoadDictionary(cbTypeLpu, _typeLPUList.ToDataTable());
             ClassForForm.LoadDictionary(cbOwnership, _ownershipList.ToDataTable());
             ClassForForm.LoadDictionary(cbAdmLevel, _admLevelList.ToDataTable());

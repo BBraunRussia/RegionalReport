@@ -86,9 +86,12 @@ namespace ClassLibrary.SF
 
         public override object[] GetRow()
         {
-            IHaveRegion region = ((Organization is IHaveRegion) ? Organization : Organization.ParentOrganization) as IHaveRegion;
+            IHaveRegion region = (Organization == null) ? new LPU(TypeOrg.ЛПУ) : 
+                ((Organization is IHaveRegion) ? Organization : Organization.ParentOrganization) as IHaveRegion;
 
-            return new object[] { ID, NumberSF, LastName, FirstName, SecondName, GetOrganizationName(), GetSubOrganizationName(), Position.Name, region.RealRegion.Name, region.City.Name };
+            return new object[] { ID, NumberSF, LastName, FirstName, SecondName, GetOrganizationName(),
+                GetSubOrganizationName(), (Position == null) ? string.Empty : Position.Name, 
+                (region.RealRegion == null) ? string.Empty : region.RealRegion.Name, (region.City == null) ? string.Empty : region.City.Name };
         }
 
         //TODO: Сделать сохранение дня рождения
@@ -136,11 +139,21 @@ namespace ClassLibrary.SF
         
         public string GetOrganizationName()
         {
+            if (Organization == null)
+            {
+                return string.Empty;
+            }
+
             return (Organization.ParentOrganization == null) ? Organization.ShortName : Organization.ParentOrganization.ShortName;
         }
 
         public string GetSubOrganizationName()
         {
+            if (Organization == null)
+            {
+                return string.Empty;
+            }
+
             return (Organization is OtherOrganization) ? string.Empty : (Organization.ParentOrganization == null) ? "Администрация" : Organization.ShortName;
         }
     }

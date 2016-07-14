@@ -11,18 +11,33 @@ namespace RegionR.SF
 {
     public static class ClassForForm
     {
-        public static void LoadDictionary(ComboBox combo, DataTable dt)
+        public static void LoadDictionary(ComboBox combo, DataTable dt, bool isNeedAddEmpty = true)
         {
-            combo.DataSource = dt;
+            //Добавляем отсутствие значения
+            DataTable newDT = new DataTable();
+            newDT.Columns.Add(dt.Columns[0].ColumnName);
+            newDT.Columns.Add(dt.Columns[1].ColumnName);
 
-            if (dt == null)
+            if (isNeedAddEmpty)
+            {
+                newDT.Rows.Add(0, "");
+            }
+
+            foreach (DataRow row in dt.Rows)
+            {
+                newDT.Rows.Add(row.ItemArray[0], row.ItemArray[1]);
+            }
+
+            combo.DataSource = newDT;
+
+            if (newDT == null)
             {
                 MessageBox.Show("Отсутствуют данные в зависимых ячейках", "Нет данных", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            combo.ValueMember = dt.Columns[0].ColumnName;
-            combo.DisplayMember = dt.Columns[1].ColumnName;
+            combo.ValueMember = newDT.Columns[0].ColumnName;
+            combo.DisplayMember = newDT.Columns[1].ColumnName;
         }
 
         public static void CheckFilled(string text, string fieldName)

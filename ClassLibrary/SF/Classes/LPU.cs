@@ -120,7 +120,10 @@ namespace ClassLibrary.SF
         {
             string typeOrgName = ((TypeOrg == TypeOrg.ЛПУ) && (ParentOrganization != null)) ? "Филиал ЛПУ" : TypeOrg.ToString();
 
-            return new object[] { ID, NumberSF, ShortName, typeOrgName, (ParentOrganization == null) ? INN : (ParentOrganization as LPU).INN, RealRegion.Name, City.Name, (LpuRR == null) ? "Прочие ЛПУ" : LpuRR.Name, ((LpuRR2 == null) || (LpuRR2.ID == 0)) ? String.Empty : LpuRR2.Name, (LpuRR == null) ? "Российская федерация" : LpuRR.RegionRR.Name };
+            return new object[] { ID, NumberSF, ShortName, typeOrgName, (ParentOrganization == null) ? INN : (ParentOrganization as LPU).INN,
+                (RealRegion == null) ? string.Empty : RealRegion.Name, (City == null) ? string.Empty : City.Name,
+                (LpuRR == null) ? "Прочие ЛПУ" : LpuRR.Name, ((LpuRR2 == null) || (LpuRR2.ID == 0)) ? String.Empty : LpuRR2.Name,
+                (LpuRR == null) ? "Российская федерация" : LpuRR.RegionRR.Name };
         }
         
         public override void Save()

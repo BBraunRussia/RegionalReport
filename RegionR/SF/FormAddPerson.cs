@@ -111,7 +111,7 @@ namespace RegionR.SF
         private void SetPhoneCode()
         {
             IHaveRegion organization = ((_person.Organization is IHaveRegion) ? _person.Organization : _person.Organization.ParentOrganization) as IHaveRegion;
-            tbPhoneCode.Text = organization.City.PhoneCode;
+            tbPhoneCode.Text = (organization.City == null) ? string.Empty : organization.City.PhoneCode;
         }
 
         private void SetPhoneMask()
@@ -130,8 +130,8 @@ namespace RegionR.SF
         {
             IHaveRegion region = (_person.Organization is IHaveRegion) ? _person.Organization as IHaveRegion : _person.Organization.ParentOrganization as IHaveRegion;
 
-            lbCity.Text = region.City.Name;
-            lbRealRegion.Text = region.RealRegion.Name;
+            lbCity.Text = (region.City == null) ? string.Empty : region.City.Name;
+            lbRealRegion.Text = (region.RealRegion == null) ? string.Empty : region.RealRegion.Name;
         }
 
         private void LoadDictionary()

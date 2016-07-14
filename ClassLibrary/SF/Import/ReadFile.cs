@@ -31,7 +31,7 @@ namespace ClassLibrary.SF.Import
 
             SplitLines(lines);
 
-            //MoveFile(fileName);
+            MoveFile(fileName);
         }
 
         private void SplitLines(string[] lines)

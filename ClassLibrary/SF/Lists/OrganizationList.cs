@@ -106,7 +106,7 @@ namespace ClassLibrary.SF
             return _list.GetEnumerator();
         }
 
-        internal Organization GetItem(string numberSF)
+        public Organization GetItem(string numberSF)
         {
             var organizationList = _list.Where(item => item.Value.NumberSF == numberSF).ToList();
 

@@ -142,11 +142,10 @@ namespace RegionR.SF
             if (_dgv.CurrentCell == null)
                 return null;
 
-            int id;
-            int.TryParse(_dgv.Rows[_dgv.CurrentCell.RowIndex].Cells[0].Value.ToString(), out id);
+            string numberSF = _dgv.Rows[_dgv.CurrentCell.RowIndex].Cells[1].Value.ToString();
 
             OrganizationList organizationList = OrganizationList.GetUniqueInstance();
-            return organizationList.GetItem(id);
+            return organizationList.GetItem(numberSF);
         }
 
 

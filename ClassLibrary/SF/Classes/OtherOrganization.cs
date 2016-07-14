@@ -59,7 +59,8 @@ namespace ClassLibrary.SF
         {
             string typeOrgName = TypeOrg.ToString();
 
-            return new object[] { ID, NumberSF, ShortName, typeOrgName, INN, RealRegion.Name, City.Name, string.Empty, string.Empty, string.Empty };
+            return new object[] { ID, NumberSF, ShortName, typeOrgName, INN, (RealRegion == null) ? string.Empty : RealRegion.Name,
+                (City == null) ? string.Empty : City.Name, string.Empty, string.Empty, string.Empty };
         }
     }
 }
