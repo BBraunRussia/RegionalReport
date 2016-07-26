@@ -38,7 +38,7 @@ namespace RegionR.SF
 
         private void LoadData()
         {
-            Organization organization = (_person.Organization is IHaveRegion) ? _person.Organization : _person.Organization.ParentOrganization;
+            Organization organization = (_person.Organization.ParentOrganization == null) ? _person.Organization : _person.Organization.ParentOrganization;
 
             SubOrganizationList subOrganizationList = new SubOrganizationList(organization);
 

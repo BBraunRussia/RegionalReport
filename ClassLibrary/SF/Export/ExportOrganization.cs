@@ -20,7 +20,7 @@ namespace ClassLibrary.SF
                                                "Z_RU_Number_of_patient_HD__c", "Z_RU_Number_of_patient_PD__c", "Z_RU_Number_of_accute_patients_per_year__c" };
 
         private string[] _columnNamesRus = { "ID", "Parent ID", "CRM ID", "Тип записи", "Тип организации", "Client type", "Официальное название организации", "Сокращённое название",
-            "ИНН", "КПП", "Регион России", "Город", "Индекс", "Район", "Уличный адрес", "Адрес эл. почты", "Веб-сайт", "Телефонный код города", "Телефонный номер",
+            "ИНН", "КПП", "Регион России", "Город", "Индекс", "Уличный адрес", "Адрес эл. почты", "Веб-сайт", "Телефонный код города", "Телефонный номер",
             "Категория коммерческой аптеки", "Тип ЛПУ", "Форма собственности", "Административное подчинение", "Тип финансирования", "Основная специализация",
             "Sales District", "Номер ЛПУ-RR", "Номер ЛПУ-RR2", "Кол-во коек общее", "Кол-во коек реанимационных", "Кол-во коек хирургических", "Кол-во операционных", "Кол-во ГД машин",
             "Кол-во ГДФ машин", "Кол-во CRRT машин", "Кол-во смен", "Кол-во ГД пациентов", "Кол-во ПД пациентов", "Кол-во CRRT пациентов",
@@ -58,31 +58,20 @@ namespace ClassLibrary.SF
             {
                 Organization organization = item.Value;
 
-                IHaveRegion mainOrganization = (organization is IHaveRegion) ? (organization as IHaveRegion) : null;
                 LPU lpu = (organization.TypeOrg == TypeOrg.ЛПУ) ? (organization as LPU) : null;
 
                 int parentID = (organization.ParentOrganization == null) ? organization.ID : organization.ParentOrganization.ID;
                 string recordType = GetRecordType(organization);
-
-                string inn = string.Empty;
-                string kpp = string.Empty;
-                string realRegionName = string.Empty;
-                string city = string.Empty;
-                string postIndex = string.Empty;
                 
-
-                if (mainOrganization != null)
-                {
-                    inn = "'" + mainOrganization.INN;
-                    kpp = "'" + mainOrganization.KPP;
-                    realRegionName = mainOrganization.RealRegion.Name;
-                    city = mainOrganization.City.Name;
-                    postIndex = mainOrganization.PostIndex;
-                }
-
-                string pharmacy = ((organization.TypeOrg == TypeOrg.Аптека) && (organization.ParentOrganization == null)) ? (organization as OtherOrganization).Pharmacy : string.Empty;
+                string inn = (organization.INN == "") ? "" : "'" + organization.INN;
+                string kpp = (organization.KPP == "") ? "" : "'" + organization.KPP;
+                string realRegionName = (organization.RealRegion == null) ? "" : organization.RealRegion.Name;
+                string city = (organization.City == null) ? "" : organization.City.Name;
+                string postIndex = organization.PostIndex;
+                
+                string pharmacy = ((organization.TypeOrg == TypeOrg.Аптека) && (organization.ParentOrganization == null)) ? (organization as Organization).Pharmacy : string.Empty;
                 string mainSpec = (organization.MainSpec != null) ? organization.MainSpec.GetName(lang) : string.Empty;
-                string phoneCode = (mainOrganization != null) ? mainOrganization.City.PhoneCode : (organization.ParentOrganization as IHaveRegion).City.PhoneCode;
+                string phoneCode = (organization.City != null) ? organization.City.PhoneCode : (organization.ParentOrganization != null) ? organization.ParentOrganization.City.PhoneCode : "";
                 
                 string typeLPU = string.Empty;
                 string ownership = string.Empty;
@@ -103,14 +92,7 @@ namespace ClassLibrary.SF
 
                 if (lang == Language.Rus)
                 {
-                    string district = string.Empty;
-                    string street = string.Empty;
-
-                    if (mainOrganization != null)
-                    {
-                        district = mainOrganization.District;
-                        street = mainOrganization.Street;
-                    }
+                    string street = organization.Street;
 
                     string idLpuRR = string.Empty;
                     string idLpuRR2 = string.Empty;
@@ -129,7 +111,7 @@ namespace ClassLibrary.SF
                     string modifedDatetime = (modifed != null) ? modifed.datetime : string.Empty;
 
                     row = new object[] { organization.ID, parentID, organization.NumberSF, recordType, GetFormatTypeOrg(organization), GetClientType(organization),
-                               organization.Name, organization.ShortName, inn, kpp, realRegionName, city, postIndex, district, street,
+                               organization.Name, organization.ShortName, inn, kpp, realRegionName, city, postIndex, street,
                                organization.Email, organization.Website, phoneCode, organization.Phone, pharmacy, typeLPU, ownership, adminLevel, typeFin, mainSpec,
                                subRegion, idLpuRR, idLpuRR2,
                                (lpu != null) ? lpu.BedsTotal : string.Empty, (lpu != null) ? lpu.BedsIC : string.Empty, (lpu != null) ? lpu.BedsSurgical : string.Empty,
@@ -203,21 +185,6 @@ namespace ClassLibrary.SF
                         PatientGD = organization.PatientGD;
                         PatientPD = organization.PatientPD;
                         PatientCRRT = organization.PatientCRRT;
-                    }
-
-                    mainOrganization = (organization is IHaveRegion) ? (organization as IHaveRegion) : (organization.ParentOrganization != null) ? organization.ParentOrganization as IHaveRegion : null;
-
-                    if (mainOrganization != null)
-                    {
-                        realRegionName = mainOrganization.RealRegion.Name;
-                        city = mainOrganization.City.Name;
-                        postIndex = mainOrganization.PostIndex;
-
-                        if (string.IsNullOrEmpty(subRegion))
-                        {
-                            SubRegionList subRegionList = SubRegionList.GetUniqueInstance();
-                            subRegion = subRegionList.GetItem(mainOrganization.RealRegion).Name.Split(' ')[0];
-                        }
                     }
 
                     row = new object[] { organization.ID, parentID, recordType,
@@ -297,11 +264,10 @@ namespace ClassLibrary.SF
             string district = string.Empty;
             string street = string.Empty;
 
-            IHaveRegion mainOrganization = (organization is IHaveRegion) ? (organization as IHaveRegion) : (organization.ParentOrganization != null) ? organization.ParentOrganization as IHaveRegion : null;
+            Organization mainOrganization = (organization.ParentOrganization == null) ? organization : organization.ParentOrganization;
 
             if (mainOrganization != null)
             {
-                district = mainOrganization.District;
                 street = mainOrganization.Street;
             }
             

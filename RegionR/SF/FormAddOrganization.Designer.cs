@@ -44,7 +44,7 @@
             this.label27 = new System.Windows.Forms.Label();
             this.lbTypeOrg = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.lbNumberSF = new System.Windows.Forms.Label();
+            this.lbCrmID = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
@@ -217,14 +217,14 @@
             this.label4.TabIndex = 103;
             this.label4.Text = "Тип организации:";
             // 
-            // lbNumberSF
+            // lbCrmID
             // 
-            this.lbNumberSF.AutoSize = true;
-            this.lbNumberSF.Location = new System.Drawing.Point(143, 59);
-            this.lbNumberSF.Name = "lbNumberSF";
-            this.lbNumberSF.Size = new System.Drawing.Size(70, 13);
-            this.lbNumberSF.TabIndex = 102;
-            this.lbNumberSF.Text = "не присвоен";
+            this.lbCrmID.AutoSize = true;
+            this.lbCrmID.Location = new System.Drawing.Point(143, 59);
+            this.lbCrmID.Name = "lbCrmID";
+            this.lbCrmID.Size = new System.Drawing.Size(70, 13);
+            this.lbCrmID.TabIndex = 102;
+            this.lbCrmID.Text = "не присвоен";
             // 
             // label2
             // 
@@ -540,7 +540,7 @@
             this.Controls.Add(this.btnSaveAndClose);
             this.Controls.Add(this.lbTypeOrg);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.lbNumberSF);
+            this.Controls.Add(this.lbCrmID);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.tbPhone);
             this.Controls.Add(this.label25);
@@ -586,7 +586,7 @@
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.Label lbTypeOrg;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label lbNumberSF;
+        private System.Windows.Forms.Label lbCrmID;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancel;

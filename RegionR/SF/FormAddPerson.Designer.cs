@@ -35,7 +35,7 @@
             this.tbSecondName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.lbNumberSF = new System.Windows.Forms.Label();
+            this.lbCrmID = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -134,14 +134,14 @@
             this.label4.TabIndex = 6;
             this.label4.Text = "CRM id:";
             // 
-            // lbNumberSF
+            // lbCrmID
             // 
-            this.lbNumberSF.AutoSize = true;
-            this.lbNumberSF.Location = new System.Drawing.Point(217, 7);
-            this.lbNumberSF.Name = "lbNumberSF";
-            this.lbNumberSF.Size = new System.Drawing.Size(54, 13);
-            this.lbNumberSF.TabIndex = 7;
-            this.lbNumberSF.Text = "Не задан";
+            this.lbCrmID.AutoSize = true;
+            this.lbCrmID.Location = new System.Drawing.Point(217, 7);
+            this.lbCrmID.Name = "lbCrmID";
+            this.lbCrmID.Size = new System.Drawing.Size(54, 13);
+            this.lbCrmID.TabIndex = 7;
+            this.lbCrmID.Text = "Не задан";
             // 
             // label6
             // 
@@ -529,7 +529,7 @@
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.lbNumberSF);
+            this.Controls.Add(this.lbCrmID);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.tbSecondName);
             this.Controls.Add(this.label3);
@@ -560,7 +560,7 @@
         private System.Windows.Forms.TextBox tbSecondName;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label lbNumberSF;
+        private System.Windows.Forms.Label lbCrmID;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;

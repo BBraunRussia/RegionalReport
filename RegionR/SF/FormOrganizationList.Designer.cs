@@ -39,7 +39,6 @@
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.cityDictionaryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
-            this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.excelAllFieldsRusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.excelAllFieldsEngToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -86,7 +85,6 @@
             this.toolStripMenuItem2,
             this.cityDictionaryToolStripMenuItem,
             this.toolStripMenuItem3,
-            this.importToolStripMenuItem,
             this.exportToolStripMenuItem,
             this.toolStripMenuItem4,
             this.settingsToolStripMenuItem,
@@ -145,13 +143,6 @@
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
             this.toolStripMenuItem3.Size = new System.Drawing.Size(200, 6);
-            // 
-            // importToolStripMenuItem
-            // 
-            this.importToolStripMenuItem.Name = "importToolStripMenuItem";
-            this.importToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
-            this.importToolStripMenuItem.Text = "Импорт";
-            this.importToolStripMenuItem.Click += new System.EventHandler(this.NotImpliment_Click);
             // 
             // exportToolStripMenuItem
             // 
@@ -373,7 +364,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem cityDictionaryToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
-        private System.Windows.Forms.ToolStripMenuItem importToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;

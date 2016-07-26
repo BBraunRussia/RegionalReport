@@ -13,7 +13,7 @@ namespace RegionR.SF
 {
     public partial class FormAddOtherOrganization : Form
     {
-        private OtherOrganization _organization;
+        private Organization _organization;
         private HistoryList _historyList;
 
         private RealRegionList _realRegionList;
@@ -21,7 +21,7 @@ namespace RegionR.SF
 
         private bool _isLoad;
 
-        public FormAddOtherOrganization(OtherOrganization organization)
+        public FormAddOtherOrganization(Organization organization)
         {
             InitializeComponent();
 
@@ -83,14 +83,13 @@ namespace RegionR.SF
                 lbOrganizationName.Location = new Point(307, 9);
             }
 
-            lbNumberSF.Text = _organization.NumberSF;
+            lbCrmID.Text = _organization.CrmID;
             lbTypeOrg.Text = _organization.TypeOrg.ToString();
 
             tbName.Text = _organization.Name;
             tbShortName.Text = _organization.ShortName;
             tbINN.Text = _organization.INN;
             tbKPP.Text = _organization.KPP;
-            tbDistrict.Text = _organization.District;
             tbPostIndex.Text = _organization.PostIndex;
             tbStreet.Text = _organization.Street;
             tbEmail.Text = _organization.Email;
@@ -212,16 +211,7 @@ namespace RegionR.SF
 
             int idCity = Convert.ToInt32(cbCity.SelectedValue);
             _organization.City = _cityList.GetItem(idCity) as City;
-
-            if ((_organization.INN != string.Empty) && (!_organization.IsBelongsINNToRealRegion()))
-            {
-                if (MessageBox.Show("ИНН организации принадлежит другому региону, продолжить сохранение?", "ИНН другого региона", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.No)
-                {
-                    return false;
-                }
-            }
-
-            _organization.District = tbDistrict.Text;
+            
             _organization.Street = tbStreet.Text;
 
             if (_organization.TypeOrg == TypeOrg.Аптека)
@@ -294,9 +284,6 @@ namespace RegionR.SF
 
             int idCity = Convert.ToInt32(cbCity.SelectedValue);
             if (_organization.City != (_cityList.GetItem(idCity) as City))
-                return true;
-
-            if (_organization.District != tbDistrict.Text)
                 return true;
             if (_organization.Street != tbStreet.Text)
                 return true;

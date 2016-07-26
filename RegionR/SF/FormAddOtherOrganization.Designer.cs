@@ -32,9 +32,8 @@
             this.lbOrganizationName = new System.Windows.Forms.Label();
             this.lbTypeOrg = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.lbNumberSF = new System.Windows.Forms.Label();
+            this.lbCrmID = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.tbDistrict = new System.Windows.Forms.TextBox();
             this.tbPhoneCode = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnShowRules = new System.Windows.Forms.Button();
@@ -67,7 +66,6 @@
             this.rbA = new System.Windows.Forms.RadioButton();
             this.label22 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
-            this.label29 = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
             this.btnShowPerson = new System.Windows.Forms.Button();
             this.btnAddPerson = new System.Windows.Forms.Button();
@@ -116,14 +114,14 @@
             this.label4.TabIndex = 91;
             this.label4.Text = "Тип организации:";
             // 
-            // lbNumberSF
+            // lbCrmID
             // 
-            this.lbNumberSF.AutoSize = true;
-            this.lbNumberSF.Location = new System.Drawing.Point(115, 44);
-            this.lbNumberSF.Name = "lbNumberSF";
-            this.lbNumberSF.Size = new System.Drawing.Size(70, 13);
-            this.lbNumberSF.TabIndex = 90;
-            this.lbNumberSF.Text = "не присвоен";
+            this.lbCrmID.AutoSize = true;
+            this.lbCrmID.Location = new System.Drawing.Point(115, 44);
+            this.lbCrmID.Name = "lbCrmID";
+            this.lbCrmID.Size = new System.Drawing.Size(70, 13);
+            this.lbCrmID.TabIndex = 90;
+            this.lbCrmID.Text = "не присвоен";
             // 
             // label2
             // 
@@ -134,17 +132,10 @@
             this.label2.TabIndex = 89;
             this.label2.Text = "CRM id:";
             // 
-            // tbDistrict
-            // 
-            this.tbDistrict.Location = new System.Drawing.Point(453, 151);
-            this.tbDistrict.Name = "tbDistrict";
-            this.tbDistrict.Size = new System.Drawing.Size(426, 20);
-            this.tbDistrict.TabIndex = 5;
-            // 
             // tbPhoneCode
             // 
             this.tbPhoneCode.Enabled = false;
-            this.tbPhoneCode.Location = new System.Drawing.Point(453, 308);
+            this.tbPhoneCode.Location = new System.Drawing.Point(453, 282);
             this.tbPhoneCode.MaxLength = 7;
             this.tbPhoneCode.Name = "tbPhoneCode";
             this.tbPhoneCode.Size = new System.Drawing.Size(74, 20);
@@ -153,7 +144,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(316, 311);
+            this.label1.Location = new System.Drawing.Point(316, 285);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(134, 13);
             this.label1.TabIndex = 122;
@@ -174,7 +165,7 @@
             // 
             this.cbCity.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCity.FormattingEnabled = true;
-            this.cbCity.Location = new System.Drawing.Point(453, 177);
+            this.cbCity.Location = new System.Drawing.Point(453, 151);
             this.cbCity.Name = "cbCity";
             this.cbCity.Size = new System.Drawing.Size(426, 21);
             this.cbCity.TabIndex = 6;
@@ -192,7 +183,7 @@
             // 
             // tbStreet
             // 
-            this.tbStreet.Location = new System.Drawing.Point(453, 230);
+            this.tbStreet.Location = new System.Drawing.Point(453, 204);
             this.tbStreet.Name = "tbStreet";
             this.tbStreet.Size = new System.Drawing.Size(426, 20);
             this.tbStreet.TabIndex = 8;
@@ -200,7 +191,7 @@
             // label31
             // 
             this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(316, 233);
+            this.label31.Location = new System.Drawing.Point(316, 207);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(92, 13);
             this.label31.TabIndex = 111;
@@ -209,7 +200,7 @@
             // label30
             // 
             this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(316, 180);
+            this.label30.Location = new System.Drawing.Point(316, 154);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(44, 13);
             this.label30.TabIndex = 110;
@@ -226,7 +217,7 @@
             // 
             // tbPhone
             // 
-            this.tbPhone.Location = new System.Drawing.Point(642, 308);
+            this.tbPhone.Location = new System.Drawing.Point(642, 282);
             this.tbPhone.MaxLength = 7;
             this.tbPhone.Name = "tbPhone";
             this.tbPhone.Size = new System.Drawing.Size(139, 20);
@@ -236,7 +227,7 @@
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(540, 311);
+            this.label25.Location = new System.Drawing.Point(540, 285);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(96, 13);
             this.label25.TabIndex = 107;
@@ -244,14 +235,14 @@
             // 
             // tbWebSite
             // 
-            this.tbWebSite.Location = new System.Drawing.Point(453, 282);
+            this.tbWebSite.Location = new System.Drawing.Point(453, 256);
             this.tbWebSite.Name = "tbWebSite";
             this.tbWebSite.Size = new System.Drawing.Size(426, 20);
             this.tbWebSite.TabIndex = 10;
             // 
             // tbEmail
             // 
-            this.tbEmail.Location = new System.Drawing.Point(453, 256);
+            this.tbEmail.Location = new System.Drawing.Point(453, 230);
             this.tbEmail.Name = "tbEmail";
             this.tbEmail.Size = new System.Drawing.Size(426, 20);
             this.tbEmail.TabIndex = 9;
@@ -259,7 +250,7 @@
             // label27
             // 
             this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(316, 259);
+            this.label27.Location = new System.Drawing.Point(316, 233);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(58, 13);
             this.label27.TabIndex = 103;
@@ -267,7 +258,7 @@
             // 
             // tbPostIndex
             // 
-            this.tbPostIndex.Location = new System.Drawing.Point(453, 204);
+            this.tbPostIndex.Location = new System.Drawing.Point(453, 178);
             this.tbPostIndex.MaxLength = 6;
             this.tbPostIndex.Name = "tbPostIndex";
             this.tbPostIndex.Size = new System.Drawing.Size(103, 20);
@@ -277,7 +268,7 @@
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(316, 207);
+            this.label24.Location = new System.Drawing.Point(316, 181);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(99, 13);
             this.label24.TabIndex = 101;
@@ -435,25 +426,16 @@
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(316, 285);
+            this.label26.Location = new System.Drawing.Point(316, 259);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(54, 13);
             this.label26.TabIndex = 129;
             this.label26.Text = "веб-сайт:";
             // 
-            // label29
-            // 
-            this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(316, 154);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(41, 13);
-            this.label29.TabIndex = 130;
-            this.label29.Text = "Район:";
-            // 
             // label32
             // 
             this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(316, 348);
+            this.label32.Location = new System.Drawing.Point(316, 322);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(116, 13);
             this.label32.TabIndex = 131;
@@ -529,14 +511,12 @@
             this.Controls.Add(this.btnShowPerson);
             this.Controls.Add(this.btnAddPerson);
             this.Controls.Add(this.label32);
-            this.Controls.Add(this.label29);
             this.Controls.Add(this.label26);
             this.Controls.Add(this.label22);
             this.Controls.Add(this.gbCategory);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSaveAndClose);
-            this.Controls.Add(this.tbDistrict);
             this.Controls.Add(this.tbPhoneCode);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnShowRules);
@@ -562,7 +542,7 @@
             this.Controls.Add(this.label19);
             this.Controls.Add(this.lbTypeOrg);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.lbNumberSF);
+            this.Controls.Add(this.lbCrmID);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lbOrganization);
             this.Controls.Add(this.lbOrganizationName);
@@ -584,9 +564,8 @@
         private System.Windows.Forms.Label lbOrganizationName;
         private System.Windows.Forms.Label lbTypeOrg;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label lbNumberSF;
+        private System.Windows.Forms.Label lbCrmID;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox tbDistrict;
         private System.Windows.Forms.TextBox tbPhoneCode;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnShowRules;
@@ -619,7 +598,6 @@
         private System.Windows.Forms.RadioButton rbA;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label26;
-        private System.Windows.Forms.Label label29;
         private System.Windows.Forms.Label label32;
         private System.Windows.Forms.Button btnShowPerson;
         private System.Windows.Forms.Button btnAddPerson;

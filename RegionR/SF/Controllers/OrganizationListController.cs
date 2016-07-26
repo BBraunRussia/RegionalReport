@@ -69,9 +69,9 @@ namespace RegionR.SF
                         return (formAddLPU.ShowDialog() == System.Windows.Forms.DialogResult.OK);                            
                     }
                 }
-                else if (organization is OtherOrganization)
+                else
                 {
-                    FormAddOtherOrganization formAddOtherOrganization = new FormAddOtherOrganization(organization as OtherOrganization);
+                    FormAddOtherOrganization formAddOtherOrganization = new FormAddOtherOrganization(organization);
                     return (formAddOtherOrganization.ShowDialog() == System.Windows.Forms.DialogResult.OK);
                 }
             }
@@ -93,13 +93,11 @@ namespace RegionR.SF
                 FormAddLPU FormAddLPU = new FormAddLPU(organization as LPU);
                 return (FormAddLPU.ShowDialog() == System.Windows.Forms.DialogResult.OK);
             }
-            else if (organization is OtherOrganization)
+            else
             {
-                FormAddOtherOrganization formAddOtherOrganization = new FormAddOtherOrganization(organization as OtherOrganization);
+                FormAddOtherOrganization formAddOtherOrganization = new FormAddOtherOrganization(organization as Organization);
                 return (formAddOtherOrganization.ShowDialog() == System.Windows.Forms.DialogResult.OK);
             }
-
-            return false;
         }
 
         public bool DeleteOrganization()
@@ -142,10 +140,10 @@ namespace RegionR.SF
             if (_dgv.CurrentCell == null)
                 return null;
 
-            string numberSF = _dgv.Rows[_dgv.CurrentCell.RowIndex].Cells[1].Value.ToString();
+            int id = Convert.ToInt32(_dgv.Rows[_dgv.CurrentCell.RowIndex].Cells[0].Value);
 
             OrganizationList organizationList = OrganizationList.GetUniqueInstance();
-            return organizationList.GetItem(numberSF);
+            return organizationList.GetItem(id);
         }
 
 

@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.lbLPUName = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.lbNumberSF = new System.Windows.Forms.Label();
+            this.lbCrmID = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.lbTypeOrg = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -110,8 +110,6 @@
             this.btnShowPerson = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.lbBranchName = new System.Windows.Forms.Label();
-            this.tbDistrict = new System.Windows.Forms.TextBox();
-            this.label29 = new System.Windows.Forms.Label();
             this.lbLPU = new System.Windows.Forms.Label();
             this.lbBranch = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
@@ -156,14 +154,14 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "CRM id:";
             // 
-            // lbNumberSF
+            // lbCrmID
             // 
-            this.lbNumberSF.AutoSize = true;
-            this.lbNumberSF.Location = new System.Drawing.Point(958, 164);
-            this.lbNumberSF.Name = "lbNumberSF";
-            this.lbNumberSF.Size = new System.Drawing.Size(70, 13);
-            this.lbNumberSF.TabIndex = 2;
-            this.lbNumberSF.Text = "не присвоен";
+            this.lbCrmID.AutoSize = true;
+            this.lbCrmID.Location = new System.Drawing.Point(958, 164);
+            this.lbCrmID.Name = "lbCrmID";
+            this.lbCrmID.Size = new System.Drawing.Size(70, 13);
+            this.lbCrmID.TabIndex = 2;
+            this.lbCrmID.Text = "не присвоен";
             // 
             // label4
             // 
@@ -595,7 +593,7 @@
             // tbPostIndex
             // 
             this.tbPostIndex.ContextMenuStrip = this.cmTextBox;
-            this.tbPostIndex.Location = new System.Drawing.Point(435, 269);
+            this.tbPostIndex.Location = new System.Drawing.Point(435, 243);
             this.tbPostIndex.MaxLength = 6;
             this.tbPostIndex.Name = "tbPostIndex";
             this.tbPostIndex.Size = new System.Drawing.Size(103, 20);
@@ -605,7 +603,7 @@
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(295, 272);
+            this.label24.Location = new System.Drawing.Point(295, 246);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(99, 13);
             this.label24.TabIndex = 50;
@@ -632,7 +630,7 @@
             // 
             // tbWebSite
             // 
-            this.tbWebSite.Location = new System.Drawing.Point(435, 347);
+            this.tbWebSite.Location = new System.Drawing.Point(435, 321);
             this.tbWebSite.Name = "tbWebSite";
             this.tbWebSite.Size = new System.Drawing.Size(399, 20);
             this.tbWebSite.TabIndex = 55;
@@ -640,7 +638,7 @@
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(295, 350);
+            this.label26.Location = new System.Drawing.Point(295, 324);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(54, 13);
             this.label26.TabIndex = 54;
@@ -648,7 +646,7 @@
             // 
             // tbEmail
             // 
-            this.tbEmail.Location = new System.Drawing.Point(435, 321);
+            this.tbEmail.Location = new System.Drawing.Point(435, 295);
             this.tbEmail.Name = "tbEmail";
             this.tbEmail.Size = new System.Drawing.Size(399, 20);
             this.tbEmail.TabIndex = 53;
@@ -656,7 +654,7 @@
             // label27
             // 
             this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(295, 324);
+            this.label27.Location = new System.Drawing.Point(295, 298);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(58, 13);
             this.label27.TabIndex = 52;
@@ -674,7 +672,7 @@
             // label30
             // 
             this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(295, 245);
+            this.label30.Location = new System.Drawing.Point(295, 219);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(44, 13);
             this.label30.TabIndex = 62;
@@ -682,7 +680,7 @@
             // 
             // tbStreet
             // 
-            this.tbStreet.Location = new System.Drawing.Point(435, 295);
+            this.tbStreet.Location = new System.Drawing.Point(435, 269);
             this.tbStreet.Name = "tbStreet";
             this.tbStreet.Size = new System.Drawing.Size(399, 20);
             this.tbStreet.TabIndex = 65;
@@ -690,7 +688,7 @@
             // label31
             // 
             this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(295, 298);
+            this.label31.Location = new System.Drawing.Point(295, 272);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(92, 13);
             this.label31.TabIndex = 64;
@@ -710,7 +708,7 @@
             // 
             this.cbCity.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCity.FormattingEnabled = true;
-            this.cbCity.Location = new System.Drawing.Point(435, 242);
+            this.cbCity.Location = new System.Drawing.Point(435, 216);
             this.cbCity.Name = "cbCity";
             this.cbCity.Size = new System.Drawing.Size(399, 21);
             this.cbCity.TabIndex = 68;
@@ -857,7 +855,7 @@
             // tbPhoneCode
             // 
             this.tbPhoneCode.Enabled = false;
-            this.tbPhoneCode.Location = new System.Drawing.Point(435, 373);
+            this.tbPhoneCode.Location = new System.Drawing.Point(435, 347);
             this.tbPhoneCode.MaxLength = 7;
             this.tbPhoneCode.Name = "tbPhoneCode";
             this.tbPhoneCode.Size = new System.Drawing.Size(74, 20);
@@ -867,7 +865,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(295, 376);
+            this.label1.Location = new System.Drawing.Point(295, 350);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(134, 13);
             this.label1.TabIndex = 78;
@@ -913,22 +911,6 @@
             this.lbBranchName.TabIndex = 83;
             this.lbBranchName.Text = "Филиал";
             // 
-            // tbDistrict
-            // 
-            this.tbDistrict.Location = new System.Drawing.Point(435, 216);
-            this.tbDistrict.Name = "tbDistrict";
-            this.tbDistrict.Size = new System.Drawing.Size(399, 20);
-            this.tbDistrict.TabIndex = 85;
-            // 
-            // label29
-            // 
-            this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(295, 219);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(41, 13);
-            this.label29.TabIndex = 84;
-            this.label29.Text = "Район:";
-            // 
             // lbLPU
             // 
             this.lbLPU.AutoSize = true;
@@ -953,7 +935,7 @@
             // label32
             // 
             this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(295, 446);
+            this.label32.Location = new System.Drawing.Point(304, 412);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(116, 13);
             this.label32.TabIndex = 89;
@@ -964,7 +946,7 @@
             this.cbSubRegion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbSubRegion.Enabled = false;
             this.cbSubRegion.FormattingEnabled = true;
-            this.cbSubRegion.Location = new System.Drawing.Point(435, 399);
+            this.cbSubRegion.Location = new System.Drawing.Point(435, 373);
             this.cbSubRegion.Name = "cbSubRegion";
             this.cbSubRegion.Size = new System.Drawing.Size(399, 21);
             this.cbSubRegion.TabIndex = 92;
@@ -972,7 +954,7 @@
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(295, 402);
+            this.label23.Location = new System.Drawing.Point(295, 376);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(99, 13);
             this.label23.TabIndex = 91;
@@ -1131,8 +1113,6 @@
             this.Controls.Add(this.label32);
             this.Controls.Add(this.lbBranch);
             this.Controls.Add(this.lbLPU);
-            this.Controls.Add(this.tbDistrict);
-            this.Controls.Add(this.label29);
             this.Controls.Add(this.lbBranchName);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnShowPerson);
@@ -1180,7 +1160,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.lbTypeOrg);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.lbNumberSF);
+            this.Controls.Add(this.lbCrmID);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lbLPUName);
             this.MinimumSize = new System.Drawing.Size(1080, 600);
@@ -1203,7 +1183,7 @@
 
         private System.Windows.Forms.Label lbLPUName;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label lbNumberSF;
+        private System.Windows.Forms.Label lbCrmID;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lbTypeOrg;
         private System.Windows.Forms.Label label3;
@@ -1276,8 +1256,6 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Label lbBranchName;
         private System.Windows.Forms.TreeView treeView1;
-        private System.Windows.Forms.TextBox tbDistrict;
-        private System.Windows.Forms.Label label29;
         private System.Windows.Forms.Label lbLPU;
         private System.Windows.Forms.Label lbBranch;
         private System.Windows.Forms.ContextMenuStrip conMenuTree;

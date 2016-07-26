@@ -6,7 +6,7 @@ using System.Data;
 
 namespace ClassLibrary.SF
 {
-    public class LPU : Organization, IHaveRegion, IAvitum
+    public class LPU : Organization, IAvitum
     {
         private int _bedsTotal;
         private int _bedsIC;
@@ -27,19 +27,7 @@ namespace ClassLibrary.SF
             int idAdmLevel;
             int.TryParse(row[12].ToString(), out idAdmLevel);
             AdmLevel = AdmLevelList.GetUniqueInstance().GetItem(idAdmLevel) as AdmLevel;
-
-            KPP = row[13].ToString();
-            PostIndex = row[14].ToString();
-            
-            int idCity;
-            int.TryParse(row[15].ToString(), out idCity);
-            City = CityList.GetUniqueInstance().GetItem(idCity) as City;
-
-            District = row[16].ToString();
-            Street = row[17].ToString();
-
-            INN = row[18].ToString();
-
+                        
             int idLpuRR;
             int.TryParse(row[19].ToString(), out idLpuRR);
             LpuRRList lpuRRList = LpuRRList.GetUniqueInstance();
@@ -68,28 +56,11 @@ namespace ClassLibrary.SF
         public LPU(TypeOrg typeOrg)
             : base(typeOrg)
         { }
-
-        public string KPP { get; set; }
-        public string PostIndex { get; set; }
-        public string District { get; set; }
-        public string Street { get; set; }
-        public string INN { get; set; }
+        
         public LpuRR LpuRR { get; set; }
         public LpuRR LpuRR2 { get; set; }
         public SubRegion SubRegion { get; set; }
         public TypeFin TypeFin { get; set; }
-        public City City { get; set; }        
-
-        public RealRegion RealRegion
-        {
-            get { return (City == null) ? null : City.RealRegion; }
-            set
-            {
-                CityList cityList = CityList.GetUniqueInstance();
-                City city = cityList.GetItem(value);
-                City = city;
-            }
-        }
 
         public TypeLPU TypeLPU { get; set; }
         public AdmLevel AdmLevel { get; set; }
@@ -116,11 +87,11 @@ namespace ClassLibrary.SF
             set { int.TryParse(value, out _operating); }
         }
         
-        public object[] GetRow()
+        public override object[] GetRow()
         {
             string typeOrgName = ((TypeOrg == TypeOrg.ЛПУ) && (ParentOrganization != null)) ? "Филиал ЛПУ" : TypeOrg.ToString();
 
-            return new object[] { ID, NumberSF, ShortName, typeOrgName, (ParentOrganization == null) ? INN : (ParentOrganization as LPU).INN,
+            return new object[] { ID, CrmID, ShortName, typeOrgName, (ParentOrganization == null) ? INN : (ParentOrganization as LPU).INN,
                 (RealRegion == null) ? string.Empty : RealRegion.Name, (City == null) ? string.Empty : City.Name,
                 (LpuRR == null) ? "Прочие ЛПУ" : LpuRR.Name, ((LpuRR2 == null) || (LpuRR2.ID == 0)) ? String.Empty : LpuRR2.Name,
                 (LpuRR == null) ? "Российская федерация" : LpuRR.RegionRR.Name };
@@ -144,9 +115,9 @@ namespace ClassLibrary.SF
             int id;
             int.TryParse(_provider.Insert("SF_LPU", ID, NumberSF, TypeOrg, Name, ShortName, (MainSpec == null) ? 0 : MainSpec.ID, Email, Website, Phone,
                 idParentOrganization, (TypeLPU == null) ? 0 : TypeLPU.ID, (Ownership == null) ? 0 : Ownership.ID, (AdmLevel == null) ? 0 : AdmLevel.ID,
-                INN, KPP, PostIndex, (City == null) ? 0 : City.ID, District, Street, idLPURR, _bedsTotal, _bedsIC, _bedsSurgical, _operating, _machineGD,
+                INN, KPP, PostIndex, (City == null) ? 0 : City.ID, Street, idLPURR, _bedsTotal, _bedsIC, _bedsSurgical, _operating, _machineGD,
                 _machineGDF, _machineCRRT, _shift, _patientGD, _patientPD, _patientCRRT, (SubRegion == null) ? 0 : SubRegion.ID,
-                (TypeFin == null) ? 0 :TypeFin.ID, idLPURR2, Deleted.ToString()), out id);
+                (TypeFin == null) ? 0 :TypeFin.ID, idLPURR2, Deleted.ToString(), CrmID), out id);
 
             ID = id;
 

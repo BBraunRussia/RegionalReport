@@ -45,6 +45,11 @@ namespace ClassLibrary.SF
 
         public City GetItem(RealRegion realRegion)
         {
+            if (realRegion == null)
+            {
+                return null;
+            }
+
             return List.Where(item => (item as City).RealRegion == realRegion).Select(item => (item as City)).First();
         }
     }

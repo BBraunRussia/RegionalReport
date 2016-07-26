@@ -16,6 +16,7 @@ namespace ClassLibrary.SF.Import
         }
 
         public string NumberSF { get; private set; }
+        public string CrmID { get; private set; }
         public string RrID { get; private set; }
         public string ParentNumberSF { get; private set; }
         public string Name { get; private set; }
@@ -55,11 +56,12 @@ namespace ClassLibrary.SF.Import
         private void Parse(DataRow row)
         {
             NumberSF = row["ID"].ToString();
+            CrmID = row["Z_CRM_ID__C"].ToString();
             RrID = row["Z_RU_RR_INSTITUTION__C"].ToString();
             RecordType = row["Z_RECORD_TYPE_DEVELOPER_NAME__C"].ToString();
             ParentNumberSF = row["PARENTID"].ToString();
-            Name = row["Z_RU_CUSTOMER_LONG_NAME__C"].ToString();
-            ShortName = row["NAME"].ToString();
+            Name = row["Z_RU_CUSTOMER_LONG_NAME__C"].ToString().Replace("\"\"", "\"");
+            ShortName = row["NAME"].ToString().Replace("\"\"", "\"");
             INN = row["Z_RU_TIN__C"].ToString();
             KPP = row["Z_RU_CRR__C"].ToString();
             RealRegion = row["BILLINGSTATE"].ToString();

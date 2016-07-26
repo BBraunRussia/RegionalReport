@@ -53,24 +53,23 @@ namespace ClassLibrary.SF.Import
                 return;
             
             organization.NumberSF = model.NumberSF;
+            organization.CrmID = model.CrmID;
             organization.ParentOrganization = (model.ParentNumberSF == string.Empty) ? null : organizationList.GetItem(model.ParentNumberSF);
             organization.Name = model.Name;
             organization.ShortName = model.ShortName;
             organization.Email = model.Email;
             organization.Website = model.Website;
             organization.Phone = model.Phone;
+            organization.Pharmacy = model.Pharmacy;
             organization.Deleted = model.Deleted;
 
-            if (organization is IHaveRegion)
-            {
-                IHaveRegion orgHaveRegion = organization as IHaveRegion;
-                orgHaveRegion.INN = model.INN;
-                orgHaveRegion.KPP = model.KPP;
-                orgHaveRegion.RealRegion = GetItem(realRegionList, model.RealRegion, "Регион", model.NumberSF) as RealRegion;
-                orgHaveRegion.City = GetItem(cityList, model.City, "Город", model.NumberSF) as City;
-                orgHaveRegion.PostIndex = model.PostIndex;
-                orgHaveRegion.Street = model.Street;
-            }
+            organization.INN = model.INN;
+            organization.KPP = model.KPP;
+            organization.RealRegion = GetItem(realRegionList, model.RealRegion, "Регион", model.NumberSF) as RealRegion;
+            organization.City = GetItem(cityList, model.City, "Город", model.NumberSF) as City;
+            organization.PostIndex = model.PostIndex;
+            organization.Street = model.Street;
+            
             if (organization is LPU)
             {
                 LPU lpu = organization as LPU;
@@ -105,11 +104,6 @@ namespace ClassLibrary.SF.Import
                 avitum.PatientCRRT = model.PatientCRRT;
             }
             
-            if (organization is OtherOrganization)
-            {
-                (organization as OtherOrganization).Pharmacy = model.Pharmacy;
-            }
-
             organization.Save();
         }
 

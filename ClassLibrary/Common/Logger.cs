@@ -25,7 +25,7 @@ namespace ClassLibrary.Common
 
         public static void WriteNotFound(string name, string nameHeader, string numberSF)
         {
-            Write(string.Format("{0} не найден: \"{1}\", SFNumber: {2}", nameHeader, name, numberSF));
+            Write(string.Format("SFNumber: {2}, {0} не найден: \"{1}\"", nameHeader, name, numberSF));
         }
     }
 }

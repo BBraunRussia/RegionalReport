@@ -33,8 +33,8 @@ namespace RegionR.SF
             _positionList = PositionList.GetUniqueInstance();
             _historyList = HistoryList.GetUniqueInstance();
 
-            lbSubOrganization.Visible = !(_person.Organization is OtherOrganization);
-            tbSubOrganization.Visible = !(_person.Organization is OtherOrganization);
+            lbSubOrganization.Visible = !(_person.Organization is Organization);
+            tbSubOrganization.Visible = !(_person.Organization is Organization);
 
             _changeSubOrg = false;
         }
@@ -74,10 +74,7 @@ namespace RegionR.SF
             mtbMobile.Text = _person.Mobile;
             mtbPhone.Text = _person.Phone;
 
-            if (!string.IsNullOrEmpty(_person.NumberSF))
-            {
-                lbNumberSF.Text = _person.NumberSF;
-            }
+            lbCrmID.Text = (_person.CrmID == "") ? "не задан" : _person.CrmID;
 
             tbOrganization.Text = _person.GetOrganizationName();
             tbSubOrganization.Text = _person.GetSubOrganizationName();
@@ -110,7 +107,7 @@ namespace RegionR.SF
 
         private void SetPhoneCode()
         {
-            IHaveRegion organization = ((_person.Organization is IHaveRegion) ? _person.Organization : _person.Organization.ParentOrganization) as IHaveRegion;
+            Organization organization = (_person.Organization.ParentOrganization == null) ? _person.Organization : _person.Organization.ParentOrganization;
             tbPhoneCode.Text = (organization.City == null) ? string.Empty : organization.City.PhoneCode;
         }
 
@@ -128,7 +125,7 @@ namespace RegionR.SF
 
         private void SetRealRegionAndCity()
         {
-            IHaveRegion region = (_person.Organization is IHaveRegion) ? _person.Organization as IHaveRegion : _person.Organization.ParentOrganization as IHaveRegion;
+            Organization region = (_person.Organization.ParentOrganization == null) ? _person.Organization : _person.Organization.ParentOrganization;
 
             lbCity.Text = (region.City == null) ? string.Empty : region.City.Name;
             lbRealRegion.Text = (region.RealRegion == null) ? string.Empty : region.RealRegion.Name;

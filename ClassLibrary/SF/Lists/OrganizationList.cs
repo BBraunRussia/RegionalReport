@@ -22,9 +22,9 @@ namespace ClassLibrary.SF
         }
 
         public Dictionary<int, Organization> List { get { return _list; } }
-        public List<LPU> ListLpu { get { return _list.Where(item => (item.Value is LPU) && item.Value.ParentOrganization == null).Select(item => item.Value as LPU).ToList(); } }
-        public List<LPU> ListBranch { get { return _list.Where(item => (item.Value is LPU) && item.Value.ParentOrganization != null).Select(item => item.Value as LPU).ToList(); } }
-        public List<OtherOrganization> ListOther { get { return _list.Where(item => item.Value is OtherOrganization).Select(item => item.Value as OtherOrganization).ToList(); } }
+        public IEnumerable<LPU> ListLpu { get { return _list.Where(item => (item.Value is LPU) && item.Value.ParentOrganization == null).Select(item => item.Value as LPU).ToList(); } }
+        public IEnumerable<LPU> ListBranch { get { return _list.Where(item => (item.Value is LPU) && item.Value.ParentOrganization != null).Select(item => item.Value as LPU).ToList(); } }
+        public IEnumerable<Organization> ListOther { get { return _list.Where(item => item.Value is Organization).Select(org => org.Value); } }
 
         public static OrganizationList GetUniqueInstance()
         {

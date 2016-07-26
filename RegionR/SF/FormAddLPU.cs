@@ -73,7 +73,7 @@ namespace RegionR.SF
             this.Text = (_parentLPU == null) ? "Карточка Организации \"ЛПУ\"" : "Карточка Организации \"Филиал ЛПУ\"";
             lbKPP.Text = (_parentLPU == null) ? "КПП:" : "КПП*:";
 
-            lbNumberSF.Text = (_lpu.NumberSF == string.Empty) ? "не присвоен" : _lpu.NumberSF;
+            lbCrmID.Text = (_lpu.CrmID == string.Empty) ? "не присвоен" : _lpu.CrmID;
             lbNumberLpuID.Text = (_lpu.ID == 0) ? "не присвоен" : _lpu.ID.ToString();
             lbLpuRRId.Text = (_lpu.LpuRR == null) ? "не присвоен" : _lpu.LpuRR.ID.ToString();
             lbTypeOrg.Text = _lpu.TypeOrg.ToString();
@@ -111,7 +111,6 @@ namespace RegionR.SF
             }
 
             tbKPP.Text = _lpu.KPP;
-            tbDistrict.Text = _lpu.District;
             tbPostIndex.Text = _lpu.PostIndex;
             tbEmail.Text = _lpu.Email;
             tbWebSite.Text = _lpu.Website;
@@ -349,14 +348,6 @@ namespace RegionR.SF
 
             _lpu.INN = (_parentLPU == null) ? tbINN.Text : string.Empty;
 
-            if (!_lpu.IsBelongsINNToRealRegion())
-            {
-                if (MessageBox.Show("ИНН организации принадлежит другому региону, продолжить сохранение?", "ИНН другого региона", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.No)
-                {
-                    return false;
-                }
-            }
-
             _lpu.KPP = tbKPP.Text;
             _lpu.PostIndex = tbPostIndex.Text;
 
@@ -381,8 +372,6 @@ namespace RegionR.SF
             }
 
             _lpu.Phone = tbPhone.Text;
-            
-            _lpu.District = tbDistrict.Text;
             _lpu.Street = tbStreet.Text;
 
             string bedsTotal, bedsIC, bedsSurgical;
@@ -653,11 +642,8 @@ namespace RegionR.SF
                     return true;
             }
 
-            if (_lpu.District != tbDistrict.Text)
-                return true;
             if (_lpu.Street != tbStreet.Text)
                 return true;
-
             if (_lpu.BedsTotal != tbBedsTotal.Text)
                 return true;
             if (_lpu.BedsIC != tbBedsIC.Text)

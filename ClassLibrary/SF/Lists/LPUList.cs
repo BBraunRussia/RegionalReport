@@ -8,9 +8,9 @@ namespace ClassLibrary.SF
 {
     public class LpuList
     {
-        private List<LPU> _list;
-        private List<LPU> _listBranch;
-        private List<OtherOrganization> _listOther;
+        private IEnumerable<LPU> _list;
+        private IEnumerable<LPU> _listBranch;
+        private IEnumerable<Organization> _listOther;
 
         public LpuList()
         {
@@ -52,15 +52,15 @@ namespace ClassLibrary.SF
             return _list.Where(item => userRightList2.Contains(item.RealRegion.RegionRR)).ToList();
         }
 
-        private List<OtherOrganization> GetListOther(List<OtherOrganization> listOther, User user)
+        private IEnumerable<Organization> GetListOther(IEnumerable<Organization> listOther, User user)
         {
             UserRightList userRightList = UserRightList.GetUniqueInstance();
             var userRightList2 = userRightList.ToList(user);
 
-            return listOther.Where(item => userRightList2.Contains(item.RealRegion.RegionRR)).ToList();
+            return listOther.Where(item => userRightList2.Contains(item.RealRegion.RegionRR));
         }
 
-        private DataTable ToDataTableWithBranch(List<LPU> list, List<OtherOrganization> listOther)
+        private DataTable ToDataTableWithBranch(IEnumerable<LPU> list, IEnumerable<Organization> listOther)
         {
             OrganizationList organizationList = OrganizationList.GetUniqueInstance();
 
@@ -78,7 +78,7 @@ namespace ClassLibrary.SF
             return CreateTable(listNew, listOther);
         }
 
-        private DataTable CreateTable(List<LPU> list, List<OtherOrganization> listOther)
+        private DataTable CreateTable(IEnumerable<LPU> list, IEnumerable<Organization> listOther)
         {
             DataTable dt = new DataTable();
             dt.Columns.Add("RR ID", typeof(int));
@@ -97,7 +97,7 @@ namespace ClassLibrary.SF
 
             if (listOther != null)
             {
-                foreach (OtherOrganization other in listOther)
+                foreach (Organization other in listOther)
                     dt.Rows.Add(other.GetRow());
             }
 
@@ -125,7 +125,7 @@ namespace ClassLibrary.SF
 
         public bool IsInList(string inn)
         {
-            return _list.Exists(item => item.INN == inn);
+            return _list.Count(item => item.INN == inn) > 0;
         }
 
         public void ReLoad()

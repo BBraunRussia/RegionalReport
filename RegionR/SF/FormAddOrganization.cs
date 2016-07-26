@@ -101,7 +101,7 @@ namespace RegionR.SF
 
             SetPhoneCodeMask();
 
-            lbNumberSF.Text = _organization.NumberSF;
+            lbCrmID.Text = _organization.CrmID;
             lbTypeOrg.Text = _organization.TypeOrg.ToString();
 
             ShowHistory();

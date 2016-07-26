@@ -64,7 +64,6 @@
     <Compile Include="SF\Classes\AdmLevel.cs" />
     <Compile Include="SF\Classes\LpuCompetitors.cs" />
     <Compile Include="RR\LpuRR.cs" />
-    <Compile Include="SF\Classes\OtherOrganization.cs" />
     <Compile Include="SF\Classes\Person.cs" />
     <Compile Include="SF\Classes\Position.cs" />
     <Compile Include="RR\RegionRR.cs" />
@@ -83,7 +82,6 @@
     <Compile Include="SF\Import\ReadFile.cs" />
     <Compile Include="SF\Import\ReadFileOrganization.cs" />
     <Compile Include="SF\Interfaces\IAvitum.cs" />
-    <Compile Include="SF\Interfaces\IHaveRegion.cs" />
     <Compile Include="SF\Interfaces\IHistory.cs" />
     <Compile Include="SF\Lists\AcademTitleList.cs" />
     <Compile Include="SF\Lists\AdmLevelList.cs" />

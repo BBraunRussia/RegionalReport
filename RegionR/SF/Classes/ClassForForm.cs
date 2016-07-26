@@ -74,7 +74,7 @@ namespace RegionR.SF
             return false;
         }
 
-        public static void CheckINN(IHaveRegion organization, string inn)
+        public static void CheckINN(Organization organization, string inn)
         {
             if ((inn.Length != 10) && (inn.Length != 12))
                 throw new NullReferenceException("Поле ИНН должно содержать 10 или 12 цифр");

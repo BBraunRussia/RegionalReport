@@ -45,6 +45,7 @@ namespace ClassLibrary.SF.Import
             }
 
             person.NumberSF = model.NumberSF;
+            person.CrmID = model.CrmID;
             person.LastName = model.LastName;
             person.FirstName = model.FirstName;
             person.SecondName = model.SecondName;

@@ -14,6 +14,7 @@ namespace ClassLibrary.SF.Import
         }
 
         public string NumberSF { get; private set; }
+        public string CrmID { get; private set; }
         public string LastName { get; private set; }
         public string FirstName { get; private set; }
         public string SecondName { get; private set; }
@@ -31,6 +32,7 @@ namespace ClassLibrary.SF.Import
         private void Parse(DataRow row)
         {
             NumberSF = row["ID"].ToString();
+            CrmID = row["Z_CRM_ID__C"].ToString();
             //"Z_RECORD_TYPE_DEVELOPER_NAME__C" значение RU_Person не понятно для чего его выгружать
             LastName = row["LASTNAME"].ToString();
             FirstName = row["FIRSTNAME"].ToString();

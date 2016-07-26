@@ -27,7 +27,6 @@ namespace RegionR
             _organizationListController = new OrganizationListController(dgv);
 
             settingsToolStripMenuItem.Visible = (UserLogged.Get().RoleSF == RolesSF.Администратор);
-            importToolStripMenuItem.Visible = (UserLogged.Get().RoleSF == RolesSF.Администратор);
             exportToolStripMenuItem.Visible = (UserLogged.Get().RoleSF == RolesSF.Администратор);
             toolStripMenuItem4.Visible = (UserLogged.Get().RoleSF == RolesSF.Администратор);
             toolStripMenuItem5.Visible = (UserLogged.Get().RoleSF == RolesSF.Администратор);
@@ -98,12 +97,7 @@ namespace RegionR
             if (_organizationListController.DeleteOrganization())
                 LoadData();
         }
-
-        private void NotImpliment_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("В процессе разработки", "Функция не реализована", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
+        
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();

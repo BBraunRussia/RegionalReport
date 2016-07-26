@@ -10,6 +10,8 @@ namespace ClassLibrary.SF
     {
         private int _idParentOrganization;
 
+        public string Pharmacy { get; set; }
+
         protected int _machineGD;
         protected int _machineGDF;
         protected int _machineCRRT;
@@ -26,31 +28,13 @@ namespace ClassLibrary.SF
             int idParent;
             int.TryParse(row[9].ToString(), out idParent);
 
-            if (typeOrg == TypeOrg.ЛПУ)
-                return new LPU(row);
-            else if (idParent != 0)
-                return new Organization(row);
-            else
-                return new OtherOrganization(row);
+            return (typeOrg == TypeOrg.ЛПУ) ? new LPU(row) : new Organization(row);
         }
 
         public static Organization CreateItem(TypeOrg typeOrg, Organization parentOrganization = null)
         {
-            Organization organization;
-
-            if (typeOrg == TypeOrg.ЛПУ)
-            {
-                organization = new LPU(typeOrg);
-            }
-            else if (parentOrganization == null)
-            {
-                organization = new OtherOrganization(typeOrg);
-            }
-            else
-            {
-                organization = new Organization(typeOrg);
-            }
-
+            Organization organization = (typeOrg == TypeOrg.ЛПУ) ? new LPU(typeOrg) : new Organization(typeOrg);
+            
             organization.ParentOrganization = parentOrganization;
 
             return organization;
@@ -83,6 +67,16 @@ namespace ClassLibrary.SF
 
             int.TryParse(row[9].ToString(), out _idParentOrganization);
 
+            KPP = row[13].ToString();
+            PostIndex = row[14].ToString();
+
+            int idCity;
+            int.TryParse(row[15].ToString(), out idCity);
+            City = CityList.GetUniqueInstance().GetItem(idCity) as City;
+
+            Street = row[17].ToString();
+            INN = row[18].ToString();
+
             int.TryParse(row[24].ToString(), out _machineGD);
             int.TryParse(row[25].ToString(), out _machineGDF);
             int.TryParse(row[26].ToString(), out _machineCRRT);
@@ -90,10 +84,10 @@ namespace ClassLibrary.SF
             int.TryParse(row[28].ToString(), out _patientGD);
             int.TryParse(row[29].ToString(), out _patientPD);
             int.TryParse(row[30].ToString(), out _patientCRRT);
-
-            bool deleted;
-            bool.TryParse(row[35].ToString(), out deleted);
-            Deleted = deleted;
+            
+            Pharmacy = row[31].ToString();
+            CrmID = row[35].ToString();
+            Deleted = false;
         }
 
         public Organization(TypeOrg typeOrg)
@@ -107,6 +101,7 @@ namespace ClassLibrary.SF
 
         public int ID { protected set; get; }
         public string NumberSF { get; set; }
+        public string CrmID { get; set; }
         public string Name { get; set; }
         public string ShortName { get; set; }
         public TypeOrg TypeOrg { get; private set; }
@@ -116,6 +111,22 @@ namespace ClassLibrary.SF
         public bool Deleted { get; set; }
         public HistoryType Type { get { return HistoryType.organization; } }
         public MainSpec MainSpec { get; set; }
+
+        public string KPP { get; set; }
+        public string PostIndex { get; set; }
+        public string Street { get; set; }
+        public City City { get; set; }
+        public string INN { get; set; }
+        public RealRegion RealRegion
+        {
+            get { return (City == null) ? null : City.RealRegion; }
+            set
+            {
+                CityList cityList = CityList.GetUniqueInstance();
+                City city = cityList.GetItem(value);
+                City = city;
+            }
+        }
 
         public string MachineGD
         {
@@ -173,9 +184,34 @@ namespace ClassLibrary.SF
         public virtual void Save()
         {
             int id;
-            int.TryParse(_provider.Insert("SF_Organization", ID, NumberSF, TypeOrg, Name, ShortName, (MainSpec == null) ? 0 : MainSpec.ID, Email, Website, Phone,
+            int.TryParse(_provider.Insert("SF_Organization",
+                ID,
+                NumberSF,
+                TypeOrg,
+                Name,
+                ShortName,
+                (MainSpec == null) ? 0 : MainSpec.ID,
+                Email,
+                Website,
+                Phone,
                 (ParentOrganization == null) ? 0 : ParentOrganization.ID,
-                _machineGD, _machineGDF, _machineCRRT, _shift, _patientGD, _patientPD, _patientCRRT, Deleted.ToString()), out id);
+                _machineGD,
+                _machineGDF,
+                _machineCRRT,
+                _shift,
+                _patientGD,
+                _patientPD,
+                _patientCRRT,
+                INN,
+                KPP,
+                PostIndex,
+                (City == null) ? 0 : ID,
+                Street,
+                Pharmacy,
+                Deleted.ToString(),
+                CrmID
+                ), out id);
+
             ID = id;
 
             OrganizationList organizationList = OrganizationList.GetUniqueInstance();
@@ -187,19 +223,13 @@ namespace ClassLibrary.SF
             OrganizationList organizationList = OrganizationList.GetUniqueInstance();
             organizationList.Delete(this);
         }
-
-        public bool IsBelongsINNToRealRegion()
+        
+        public virtual object[] GetRow()
         {
-            if ((ID != 0) || (!(this is IHaveRegion)) || (ParentOrganization != null))
-                return true;
+            string typeOrgName = TypeOrg.ToString();
 
-            IHaveRegion organization = this as IHaveRegion;
-            
-            string idRealRegion = organization.RealRegion.ID.ToString();
-            if (organization.RealRegion.ID < 10)
-                idRealRegion = "0" + organization.RealRegion.ID.ToString();
-
-            return idRealRegion == organization.INN.Substring(0, 2);
+            return new object[] { ID, NumberSF, ShortName, typeOrgName, INN, (RealRegion == null) ? string.Empty : RealRegion.Name,
+                (City == null) ? string.Empty : City.Name, string.Empty, string.Empty, string.Empty };
         }
     }
 }

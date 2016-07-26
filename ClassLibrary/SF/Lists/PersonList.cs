@@ -10,14 +10,14 @@ namespace ClassLibrary.SF
     public class PersonList : InitProvider, IEnumerable<Person>
     {
         private static PersonList _uniqueInstance;
-        private Dictionary<string, Person> list;
+        private Dictionary<int, Person> list;
         private string tableName;
 
         private PersonList(string tableName)
         {
             this.tableName = tableName;
 
-            list = new Dictionary<string, Person>();
+            list = new Dictionary<int, Person>();
 
             LoadFromDataBase();
         }
@@ -75,18 +75,18 @@ namespace ClassLibrary.SF
             var userRightList2 = userRightList.ToList(user);
 
             var listPerson = (from item in list
-                              where userRightList2.Contains(((item.Value.Organization.ParentOrganization == null) ? (item.Value.Organization as IHaveRegion) : item.Value.Organization.ParentOrganization as IHaveRegion).RealRegion.RegionRR)
+                              where userRightList2.Contains(((item.Value.Organization.ParentOrganization == null) ? item.Value.Organization : item.Value.Organization.ParentOrganization).RealRegion.RegionRR)
                               orderby item.Value.Name
                               select item);
 
             return CreateTable(listPerson);
         }
 
-        private DataTable CreateTable(IEnumerable<KeyValuePair<string, Person>> list)
+        private DataTable CreateTable(IEnumerable<KeyValuePair<int, Person>> list)
         {
             DataTable dt = new DataTable();
             dt.Columns.Add("RR ID", typeof(int));
-            dt.Columns.Add("SF ID");
+            dt.Columns.Add("CRM ID");
             dt.Columns.Add("Фамилия");
             dt.Columns.Add("Имя");
             dt.Columns.Add("Отчество");
@@ -104,9 +104,9 @@ namespace ClassLibrary.SF
 
         public void Add(Person person)
         {
-            if (!IsExist(person.NumberSF))
+            if (!IsExist(person.ID))
             {
-                list.Add(person.NumberSF, person);
+                list.Add(person.ID, person);
             }
         }
 
@@ -117,7 +117,7 @@ namespace ClassLibrary.SF
 
         public string Delete(Person person)
         {
-            list.Remove(person.NumberSF);
+            list.Remove(person.ID);
 
             return _provider.Delete(tableName, person.ID);
         }
@@ -135,7 +135,8 @@ namespace ClassLibrary.SF
 
         public Person GetItem(string numberSF)
         {
-            return (IsExist(numberSF)) ? list[numberSF] : null;
+            var listPerson = list.Where(p => p.Value.NumberSF == numberSF).Select(p => p.Value);
+            return (listPerson.Count() > 0) ? listPerson.First() : null;
         }
 
         public Person GetItem(int id)
@@ -145,9 +146,9 @@ namespace ClassLibrary.SF
             return listNew.Count() == 0 ? null : listNew.First().Value;
         }
 
-        private bool IsExist(string numberSF)
+        private bool IsExist(int id)
         {
-            return list.ContainsKey(numberSF);
+            return list.ContainsKey(id);
         }
 
         public IEnumerator<Person> GetEnumerator()
