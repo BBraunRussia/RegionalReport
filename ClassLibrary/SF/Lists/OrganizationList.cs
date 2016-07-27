@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Data;
 using System.Collections;
+using ClassLibrary.SF.Models;
 
-namespace ClassLibrary.SF
+namespace ClassLibrary.SF.Lists
 {
     public class OrganizationList : IEnumerable
     {
@@ -70,8 +71,7 @@ namespace ClassLibrary.SF
         
         public void Delete(Organization organization)
         {
-            PersonList personList = PersonList.GetUniqueInstance();
-            personList.Delete(organization);
+            PersonList.GetUniqueInstance().Delete(organization);
 
             var subOrgList = _list.Where(itemSubOrg => itemSubOrg.Value.ParentOrganization == organization).ToList();
             subOrgList.ForEach(itemSubOrg => itemSubOrg.Value.Delete());
@@ -81,7 +81,7 @@ namespace ClassLibrary.SF
             _provider.Delete("SF_Organization", organization.ID);
         }
 
-        public List<Organization> GetChildList(Organization organization)
+        public IEnumerable<Organization> GetChildList(Organization organization)
         {
             var listBranch = GetBranchList(organization);
             var listSubOrganization = GetSubOrganizationList(organization);
@@ -91,7 +91,7 @@ namespace ClassLibrary.SF
             return listBranch;
         }
 
-        public List<Organization> GetSubOrganizationList(Organization organization)
+        public IEnumerable<Organization> GetSubOrganizationList(Organization organization)
         {
             return _list.Where(item => item.Value.ParentOrganization == organization && !(item.Value is LPU)).OrderBy(item => item.Value.ShortName).Select(item => item.Value).ToList();
         }

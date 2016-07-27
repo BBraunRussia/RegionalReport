@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data;
+using ClassLibrary.SF.Models;
 
-namespace ClassLibrary.SF
+namespace ClassLibrary.SF.Lists
 {
     public class UserRoleSFList : BaseList
     {

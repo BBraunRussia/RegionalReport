@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data;
+using ClassLibrary.SF.Lists;
 
-namespace ClassLibrary.SF
+namespace ClassLibrary.SF.Models
 {
     public class SubRegion : BaseDictionary
     {
@@ -15,8 +16,7 @@ namespace ClassLibrary.SF
         {
             int idRealRegion;
             int.TryParse(row[2].ToString(), out idRealRegion);
-            RealRegionList realRegionList = RealRegionList.GetUniqueInstance();
-            _realRegion = realRegionList.GetItem(idRealRegion) as RealRegion;
+            _realRegion = RealRegionList.GetUniqueInstance().GetItem(idRealRegion) as RealRegion;
         }
 
         public RealRegion RealRegion

@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Data;
 
-namespace ClassLibrary.SF
+namespace ClassLibrary.SF.Models
 {
-    public class TypeFin : BaseDictionary
+    public class Ownership : BaseDictionary
     {
-        public TypeFin(DataRow row)
+        public Ownership(DataRow row)
             : base(row)
         { }
     }

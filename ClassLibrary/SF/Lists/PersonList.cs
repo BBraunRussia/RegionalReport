@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Data;
 using System.Collections;
+using ClassLibrary.SF.Models;
 
-namespace ClassLibrary.SF
+namespace ClassLibrary.SF.Lists
 {
     public class PersonList : InitProvider, IEnumerable<Person>
     {
@@ -53,20 +54,21 @@ namespace ClassLibrary.SF
 
         public DataTable ToDataTable()
         {
-            return CreateTable(list.OrderBy(p => p.Value.Name));
+            return CreateTable(list.OrderBy(p => p.Value.Name).Select(p => p.Value));
         }
 
         public DataTable ToDataTable(Organization organization)
         {
-            return CreateTable(list);
+            return CreateTable(GetItems(organization));
         }
 
-        public List<Person> GetItems(Organization organization)
+        public IEnumerable<Person> GetItems(Organization organization)
         {
-            return (from item in list
-                    where ((item.Value.Organization.ID == organization.ID) || ((item.Value.Organization.ParentOrganization != null) && item.Value.Organization.ParentOrganization.ID == organization.ID))
-                    orderby item.Value.Name
-                    select item.Value).ToList();
+            return from item in list
+                   where item.Value.Organization != null 
+                        && ((item.Value.Organization.ID == organization.ID) || ((item.Value.Organization.ParentOrganization != null) && item.Value.Organization.ParentOrganization.ID == organization.ID))
+                   orderby item.Value.Name
+                   select item.Value;
         }
 
         public DataTable ToDataTable(User user)
@@ -74,15 +76,15 @@ namespace ClassLibrary.SF
             UserRightList userRightList = UserRightList.GetUniqueInstance();
             var userRightList2 = userRightList.ToList(user);
 
-            var listPerson = (from item in list
-                              where userRightList2.Contains(((item.Value.Organization.ParentOrganization == null) ? item.Value.Organization : item.Value.Organization.ParentOrganization).RealRegion.RegionRR)
-                              orderby item.Value.Name
-                              select item);
+            var listPerson = from item in list
+                             where userRightList2.Contains(((item.Value.Organization.ParentOrganization == null) ? item.Value.Organization : item.Value.Organization.ParentOrganization).RealRegion.RegionRR)
+                             orderby item.Value.Name
+                             select item.Value;
 
             return CreateTable(listPerson);
         }
 
-        private DataTable CreateTable(IEnumerable<KeyValuePair<int, Person>> list)
+        private DataTable CreateTable(IEnumerable<Person> list)
         {
             DataTable dt = new DataTable();
             dt.Columns.Add("RR ID", typeof(int));
@@ -97,7 +99,7 @@ namespace ClassLibrary.SF
             dt.Columns.Add("Город");
 
             foreach (var item in list)
-                dt.Rows.Add(item.Value.GetRow());
+                dt.Rows.Add(item.GetRow());
 
             return dt;
         }

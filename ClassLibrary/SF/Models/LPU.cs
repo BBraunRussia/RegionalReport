@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data;
+using ClassLibrary.SF.Lists;
+using ClassLibrary.SF.Interfaces;
 
-namespace ClassLibrary.SF
+namespace ClassLibrary.SF.Models
 {
     public class LPU : Organization, IAvitum
     {
@@ -17,39 +19,39 @@ namespace ClassLibrary.SF
             : base(row)
         {
             int idTypeLPU;
-            int.TryParse(row[10].ToString(), out idTypeLPU);
+            int.TryParse(row["TypeLPU_id"].ToString(), out idTypeLPU);
             TypeLPU = TypeLPUList.GetUniqueInstance().GetItem(idTypeLPU) as TypeLPU;
 
             int idOwnership;
-            int.TryParse(row[11].ToString(), out idOwnership);
+            int.TryParse(row["Ownership_id"].ToString(), out idOwnership);
             Ownership = OwnershipList.GetUniqueInstance().GetItem(idOwnership) as Ownership;
 
             int idAdmLevel;
-            int.TryParse(row[12].ToString(), out idAdmLevel);
+            int.TryParse(row["AdmLevel_id"].ToString(), out idAdmLevel);
             AdmLevel = AdmLevelList.GetUniqueInstance().GetItem(idAdmLevel) as AdmLevel;
                         
             int idLpuRR;
-            int.TryParse(row[19].ToString(), out idLpuRR);
+            int.TryParse(row["lpuRR_id"].ToString(), out idLpuRR);
             LpuRRList lpuRRList = LpuRRList.GetUniqueInstance();
             LpuRR = lpuRRList.GetItem(idLpuRR) as LpuRR;
 
-            int.TryParse(row[20].ToString(), out _bedsTotal);
-            int.TryParse(row[21].ToString(), out _bedsIC);
-            int.TryParse(row[22].ToString(), out _bedsSurgical);
-            int.TryParse(row[23].ToString(), out _operating);
+            int.TryParse(row["Organization_bedsTotal"].ToString(), out _bedsTotal);
+            int.TryParse(row["Organization_bedsIC"].ToString(), out _bedsIC);
+            int.TryParse(row["Organization_Surgical"].ToString(), out _bedsSurgical);
+            int.TryParse(row["Organization_Operating"].ToString(), out _operating);
             
             int idSubRegion;
-            int.TryParse(row[32].ToString(), out idSubRegion);
+            int.TryParse(row["subregion_id"].ToString(), out idSubRegion);
             SubRegionList subRegionList = SubRegionList.GetUniqueInstance();
             SubRegion = subRegionList.GetItem(idSubRegion) as SubRegion;
 
             int idTypeFin;
-            int.TryParse(row[33].ToString(), out idTypeFin);
+            int.TryParse(row["typeFin_id"].ToString(), out idTypeFin);
             TypeFinList typeFinList = TypeFinList.GetUniqueInstance();
             TypeFin = typeFinList.GetItem(idTypeFin) as TypeFin;
 
             int idLpuRR2;
-            int.TryParse(row[34].ToString(), out idLpuRR2);
+            int.TryParse(row["lpuRR2_id"].ToString(), out idLpuRR2);
             LpuRR2 = lpuRRList.GetItem(idLpuRR2) as LpuRR;
         }
 
@@ -113,11 +115,43 @@ namespace ClassLibrary.SF
             int idLPURR2 = (LpuRR2 == null) ? 0 : LpuRR2.ID;
 
             int id;
-            int.TryParse(_provider.Insert("SF_LPU", ID, NumberSF, TypeOrg, Name, ShortName, (MainSpec == null) ? 0 : MainSpec.ID, Email, Website, Phone,
-                idParentOrganization, (TypeLPU == null) ? 0 : TypeLPU.ID, (Ownership == null) ? 0 : Ownership.ID, (AdmLevel == null) ? 0 : AdmLevel.ID,
-                INN, KPP, PostIndex, (City == null) ? 0 : City.ID, Street, idLPURR, _bedsTotal, _bedsIC, _bedsSurgical, _operating, _machineGD,
-                _machineGDF, _machineCRRT, _shift, _patientGD, _patientPD, _patientCRRT, (SubRegion == null) ? 0 : SubRegion.ID,
-                (TypeFin == null) ? 0 :TypeFin.ID, idLPURR2, Deleted.ToString(), CrmID), out id);
+            int.TryParse(_provider.Insert("SF_LPU",
+                ID,
+                NumberSF,
+                TypeOrg,
+                Name,
+                ShortName,
+                (MainSpec == null) ? 0 : MainSpec.ID,
+                Email,
+                Website,
+                Phone,
+                idParentOrganization,
+                (TypeLPU == null) ? 0 : TypeLPU.ID,
+                (Ownership == null) ? 0 : Ownership.ID,
+                (AdmLevel == null) ? 0 : AdmLevel.ID,
+                INN,
+                KPP,
+                PostIndex,
+                (City == null) ? 0 : City.ID,
+                Street,
+                idLPURR,
+                _bedsTotal,
+                _bedsIC,
+                _bedsSurgical,
+                _operating,
+                _machineGD,
+                _machineGDF,
+                _machineCRRT,
+                _shift,
+                _patientGD,
+                _patientPD,
+                _patientCRRT,
+                (SubRegion == null) ? 0 : SubRegion.ID,
+                (TypeFin == null) ? 0 :TypeFin.ID,
+                idLPURR2,
+                Deleted.ToString(),
+                CrmID
+            ), out id);
 
             ID = id;
 
@@ -131,7 +165,7 @@ namespace ClassLibrary.SF
 
         public bool IsHaveDepartment()
         {
-            return OrganizationList.GetUniqueInstance().GetChildList(this).Exists(item => item.TypeOrg == ClassLibrary.TypeOrg.Отделение);
+            return OrganizationList.GetUniqueInstance().GetChildList(this).Count(item => item.TypeOrg == ClassLibrary.TypeOrg.Отделение) > 0;
         }
     }
 }

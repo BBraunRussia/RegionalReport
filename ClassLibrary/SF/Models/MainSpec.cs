@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Data;
 
-namespace ClassLibrary.SF
+namespace ClassLibrary.SF.Models
 {
-    public class MainSpecPerson : BaseDictionary
+    public class MainSpec : BaseDictionary
     {
-        public MainSpecPerson(DataRow row)
+        public MainSpec(DataRow row)
             : base(row)
         { }
     }

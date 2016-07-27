@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data;
+using ClassLibrary.SF.Models;
 
-namespace ClassLibrary.SF
+namespace ClassLibrary.SF.Lists
 {
     public class SubOrganizationList
     {
-        private List<Organization> _list;
+        private IEnumerable<Organization> _list;
         private Organization _organization;
 
         public SubOrganizationList(Organization organization)

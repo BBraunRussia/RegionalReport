@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data;
+using ClassLibrary.SF.Lists;
+using ClassLibrary.SF.Interfaces;
 
-namespace ClassLibrary.SF
+namespace ClassLibrary.SF.Models
 {
     public class History : BaseDictionary
     {

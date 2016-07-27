@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data;
+using ClassLibrary.SF.Lists;
+using ClassLibrary.SF.Models;
+using ClassLibrary.SF.Common;
 
-namespace ClassLibrary.SF
+namespace ClassLibrary.SF.Export
 {
     public enum RecordType { RU_Hospital, RU_Department, RU_Pharmacy, RU_Other, RU_Institution_Buying }
     

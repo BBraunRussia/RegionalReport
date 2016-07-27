@@ -8,6 +8,8 @@ using System.Text;
 using System.Windows.Forms;
 using ClassLibrary.SF;
 using ClassLibrary;
+using ClassLibrary.SF.Models;
+using ClassLibrary.SF.Lists;
 
 namespace RegionR.SF
 {

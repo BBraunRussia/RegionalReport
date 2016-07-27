@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Data;
 
-namespace ClassLibrary.SF
+namespace ClassLibrary.SF.Models
 {
-    public class AdmLevel : BaseDictionary
+    public class AcademTitle : BaseDictionary
     {
-        public AdmLevel(DataRow row)
+        public AcademTitle(DataRow row)
             : base(row)
         { }
     }

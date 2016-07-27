@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Data;
 
-namespace ClassLibrary.SF
+namespace ClassLibrary.SF.Models
 {
     public class Position : BaseDictionary
     {

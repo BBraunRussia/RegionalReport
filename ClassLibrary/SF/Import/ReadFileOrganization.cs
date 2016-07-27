@@ -5,6 +5,10 @@ using System.Text;
 using System.IO;
 using ClassLibrary.Common;
 using System.Data;
+using ClassLibrary.SF.Lists;
+using ClassLibrary.SF.Models;
+using ClassLibrary.SF.Interfaces;
+using ClassLibrary.SF.Export;
 
 namespace ClassLibrary.SF.Import
 {
@@ -65,15 +69,15 @@ namespace ClassLibrary.SF.Import
 
             organization.INN = model.INN;
             organization.KPP = model.KPP;
-            organization.RealRegion = GetItem(realRegionList, model.RealRegion, "Регион", model.NumberSF) as RealRegion;
-            organization.City = GetItem(cityList, model.City, "Город", model.NumberSF) as City;
+            organization.RealRegion = GetItem(realRegionList, model.RealRegion, "Region", model.NumberSF) as RealRegion;
+            organization.City = GetItem(cityList, model.City, "City", model.NumberSF) as City;
             organization.PostIndex = model.PostIndex;
             organization.Street = model.Street;
             
             if (organization is LPU)
             {
                 LPU lpu = organization as LPU;
-                lpu.AdmLevel = GetItem(admLevelList, model.AdmLevel, "AdmLevel", model.NumberSF) as AdmLevel;
+                lpu.AdmLevel = GetItem(admLevelList, model.AdmLevel, "AdminLevel", model.NumberSF) as AdmLevel;
                 lpu.TypeFin = GetItem(typeFinList, model.TypeFin, "TypeFin", model.NumberSF) as TypeFin;
                 lpu.MainSpec = GetItem(mainSpecList, model.MainSpec, "MainSpec", model.NumberSF) as MainSpec;
 
@@ -81,7 +85,7 @@ namespace ClassLibrary.SF.Import
                 lpu.SubRegion = subRegion;
                 if (subRegion == null)
                 {
-                    Logger.WriteNotFound(model.SubRegion, "Субрегион", model.NumberSF);
+                    Logger.WriteNotFound(model.SubRegion, "SubRegion", model.NumberSF);
                 }
                 
                 lpu.BedsTotal = model.BedsTotal;
@@ -89,7 +93,7 @@ namespace ClassLibrary.SF.Import
                 lpu.BedsSurgical = model.BedsSurgical;
                 lpu.Operating = model.Operating;
                 
-                lpu.TypeLPU = GetItem(typeLPUList, model.TypeLPU, "Тип ЛПУ", model.NumberSF) as TypeLPU;
+                lpu.TypeLPU = GetItem(typeLPUList, model.TypeLPU, "Hospital type", model.NumberSF) as TypeLPU;
                 lpu.Ownership = GetItem(ownershipList, model.Ownership, "Ownership", model.NumberSF) as Ownership;
             }
             if (organization is IAvitum)
@@ -131,7 +135,7 @@ namespace ClassLibrary.SF.Import
                 }
                 catch (NullReferenceException)
                 {
-                    Logger.WriteNotFound(string.Concat(model.RecordType, " ", model.ClientType), "Тип организации", model.NumberSF);
+                    Logger.WriteNotFound(string.Concat(model.RecordType, " ", model.ClientType), "Organization type", model.NumberSF);
                 }
             }
 
@@ -159,7 +163,7 @@ namespace ClassLibrary.SF.Import
             if (model.ClientType == ExportOrganization.clientType[4])
                 return TypeOrg.Стоматология;
             
-            throw new NullReferenceException("Не удалось определеть тип организации");
+            throw new NullReferenceException("Failed recognize Organization type");
         }
     }
 }

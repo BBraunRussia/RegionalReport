@@ -5,7 +5,7 @@ using System.Text;
 using System.Data;
 using ClassLibraryBBAuto;
 
-namespace ClassLibrary.SF
+namespace ClassLibrary.SF.Common
 {
     public class CreateExcel
     {

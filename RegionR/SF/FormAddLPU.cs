@@ -7,7 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using ClassLibrary;
-using ClassLibrary.SF;
+using ClassLibrary.SF.Lists;
+using ClassLibrary.SF.Models;
+using ClassLibrary.SF.Common;
 
 namespace RegionR.SF
 {
@@ -182,8 +184,7 @@ namespace RegionR.SF
                                     PatientPD = string.IsNullOrEmpty(item.PatientPD) ? 0 : Convert.ToInt32(item.PatientPD),
                                     PatientCRRT = string.IsNullOrEmpty(item.PatientCRRT) ? 0 : Convert.ToInt32(item.PatientCRRT)
                                 };
-
-
+                
                 tbMachineGD.Text = childList.Sum(item => item.MachineGD).ToString();
                 tbMachineGDF.Text = childList.Sum(item => item.MachineGDF).ToString();
                 tbMachineCRRT.Text = childList.Sum(item => item.MachineCRRT).ToString();

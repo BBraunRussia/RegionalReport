@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data;
+using ClassLibrary.SF.Lists;
+using ClassLibrary.SF.Interfaces;
 
-namespace ClassLibrary.SF
+namespace ClassLibrary.SF.Models
 {
     public class Person : BaseDictionary, IHistory
     {
@@ -21,39 +23,39 @@ namespace ClassLibrary.SF
         public Person(DataRow row)
             : base(row)
         {
-            LastName = row[1].ToString();
-            NumberSF = row[2].ToString();
-            FirstName = row[3].ToString();
-            SecondName = row[4].ToString();
+            LastName = row["person_lastName"].ToString();
+            NumberSF = row["person_numberSF"].ToString();
+            FirstName = row["person_firstName"].ToString();
+            SecondName = row["person_secondName"].ToString();
 
-            Appeal = Convert.ToInt32(row[5].ToString());
+            Appeal = Convert.ToInt32(row["appeal_id"].ToString());
             
             int idPosition;
-            int.TryParse(row[6].ToString(), out idPosition);
+            int.TryParse(row["position_id"].ToString(), out idPosition);
             PositionList positionList = PositionList.GetUniqueInstance();
             Position = positionList.GetItem(idPosition) as Position;
             
             int idMainSpecPerson;
-            int.TryParse(row[7].ToString(), out idMainSpecPerson);
+            int.TryParse(row["mainSpecPerson_id"].ToString(), out idMainSpecPerson);
             MainSpecPersonList mainSpecPersonList = MainSpecPersonList.GetUniqueInstance();
             MainSpecPerson = mainSpecPersonList.GetItem(idMainSpecPerson) as MainSpecPerson;
 
             int idAcademTitle;
-            int.TryParse(row[8].ToString(), out idAcademTitle);
+            int.TryParse(row["academTitle_id"].ToString(), out idAcademTitle);
             AcademTitleList academTitleList = AcademTitleList.GetUniqueInstance();
             AcademTitle = academTitleList.GetItem(idAcademTitle) as AcademTitle;
 
-            Email = row[9].ToString();
-            Mobile = row[10].ToString();
-            Phone = row[11].ToString();
-            Comment = row[12].ToString();
+            Email = row["person_email"].ToString();
+            Mobile = row["person_mobile"].ToString();
+            Phone = row["person_phone"].ToString();
+            Comment = row["person_comment"].ToString();
 
             int idOrganization;
-            int.TryParse(row[13].ToString(), out idOrganization);
+            int.TryParse(row["organization_id"].ToString(), out idOrganization);
             OrganizationList organizationList = OrganizationList.GetUniqueInstance();
             Organization = organizationList.GetItem(idOrganization);
-            
-            CrmID = row[14].ToString();
+
+            CrmID = row["person_crmID"].ToString();
             Deleted = false;
         }
 
@@ -86,9 +88,18 @@ namespace ClassLibrary.SF
             Organization organization = (Organization == null) ? new LPU(TypeOrg.ЛПУ) :
                 Organization.ParentOrganization == null ? Organization : Organization.ParentOrganization;
 
-            return new object[] { ID, CrmID, LastName, FirstName, SecondName, GetOrganizationName(),
-                GetSubOrganizationName(), (Position == null) ? string.Empty : Position.Name, 
-                (organization.RealRegion == null) ? string.Empty : organization.RealRegion.Name, (organization.City == null) ? string.Empty : organization.City.Name };
+            return new object[] { 
+                ID,
+                CrmID,
+                LastName,
+                FirstName,
+                SecondName,
+                GetOrganizationName(),
+                GetSubOrganizationName(),
+                (Position == null) ? string.Empty : Position.Name, 
+                (organization.RealRegion == null) ? string.Empty : organization.RealRegion.Name,
+                (organization.City == null) ? string.Empty : organization.City.Name
+            };
         }
 
         //TODO: Сделать сохранение дня рождения
@@ -151,7 +162,7 @@ namespace ClassLibrary.SF
                 return string.Empty;
             }
 
-            return (Organization is Organization) ? string.Empty : (Organization.ParentOrganization == null) ? "Администрация" : Organization.ShortName;
+            return (Organization.ParentOrganization != null) ? Organization.ShortName : (Organization is LPU) ? "Администрация" : Organization.ShortName;
         }
     }
 }

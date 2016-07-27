@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 
-namespace ClassLibrary.Common
+namespace ClassLibrary.SF.Import
 {
     public class SettingsImportSF
     {
@@ -23,14 +23,14 @@ namespace ClassLibrary.Common
         {
             if (!File.Exists(SETTINGS_FILENAME))
             {
-                throw new NullReferenceException("Отсутствует файл settings.ini");
+                throw new NullReferenceException("Can't find the file settings.ini");
             }
             
             string[] lines = File.ReadAllLines(SETTINGS_FILENAME);
 
             if (lines.Count() < 3)
             {
-                throw new NullReferenceException("Файл settings.ini поверждён");
+                throw new NullReferenceException("File settings.ini is broken");
             }
 
             try
@@ -41,7 +41,7 @@ namespace ClassLibrary.Common
             }
             catch (IndexOutOfRangeException)
             {
-                throw new NullReferenceException("Файл settings.ini поверждён, проверьте наличие разделителя");
+                throw new NullReferenceException("File settings.ini is broken. Is have separator?");
             }
         }
 

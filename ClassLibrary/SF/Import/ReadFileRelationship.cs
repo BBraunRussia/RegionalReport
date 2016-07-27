@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data;
+using ClassLibrary.SF.Lists;
+using ClassLibrary.SF.Models;
 
 namespace ClassLibrary.SF.Import
 {

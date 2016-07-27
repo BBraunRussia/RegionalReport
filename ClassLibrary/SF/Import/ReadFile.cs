@@ -89,7 +89,7 @@ namespace ClassLibrary.SF.Import
 
             if (newLine.Count() != count)
             {
-                Logger.Write(string.Concat("Не удалось распознать строку №", (index + 1), " в файле", Path.GetFileName(fileName)));
+                Logger.Write(string.Concat("Can't recognize the string №", (index + 1), " in the file", Path.GetFileName(fileName)));
                 return null;
             }
 

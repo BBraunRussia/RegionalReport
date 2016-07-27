@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using ClassLibrary.SF;
 using RegionR.SF;
 using ClassLibrary;
+using ClassLibrary.SF.Export;
 
 namespace RegionR
 {

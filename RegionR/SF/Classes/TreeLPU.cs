@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using ClassLibrary.SF;
 using System.Windows.Forms;
+using ClassLibrary.SF.Lists;
+using ClassLibrary.SF.Models;
 
 namespace RegionR.SF
 {

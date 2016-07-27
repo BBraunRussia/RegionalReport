@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Data;
 using ClassLibrary.Common;
+using ClassLibrary.SF.Lists;
+using ClassLibrary.SF.Models;
 
 namespace ClassLibrary.SF.Import
 {
@@ -40,7 +42,7 @@ namespace ClassLibrary.SF.Import
             Person person = GetPerson(model);
             if (person == null)
             {
-                Logger.Write("Не удалось создать персону " + model.NumberSF);
+                Logger.Write("Can't create a person. NumberSF: " + model.NumberSF);
                 return;
             }
 

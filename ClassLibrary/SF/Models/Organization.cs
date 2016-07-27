@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data;
+using ClassLibrary.SF.Interfaces;
+using ClassLibrary.SF.Lists;
 
-namespace ClassLibrary.SF
+namespace ClassLibrary.SF.Models
 {
     public class Organization : IHistory, IAvitum
     {
@@ -24,9 +26,9 @@ namespace ClassLibrary.SF
 
         public static Organization CreateItem(DataRow row)
         {
-            TypeOrg typeOrg = (TypeOrg)Convert.ToInt32(row[2].ToString());
+            TypeOrg typeOrg = (TypeOrg)Convert.ToInt32(row["TypeOrg_id"].ToString());
             int idParent;
-            int.TryParse(row[9].ToString(), out idParent);
+            int.TryParse(row["parent_id"].ToString(), out idParent);
 
             return (typeOrg == TypeOrg.ЛПУ) ? new LPU(row) : new Organization(row);
         }
@@ -45,48 +47,48 @@ namespace ClassLibrary.SF
             _provider = Provider.GetProvider();
 
             int id;
-            int.TryParse(row[0].ToString(), out id);
+            int.TryParse(row["Organization_id"].ToString(), out id);
             ID = id;
 
-            NumberSF = row[1].ToString();
+            NumberSF = row["Organization_NumberSF"].ToString();
 
             int idTypeOrg;
-            int.TryParse(row[2].ToString(), out idTypeOrg);
+            int.TryParse(row["TypeOrg_id"].ToString(), out idTypeOrg);
             TypeOrg = (TypeOrg)idTypeOrg;
 
-            Name = row[3].ToString();
-            ShortName = row[4].ToString();
+            Name = row["Organization_name"].ToString();
+            ShortName = row["Organization_sName"].ToString();
             
             int idMainSpec;
-            int.TryParse(row[5].ToString(), out idMainSpec);
+            int.TryParse(row["MainSpec_id"].ToString(), out idMainSpec);
             MainSpec = MainSpecList.GetUniqueInstance().GetItem(idMainSpec) as MainSpec;
 
-            Email = row[6].ToString();
-            Website = row[7].ToString();
-            Phone = row[8].ToString();
+            Email = row["Organization_email"].ToString();
+            Website = row["Organization_website"].ToString();
+            Phone = row["Organization_phone"].ToString();
 
-            int.TryParse(row[9].ToString(), out _idParentOrganization);
+            int.TryParse(row["parent_id"].ToString(), out _idParentOrganization);
 
-            KPP = row[13].ToString();
-            PostIndex = row[14].ToString();
+            KPP = row["Organization_KPP"].ToString();
+            PostIndex = row["Organization_PostIndex"].ToString();
 
             int idCity;
-            int.TryParse(row[15].ToString(), out idCity);
+            int.TryParse(row["City_id"].ToString(), out idCity);
             City = CityList.GetUniqueInstance().GetItem(idCity) as City;
 
-            Street = row[17].ToString();
-            INN = row[18].ToString();
+            Street = row["Organization_street"].ToString();
+            INN = row["Organization_INN"].ToString();
 
-            int.TryParse(row[24].ToString(), out _machineGD);
-            int.TryParse(row[25].ToString(), out _machineGDF);
-            int.TryParse(row[26].ToString(), out _machineCRRT);
-            int.TryParse(row[27].ToString(), out _shift);
-            int.TryParse(row[28].ToString(), out _patientGD);
-            int.TryParse(row[29].ToString(), out _patientPD);
-            int.TryParse(row[30].ToString(), out _patientCRRT);
-            
-            Pharmacy = row[31].ToString();
-            CrmID = row[35].ToString();
+            int.TryParse(row["Organization_machineGD"].ToString(), out _machineGD);
+            int.TryParse(row["Organization_machineGDF"].ToString(), out _machineGDF);
+            int.TryParse(row["Organization_machineCRRT"].ToString(), out _machineCRRT);
+            int.TryParse(row["Organization_shift"].ToString(), out _shift);
+            int.TryParse(row["Organization_patientGD"].ToString(), out _patientGD);
+            int.TryParse(row["Organization_patientPD"].ToString(), out _patientPD);
+            int.TryParse(row["Organization_patientCRRT"].ToString(), out _patientCRRT);
+
+            Pharmacy = row["pharmacy"].ToString();
+            CrmID = row["organization_crmID"].ToString();
             Deleted = false;
         }
 
@@ -228,7 +230,7 @@ namespace ClassLibrary.SF
         {
             string typeOrgName = TypeOrg.ToString();
 
-            return new object[] { ID, NumberSF, ShortName, typeOrgName, INN, (RealRegion == null) ? string.Empty : RealRegion.Name,
+            return new object[] { ID, CrmID, ShortName, typeOrgName, INN, (RealRegion == null) ? string.Empty : RealRegion.Name,
                 (City == null) ? string.Empty : City.Name, string.Empty, string.Empty, string.Empty };
         }
     }
