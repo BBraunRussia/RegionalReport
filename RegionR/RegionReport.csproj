@@ -269,6 +269,7 @@
     <Compile Include="aeFR\aeOutlay.Designer.cs">
       <DependentUpon>aeOutlay.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\IParamController.cs" />
     <Compile Include="DialogList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -390,6 +391,12 @@
       <DependentUpon>FirstPage.cs</DependentUpon>
     </Compile>
     <Compile Include="globalData.cs" />
+    <Compile Include="HT\HT_Add_LPU.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HT\HT_Add_LPU.Designer.cs">
+      <DependentUpon>HT_Add_LPU.cs</DependentUpon>
+    </Compile>
     <Compile Include="Komment.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -509,6 +516,7 @@
     <Compile Include="SF\Classes\UserLogged.cs" />
     <Compile Include="Controllers\BaseOperations.cs" />
     <Compile Include="Controllers\IController.cs" />
+    <Compile Include="SF\Controllers\LPUController.cs" />
     <Compile Include="SF\Controllers\OrganizationListController.cs" />
     <Compile Include="Controllers\LpuRRController.cs" />
     <Compile Include="SF\Controllers\PersonListController.cs" />
@@ -762,6 +770,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FirstPage.resx">
       <DependentUpon>FirstPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HT\HT_Add_LPU.resx">
+      <DependentUpon>HT_Add_LPU.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Komment.resx">
       <DependentUpon>Komment.cs</DependentUpon>

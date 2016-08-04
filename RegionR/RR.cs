@@ -23,6 +23,7 @@ using System.Globalization;
 using DataLayer;
 using ClassLibrary;
 using ClassLibraryBBAuto;
+using RegionR.HT;
 
 namespace RegionR
 {
@@ -68,7 +69,7 @@ namespace RegionR
             /* Закрыть доступ ОPM на косвенные продажи * /
             btnAdd.Enabled =  false;
             btnEdit.Enabled = false;
-            btnDel.Enabled =  false;
+            btnDel.Enabled =  false;           
             /**/
             setCurDateForGlobalDataAndForComponents();
 
@@ -119,6 +120,7 @@ namespace RegionR
             dateTimePicker18.Value = globalData.CurDate;
             dateTimePicker19.Value = globalData.CurDate;
             dateTimePicker20.Value = globalData.CurDate;
+            dateTimePicker23.Value = globalData.CurDate;
 
             fillComboBoxYear(cbYearMA);
             fillComboBoxYear(cbYearAcc);
@@ -201,6 +203,7 @@ namespace RegionR
             toolStripMenuItem6.Visible = false;
             divideToolStripMenuItem.Visible = false;
             usersToolStripMenuItem1.Visible = false;
+            konsToolStripMenuItem.Visible = false;
 
             регионыToolStripMenuItem.Visible = false;
             отчётыToolStripMenuItem.Visible = false;
@@ -228,6 +231,7 @@ namespace RegionR
                 toolStripMenuItem6.Visible = true;
                 divideToolStripMenuItem.Visible = true;
                 usersToolStripMenuItem1.Visible = true;
+                konsToolStripMenuItem.Visible = true;
 
                 регионыToolStripMenuItem.Visible = true;
                 отчётыToolStripMenuItem.Visible = true;
@@ -352,11 +356,11 @@ namespace RegionR
                 if ((globalData.UserAccess == 5) || (globalData.UserAccess == 6) || (globalData.UserAccess == 2))
                     acs = sql1.GetRecordsOne("exec GetUserRentAccess @p1", globalData.UserID);
 
-                if ((globalData.UserAccess == 1) || (globalData.UserID == 78) || (globalData.UserID == 7) || (globalData.UserAccess == 2 && acs == "1") || (globalData.UserAccess == 5 && acs == "1") || (globalData.UserAccess == 13) || (globalData.UserAccess == 6 && acs == "1") || (globalData.UserAccess == 4) || (globalData.UserAccess == 3))
+                if ((globalData.UserAccess == 1) || (globalData.UserID == 78) || (globalData.UserID == 7) || (globalData.UserAccess == 2 && acs == "1") || (globalData.UserAccess == 5 && acs == "1") || (globalData.UserAccess == 13) || (globalData.UserAccess == 6 && acs == "1") || (globalData.UserAccess == 4) || (globalData.UserAccess == 3) || (globalData.UserID == 423))
                 {
                     treeView1.Nodes.Add("Rent", "Отчётность");
                     tn = treeView1.Nodes["Rent"];
-                    if (globalData.UserAccess != 3)
+                    if ((globalData.UserAccess != 3) && (globalData.UserID != 423))
                     {
                         tn.Nodes.Add("Маркетинг 1");
                         tn2 = tn.Nodes[0];
@@ -373,12 +377,14 @@ namespace RegionR
                         if ((globalData.UserAccess == 1) || (globalData.UserAccess == 4) || (globalData.UserID == 78) || (globalData.UserID == 7) || (globalData.UserID == 6) || (globalData.UserAccess == 13))
                             tn2.Nodes.Add("Сторно");
                     }
-                    if ((globalData.UserAccess == 3) || (globalData.UserAccess == 1) || (globalData.UserAccess == 4))
+                    if ((globalData.UserAccess == 3) || (globalData.UserAccess == 1) || (globalData.UserAccess == 4) || (globalData.UserID == 423))
                         tn.Nodes.Add("Маркетинг 2");
 
                 }
 
-
+                //TODO: расскомментировать!!! Консигнации и ХТ
+                //treeView1.Nodes.Add("Консигнации");
+                //treeView1.Nodes.Add("Проект химиотерапия");
                 treeView1.Nodes.Add("Справочник пользователей");
 
 
@@ -624,8 +630,11 @@ namespace RegionR
 
                     tn2 = tn.Nodes["HC"];
                     tn2.Nodes.Add("Общая динамика продаж");
+                    tn2.Nodes.Add("Общая динамика продаж по рег.директорам");
                     tn2.Nodes.Add("Общий ассортиментный план");
                     tn2.Nodes.Add("Личные продажи (список)");
+                    //TODO: личные продажи список HC
+                    tn2.Nodes.Add("Личные продажи (все дивизионы)");
                     tn2.Nodes.Add("Общий маркетинговый план");
                     tn2.Nodes.Add("Общий ассортиментный план " + year);
                     tn2.Nodes.Add("Выполнение плана по России");
@@ -636,8 +645,11 @@ namespace RegionR
 
                     tn2 = tn.Nodes["AE"];
                     tn2.Nodes.Add("Общая динамика продаж");
+                    tn2.Nodes.Add("Общая динамика продаж по рег.директорам");
                     tn2.Nodes.Add("Общий ассортиментный план");
                     tn2.Nodes.Add("Личные продажи (список)");
+                    //TODO: личные продажи список AE
+                    tn2.Nodes.Add("Личные продажи (все дивизионы)");
                     tn2.Nodes.Add("Общий маркетинговый план");
                     tn2.Nodes.Add("Общий ассортиментный план " + year);
                     tn2.Nodes.Add("VisitsRegDir", "Визиты");
@@ -648,6 +660,8 @@ namespace RegionR
                     tn2 = tn.Nodes["OM"];
                     tn2.Nodes.Add("Общая динамика продаж");
                     tn2.Nodes.Add("Личные продажи (список)");
+                    //TODO: личные продажи список OM
+                    tn2.Nodes.Add("Личные продажи (все дивизионы)");
                     tn2.Nodes.Add("VisitsRegDir", "Визиты");
                     tn3 = tn2.Nodes["VisitsRegDir"];
                     tn3.Nodes.Add("Планировщик");
@@ -1048,6 +1062,22 @@ namespace RegionR
                 Cursor = Cursors.Default;
                 return;
             }
+            if (tn1.Text == "Консигнации")
+            {
+                tabControl1.SelectedTab = tabControl1.TabPages["tabPage30"];
+                tabControl1.Visible = true;
+                loadKonsignation();
+                Cursor = Cursors.Default;
+                return;
+            }
+            if (tn1.Text == "Проект химиотерапия")
+            {
+                tabControl1.SelectedTab = tabControl1.TabPages["tabPage29"];
+                tabControl1.Visible = true;
+                
+                Cursor = Cursors.Default;
+                return;
+            }
             if (tn1.Text == "Отчёты дистрибьюторов")
             {
                 dt1 = sql1.GetRecords("exec SelCustRepDist");
@@ -1154,7 +1184,7 @@ namespace RegionR
                     tabControl1.SelectedTab = tabControl1.TabPages["tabPage24"];
                     tabControl1.Visible = true;
                     _dgvRentRD.Columns.Clear();
-                    _dgvRentRD.Rows.Clear();
+                    _dgvRentRD.Rows.Clear();                   
                     loadSvodRent(false);
                 }
                 if (tn1.Text == "Сводный отчёт")
@@ -1766,6 +1796,24 @@ namespace RegionR
 
                         break;
                     }
+                case "Общая динамика продаж по рег.директорам":
+                    {
+                        button20.Visible = false;
+
+                        globalData.RD = String.Empty;
+                        globalData.Div = tn1.Parent.Text;
+                        tabControl1.SelectedIndex = 4;
+                        tabControl1.Visible = true;
+
+                        treeView1.Focus();
+
+                        label14.Visible = false;
+                        cbRegions.Visible = false;
+                     
+                        loadDynAllRD();
+
+                        break;
+                    }
                 case "Общая динамика продаж":
                     {
                         switch (tn1.Parent.Text)
@@ -1920,6 +1968,34 @@ namespace RegionR
                                     btnBasic.Visible = false;
                                     fillRegions("", cbRegionAllPrivSales);
                                     selAllPrivSales();
+                                    break;
+                                }
+                        }
+                        break;
+                    }
+                case "Личные продажи (все дивизионы)":
+                    {
+                        switch (tn1.Parent.Text)
+                        {
+                            case "HC":
+                                {
+                                    globalData.Div = "HC";
+                                    loadUserSalesDiv();
+                                    selUserSalesDiv();
+                                    break;
+                                }
+                            case "AE":
+                                {
+                                    globalData.Div = "AE";
+                                    loadUserSalesDiv();
+                                    selUserSalesDiv();
+                                    break;
+                                }
+                            case "OM":
+                                {
+                                    globalData.Div = "OM";
+                                    loadUserSalesDiv();
+                                    selUserSalesDiv();
                                     break;
                                 }
                         }
@@ -2132,7 +2208,7 @@ namespace RegionR
 
 
                                 dgv.Columns.Insert(27, comboCol);
-                                dgv.Columns[27].Width = 100;
+                                dgv.Columns[27].Width = 200;
                                 dgv.Columns[27].HeaderText = "ЛПУ";
                                 dgv.Columns["lpu"].SortMode = DataGridViewColumnSortMode.Programmatic;
 
@@ -2570,37 +2646,60 @@ namespace RegionR
                             dgv.Columns.Add("prEuro", "% плана (Евро)");
 
                             dgv.Columns.Add("JanFact", "1");
+                            dgv.Columns.Add("JanFactE", "");
                             dgv.Columns.Add("FebFact", "2");
+                            dgv.Columns.Add("FebFactE", "");
                             dgv.Columns.Add("MartFact", "");
+                            dgv.Columns.Add("MartFactE", "");
                             dgv.Columns.Add("AprFact", "");
+                            dgv.Columns.Add("AprFactE", "");
                             dgv.Columns.Add("MayFact", "");
+                            dgv.Columns.Add("MayFactE", "");
                             dgv.Columns.Add("JuneFact", "");
+                            dgv.Columns.Add("JuneFactE", "");
                             dgv.Columns.Add("JuleFact", "");
+                            dgv.Columns.Add("JuleFactE", "");
                             dgv.Columns.Add("AugFact", "");
+                            dgv.Columns.Add("AugFactE", "");
                             dgv.Columns.Add("SepFact", "");
+                            dgv.Columns.Add("SepFactE", "");
                             dgv.Columns.Add("OktFact", "");
+                            dgv.Columns.Add("OktFactE", "");
                             dgv.Columns.Add("NovFact", "");
+                            dgv.Columns.Add("NovFactE", "");
                             dgv.Columns.Add("DecFact", "");
+                            dgv.Columns.Add("DecFactE", "");
 
                             dgv.Columns.Add("prRub", "% плана (РУБ)");
 
                             dgv.Columns.Add("JanFactR", "1");
+                            dgv.Columns.Add("JanFactR0", "");
                             dgv.Columns.Add("FebFactR", "2");
+                            dgv.Columns.Add("FebFactR0", "");
                             dgv.Columns.Add("MartFactR", "");
+                            dgv.Columns.Add("MartFactR0", "");
                             dgv.Columns.Add("AprFactR", "");
+                            dgv.Columns.Add("AprFactR0", "");
                             dgv.Columns.Add("MayFactR", "");
+                            dgv.Columns.Add("MayFactR0", "");
                             dgv.Columns.Add("JuneFactR", "");
+                            dgv.Columns.Add("JuneFactR0", "");
                             dgv.Columns.Add("JuleFactR", "");
+                            dgv.Columns.Add("JuleFactR0", "");
                             dgv.Columns.Add("AugFactR", "");
+                            dgv.Columns.Add("AugFactR0", "");
                             dgv.Columns.Add("SepFactR", "");
+                            dgv.Columns.Add("SepFactR0", "");
                             dgv.Columns.Add("OktFactR", "");
+                            dgv.Columns.Add("OktFactR0", "");
                             dgv.Columns.Add("NovFactR", "");
+                            dgv.Columns.Add("NovFactR0", "");
                             dgv.Columns.Add("DecFactR", "");
-
+                            dgv.Columns.Add("DecFactR0", "");
 
                             dgv.Columns.Add("nom_group", "");
                             dgv.Columns.Add("div", "");
-
+                           
                             dgv.Columns.Add("h1Sales", "I квартал Общий объем закупок ЛПУ");
                             dgv.Columns.Add("vc_id1", "");
                             dgv.Columns.Add("vc_sum1", "I квартал Объем закупок конкурентов");
@@ -2623,6 +2722,8 @@ namespace RegionR
                             dgv.Columns.Add("upd4", "");
                             
                             dgv.Columns.Add("prVC", "Доли конкурентов в объеме продаж " + year.ToString() + " год");
+
+                            
                         }
                         else
                         {
@@ -2665,7 +2766,8 @@ namespace RegionR
 
                             dgv.Columns.Add("lyplan", (year - 1).ToString() + "\nплан, шт");
                             dgv.Columns.Add("lydilcost", (year - 1).ToString() + "\nДил. цена\nбез НДС");
-                            dgv.Columns.Add("lyplanEuro", (year - 1).ToString() + "\nплан, EUR");
+                            //dgv.Columns.Add("lyplanEuro", (year - 1).ToString() + "\nплан, EUR");
+                            dgv.Columns.Add("lyplanEuro", (year).ToString() + "\nплан СТАРЫЙ, EUR");
                             dgv.Columns.Add("lyfact", (year - 1).ToString() + "\nфакт, шт");
                             dgv.Columns.Add("lyfactEuro", (year - 1).ToString() + "\nфакт, EUR");
 
@@ -2675,7 +2777,7 @@ namespace RegionR
                             dgv.Columns.Add("cyplan", year.ToString() + "\nплан, шт");
                             dgv.Columns.Add("cydilcost", year.ToString() + "\nДил. цена\nбез НДС");                           
                             dgv.Columns.Add("cyplanEuro", year.ToString() + "\nплан, EUR");                           
-                            dgv.Columns.Add("prCyLyEuro", "План " + year.ToString() + "/\nФакт " + (year - 1).ToString() + " (%)");
+                            dgv.Columns.Add("prCyLyEuro", "План Новый" + year.ToString() + "/\nПлан Старый " + (year).ToString() + " (%)");
                             
                             dgv.Columns.Add("nom_group", "");
                             dgv.Columns.Add("nom_seq", "");
@@ -4146,6 +4248,30 @@ namespace RegionR
             formatDyn();
         }
 
+
+        private void loadDynAllRD()
+        {
+            tabControl1.SelectedIndex = 4;
+            tabControl1.Visible = true;
+
+            Sql sql1 = new Sql();
+            _dgv5.DataSource = null;
+            _dgv5.Columns.Clear();
+            DataTable dt1 = new DataTable();
+            
+            dt1 = sql1.GetRecords("exec SelDynRD_All @p1, @p2", globalData.Div, cbYearDyn.SelectedItem.ToString());
+            _dgv5.DataSource = dt1;
+
+            if (dt1 == null)
+            {
+                MessageBox.Show("Не удалось получить данные для построения динамики продаж", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            formatDynAllRD();
+            
+        }
+
         private void loadDyn(String regID)
         {
             tabControl1.SelectedIndex = 4;
@@ -4365,6 +4491,148 @@ namespace RegionR
             visiblePrivSales(_dgv5, radioButton15, radioButton14);
         }
 
+        private void formatDynAllRD()
+        {
+            _dgv5.Columns["id"].Visible = false;
+
+            _dgv5.Columns["cm1"].DefaultCellStyle.Format = "N3";
+            _dgv5.Columns["cm2"].DefaultCellStyle.Format = "N3";
+            _dgv5.Columns["cm3"].DefaultCellStyle.Format = "N3";
+            _dgv5.Columns["cm4"].DefaultCellStyle.Format = "N3";
+            _dgv5.Columns["cm5"].DefaultCellStyle.Format = "N3";
+            _dgv5.Columns["cm6"].DefaultCellStyle.Format = "N3";
+            _dgv5.Columns["cm7"].DefaultCellStyle.Format = "N3";
+            _dgv5.Columns["cm8"].DefaultCellStyle.Format = "N3";
+            _dgv5.Columns["cm9"].DefaultCellStyle.Format = "N3";
+            _dgv5.Columns["cm10"].DefaultCellStyle.Format = "N3";
+            _dgv5.Columns["cm11"].DefaultCellStyle.Format = "N3";
+            _dgv5.Columns["cm12"].DefaultCellStyle.Format = "N3";
+            _dgv5.Columns["total"].DefaultCellStyle.Format = "N3";
+
+         
+            _dgv5.Columns["cm1R"].DefaultCellStyle.Format = "N3";
+            _dgv5.Columns["cm2R"].DefaultCellStyle.Format = "N3";
+            _dgv5.Columns["cm3R"].DefaultCellStyle.Format = "N3";
+            _dgv5.Columns["cm4R"].DefaultCellStyle.Format = "N3";
+            _dgv5.Columns["cm5R"].DefaultCellStyle.Format = "N3";
+            _dgv5.Columns["cm6R"].DefaultCellStyle.Format = "N3";
+            _dgv5.Columns["cm7R"].DefaultCellStyle.Format = "N3";
+            _dgv5.Columns["cm8R"].DefaultCellStyle.Format = "N3";
+            _dgv5.Columns["cm9R"].DefaultCellStyle.Format = "N3";
+            _dgv5.Columns["cm10R"].DefaultCellStyle.Format = "N3";
+            _dgv5.Columns["cm11R"].DefaultCellStyle.Format = "N3";
+            _dgv5.Columns["cm12R"].DefaultCellStyle.Format = "N3";
+            _dgv5.Columns["totalR"].DefaultCellStyle.Format = "N3";
+
+            _dgv5.Columns["cm1"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            _dgv5.Columns["cm2"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            _dgv5.Columns["cm3"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            _dgv5.Columns["cm4"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            _dgv5.Columns["cm5"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            _dgv5.Columns["cm6"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            _dgv5.Columns["cm7"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            _dgv5.Columns["cm8"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            _dgv5.Columns["cm9"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            _dgv5.Columns["cm10"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            _dgv5.Columns["cm11"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            _dgv5.Columns["cm12"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            _dgv5.Columns["total"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
+            _dgv5.Columns["cm1R"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            _dgv5.Columns["cm2R"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            _dgv5.Columns["cm3R"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            _dgv5.Columns["cm4R"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            _dgv5.Columns["cm5R"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            _dgv5.Columns["cm6R"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            _dgv5.Columns["cm7R"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            _dgv5.Columns["cm8R"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            _dgv5.Columns["cm9R"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            _dgv5.Columns["cm10R"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            _dgv5.Columns["cm11R"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            _dgv5.Columns["cm12R"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            _dgv5.Columns["totalR"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
+            _dgv5.Columns["name"].HeaderText = "";
+       
+            _dgv5.Columns["cm1"].HeaderText = "01-" + cbYearDyn.SelectedItem.ToString();
+            _dgv5.Columns["cm2"].HeaderText = "02-" + cbYearDyn.SelectedItem.ToString();
+            _dgv5.Columns["cm3"].HeaderText = "03-" + cbYearDyn.SelectedItem.ToString();
+            _dgv5.Columns["cm4"].HeaderText = "04-" + cbYearDyn.SelectedItem.ToString();
+            _dgv5.Columns["cm5"].HeaderText = "05-" + cbYearDyn.SelectedItem.ToString();
+            _dgv5.Columns["cm6"].HeaderText = "06-" + cbYearDyn.SelectedItem.ToString();
+            _dgv5.Columns["cm7"].HeaderText = "07-" + cbYearDyn.SelectedItem.ToString();
+            _dgv5.Columns["cm8"].HeaderText = "08-" + cbYearDyn.SelectedItem.ToString();
+            _dgv5.Columns["cm9"].HeaderText = "09-" + cbYearDyn.SelectedItem.ToString();
+            _dgv5.Columns["cm10"].HeaderText = "10-" + cbYearDyn.SelectedItem.ToString();
+            _dgv5.Columns["cm11"].HeaderText = "11-" + cbYearDyn.SelectedItem.ToString();
+            _dgv5.Columns["cm12"].HeaderText = "12-" + cbYearDyn.SelectedItem.ToString();
+            _dgv5.Columns["total"].HeaderText = "Итого";
+
+            _dgv5.Columns["cm1R"].HeaderText = "01-" + cbYearDyn.SelectedItem.ToString();
+            _dgv5.Columns["cm2R"].HeaderText = "02-" + cbYearDyn.SelectedItem.ToString();
+            _dgv5.Columns["cm3R"].HeaderText = "03-" + cbYearDyn.SelectedItem.ToString();
+            _dgv5.Columns["cm4R"].HeaderText = "04-" + cbYearDyn.SelectedItem.ToString();
+            _dgv5.Columns["cm5R"].HeaderText = "05-" + cbYearDyn.SelectedItem.ToString();
+            _dgv5.Columns["cm6R"].HeaderText = "06-" + cbYearDyn.SelectedItem.ToString();
+            _dgv5.Columns["cm7R"].HeaderText = "07-" + cbYearDyn.SelectedItem.ToString();
+            _dgv5.Columns["cm8R"].HeaderText = "08-" + cbYearDyn.SelectedItem.ToString();
+            _dgv5.Columns["cm9R"].HeaderText = "09-" + cbYearDyn.SelectedItem.ToString();
+            _dgv5.Columns["cm10R"].HeaderText = "10-" + cbYearDyn.SelectedItem.ToString();
+            _dgv5.Columns["cm11R"].HeaderText = "11-" + cbYearDyn.SelectedItem.ToString();
+            _dgv5.Columns["cm12R"].HeaderText = "12-" + cbYearDyn.SelectedItem.ToString();
+            _dgv5.Columns["totalR"].HeaderText = "Итого";
+
+
+            _dgv5.Columns["name"].Frozen = true;
+            _dgv5.Columns["name"].Width = 240;
+            _dgv5.Columns["name"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+
+            foreach (DataGridViewColumn col in _dgv5.Columns)
+                col.SortMode = DataGridViewColumnSortMode.Programmatic;
+
+            _dgv5.Columns["name"].DefaultCellStyle.BackColor = bbgreen3;
+
+            int i = 0;
+            bool b = false;
+            if (globalData.Div == "HC" || globalData.Div == "AE")
+            {
+                foreach (DataGridViewRow row in _dgv5.Rows)
+                {
+                    
+                    if (row.Cells[0].Value.ToString() == "2")
+                        b = true;
+                    if (b)
+                        _dgv5.Rows[i].DefaultCellStyle.BackColor = bbgray5;                    
+                    i++;
+                }
+            }
+            //if (globalData.Div == "AE")
+            //{
+            //    _dgv5.Rows[7].DefaultCellStyle.BackColor = bbgreen3;
+            //    /*
+            //    foreach (DataGridViewRow row in _dgv5.Rows)
+            //    {
+            //        if (row.Cells[0].Value.ToString() == "10")
+            //            b = true;
+            //        if (b)
+            //            _dgv5.Rows[i].DefaultCellStyle.BackColor = bbgray5;
+            //        i++;
+            //    }
+            //    */
+            //}
+            if (globalData.Div == "OM")
+            {
+                if (_dgv5.Rows[8].Cells[1].Value.ToString() == "Личные продажи:")
+                    _dgv5.Rows[8].DefaultCellStyle.BackColor = bbgreen3;
+                else
+                    _dgv5.Rows[7].DefaultCellStyle.BackColor = bbgreen3;
+
+            }
+              
+            visiblePrivSales(_dgv5, radioButton15, radioButton14);
+        }
+
+
         private void dataGridView6_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -4476,17 +4744,17 @@ namespace RegionR
         private void formatAcc(DataGridView dgv)
         {
             //-------------------------------------------------------------------
-            dgv.Columns["acc_id"].Visible = false;
-            dgv.Columns["nom_id"].Visible = false;
-            dgv.Columns["nom_group"].Visible = false;
-            dgv.Columns["vc_id1"].Visible = false;
-            dgv.Columns["vc_id2"].Visible = false;
-            dgv.Columns["upd"].Visible = false;
-            dgv.Columns["upd2"].Visible = false;
-            dgv.Columns["vc_id3"].Visible = false;
-            dgv.Columns["vc_id4"].Visible = false;
-            dgv.Columns["upd3"].Visible = false;
-            dgv.Columns["upd4"].Visible = false;
+            dgv.Columns["acc_id"].Visible = false; //0
+            dgv.Columns["nom_id"].Visible = false; //1
+            dgv.Columns["nom_group"].Visible = false; //2
+            dgv.Columns["vc_id1"].Visible = false; //3
+            dgv.Columns["vc_id2"].Visible = false; //4
+            dgv.Columns["upd"].Visible = false; //5
+            dgv.Columns["upd2"].Visible = false; //6
+            dgv.Columns["vc_id3"].Visible = false; //7
+            dgv.Columns["vc_id4"].Visible = false; //8
+            dgv.Columns["upd3"].Visible = false; //9
+            dgv.Columns["upd4"].Visible = false; //10
 
             if (globalData.UserID == 258)
             {
@@ -4502,9 +4770,9 @@ namespace RegionR
                 //dgv.Columns["upd4"].Visible = true;
             }
             //убрать, если понадобится ассортиментный план за текущий год -2 и -3
-            dgv.Columns["py3"].Visible = false;
+            dgv.Columns["py3"].Visible = false; //11
             
-            dgv.Columns["py1"].Visible = true;
+            dgv.Columns["py1"].Visible = true; //12
 
             //dgv.Columns["vc_id1"].Visible = false;
             //dgv.Columns["vc_id2"].Visible = false;
@@ -4512,14 +4780,14 @@ namespace RegionR
             //-------------------------------------------------------------------
             if (globalData.Div == "HC")
             {
-                dgv.Columns["py2"].Visible = true;
+                dgv.Columns["py2"].Visible = true; //13
 
-                dgv.Columns["nom_type"].Visible = true;
-                dgv.Columns["dilcost"].Visible = true;
-                dgv.Columns["dilcostRub"].Visible = true;
-                dgv.Columns["cyplan"].Visible = true;
-                dgv.Columns["cyfact"].Visible = true;
-                dgv.Columns["pr"].Visible = true;
+                dgv.Columns["nom_type"].Visible = true; //14
+                dgv.Columns["dilcost"].Visible = true; //15
+                dgv.Columns["dilcostRub"].Visible = true; //16
+                dgv.Columns["cyplan"].Visible = true; //17
+                dgv.Columns["cyfact"].Visible = true; //18
+                dgv.Columns["pr"].Visible = true; //19
 
                 dgv.Columns["nom_type"].Width = 40;
                 dgv.Columns["nom_type"].Frozen = true;
@@ -4572,6 +4840,58 @@ namespace RegionR
                 dgv.Columns["OktFactR"].HeaderText = "Октябрь\nфакт, ед.";
                 dgv.Columns["NovFactR"].HeaderText = "Ноябрь\nфакт, ед.";
                 dgv.Columns["DecFactR"].HeaderText = "Декабрь\nфакт, ед.";
+                /***********************/
+                dgv.Columns["JanFactE"].HeaderText = "Январь\nфакт, вал.";
+                dgv.Columns["FebFactE"].HeaderText = "Февраль\nфакт, вал.";
+                dgv.Columns["MartFactE"].HeaderText = "Март\nфакт, вал.";
+                dgv.Columns["AprFactE"].HeaderText = "Апрель\nфакт, вал.";
+                dgv.Columns["MayFactE"].HeaderText = "Май\nфакт, вал.";
+                dgv.Columns["JuneFactE"].HeaderText = "Июнь\nфакт, вал.";
+                dgv.Columns["JuleFactE"].HeaderText = "Июль\nфакт, вал.";
+                dgv.Columns["AugFactE"].HeaderText = "Август\nфакт, вал.";
+                dgv.Columns["SepFactE"].HeaderText = "Сентябрь\nфакт, вал.";
+                dgv.Columns["OktFactE"].HeaderText = "Октябрь\nфакт, вал.";
+                dgv.Columns["NovFactE"].HeaderText = "Ноябрь\nфакт, вал.";
+                dgv.Columns["DecFactE"].HeaderText = "Декабрь\nфакт, вал.";
+
+                dgv.Columns["JanFactR0"].HeaderText = "Январь\nфакт, вал.";
+                dgv.Columns["FebFactR0"].HeaderText = "Февраль\nфакт, вал.";
+                dgv.Columns["MartFactR0"].HeaderText = "Март\nфакт, вал.";
+                dgv.Columns["AprFactR0"].HeaderText = "Апрель\nфакт, вал.";
+                dgv.Columns["MayFactR0"].HeaderText = "Май\nфакт, вал.";
+                dgv.Columns["JuneFactR0"].HeaderText = "Июнь\nфакт, вал.";
+                dgv.Columns["JuleFactR0"].HeaderText = "Июль\nфакт, вал.";
+                dgv.Columns["AugFactR0"].HeaderText = "Август\nфакт, вал.";
+                dgv.Columns["SepFactR0"].HeaderText = "Сентябрь\nфакт, вал.";
+                dgv.Columns["OktFactR0"].HeaderText = "Октябрь\nфакт, вал.";
+                dgv.Columns["NovFactR0"].HeaderText = "Ноябрь\nфакт, вал.";
+                dgv.Columns["DecFactR0"].HeaderText = "Декабрь\nфакт, вал.";
+
+                //dgv.Columns["JanFactE"].DisplayIndex = 18;
+                //dgv.Columns["FebFactE"].DisplayIndex = 21;
+                //dgv.Columns["MartFactE"].DisplayIndex = 24;
+                //dgv.Columns["AprFactE"].DisplayIndex = 27;
+                //dgv.Columns["MayFactE"].DisplayIndex = 30;
+                //dgv.Columns["JuneFactE"].DisplayIndex = 33;
+                //dgv.Columns["JuleFactE"].DisplayIndex = 36;
+                //dgv.Columns["AugFactE"].DisplayIndex = 39;
+                //dgv.Columns["SepFactE"].DisplayIndex = 42;
+                //dgv.Columns["OktFactE"].DisplayIndex = 45;
+                //dgv.Columns["NovFactE"].DisplayIndex = 48;
+                //dgv.Columns["DecFactE"].DisplayIndex = 51;
+
+                //dgv.Columns["JanFactR0"].DisplayIndex = 32;
+                //dgv.Columns["FebFactR0"].DisplayIndex = 22;
+                //dgv.Columns["MartFactR0"].DisplayIndex = 25;
+                //dgv.Columns["AprFactR0"].DisplayIndex = 28;
+                //dgv.Columns["MayFactR0"].DisplayIndex = 31;
+                //dgv.Columns["JuneFactR0"].DisplayIndex = 34;
+                //dgv.Columns["JuleFactR0"].DisplayIndex = 37;
+                //dgv.Columns["AugFactR0"].DisplayIndex = 40;
+                //dgv.Columns["SepFactR0"].DisplayIndex = 43;
+                //dgv.Columns["OktFactR0"].DisplayIndex = 46;
+                //dgv.Columns["NovFactR0"].DisplayIndex = 49;
+                //dgv.Columns["DecFactR0"].DisplayIndex = 52;
             }
             else
             {
@@ -4610,6 +4930,33 @@ namespace RegionR
                 dgv.Columns["NovFactR"].HeaderText = "Ноябрь\nфакт, РУБ.";
                 dgv.Columns["DecFactR"].HeaderText = "Декабрь\nфакт, РУБ.";
 
+                dgv.Columns["JanFactE"].Visible = false;
+                dgv.Columns["FebFactE"].Visible = false;
+                dgv.Columns["MartFactE"].Visible = false;
+                dgv.Columns["AprFactE"].Visible = false;
+                dgv.Columns["MayFactE"].Visible = false;
+                dgv.Columns["JuneFactE"].Visible = false;
+                dgv.Columns["JuleFactE"].Visible = false; 
+                dgv.Columns["AugFactE"].Visible = false;
+                dgv.Columns["SepFactE"].Visible = false;
+                dgv.Columns["OktFactE"].Visible = false;
+                dgv.Columns["NovFactE"].Visible = false;
+                dgv.Columns["DecFactE"].Visible = false;
+
+                dgv.Columns["JanFactR0"].Visible = false;
+                dgv.Columns["FebFactR0"].Visible = false;
+                dgv.Columns["MartFactR0"].Visible = false;
+                dgv.Columns["AprFactR0"].Visible = false;
+                dgv.Columns["MayFactR0"].Visible = false;
+                dgv.Columns["JuneFactR0"].Visible = false;
+                dgv.Columns["JuleFactR0"].Visible = false;
+                dgv.Columns["AugFactR0"].Visible = false;
+                dgv.Columns["SepFactR0"].Visible = false;
+                dgv.Columns["OktFactR0"].Visible = false;
+                dgv.Columns["NovFactR0"].Visible = false;
+                dgv.Columns["DecFactR0"].Visible = false;
+
+
                 dgv.Columns["cyplanEuro"].DefaultCellStyle.BackColor = bbgray5;
                 dgv.Columns["cyfactEuro"].DefaultCellStyle.BackColor = bbgray5;
 
@@ -4631,6 +4978,19 @@ namespace RegionR
             dgv.Columns["SepFactR"].DefaultCellStyle.BackColor = bbgray5;
             dgv.Columns["NovFactR"].DefaultCellStyle.BackColor = bbgray5;
 
+            dgv.Columns["JanFactE"].DefaultCellStyle.BackColor = bbgray5;
+            dgv.Columns["MartFactE"].DefaultCellStyle.BackColor = bbgray5;
+            dgv.Columns["MayFactE"].DefaultCellStyle.BackColor = bbgray5;
+            dgv.Columns["JuleFactE"].DefaultCellStyle.BackColor = bbgray5;
+            dgv.Columns["SepFactE"].DefaultCellStyle.BackColor = bbgray5;
+            dgv.Columns["NovFactE"].DefaultCellStyle.BackColor = bbgray5;
+
+            dgv.Columns["JanFactR0"].DefaultCellStyle.BackColor = bbgray5;
+            dgv.Columns["MartFactR0"].DefaultCellStyle.BackColor = bbgray5;
+            dgv.Columns["MayFactR0"].DefaultCellStyle.BackColor = bbgray5;
+            dgv.Columns["JuleFactR0"].DefaultCellStyle.BackColor = bbgray5;
+            dgv.Columns["SepFactR0"].DefaultCellStyle.BackColor = bbgray5;
+            dgv.Columns["NovFactR0"].DefaultCellStyle.BackColor = bbgray5;
 
             dgv.Columns["vc_sum1"].DefaultCellStyle.BackColor = bbgray5;
             dgv.Columns["vc_sum2"].DefaultCellStyle.BackColor = bbgray5;
@@ -4675,6 +5035,32 @@ namespace RegionR
             dgv.Columns["OktFactR"].DefaultCellStyle.Format = "N2";
             dgv.Columns["NovFactR"].DefaultCellStyle.Format = "N2";
             dgv.Columns["DecFactR"].DefaultCellStyle.Format = "N2";
+
+            dgv.Columns["JanFactE"].DefaultCellStyle.Format = "N2";
+            dgv.Columns["FebFactE"].DefaultCellStyle.Format = "N2";
+            dgv.Columns["MartFactE"].DefaultCellStyle.Format = "N2";
+            dgv.Columns["AprFactE"].DefaultCellStyle.Format = "N2";
+            dgv.Columns["MayFactE"].DefaultCellStyle.Format = "N2";
+            dgv.Columns["JuneFactE"].DefaultCellStyle.Format = "N2";
+            dgv.Columns["JuleFactE"].DefaultCellStyle.Format = "N2";
+            dgv.Columns["AugFactE"].DefaultCellStyle.Format = "N2";
+            dgv.Columns["SepFactE"].DefaultCellStyle.Format = "N2";
+            dgv.Columns["OktFactE"].DefaultCellStyle.Format = "N2";
+            dgv.Columns["NovFactE"].DefaultCellStyle.Format = "N2";
+            dgv.Columns["DecFactE"].DefaultCellStyle.Format = "N2";
+
+            dgv.Columns["JanFactR0"].DefaultCellStyle.Format = "N2";
+            dgv.Columns["FebFactR0"].DefaultCellStyle.Format = "N2";
+            dgv.Columns["MartFactR0"].DefaultCellStyle.Format = "N2";
+            dgv.Columns["AprFactR0"].DefaultCellStyle.Format = "N2";
+            dgv.Columns["MayFactR0"].DefaultCellStyle.Format = "N2";
+            dgv.Columns["JuneFactR0"].DefaultCellStyle.Format = "N2";
+            dgv.Columns["JuleFactR0"].DefaultCellStyle.Format = "N2";
+            dgv.Columns["AugFactR0"].DefaultCellStyle.Format = "N2";
+            dgv.Columns["SepFactR0"].DefaultCellStyle.Format = "N2";
+            dgv.Columns["OktFactR0"].DefaultCellStyle.Format = "N2";
+            dgv.Columns["NovFactR0"].DefaultCellStyle.Format = "N2";
+            dgv.Columns["DecFactR0"].DefaultCellStyle.Format = "N2";
 
             dgv.Columns["h1Sales"].DefaultCellStyle.Format = "N2";
             dgv.Columns["h2Sales"].DefaultCellStyle.Format = "N2";
@@ -5374,6 +5760,7 @@ namespace RegionR
                         
             int i = 0;
             
+            int t = 0;
             foreach (DataRow row in dt1.Rows)
             {
                 bool out1 = false;
@@ -5382,6 +5769,13 @@ namespace RegionR
                 if (rb == 6)
                 {
                     _dgv1.Rows.Add(row.ItemArray[0], row.ItemArray[1], row.ItemArray[2], row.ItemArray[3], row.ItemArray[4], row.ItemArray[5], row.ItemArray[6], row.ItemArray[7], row.ItemArray[8], row.ItemArray[9], row.ItemArray[10], row.ItemArray[11], row.ItemArray[12], row.ItemArray[13], row.ItemArray[14], row.ItemArray[15], row.ItemArray[16], row.ItemArray[17], row.ItemArray[18], row.ItemArray[19], row.ItemArray[20], row.ItemArray[21], row.ItemArray[22], row.ItemArray[23]);
+                   
+                    if (Convert.ToString(row.ItemArray[8]).StartsWith("9") == true)
+                    {
+                        _dgv1.Rows[t].DefaultCellStyle.BackColor = Color.FromArgb(204, 221, 229);                       
+                    }
+                
+                    t++;
                 }
                 else
                 {
@@ -5392,6 +5786,13 @@ namespace RegionR
                             out1 = true;
 
                     _dgv1.Rows.Add(row.ItemArray[0], row.ItemArray[1], row.ItemArray[2], row.ItemArray[3], row.ItemArray[4], row.ItemArray[5], row.ItemArray[6], row.ItemArray[7], row.ItemArray[8], row.ItemArray[9], row.ItemArray[10], row.ItemArray[11], row.ItemArray[12], row.ItemArray[13], row.ItemArray[14], row.ItemArray[15], row.ItemArray[16], row.ItemArray[17], row.ItemArray[18], row.ItemArray[19], row.ItemArray[20], row.ItemArray[21], row.ItemArray[22], row.ItemArray[23], row.ItemArray[24], row.ItemArray[25], row.ItemArray[26], row.ItemArray[27], row.ItemArray[28], out1, "", user);
+
+                    if (Convert.ToString(row.ItemArray[8]).StartsWith("9") == true)
+                    {
+                        _dgv1.Rows[t].DefaultCellStyle.BackColor = Color.FromArgb(204, 221, 229); 
+                    }
+
+                    t++;
                 }
                 i++;
             }
@@ -5553,7 +5954,7 @@ namespace RegionR
 
             DataTable dt1 = new DataTable();
             //dt1 = sql1.GetRecords("exec SelAcc @p1, @p2, @p3, @p4, @p5, @p6", globalData.Div, year, lpu, user, reg, RD);
-            dt1 = sql1.GetRecords("exec SelAcc_quart @p1, @p2, @p3, @p4, @p5, @p6", globalData.Div, year, lpu, user, reg, RD);
+            dt1 = sql1.GetRecords("exec SelAcc_quartNew @p1, @p2, @p3, @p4, @p5, @p6", globalData.Div, year, lpu, user, reg, RD);
 
             Cursor = Cursors.Default;
 
@@ -5831,7 +6232,8 @@ namespace RegionR
 
         private void EnableSave(string report)
         {
-            if ((globalData.Div == "OM") || (globalData.UserAccess == 1))
+            /*TODO: закрыт доступ для разнесения косвенных продаж ОПМ */
+            if (/*(globalData.Div == "OM") || */(globalData.UserAccess == 1))
             {                
                 btnAdd.Visible = true;
                 btnEdit.Visible = true;
@@ -7859,10 +8261,14 @@ namespace RegionR
                         header = "J";
                         DateTime s6 = Convert.ToDateTime(xlSh.get_Range("J" + i.ToString(), "J" + i.ToString()).Value.ToString());//create
                         header = "K";
-                        var s71 = xlSh.get_Range("K" + i.ToString(), "K" + i.ToString()).Value.ToString();//invoce
+                        var s71 = ""; // если ремонт мед.техники, то даты нет
                         DateTime s7 = Convert.ToDateTime("1000-01-01");
-                        if (s71 != null)
-                            s7 = Convert.ToDateTime(s71);
+                        if (xlSh.get_Range("K" + i.ToString(), "K" + i.ToString()).Value != null)
+                        {
+                            s71 = xlSh.get_Range("K" + i.ToString(), "K" + i.ToString()).Value.ToString();//invoce                            
+                            if (s71 != null)
+                                s7 = Convert.ToDateTime(s71);
+                        }
                         header = "L";
                         String s8 = xlSh.get_Range("L" + i.ToString(), "L" + i.ToString()).Value2.ToString();//docNum
                         header = "M";
@@ -7943,7 +8349,15 @@ namespace RegionR
                         else
                             s23 = s11;
 
-                        DataTable dt1 = sql1.GetRecords("exec InsReport 0, 0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19, @p20, @p21, @p22, @p23, @p24, @p25, @p26, @p27, @p28, @p29", 3, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16, s17, s18, s19, s20, s21, s22, s23, s24, s25, s26, s27, s28);
+                        DataTable dt1 = null;
+                        if (s71 != "" && s7.ToString() != "01.01.1000 0:00:00")
+                        {                            
+                            dt1 = sql1.GetRecords("exec InsReport 0, 0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19, @p20, @p21, @p22, @p23, @p24, @p25, @p26, @p27, @p28, @p29", 3, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16, s17, s18, s19, s20, s21, s22, s23, s24, s25, s26, s27, s28);
+                        }
+                        else
+                        {
+                            dt1 = sql1.GetRecords("exec InsReport 0, 0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19, @p20, @p21, @p22, @p23, @p24, @p25, @p26, @p27, @p28, @p29", 3, s1, s2, s3, s4, s5, s6, "", s8, s9, s10, s11, s12, s13, s14, s15, s16, s17, s18, s19, s20, s21, s22, s23, s24, s25, s26, s27, s28);
+                        }
                         if (dt1 == null)
                         {
                             xlSh.Cells[i, 34] = "Ошибка";
@@ -9318,13 +9732,13 @@ namespace RegionR
             try
             {
                 String cell = "";
-                if (e.ColumnIndex == 42)
+                if (e.ColumnIndex == 70)
                     cell = "vc_sum1";
-                else if (e.ColumnIndex == 45)
+                else if (e.ColumnIndex == 73)
                     cell = "vc_sum2";
-                else if (e.ColumnIndex == 48)
+                else if (e.ColumnIndex == 76)
                     cell = "vc_sum3";
-                else if (e.ColumnIndex == 51)
+                else if (e.ColumnIndex == 79)
                     cell = "vc_sum4";
 
                 if (globalData.Div == "HC")
@@ -9353,13 +9767,13 @@ namespace RegionR
         private void _dgv4EndEdit(int ColumnIndex, int RowIndex)
         {
             String cell = "";
-            if (ColumnIndex == 46)
+            if (ColumnIndex == 70)
                 cell = "vc_sum1";
-            else if (ColumnIndex == 49)
+            else if (ColumnIndex == 73)
                 cell = "vc_sum2";
-            else if (ColumnIndex == 52)
+            else if (ColumnIndex == 76)
                 cell = "vc_sum3";
-            else if (ColumnIndex == 55)
+            else if (ColumnIndex == 79)
                 cell = "vc_sum4";
 
             bool subsum = false;
@@ -9503,13 +9917,13 @@ namespace RegionR
                 String cell = "";
                 int greenindex = 0;
 
-                if (ColumnIndex == 46)
+                if (ColumnIndex == 70)
                     cell = "vc_sum1";
-                else if (ColumnIndex == 49)
+                else if (ColumnIndex == 73)
                     cell = "vc_sum2";
-                else if (ColumnIndex == 52)
+                else if (ColumnIndex == 76)
                     cell = "vc_sum3";
-                else if (ColumnIndex == 55)
+                else if (ColumnIndex == 79)
                     cell = "vc_sum4";
 
                 if ((globalData.Div == "HC") && (_dgv4.Rows[RowIndex].Cells["nom_type"].Value.ToString() == "шт"))
@@ -9870,7 +10284,7 @@ namespace RegionR
                 DataTable dt1 = new DataTable();
 
                 if (globalData.Div == "AE")
-                    dt1 = sql1.GetRecords("exec SelAccPlanNYAE @p1, @p2, '', 0", cbLPU.SelectedValue, cbUsers2.SelectedValue);
+                    dt1 = sql1.GetRecords("exec SelAccPlanNYAE2 @p1, @p2, '', 0", cbLPU.SelectedValue, cbUsers2.SelectedValue);
                 else /*TODO: SelAccPlanNYnew*/
                     dt1 = sql1.GetRecords("exec SelAccPlanNYWithRub @p1, @p2, '', 0", cbLPU.SelectedValue, cbUsers2.SelectedValue);
 
@@ -9957,6 +10371,10 @@ namespace RegionR
             }
             else
             {
+                dgv.Columns["py3"].HeaderText = "2015" + "\nплан, EUR";
+                dgv.Columns["py1"].HeaderText = "2015" + "\nфакт, EUR";
+                dgv.Columns["lyFactEuro"].HeaderText = "2016" + "\nФАКТ, EUR";
+
                 dgv.Columns["py4"].Visible = false;
                 dgv.Columns["py2"].Visible = false;
 
@@ -9970,6 +10388,10 @@ namespace RegionR
                 dgv.Columns["cyDilCostRub"].Visible = false;
                 dgv.Columns["cyPlanRub"].Visible = false;
                 dgv.Columns["prCyLyEuro"].Visible = true;
+
+                //lyFactEuro
+                //dgv.Columns["lyFactEuro"].Visible = false;
+                dgv.Columns["prEuro"].Visible = false;
             }
 
             dgv.Columns["lyplan"].DefaultCellStyle.Format = "N0";
@@ -10126,7 +10548,7 @@ namespace RegionR
                 Sql sql1 = new Sql();
                 DataTable dt1 = new DataTable();
                 if (globalData.Div == "AE")
-                    dt1 = sql1.GetRecords("exec SelAccPlanNYAE 0, @p1, @p2, 0", cbUsersAccNY.SelectedValue, globalData.Region);
+                    dt1 = sql1.GetRecords("exec SelAccPlanNYAE2 0, @p1, @p2, 0", cbUsersAccNY.SelectedValue, globalData.Region);
                 else
                     dt1 = sql1.GetRecords("exec SelAccPlanNYWithRub 0, @p1, @p2, 0", cbUsersAccNY.SelectedValue, globalData.Region);
 
@@ -10164,7 +10586,7 @@ namespace RegionR
                 DataTable dt1 = new DataTable();
 
                 if (globalData.Div == "AE")
-                    dt1 = sql1.GetRecords("exec SelAccPlanNYAE 0, 0, @p1, 0", globalData.Region);
+                    dt1 = sql1.GetRecords("exec SelAccPlanNYAE2 0, 0, @p1, 0", globalData.Region);
                 else
                     dt1 = sql1.GetRecords("exec SelAccPlanNYWithRub 0, 0, @p1, 0", globalData.Region);
                 //_dgv4.DataSource = dt1;
@@ -10448,7 +10870,7 @@ namespace RegionR
                 
                 if (_dgv14.Rows[greenindex].Cells["cyplanEuro"].Value.ToString() == "")
                     upd = true;
-                else if (Convert.ToInt32(_dgv14.Rows[greenindex].Cells["cyplanEuro"].Value) != sum)
+                else if (Convert.ToInt32(_dgv14.Rows[greenindex].Cells["cyplanEuro"].Value) != sumEuro)
                     upd = true;
 
                 if (upd)
@@ -10523,7 +10945,7 @@ namespace RegionR
 
                 if (_dgv14.Rows[greenindex].Cells["cyplanEuro"].Value.ToString() == "")
                     upd = true;
-                else if (Convert.ToInt32(_dgv14.Rows[greenindex].Cells["cyplanEuro"].Value) != sum)
+                else if (Convert.ToInt32(_dgv14.Rows[greenindex].Cells["cyplanEuro"].Value) != sumEuro)
                     upd = true;
 
                 if (upd)
@@ -10592,7 +11014,7 @@ namespace RegionR
                                 else if (row.Cells["cyplan"].Value.ToString() != "0")
                                     Rub = Convert.ToInt32(row.Cells["cyplanRub"].Value);
                             }
-                            sql1.GetRecords("exec fillAccPlanNYoldWithRub @p1, @p2, @p3, @p4, @p5", row.Cells["acc_id"].Value, row.Cells["cyplan"].Value, row.Cells["cyplanEuro"].Value, cbUsersAccNY.SelectedValue, Rub);
+                            sql1.GetRecords("exec fillAccPlanNYoldWithRub2 @p1, @p2, @p3, @p4, @p5", row.Cells["acc_id"].Value, row.Cells["cyplan"].Value, row.Cells["cyplanEuro"].Value, cbUsersAccNY.SelectedValue, Rub);
                         }
                     }
                 }
@@ -11398,6 +11820,8 @@ namespace RegionR
             {
                 loadDyn(cbRegions.SelectedValue.ToString());
             }
+            else if (tn1.Text == "Общая динамика продаж по рег.директорам")
+                loadDynAllRD();
             else
                 loadDyn("0");
         }
@@ -11637,7 +12061,7 @@ namespace RegionR
 
             string procName = "exec SelAccPlanNY";
             if (globalData.Div == "AE")
-                procName += "AE";
+                procName += "AE2";
             if (globalData.Div == "HC")
                 procName += "WithRub";
             
@@ -15178,20 +15602,30 @@ namespace RegionR
             }
         }
 
+        /*TODO: null */
         private void cbYearEvoRP_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (cbSDivEvoRP.SelectedItem == null)
+                return;
+
             if ((globalData.load) && (cbSDivEvoRP.SelectedItem.ToString() == "HC"))
                 fillUsersEvoRP(cbUsersEvoRP);
         }
 
         private void cbRegEvoRP_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (cbSDivEvoRP.SelectedItem == null)
+                return;
+
             if ((globalData.load) && (cbSDivEvoRP.SelectedItem.ToString() == "HC"))
                 fillUsersEvoRP(cbUsersEvoRP);
         }
 
         private void btnApplyEvoRP_Click(object sender, EventArgs e)
         {
+            if (cbSDivEvoRP.SelectedItem == null)
+                return;
+
             if ((cbSDivEvoRP.SelectedItem.ToString() == "HC") && (cbUsersEvoRP.Items.Count == 0))
             {
                 _dgv19.Columns.Clear();
@@ -16308,6 +16742,50 @@ namespace RegionR
             dgv.Columns["NovFactR"].Visible = flagR;
             dgv.Columns["DecFactR"].Visible = flagR;
 
+            if (globalData.Div != "HC")
+            {
+                dgv.Columns["JanFactE"].Visible = flagR;
+                dgv.Columns["FebFactE"].Visible = flagR;
+                dgv.Columns["MartFactE"].Visible = flagR; 
+                dgv.Columns["AprFactE"].Visible = flagR;
+                dgv.Columns["MayFactE"].Visible = flagR;
+                dgv.Columns["JuneFactE"].Visible = flagR; 
+                dgv.Columns["JuleFactE"].Visible = flagR; 
+                dgv.Columns["AugFactE"].Visible = flagR;
+                dgv.Columns["SepFactE"].Visible = flagR;
+                dgv.Columns["OktFactE"].Visible = flagR;
+                dgv.Columns["NovFactE"].Visible = flagR;
+                dgv.Columns["DecFactE"].Visible = flagR;
+            }
+            else
+            {
+                dgv.Columns["JanFactE"].Visible = flagE;
+                dgv.Columns["FebFactE"].Visible = flagE;
+                dgv.Columns["MartFactE"].Visible = flagE;
+                dgv.Columns["AprFactE"].Visible = flagE;
+                dgv.Columns["MayFactE"].Visible = flagE;
+                dgv.Columns["JuneFactE"].Visible = flagE;
+                dgv.Columns["JuleFactE"].Visible = flagE;
+                dgv.Columns["AugFactE"].Visible = flagE;
+                dgv.Columns["SepFactE"].Visible = flagE;
+                dgv.Columns["OktFactE"].Visible = flagE;
+                dgv.Columns["NovFactE"].Visible = flagE;
+                dgv.Columns["DecFactE"].Visible = flagE;
+            }
+
+            dgv.Columns["JanFactR0"].Visible = flagR;
+            dgv.Columns["FebFactR0"].Visible = flagR;
+            dgv.Columns["MartFactR0"].Visible = flagR;
+            dgv.Columns["AprFactR0"].Visible = flagR;
+            dgv.Columns["MayFactR0"].Visible = flagR;
+            dgv.Columns["JuneFactR0"].Visible = flagR;
+            dgv.Columns["JuleFactR0"].Visible = flagR;
+            dgv.Columns["AugFactR0"].Visible = flagR;
+            dgv.Columns["SepFactR0"].Visible = flagR;
+            dgv.Columns["OktFactR0"].Visible = flagR;
+            dgv.Columns["NovFactR0"].Visible = flagR;
+            dgv.Columns["DecFactR0"].Visible = flagR;
+
         }
 
         private void visiblePrivSales(DataGridView dgv, RadioButton rbR, RadioButton rbE)
@@ -16775,10 +17253,900 @@ namespace RegionR
                 SelMAPM();
         }
 
+
         private void persSalesReportToolStripMenuItem_Click(object sender, EventArgs e)
         {
             RegionR.Reports.FormPersSalesReport formPersSalesReport = new Reports.FormPersSalesReport();
             formPersSalesReport.ShowDialog();
+        }
+
+
+        private void добавитьЛПУВПроектХимиоТерапияToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HT_Add_LPU ht = new HT_Add_LPU();
+            ht.ShowDialog();
+        }
+
+        private void comboBox8_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (globalData.update == false)
+                selUserSalesDiv();
+        }
+
+        private void button74_Click(object sender, EventArgs e)
+        {
+            selUserSalesDiv();
+        }
+
+        private void radioButton7_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckCheck(radioButton7, radioButton8);
+            visibleUserSalesDiv(_dgvUserSalesDiv, radioButton8, radioButton7);
+
+        }
+
+        private void radioButton8_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckCheck(radioButton8, radioButton7);
+            visibleUserSalesDiv(_dgvUserSalesDiv, radioButton8, radioButton7);
+        }
+
+        private void button76_Click(object sender, EventArgs e)
+        {
+            object misValue = System.Reflection.Missing.Value;
+            Excel.Application xlApp;
+            Excel.Workbook xlWB;
+            Excel.Worksheet xlSh;
+
+            xlApp = new Excel.Application();
+            xlWB = xlApp.Workbooks.Add(misValue);
+            xlSh = (Excel.Worksheet)xlWB.Worksheets.get_Item(1);
+
+            xlSh.Cells[1, 1] = "№";
+            xlSh.Cells[1, 3] = "Регион";
+            xlSh.Cells[1, 4] = "HC Euro";
+            xlSh.Cells[1, 5] = "HC Rub";
+            xlSh.Cells[1, 6] = "AE Euro";
+            xlSh.Cells[1, 7] = "AE Rub";
+            xlSh.Cells[1, 8] = "OM Euro";
+            xlSh.Cells[1, 9] = "OM Rub";
+            
+            int i = 2;
+            foreach (DataGridViewRow row in _dgvUserSalesDiv.Rows)
+            {
+                xlSh.Cells[i, 1] = i - 1;
+                for (int j = 0; j < _dgvUserSalesDiv.ColumnCount; j++)
+                {
+                    xlSh.Cells[i, j + 2] = row.Cells[j].Value.ToString();
+                }
+                i++;
+            }
+            xlApp.Visible = true;
+        }
+
+        private void visibleUserSalesDiv(DataGridView dgv, RadioButton rbR, RadioButton rbE)
+        {
+            bool flagR, flagE;
+
+            flagR = rbR.Checked;
+            flagE = rbE.Checked;
+
+            if (dgv.Columns.Count == 0)
+                return;
+
+            dgv.Columns["hcEuro"].Visible = flagE;
+            dgv.Columns["aeEuro"].Visible = flagE;
+            dgv.Columns["omEuro"].Visible = flagE;
+
+            dgv.Columns["hcRub"].Visible = flagR;
+            dgv.Columns["aeRub"].Visible = flagR;
+            dgv.Columns["omRub"].Visible = flagR;
+            
+        }
+
+        private void selUserSalesDiv()
+        {
+            tabControl1.SelectedTab = tabControl1.TabPages["tabPage28"]; 
+            tabControl1.Visible = true;
+
+            Sql sql1 = new Sql();
+            DataTable dt1 = new DataTable();
+
+            dt1 = sql1.GetRecords("exec UserSalesDiv_Select @p1, @p2", comboBox8.SelectedValue, dateTimePicker23.Value.Year.ToString() + "-" + dateTimePicker23.Value.Month.ToString() + "-" + "01");
+
+            _dgvUserSalesDiv.DataSource = dt1;
+
+            if (dt1 == null)
+            {
+                MessageBox.Show("Не удалось получить данные по личным продажам.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            foreach (DataGridViewColumn col in _dgvUserSalesDiv.Columns)
+                col.SortMode = DataGridViewColumnSortMode.Programmatic;
+
+            _dgvUserSalesDiv.Columns["regID"].Visible = false;
+
+            _dgvUserSalesDiv.Columns["reg"].HeaderText = "Регион";
+
+            _dgvUserSalesDiv.Columns["hcEuro"].HeaderText = "HC";
+            _dgvUserSalesDiv.Columns["aeEuro"].HeaderText = "AE";
+            _dgvUserSalesDiv.Columns["omEuro"].HeaderText = "OM";
+            _dgvUserSalesDiv.Columns["hcRub"].HeaderText = "HC";
+            _dgvUserSalesDiv.Columns["aeRub"].HeaderText = "AE";
+            _dgvUserSalesDiv.Columns["omRub"].HeaderText = "OM";
+                     
+
+            for (int i = 2; i < 8; i++)
+            {
+                _dgvUserSalesDiv.Columns[i].DefaultCellStyle.Format = "N3";
+                _dgvUserSalesDiv.Columns[i].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            }
+
+            visibleUserSalesDiv(_dgvUserSalesDiv, radioButton8, radioButton7);
+        }
+
+        private void loadUserSalesDiv()
+        {
+            globalData.update = true;
+
+            Sql sql1 = new Sql();
+            DataTable dt1 = new DataTable();
+
+            dt1 = sql1.GetRecords("exec Users_Select_AllRP ");
+
+            fillComboBox(dt1, comboBox8, "user_name", "user_id");
+
+            comboBox8.SelectedIndex = 1;
+            globalData.update = false;
+        }
+
+        private void лПУХТToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HT_Add_LPU ht = new HT_Add_LPU(false);
+            ht.ShowDialog();
+        }
+
+        private void материаловToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+
+            openFileDialog1.InitialDirectory = @"J:\Hospital Care\Kasyanova Tatyana\Отчёты\RR\Консигнации\Загрузка\";
+            openFileDialog1.Filter = "Excel files (*.xls)|*.xls";
+            openFileDialog1.FilterIndex = 0;
+            openFileDialog1.RestoreDirectory = true;
+            openFileDialog1.Multiselect = false;
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                Cursor = Cursors.WaitCursor;
+                Excel.Application xlApp;
+                Excel.Workbook xlWorkBook;
+                Excel.Worksheet xlSh;
+                xlApp = new Excel.Application();
+                xlWorkBook = xlApp.Workbooks.Open(openFileDialog1.FileName, 0, true, 5, "", "", true, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "\t", false, false, 0, true, 1, 0);
+
+                xlSh = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+
+                object misValue = System.Reflection.Missing.Value;
+                int err = 0;
+                InputDialog ind = new InputDialog("Введите номер строки", "Номер строки:", true);
+                ind.ShowDialog();
+                if (globalData.input == "0")
+                {
+                    MessageBox.Show("Загрузка отчёта отменена", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    xlWorkBook.Close(true, misValue, misValue);
+                    xlApp.Quit();
+
+                    releaseObject(xlSh);
+                    releaseObject(xlWorkBook);
+                    releaseObject(xlApp);
+                    return;
+                }
+                int i = Convert.ToInt32(globalData.input);  //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                String header = String.Empty;
+
+                //int i = 2;
+
+                try
+                {
+                    Sql sql1 = new Sql();                   
+
+                    while (xlSh.get_Range("D" + i.ToString(), "D" + i.ToString()).Value2 != null)
+                    {
+                        header = "A";
+                        string s1 = "";
+                        if (xlSh.get_Range("A" + i.ToString(), "A" + i.ToString()).Value2 != null)
+                            s1 = xlSh.get_Range("A" + i.ToString(), "A" + i.ToString()).Value2.ToString();//mat_code
+                        
+                        header = "D";
+                        string s3 = "1";
+                        if (xlSh.get_Range("D" + i.ToString(), "D" + i.ToString()).Value2 != null)
+                            s3 = xlSh.get_Range("D" + i.ToString(), "D" + i.ToString()).Value2.ToString();//matkons_count
+                        if (s3 == "-2146826246")
+                            s3 = "1";
+                        
+                        header = "C";
+                        string s2 = xlSh.get_Range("C" + i.ToString(), "C" + i.ToString()).Value2.ToString();//unit_code
+
+                        string res = sql1.GetRecordsOne("exec Kons_Insert_Material @p1, @p2, @p3", s1, s3, s2);
+
+                        if (res != "1")
+                        {
+                            xlSh.Cells[i, 5] = res;
+                            err++;
+                        }
+                        i++;
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ошибка при чтении файла. Системная ошибка: " + ex.Message + " В ячейке " + header + i.ToString(), "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    err++;
+                }
+                finally
+                {
+                    if (err == 0)
+                    {
+                        MessageBox.Show("Загрузка завершена. Ошибок не найдено.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        xlWorkBook.Close(true, misValue, misValue);
+                        xlApp.Quit();
+
+                        releaseObject(xlSh);
+                        releaseObject(xlWorkBook);
+                        releaseObject(xlApp);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Загрузка завершена. Найдено " + err.ToString() + " ошибок.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        xlApp.Visible = true;
+                    }
+                }
+                Cursor = Cursors.Default;
+            }
+        }
+
+        private void сотрудниковToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+
+            openFileDialog1.InitialDirectory = @"J:\Hospital Care\Kasyanova Tatyana\Отчёты\RR\Консигнации\Загрузка\";
+            openFileDialog1.Filter = "Excel files (*.xls)|*.xls";
+            openFileDialog1.FilterIndex = 0;
+            openFileDialog1.RestoreDirectory = true;
+            openFileDialog1.Multiselect = false;
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                Cursor = Cursors.WaitCursor;
+                Excel.Application xlApp;
+                Excel.Workbook xlWorkBook;
+                Excel.Worksheet xlSh;
+                xlApp = new Excel.Application();
+                xlWorkBook = xlApp.Workbooks.Open(openFileDialog1.FileName, 0, true, 5, "", "", true, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "\t", false, false, 0, true, 1, 0);
+
+                xlSh = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+
+                object misValue = System.Reflection.Missing.Value;
+                int err = 0;
+
+
+                String header = String.Empty;
+
+                int i = 2;
+
+                try
+                {
+                    Sql sql1 = new Sql();
+                    
+
+                    while (xlSh.get_Range("A" + i.ToString(), "A" + i.ToString()).Value2 != null)
+                    {
+                        header = "A";
+                        string s1 = "";
+                        if (xlSh.get_Range("A" + i.ToString(), "A" + i.ToString()).Value2 != null)
+                            s1 = xlSh.get_Range("A" + i.ToString(), "A" + i.ToString()).Value2.ToString();//user_code
+                        
+                        header = "B";
+                        string s2 = "";
+                        if (xlSh.get_Range("B" + i.ToString(), "B" + i.ToString()).Value2 != null)
+                            s2 = xlSh.get_Range("B" + i.ToString(), "B" + i.ToString()).Value2.ToString();//user_name
+
+                        header = "C";
+                        string s3 = "";
+                        if (xlSh.get_Range("C" + i.ToString(), "C" + i.ToString()).Value2 != null)
+                            s3 = xlSh.get_Range("C" + i.ToString(), "C" + i.ToString()).Value2.ToString();//reg_name
+
+                        header = "D";
+                        string s4 = "";
+                        if (xlSh.get_Range("D" + i.ToString(), "D" + i.ToString()).Value2 != null)
+                            s4 = xlSh.get_Range("D" + i.ToString(), "D" + i.ToString()).Value2.ToString();//post_name
+
+                        header = "E";
+                        string s5 = "";
+                        if (xlSh.get_Range("E" + i.ToString(), "E" + i.ToString()).Value2 != null)
+                            s5 = xlSh.get_Range("E" + i.ToString(), "E" + i.ToString()).Value2.ToString();//flag
+
+                        header = "F";
+                        string s6 = "";
+                        if (xlSh.get_Range("F" + i.ToString(), "F" + i.ToString()).Value2 != null)
+                            s6 = xlSh.get_Range("F" + i.ToString(), "F" + i.ToString()).Value2.ToString();//sdiv_name
+
+
+                        string res = sql1.GetRecordsOne("exec Kons_Insert_User @p1, @p2, @p3, @p4, @p5, @p6", s1, s2, s4, s3, s6, s5);
+
+                        if (res != "1")
+                        {
+                            xlSh.Cells[i, 7] = res;
+                            err++;
+                        }
+                        i++;
+                    }
+
+                    i = 2;
+                    xlSh = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(2);
+                    while (xlSh.get_Range("A" + i.ToString(), "A" + i.ToString()).Value2 != null)
+                    {
+                        header = "A";
+                        string s1 = "";
+                        if (xlSh.get_Range("A" + i.ToString(), "A" + i.ToString()).Value2 != null)
+                            s1 = xlSh.get_Range("A" + i.ToString(), "A" + i.ToString()).Value2.ToString();//lpu_code
+
+                        header = "B";
+                        string s2 = "";
+                        if (xlSh.get_Range("B" + i.ToString(), "B" + i.ToString()).Value2 != null)
+                            s2 = xlSh.get_Range("B" + i.ToString(), "B" + i.ToString()).Value2.ToString();//lpu_name
+
+                        header = "D";
+                        string s3 = "";
+                        if (xlSh.get_Range("D" + i.ToString(), "D" + i.ToString()).Value2 != null)
+                            s3 = xlSh.get_Range("D" + i.ToString(), "D" + i.ToString()).Value2.ToString();//reg_name
+
+                        string res = sql1.GetRecordsOne("exec Kons_Insert_LPU @p1, @p2, @p3", s1, s2, s3);
+
+                        if (res != "1")
+                        {
+                            xlSh.Cells[i, 5] = res;
+                            err++;
+                        }
+                        i++;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ошибка при чтении файла. Системная ошибка: " + ex.Message + " В ячейке " + header + i.ToString(), "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    err++;
+                }
+                finally
+                {
+                    if (err == 0)
+                    {
+                        MessageBox.Show("Загрузка завершена. Ошибок не найдено.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        xlWorkBook.Close(true, misValue, misValue);
+                        xlApp.Quit();
+
+                        releaseObject(xlSh);
+                        releaseObject(xlWorkBook);
+                        releaseObject(xlApp);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Загрузка завершена. Найдено " + err.ToString() + " ошибок.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        xlApp.Visible = true;
+                    }
+                }
+                Cursor = Cursors.Default;
+            }
+        }
+
+        private void загрузкаОтчётаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+
+            openFileDialog1.InitialDirectory = @"J:\Hospital Care\Kasyanova Tatyana\Отчёты\RR\Консигнации\";
+            openFileDialog1.Filter = "Excel files (*.xls)|*.xls";
+            openFileDialog1.FilterIndex = 0;
+            openFileDialog1.RestoreDirectory = true;
+            openFileDialog1.Multiselect = false;
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                Cursor = Cursors.WaitCursor;
+                Excel.Application xlApp;
+                Excel.Workbook xlWorkBook;
+                Excel.Worksheet xlSh;
+                xlApp = new Excel.Application();
+                xlWorkBook = xlApp.Workbooks.Open(openFileDialog1.FileName, 0, true, 5, "", "", true, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "\t", false, false, 0, true, 1, 0);
+
+                xlSh = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+
+                object misValue = System.Reflection.Missing.Value;
+                int err = 0;
+
+                InputDialog ind = new InputDialog("Введите номер строки", "Номер строки:", true);
+                ind.ShowDialog();
+                if (globalData.input == "0")
+                {
+                    MessageBox.Show("Загрузка отчёта отменена", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    xlWorkBook.Close(true, misValue, misValue);
+                    xlApp.Quit();
+
+                    releaseObject(xlSh);
+                    releaseObject(xlWorkBook);
+                    releaseObject(xlApp);
+                    return;
+                }
+                int i = Convert.ToInt32(globalData.input);  //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                String header = String.Empty;
+
+                //int i = 2;
+
+                try
+                {
+                    Sql sql1 = new Sql();
+                    while (xlSh.get_Range("A" + i.ToString(), "A" + i.ToString()).Value2 != null)
+                    {
+                        header = "A";
+                        String s1 = xlSh.get_Range("A" + i.ToString(), "A" + i.ToString()).Value2.ToString();//customer
+                        header = "B";
+                        String s2 = "";
+                        if (xlSh.get_Range("B" + i.ToString(), "B" + i.ToString()).Value2 != null)
+                            s2 = xlSh.get_Range("B" + i.ToString(), "B" + i.ToString()).Value2.ToString();//salesOrg
+                        header = "C";
+                        String s3 = "";
+                        if (xlSh.get_Range("C" + i.ToString(), "C" + i.ToString()).Value2 != null)
+                            s3 = xlSh.get_Range("C" + i.ToString(), "C" + i.ToString()).Value2.ToString();//distchan
+                        header = "D";
+                        String s4 = xlSh.get_Range("D" + i.ToString(), "D" + i.ToString()).Value2.ToString();//plant                        
+                        header = "F";
+                        String s5 = xlSh.get_Range("F" + i.ToString(), "F" + i.ToString()).Value2.ToString();//matCode
+                        header = "G";
+                        String s6 = xlSh.get_Range("G" + i.ToString(), "G" + i.ToString()).Value2.ToString();//matName
+                        header = "H";
+                        String s7 = "";
+                        if (xlSh.get_Range("H" + i.ToString(), "H" + i.ToString()).Value2 != null)
+                            s7 = xlSh.get_Range("H" + i.ToString(), "H" + i.ToString()).Value2.ToString();//batch
+                        header = "I";
+                        String s8 = "";
+                        if (xlSh.get_Range("I" + i.ToString(), "I" + i.ToString()).Value2 != null)
+                            s8 = xlSh.get_Range("I" + i.ToString(), "I" + i.ToString()).Value2.ToString();//sernum
+                        header = "J";
+                        double s9 = Convert.ToDouble(xlSh.get_Range("J" + i.ToString(), "J" + i.ToString()).Value2.ToString());//customer stock
+                        header = "K";
+                        String s10 = xlSh.get_Range("K" + i.ToString(), "K" + i.ToString()).Value2.ToString();//unit                                               
+                        header = "L";
+                        var s111 = ""; 
+                        DateTime s11 = Convert.ToDateTime("1900-01-01");
+                        if (xlSh.get_Range("L" + i.ToString(), "L" + i.ToString()).Value != null)
+                        {
+                            s111 = xlSh.get_Range("L" + i.ToString(), "L" + i.ToString()).Value.ToString();//postdate                           
+                            if (s111 != null)
+                                s11 = Convert.ToDateTime(s111);
+                        }
+                        header = "M";
+                        String s12 = "";
+                        if (xlSh.get_Range("M" + i.ToString(), "M" + i.ToString()).Value2 != null)
+                            s12 = xlSh.get_Range("M" + i.ToString(), "M" + i.ToString()).Value2.ToString();//delivery
+                        header = "N";
+                        var s131 = ""; 
+                        DateTime s13 = Convert.ToDateTime("1900-01-01");
+                        if (xlSh.get_Range("N" + i.ToString(), "N" + i.ToString()).Value != null)
+                        {
+                            s131 = xlSh.get_Range("N" + i.ToString(), "N" + i.ToString()).Value.ToString();//expirdate                           
+                            if (s131 != null)
+                                s13 = Convert.ToDateTime(s131);
+                        }
+                        header = "O";
+                        double s14 = Convert.ToDouble(xlSh.get_Range("O" + i.ToString(), "O" + i.ToString()).Value2.ToString());//value
+                        
+                        header = "P";
+                        var s15 = xlSh.get_Range("P" + i.ToString(), "P" + i.ToString()).Value2;//curr
+                      
+                        header = "R";
+                        String s16 = "";
+                        if (xlSh.get_Range("R" + i.ToString(), "R" + i.ToString()).Value2 != null)
+                            s16 = xlSh.get_Range("R" + i.ToString(), "R" + i.ToString()).Value2.ToString();//ean/upc
+                        header = "S";
+                        String s17 = xlSh.get_Range("S" + i.ToString(), "S" + i.ToString()).Value2.ToString();//regcode                       
+                        header = "U";
+                        String s18 = xlSh.get_Range("U" + i.ToString(), "U" + i.ToString()).Value2.ToString();//city name
+
+
+                        
+                        string res = sql1.GetRecordsOne("exec Kons_Insert_Sales @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18", 
+                                                                      s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16, s17, s18);
+                        
+                        if (res != "1")
+                        {
+                            xlSh.Cells[i, 22] = res;
+                            err++;
+                        }
+                        i++;
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ошибка при чтении файла. Системная ошибка: " + ex.Message + " В ячейке " + header + i.ToString(), "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    err++;
+                }
+                finally
+                {
+                    if (err == 0)
+                    {
+                        MessageBox.Show("Загрузка завершена. Ошибок не найдено.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        xlWorkBook.Close(true, misValue, misValue);
+                        xlApp.Quit();
+
+                        releaseObject(xlSh);
+                        releaseObject(xlWorkBook);
+                        releaseObject(xlApp);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Загрузка завершена. Найдено " + err.ToString() + " ошибок.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        xlApp.Visible = true;
+                    }
+                }
+                Cursor = Cursors.Default;
+            }
+
+        }
+
+        private void регионовToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+
+            openFileDialog1.InitialDirectory = @"J:\Information Technology\Development\отчётность региональщиков\Доработки\загрузка данных от дистрибюторов\";
+            openFileDialog1.Filter = "Excel files (*.xls)|*.xls";
+            openFileDialog1.FilterIndex = 0;
+            openFileDialog1.RestoreDirectory = true;
+            openFileDialog1.Multiselect = false;
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                Cursor = Cursors.WaitCursor;
+                Excel.Application xlApp;
+                Excel.Workbook xlWorkBook;
+                Excel.Worksheet xlSh;
+                xlApp = new Excel.Application();
+                xlWorkBook = xlApp.Workbooks.Open(openFileDialog1.FileName, 0, true, 5, "", "", true, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "\t", false, false, 0, true, 1, 0);
+
+                xlSh = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+
+                object misValue = System.Reflection.Missing.Value;
+                int err = 0;
+
+
+                String header = String.Empty;
+
+                int i = 2;
+
+                try
+                {
+                    Sql sql1 = new Sql();
+
+                    while (xlSh.get_Range("C" + i.ToString(), "C" + i.ToString()).Value2 != null)
+                    {
+                        header = "A";
+                        string s1 = "";
+                        if (xlSh.get_Range("A" + i.ToString(), "A" + i.ToString()).Value2 != null)
+                            s1 = xlSh.get_Range("A" + i.ToString(), "A" + i.ToString()).Value2.ToString();//city_code
+
+                        header = "B";
+                        string s2 = "";
+                        if (xlSh.get_Range("B" + i.ToString(), "B" + i.ToString()).Value2 != null)
+                            s2 = xlSh.get_Range("B" + i.ToString(), "B" + i.ToString()).Value2.ToString();//city_name
+
+                        header = "C";
+                        string s3 = "";
+                        if (xlSh.get_Range("C" + i.ToString(), "C" + i.ToString()).Value2 != null)
+                            s3 = xlSh.get_Range("C" + i.ToString(), "C" + i.ToString()).Value2.ToString();//subreg_name
+
+                        string res = sql1.GetRecordsOne("exec Kons_Insert_City @p1, @p2, @p3", s1, s2, s3);
+
+                        if (res != "1")
+                        {
+                            xlSh.Cells[i, 4] = res;
+                            err++;
+                        }
+                        i++;
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ошибка при чтении файла. Системная ошибка: " + ex.Message + " В ячейке " + header + i.ToString(), "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    err++;
+                }
+                finally
+                {
+                    if (err == 0)
+                    {
+                        MessageBox.Show("Загрузка завершена. Ошибок не найдено.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        xlWorkBook.Close(true, misValue, misValue);
+                        xlApp.Quit();
+
+                        releaseObject(xlSh);
+                        releaseObject(xlWorkBook);
+                        releaseObject(xlApp);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Загрузка завершена. Найдено " + err.ToString() + " ошибок.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        xlApp.Visible = true;
+                    }
+                }
+                Cursor = Cursors.Default;
+            }
+        }
+
+        void loadKonsignation()
+        {
+            globalData.update = true;
+
+            globalData.role = CheckRole();
+            rent_fill("RD", globalData.role, kons_rd);
+            rent_fill("Region", globalData.role, kons_reg, null, null, null, kons_rd);
+            //rent_fill("Div", globalData.role, kons_div, null, null, null, kons_rd);
+
+            fill_kons();
+
+            globalData.update = false;
+         
+        }
+       
+        
+        private void fill_kons()
+        {
+            Sql sql1 = new Sql();
+            DataTable dt1 = new DataTable();
+
+            int typekons;
+            string rd = "0";
+            string reg = "0";
+            
+            string cust = "";
+            string mat = "";
+            string sba = "";
+            string refdoc = "";
+            string lpu = "";
+
+            bool fl1, fl2, fl3;
+
+            fl1 = true;
+            fl2 = true;
+            fl3 = false;
+
+            typekons = CheckKonsType();
+
+            if (User_rent.Enabled == false)
+                fl3 = true;
+
+            ///* Вкладка заполнение */
+            
+            if (kons_rd.Enabled == true)
+                rd = kons_rd.SelectedValue.ToString();
+
+            if (kons_reg.Enabled == true)
+                reg = kons_reg.SelectedValue.ToString();
+
+            if (kons_cust.SelectedItem != null)
+            {
+                if (kons_cust.SelectedItem.ToString() == "все")
+                {
+                    cust = "";
+                    f[0] = "";
+                }
+                else
+                {
+                    cust = kons_cust.SelectedItem.ToString();
+                    cust = cust.Split(' ')[0];
+                }
+            }
+
+            if (kons_mat.SelectedItem != null)
+            {
+                if (kons_mat.SelectedItem.ToString() == "все")
+                {
+                    mat = "";
+                    f[1] = "";
+                }
+                else
+                {
+                    mat = kons_mat.SelectedItem.ToString();
+                    mat = mat.Split(' ')[0];
+                }
+            }
+
+            if (kons_sba.SelectedItem != null)
+            {
+                if (kons_sba.SelectedItem.ToString() == "все")
+                {
+                    sba = "";
+                    f[2] = "";
+                }
+                else
+                {
+                    sba = kons_sba.SelectedItem.ToString();
+                    sba = sba.Split(' ')[0];
+                }
+            }
+
+
+            if (cust != "")
+                f[0] = cust;
+            if (mat != "")
+                f[1] = mat;
+            if (sba != "")
+                f[2] = sba;
+            
+            _dgvKons.DataSource = null;
+
+            dt1 = sql1.GetRecords("exec Kons_Select_Sales @p1, @p2, @p3, @p4, @p5, @p6", reg, typekons, rd, cust, mat, sba);
+
+            _dgvKons.DataSource = dt1;
+
+            globalData.update = true;
+            
+            fillComboBox(dt1, "cust", kons_cust, 0);
+            if (dt1.Rows.Count > 0)
+            {
+                if (f[0] != String.Empty)
+                    kons_cust.SelectedIndex = 1;
+                else
+                    kons_cust.SelectedIndex = 0;
+            }
+            
+            fillComboBox(dt1, "mat", kons_mat, 1);
+            if (dt1.Rows.Count > 0)
+            {
+                if (f[1] != String.Empty)
+                    kons_mat.SelectedIndex = 1;
+                else
+                    kons_mat.SelectedIndex = 0;
+            }
+            
+            fillComboBox(dt1, "sba", kons_sba, 2);
+            if (dt1.Rows.Count > 0)
+            {
+                if (f[2] != String.Empty)
+                    kons_sba.SelectedIndex = 1;
+                else
+                    kons_sba.SelectedIndex = 0;
+            }
+
+            
+            globalData.update = false;
+
+            //if (subsum != 0)
+            //{
+            //    int temp = subsum;
+            //    subsum++;
+            //    SubSumRent(temp);
+            //}
+
+        }
+
+        private void button73_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void kons_rd_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (globalData.update == true)
+                return;
+
+            rent_fill("Region", globalData.role, kons_reg, null, null, null, kons_rd);
+            //rent_fill("Div", globalData.role, kons_div, null, null, kons_reg, kons_rd);
+            
+            
+        }
+
+        private void kons_reg_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (globalData.update == true)
+                return;
+
+            //rent_fill("Div", globalData.role, kons_div, null, null, kons_reg, kons_rd);
+            
+            //fill_kons();
+        }
+
+        private void kons_cust_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (globalData.update == true)
+                return;
+            fill_kons();
+        }
+
+        private void kons_mat_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (globalData.update == true)
+                return;
+            fill_kons();
+
+        }
+
+        private void kons_sba_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (globalData.update == true)
+                return;
+            fill_kons();
+        }
+
+        int CheckKonsType()
+        {
+            if (rbLPUKons.Checked && rbUserKons.Checked)
+                return 0;
+            if (rbLPUKons.Checked)
+                return 2;
+            if (rbUserKons.Checked)
+                return 3;
+            
+            return 0;
+        }
+     
+
+        private void rbLPUKons_CheckedChanged(object sender, EventArgs e)
+        {
+            //if (rbLPUKons.Checked)
+            //{
+            //    rbUserKons.Checked = false;
+            //}
+            //else
+            //    rbLPUKons.Checked = false;
+        }
+
+        private void rbUserKons_CheckedChanged(object sender, EventArgs e)
+        {
+            //if (rbUserKons.Checked)
+            //{
+            //    rbLPUKons.Checked = false;
+            //}
+            //else
+            //    rbUserKons.Checked = false;
+        }
+
+        private void button80_Click(object sender, EventArgs e)
+        {
+            fill_kons();
+        }
+
+        private void checkBox8_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox8.Checked)
+            {
+                kons_rd.Enabled = false;
+                rent_fill("Region", globalData.role, kons_reg, null, null, null, null);
+            }
+            else
+            {
+                kons_rd.Enabled = true;
+                rent_fill("Region", globalData.role, kons_reg, null, null, null, kons_rd);
+            }
+        }
+
+        private void checkBox7_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox7.Checked)
+            {
+                kons_reg.Enabled = false;                
+            }
+            else
+            {
+                kons_reg.Enabled = true;                
+            }
+        }
+
+        private void button81_Click(object sender, EventArgs e)
+        {
+            rbUserKons.Checked = false;
+            rbLPUKons.Checked = false;
         }
     }
 }

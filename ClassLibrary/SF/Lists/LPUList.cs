@@ -35,7 +35,7 @@ namespace ClassLibrary.SF.Lists
             var listOther = GetListOther(_listOther, user);
             return CreateTable(list, listOther);
         }
-
+        
         public DataTable ToDataTableWithBranch(User user = null)
         {
             if (user == null)
@@ -135,6 +135,21 @@ namespace ClassLibrary.SF.Lists
             organizationList.Reload();
 
             InitLists();
+        }
+
+        public DataTable ToDataTable(RegionRR regionRR)
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("ID", typeof(int));
+            dt.Columns.Add("Сокращенное наименование");
+            dt.Columns.Add("Полное наименование");
+
+            var filtredList = _list.Where(lpu => (lpu.RealRegion != null) && lpu.RealRegion.RegionRR.ID == regionRR.ID);
+
+            foreach (var lpu in filtredList)
+                dt.Rows.Add(new object[] { lpu.ID, lpu.ShortName, lpu.Name });
+            
+            return dt;
         }
     }
 }

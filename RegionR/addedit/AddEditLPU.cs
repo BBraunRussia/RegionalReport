@@ -7,37 +7,61 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using ClassLibrary;
+using ClassLibrary.SF;
 using ClassLibrary.SF.Lists;
 using ClassLibrary.SF.Models;
+using RegionR.SF;
+using RegionR.SF.Controllers;
+using RegionR.Controllers;
 
 namespace RegionR.addedit
 {
     public partial class AddEditLPU : Form
     {
-        private LpuRR _lpuRR;
+        private LpuRR lpuRR;
+        private LpuList lpuList;
         
         public AddEditLPU(LpuRR lpuRR)
         {
             InitializeComponent();
 
-            _lpuRR = lpuRR;
+            this.lpuRR = lpuRR;
+
+            lpuList = new LpuList();
+            
+            loadSFLPU();
         }
-        
+
+        private void loadSFLPU()
+        {
+            IController<RegionRR> controller = new LPUController<RegionRR>();
+            DataGridView dgv = controller.GetDataGridView(lpuRR.RegionRR);
+            dgv.CellDoubleClick += (object sender, DataGridViewCellEventArgs e) =>
+            {
+                LPU lpu = lpuList.GetItem(Convert.ToInt32(dgv[0, e.RowIndex].Value));
+
+                tbSName.Text = lpu.ShortName;
+                tbName.Text = lpu.Name;
+            };
+
+            this.Controls.Add(dgv);
+        }
+
         private void AddEditLPU_Load(object sender, EventArgs e)
         {
-            tbSName.Text = _lpuRR.Name;
-            tbName.Text = _lpuRR.FullName;
-            rbActive.Checked = (_lpuRR.StatusLPU == StatusLPU.Активен);
-            rbNonActive.Checked = (_lpuRR.StatusLPU == StatusLPU.Неактивен);
-            rbGroup.Checked = (_lpuRR.StatusLPU == StatusLPU.Групповой);
-            lbLpuID.Text = _lpuRR.ID.ToString();
+            tbSName.Text = lpuRR.Name;
+            tbName.Text = lpuRR.FullName;
+            rbActive.Checked = (lpuRR.StatusLPU == StatusLPU.Активен);
+            rbNonActive.Checked = (lpuRR.StatusLPU == StatusLPU.Неактивен);
+            rbGroup.Checked = (lpuRR.StatusLPU == StatusLPU.Групповой);
+            lbLpuID.Text = lpuRR.ID.ToString();
         }
 
         private void btnOK_Click(object sender, EventArgs e)
         {
             if (CopyFields())
             {
-                _lpuRR.Save();
+                lpuRR.Save();
                 DialogResult = System.Windows.Forms.DialogResult.OK;
             }
         }
@@ -49,8 +73,7 @@ namespace RegionR.addedit
 
             if ((rbNonActive.Checked) || (rbGroup.Checked))
             {
-                LpuList lpuList = new LpuList();
-                LPU lpu = lpuList.GetItem(_lpuRR);
+                LPU lpu = lpuList.GetItem(lpuRR);
                 if (lpu != null)
                 {
                     MessageBox.Show("Установить статус " + ((rbNonActive.Checked) ? "\"неактивен\"" : "\"групповой\"") + " нельзя - имеется сопоставление с ЛПУ-SF № " + lpu.ID, "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -58,9 +81,9 @@ namespace RegionR.addedit
                 }
             }
 
-            _lpuRR.Name = tbSName.Text;
-            _lpuRR.FullName = tbName.Text;
-            _lpuRR.StatusLPU = (rbActive.Checked) ? StatusLPU.Активен : (rbNonActive.Checked) ? StatusLPU.Неактивен : StatusLPU.Групповой;
+            lpuRR.Name = tbSName.Text;
+            lpuRR.FullName = tbName.Text;
+            lpuRR.StatusLPU = (rbActive.Checked) ? StatusLPU.Активен : (rbNonActive.Checked) ? StatusLPU.Неактивен : StatusLPU.Групповой;
 
             return true;
         }
