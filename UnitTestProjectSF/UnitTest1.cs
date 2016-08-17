@@ -3,6 +3,8 @@ using NUnit.Framework;
 using ClassLibrary;
 using ClassLibrary.SF;
 using ClassLibrary.SF.Import;
+using ClassLibrary.SF.Export;
+using RegionReport.Domain;
 
 namespace UnitTestProjectSF
 {

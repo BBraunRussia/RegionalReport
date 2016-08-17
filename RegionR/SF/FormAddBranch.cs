@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using ClassLibrary.SF;
 using ClassLibrary;
+using RegionReport.Domain;
 
 namespace RegionR.SF
 {

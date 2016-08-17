@@ -8,6 +8,7 @@ using ClassLibrary;
 using ClassLibrary.SF;
 using System.Drawing;
 using RegionR.Controllers;
+using RegionReport.Domain;
 
 namespace RegionR
 {

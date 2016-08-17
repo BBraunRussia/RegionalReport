@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using ClassLibrary.SF.Models;
+using ClassLibrary.SF.Entities;
 
 namespace RegionR.SF
 {

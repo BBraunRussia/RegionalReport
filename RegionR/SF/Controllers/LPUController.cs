@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
-using ClassLibrary.SF.Models;
+using ClassLibrary.SF.Entities;
 using RegionR.Controllers;
 
 namespace RegionR.SF.Controllers

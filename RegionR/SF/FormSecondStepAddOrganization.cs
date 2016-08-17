@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using ClassLibrary;
 using ClassLibrary.SF.Lists;
-using ClassLibrary.SF.Models;
+using ClassLibrary.SF.Entities;
 
 namespace RegionR.SF
 {

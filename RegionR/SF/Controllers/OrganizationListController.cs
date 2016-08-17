@@ -6,8 +6,9 @@ using System.Windows.Forms;
 using System.Data;
 using ClassLibrary;
 using ClassLibrary.SF.Lists;
-using ClassLibrary.SF.Models;
+using ClassLibrary.SF.Entities;
 using RegionR.Controllers;
+using RegionReport.Domain;
 
 namespace RegionR.SF
 {

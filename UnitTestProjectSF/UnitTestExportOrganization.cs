@@ -2,6 +2,10 @@
 using NUnit.Framework;
 using ClassLibrary;
 using ClassLibrary.SF;
+using ClassLibrary.SF.Entities;
+using RegionReport.Domain;
+using ClassLibrary.SF.Lists;
+using ClassLibrary.SF.Export;
 
 namespace UnitTestProjectSF
 {

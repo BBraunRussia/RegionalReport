@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using ClassLibrary;
-using ClassLibrary.SF.Models;
+using ClassLibrary.SF.Entities;
+using RegionReport.Domain;
 
 namespace RegionR.SF
 {

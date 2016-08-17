@@ -9,10 +9,11 @@ using System.Windows.Forms;
 using ClassLibrary;
 using ClassLibrary.SF;
 using ClassLibrary.SF.Lists;
-using ClassLibrary.SF.Models;
+using ClassLibrary.SF.Entities;
 using RegionR.SF;
 using RegionR.SF.Controllers;
 using RegionR.Controllers;
+using RegionReport.Domain;
 
 namespace RegionR.addedit
 {

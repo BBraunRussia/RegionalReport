@@ -10,6 +10,7 @@ using RegionR.addedit;
 using RegionR.other;
 using DataLayer;
 using ClassLibrary;
+using RegionReport.Domain;
 
 namespace RegionR.Directories
 {
