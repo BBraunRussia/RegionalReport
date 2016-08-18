@@ -31,8 +31,17 @@ namespace ClassLibrary.SF.Import
             string[] lines = File.ReadAllLines(fileName);
 
             SplitLines(lines);
+        }
 
-            MoveFile(fileName);
+        public void Move()
+        {
+            string path = Path.GetDirectoryName(fileName) + @"\processed";
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
+            File.Move(fileName, string.Concat(path, @"\", DateTime.Today.ToShortDateString(), " ", Path.GetFileName(fileName)));
         }
 
         private void SplitLines(string[] lines)
@@ -126,17 +135,6 @@ namespace ClassLibrary.SF.Import
             return currentIndex - 1;
         }
         
-        private void MoveFile(string fileName)
-        {
-            string path = Path.GetDirectoryName(fileName) + @"\processed";
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-            }
-
-            File.Move(fileName, string.Concat(path, @"\", DateTime.Today.ToShortDateString(), " ", Path.GetFileName(fileName)));
-        }
-
         public IEnumerator GetEnumerator()
         {
             foreach (var item in dt.Rows)

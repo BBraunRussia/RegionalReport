@@ -36,6 +36,8 @@ namespace ClassLibrary.SF.Import
             {
                 Update(new PersonModel(row));
             }
+
+            readFile.Move();
         }
 
         private void Update(PersonModel model)

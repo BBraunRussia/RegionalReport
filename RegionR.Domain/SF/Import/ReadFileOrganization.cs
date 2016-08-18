@@ -49,6 +49,8 @@ namespace ClassLibrary.SF.Import
             {
                 Update(new OrganizationModel(row));
             }
+
+            readFile.Move();
         }
 
         private void Update(OrganizationModel model)

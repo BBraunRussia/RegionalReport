@@ -22,6 +22,8 @@ namespace ClassLibrary.SF.Import
             {
                 Update(new RelationshipModel(row));
             }
+
+            readFile.Move();
         }
 
         private void Update(RelationshipModel model)
