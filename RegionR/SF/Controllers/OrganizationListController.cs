@@ -9,6 +9,7 @@ using ClassLibrary.SF.Lists;
 using ClassLibrary.SF.Entities;
 using RegionReport.Domain;
 using RegionR.Controllers;
+using System.Drawing;
 
 namespace RegionR.SF
 {
@@ -48,6 +49,8 @@ namespace RegionR.SF
             _dgv.Columns[3].Width = 80;
             _dgv.Columns[4].Width = 80;
             _dgv.Columns[5].Width = 120;
+
+            SetStyle();
 
             return _dgv;
         }
@@ -149,10 +152,19 @@ namespace RegionR.SF
             return organizationList.GetItem(id);
         }
 
-
         public void SetStyle()
         {
-            throw new NotImplementedException();
+            foreach (DataGridViewRow row in _dgv.Rows)
+            {
+                int id;
+                int.TryParse(row.Cells["RR ID"].Value.ToString(), out id);
+
+                OrganizationList organizationList = OrganizationList.GetUniqueInstance();
+                Organization organization = organizationList.GetItem(id);
+
+                if (organization.Deleted)
+                    row.DefaultCellStyle.ForeColor = Color.Red;
+            }
         }
     }
 }

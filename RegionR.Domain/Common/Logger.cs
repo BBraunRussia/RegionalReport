@@ -19,7 +19,7 @@ namespace ClassLibrary.Common
 
         public static void WriteNotFound(string name, string nameHeader, string numberSF)
         {
-            Logger.Warning("SFNumber: {numberSF}, {nameHeader} not found value: \"{name}\"", numberSF, nameHeader, name);
+            Logger.Warning("SFNumber: {numberSF}, {nameHeader} not found value: {name}", numberSF, nameHeader, name);
         }
     }
 }

@@ -90,7 +90,9 @@ namespace ClassLibrary.SF.Entities
 
             Pharmacy = row["pharmacy"].ToString();
             CrmID = row["organization_crmID"].ToString();
-            Deleted = false;
+            bool deleted;
+            bool.TryParse(row["organization_Deleted"].ToString(), out deleted);
+            Deleted = deleted;
         }
 
         public Organization(TypeOrg typeOrg)

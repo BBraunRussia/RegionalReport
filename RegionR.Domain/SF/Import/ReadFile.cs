@@ -26,7 +26,10 @@ namespace ClassLibrary.SF.Import
             fileName = settings.GetFileName(importFileType);
 
             if (!File.Exists(fileName))
+            {
+                LogManager.Logger.Information("File " + importFileType.ToString() + " not found");
                 return;
+            }
             
             string[] lines = File.ReadAllLines(fileName);
 
