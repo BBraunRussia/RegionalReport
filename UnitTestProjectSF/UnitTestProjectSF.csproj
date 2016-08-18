@@ -72,6 +72,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="OrganizationListTest.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="UnitTestExportOrganization.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
