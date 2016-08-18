@@ -43,7 +43,7 @@ namespace ClassLibrary.SF.Import
             Person person = GetPerson(model);
             if (person == null)
             {
-                Logger.Write("Can't create a person. NumberSF: " + model.NumberSF);
+                LogManager.Logger.Error("Can't create a person. NumberSF: {numberSF}", model.NumberSF);
                 return;
             }
 
@@ -78,7 +78,7 @@ namespace ClassLibrary.SF.Import
             BaseDictionary item = list.GetItem(name);
             if (item == null)
             {
-                Logger.WriteNotFound(name, nameHeader, numberSF);
+                LogManager.WriteNotFound(name, nameHeader, numberSF);
             }
 
             return item;

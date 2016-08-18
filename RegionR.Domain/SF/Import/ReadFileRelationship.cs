@@ -34,7 +34,7 @@ namespace ClassLibrary.SF.Import
             if (person == null)
                 return;
 
-            person.Organization = GetOrganization(model);
+            person.Organization = GetOrganization(model) ?? person.Organization;
             
             person.Save();
         }

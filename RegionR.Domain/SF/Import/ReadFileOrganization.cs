@@ -59,7 +59,12 @@ namespace ClassLibrary.SF.Import
             
             organization.NumberSF = model.NumberSF;
             organization.CrmID = model.CrmID;
-            organization.ParentOrganization = (model.ParentNumberSF == string.Empty) ? null : organizationList.GetItem(model.ParentNumberSF);
+
+            if (model.ParentNumberSF != string.Empty)
+            {
+                organization.ParentOrganization = organizationList.GetItem(model.ParentNumberSF) ?? organization.ParentOrganization;
+            }
+
             organization.Name = model.Name;
             organization.ShortName = model.ShortName;
             organization.Email = model.Email;
@@ -86,7 +91,7 @@ namespace ClassLibrary.SF.Import
                 lpu.SubRegion = subRegion;
                 if (subRegion == null)
                 {
-                    Logger.WriteNotFound(model.SubRegion, "SubRegion", model.NumberSF);
+                    LogManager.WriteNotFound(model.SubRegion, "SubRegion", model.NumberSF);
                 }
                 
                 lpu.BedsTotal = model.BedsTotal;
@@ -117,7 +122,7 @@ namespace ClassLibrary.SF.Import
             BaseDictionary item = list.GetItem(name);
             if (item == null)
             {
-                Logger.WriteNotFound(name, nameHeader, numberSF);
+                LogManager.WriteNotFound(name, nameHeader, numberSF);
             }
 
             return item;
@@ -136,7 +141,7 @@ namespace ClassLibrary.SF.Import
                 }
                 catch (NullReferenceException)
                 {
-                    Logger.WriteNotFound(string.Concat(model.RecordType, " ", model.ClientType), "Organization type", model.NumberSF);
+                    LogManager.WriteNotFound(string.Concat(model.RecordType, " ", model.ClientType), "Organization type", model.NumberSF);
                 }
             }
 

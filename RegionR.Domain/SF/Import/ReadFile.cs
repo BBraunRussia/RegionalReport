@@ -90,7 +90,7 @@ namespace ClassLibrary.SF.Import
 
             if (newLine.Count() != count)
             {
-                Logger.Write(string.Concat("Can't recognize the string №", (index + 1), " in the file", Path.GetFileName(fileName)));
+                LogManager.Logger.Error("Can't recognize the string №{index} in the file {file}", (index + 1), Path.GetFileName(fileName));
                 return null;
             }
 

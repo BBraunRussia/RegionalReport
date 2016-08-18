@@ -25,7 +25,7 @@ namespace ClassLibrary.SF.Lists
         public Dictionary<int, Organization> List { get { return _list; } }
         public IEnumerable<LPU> ListLpu { get { return _list.Where(item => (item.Value is LPU) && item.Value.ParentOrganization == null).Select(item => item.Value as LPU).ToList(); } }
         public IEnumerable<LPU> ListBranch { get { return _list.Where(item => (item.Value is LPU) && item.Value.ParentOrganization != null).Select(item => item.Value as LPU).ToList(); } }
-        public IEnumerable<Organization> ListOther { get { return _list.Where(item => item.Value is Organization).Select(org => org.Value); } }
+        public IEnumerable<Organization> ListOther { get { return _list.Where(item => !(item.Value is LPU)).Select(org => org.Value); } }
 
         public static OrganizationList GetUniqueInstance()
         {
