@@ -72,17 +72,17 @@ namespace ClassLibrary.SF.Import
             TypeFin = row["Z_SEE_FINANCIAL_STATUS__C"].ToString();
             MainSpec = row["Z_RU_INSTITUTION_MAIN_SPECIALITIES__C"].ToString();
             SubRegion = row["Z_R3_TERRITORIES_RU__C"].ToString();
-            BedsTotal = row["Z_CD_NUMBER_OF_BEDS__C"].ToString();
-            BedsIC = row["Z_ICU_BEDS__C"].ToString();
-            BedsSurgical = row["Z_NUMBER_OF_ACUTE_BEDS_IN_HOSPITAL__C"].ToString();
-            Operating = row["Z_RU_NUMBER_OF_SURGICAL_ROOMS__C"].ToString();
-            MachineGD = row["Z_RU_NUMBER_OF_HD_DIALYSIS_MACHINES__C"].ToString();
-            MachineGDF = row["Z_RU_NUMBER_OF_HDF_DIALYSIS_MACHINES__C"].ToString();
-            MachineCRRT = row["Z_RU_NUMBER_OF_CRRT_MACHINES__C"].ToString();
-            Shifts = row["Z_RU_NUMBER_OF_SHIFTS__C"].ToString();
-            PatientGD = row["Z_RU_NUMBER_OF_PATIENT_HD__C"].ToString();
-            PatientPD = row["Z_RU_NUMBER_OF_PATIENT_PD__C"].ToString();
-            PatientCRRT = row["Z_RU_NUMBER_OF_ACCUTE_PATIENTS_PER_YEAR__C"].ToString();
+            BedsTotal = GetIntValue(row["Z_CD_NUMBER_OF_BEDS__C"]);
+            BedsIC = GetIntValue(row["Z_ICU_BEDS__C"]);
+            BedsSurgical = GetIntValue(row["Z_NUMBER_OF_ACUTE_BEDS_IN_HOSPITAL__C"]);
+            Operating = GetIntValue(row["Z_RU_NUMBER_OF_SURGICAL_ROOMS__C"]);
+            MachineGD = GetIntValue(row["Z_RU_NUMBER_OF_HD_DIALYSIS_MACHINES__C"]);
+            MachineGDF = GetIntValue(row["Z_RU_NUMBER_OF_HDF_DIALYSIS_MACHINES__C"]);
+            MachineCRRT = GetIntValue(row["Z_RU_NUMBER_OF_CRRT_MACHINES__C"]);
+            Shifts = GetIntValue(row["Z_RU_NUMBER_OF_SHIFTS__C"]);
+            PatientGD = GetIntValue(row["Z_RU_NUMBER_OF_PATIENT_HD__C"]);
+            PatientPD = GetIntValue(row["Z_RU_NUMBER_OF_PATIENT_PD__C"]);
+            PatientCRRT = GetIntValue(row["Z_RU_NUMBER_OF_ACCUTE_PATIENTS_PER_YEAR__C"]);
             Email = row["Z_R3_EMAIL_ADDRESS__C"].ToString();
             Website = row["WEBSITE"].ToString();
             Phone = row["PHONE"].ToString();
@@ -91,6 +91,11 @@ namespace ClassLibrary.SF.Import
             TypeLPU = row["Z_HOSPITAL_TYPE__C"].ToString();
             Ownership = row["OWNERSHIP"].ToString();
             Deleted = Convert.ToBoolean(row["Z_R3_INACTIVE__C"].ToString());
+        }
+
+        private string GetIntValue(object value)
+        {
+            return value.ToString().Replace(".0", "");
         }
     }
 }
