@@ -36,7 +36,7 @@ namespace ClassLibrary.SF.Export
                                        "Pharmacy", "Governmental-administrative establishment", "Distributor (Buying)", "Distributor (Non-Buying)"};
 
         public static readonly string[] clientType = { "Department (purchasing dep., etc)", "Governmental-administrative establishment", "Dealer",
-                                                     "Veterinary clinic", "Dentistry" };
+                                                     "Veterinary clinic", "Dentist" };
 
         public void ExportRus()
         {
