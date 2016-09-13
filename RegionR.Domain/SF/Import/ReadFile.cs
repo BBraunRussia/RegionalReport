@@ -44,7 +44,22 @@ namespace ClassLibrary.SF.Import
                 Directory.CreateDirectory(path);
             }
 
-            File.Move(fileName, string.Concat(path, @"\", DateTime.Today.ToShortDateString(), " ", Path.GetFileName(fileName)));
+            string curDate = GetCurrentDateToString();
+
+            File.Move(fileName, string.Concat(path, @"\", curDate, " ", Path.GetFileName(fileName)));
+        }
+
+        private string GetCurrentDateToString()
+        {
+            string month = DateTime.Today.Month.ToString();
+            if (DateTime.Today.Month < 10)
+                month = "0" + DateTime.Today.Month.ToString();
+
+            string day = DateTime.Today.Day.ToString();
+            if (DateTime.Today.Day < 10)
+                day = "0" + DateTime.Today.Day.ToString();
+
+            return DateTime.Today.Year + "." + month + "." + day;
         }
 
         private void SplitLines(string[] lines)
@@ -68,9 +83,6 @@ namespace ClassLibrary.SF.Import
             while (index < lines.Count())
             {
                 string[] line = SplitLine(lines, count);
-
-                if (index == 193)
-                    index = 193;
 
                 if (line != null)
                 {
