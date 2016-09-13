@@ -73,10 +73,11 @@ namespace ClassLibrary.SF.Entities
             KPP = row["Organization_KPP"].ToString();
             PostIndex = row["Organization_PostIndex"].ToString();
 
-            int idCity;
-            int.TryParse(row["City_id"].ToString(), out idCity);
-            City = CityList.GetUniqueInstance().GetItem(idCity) as City;
+            int idRealRegion;
+            int.TryParse(row["RealRegion_id"].ToString(), out idRealRegion);
+            RealRegion = RealRegionList.GetUniqueInstance().GetItem(idRealRegion) as RealRegion;
 
+            City = row["Organization_city"].ToString();
             Street = row["Organization_street"].ToString();
             INN = row["Organization_INN"].ToString();
 
@@ -120,18 +121,9 @@ namespace ClassLibrary.SF.Entities
         public string KPP { get; set; }
         public string PostIndex { get; set; }
         public string Street { get; set; }
-        public City City { get; set; }
+        public string City { get; set; }
         public string INN { get; set; }
-        public RealRegion RealRegion
-        {
-            get { return (City == null) ? null : City.RealRegion; }
-            set
-            {
-                CityList cityList = CityList.GetUniqueInstance();
-                City city = cityList.GetItem(value);
-                City = city;
-            }
-        }
+        public RealRegion RealRegion { get; set; }
 
         public string MachineGD
         {
@@ -210,7 +202,8 @@ namespace ClassLibrary.SF.Entities
                 INN,
                 KPP,
                 PostIndex,
-                (City == null) ? 0 : ID,
+                (RealRegion == null) ? 0 : RealRegion.ID,
+                City,
                 Street,
                 Pharmacy,
                 Deleted.ToString(),
@@ -234,7 +227,7 @@ namespace ClassLibrary.SF.Entities
             string typeOrgName = TypeOrg.ToString();
 
             return new object[] { ID, CrmID, ShortName, typeOrgName, INN, (RealRegion == null) ? string.Empty : RealRegion.Name,
-                (City == null) ? string.Empty : City.Name, string.Empty, string.Empty, string.Empty };
+                (City == null) ? string.Empty : City, string.Empty, string.Empty, string.Empty };
         }
     }
 }

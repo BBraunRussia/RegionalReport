@@ -99,7 +99,7 @@ namespace ClassLibrary.SF.Entities
                 GetSubOrganizationName(),
                 (Position == null) ? string.Empty : Position.Name, 
                 (organization.RealRegion == null) ? string.Empty : organization.RealRegion.Name,
-                (organization.City == null) ? string.Empty : organization.City.Name
+                organization.City
             };
         }
 

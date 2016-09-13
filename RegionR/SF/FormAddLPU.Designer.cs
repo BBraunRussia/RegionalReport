@@ -89,7 +89,6 @@
             this.tbStreet = new System.Windows.Forms.TextBox();
             this.label31 = new System.Windows.Forms.Label();
             this.cbRealRegion = new System.Windows.Forms.ComboBox();
-            this.cbCity = new System.Windows.Forms.ComboBox();
             this.lbRegionRR = new System.Windows.Forms.Label();
             this.label35 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -104,8 +103,6 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.cbLpuRR = new System.Windows.Forms.ComboBox();
             this.btnShowRules = new System.Windows.Forms.Button();
-            this.tbPhoneCode = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.btnAddPerson = new System.Windows.Forms.Button();
             this.btnShowPerson = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
@@ -129,6 +126,7 @@
             this.label39 = new System.Windows.Forms.Label();
             this.lbRegionRR2 = new System.Windows.Forms.Label();
             this.label40 = new System.Windows.Forms.Label();
+            this.tbCity = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -612,17 +610,17 @@
             // tbPhone
             // 
             this.tbPhone.ContextMenuStrip = this.cmTextBox;
-            this.tbPhone.Location = new System.Drawing.Point(624, 373);
-            this.tbPhone.MaxLength = 7;
+            this.tbPhone.Location = new System.Drawing.Point(435, 347);
+            this.tbPhone.MaxLength = 10;
             this.tbPhone.Name = "tbPhone";
-            this.tbPhone.Size = new System.Drawing.Size(139, 20);
+            this.tbPhone.Size = new System.Drawing.Size(187, 20);
             this.tbPhone.TabIndex = 57;
             this.tbPhone.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_KeyPress);
             // 
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(522, 376);
+            this.label25.Location = new System.Drawing.Point(295, 350);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(96, 13);
             this.label25.TabIndex = 56;
@@ -703,16 +701,6 @@
             this.cbRealRegion.Size = new System.Drawing.Size(399, 21);
             this.cbRealRegion.TabIndex = 66;
             this.cbRealRegion.SelectedIndexChanged += new System.EventHandler(this.cbRealRegion_SelectedIndexChanged);
-            // 
-            // cbCity
-            // 
-            this.cbCity.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCity.FormattingEnabled = true;
-            this.cbCity.Location = new System.Drawing.Point(435, 216);
-            this.cbCity.Name = "cbCity";
-            this.cbCity.Size = new System.Drawing.Size(399, 21);
-            this.cbCity.TabIndex = 68;
-            this.cbCity.SelectedIndexChanged += new System.EventHandler(this.cbCity_SelectedIndexChanged);
             // 
             // lbRegionRR
             // 
@@ -851,25 +839,6 @@
             this.btnShowRules.Text = "Правила наименования";
             this.btnShowRules.UseVisualStyleBackColor = true;
             this.btnShowRules.Click += new System.EventHandler(this.btnShowRules_Click);
-            // 
-            // tbPhoneCode
-            // 
-            this.tbPhoneCode.Enabled = false;
-            this.tbPhoneCode.Location = new System.Drawing.Point(435, 347);
-            this.tbPhoneCode.MaxLength = 7;
-            this.tbPhoneCode.Name = "tbPhoneCode";
-            this.tbPhoneCode.Size = new System.Drawing.Size(74, 20);
-            this.tbPhoneCode.TabIndex = 56;
-            this.tbPhoneCode.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_KeyPress);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(295, 350);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(134, 13);
-            this.label1.TabIndex = 78;
-            this.label1.Text = "Телефонный код города:";
             // 
             // btnAddPerson
             // 
@@ -1087,6 +1056,13 @@
             this.label40.TabIndex = 106;
             this.label40.Text = "Регион RR:";
             // 
+            // tbCity
+            // 
+            this.tbCity.Location = new System.Drawing.Point(435, 217);
+            this.tbCity.Name = "tbCity";
+            this.tbCity.Size = new System.Drawing.Size(399, 20);
+            this.tbCity.TabIndex = 108;
+            // 
             // FormAddLPU
             // 
             this.AcceptButton = this.btnSaveAndClose;
@@ -1094,6 +1070,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(1113, 613);
+            this.Controls.Add(this.tbCity);
             this.Controls.Add(this.lbRegionRR2);
             this.Controls.Add(this.label40);
             this.Controls.Add(this.lbLpuRR2Id);
@@ -1117,8 +1094,6 @@
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnShowPerson);
             this.Controls.Add(this.btnAddPerson);
-            this.Controls.Add(this.tbPhoneCode);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnShowRules);
             this.Controls.Add(this.cbLpuRR);
             this.Controls.Add(this.btnCancel);
@@ -1126,7 +1101,6 @@
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.lbRegionRR);
             this.Controls.Add(this.label35);
-            this.Controls.Add(this.cbCity);
             this.Controls.Add(this.cbRealRegion);
             this.Controls.Add(this.tbStreet);
             this.Controls.Add(this.label31);
@@ -1240,7 +1214,6 @@
         private System.Windows.Forms.TextBox tbStreet;
         private System.Windows.Forms.Label label31;
         private System.Windows.Forms.ComboBox cbRealRegion;
-        private System.Windows.Forms.ComboBox cbCity;
         private System.Windows.Forms.Label lbRegionRR;
         private System.Windows.Forms.Label label35;
         private System.Windows.Forms.GroupBox groupBox3;
@@ -1248,8 +1221,6 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.ComboBox cbLpuRR;
         private System.Windows.Forms.Button btnShowRules;
-        private System.Windows.Forms.TextBox tbPhoneCode;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnAddSubOrganization;
         private System.Windows.Forms.Button btnAddPerson;
         private System.Windows.Forms.Button btnShowPerson;
@@ -1281,5 +1252,6 @@
         private System.Windows.Forms.Label label39;
         private System.Windows.Forms.Label lbRegionRR2;
         private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.TextBox tbCity;
     }
 }

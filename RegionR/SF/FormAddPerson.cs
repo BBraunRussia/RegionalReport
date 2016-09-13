@@ -73,7 +73,7 @@ namespace RegionR.SF
 
             tbEmail.Text = _person.Email;
             mtbMobile.Text = _person.Mobile;
-            mtbPhone.Text = _person.Phone;
+            tbPhone.Text = _person.Phone;
 
             lbCrmID.Text = (_person.CrmID == "") ? "не задан" : _person.CrmID;
 
@@ -86,10 +86,7 @@ namespace RegionR.SF
                 cbMainSpecPerson.SelectedValue = 86;
                 cbPosition.SelectedValue = 7;
             }
-
-            SetPhoneCode();
-            SetPhoneMask();
-
+            
             ShowHistory();
         }
 
@@ -105,30 +102,12 @@ namespace RegionR.SF
             controlEditMode.SetEnableValue(tbOrganization, false);
             controlEditMode.SetEnableValue(tbSubOrganization, false);
         }
-
-        private void SetPhoneCode()
-        {
-            Organization organization = (_person.Organization.ParentOrganization == null) ? _person.Organization : _person.Organization.ParentOrganization;
-            tbPhoneCode.Text = (organization.City == null) ? string.Empty : organization.City.PhoneCode;
-        }
-
-        private void SetPhoneMask()
-        {
-            int lenght = (tbPhoneCode.Text == string.Empty) ? 10 : 10 - tbPhoneCode.Text.Length;
-
-            string mask = string.Empty;
-
-            for (int i = 0; i < lenght; i++)
-                mask += "0";
-
-            mtbPhone.Mask = mask;
-        }
-
+        
         private void SetRealRegionAndCity()
         {
             Organization region = (_person.Organization.ParentOrganization == null) ? _person.Organization : _person.Organization.ParentOrganization;
 
-            lbCity.Text = (region.City == null) ? string.Empty : region.City.Name;
+            lbCity.Text = (region.City == null) ? string.Empty : region.City;
             lbRealRegion.Text = (region.RealRegion == null) ? string.Empty : region.RealRegion.Name;
         }
 
@@ -221,7 +200,7 @@ namespace RegionR.SF
 
             _person.Email = tbEmail.Text;
             _person.Mobile = mtbMobile.Text;
-            _person.Phone = mtbPhone.Text;
+            _person.Phone = tbPhone.Text;
 
             _person.Comment = tbComment.Text;
 
@@ -285,7 +264,7 @@ namespace RegionR.SF
             if ((mtbMobile.Text != "+7(   )   -  -") && (_person.Mobile != mtbMobile.Text))
                 return true;
 
-            if (_person.Phone != mtbPhone.Text)
+            if (_person.Phone != tbPhone.Text)
                 return true;
 
             if (_person.Comment != tbComment.Text)

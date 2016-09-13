@@ -26,7 +26,6 @@ namespace RegionR.SF
         private AdmLevelList _admLevelList;
         private MainSpecList _mainSpecList;
         private RealRegionList _realRegionList;
-        private CityList _cityList;
         private SubRegionList _subRegionList;
         private TypeFinList _typeFinList;
         private HistoryList _historyList;
@@ -52,7 +51,6 @@ namespace RegionR.SF
             _admLevelList = AdmLevelList.GetUniqueInstance();
             _mainSpecList = MainSpecList.GetUniqueInstance();
             _realRegionList = RealRegionList.GetUniqueInstance();
-            _cityList = CityList.GetUniqueInstance();
             _subRegionList = SubRegionList.GetUniqueInstance();
             _typeFinList = TypeFinList.GetUniqueInstance();
             _historyList = HistoryList.GetUniqueInstance();
@@ -118,16 +116,11 @@ namespace RegionR.SF
             tbEmail.Text = _lpu.Email;
             tbWebSite.Text = _lpu.Website;
             tbPhone.Text = _lpu.Phone;
+            tbCity.Text = _lpu.City;
 
             if (_lpu.RealRegion != null)
                 cbRealRegion.SelectedValue = _lpu.RealRegion.ID;
-
-            if (_lpu.City != null)
-            {
-                cbCity.SelectedValue = _lpu.City.ID;
-                tbPhoneCode.Text = _lpu.City.PhoneCode;
-            }
-
+            
             if (_parentLPU == null)
             {
                 tbINN.Text = _lpu.INN;                
@@ -204,10 +197,9 @@ namespace RegionR.SF
                 tbPatientPD.Text = _lpu.PatientPD;
                 tbPatientCRRT.Text = _lpu.PatientCRRT;
             }
+            
             LoadTree();
-
-            SetPhoneCodeMask();
-
+            
             ShowHistory();
         }
 
@@ -223,16 +215,9 @@ namespace RegionR.SF
             lbAutor.Text = _historyList.GetItemString(_lpu, HistoryAction.Создал);
             lbEditor.Text = _historyList.GetItemString(_lpu, HistoryAction.Редактировал);
         }
-
-        private void SetPhoneCodeMask()
+        
+        private async void LoadDictionaries()
         {
-            tbPhone.MaxLength = Phone.GetPhoneLenght(tbPhoneCode.Text);
-        }
-
-        private void LoadDictionaries()
-        {
-            ClassForForm.LoadDictionary(cbLpuRR, _lpuRRList.ToDataTable(_lpu.LpuRR), false);
-            ClassForForm.LoadDictionary(cbLpuRR2, _lpuRRList.ToDataTable(_lpu.LpuRR2), false);
             ClassForForm.LoadDictionary(cbTypeLpu, _typeLPUList.ToDataTable());
             ClassForForm.LoadDictionary(cbOwnership, _ownershipList.ToDataTable());
             ClassForForm.LoadDictionary(cbAdmLevel, _admLevelList.ToDataTable());
@@ -247,25 +232,32 @@ namespace RegionR.SF
                 ClassForForm.LoadDictionary(cbRealRegion, _realRegionList.ToDataTable());
 
             _isLoad = true;
-            LoadCity();
+
+            DataTable dtLpuRR = await _lpuRRList.ToDataTableAsync(_lpu.LpuRR);
+            DataTable dtLpuRR2 = await _lpuRRList.ToDataTableAsync(_lpu.LpuRR2);
+
+            ClassForForm.LoadDictionary(cbLpuRR, dtLpuRR, false);
+            ClassForForm.LoadDictionary(cbLpuRR2, dtLpuRR2, false);
+
+            if (_lpu.LpuRR != null)
+            {
+                cbLpuRR.SelectedValue = _lpu.LpuRR.ID;
+                lbRegionRR.Text = _lpu.LpuRR.RegionRR.Name;
+            }
+
+            if (_lpu.LpuRR2 != null)
+            {
+                cbLpuRR2.SelectedValue = _lpu.LpuRR2.ID;
+                lbRegionRR2.Text = _lpu.LpuRR2.RegionRR.Name;
+            }
         }
 
         private void cbRealRegion_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (_isLoad)
             {
-                LoadCity();
                 ChangeSalesDistrict();
             }
-        }
-
-        private void LoadCity()
-        {
-            int idRealRegion = Convert.ToInt32(cbRealRegion.SelectedValue);
-            RealRegion realRegion = _realRegionList.GetItem(idRealRegion) as RealRegion;
-
-            DataTable dt = _cityList.ToDataTable(realRegion);
-            ClassForForm.LoadDictionary(cbCity, dt);
         }
 
         private void ChangeSalesDistrict()
@@ -345,9 +337,8 @@ namespace RegionR.SF
             _lpu.Name = tbName.Text;
             _lpu.ShortName = tbShortName.Text;
 
-            int idCity = Convert.ToInt32(cbCity.SelectedValue);
-            _lpu.City = _cityList.GetItem(idCity) as City;
-
+            _lpu.City = tbCity.Text;
+            
             _lpu.INN = (_parentLPU == null) ? tbINN.Text : string.Empty;
 
             _lpu.KPP = tbKPP.Text;
@@ -617,11 +608,9 @@ namespace RegionR.SF
                 return true;
             if (_lpu.Phone != tbPhone.Text)
                 return true;
-
-            int idCity = Convert.ToInt32(cbCity.SelectedValue);
-            if (_lpu.City != (_cityList.GetItem(idCity) as City))
+            if (_lpu.City != tbCity.Text)
                 return true;
-
+            
             if (cbLpuRR.Enabled)
             {
                 int idLpuRR;
@@ -748,21 +737,7 @@ namespace RegionR.SF
                     LoadTree();
             }
         }
-
-        private void cbCity_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int idCity;
-            int.TryParse(cbCity.SelectedValue.ToString(), out idCity);
-
-            if (idCity != 0)
-            {
-                City city = _cityList.GetItem(idCity) as City;
-                tbPhoneCode.Text = city.PhoneCode;
-            }
-
-            SetPhoneCodeMask();
-        }
-
+        
         private void cbLpuRR_SelectedIndexChanged(object sender, EventArgs e)
         {
             int idLpuRR;

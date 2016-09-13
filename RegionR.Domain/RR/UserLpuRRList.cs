@@ -123,7 +123,7 @@ namespace ClassLibrary
                     lpuSFID = lpu.ID.ToString();
                     lpuSFName = lpu.ShortName;
                     lpuSFRealRegion = lpu.RealRegion.Name;
-                    lpuSFCity = lpu.City.Name;
+                    lpuSFCity = lpu.City;
                 }
 
                 dt.Rows.Add(new object[] { item.LpuRR.ID, item.User.Name, item.Sdiv.ToString(), item.YearBegin, item.YearEnd, item.LpuRR.Name, item.LpuRR.FullName,

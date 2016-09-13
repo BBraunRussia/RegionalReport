@@ -107,8 +107,6 @@
     <Compile Include="SF\Interfaces\IHistory.cs" />
     <Compile Include="SF\Lists\AcademTitleList.cs" />
     <Compile Include="SF\Lists\AdmLevelList.cs" />
-    <Compile Include="SF\Entities\City.cs" />
-    <Compile Include="SF\Lists\CityList.cs" />
     <Compile Include="SF\Lists\HistoryList.cs" />
     <Compile Include="SF\Lists\LpuCompetitorsList.cs" />
     <Compile Include="SF\Lists\LpuList.cs" />

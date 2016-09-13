@@ -17,7 +17,6 @@ namespace ClassLibrary.SF.Import
     {
         private OrganizationList organizationList;
         private RealRegionList realRegionList;
-        private CityList cityList;
         private AdmLevelList admLevelList;
         private TypeFinList typeFinList;
         private MainSpecList mainSpecList;
@@ -29,7 +28,6 @@ namespace ClassLibrary.SF.Import
         {
             organizationList = OrganizationList.GetUniqueInstance();
             realRegionList = RealRegionList.GetUniqueInstance();
-            cityList = CityList.GetUniqueInstance();
             admLevelList = AdmLevelList.GetUniqueInstance();
             typeFinList = TypeFinList.GetUniqueInstance();
             mainSpecList = MainSpecList.GetUniqueInstance();
@@ -78,7 +76,7 @@ namespace ClassLibrary.SF.Import
             organization.INN = model.INN;
             organization.KPP = model.KPP;
             organization.RealRegion = GetItem(realRegionList, model.RealRegion, "Region", model.NumberSF) as RealRegion;
-            organization.City = GetItem(cityList, model.City, "City", model.NumberSF) as City;
+            organization.City = model.City;
             organization.PostIndex = model.PostIndex;
             organization.Street = model.Street;
             

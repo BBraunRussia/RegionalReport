@@ -7,6 +7,7 @@ using ClassLibrary.SF;
 using ClassLibrary.SF.Lists;
 using ClassLibrary.SF.Entities;
 using RegionReport.Domain;
+using System.Threading.Tasks;
 
 namespace ClassLibrary
 {
@@ -58,6 +59,33 @@ namespace ClassLibrary
                 dt.Rows.Add(item.GetRow());
 
             return dt;
+        }
+
+        public Task<DataTable> ToDataTableAsync(LpuRR lpuRR)
+        {
+            var task = new Task<DataTable>(() =>
+                {
+
+                    DataTable dt = new DataTable();
+                    dt.Columns.Add("id");
+                    dt.Columns.Add("Название");
+
+                    var list = List.Select(item => item as LpuRR).ToList();
+
+                    list = list.Where(item => (!item.IsInList || item == lpuRR) && item.StatusLPU == StatusLPU.Активен).OrderBy(item => item.Name).ToList();
+
+                    dt.Rows.Add("0", "Прочие ЛПУ");
+
+                    foreach (var item in list)
+                        dt.Rows.Add(item.GetRow());
+
+                    return dt;
+                }
+            );
+
+            task.Start();
+
+            return task;
         }
         
         public DataTable ToDataTable(User user)
@@ -129,7 +157,7 @@ namespace ClassLibrary
                 {
                     lpuName = lpu.ShortName;
                     realRegionName = lpu.RealRegion.Name;
-                    cityName = lpu.City.Name;
+                    cityName = lpu.City;
                     lpuID = lpu.ID.ToString();
                 }
 

@@ -95,7 +95,7 @@ namespace ClassLibrary.SF.Entities
             string typeOrgName = ((TypeOrg == TypeOrg.ЛПУ) && (ParentOrganization != null)) ? "Филиал ЛПУ" : TypeOrg.ToString();
 
             return new object[] { ID, CrmID, ShortName, typeOrgName, (ParentOrganization == null) ? INN : (ParentOrganization as LPU).INN,
-                (RealRegion == null) ? string.Empty : RealRegion.Name, (City == null) ? string.Empty : City.Name,
+                (RealRegion == null) ? string.Empty : RealRegion.Name, City,
                 (LpuRR == null) ? "Прочие ЛПУ" : LpuRR.Name, ((LpuRR2 == null) || (LpuRR2.ID == 0)) ? String.Empty : LpuRR2.Name,
                 (LpuRR == null) ? "Российская федерация" : LpuRR.RegionRR.Name };
         }
@@ -133,7 +133,8 @@ namespace ClassLibrary.SF.Entities
                 INN,
                 KPP,
                 PostIndex,
-                (City == null) ? 0 : City.ID,
+                (RealRegion == null) ? 0 : RealRegion.ID,
+                City,
                 Street,
                 idLPURR,
                 _bedsTotal,

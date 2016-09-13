@@ -66,7 +66,7 @@ namespace ClassLibrary.SF.Export
                 {
                     row = new object[] { person.ID, person.Organization.ID, person.LastName, person.FirstName, person.SecondName,
                         GetTitle(lang, person.Appeal), person.Position.GetName(lang), person.MainSpecPerson.GetName(lang),
-                        person.AcademTitle.GetName(lang), person.Email, person.Mobile, GetPhoneWithCode(person), person.Comment };
+                        person.AcademTitle.GetName(lang), person.Email, person.Mobile, person.Phone, person.Comment };
                 }
 
                 dt.Rows.Add(row);
@@ -91,20 +91,6 @@ namespace ClassLibrary.SF.Export
             }
 
             return dt;
-        }
-
-        private string GetPhoneWithCode(Person person)
-        {
-            string phone = string.Empty;
-
-            if (!string.IsNullOrEmpty(person.Phone))
-            {
-                Organization organization = (person.Organization.ParentOrganization == null) ? person.Organization : person.Organization.ParentOrganization;
-
-                phone = string.Concat("+7(", organization.City.PhoneCode, ")", person.Phone);
-            }
-
-            return phone;
         }
     }
 }

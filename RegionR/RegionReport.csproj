@@ -532,12 +532,6 @@
     <Compile Include="SF\FormAddBranch.Designer.cs">
       <DependentUpon>FormAddBranch.cs</DependentUpon>
     </Compile>
-    <Compile Include="SF\FormAddCity.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SF\FormAddCity.Designer.cs">
-      <DependentUpon>FormAddCity.cs</DependentUpon>
-    </Compile>
     <Compile Include="SF\FormAddLPU.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -561,12 +555,6 @@
     </Compile>
     <Compile Include="SF\FormAddPerson.Designer.cs">
       <DependentUpon>FormAddPerson.cs</DependentUpon>
-    </Compile>
-    <Compile Include="SF\FormCityList.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SF\FormCityList.Designer.cs">
-      <DependentUpon>FormCityList.cs</DependentUpon>
     </Compile>
     <Compile Include="SF\FormFirstStepAddOrganization.cs">
       <SubType>Form</SubType>
@@ -846,9 +834,6 @@
     <EmbeddedResource Include="SF\FormAddBranch.resx">
       <DependentUpon>FormAddBranch.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SF\FormAddCity.resx">
-      <DependentUpon>FormAddCity.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="SF\FormAddLPU.resx">
       <DependentUpon>FormAddLPU.cs</DependentUpon>
     </EmbeddedResource>
@@ -860,9 +845,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SF\FormAddPerson.resx">
       <DependentUpon>FormAddPerson.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SF\FormCityList.resx">
-      <DependentUpon>FormCityList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SF\FormFirstStepAddOrganization.resx">
       <DependentUpon>FormFirstStepAddOrganization.cs</DependentUpon>

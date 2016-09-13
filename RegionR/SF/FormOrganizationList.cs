@@ -134,13 +134,7 @@ namespace RegionR
         {
             _organizationListController.Sort();
         }
-
-        private void cityDictionaryToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FormCityList formCityList = new FormCityList();
-            formCityList.ShowDialog();
-        }
-
+        
         private void addPersonToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _organizationListController.AddPerson();

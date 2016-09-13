@@ -58,8 +58,6 @@
             this.lbAutor = new System.Windows.Forms.Label();
             this.lbID = new System.Windows.Forms.Label();
             this.label34 = new System.Windows.Forms.Label();
-            this.tbPhoneCode = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.gbAvitum = new System.Windows.Forms.GroupBox();
             this.label12 = new System.Windows.Forms.Label();
             this.tbPatientCRRT = new System.Windows.Forms.TextBox();
@@ -151,17 +149,17 @@
             // 
             // tbPhone
             // 
-            this.tbPhone.Location = new System.Drawing.Point(329, 237);
+            this.tbPhone.Location = new System.Drawing.Point(146, 237);
             this.tbPhone.MaxLength = 12;
             this.tbPhone.Name = "tbPhone";
-            this.tbPhone.Size = new System.Drawing.Size(117, 20);
+            this.tbPhone.Size = new System.Drawing.Size(193, 20);
             this.tbPhone.TabIndex = 99;
             this.tbPhone.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPhone_KeyPress);
             // 
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(227, 240);
+            this.label25.Location = new System.Drawing.Point(7, 240);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(96, 13);
             this.label25.TabIndex = 98;
@@ -357,24 +355,6 @@
             this.label34.TabIndex = 138;
             this.label34.Text = "Номер SF:";
             // 
-            // tbPhoneCode
-            // 
-            this.tbPhoneCode.Enabled = false;
-            this.tbPhoneCode.Location = new System.Drawing.Point(147, 237);
-            this.tbPhoneCode.MaxLength = 7;
-            this.tbPhoneCode.Name = "tbPhoneCode";
-            this.tbPhoneCode.Size = new System.Drawing.Size(74, 20);
-            this.tbPhoneCode.TabIndex = 140;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(7, 240);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(134, 13);
-            this.label3.TabIndex = 141;
-            this.label3.Text = "Телефонный код города:";
-            // 
             // gbAvitum
             // 
             this.gbAvitum.Controls.Add(this.label12);
@@ -524,8 +504,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(847, 371);
             this.Controls.Add(this.gbAvitum);
-            this.Controls.Add(this.tbPhoneCode);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.lbID);
             this.Controls.Add(this.label34);
             this.Controls.Add(this.lbEditor);
@@ -600,8 +578,6 @@
         private System.Windows.Forms.Label lbAutor;
         private System.Windows.Forms.Label lbID;
         private System.Windows.Forms.Label label34;
-        private System.Windows.Forms.TextBox tbPhoneCode;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.GroupBox gbAvitum;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox tbPatientCRRT;

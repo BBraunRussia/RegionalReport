@@ -117,13 +117,13 @@ namespace ClassLibrary.SF.Lists
             var listBranch = _listBranch.Where(item => ((item.LpuRR == lpuRR) || (item.LpuRR2 == lpuRR)));
             return ((list.Count() == 0) && (listBranch.Count() == 0)) ? null : (list.Count() != 0) ? list.First() : listBranch.First();
         }
-
+        /*
         public LPU GetItem(City city)
         {
             var list = _list.Where(item => item.City == city);
             return (list.Count() == 0) ? null : list.First();
         }
-
+        */
         public bool IsInList(string inn)
         {
             return _list.Count(item => item.INN == inn) > 0;

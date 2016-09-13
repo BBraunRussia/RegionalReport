@@ -40,9 +40,6 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.tbPhoneCode = new System.Windows.Forms.TextBox();
-            this.mtbPhone = new System.Windows.Forms.MaskedTextBox();
-            this.label13 = new System.Windows.Forms.Label();
             this.mtbMobile = new System.Windows.Forms.MaskedTextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -74,6 +71,7 @@
             this.label19 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.dtpDateBirth = new System.Windows.Forms.DateTimePicker();
+            this.tbPhone = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -172,9 +170,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.tbPhoneCode);
-            this.groupBox1.Controls.Add(this.mtbPhone);
-            this.groupBox1.Controls.Add(this.label13);
+            this.groupBox1.Controls.Add(this.tbPhone);
             this.groupBox1.Controls.Add(this.mtbMobile);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.label10);
@@ -186,31 +182,6 @@
             this.groupBox1.TabIndex = 14;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Контактная информация";
-            // 
-            // tbPhoneCode
-            // 
-            this.tbPhoneCode.Location = new System.Drawing.Point(103, 84);
-            this.tbPhoneCode.Name = "tbPhoneCode";
-            this.tbPhoneCode.ReadOnly = true;
-            this.tbPhoneCode.Size = new System.Drawing.Size(50, 20);
-            this.tbPhoneCode.TabIndex = 32;
-            // 
-            // mtbPhone
-            // 
-            this.mtbPhone.Location = new System.Drawing.Point(157, 84);
-            this.mtbPhone.Mask = "0000000";
-            this.mtbPhone.Name = "mtbPhone";
-            this.mtbPhone.Size = new System.Drawing.Size(169, 20);
-            this.mtbPhone.TabIndex = 22;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(150, 107);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(182, 13);
-            this.label13.TabIndex = 21;
-            this.label13.Text = " (без кода города и разделителей)";
             // 
             // mtbMobile
             // 
@@ -494,6 +465,13 @@
             this.dtpDateBirth.Size = new System.Drawing.Size(225, 20);
             this.dtpDateBirth.TabIndex = 148;
             // 
+            // tbPhone
+            // 
+            this.tbPhone.Location = new System.Drawing.Point(102, 84);
+            this.tbPhone.Name = "tbPhone";
+            this.tbPhone.Size = new System.Drawing.Size(225, 20);
+            this.tbPhone.TabIndex = 21;
+            // 
             // FormAddPerson
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -585,9 +563,6 @@
         private System.Windows.Forms.ComboBox cbAcademTitle;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.MaskedTextBox mtbMobile;
-        private System.Windows.Forms.TextBox tbPhoneCode;
-        private System.Windows.Forms.MaskedTextBox mtbPhone;
-        private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label lbEditor;
         private System.Windows.Forms.Label lbAutor;
         private System.Windows.Forms.Button btnChangeSubOrganization;
@@ -599,5 +574,6 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.DateTimePicker dtpDateBirth;
+        private System.Windows.Forms.TextBox tbPhone;
     }
 }

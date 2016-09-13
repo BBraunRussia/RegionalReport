@@ -19,10 +19,7 @@ namespace RegionR.SF
         private HistoryList _historyList;
 
         private RealRegionList _realRegionList;
-        private CityList _cityList;
-
-        private bool _isLoad;
-
+        
         public FormAddOtherOrganization(Organization organization)
         {
             InitializeComponent();
@@ -30,7 +27,6 @@ namespace RegionR.SF
             _organization = organization;
 
             _realRegionList = RealRegionList.GetUniqueInstance();
-            _cityList = CityList.GetUniqueInstance();
             _historyList = HistoryList.GetUniqueInstance();
         }
 
@@ -97,18 +93,13 @@ namespace RegionR.SF
             tbEmail.Text = _organization.Email;
             tbWebSite.Text = _organization.Website;
             tbPhone.Text = _organization.Phone;
+            tbCity.Text = _organization.City;
 
             if (_organization.RealRegion != null)
             {
                 cbRealRegion.SelectedValue = _organization.RealRegion.ID;
             }
-
-            if (_organization.City != null)
-            {
-                cbCity.SelectedValue = _organization.City.ID;
-                tbPhoneCode.Text = _organization.City.PhoneCode;
-            }
-
+            
             ShowHistory();
         }
 
@@ -128,31 +119,12 @@ namespace RegionR.SF
 
         private void LoadDictionaries()
         {
-            _isLoad = false;
             if (UserLogged.Get().RoleSF == RolesSF.Пользователь)
                 ClassForForm.LoadDictionary(cbRealRegion, _realRegionList.ToDataTable(UserLogged.Get()));
             else
                 ClassForForm.LoadDictionary(cbRealRegion, _realRegionList.ToDataTable());
-
-            _isLoad = true;
-            LoadCity();
         }
-
-        private void LoadCity()
-        {
-            int idRealRegion = Convert.ToInt32(cbRealRegion.SelectedValue);
-            RealRegion realRegion = _realRegionList.GetItem(idRealRegion) as RealRegion;
-
-            DataTable dt = _cityList.ToDataTable(realRegion);
-            ClassForForm.LoadDictionary(cbCity, dt);
-        }
-
-        private void cbRealRegion_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (_isLoad)
-                LoadCity();
-        }
-
+        
         private void btnSaveAndClose_Click(object sender, EventArgs e)
         {
             if (TrySave())
@@ -210,10 +182,8 @@ namespace RegionR.SF
             _organization.Email = tbEmail.Text;
             _organization.Website = tbWebSite.Text;
             _organization.Phone = tbPhone.Text;
-
-            int idCity = Convert.ToInt32(cbCity.SelectedValue);
-            _organization.City = _cityList.GetItem(idCity) as City;
-            
+            _organization.City = tbCity.Text;
+                        
             _organization.Street = tbStreet.Text;
 
             if (_organization.TypeOrg == TypeOrg.Аптека)
@@ -283,10 +253,9 @@ namespace RegionR.SF
                 return true;
             if (_organization.Phone != tbPhone.Text)
                 return true;
-
-            int idCity = Convert.ToInt32(cbCity.SelectedValue);
-            if (_organization.City != (_cityList.GetItem(idCity) as City))
+            if (_organization.City != tbCity.Text)
                 return true;
+
             if (_organization.Street != tbStreet.Text)
                 return true;
 
@@ -330,18 +299,6 @@ namespace RegionR.SF
         {
             FormPersonList formPersonList = new FormPersonList(_organization);
             formPersonList.ShowDialog();
-        }
-
-        private void cbCity_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int idCity;
-            int.TryParse(cbCity.SelectedValue.ToString(), out idCity);
-
-            if (idCity != 0)
-            {
-                City city = _cityList.GetItem(idCity) as City;
-                tbPhoneCode.Text = city.PhoneCode;
-            }
         }
     }
 }

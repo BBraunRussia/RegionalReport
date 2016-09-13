@@ -98,11 +98,7 @@ namespace RegionR.SF
             tbEmail.Text = _organization.Email;
             tbWebSite.Text = _organization.Website;
             tbPhone.Text = _organization.Phone;
-
-            tbPhoneCode.Text = (_organization.ParentOrganization as LPU).City.PhoneCode;
-
-            SetPhoneCodeMask();
-
+            
             lbCrmID.Text = _organization.CrmID;
             lbTypeOrg.Text = _organization.TypeOrg.ToString();
 
@@ -113,11 +109,6 @@ namespace RegionR.SF
         {
             lbAutor.Text = _historyList.GetItemString(_organization, HistoryAction.Создал);
             lbEditor.Text = _historyList.GetItemString(_organization, HistoryAction.Редактировал);
-        }
-
-        private void SetPhoneCodeMask()
-        {
-            tbPhone.MaxLength = Phone.GetPhoneLenght(tbPhoneCode.Text);
         }
 
         private void SetEnabledComponent()

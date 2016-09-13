@@ -37,8 +37,6 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.addPersonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
-            this.cityDictionaryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.excelAllFieldsRusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.excelAllFieldsEngToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -83,8 +81,6 @@
             this.toolStripMenuItem1,
             this.addPersonToolStripMenuItem,
             this.toolStripMenuItem2,
-            this.cityDictionaryToolStripMenuItem,
-            this.toolStripMenuItem3,
             this.exportToolStripMenuItem,
             this.toolStripMenuItem4,
             this.settingsToolStripMenuItem,
@@ -131,18 +127,6 @@
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
             this.toolStripMenuItem2.Size = new System.Drawing.Size(200, 6);
-            // 
-            // cityDictionaryToolStripMenuItem
-            // 
-            this.cityDictionaryToolStripMenuItem.Name = "cityDictionaryToolStripMenuItem";
-            this.cityDictionaryToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
-            this.cityDictionaryToolStripMenuItem.Text = "Справочник городов";
-            this.cityDictionaryToolStripMenuItem.Click += new System.EventHandler(this.cityDictionaryToolStripMenuItem_Click);
-            // 
-            // toolStripMenuItem3
-            // 
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(200, 6);
             // 
             // exportToolStripMenuItem
             // 
@@ -362,8 +346,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem addPersonToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem cityDictionaryToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;

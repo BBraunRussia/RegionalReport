@@ -25,6 +25,9 @@ namespace ClassLibrary.SF.Lists
 
         public SubRegion GetItem(RealRegion realRegion)
         {
+            if (realRegion.RegionRR == null)
+                return null;
+
             return List.Where(item => (item as SubRegion).RealRegion.ID == realRegion.ID).Select(item => item as SubRegion).First();
         }
 
