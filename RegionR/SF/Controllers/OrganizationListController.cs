@@ -10,6 +10,7 @@ using ClassLibrary.SF.Entities;
 using RegionReport.Domain;
 using RegionR.Controllers;
 using System.Drawing;
+using System.Threading.Tasks;
 
 namespace RegionR.SF
 {
@@ -55,9 +56,32 @@ namespace RegionR.SF
             return _dgv;
         }
 
-        public void ReLoad()
+        public async Task LoadDataGridViewAsync()
         {
-            _lpuList.ReLoad();
+            await ReLoadAsync();
+
+            DataTable dt = (_user.RoleSF == RolesSF.Пользователь) ? _lpuList.ToDataTable(_user) : _lpuList.ToDataTable();
+
+            _dgv.DataSource = dt;
+
+            _dgv.Columns[0].Width = 80;
+            _dgv.Columns[1].Width = 122;
+            _dgv.Columns[2].Width = 300;
+            _dgv.Columns[3].Width = 80;
+            _dgv.Columns[4].Width = 80;
+            _dgv.Columns[5].Width = 120;
+
+            SetStyle();
+        }
+
+        public async void ReLoad()
+        {
+            await _lpuList.ReLoad();
+        }
+
+        public async Task ReLoadAsync()
+        {
+            await _lpuList.ReLoad();
         }
         
         public bool AddOrganization()

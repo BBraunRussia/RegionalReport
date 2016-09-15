@@ -156,7 +156,7 @@ namespace ClassLibrary
                 if (lpu != null)
                 {
                     lpuName = lpu.ShortName;
-                    realRegionName = lpu.RealRegion.Name;
+                    realRegionName = (lpu.RealRegion != null) ? lpu.RealRegion.Name : string.Empty;
                     cityName = lpu.City;
                     lpuID = lpu.ID.ToString();
                 }

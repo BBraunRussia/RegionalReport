@@ -62,7 +62,7 @@ namespace RegionR
         public RR()
         {
             InitializeComponent();
-
+         
             DataBase.InitDataBase();
             Provider.InitSQLProvider();
 
@@ -384,7 +384,8 @@ namespace RegionR
 
                 //TODO: расскомментировать!!! Консигнации и ХТ
                 //treeView1.Nodes.Add("Консигнации");
-                //treeView1.Nodes.Add("Проект химиотерапия");
+                if (globalData.UserAccess <= 6)
+                    treeView1.Nodes.Add("Проект химиотерапия");
                 treeView1.Nodes.Add("Справочник пользователей");
 
 
@@ -1074,7 +1075,40 @@ namespace RegionR
             {
                 tabControl1.SelectedTab = tabControl1.TabPages["tabPage29"];
                 tabControl1.Visible = true;
+
+                globalData.role = CheckRole();
                 
+                globalData.RD = "";
+                //fillRegions(globalData.RD, comboBox13);
+                if (globalData.UserAccess == 2 || globalData.UserAccess == 3)
+                    globalData.role = 1;                
+
+                if (globalData.role != 1 && globalData.role != 2)
+                {
+                    rent_fill("RD", globalData.role, comboBox16);
+                    rent_fill("Region", globalData.role, comboBox13, null, null, null, comboBox16);
+                    globalData.RD = comboBox16.SelectedValue.ToString();
+                    button77.Visible = false;
+                    button78.Visible = false;
+                }
+                else
+                {
+                    rent_fill("Region", globalData.role, comboBox13, null, null, null, null);
+                    button77.Visible = true;
+                    button78.Visible = true;
+                }
+                string reg = "0";
+                if (comboBox13.Visible)
+                    reg = comboBox13.SelectedValue.ToString();
+                fillUsersHTAcc(comboBox15, reg, cbYearAccAll.SelectedItem.ToString());
+                
+                string user = "0";
+                if (comboBox15.Visible)
+                    user = comboBox15.SelectedValue.ToString();
+
+                if (comboBox15.Items.Count > 0)
+                    fillLPUHT(comboBox14, user, reg, cbYearAccAll.SelectedItem.ToString());
+
                 Cursor = Cursors.Default;
                 return;
             }
@@ -2697,6 +2731,8 @@ namespace RegionR
                             dgv.Columns.Add("DecFactR", "");
                             dgv.Columns.Add("DecFactR0", "");
 
+                            if (tabControl1.SelectedTab.Text == "tabPage29")
+                                dgv.Columns.Add("sdiv_id", "");
                             dgv.Columns.Add("nom_group", "");
                             dgv.Columns.Add("div", "");
                            
@@ -5618,6 +5654,23 @@ namespace RegionR
             load = true;
         }
 
+        private void fillUsersHTAcc(ComboBox cbU, string reg, string year)
+        {
+            Sql sql1 = new Sql();
+            DataTable dt1 = new DataTable();
+
+            dt1 = sql1.GetRecords("exec HT_Select_Users @p1, @p2, @p3", reg, year, globalData.RD);
+
+            load = false;
+            if (dt1 != null)
+            {
+                cbU.DataSource = dt1;
+                cbU.DisplayMember = "user_name";
+                cbU.ValueMember = "user_id";
+            }
+            load = true;
+        }
+
         private void dataGridView1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyData == Keys.Delete)
@@ -6187,7 +6240,12 @@ namespace RegionR
                 xlSh.Cells[i, 1] = i - 1;
                 for (int j = 0; j < _dgv6.ColumnCount; j++)
                 {
-                    xlSh.Cells[i, j + 2] = row.Cells[j].Value.ToString();
+                    if (digit(row.Cells[j].Value.ToString()))
+                        xlSh.Cells[i, j + 2] = Math.Round(float.Parse(row.Cells[j].Value.ToString()), 3);
+                    else
+                        xlSh.Cells[i, j + 2] = row.Cells[j].Value.ToString();
+                    
+                    //xlSh.Cells[i, j + 2] = row.Cells[j].Value.ToString();
                 }
                 i++;
             }
@@ -7483,6 +7541,32 @@ namespace RegionR
 
             load = true;
         }
+
+        private void fillLPUHT(ComboBox lpu, string user_id, string region, string year)
+        {
+            Sql sql1 = new Sql();
+            DataTable dt1 = new DataTable();
+
+            load = false;
+
+            if (globalData.RD == null)
+                globalData.RD = String.Empty;
+
+            dt1 = sql1.GetRecords("exec HT_Select_LPU @p1, @p2, @p3, @p4, 1", region, user_id, year, globalData.RD);
+
+            if (dt1.Rows.Count > 0)
+            {
+                lpu.DataSource = dt1;
+                lpu.DisplayMember = "lpu_sname";
+                lpu.ValueMember = "lpu_id";
+                lpu.Enabled = true;
+            }
+            else
+                lpu.Enabled = false;
+
+            load = true;
+        }
+
 
         private void btnHideUsersAcc_Click(object sender, EventArgs e)
         {
@@ -9314,7 +9398,7 @@ namespace RegionR
                                     xlSh.Cells[i, k] = Convert.ToDateTime(row.Cells[j].Value).ToShortDateString();
                                 else
                                 {
-                                    if ((digit(row.Cells[j].Value.ToString())) &&
+                                    if ((digit(row.Cells[j].Value.ToString())) ||
                                         ((dgv.Columns[j].HeaderText == "Продажи без НДС") ||
                                         (dgv.Columns[j].HeaderText == "Сумма продаж (евро)") ||
                                         (dgv.Columns[j].HeaderText == "Сумма продаж (руб.)")))
@@ -11614,7 +11698,7 @@ namespace RegionR
             cbLPUExcel.SelectedIndex = curIndex;
         }
 
-        private void ExportInExcelAccAE(DataGridView dgv, ComboBox cbLPUExcel, ComboBox cbUserExcel)
+        private void ExportInExcelAccAE(DataGridView dgv, ComboBox cbLPUExcel, ComboBox cbUserExcel, int flag_all = 0)
         {
             object misValue = System.Reflection.Missing.Value;
             Excel.Application xlApp;
@@ -11648,8 +11732,8 @@ namespace RegionR
             ((Excel.Range)xlSh.Columns[6]).ColumnWidth = 10;
             ((Excel.Range)xlSh.Columns[7]).ColumnWidth = 10;
 
-
-            if (btnHideUsersAccNY.Text == "Скрыть пользователей")
+            
+            if (btnHideUsersAccNY.Text == "Скрыть пользователей" && flag_all == 0)
             {
                 if (btnHideLPUAccNY.Text == "Скрыть ЛПУ")
                     btnHideLPUAccNY_Click(null, null);
@@ -11682,14 +11766,19 @@ namespace RegionR
                     {
                         if (row.Cells[j].Value != null)
                         {
-                            xlSh.Cells[i, k] = row.Cells[j].Value.ToString();
+                            if (digit(row.Cells[j].Value.ToString()))
+                                xlSh.Cells[i, k] = Math.Round(float.Parse(row.Cells[j].Value.ToString()), 3);
+                            else
+                                xlSh.Cells[i, k] = row.Cells[j].Value.ToString();
+                           // xlSh.Cells[i, k] = row.Cells[j].Value.ToString();
                         }
                         k++;
                     }
                 }
                 i++;
             }
-            if (btnHideUsersAccNY.Text == "Скрыть пользователей")
+
+            if (btnHideUsersAccNY.Text == "Скрыть пользователей" && flag_all == 0)
             {
                 if (dgv.Name == "_dgv14")
                     btnHideLPUAccNY_Click(null, null);
@@ -11702,7 +11791,7 @@ namespace RegionR
                         selAllAccNY();
 
                     string lpu;
-
+                    
                     if (cbUserExcel.Visible)
                         lpu = sql1.GetRecordsOne("exec GetLPUName @p1", cbLPUExcel.SelectedValue);
                     else
@@ -11719,7 +11808,7 @@ namespace RegionR
                             if (row.Cells["cyPlanEuro"].Value != null)
                             {
                                 if (row.Cells["cyPlanEuro"].Value.ToString() != "")
-                                    xlSh.Cells[k, ih] = row.Cells["cyPlanEuro"].Value.ToString();
+                                    xlSh.Cells[k, ih] = Math.Round(float.Parse(row.Cells["cyPlanEuro"].Value.ToString()), 3);//row.Cells["cyPlanEuro"].Value.ToString();
                             }
                             k++;
                         }
@@ -12038,7 +12127,7 @@ namespace RegionR
         private void btnExportInExcelAllAccNY_Click(object sender, EventArgs e)
         {
             if (globalData.Div == "AE")
-                ExportInExcelAccAE(_dgv16, cbLPUAllAccNY, cbUsersAllAccNY);
+                ExportInExcelAccAE(_dgv16, cbLPUAllAccNY, cbUsersAllAccNY, 1);
             else
                 ExportInExcelAcc(_dgv16, cbLPUAllAccNY, cbUsersAllAccNY);
         }
@@ -12110,12 +12199,18 @@ namespace RegionR
             Sql sql1 = new Sql();
 
             DataTable dt1 = new DataTable();
-
-            string procName = "exec AccPlanNY_Select_HistoryLPU_";
+/* TODO: ИСПРАВИТЬ ПОСЛЕ ЗАКРЫТИЯ АСС ПЛАНОВ Бондаря! 
+ */
+            //string procName = "exec AccPlanNY_Select_HistoryLPU_";
+            //if (globalData.Div == "AE")
+            //    procName += "AE";
+            //if (globalData.Div == "HC")
+            //    procName += "HC";
+            string procName = "exec ";
             if (globalData.Div == "AE")
-                procName += "AE";
+                procName += "SelAccPlanNYAE2";
             if (globalData.Div == "HC")
-                procName += "HC";
+                procName += "AccPlanNY_Select_HistoryLPU_HC";
 
 
 
@@ -15511,7 +15606,7 @@ namespace RegionR
                 }
             }
 
-            checkKosReportLoadData();
+            //checkKosReportLoadData();
         }
 
         private string getMatName(string begStr)
@@ -18033,8 +18128,40 @@ namespace RegionR
 
         private void button73_Click(object sender, EventArgs e)
         {
+            string lpu = "0";
+            if (comboBox14.Visible && comboBox14.Enabled)
+                lpu = comboBox14.SelectedValue.ToString();
 
+            string reg = "0";
+            if (comboBox13.Visible && comboBox13.Enabled)
+                reg = comboBox13.SelectedValue.ToString();
+
+            string user = "0";
+            if (comboBox15.Visible && comboBox15.Enabled)
+                user = comboBox15.SelectedValue.ToString();
+
+            SelHTAcc(cbYearAcc.SelectedItem.ToString(), lpu, user, reg, globalData.RD,_dgvHTAcc);            
         }
+
+        private void SelHTAcc(string year, string lpu, string user, string reg, string RD, DataGridView dgv)
+        {
+            Cursor = Cursors.WaitCursor;
+            Sql sql1 = new Sql();
+
+            DataTable dt1 = new DataTable();
+            //dt1 = sql1.GetRecords("exec SelAcc @p1, @p2, @p3, @p4, @p5, @p6", globalData.Div, year, lpu, user, reg, RD);
+            dt1 = sql1.GetRecords("exec HT_Select_Acc @p1, @p2, @p3, @p4, @p5", year, lpu, user, reg, RD);
+
+            Cursor = Cursors.Default;
+
+            if (dt1 == null)
+            {
+                MessageBox.Show("Не удалось получить данные для построения ассортиментного плана.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            fillAcc(dt1, dgv);
+        }
+
 
         private void kons_rd_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -18148,5 +18275,116 @@ namespace RegionR
             rbUserKons.Checked = false;
             rbLPUKons.Checked = false;
         }
+
+        private void _dgvHTAcc_SelectionChanged(object sender, EventArgs e)
+        {
+            CountSelectCell(_dgvHTAcc);
+        }
+
+        // регион хт
+        private void comboBox13_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (load)
+            {
+                fillht(1);
+            }
+        }
+        
+        //рп хт
+        private void comboBox15_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (load)
+            {
+                fillht();
+            }
+        }
+
+
+        void fillht(int flag = 0)
+        {
+            comboBox15.Enabled = true;           
+            
+            string reg = "0";
+            if (comboBox13.Visible)
+                reg = comboBox13.SelectedValue.ToString();
+            if (flag != 0)
+                fillUsersHTAcc(comboBox15, reg, cbYearAccAll.SelectedItem.ToString());
+            
+            string user = "0";
+            if (comboBox15.Visible)
+            {
+                if (comboBox15.SelectedValue == null)
+                {
+                    comboBox15.Enabled = false;
+                    comboBox14.DataSource = null;
+                    comboBox14.Enabled = false;
+                }
+                else
+                    user = comboBox15.SelectedValue.ToString();
+            }
+
+            if (comboBox15.Items.Count > 0)
+                fillLPUHT(comboBox14, user, reg, cbYearAccAll.SelectedItem.ToString());
+        }
+        //лпу хт
+        private void comboBox14_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button77_Click(object sender, EventArgs e)
+        {
+            if (comboBox13.Visible == true)
+                comboBox13.Visible = false;
+            else
+                comboBox13.Visible = true;
+
+            fillht(1);
+            
+            if (comboBox13.Visible == false && comboBox15.Visible == false && comboBox15.Enabled == true)
+                comboBox14.Enabled = false;
+            else
+                comboBox14.Enabled = true;
+        }
+
+        private void button78_Click(object sender, EventArgs e)
+        {
+            if (comboBox15.Visible == true)
+            {
+                comboBox15.Visible = false;
+                fillht();
+            }
+            else
+            {
+                comboBox15.Visible = true;
+                fillht(1);
+            }
+           
+
+            if (comboBox13.Visible == false && comboBox15.Visible == false && comboBox15.Enabled == true)
+                comboBox14.Enabled = false;
+            else
+                comboBox14.Enabled = true;
+        }
+
+        private void button79_Click(object sender, EventArgs e)
+        {
+            if (comboBox14.Visible == true)
+                comboBox14.Visible = false;
+            else
+                comboBox14.Visible = true;
+        }
+
+        private void button75_Click(object sender, EventArgs e)
+        {
+            ExportInExcel(_dgvHTAcc);
+        }
+
+        private void button82_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        
     }
 }

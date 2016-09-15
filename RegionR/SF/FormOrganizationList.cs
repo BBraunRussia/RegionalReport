@@ -10,6 +10,7 @@ using ClassLibrary.SF;
 using RegionR.SF;
 using ClassLibrary.SF.Export;
 using RegionReport.Domain;
+using System.Threading.Tasks;
 
 namespace RegionR
 {
@@ -35,9 +36,9 @@ namespace RegionR
             btnDeleteOrganization.Visible = (UserLogged.Get().RoleSF == RolesSF.Администратор);
         }
 
-        private void formOrganizationList_Load(object sender, EventArgs e)
+        private async void formOrganizationList_Load(object sender, EventArgs e)
         {
-            LoadData();
+            await LoadDataAsync();
 
             SetEnabledComponent();
 
@@ -52,6 +53,11 @@ namespace RegionR
         private void LoadData()
         {
             dgv = _organizationListController.ToDataGridView();
+        }
+
+        private async Task LoadDataAsync()
+        {
+            await _organizationListController.LoadDataGridViewAsync();
         }
 
         private void SetEnabledComponent()

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Data;
 using ClassLibrary.SF.Entities;
+using System.Threading.Tasks;
 
 namespace ClassLibrary.SF.Lists
 {
@@ -129,10 +130,10 @@ namespace ClassLibrary.SF.Lists
             return _list.Count(item => item.INN == inn) > 0;
         }
 
-        public void ReLoad()
+        public async Task ReLoad()
         {
             OrganizationList organizationList = OrganizationList.GetUniqueInstance();
-            organizationList.Reload();
+            await organizationList.Reload();
 
             InitLists();
         }
@@ -144,7 +145,7 @@ namespace ClassLibrary.SF.Lists
             dt.Columns.Add("Сокращенное наименование");
             dt.Columns.Add("Полное наименование");
 
-            var filtredList = _list.Where(lpu => (lpu.RealRegion != null) && lpu.RealRegion.RegionRR.ID == regionRR.ID);
+            var filtredList = _list.Where(lpu => (lpu.RealRegion != null) && (lpu.RealRegion.RegionRR != null) && lpu.RealRegion.RegionRR.ID == regionRR.ID);
 
             foreach (var lpu in filtredList)
                 dt.Rows.Add(new object[] { lpu.ID, lpu.ShortName, lpu.Name });

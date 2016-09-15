@@ -80,6 +80,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle49 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle50 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle51 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RR));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle52 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle53 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle54 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -686,6 +687,8 @@
             this.button76 = new System.Windows.Forms.Button();
             this._dgvUserSalesDiv = new System.Windows.Forms.DataGridView();
             this.tabPage29 = new System.Windows.Forms.TabPage();
+            this.button82 = new System.Windows.Forms.Button();
+            this.comboBox16 = new System.Windows.Forms.ComboBox();
             this.button73 = new System.Windows.Forms.Button();
             this.button75 = new System.Windows.Forms.Button();
             this.button77 = new System.Windows.Forms.Button();
@@ -694,7 +697,7 @@
             this.button79 = new System.Windows.Forms.Button();
             this.comboBox14 = new System.Windows.Forms.ComboBox();
             this.comboBox15 = new System.Windows.Forms.ComboBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this._dgvHTAcc = new System.Windows.Forms.DataGridView();
             this.tabPage30 = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button81 = new System.Windows.Forms.Button();
@@ -742,6 +745,7 @@
             this.tabPage7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._dgv7)).BeginInit();
             this.tabPage8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
@@ -769,6 +773,7 @@
             this.tabPage16.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._dgv17)).BeginInit();
             this.tabDaily.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -787,6 +792,7 @@
             this.tabPage22.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._dgvVisitPlan)).BeginInit();
             this.tabPage23.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
@@ -795,6 +801,7 @@
             this.tabPage24.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._dgvRentRD)).BeginInit();
             this.tabPage25.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
             this.splitContainer4.Panel1.SuspendLayout();
             this.splitContainer4.Panel2.SuspendLayout();
             this.splitContainer4.SuspendLayout();
@@ -807,7 +814,7 @@
             this.tabPage28.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._dgvUserSalesDiv)).BeginInit();
             this.tabPage29.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this._dgvHTAcc)).BeginInit();
             this.tabPage30.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._dgvKons)).BeginInit();
@@ -5146,7 +5153,7 @@
             // 
             // panel5
             // 
-            this.panel5.BackgroundImage = global::RegionR.Properties.Resources.маленькие_стрелки;
+            this.panel5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel5.BackgroundImage")));
             this.panel5.Location = new System.Drawing.Point(668, 40);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(26, 49);
@@ -5154,7 +5161,7 @@
             // 
             // panel4
             // 
-            this.panel4.BackgroundImage = global::RegionR.Properties.Resources.большие_стрелки;
+            this.panel4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel4.BackgroundImage")));
             this.panel4.Location = new System.Drawing.Point(561, 13);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(27, 68);
@@ -7649,6 +7656,8 @@
             // 
             // tabPage29
             // 
+            this.tabPage29.Controls.Add(this.button82);
+            this.tabPage29.Controls.Add(this.comboBox16);
             this.tabPage29.Controls.Add(this.button73);
             this.tabPage29.Controls.Add(this.button75);
             this.tabPage29.Controls.Add(this.button77);
@@ -7657,7 +7666,7 @@
             this.tabPage29.Controls.Add(this.button79);
             this.tabPage29.Controls.Add(this.comboBox14);
             this.tabPage29.Controls.Add(this.comboBox15);
-            this.tabPage29.Controls.Add(this.dataGridView1);
+            this.tabPage29.Controls.Add(this._dgvHTAcc);
             this.tabPage29.Location = new System.Drawing.Point(4, 5);
             this.tabPage29.Name = "tabPage29";
             this.tabPage29.Size = new System.Drawing.Size(918, 490);
@@ -7665,11 +7674,32 @@
             this.tabPage29.Text = "tabPage29";
             this.tabPage29.UseVisualStyleBackColor = true;
             // 
+            // button82
+            // 
+            this.button82.Location = new System.Drawing.Point(294, 32);
+            this.button82.Name = "button82";
+            this.button82.Size = new System.Drawing.Size(121, 23);
+            this.button82.TabIndex = 90;
+            this.button82.Text = "Скрыть РД";
+            this.button82.UseVisualStyleBackColor = true;
+            this.button82.Visible = false;
+            this.button82.Click += new System.EventHandler(this.button82_Click);
+            // 
+            // comboBox16
+            // 
+            this.comboBox16.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox16.FormattingEnabled = true;
+            this.comboBox16.Location = new System.Drawing.Point(421, 32);
+            this.comboBox16.Name = "comboBox16";
+            this.comboBox16.Size = new System.Drawing.Size(196, 21);
+            this.comboBox16.TabIndex = 89;
+            this.comboBox16.Visible = false;
+            // 
             // button73
             // 
             this.button73.Location = new System.Drawing.Point(6, 32);
             this.button73.Name = "button73";
-            this.button73.Size = new System.Drawing.Size(118, 23);
+            this.button73.Size = new System.Drawing.Size(119, 23);
             this.button73.TabIndex = 88;
             this.button73.Text = "Построить отчёт";
             this.button73.UseVisualStyleBackColor = true;
@@ -7684,6 +7714,7 @@
             this.button75.TabIndex = 87;
             this.button75.Text = "Выгрузка в Excel";
             this.button75.UseVisualStyleBackColor = true;
+            this.button75.Click += new System.EventHandler(this.button75_Click);
             // 
             // button77
             // 
@@ -7693,6 +7724,7 @@
             this.button77.TabIndex = 86;
             this.button77.Text = "Скрыть регион";
             this.button77.UseVisualStyleBackColor = true;
+            this.button77.Click += new System.EventHandler(this.button77_Click);
             // 
             // comboBox13
             // 
@@ -7700,54 +7732,59 @@
             this.comboBox13.FormattingEnabled = true;
             this.comboBox13.Location = new System.Drawing.Point(124, 7);
             this.comboBox13.Name = "comboBox13";
-            this.comboBox13.Size = new System.Drawing.Size(142, 21);
+            this.comboBox13.Size = new System.Drawing.Size(164, 21);
             this.comboBox13.TabIndex = 85;
+            this.comboBox13.SelectedIndexChanged += new System.EventHandler(this.comboBox13_SelectedIndexChanged);
             // 
             // button78
             // 
-            this.button78.Location = new System.Drawing.Point(272, 5);
+            this.button78.Location = new System.Drawing.Point(296, 5);
             this.button78.Name = "button78";
-            this.button78.Size = new System.Drawing.Size(150, 23);
+            this.button78.Size = new System.Drawing.Size(119, 23);
             this.button78.TabIndex = 84;
             this.button78.Text = "Скрыть РП";
             this.button78.UseVisualStyleBackColor = true;
+            this.button78.Click += new System.EventHandler(this.button78_Click);
             // 
             // button79
             // 
-            this.button79.Location = new System.Drawing.Point(576, 5);
+            this.button79.Location = new System.Drawing.Point(624, 7);
             this.button79.Name = "button79";
-            this.button79.Size = new System.Drawing.Size(118, 23);
+            this.button79.Size = new System.Drawing.Size(112, 23);
             this.button79.TabIndex = 83;
             this.button79.Text = "Скрыть ЛПУ";
             this.button79.UseVisualStyleBackColor = true;
+            this.button79.Click += new System.EventHandler(this.button79_Click);
             // 
             // comboBox14
             // 
             this.comboBox14.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox14.Enabled = false;
             this.comboBox14.FormattingEnabled = true;
-            this.comboBox14.Location = new System.Drawing.Point(700, 5);
+            this.comboBox14.Location = new System.Drawing.Point(742, 7);
             this.comboBox14.Name = "comboBox14";
-            this.comboBox14.Size = new System.Drawing.Size(142, 21);
+            this.comboBox14.Size = new System.Drawing.Size(157, 21);
             this.comboBox14.TabIndex = 82;
+            this.comboBox14.SelectedIndexChanged += new System.EventHandler(this.comboBox14_SelectedIndexChanged);
             // 
             // comboBox15
             // 
             this.comboBox15.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox15.FormattingEnabled = true;
-            this.comboBox15.Location = new System.Drawing.Point(428, 5);
+            this.comboBox15.Location = new System.Drawing.Point(421, 7);
             this.comboBox15.Name = "comboBox15";
-            this.comboBox15.Size = new System.Drawing.Size(142, 21);
+            this.comboBox15.Size = new System.Drawing.Size(196, 21);
             this.comboBox15.TabIndex = 81;
+            this.comboBox15.SelectedIndexChanged += new System.EventHandler(this.comboBox15_SelectedIndexChanged);
             // 
-            // dataGridView1
+            // _dgvHTAcc
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this._dgvHTAcc.AllowUserToAddRows = false;
+            this._dgvHTAcc.AllowUserToDeleteRows = false;
+            this._dgvHTAcc.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this._dgvHTAcc.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             dataGridViewCellStyle71.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle71.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle71.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -7755,9 +7792,9 @@
             dataGridViewCellStyle71.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle71.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle71.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle71;
-            this.dataGridView1.ColumnHeadersHeight = 60;
-            this.dataGridView1.ContextMenuStrip = this._cms1;
+            this._dgvHTAcc.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle71;
+            this._dgvHTAcc.ColumnHeadersHeight = 60;
+            this._dgvHTAcc.ContextMenuStrip = this._cms1;
             dataGridViewCellStyle72.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle72.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle72.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
@@ -7765,9 +7802,9 @@
             dataGridViewCellStyle72.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle72.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle72.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle72;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 57);
-            this.dataGridView1.Name = "dataGridView1";
+            this._dgvHTAcc.DefaultCellStyle = dataGridViewCellStyle72;
+            this._dgvHTAcc.Location = new System.Drawing.Point(3, 57);
+            this._dgvHTAcc.Name = "_dgvHTAcc";
             dataGridViewCellStyle73.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle73.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle73.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -7775,12 +7812,13 @@
             dataGridViewCellStyle73.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle73.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle73.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle73;
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.RowHeadersWidth = 20;
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(912, 429);
-            this.dataGridView1.TabIndex = 80;
+            this._dgvHTAcc.RowHeadersDefaultCellStyle = dataGridViewCellStyle73;
+            this._dgvHTAcc.RowHeadersVisible = false;
+            this._dgvHTAcc.RowHeadersWidth = 20;
+            this._dgvHTAcc.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this._dgvHTAcc.Size = new System.Drawing.Size(912, 429);
+            this._dgvHTAcc.TabIndex = 80;
+            this._dgvHTAcc.SelectionChanged += new System.EventHandler(this._dgvHTAcc_SelectionChanged);
             // 
             // tabPage30
             // 
@@ -8111,6 +8149,7 @@
             this.tabPage8.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this._dgvUpd)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this._dgv8)).EndInit();
@@ -8146,6 +8185,7 @@
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDaily)).EndInit();
@@ -8168,6 +8208,7 @@
             this.splitContainer3.Panel1.ResumeLayout(false);
             this.splitContainer3.Panel1.PerformLayout();
             this.splitContainer3.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this._dgvUsRent)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this._dgvRent)).EndInit();
@@ -8177,6 +8218,7 @@
             this.tabPage25.ResumeLayout(false);
             this.splitContainer4.Panel1.ResumeLayout(false);
             this.splitContainer4.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
             this.splitContainer4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this._dgvSBA2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this._dgvMA2)).EndInit();
@@ -8189,7 +8231,7 @@
             this.tabPage28.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this._dgvUserSalesDiv)).EndInit();
             this.tabPage29.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._dgvHTAcc)).EndInit();
             this.tabPage30.ResumeLayout(false);
             this.tabPage30.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -8805,7 +8847,7 @@
         private System.Windows.Forms.Button button79;
         private System.Windows.Forms.ComboBox comboBox14;
         private System.Windows.Forms.ComboBox comboBox15;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView _dgvHTAcc;
         private System.Windows.Forms.TabPage tabPage30;
         private System.Windows.Forms.DataGridView _dgvKons;
         private System.Windows.Forms.Label label68;
@@ -8827,6 +8869,8 @@
         private System.Windows.Forms.RadioButton rbUserKons;
         private System.Windows.Forms.RadioButton rbLPUKons;
         private System.Windows.Forms.Button button81;
+        private System.Windows.Forms.Button button82;
+        private System.Windows.Forms.ComboBox comboBox16;
     }
 }
 

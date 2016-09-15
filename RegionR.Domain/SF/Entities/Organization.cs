@@ -6,6 +6,7 @@ using System.Data;
 using ClassLibrary.SF.Interfaces;
 using ClassLibrary.SF.Lists;
 using RegionReport.Domain;
+using System.Threading.Tasks;
 
 namespace ClassLibrary.SF.Entities
 {
@@ -28,10 +29,22 @@ namespace ClassLibrary.SF.Entities
         public static Organization CreateItem(DataRow row)
         {
             TypeOrg typeOrg = (TypeOrg)Convert.ToInt32(row["TypeOrg_id"].ToString());
-            int idParent;
-            int.TryParse(row["parent_id"].ToString(), out idParent);
-
+            
             return (typeOrg == TypeOrg.ЛПУ) ? new LPU(row) : new Organization(row);
+        }
+
+        public static Task<Organization> CreateItemAsync(DataRow row)
+        {
+            TypeOrg typeOrg = (TypeOrg)Convert.ToInt32(row["TypeOrg_id"].ToString());
+            
+            Task<Organization> task = new Task<Organization>(() =>
+            {
+                return (typeOrg == TypeOrg.ЛПУ) ? new LPU(row) : new Organization(row);
+            });
+
+            task.Start();
+
+            return task;
         }
 
         public static Organization CreateItem(TypeOrg typeOrg, Organization parentOrganization = null)

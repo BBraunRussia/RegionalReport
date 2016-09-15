@@ -5,6 +5,7 @@ using System.Text;
 using System.Data;
 using System.Collections;
 using ClassLibrary.SF.Entities;
+using System.Threading.Tasks;
 
 namespace ClassLibrary.SF.Lists
 {
@@ -46,17 +47,28 @@ namespace ClassLibrary.SF.Lists
             }
         }
 
+        private async Task LoadFromDataBaseAsync()
+        {
+            DataTable dt = _provider.Select("SF_Organization");
+
+            foreach (DataRow row in dt.Rows)
+            {
+                Organization organization = await Organization.CreateItemAsync(row);
+                Add(organization);
+            }
+        }
+
         internal void Add(Organization organization)
         {
             if (!_list.ContainsKey(organization.ID))
                 _list.Add(organization.ID, organization);
         }
 
-        public void Reload()
+        public async Task Reload()
         {
             _list.Clear();
 
-            LoadFromDataBase();
+            await LoadFromDataBaseAsync();
         }
 
         public Organization GetFirst()

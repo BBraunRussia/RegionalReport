@@ -63,6 +63,7 @@
     <Compile Include="SF\Abstract\IOrganization.cs" />
     <Compile Include="SF\Abstract\IOrganizationRepository.cs" />
     <Compile Include="Common\Logger.cs" />
+    <Compile Include="SF\Entities\SubRegionOrganization.cs" />
     <Compile Include="SF\Import\OrganizationModel.cs" />
     <Compile Include="SF\Import\PersonModel.cs" />
     <Compile Include="SF\Import\ReadFilePerson.cs" />
@@ -125,6 +126,7 @@
     <Compile Include="SF\Lists\PositionList.cs" />
     <Compile Include="SF\Lists\RealRegionList.cs" />
     <Compile Include="SF\Lists\SubRegionList.cs" />
+    <Compile Include="SF\Lists\SubRegionOrganizationList.cs" />
     <Compile Include="SF\Lists\TypeFinList.cs" />
     <Compile Include="RR\UserLpuRRList.cs" />
     <Compile Include="SF\Common\MyFile.cs" />

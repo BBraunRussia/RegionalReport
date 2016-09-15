@@ -1511,7 +1511,7 @@ namespace RegionR
                             if (row.Cells[j].Value != null)
                             {
                                 if ((digit(row.Cells[j].Value.ToString())) &&
-                                    ((dgv.Columns[j].HeaderText == "Сумма") ||
+                                    ((dgv.Columns[j].HeaderText == "Сумма, руб.") ||
                                     (dgv.Columns[j].HeaderText == "Сумма выплаты с накоплением") ||
                                     (dgv.Columns[j].HeaderText == "Сумма сторно с накоплением")))
                                         xlSh.Cells[i, k] = Math.Round(float.Parse(row.Cells[j].Value.ToString()), 2);
