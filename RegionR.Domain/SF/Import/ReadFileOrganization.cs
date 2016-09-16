@@ -86,14 +86,7 @@ namespace ClassLibrary.SF.Import
                 lpu.AdmLevel = GetItem(admLevelList, model.AdmLevel, "AdminLevel", model.NumberSF) as AdmLevel;
                 lpu.TypeFin = GetItem(typeFinList, model.TypeFin, "TypeFin", model.NumberSF) as TypeFin;
                 lpu.MainSpec = GetItem(mainSpecList, model.MainSpec, "MainSpec", model.NumberSF) as MainSpec;
-
-                SubRegion subRegion = subRegionList.GetItemByCode(model.SubRegion);
-                lpu.SubRegion = subRegion;
-                if (subRegion == null)
-                {
-                    LogManager.WriteNotFound(model.SubRegion, "SubRegion", model.NumberSF);
-                }
-                
+                lpu.SubRegion = model.SubRegion;
                 lpu.BedsTotal = model.BedsTotal;
                 lpu.BedsIC = model.BedsIC;
                 lpu.BedsSurgical = model.BedsSurgical;
@@ -141,7 +134,10 @@ namespace ClassLibrary.SF.Import
                 }
                 catch (NullReferenceException)
                 {
-                    LogManager.WriteNotFound(string.Concat(model.RecordType, " ", model.ClientType), "Organization type", model.NumberSF);
+                    if (model.RecordType == "RU_Other")
+                        LogManager.WriteNotFound(model.ClientType, "Organization subtype", model.NumberSF);
+                    else
+                        LogManager.WriteNotFound(model.RecordType, "Organization type", model.NumberSF);
                 }
             }
 

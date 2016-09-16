@@ -79,7 +79,6 @@ namespace ClassLibrary.SF.Export
                 string ownership = string.Empty;
                 string adminLevel = string.Empty;
                 string typeFin = string.Empty;
-                string subRegion = string.Empty;
 
                 if (lpu != null)
                 {
@@ -87,7 +86,6 @@ namespace ClassLibrary.SF.Export
                     ownership = lpu.Ownership.GetName(lang);
                     adminLevel = lpu.AdmLevel.GetName(lang);
                     typeFin = lpu.TypeFin.GetName(lang);
-                    subRegion = lpu.SubRegion.Name.Split(' ')[0];
                 }
 
                 object[] row;
@@ -115,7 +113,7 @@ namespace ClassLibrary.SF.Export
                     row = new object[] { organization.ID, parentID, organization.NumberSF, recordType, GetFormatTypeOrg(organization), GetClientType(organization),
                                organization.Name, organization.ShortName, inn, kpp, realRegionName, organization.City, postIndex, street,
                                organization.Email, organization.Website, organization.Phone, pharmacy, typeLPU, ownership, adminLevel, typeFin, mainSpec,
-                               subRegion, idLpuRR, idLpuRR2,
+                               lpu.SubRegion, idLpuRR, idLpuRR2,
                                (lpu != null) ? lpu.BedsTotal : string.Empty, (lpu != null) ? lpu.BedsIC : string.Empty, (lpu != null) ? lpu.BedsSurgical : string.Empty,
                                (lpu != null) ? lpu.Operating : string.Empty,
                                organization.MachineGD, organization.MachineGDF, organization.MachineCRRT, organization.Shift, organization.PatientGD,
@@ -189,7 +187,8 @@ namespace ClassLibrary.SF.Export
 
                     row = new object[] { organization.ID, parentID, recordType,
                                organization.Name, organization.ShortName, inn, kpp, realRegionName, organization.City, postIndex, GetAddressWithDistrict(organization),
-                               organization.Email, organization.Website, organization.Phone, pharmacy, GetClientType(organization), typeLPU, ownership, adminLevel, typeFin, mainSpec, subRegion,
+                               organization.Email, organization.Website, organization.Phone, pharmacy, GetClientType(organization), typeLPU, ownership, adminLevel,
+                               typeFin, mainSpec, lpu.SubRegion,
                                (lpu != null) ? lpu.BedsTotal : string.Empty, (lpu != null) ? lpu.BedsIC : string.Empty, (lpu != null) ? lpu.BedsSurgical : string.Empty,
                                (lpu != null) ? lpu.Operating : string.Empty, MachineGD, MachineGDF, MachineCRRT, Shift, PatientGD, PatientPD, PatientCRRT };
                 }

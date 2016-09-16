@@ -26,7 +26,6 @@ namespace RegionR.SF
         private AdmLevelList _admLevelList;
         private MainSpecList _mainSpecList;
         private RealRegionList _realRegionList;
-        private SubRegionList _subRegionList;
         private TypeFinList _typeFinList;
         private HistoryList _historyList;
         private LpuRRList _lpuRRList;
@@ -51,7 +50,6 @@ namespace RegionR.SF
             _admLevelList = AdmLevelList.GetUniqueInstance();
             _mainSpecList = MainSpecList.GetUniqueInstance();
             _realRegionList = RealRegionList.GetUniqueInstance();
-            _subRegionList = SubRegionList.GetUniqueInstance();
             _typeFinList = TypeFinList.GetUniqueInstance();
             _historyList = HistoryList.GetUniqueInstance();
             _lpuRRList = LpuRRList.GetUniqueInstance();
@@ -131,27 +129,7 @@ namespace RegionR.SF
                 tbINN.ReadOnly = true;
             }
 
-            if (_lpu.SubRegion != null)
-            {
-                cbSubRegion.SelectedValue = _lpu.SubRegion.ID;
-            }
-            else
-            {
-                RealRegion realRegion = _lpu.RealRegion;
-
-                if (realRegion != null)
-                    cbSubRegion.SelectedValue = _subRegionList.GetItem(realRegion).ID;
-                else
-                {
-                    int idRealRegion;
-                    int.TryParse(cbRealRegion.SelectedValue.ToString(), out idRealRegion);
-                    if (idRealRegion != 0)
-                    {
-                        realRegion = _realRegionList.GetItem(idRealRegion) as RealRegion;
-                        cbSubRegion.SelectedValue = _subRegionList.GetItem(realRegion).ID;
-                    }
-                }
-            }
+            tbSubRegion.Text = _lpu.SubRegion;
             
             tbStreet.Text = _lpu.Street;
 
@@ -202,7 +180,7 @@ namespace RegionR.SF
             
             ShowHistory();
         }
-
+        
         private void SetEnabledComponent()
         {
             ControlEditMode controlEditMode = new ControlEditMode(this.Controls, btnCancel);
@@ -223,7 +201,6 @@ namespace RegionR.SF
             ClassForForm.LoadDictionary(cbAdmLevel, _admLevelList.ToDataTable());
             ClassForForm.LoadDictionary(cbMainSpec, _mainSpecList.ToDataTable());
             ClassForForm.LoadDictionary(cbTypeFin, _typeFinList.ToDataTable());
-            ClassForForm.LoadDictionary(cbSubRegion, _subRegionList.ToDataTable());
             _isLoad = false;
 
             if (UserLogged.Get().RoleSF == RolesSF.Пользователь)
@@ -265,7 +242,6 @@ namespace RegionR.SF
             int idRealRegion;
             int.TryParse(cbRealRegion.SelectedValue.ToString(), out idRealRegion);
             RealRegion realRegion = _realRegionList.GetItem(idRealRegion) as RealRegion;
-            cbSubRegion.SelectedValue = _subRegionList.GetItem(realRegion).ID;
         }
 
         private void btnSaveAndClose_Click(object sender, EventArgs e)
@@ -320,10 +296,10 @@ namespace RegionR.SF
 
             int idTypeFin = Convert.ToInt32(cbTypeFin.SelectedValue);
             _lpu.TypeFin = _typeFinList.GetItem(idTypeFin) as TypeFin;
-
+            /*
             int idSubRegion = Convert.ToInt32(cbSubRegion.SelectedValue);
             _lpu.SubRegion = _subRegionList.GetItem(idSubRegion) as SubRegion;
-
+            */
             ClassForForm.CheckFilled(tbName.Text, "Официальное название");
             ClassForForm.CheckFilled(tbShortName.Text, "Сокращенное название");
             ClassForForm.CheckFilled(tbINN.Text, "ИНН");
@@ -582,11 +558,11 @@ namespace RegionR.SF
             int idTypeFin = Convert.ToInt32(cbTypeFin.SelectedValue);
             if (_lpu.TypeFin != (_typeFinList.GetItem(idTypeFin) as TypeFin))
                 return true;
-
+            /*
             int idSubRegion = Convert.ToInt32(cbSubRegion.SelectedValue);
             if (_lpu.SubRegion != (_subRegionList.GetItem(idSubRegion) as SubRegion))
                 return true;
-            
+            */
             if (_lpu.Name != tbName.Text)
                 return true;
             if (_lpu.ShortName != tbShortName.Text)

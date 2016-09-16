@@ -41,10 +41,7 @@ namespace ClassLibrary.SF.Entities
             int.TryParse(row["Organization_Surgical"].ToString(), out _bedsSurgical);
             int.TryParse(row["Organization_Operating"].ToString(), out _operating);
             
-            int idSubRegion;
-            int.TryParse(row["subregion_id"].ToString(), out idSubRegion);
-            SubRegionList subRegionList = SubRegionList.GetUniqueInstance();
-            SubRegion = subRegionList.GetItem(idSubRegion) as SubRegion;
+            SubRegion = row["Organization_SubRegion"].ToString();
 
             int idTypeFin;
             int.TryParse(row["typeFin_id"].ToString(), out idTypeFin);
@@ -62,7 +59,7 @@ namespace ClassLibrary.SF.Entities
         
         public LpuRR LpuRR { get; set; }
         public LpuRR LpuRR2 { get; set; }
-        public SubRegion SubRegion { get; set; }
+        public string SubRegion { get; set; }
         public TypeFin TypeFin { get; set; }
 
         public TypeLPU TypeLPU { get; set; }
@@ -148,7 +145,7 @@ namespace ClassLibrary.SF.Entities
                 _patientGD,
                 _patientPD,
                 _patientCRRT,
-                (SubRegion == null) ? 0 : SubRegion.ID,
+                SubRegion,
                 (TypeFin == null) ? 0 :TypeFin.ID,
                 idLPURR2,
                 Deleted.ToString(),

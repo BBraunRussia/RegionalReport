@@ -110,7 +110,6 @@
             this.lbLPU = new System.Windows.Forms.Label();
             this.lbBranch = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
-            this.cbSubRegion = new System.Windows.Forms.ComboBox();
             this.label23 = new System.Windows.Forms.Label();
             this.cbTypeFin = new System.Windows.Forms.ComboBox();
             this.label33 = new System.Windows.Forms.Label();
@@ -127,6 +126,7 @@
             this.lbRegionRR2 = new System.Windows.Forms.Label();
             this.label40 = new System.Windows.Forms.Label();
             this.tbCity = new System.Windows.Forms.TextBox();
+            this.tbSubRegion = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -910,16 +910,6 @@
             this.label32.TabIndex = 89;
             this.label32.Text = "* Обязательные поля";
             // 
-            // cbSubRegion
-            // 
-            this.cbSubRegion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbSubRegion.Enabled = false;
-            this.cbSubRegion.FormattingEnabled = true;
-            this.cbSubRegion.Location = new System.Drawing.Point(435, 373);
-            this.cbSubRegion.Name = "cbSubRegion";
-            this.cbSubRegion.Size = new System.Drawing.Size(399, 21);
-            this.cbSubRegion.TabIndex = 92;
-            // 
             // label23
             // 
             this.label23.AutoSize = true;
@@ -1063,6 +1053,13 @@
             this.tbCity.Size = new System.Drawing.Size(399, 20);
             this.tbCity.TabIndex = 108;
             // 
+            // tbSubRegion
+            // 
+            this.tbSubRegion.Location = new System.Drawing.Point(435, 373);
+            this.tbSubRegion.Name = "tbSubRegion";
+            this.tbSubRegion.Size = new System.Drawing.Size(399, 20);
+            this.tbSubRegion.TabIndex = 109;
+            // 
             // FormAddLPU
             // 
             this.AcceptButton = this.btnSaveAndClose;
@@ -1070,6 +1067,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(1113, 613);
+            this.Controls.Add(this.tbSubRegion);
             this.Controls.Add(this.tbCity);
             this.Controls.Add(this.lbRegionRR2);
             this.Controls.Add(this.label40);
@@ -1085,7 +1083,6 @@
             this.Controls.Add(this.lbAutor);
             this.Controls.Add(this.cbTypeFin);
             this.Controls.Add(this.label33);
-            this.Controls.Add(this.cbSubRegion);
             this.Controls.Add(this.label23);
             this.Controls.Add(this.label32);
             this.Controls.Add(this.lbBranch);
@@ -1235,7 +1232,6 @@
         private System.Windows.Forms.ToolStripMenuItem expandToolStripMenuItem;
         private System.Windows.Forms.Button btnDeleteSubOrganization;
         private System.Windows.Forms.Label label32;
-        private System.Windows.Forms.ComboBox cbSubRegion;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.ComboBox cbTypeFin;
         private System.Windows.Forms.Label label33;
@@ -1253,5 +1249,6 @@
         private System.Windows.Forms.Label lbRegionRR2;
         private System.Windows.Forms.Label label40;
         private System.Windows.Forms.TextBox tbCity;
+        private System.Windows.Forms.TextBox tbSubRegion;
     }
 }

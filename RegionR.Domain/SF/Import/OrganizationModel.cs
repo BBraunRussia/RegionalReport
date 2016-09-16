@@ -91,11 +91,51 @@ namespace ClassLibrary.SF.Import
             TypeLPU = row["Z_HOSPITAL_TYPE__C"].ToString();
             Ownership = row["OWNERSHIP"].ToString();
             Deleted = Convert.ToBoolean(row["Z_R3_INACTIVE__C"].ToString());
+
+            UpdateRegionIfNotFromRR();
         }
 
         private string GetIntValue(object value)
         {
             return value.ToString().Replace(".0", "");
+        }
+
+        private void UpdateRegionIfNotFromRR()
+        {
+            switch (RealRegion)
+            {
+                case "Киров":
+                    RealRegion = "Кировская область";
+                    break;
+                case "Хакасия":
+                    RealRegion = "Хакасия республика";
+                    break;
+                case "Республика Бурятия":
+                    RealRegion = "Бурятия республика";
+                    break;
+                case "Чувашия республика":
+                    RealRegion = "Чувашская Республика - Чувашия";
+                    break;
+                case "Ханты-Мансийский АО":
+                case "Ханты-Мансийский Автономный округ - Югра АО":
+                case "Ханты-Мансийский Автономный округ - Югра автономный округ":
+                    RealRegion = "Ханты-Мансийский автономный округ - Югра";
+                    break;
+                case "Ямало-Ненецкий АО":
+                case "Ненецкий АО":
+                    RealRegion = "Ямало-Ненецкий автономный округ";
+                    break;
+                case "Чукотский АО":
+                    RealRegion = "Чукотский автономный округ";
+                    break;
+                case "Санкт-Петербург г":
+                    RealRegion = "Санкт-Петербург";
+                    break;
+                case "Москва г":
+                    RealRegion = "Москва";
+                    break;
+                    
+            }
         }
     }
 }
